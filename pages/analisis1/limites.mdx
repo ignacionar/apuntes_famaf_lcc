@@ -1,0 +1,251 @@
+# Límites
+
+> El límite de una función es el valor al que **tiende** la función cuando el valor de su variable independiente ($x$) se acerca a un valor $a$.\
+Su anotación es: $\;\displaystyle{\lim_{x \to a}} \; f(x) = L$, (el límite de $f(x)$ cuando $x$ **tiende** a $a$ es igual a $L$).
+
+## Propiedades - Límites
+
+Sea $a$ un real y $c$ una constante:
+
+* $f(x) = c \implies \displaystyle{\lim_{x \to a}} \; f(x) = c$
+* $f(x) = cx \implies \displaystyle{\lim_{x \to a}} \; f(x) = ca$
+* Si $\displaystyle{\lim_{x \to a}} \; f(x) = L$, $\displaystyle{\lim_{x \to a}} \; g(x) = M$, entonces:
+    1. $\displaystyle{\lim_{x \to a}} \; (f(x) + g(x)) = L + M$
+    2. $\displaystyle{\lim_{x \to a}} \; (f(x) - g(x)) = L - M$
+    3. $\displaystyle{\lim_{x \to a}} \; (f(x) \cdot g(x)) = L \cdot M$
+    4. $\displaystyle{\lim_{x \to a}} \; \left(\frac{f(x)}{g(x)}\right) = \frac{L}{M}$, si $M \neq 0$
+* $\displaystyle{\lim_{x \to a}} \; f(x) = \sqrt[n]{L}$, si $n \in \mathbb{N}$ par, y $L \ge 0$
+* $f(x) \leq g(x) \implies \displaystyle{\lim_{x \to a}} \; f(x) \leq \displaystyle{\lim_{x \to a}} \; g(x)$
+* **Teorema del Sandwich**: $f(x) \leq g(x) \leq h(x)$ y $\displaystyle{\lim_{x \to a}} \; f(x) = \displaystyle{\lim_{x \to a}} \; h(x) = L \implies \displaystyle{\lim_{x \to a}} \; g(x) = L$
+
+## Límites laterales
+
+> El límite lateral de una función es el valor al que **tiende** la función cuando el valor de su variable independiente ($x$) se acerca a un valor $a$ por la izquierda (números **menores** a $a$) o por la derecha (números **mayores** a $a$).\
+$\;\displaystyle{\lim_{x \to a^+}} \; f(x) = L$, (el límite de $f(x)$ cuando $x$ **tiende** a $a$ por **derecha** es igual a $L$).\
+$\;\displaystyle{\lim_{x \to a^-}} \; f(x) = L$, (el límite de $f(x)$ cuando $x$ **tiende** a $a$ por **izquierda** es igual a $L$).
+
+### Teorema - Límites laterales
+
+> Para que un límite exista, es necesario que los límites laterales **existan, sean iguales y finitos**:\
+$\displaystyle{\lim_{x \to a}} \; f(x) = L \iff \displaystyle{\lim_{x \to a^+}} \; f(x) = L = \displaystyle{\lim_{x \to a^-}} \; f(x) = L$
+
+**Ejemplo:**
+
+```math
+f(x) = \begin{cases} 
+      0,\;x < 0 \\
+      1,\;0 \leq x < 1 \\
+      \frac{1}{x},\;x \geq 1 
+\end{cases}
+```
+
+Si quisieramos saber el límite de $f(x)$ cuando $x$ **tiende** a $0$, deberíamos calcular los límites laterales:  
+
+```math
+\displaystyle{\lim_{x \to 0^-}} \; f(x) = 0
+```
+
+```math
+\displaystyle{\lim_{x \to 0^+}} \; f(x) = 1
+```
+
+Ambos son distintos, por lo que $\nexists\;\displaystyle{\lim_{x \to 0}} \; f(x)$. 
+
+Para saber el límite de $f(x)$ cuando $x$ **tiende** a $1$, repetimos:
+
+```math
+\displaystyle{\lim_{x \to 1^-}} \; f(x) = 1
+```
+
+```math
+\displaystyle{\lim_{x \to 1^+}} \; f(x) = 1
+```
+
+En este caso, ambos son iguales, por lo que $\displaystyle{\lim_{x \to 1}} \; f(x) = 1$.
+
+## Asíntotas Verticales
+
+> La recta $x = a$ es una asíntota vertical de la función $f(x)$ si $\displaystyle{\lim_{x \to a^\pm}} \; f(x) = \pm \infty$.
+
+Una forma de darnos cuenta si una A.V. existe es que el denominador de la función se anule en algún punto. Por ejemplo, en la función $f(x) = \frac{1}{x}$, el denominador se anula en $x = 0$. Si calculamos los límites laterales, nos daremos cuenta que $\displaystyle{\lim_{x \to 0^+}} \; \frac{1}{x} = +\infty$ y $\displaystyle{\lim_{x \to 0^-}} \; \frac{1}{x} = -\infty$, por lo que la recta $x = 0$ es una A.V.
+
+Tomemos por ejemplo, el caso de la función $f(x) = \frac{1}{x^2 - 4}$. Si calculamos los límites laterales cuando $x$ tiende a $-2$ **por izquierda**:
+
+```math
+\displaystyle{\lim_{x \to -2^-}} \; \frac{1}{x^2 - 4} 
+```
+
+Sabemos que el límite es $\infty$, ya que analizamos el comportamiento de la función cuando $x$ **tiende** a $-2$ (no nos interesa el valor de la función en $x = -2$ como tal).
+Mientras más cerca estemos de $-2$ (en este caso, por izquierda) el denominador es más chico y el valor de la función es más grande. Por lo tanto, el límite es $\infty$.
+
+Sin embargo, no sabemos el signo del $\infty$. Para saberlo, debemos averiguar los signos de toda la fracción cuando $x$ tiende a $-2$ por **izquierda**:
+
+```math
+\displaystyle{\lim_{x \to -2^-}} \; \frac{1}{x^2 - 4} = \displaystyle{\lim_{x \to -2^-}} \; \frac{1}{(x-2)(x+2)}
+```
+
+```math
+\begin{array}{ll}
+  1 \geq 0 \;\; (+) \\
+  x - 2 \implies -4 \;\; (-) \\
+  x + 2 \implies 0 \;\; (-)
+\end{array}
+```
+
+1. El numerador es positivo. 
+2. El factor **tiende** a $-4$. 
+3. El factor **tiende** a $0$ **por izquierda**. Por lo que será negativo (se acercará a $-0$)
+
+Teniendo los signos, la fracción sería:
+
+```math
+\frac{(+)}{(-)(-)} = \frac{(+)}{(+)} = (+)
+```
+
+Por lo que finalmente, el límite será:
+
+```math
+\displaystyle{\lim_{x \to -2^-}} \; \frac{1}{x^2 - 4} = +\infty
+```
+
+### Ejercicios resueltos - Asíntotas Verticales
+
+**1.**
+
+```math
+\displaystyle{\lim_{x \to 1^+}} \; \frac{3x}{x^2 - 1}
+```
+
+Sabemos que el límite es $\infty$ cuando $x=1$ o $x=-1$, en este caso nos interesa el $1$ ya que analizamos el comportamiento de la función cuando $x$ **tiende** a $1$. Para saber el signo del $\infty$, debemos averiguar los signos de toda la fracción cuando $x$ tiende a $1$ por **derecha**.
+
+Aplicamos difrencia de cuadrados:
+
+```math
+\displaystyle{\lim_{x \to 1^+}} \; \frac{3x}{x^2 - 1} = \displaystyle{\lim_{x \to 1^+}} \; \frac{3x}{(x-1)(x+1)}
+```
+
+```math
+\begin{array}{ll}
+  3x \implies 3 \;\; (+) \\
+  x - 1 \implies 0 \;\; (+) \\
+  x + 1 \implies 2 \;\; (+)
+\end{array}
+```
+
+Todos los signos son positivos, por lo que el límite será:
+
+```math
+\displaystyle{\lim_{x \to 1^+}} \; \frac{3x}{x^2 - 1} = +\infty
+```
+
+Además la A.V. es $x = 1$.
+
+**2.**
+
+```math
+\displaystyle{\lim_{x \to -3^+}} \; \frac{x}{x+3}
+```
+
+Sabemos que el límite es $\infty$ cuando $x=3$. Para saber el signo del $\infty$, debemos averiguar los signos de toda la fracción cuando $x$ tiende a $3$ por **izquierda**.
+
+```math
+\begin{array}{ll}
+  x \implies -3 \;\; (-) \\
+  x - 3 \implies 0 \;\; (+)
+\end{array}
+```
+
+El numerador es negativo y el denominador es positivo, por lo que el límite será:
+
+```math
+\displaystyle{\lim_{x \to -3^+}} \; \frac{x}{x+3} = -\infty
+```
+
+Además la A.V. es $x = -3$.
+
+## Límites en el Infinito
+
+Las siguientes reglas de los límites infinitos serán utiles tanto para $x \to \pm \infty$ como para $x \to a$.
+
+### Suma y Resta 
+
+Sean: $\;\displaystyle{\lim_{x \to a}} \; f(x) = \infty, \;\displaystyle{\lim_{x \to a}} \; h(x) = \infty, \;\displaystyle{\lim_{x \to a}} \; g(x) = L\;(\mathbb{R})$:
+
+* $\displaystyle{\lim_{x \to a}} \; (f(x) + g(x)) = \infty$
+* $\displaystyle{\lim_{x \to a}} \; (f(x) + h(x)) = \infty$
+
+### Producto 
+
+Sean: $\;\displaystyle{\lim_{x \to a}} \; f(x) = \infty, \;\displaystyle{\lim_{x \to a}} \; h(x) = \infty, \;\displaystyle{\lim_{x \to a}} \; g(x) = L\;(\mathbb{R} - \{0\})$:
+
+* $\displaystyle{\lim_{x \to a}} \; (f(x) \cdot g(x)) = \pm\infty$  (depende de los signos)
+* $\displaystyle{\lim_{x \to a}} \; (f(x) \cdot h(x)) = \pm\infty$  (depende de los signos)
+
+### Cociente 
+
+Sean: $\;\displaystyle{\lim_{x \to a}} \; f(x) = \infty, \;\displaystyle{\lim_{x \to a}} \; h(x) = 0, \;\displaystyle{\lim_{x \to a}} \; g(x) = L\;(\mathbb{R} - \{0\})$:
+
+* $\displaystyle{\lim_{x \to a}} \; \left(\frac{f(x)}{g(x)}\right) = \pm\infty$  (depende de los signos)
+* $\displaystyle{\lim_{x \to a}} \; \left(\frac{f(x)}{h(x)}\right) = \pm\infty$  (depende de los signos)
+* $\displaystyle{\lim_{x \to a}} \; \left(\frac{g(x)}{f(x)}\right) = 0$
+* $\displaystyle{\lim_{x \to a}} \; \left(\frac{h(x)}{h(x)}\right) $ INDETERMINADO
+* $\displaystyle{\lim_{x \to a}} \; \left(\frac{f(x)}{f(x)}\right) $ INDETERMINADO
+
+## Asíntotas Horizontales
+
+> La recta $y = L$ es una asíntota horizontal de $f(x)$ si $\displaystyle{\lim_{x \to +\infty}} \; f(x) = L \;\lor \displaystyle{\lim_{x \to -\infty}} \; f(x) = L$\
+$L$ **debe ser FINITO**.
+
+Veamos un ejemplo, si queremos calcular la A.H. de la función $f(x) = \frac{1}{x}$, debemos calcular los límites laterales cuando $x$ tiende a $\pm\infty$:
+
+```math
+\displaystyle{\lim_{x \to +\infty}} \; \frac{1}{x} = \frac{1}{+\infty} = 0
+```
+
+En algunos casos, para no conseguir un resultado indeterminado debemos factorizar. 
+
+### Ejercicios resueltos - Asíntotas Horizontales
+
+**1.**
+
+```math
+\displaystyle{\lim_{x \to +\infty}} \; \frac{2x^2 + 3x - 1}{x^2 + 1} 
+```
+
+En este caso, si reemplazamos $x$ por $\infty$ nos queda $\frac{+\infty}{+\infty}$, que es un resultado indeterminado. Por lo tanto, debemos factorizar:
+
+```math
+\displaystyle{\lim_{x \to +\infty}} \; \frac{2x^2 + 3x - 1}{x^2 + 1} = \displaystyle{\lim_{x \to +\infty}} \; \frac{x^2(2 + \frac{3}{x} - \frac{1}{x^2})}{x^2(1 + \frac{1}{x^2})}
+```
+
+```math
+\displaystyle{\lim_{x \to +\infty}} \; \frac{\cancel{x^2}(2 + \frac{3}{x} - \frac{1}{x^2})}{\cancel{x^2}(1 + \frac{1}{x^2})} = \displaystyle{\lim_{x \to +\infty}} \; \frac{2 + \frac{3}{x} - \frac{1}{x^2}}{1 + \frac{1}{x^2}} 
+```
+
+Ahora si podemos reemplazar $x$ por $\infty$:
+
+```math
+\displaystyle{\lim_{x \to +\infty}} \; \frac{2 + \frac{3}{x} - \frac{1}{x^2}}{1 + \frac{1}{x^2}} = \frac{2 + 0 - 0}{1 + 0} = 2
+```
+
+Por lo tanto, la A.H. es $y = 2$.
+
+**2.**
+
+```math
+\displaystyle{\lim_{x \to -\infty}} \; \frac{x-3}{x+2}
+```
+
+En este caso, si reemplazamos $x$ por $-\infty$ nos queda $\frac{-\infty}{-\infty}$, que es un resultado indeterminado. Por lo tanto, debemos factorizar:
+
+```math
+\displaystyle{\lim_{x \to -\infty}} \; \frac{x-3}{x+2} = \displaystyle{\lim_{x \to -\infty}} \; \frac{\cancel{x}(1 - \frac{3}{x})}{\cancel{x}(1 + \frac{2}{x})}
+```
+
+Ahora, si reemplazamos $x$ por $-\infty$:
+
+```math
+\displaystyle{\lim_{x \to -\infty}} \; \frac{1 - \frac{3}{x}}{1 + \frac{2}{x}} = \frac{1 - 0}{1 + 0} = 1
+```
+
+Por lo tanto, la A.H. es $y = 1$.

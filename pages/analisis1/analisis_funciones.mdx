@@ -1,0 +1,573 @@
+# Análisis de Funciones
+
+## Máximos y Mínimos (extremos)
+
+### Absolutos 
+
+> $f$ tiene un máximo absoluto en $x = c$ si $f(c) >= f(x)\; \forall x \in Dom\;f$.\
+$f$ tiene un mínimo absoluto en $x = c$ si $f(c) <= f(x)\; \forall x \in Dom\;f$.
+
+En este ejemplo, el punto $A = (0,0)$ es el punto mínimo absoluto de $f$ y el máximo absoluto de $g$:
+
+<br/>
+
+<center>
+  <iframe scrolling="no" title="Máximos y mínimos" src="https://www.geogebra.org/material/iframe/id/bequd85r/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" width="700px" height="500px" allowFullScreen/>
+</center>
+
+### Locales
+
+> $f$ tiene un máximo local en $x = c$ si existe un **intervalo abierto** $(a, b)$ que contiene a $c$ tal que\
+$f(c) >= f(x)\; \forall x \in (a, b)$.\
+$f$ tiene un mínimo local en $x = c$ si existe un **intervalo abierto** $(a, b)$ que contiene a $c$ tal que\
+$f(c) <= f(x)\; \forall x \in (a, b)$.
+
+En este función, hay dos intervalos: $\mathbb{H}$ y $\mathbb{P}$. En $\mathbb{H}$ su máximo y mínimo local son $A$ y $B$, respectivamente.\
+En $\mathbb{P}$ su máximo y mínimo local son $C$ y $D$, respectivamente. 
+
+<br/>
+
+<center>
+  <iframe scrolling="no" title="Minimo y máximo local" src="https://www.geogebra.org/material/iframe/id/c9rsdnjn/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" width="700px" height="500px" allowFullScreen/>
+</center>
+
+## Teorema de Fermat 
+
+> Si $f$ tiene un **extremo local** en $x = c\;\land\;\exists\;f'(c) \implies f'(c) = 0$
+
+## Puntos críticos
+
+> Un punto crítico de $f$ es un **punto $c$ en el dominio de** $f$ tal que $f'(c) = 0 \; \lor \; \nexists \; f'(c)$
+
+## Teorema de Rolle
+
+> Sea $f$ una función tal que:\
+1] **continua** en $[a, b]$\
+2] **derivable** en $(a, b)$\
+3] $f(a) = f(b)$\
+Entonces $\exists\;c \in (a, b) \;$ tal que $\; f'(c) = 0$
+
+Hay algunas excepciones a esta función, entre ellas funciones definidas por casos o lineales:\
+$f \in [-1, 1], f(-1) \neq f(1)$ 
+
+## Teorema de Valor Medio
+
+> Sea $f$ una función tal que:\
+1] **continua** en $[a, b]$\
+2] **derivable** en $(a, b)$\
+Entonces $\exists\;c \in (a, b) \;$ tal que $\; f'(c) = \frac{f(b) - f(a)}{b - a}$\
+(es decir, $f'(c) =$ **pendiente de la recta secante** de $a$ y $b$) 
+
+## Crecimiento y Decrecimiento
+
+> Sea $f$ **continua** en $[a, b]$ y **derivable** en $(a, b)$, entonces:\
+$f'(x) > 0 \implies f$ es **creciente** en $[a, b]$\
+$f'(x) < 0 \implies f$ es **decreciente** en $[a, b]$
+
+## Concavidad 
+> Si $\;\exists\;f''(x)$ en un intervalo $\mathbb{I}$:\
+$f''(x) > 0 \implies f$ es **cóncava hacia arriba** $\mathbb{I}$\
+$f''(x) < 0 \implies f$ es **cóncava hacia abajo** $\mathbb{I}$
+
+## Prueba de la Derivada Segunda
+
+> Si $f''$ es continua en un intervalo abierto $(a, b)$ que contiene $c$:\
+Si $f'(c) = 0 \land f''(c) > 0 \implies f$ tiene un **mínimo local** en $x = c$\
+Si $f'(c) = 0 \land f''(c) < 0 \implies f$ tiene un **máximo local** en $x = c$
+
+## Ejercicios resueltos - Análisis de funciones
+
+**1.**
+
+Realizar un análisis completo de la función $f(x) = x^3 - 3x^2 + 2x + 1$.
+
+<br/>
+
+***
+
+<center>
+**INFORMACIÓN A PARTIR DE $f$**
+</center>
+
+$Dom\;f(x) = \mathbb{R}$ (Es un polinomio)
+
+Es par o impar? 
+
+```math
+f(-x) = (-x)^3 - 3(-x)^2 + 2(-x) + 1 = -x^3 - 3x^2 - 2x + 1
+```
+
+$f(x) \neq f(-x) \implies f$ no es par
+
+```math
+-f(x) = -(x^3 - 3x^2 + 2x + 1) = -x^3 + 3x^2 - 2x - 1
+```
+
+$f(x) \neq -f(x) \implies f$ no es impar
+
+Por lo tanto, **no es par ni impar**
+
+**Ordenada al origen:** $= 1$
+
+Calculamos las raíces de $f$:
+
+Realizamos un cambio de variable, $x^2 = t$:
+
+```math
+t^2 - 3t + 2 = 0
+```
+
+```math
+(t - 2)(t - 1) = 0
+```
+
+```math
+t_1 = 2 \implies x^2 = 2 \implies x_1, x_2 = \pm \sqrt{2}
+```
+
+```math
+t_2 = 1 \implies x^2 = 1 \implies x_3, x_4 = \pm \sqrt{1}
+```
+
+**Sus raíces son:** $x_1 = -\sqrt{2},\;x_2 = \sqrt{2},\;x_3 = -1,\;x_4 = 1$
+
+**No tiene A.V.** (El dominio es $\mathbb{R}$)
+
+Buscamos la Asíntota horizontal:
+
+```math
+\displaystyle \lim_{x \to -\infty} f(x) = x^3 - 3x^2 + 2x + 1
+``` 
+
+Aplicamos factor común $x^3$:
+
+```math
+\displaystyle \lim_{x \to -\infty} f(x) = x^3(1 - \frac{3}{x} + \frac{2}{x^2} + \frac{1}{x^3})
+```
+
+Reemplazamos $x$ por $-\infty$ y resolvemos:
+
+```math
+(-\infty)^3(1 - \frac{3}{-\infty} + \frac{2}{(-\infty)^2} + \frac{1}{(-\infty)^3}) = -\infty
+```
+
+```math
+(-\infty)(1 - 0 + 0 + 0) = -\infty
+```
+
+Ahora hacemos lo mismo para $+\infty$:
+
+```math
+\displaystyle \lim_{x \to +\infty} f(x) = x^3(1 - \frac{3}{x} + \frac{2}{x^2} + \frac{1}{x^3})
+```
+
+Reemplazamos $x$ por $+\infty$ y resolvemos:
+
+```math
+(+\infty)^3(1 - \frac{3}{+\infty} + \frac{2}{(+\infty)^2} + \frac{1}{(+\infty)^3}) = +\infty
+```
+
+```math
+(+\infty)(1 - 0 + 0 + 0) = +\infty
+```
+
+**No tiene A.H.** (No finitos)
+
+<br/>
+
+***
+
+<center>
+**INFORMACIÓN A PARTIR DE $f'$**
+</center>
+
+$f'(x) = 3x^2 - 6x + 2$
+
+**Puntos críticos:** 
+
+Igualamos a $0$:
+
+```math
+3x^2 - 6x + 2 = 0
+```
+
+Aplicamos Bhaskara:
+
+```math
+x = \frac{-(-6) \pm \sqrt{(-6)^2 - 4(3)(2)}}{2(3)} = \frac{6 \pm \sqrt{36 - 24}}{6} = \frac{6 \pm \sqrt{12}}{6} = \frac{6 \pm 2\sqrt{3}}{6} = \frac{3 \pm \sqrt{3}}{3}
+```
+
+Reducimos la fracción:
+
+```math
+x_1 = \frac{3 + \sqrt{3}}{3}
+```
+
+```math
+x_2 = \frac{3 - \sqrt{3}}{3}
+```
+
+**Sus puntos críticos son:** $x_1 = \frac{3 + \sqrt{3}}{3},\;x_2 = \frac{3 - \sqrt{3}}{3}$
+
+Ahora, nos interesa ver los signos de la derivada: 
+
+```math
+3(x-(\frac{3 + \sqrt{3}}{3}))(x-(\frac{3 - \sqrt{3}}{3})) > 0\;\lor\;3(x-(\frac{3 + \sqrt{3}}{3}))(x-(\frac{3 - \sqrt{3}}{3})) < 0
+```
+
+(Nota: en este caso el dominio son todos los reales, **si no fuera el caso, omitimos los valores que no están definidos en los intervalos**)
+
+<br/>
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table style={{overflowX: "hidden"}}>
+      <thead>
+        <tr>
+          <th>$x_c$</th>
+          <th> $(-\infty, \frac{3 - \sqrt{3}}{3})\\ \small{x=-100}$</th>
+          <th> $(\frac{3 - \sqrt{3}}{3}, \frac{3 + \sqrt{3}}{3})\\ \small{x=1}$</th>
+          <th> $(\frac{3 + \sqrt{3}}{3}, +\infty)\\ \small{x=100}$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>$3\\(x-(\frac{3 + \sqrt{3}}{3}))\\(x-(\frac{3 - \sqrt{3}}{3}))$</th>
+          <th>$(+)\\(-)\\(-)$</th>
+          <th>$(+)\\(+)\\(-)$</th>
+          <th>$(+)\\(+)\\(+)$</th>
+        </tr>
+        <tr>
+          <th>$f'(x)$</th>
+          <th>$(+)$</th>
+          <th>$(-)$</th>
+          <th>$(+)$</th>
+        </tr>
+        <tr>
+          <th>$f(x)$</th>
+          <th>$\nearrow$</th>
+          <th>$\searrow$</th>
+          <th>$\nearrow$</th>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+**Máximo Local:** 
+
+```math
+x_c = \frac{3 - \sqrt{3}}{3}
+``` 
+
+```math
+\begin{aligned}
+f\left(\frac{3 - \sqrt{3}}{3}\right) & = \left(\frac{3 - \sqrt{3}}{3}\right)^3 - 3\left(\frac{3 - \sqrt{3}}{3}\right)^2 + 2\left(\frac{3 - \sqrt{3}}{3}\right) + 1 \\
+& = \frac{(3 - \sqrt{3})^3}{27} - \frac{3(3 - \sqrt{3})^2}{9} + \frac{2(3 - \sqrt{3})}{3} + 1 \\
+& = \frac{27 - 27\sqrt{3} + 9\sqrt{3} - 9}{27} - \frac{3(9 - 6\sqrt{3} + 3)}{9} + \frac{2(3 - \sqrt{3})}{3} + 1 \\
+& = \frac{18 - 18\sqrt{3} + 6\sqrt{3} - 18}{27} - \frac{27 - 18\sqrt{3} + 9}{9} + \frac{6 - 2\sqrt{3}}{3} + 1 \\
+& = \frac{-27\sqrt{3}}{27} - \frac{9\sqrt{3}}{9} + \frac{6 - 2\sqrt{3}}{3} + 1 \\
+& = -\sqrt{3} - \sqrt{3} + 2 - \sqrt{3} + 1 \\
+& = 3 - 3\sqrt{3}.
+\end{aligned}
+```
+
+El máximo local es $A = (\frac{3 - \sqrt{3}}{3}, 3 - 3\sqrt{3})$
+
+**Mínimo Local:**
+
+```math
+x_c = \frac{3 + \sqrt{3}}{3}
+```
+
+```math
+\begin{aligned}
+f\left(\frac{3 + \sqrt{3}}{3}\right) & = \left(\frac{3 + \sqrt{3}}{3}\right)^3 - 3\left(\frac{3 + \sqrt{3}}{3}\right)^2 + 2\left(\frac{3 + \sqrt{3}}{3}\right) + 1 \\
+& = \frac{(3 + \sqrt{3})^3}{27} - \frac{3(3 + \sqrt{3})^2}{9} + \frac{2(3 + \sqrt{3})}{3} + 1 \\
+& = \frac{27 + 27\sqrt{3} + 9\sqrt{3} + 9}{27} - \frac{3(9 + 6\sqrt{3} + 3)}{9} + \frac{2(3 + \sqrt{3})}{3} + 1 \\
+& = \frac{18 + 18\sqrt{3} + 6\sqrt{3} + 18}{27} - \frac{27 + 18\sqrt{3} + 9}{9} + \frac{6 + 2\sqrt{3}}{3} + 1 \\
+& = \frac{27\sqrt{3}}{27} - \frac{9\sqrt{3}}{9} + \frac{6 + 2\sqrt{3}}{3} + 1 \\
+& = \sqrt{3} - \sqrt{3} + 2 + \sqrt{3} + 1 \\
+& = 3 + 3\sqrt{3}.
+\end{aligned}
+```
+
+El mínimo local es $B = (\frac{3 + \sqrt{3}}{3}, 3 + 3\sqrt{3})$
+
+<br/>
+
+***
+
+<center>
+**INFORMACIÓN A PARTIR DE $f''$**
+</center>
+
+$f''(x) = 6x - 6$
+
+En este caso no hay raíces, por lo que buscamos un único punto de inflexión y definimos intervalos:
+
+```math
+6x - 6 = 0
+```
+
+```math
+x = \frac{6}{6} = 1
+```
+
+**Su punto de inflexión es:** $x_c = 1$
+
+Ahora, nos interesa ver los signos de la derivada segunda:
+
+<br/>
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table style={{overflowX: "hidden"}}>
+      <thead>
+        <tr>
+          <th>$x_c$</th>
+          <th> $(-\infty, 1)\\ \small{x=-100}$</th>
+          <th> $(1, +\infty)\\ \small{x=100}$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>$6x - 6$</th>
+          <th>$(-)$</th>
+          <th>$(+)$</th>
+        </tr>
+        <tr>
+          <th>$f''(x)$</th>
+          <th>$(-)$</th>
+          <th>$(+)$</th>
+        </tr>
+        <tr>
+          <th>$f(x)$</th>
+          <th>$\cap$</th>
+          <th>$\cup$</th>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+***
+
+**2.**
+
+Realizar un análisis completo de la función: $f(x) = \frac{x^2}{x - 1}$
+
+<br/>
+
+***
+
+<center>
+**INFORMACIÓN A PARTIR DE $f$**
+</center>
+
+$Dom\;f(x) = \mathbb{R} - \{1\}$ (Es una función racional)
+
+Es par o impar?
+
+```math
+f(-x) = \frac{(-x)^2}{-x - 1} = \frac{x^2}{-x - 1}
+```
+
+```math
+f(x) \neq f(-x) 
+```
+
+```math
+-f(x) = -\frac{x^2}{x - 1}
+```
+
+```math
+f(x) \neq -f(x)
+```
+
+Por lo tanto, **no es par ni impar**
+
+**Ordenada al origen:** $= 0$
+
+**Sus raíces son:** $x_1 = 0$
+
+**A.V.:** $x = 1$
+
+Buscamos la Asíntota horizontal:
+
+```math
+\displaystyle \lim_{x \to -\infty} f(x) = \frac{x^2}{x - 1}
+```
+
+Aplicamos factor común $x^2$:
+
+```math
+\displaystyle \lim_{x \to -\infty} f(x) = x^2(\frac{1}{x - 1})
+```
+
+Reemplazamos $x$ por $-\infty$ y resolvemos:
+
+```math
+(-\infty)^2(\frac{1}{-\infty - 1}) = +\infty
+```
+
+```math
+(+\infty)(\frac{1}{-\infty - 1}) = -\infty
+```
+
+Ahora hacemos lo mismo para $+\infty$:
+
+```math
+\displaystyle \lim_{x \to +\infty} f(x) = x^2(\frac{1}{x - 1})
+```
+
+Reemplazamos $x$ por $+\infty$ y resolvemos:
+
+```math
+(+\infty)^2(\frac{1}{+\infty - 1}) = +\infty
+```
+
+```math
+(+\infty)(\frac{1}{+\infty - 1}) = +\infty
+```
+
+**No tiene A.H.** (No finitos)
+
+<br/>
+
+***
+
+<center>
+**INFORMACIÓN A PARTIR DE $f'$**
+</center>
+
+$f'(x) = \frac{x(x - 2)}{(x - 1)^2}$
+
+**Puntos críticos:**
+
+Igualamos a $0$:
+
+```math
+\frac{x(x - 2)}{(x - 1)^2} = 0
+```
+
+```math
+x(x - 2) = 0
+```
+
+```math
+x_1 = 0
+```
+
+```math
+x_2 = 2
+```
+
+**Sus puntos críticos son:** $x_1 = 0,\;x_2 = 2$
+
+Ahora, nos interesa ver los signos de la derivada:
+
+<br/>
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table style={{overflowX: "hidden"}}>
+      <thead>
+        <tr>
+          <th>$x_c$</th>
+          <th> $(-\infty, 0)\\ \small{x=-100}$</th>
+          <th> $(0, 1)\\ \small{x=1/2}$</th>
+          <th> $(1, 2)\\ \small{x=3/2}$</th>
+          <th> $(2, +\infty)\\ \small{x=100}$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>$x(x - 2)$</th>
+          <th>$(-)\\(-)$</th>
+          <th>$(-)\\(+)$</th>
+          <th>$(+)\\(+)$</th>
+          <th>$(+)\\(+)$</th>
+        </tr>
+        <tr>
+          <th>$(x - 1)^2$</th>
+          <th>$(+)$</th>
+          <th>$(+)$</th>
+          <th>$(+)$</th>
+          <th>$(+)$</th>
+        </tr>
+        <tr>
+          <th>$f'(x)$</th>
+          <th>$(-)$</th>
+          <th>$(+)$</th>
+          <th>$(+)$</th>
+          <th>$(+)$</th>
+        </tr>
+        <tr>
+          <th>$f(x)$</th>
+          <th>$\searrow$</th>
+          <th>$\nearrow$</th>
+          <th>$\nearrow$</th>
+          <th>$\nearrow$</th>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+**Mínimo Local:**
+
+```math
+x_c = 0
+```
+
+```math
+f(0) = \frac{0^2}{0 - 1} = 0
+```
+
+El mínimo local es $A = (0, 0)$
+
+<br/>
+
+***
+
+<center>
+**INFORMACIÓN A PARTIR DE $f''$**
+</center>
+
+$f''(x) = \frac{2}{(x - 1)^3}$
+
+En este caso no hay raíces, por lo que buscamos un único punto de inflexión y definimos intervalos:
+
+```math
+\frac{2}{(x - 1)^3} = 0
+```
+
+No tiene solución, por lo que no tiene puntos de inflexión.
+
+Ahora, nos interesa ver los signos de la derivada segunda:
+
+<br/>
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table style={{overflowX: "hidden"}}>
+      <thead>
+        <tr>
+          <th>$x_c$</th>
+          <th> $(-\infty, 1)\\ \small{x=-100}$</th>
+          <th> $(1, +\infty)\\ \small{x=100}$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>$\frac{2}{(x - 1)^3}$</th>
+          <th>$(+)$</th>
+          <th>$(+)$</th>
+        </tr>
+        <tr>
+          <th>$f''(x)$</th>
+          <th>$(+)$</th>
+          <th>$(+)$</th>
+        </tr>
+        <tr>
+          <th>$f(x)$</th>
+          <th>$\cup$</th>
+          <th>$\cup$</th>
+        </tr>
+      </tbody>
+  </table>
+</div>

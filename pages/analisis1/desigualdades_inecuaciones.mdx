@@ -1,0 +1,158 @@
+import Image from 'next/image'
+
+# Desigualdades e Inecuaciones
+
+## Desigualdades
+
+> Una desigualdad es una expresión que indica que dos cantidades no son iguales. 
+
+Las desigualdades se pueden expresar con los símbolos de desigualdad: 
+* $<$ (menor que) 
+* $>$ (mayor que) 
+* $≤$ (menor o igual que) 
+* $≥$ (mayor o igual que)
+
+### Propiedades - Desigualdades
+
+Sean $a, b$ números reales, las siguientes propiedades son aplicables a cada caso de desigualdad:
+
+* Tricotomía: Para cualquier par de números reales $a$ y $b$, solo **UNO** de los casos se cumple: $a < b$, $a = b$, $a > b$.
+* Transitividad: Si $(a < b) \land (b < c) \implies a < c$.
+* Suma cerrada en ${X}$: <br/> 
+Si $a, b \in \mathbb{X}, \implies a + b \in \mathbb{X}$ <br/>
+Si $a > 0 \land b > 0, \implies a + b > 0$
+* Multiplicación cerrada en ${X}$: <br/> Si $\;a, b \in \mathbb{X}, \implies ab \in \mathbb{X}\;$ <br/> Si $a > 0 \land b > 0, \implies ab > 0$
+
+*(La última propiedad será muy importante para resolver inecuaciones)*
+
+## Inecuaciones
+
+> Una inecuación es una desigualdad que involucra una incógnita. Por ejemplo, $x + 3 > 5$ es una inecuación. 
+
+La solución será un conjunto (conjunto solución) de valores que satisfacen la inecuación. Expresado como **intervalo o por comprensión.**
+
+### Ejercicios resueltos - Inecuaciones
+
+**1.**
+
+```math
+x > 4
+```
+
+Si tuvieramos que expresar este valor en un intervalo, sería: $x \in (4, \infty)$. 4 no se incluye en este intervalo $(>)$.
+
+En la recta real, se vería así: 
+
+<br/>
+
+<Image src="/analisis1/recta.jpg" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+La parte azul corresponde a $(4, \infty)$: nuestro conjunto solución.
+
+***
+
+**2.**
+
+```math
+x > -5 \land x \leq 3
+```
+
+En este caso, tenemos 2 condiciones para $x$. Debe ser mayor a -5 **y** menor o igual a 3. Ambos casos pueden expresarse como intervalos, pero nuestro conjunto solución es la **intersección** entre ambos (cuando ambas condiciones se cumplen):
+
+<br/>
+
+<Image src="/analisis1/interseccion1.jpg" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+La línea violeta representa el conjunto solución: $(-5, 3]$
+
+***
+
+**3.** 
+
+```math
+x^2 \geq 6
+```
+
+El primer paso en este ejercicio sería restar 4 en ambos lados de la inecuación para ser comparada con 0: 
+
+```math
+x^2 - 6 \geq 0
+```
+
+Podemos aplicar diferencia de cuadrados para factorizar:
+
+```math
+(x + \sqrt{6})(x - \sqrt{6}) \geq 0
+```
+
+Sabiendo que el producto de $ab \geq 0$ cuando ambos son positivos o ambos son negativos, hacemos un análisis de casos:
+
+```math
+((x + \sqrt{6} \geq 0 )\land (x - \sqrt{6} \geq 0)) \lor ((x + \sqrt{6}\leq 0) \land (x - \sqrt{6} \leq 0))
+```
+
+Ahora resolvemos cada caso:
+
+```math
+((x \geq -\sqrt{6}) \land (x \geq \sqrt{6})) \lor ((x \leq -\sqrt{6}) \land (x \leq \sqrt{6}))
+```
+
+Dentro de cada caso tenemos 2 condiciones para $x$, por lo que debemos buscar una intersección entre ellas:
+
+<br/>
+
+<Image src="/analisis1/interseccion2.jpg" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+<Image src="/analisis1/interseccion3.jpg" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+Las intersecciones son $(-\infty, -\sqrt{6}]$ y $(\sqrt{6}, \infty]$. El conjunto solución contempla los casos donde $ab$ son $(+)$ o $(-)$: $(-\infty, -\sqrt{6}] \cup (\sqrt{6}, \infty]$.
+
+<br/>
+
+<Image src="/analisis1/conjunto_solucion.jpg" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+***
+
+**4.**
+
+```math
+(x + 2)(x - 2) \leq 0
+```
+
+Sabiendo que el producto de $ab \leq 0$ cuando uno es negativo y otro positivo, hacemos un análisis de casos:
+
+```math
+((x + 2 \geq 0 )\land (x - 2 \leq 0)) \lor ((x + 2 \leq 0) \land (x - 2 \geq 0))
+```
+
+Ahora resolvemos cada caso:
+
+```math
+((x \geq -2) \land (x \leq 2)) \lor ((x \leq -2) \land (x \geq 2))
+```
+
+Los representamos en la recta real con las desigualdades de $x$:
+
+<br/>
+
+<Image src="/analisis1/interseccion4.jpg" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+<Image src="/analisis1/sininterseccion.jpg" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+No existen valores de $x$ para el segundo caso, por lo que el conjunto solución es $[-2, 2]$.
+
+***
+
+**5.** 
+
+```math
+\frac{1}{x} \geq 0
+```
+
+En este caso, multiplicamos ambos lados por $x$:
+
+```math
+1 \geq 0
+```
+
+Esto significa que $x$ puede ser cualquier número real. Por lo que el conjunto solución es $\mathbb{R}$.
+

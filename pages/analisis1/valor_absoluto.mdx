@@ -1,0 +1,342 @@
+# Valor Absoluto o Módulo
+
+> El valor absoluto o módulo de un número se define como **la distancia del número a cero en la recta numérica**. Se representa con dos barras verticales alrededor del número:
+
+```math
+|x| = \begin{cases}
+x,\;x \geq 0 \\
+-x ,\;x < 0
+\end{cases}
+```
+
+## Teoremas - Valor Absoluto
+
+* $|a| = \sqrt{a^2}$
+* $|a|^2 = a^2$
+* $|a \cdot b| = |a| \cdot |b|$
+* $|a + b| \leq |a| + |b|$
+* $|a - b| = |b - a|$
+
+## Ecuaciones con Valor Absoluto
+
+Por cada módulo se generan dos ecuaciones distintas, por ejemplo:
+
+```math
+|x + 3| = 5
+```
+
+```math
+|x + 3| = \begin{cases}
+x + 3,\;x + 3 \geq 0 \\
+-(x + 3) ,\;x + 3 < 0
+\end{cases}
+```
+
+Resolviendo el primer caso, $x + 3 \geq 0$, se obtiene:
+
+```math
+x + 3 = 5
+```
+
+Restando 3 a ambos miembros da el resultado:
+
+```math
+x = 2
+``` 
+
+Es necesario verificar que la solución cumpla con la condición inicial, es decir, que $2 + 3 \geq 0$. Como se cumple, la solución es válida.
+
+Queda pendiente resolver el segundo caso, $x + 3 < 0$:
+
+```math
+-(x + 3) = 5
+```
+
+Multiplicando por -1 el contenido del paréntesis:
+
+```math
+-x - 3 = 5
+```
+
+Restando 5 y sumando $x$ a ambos miembros:
+
+```math
+-8 = x
+```
+
+Verificando que la solución cumpla con la condición inicial, es decir, que $-8 + 3 < 0$. Como se cumple, la segunda solución es válida.
+
+La solución final es la unión de ambas soluciones: $x = 2 \land x = -8$.
+
+***
+
+### Ejercicios resueltos - Ecuaciones con Valor Absoluto
+
+**1.**
+
+```math
+|x - 2| = 3
+```
+
+Para resolverlo necesitamos considerar los casos posibles:
+
+```math
+|x - 2| = \begin{cases}
+x - 2,\;x - 2 \geq 0 \\
+-(x - 2) ,\;x - 2 < 0
+\end{cases}
+```
+
+Ahora resolvemos cada caso:
+
+```math
+x - 2 = 3
+```
+
+Sumando 2 a ambos miembros:
+
+```math
+x = 5
+```
+
+Verificando que la solución cumpla con la condición inicial, es decir, que $5 - 2 \geq 0$. Como se cumple, la primera solución es válida.
+
+Queda pendiente resolver el segundo caso, $x - 2 < 0$:
+
+```math
+-(x - 2) = 3
+```
+
+Multiplicando por -1 el contenido del paréntesis:
+
+```math
+-x + 2 = 3
+```
+
+Restando 2 y sumando $x$ a ambos miembros:
+
+```math
+1 = x
+```
+
+Verificando que la solución cumpla con la condición inicial, es decir, que $1 - 2 < 0$. Como se cumple, la segunda solución es válida.
+
+La solución final es la unión de ambas soluciones: $x = 5 \land x = 1$.
+
+***
+
+**2.**
+
+```math
+|x + 1| = |x-3|
+```
+
+Podemos elevar al cuadrado ambos miembros.
+
+```math
+(|x + 1|)^2 = (|x-3|)^2
+```
+
+Quedarían en:
+
+```math
+(x + 1)^2 = (x-3)^2
+```
+
+Igualamos a 0, restamos $(x-3)^2$ a ambos miembros:
+
+```math
+(x + 1)^2 - (x-3)^2 = 0
+```
+
+Aplicamos binomio al cuadrado:
+
+```math
+x^2 + 2x + 1 - x^2 + 6x - 9 = 0
+```
+
+El resultado es:
+
+```math
+8x - 8 = 0
+```
+
+Dividiendo por 8 ambos miembros:
+
+```math
+x - 1 = 0
+```
+
+Sumando 1 a ambos miembros:
+
+```math
+x = 1
+```
+
+***
+
+**3.**
+
+```math
+|x - 1| = 1 - x
+```
+
+Para resolverlo necesitamos considerar los casos posibles:
+
+```math
+|x - 1| = \begin{cases}
+x - 1,\;x - 1 \geq 0 \\
+-(x - 1) ,\;x - 1 < 0
+\end{cases}
+```
+
+Ahora resolvemos cada caso:
+
+```math
+x - 1 = 1 - x
+```
+
+Sumando $x$ a ambos miembros:
+
+```math
+2x - 1 = 1
+```
+
+Sumando 1 a ambos miembros:
+
+```math
+2x = 2
+```
+
+Dividiendo por 2 ambos miembros:
+
+```math
+x = 1
+```
+
+Verificando que la solución cumpla con la condición inicial, es decir, que $1 - 1 \geq 0$. Como se cumple, la primera solución es válida.
+
+Queda pendiente resolver el segundo caso, $x - 1 < 0$:
+
+```math
+-(x - 1) = 1 - x
+```
+
+Multiplicando por -1 el contenido del paréntesis:
+
+```math
+-x + 1 = 1 - x
+```
+
+Sumando $x$ y restando 1 a ambos miembros:
+
+```math
+0 = 0
+```
+
+Verificando que la solución cumpla con la condición inicial, es decir, que $0 - 1 < 0$. Como se cumple, la segunda solución es válida para cualquier real.
+
+La solución final es la unión de ambas soluciones: $x = 1 \lor x < 1$
+
+## Inecuaciones con Valor Absoluto
+
+Los teoremas anteriores son importantes para resolver inecuaciones con módulos. Estas propiedades que permiten resolver inecuaciones con módulos fácilmente: 
+
+## Propiedades - Valor Absoluto
+
+* $|x| < a \iff -a < x < a$
+* $|x| > a \iff x < -a \lor x > a$
+
+*También aplicables con $\leq$, $\geq$.*
+
+***
+
+### Ejercicios resueltos - Inecuaciones con Valor Absoluto
+
+**1.**
+
+```math
+|x - 2| < 3
+```
+
+Podemos aplicar la propiedad $|x| < a \iff -a < x < a$:
+
+```math
+-3 < x - 2 < 3
+```
+
+Sumando 2 a ambos miembros:
+
+```math
+-1 < x < 5
+```
+
+Por lo tanto, $x \in (-1, 5)$.
+
+***
+
+**2.**
+
+```math
+|x - 4| > 2
+```
+
+Podemos aplicar la propiedad $|x| > a \iff x < -a \lor x > a$:
+
+```math
+x - 4 < -2 \lor x - 4 > 2
+```
+
+Sumando 4 a ambos miembros:
+
+```math
+x < 2 \lor x > 6
+```
+
+Por lo tanto, $x \in (-\infty, 2) \cup (6, \infty)$.
+
+***
+
+**3.**
+
+```math
+|x - 1| \leq |x + 4|
+```
+
+Podemos elevar al cuadrado ambos miembros.
+
+```math
+(|x - 1|)^2 \leq (|x + 4|)^2
+```
+
+Restamos $(|x + 4|)^2$ a ambos miembros:
+
+```math
+(x - 1)^2 - (x + 4)^2 \leq 0
+```
+
+Aplicamos binomio al cuadrado:
+
+```math
+x^2 - 2x + 1 - x^2 - 8x - 16 \leq 0
+```
+
+El resultado es:
+
+```math
+-10x - 15 \leq 0
+```
+
+Dividiendo por -10 ambos miembros:
+
+```math
+x + \frac{3}{2} \geq 0
+```
+
+Restando $\frac{3}{2}$ a ambos miembros:
+
+```math
+x \geq -\frac{3}{2}
+```
+
+Por lo tanto, $x \in [-\frac{3}{2}, \infty)$.

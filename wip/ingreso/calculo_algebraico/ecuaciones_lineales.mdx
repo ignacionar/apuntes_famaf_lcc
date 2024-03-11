@@ -1,0 +1,159 @@
+## Ecuaciones Lineales 
+
+### Ecuaciones lineales con una incognita 
+
+Una ecuacion lineal con una incognita es una ecuacion que se puede escribir en la forma $ax+b=0$, donde $a$ y $b$ son numeros reales y $x$ es la incognita.
+ La solucion de una ecuacion lineal con una incognita es un numero real que, sustituido en la ecuacion, hace que esta se cumpla. Por ejemplo, la ecuacion $2x+3=0$ tiene
+  como solucion  
+  $x=-\frac{3}{2}$, ya que $2\cdot(-\frac{3}{2})+3=0$. 
+
+  ### Sistema de Ecuaciones 
+
+  Encontrar una solución es dar un par de números que satisfagan la ecuación. La diferencia con las ecuaciones
+lineales con una incógnita es que ahora tendremos infinitas soluciones. Notemos que si despejamos la incógnita y en la ecuación, obtenemos
+```math 
+y = 2x−3.
+```
+Entonces para cada valor de x que demos, tendremos un valor de y y este par de números será una solución.
+Por ejemplo los siguientes pares de números son solución de la ecuación 2x−y = 3:
+```math
+x = 0,\;\;\;\;\; y = −3,
+```
+ 
+```math
+x = 1,\;\;\;\;\;\;y = −1,
+```
+
+```math 
+x = \frac{5}{2},\;\;\;\;\;\; y = 2.
+```
+En efecto, si reemplazamos estos valores en la ecuación y = 2x−3 veremos que se satisface la igualdad:
+
+```math 
+2 \cdot 0−(−3) = 3,\;\;\;\;\;\;2 \cdot1−(−1) = 3,\;\;\;\;\;\; 2 \cdot
+\frac{5}{2}
+−2 = 3.
+```
+
+### Sistema de Ecuaciones Lineales    
+
+Un sistema de ecuaciones es un conjunto de ecuaciones con varias incógnitas. Lo que caracteriza al sistema es
+que se busca una o más soluciones que sean soluciones de todas las ecuaciones planteadas en el sistema.  
+
+```math
+\begin{cases}
+3x - y = 7 \\
+2x + 3y = 1
+\end{cases} 
+```
+
+Para resolver un sistema de ecuaciones con dos incógnitas, se pueden utilizar tres métodos: el método de sustitución, el método de reducción y el método de igualación.
+
+**Método de sustitución**: Consiste en despejar una de las incógnitas en una de las ecuaciones y sustituir en la otra ecuación.
+
+**Método de reducción**: Consiste en multiplicar una de las ecuaciones por un número para que al sumarla con la otra ecuación se elimine una de las incógnitas.
+
+**Método de igualación**: Consiste en despejar una de las incógnitas en ambas ecuaciones y luego igualarlas.
+
+
+Para resolver el anterior sistema de ecuacion por el **metodo de sustitucion** se procede de la siguiente manera: 
+
+```math
+\begin{cases}
+3x - y = 7 \\
+2x + 3y = 1
+\end{cases} 
+```
+
+Despejamos la primera ecuacion y la incognita que despejamos la sustituimos en la segunda ecuacion:
+
+```math
+2x + 3(3x - 7) = 1
+```
+
+Una vez hecho esto, aplicamos la propiedad distributiva y resolvemos la ecuacion:
+
+```math
+11x−21 = 1
+```
+ 
+Sabiendo que el resultado es $x = 2$, sustituimos el valor de $x$ en la primera ecuacion y resolvemos para obtener el valor de $y$.
+ Puede ser en cualquiera de las dos ecuaciones. Reemplazamos este valor de x en la ecuación:
+```math
+y = 3x−7
+```
+
+Y obtenemos que 
+
+```math
+y = 3\cdot 2−7 = −1
+```
+
+Por lo tanto, la solución del sistema es $x = 2, x = −1$. 
+
+En cuanto al **metodo de reduccion** se procede de la siguiente manera: 
+
+Si multiplicamos la primera ecuación por 3, obtenemos:
+
+```math 
+\begin{cases}
+9x - 3y = 21 \\
+2x + 3y = 1
+\end{cases} 
+```
+
+De esta manera, la incógnita $y$ tiene los coeficientes $−3$ y $3$ respectivamente. Así, si sumamos las dos ecuaciones llegamos a la ecuación lineal
+
+```math
+11x = 22
+```
+
+Que tiene como solución $x = 2$. Ahora reemplazamos este valor de $x$ en una de las ecuaciones lineales, y
+obtenemos el valor para la otra incógnita: $y = −1$.
+
+Por último, el **metodo de igualacion** se procede de la siguiente manera: 
+
+```math
+\begin{cases}
+   3x - y = 7 \\
+   2x + 3y = 1
+\end{cases} 
+```
+
+Despejamos $$y$$ en ambas ecuaciones, hay que tener en cuenta que siempre se despeja la misma incognita en ambas ecuaciones:
+
+```math
+\begin{cases}
+   y = 3x - 7 \\
+   y = \frac{1 - 2x}{3}
+\end{cases}
+```
+
+Y las igualamos en una misma ecuacion para obtener el valor de $x$:
+
+```math
+3x - 7 = \frac{1 - 2x}{3}
+```
+
+Resolvemos la ecuacion pasando las $x$ de un lado, los terminos independientes del otro y obtenemos que $x = 2$, sustituimos este valor
+en cualquiera de las ecuaciones y obtenemos el valor de $y$:
+
+```math
+ 3 \cdot(2)−y = 7,
+```
+
+Que tiene como solucion $y = −1$. Por lo tanto la solucion del sistema es $x = 2, y = −1$.
+
+
+### Sistemas compatibles e incompatibles
+
+> Un sistema de ecuaciones se dice compatible si tiene solución, es decir, si existe un par de números que satisfaga todas las ecuaciones del sistema.
+ Por ejemplo $x = 2, y = −1$ es un sistema **compatible**. Un sistema incompatible es aquel que no tiene solución, es decir, no existe ningún par de números que satisfaga todas las ecuaciones del sistema.
+ Por ejemplo $x = 2, y = 2x + 1$ es un sistema **incompatible**.
+
+
+> Un sistema compatible se dice determinado si tiene una única solución, es decir, si existe un único par de números que satisfaga todas las ecuaciones del sistema.
+ Por ejemplo $x = 2, y = −1$ es un sistema **determinado**. E indeterminadosi tiene infinitas soluciones, es decir, si existen infinitos pares de números que satisfagan 
+ todas las ecuaciones del sistema. Por ejemplo $x = 2, y = 2x − 3$ es un sistema **indeterminado**.
+
+

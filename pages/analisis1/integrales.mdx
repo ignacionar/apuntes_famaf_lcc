@@ -1,0 +1,302 @@
+# Integrales
+
+## Antiderivadas (o primitivas)
+
+> Una función $F$ es una antiderivada de $f$ en un intervalo $I$ si $F'(x) = f(x)\;\forall x \in [a, b]$.
+
+Si $F(x)$ es una antiderivada de $f$, $G(x) = F(x) + c$ también lo es para **cualquier constante**.
+
+**Ejemplo:**
+
+Encontrar la antiderivada de $f(x) = 4x^2$ que pasa por el punto $(1, 3)$.
+
+Primero buscamos la antiderivada:
+
+```math
+F(x) = 2x^3 + c
+```
+
+Luego, reemplazamos el punto $(1, 3)$:
+
+```math
+3 = 2(1)^3 + c \implies c = 1
+```
+
+Por lo tanto, la antiderivada que pasa por el punto $(1, 3)$ es: $F(x) = 2x^3 + 1$.
+
+## Integral Indefinida
+
+> La integral indefinida de $f$ es el conjunto de todas las antiderivadas de $f$. Se simboliza: $\int f(x) dx$.
+
+Si $F(x)$ es una antiderivada de $f$, entonces la integral indefinida es el conjunto infinito de funciones $F(x) + c$:
+
+```math
+\int f(x)dx = F(x) + c
+```
+
+### Tabla de Integrales Indefinidas
+
+<br/>
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table style={{overflowX: "hidden"}}>
+      <thead>
+        <tr>
+          <th>Función</th>
+          <th>Integral Indefinida</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>$x^n$</td>
+        <td>$\frac{x^{n+1}}{n+1} + c$</td>
+      </tr>
+      <tr>
+        <td>$\frac{1}{x}$</td>
+        <td>$\ln(|x|) + c$</td>
+      </tr>
+      <tr>
+        <td>$e^x$</td>
+        <td>$e^x + c$</td>
+      </tr>
+      <tr>
+        <td>$a^x$</td>
+        <td>$\frac{a^x}{\ln(a)} + c$</td>
+      </tr>  
+      <tr>
+        <td>$\sin x$</td>
+        <td>$-\cos x + c$</td>
+      </tr>
+      <tr>
+        <td>$\cos x$</td>
+        <td>$\sin x + c$</td>
+      </tr>    
+      <tr>
+        <td>$\frac{1}{\sqrt{1-x^2}}$</td>
+        <td>$\arcsin x + c, \\ \arccos x + c$</td>
+      </tr>
+      <tr>
+        <td>$\frac{1}{1+x^2}$</td>
+        <td>$\arctan x + c$</td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+
+### Propiedades - Integrales Indefinidas
+
+* $\int 0\;dx = c$
+* $\int (f + g)(x)\;dx = \int f(x)\;dx + \int g(x)\;dx$
+* $\int (f - g)(x)\;dx = \int f(x)\;dx - \int g(x)\;dx$
+* $\int k\;f(x)\;dx = k \int f(x)\;dx$ ($k$ constante)
+
+### Integración por sustitución
+
+> Sea $F(x)$ la primitiva de $f(x)$ y $g(x)$ derivable: $\int f(g(x))\;g'(x)\;dx = F(g(x)) + c$
+
+**Ejemplo:**
+
+```math
+\int \sin(2x)2\;dx
+```
+
+Sabemos que $f(x) = \sin(x)$ y $g(x) = 2x$. Por lo tanto, $g'(x) = 2$.
+
+```math
+\frac{du}{dx} = 2 \implies du = 2\;dx 
+```
+
+Ahora podemos reemplazar en la integral:
+
+```math
+\int \sin(2x)2\;dx = \int \sin(u)\;du = -\cos(u) + c = -\cos(2x) + c
+```
+
+### Integración por partes
+
+> Si $f'$ y $g'$ son continuas, entonces: $\int f'(x)g(x)\;dx = f(x)g(x) - \int f(x)g'(x)\;dx$
+
+**Ejemplo:**
+
+```math
+\int \ln(x)\;dx 
+```
+
+Sabemos que $f(x) = \ln(x)$ y $g(x) = x$. Por lo tanto, $f'(x) = \frac{1}{x}$ y $g'(x) = 1$.
+
+```math
+\int \ln(x)\;dx = x\ln(x) - \int x\frac{1}{x}\;dx = x\ln(x) - \int 1\;dx = x\ln(x) - x + c
+```
+
+### Ejercicios - Integrales Indefinidas
+
+**1.** 
+
+Resolver por sustitución: 
+
+```math
+\int\frac{\sin(\sqrt{4x})}{\sqrt{x}}\;dx
+```
+
+Para resolver esta integral, hacemos el cambio de variable:
+
+```math
+u = \sqrt{4x} \implies du = \frac{1}{2\sqrt{x}}\;dx
+```
+
+Reemplazamos en la integral:
+
+```math
+\int\frac{\sin(u)}{2}\;du = -\frac{\cos(u)}{2} + c = -\frac{\cos(\sqrt{4x})}{2} + c
+```
+
+***
+
+**2.** 
+
+Resolver por partes:
+
+```math
+\int x\cos(x)\;dx
+```
+
+Identificamos $f, f'$ y $g, g'$:
+
+```math
+f(x) = x, f'(x) = 1 \\
+g(x) = \sin(x), g'(x) = \cos(x)
+```
+
+Ahora, resolvemos por partes:
+
+```math
+\int x\cos(x)\;dx = x\sin(x) - \int \sin(x)\;dx = x\sin(x) + \cos(x) + c
+```
+
+***
+
+**3.** Resolver y obtener la primitiva $F$ de $f$ tal que $F(0) = 0$:
+
+```math
+f(x) = (x + 1)^2
+```
+
+Definimos la integral:
+
+```math
+F(x) = \int (x + 1)^2\;dx
+```
+
+Expandimos el término:
+
+```math
+F(x) = \int (x^2 + 2x + 1)\;dx = \frac{x^3}{3} + x^2 + x + c
+```
+
+Ahora buscamos el valor de la constante $c$:
+
+```math
+F(0) = 0 \implies 0 = \frac{0^3}{3} + 0^2 + 0 + c \implies c = 0
+```
+
+Por lo tanto, la primitiva de $f$ tal que $F(0) = 0$ es:
+
+```math
+F(x) = \frac{x^3}{3} + x^2 + x
+```
+
+## Integral Definida
+
+> La integral definida de $f$ en el intervalo $[a, b]$ es el área bajo la curva $y = f(x)$ entre $x = a$ y $x = b$. Se simboliza: $\int_a^b f(x)\;dx$. Los extremos del intervalo se llaman límite inferior y superior de integración.
+
+La siguiente figura muestra el área bajo la curva $f(x) = x^2$ entre $x = -4$ y $x = 4$:
+
+<br/>
+
+<iframe scrolling="no" title="Integral" src="https://www.geogebra.org/material/iframe/id/wdkf3axy/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" width="700px" height="500px" allowFullScreen/>
+
+### Propiedades - Integrales definidas
+
+* $\int_a^a f(x)\;dx = 0$ 
+
+* $\int_b^a k\;f(x)\;dx = k \int_b^a f(x)\;dx$ ($k$ constante)
+* $\int_b^a f(x)\;dx = -\int_a^b f(x)\;dx$
+* $\int_a^b (f + g)(x)\;dx = \int_a^b f(x)\;dx + \int_a^b g(x)\;dx$
+* $\int_a^b (f - g)(x)\;dx = \int_a^b f(x)\;dx - \int_a^b g(x)\;dx$
+* Si $f(x) \geq 0 \in [a, b]$, $\int_a^b f(x)\;dx \geq 0$
+* Si $c \in \mathbb{R}$, $\int_a^b f(x)\;dx = \int_a^c f(x)\;dx + \int_c^b f(x)\;dx$
+* Si $f(x) \leq g(x) \in [a, b]$, $\int_a^b f(x)\;dx \leq \int_a^b g(x)\;dx$
+
+### Primer Teorema Fundamental del Cálculo
+
+> Sea $f: [a, b] \Rightarrow\;\mathbb{R}$ continua y $F$:\
+$F(x) = \int_a^x f(t)\;dt\;\forall x \in [a, b]$\
+\
+Entonces, $F$ es antiderivada de $f$ en $[a, b]$:\
+$F'(x) = \frac{d}{dx} \int_a^x f(t)\;dt = f(x)\;\forall x \in [a, b]$
+ 
+### Segundo Teorema Fundamental del Cálculo
+
+> Si $f$ es continua en $[a, b]$ y $F$ es su antiderivada: $\int_a^b f(x)\;dx = F(b) - F(a) = F(x)\Big|_a^b$ (R. de Barrow)
+
+### Ejercicios - Integrales Definidas
+
+**1.**
+
+Resolver la siguiente integral definida:
+
+```math
+\int_0^1 (x^2 - x)\;dx
+```
+
+Buscamos la antiderivada de $f(x) = x^2 - x$:
+
+```math
+F(x) = \frac{x^3}{3} - \frac{x^2}{2} + c
+```
+
+Aplicamos el segundo teorema fundamental del cálculo:
+
+```math
+\int_0^1 (x^2 - x)\;dx = \frac{x^3}{3}\Big|_0^1 - \frac{x^2}{2}\Big|_0^1 = \frac{1}{3} - \frac{1}{2} = -\frac{1}{6}
+```
+
+***
+
+**2.**
+
+Resolver la siguiente integral definida:
+
+```math
+\int_0^{\pi} \sin(x)\;dx
+```
+
+Buscamos la antiderivada de $f(x) = \sin(x)$:
+
+```math
+F(x) = -\cos(x) + c
+```
+
+Aplicamos el segundo teorema fundamental del cálculo:
+
+```math
+\int_0^{\pi} \sin(x)\;dx = -\cos(x)\Big|_0^{\pi} = -\cos(\pi) + \cos(0) = 2
+```
+
+## Área entre dos curvas
+
+> Sean $f$ y $g$ tales que $f(x) \geq g(x)$ en $[a, b]$, el área comprendida entre sus gráficos es: $\;\int_a^b (f(x) - g(x))\;dx$
+
+**Ejemplo:**
+
+$f(x) = x^2$ y $g(x) = x$ en $[0, 1]$
+
+```math
+\int_0^1 (x^2 - x)\;dx = \int_0^1 x^2\;dx - \int_0^1 x\;dx = \frac{x^3}{3}\Big|_0^1 - \frac{x^2}{2}\Big|_0^1 = \frac{1}{3} - \frac{1}{2} = -\frac{1}{6}
+```
+
+Se vería de la siguiente forma:
+
+<br/>
+
+<iframe scrolling="no" title="Arco de dos curvas" src="https://www.geogebra.org/material/iframe/id/khawabmx/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" width="700px" height="500px" allowFullScreen/>

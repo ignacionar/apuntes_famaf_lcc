@@ -1,0 +1,661 @@
+import Image from 'next/image'
+
+# Derivadas
+
+## Definición y Fórmula
+
+> La derivada es **la pendiente de la recta tangente a la función en un punto** $a$.\
+Es la razón de cambio instantáneo de la función en un punto $a$.
+
+Tomemos la siguiente función: 
+
+<br/>
+
+<Image src="/analisis1/derivada1.png" alt="recta" width={0} height={0} layout="responsive" style={{border: "1px solid black"}}/>
+
+<br/>
+
+La recta azul es una recta secante que une dos puntos de la función. Siendo $h$ la distancia que hay entre estos dos puntos.
+
+Si quisieramos saber la **pendiente de la recta secante**, podríamos calcularlo de la siguiente forma:
+
+```math
+m = \frac{f(a+h) - f(a)}{h}
+```
+
+La recta secante corta en dos puntos, pero queremos saber la pendiente en $a$, por lo que hacemos que $h$ **tienda a** $0$:
+
+<br/>
+
+<div>
+<Image src="/analisis1/derivada2.png" width={0} height={0} layout="responsive" style={{border: "1px solid black"}}/>
+</div>
+
+De manera tal que la recta **tienda** a ser tangente en el punto $a$ ($h \neq 0$, pero la diferencia es muy pequeña):
+
+```math
+m = \displaystyle{\lim_{h \to 0}} \; \frac{f(a+h) - f(a)}{h}
+```
+
+La pendiente de la recta tangente a la función en el punto $a$ es la **derivada de $f(a)$**:
+
+```math
+f'(a) = \displaystyle{\lim_{h \to 0}} \; \frac{f(a+h) - f(a)}{h}
+```
+
+Si quisieramos saber la derivada para la generalidad y no solo en $a$, calculamos la **derivada de $f(x)$**:
+
+```math
+f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{f(x+h) - f(x)}{h}
+```
+
+## Derivadas Laterales
+
+> Se define la derivada a **izquierda** de $f$ en $a$ cuando $h$ tiende a $0^-$ y se denota $f'^-(a)$\
+Se define la derivada a **derecha** de $f$ en $a$ cuando $h$ tiende a $0^+$ y se denota $f'^+(a)$\
+
+### Teorema - Derivadas Laterales
+> Para que $f$ sea derivable en $a$ es necesario que las derivadas laterales existan y sean iguales:\
+$f'(a) \iff  f'^-(a) = f'^+(a)$
+
+## Tabla de Derivadas y Reglas de Derivación
+
+Hay distintas reglas para derivar funciones, y la tabla nos permite derivar funciones más rapidamente:
+
+### Tabla de Derivadas
+
+
+<div style={{display: "flex", justifyContent: "center", overflow: "hidden"}}>
+  <table style={{overflowX: "hidden"}}>
+      <thead>
+        <tr>
+          <th>Función</th>
+          <th>Derivada</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>$c$</td>
+        <td>$0$</td>
+      </tr>
+      <tr>
+        <td>$x^n,\; n\in\mathbb{Z}$</td>
+        <td>$n \cdot x^{n-1}$</td>
+      </tr>
+      <tr>
+        <td>$e^x$</td>
+        <td>$e^x$</td>
+      </tr>
+      <tr>
+        <td>$\ln(x),\; x>0$</td>
+        <td>$\frac{1}{x}$</td>
+      </tr>
+      <tr>
+        <td>$\sin(x)$</td>
+        <td>$\cos(x)$</td>
+      </tr>
+      <tr>
+        <td>$\cos(x)$</td>
+        <td>$-\sin(x)$</td>
+      </tr>
+      <tr>
+        <td>$\arcsin(x)$</td>
+        <td>$\frac{1}{\sqrt{1-x^2}}$</td>
+      </tr>
+      <tr>
+        <td>$\arccos(x)$</td>
+        <td>$-\frac{1}{\sqrt{1-x^2}}$</td>
+      </tr>
+      <tr>
+        <td>$\arctan(x)$</td>
+        <td>$\frac{1}{1+x^2}$</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br/>
+
+### Reglas de Derivación
+
+<br/>
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table style={{overflowX: "hidden"}}>
+      <thead>
+        <tr>
+          <td>Suma</td>
+          <td>$(f + g)'(x) = f'(x) + g'(x)$</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Resta</td>
+        <td>$(f - g)'(x) = f'(x) - g'(x)$</td>
+      </tr>
+      <tr>
+        <td>Producto</td>
+        <td>$(f \cdot g)'(x) = f'(x) \cdot g(x) + f(x) \cdot g'(x)$</td>
+      </tr>
+      <tr>
+        <td>Cociente</td>
+        <td>$\left(\frac{f}{g}\right)'(x) = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{g(x)^2}$</td>
+      </tr>
+      <tr>
+        <td>Regla de la Cadena</td>
+        <td>$\left(f(g(x))\right)' = f'(g(x)) \cdot g'(x)$</td>
+      </tr>
+      <tr>
+        <td>Función Inversa</td>
+        <td>$\left(f^{-1}(x)\right)' = \frac{1}{f'(f^{-1}(x))}$</td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+
+## Ejercicios resueltos - Derivadas por definición
+
+**1.**
+
+Dar la derivada de $f(x) = 5x + 3$ por definición:
+
+```math
+f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{f(x+h) - f(x)}{h}
+```
+
+Sustituimos $f(x)$ por $5x + 3$ y $f(x+h)$ por $(5x + 3) + h$:
+
+```math
+f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{(5x + 3) + h - (5x + 3)}{h}
+```
+
+Restamos:
+
+```math
+f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{h}{h}
+```
+
+Simplificamos:
+
+```math
+f'(x) = \displaystyle{\lim_{h \to 0}} \; 1 = 1
+```
+
+***
+
+**2.**
+
+Dar la derivada de $g(x) = \sqrt{x + 2}$ por definición:
+
+```math
+g'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{g(x+h) - g(x)}{h}
+```
+
+Sustituimos $g(x)$ por $\sqrt{x + 2}$ y $g(x+h)$ por $\sqrt{(x + 2) + h}$:
+
+```math
+g'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{\sqrt{x + 2 + h} - \sqrt{x + 2}}{h}
+```
+
+Multiplicamos por el conjugado:
+
+```math
+g'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{\sqrt{x + 2 + h} - \sqrt{x + 2}}{h} \cdot \frac{\sqrt{x + 2 + h} + \sqrt{x + 2}}{\sqrt{x + 2 + h} + \sqrt{x + 2}}
+```
+
+Resolvemos:
+
+```math
+g'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{x + 2 + h - (x + 2)}{h \left(\sqrt{x + 2 + h} + \sqrt{x + 2}\right)}
+```
+
+Restamos en el numerador:
+
+```math
+g'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{h}{h \left(\sqrt{x + 2 + h} + \sqrt{x + 2}\right)}
+```
+
+Simplificamos:
+
+```math
+g'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{\cancel{h}}{\cancel{h} \left(\sqrt{x + 2 + h} + \sqrt{x + 2}\right)} = \displaystyle{\lim_{h \to 0}} \; \frac{1}{\sqrt{x + 2 + h} + \sqrt{x + 2}}
+```
+
+Luego, sustituimos $h$ por $0$:
+
+```math
+g'(x) = \frac{1}{\sqrt{x + 2 + 0} + \sqrt{x + 2}} = \frac{1}{\sqrt{x + 2} + \sqrt{x + 2}} = \frac{1}{2\sqrt{x + 2}}
+```
+
+***
+
+**3.**
+
+Dar la derivada de $h(x) = \frac{2}{x + 2}$ por definición:
+
+```math
+h'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{h(x+h) - h(x)}{h}
+```
+
+Sustituimos $h(x)$ por $\frac{2}{x + 2}$ y $h(x+h)$ por $\frac{2}{(x + 2) + h}$:
+
+```math
+h'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{\frac{2}{(x + 2) + h} - \frac{2}{x + 2}}{h}
+```
+
+Restamos bajo un común denominador:
+
+```math
+h'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{\frac{2(x+2) - 2(x + 2 + h)}{(x + 2 + h)(x + 2)}}{h}
+```
+
+Resolvemos:
+
+```math
+h'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{\frac{2x + 4 - 2x - 2h - 4}{(x + 2 + h)(x + 2)}}{h}
+```
+
+Simplificamos:
+
+```math
+h'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{\frac{-2h}{(x + 2 + h)(x + 2)}}{h}
+```
+
+Sustituimos $h$ por $\frac{h}{1}$:
+
+```math
+h'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{\frac{-2h}{(x + 2 + h)(x + 2)}}{\frac{h}{1}}
+```
+
+Resolvemos la división de fracciones y simplificamos:
+
+```math
+h'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{-2\cancel{h}}{\cancel{h}(x + 2 + h)(x + 2)} 
+```
+
+Finalmente, sustituimos $h$ por $0$:
+
+```math
+h'(x) = \frac{-2}{(x + 2 + 0)(x + 2)} = \frac{-2}{(x + 2)^2}
+```
+
+***
+
+## Ejercicios resueltos - Cálculo de derivadas
+
+**1.**
+
+Dada la función $f(x) = x^2 + 2x + 1$, calcular $f'(x)$ y simplificar lo más posible.
+
+Para esta función, sustituimos $x^2$ por $2x$ (potencia menos uno) y $2x$ por $2$ (potencia menos uno) y $1$ por $0$ (constante):
+
+```math 
+f'(x) = 2x^{2-1} + 2 \cdot 2x^{1-1} + 0 = 2x + 2
+```
+
+***
+
+**2.** 
+
+Dada la función $f(x) = |3x+2|$, comprobar si $f$ es derivable en $2$.
+
+Para eso comparamos las derivadas laterales de la función en $2$. Primero, calculamos $f'^-(2)$:
+
+```math
+f'^-(2) = 1\cdot-3x^{-1} - 0 = 1\cdot-3 = -3
+```
+
+Luego, calculamos $f'^+(2)$:
+
+```math
+f'^+(2) = 1\cdot3x^{-1} - 0 = 1\cdot3 = 3
+```
+
+Como $f'^-(2) \neq f'^+(2)$, $f$ no es derivable en $-2$.
+
+***
+
+**3.**
+
+Calcular la derivada de $f(x) = (x^2+1)^\frac{1}{3}$:
+
+Aplicamos la regla de la cadena:
+
+```math
+f'(x) = \frac{1}{3} \cdot \left(x^2+1\right)^{\frac{1}{3}-1} \cdot \left(2x+0\right) 
+```
+
+Resolvemos:
+
+```math
+f'(x) = \frac{1}{3} \cdot \left(x^2+1\right)^{-\frac{2}{3}} \cdot 2x
+```
+
+Si el exponente es una fracción negativa, invertimos:
+
+```math
+f'(x) = \frac{2x}{3\left(x^2+1\right)^{\frac{2}{3}}}
+```
+
+***
+
+**4.**
+
+Calcular la derivada de $g(x) = \frac{1}{\sqrt[3]{x}}$:
+
+En este caso, podemos reexpresar la función como $g(x) = x^{-\frac{1}{3}}$ y aplicar la regla de la cadena:
+
+```math
+g'(x) = -\frac{1}{3} \cdot x^{-\frac{1}{3}-1} \cdot 1
+```
+
+Resolvemos:
+
+```math
+g'(x) = -\frac{1}{3} \cdot x^{-\frac{4}{3}} = -\frac{1}{3} \cdot \frac{1}{x^{\frac{4}{3}}}
+```
+
+El resultado final es:
+
+```math
+g'(x) = -\frac{1}{3x^{\frac{4}{3}}}
+```
+
+***
+
+**5.**
+
+Calcular la derivada de $h(x) = x^3 \ln(x^2-1)$:
+
+Aplicamos la regla del producto:
+
+```math
+h'(x) = 3x^2 \cdot \ln(x^2-1) + x^3 \cdot \frac{1}{x^2-1} \cdot 2x
+```
+
+Resolvemos:
+
+```math
+h'(x) = 3x^2\ln(x^2-1) + \frac{2x^4}{x^2-1}
+```
+
+***
+
+**6.** 
+ 
+Calcular la derivada de $f(x) = \frac{1}{\sqrt{x^2+1}} - 3x^2$:
+
+Aplicamos la regla de la resta:
+
+```math
+f'(x) = \frac{1}{2} \cdot \left(x^2+1\right)^{-\frac{1}{2}} \cdot 2x - 6x
+```
+
+Resolvemos la potencia:
+
+```math
+f'(x) = \frac{1}{2} \cdot \frac{1}{\sqrt{x^2+1}} \cdot 2x - 6x
+```
+
+Multiplicamos:
+
+```math
+f'(x) = \frac{2x}{2\sqrt{x^2+1}} - 6x
+```
+
+Simplificamos:
+
+```math
+f'(x) = \frac{\cancel{2}x}{\cancel{2}x\sqrt{^2+1}} - 6x = \frac{x}{\sqrt{x^2+1}} - 6x
+```
+
+***
+
+**7.**
+
+Calcular la derivada de $f(x) = \cos(x^2+1)$:
+
+Aplicamos la regla de la cadena:
+
+```math
+f'(x) = -\sin(x^2+1) \cdot \left(2x+0\right)
+```
+
+Resolvemos:
+
+```math
+f'(x) = -2x\sin(x^2+1)
+```
+
+***
+
+## Derivada Segunda (de orden superior)
+
+> La derivada segunda es la derivada de la derivada: $f''(x) = \left(f'(x)\right)'$
+
+## Ecuación de la Recta Tangente
+
+> La ecuación de la recta tangente a la función $f$ en el punto $a$ es:\
+$y = Ax + B$ donde $A = f'(a), \; B = f(a) - A \cdot a$\
+También puede calcularse $B$ reemplazando $x$ e $y$ por los valores de un punto.
+
+### Ejercicios resueltos - Ecuación de la recta tangente
+
+**1.**
+
+Calcular la ecuación de la recta tangente a la función $f(x) = x^2 + 2x + 1$ en el punto $a = 2$:
+
+Primero, calculamos $f'(x)$:
+
+```math
+f'(x) = 2x + 2
+```
+
+Luego, calculamos $f'(2)$:
+
+```math
+f'(2) = 2\cdot2 + 2 = 6
+```
+
+El valor de la pendiente de la recta tangente es $6$. Ahora, calculamos $f(2)$:
+
+```math
+f(2) = 2^2 + 2\cdot2 + 1 = 9
+```
+
+Armamos la ecuación de la recta tangente:
+
+```math
+y = Ax + B \implies y = 6x + (9 - 6\cdot2) \implies y = 6x - 3
+```
+
+***
+
+**2.**
+
+Calcular la ecuación de la recta tangente a la función $f(x) = \frac{x+1}{x-2}$ en el punto $a = 3$:
+
+Primero, calculamos $f'(x)$:
+
+```math
+f'(x) = \frac{(x-2) - (x+1)}{(x-2)^2} = \frac{-3}{(x-2)^2}
+```
+
+Luego, calculamos $f'(3)$:
+
+```math
+f'(3) = \frac{-3}{(3-2)^2} = -3
+```
+
+El valor de la pendiente de la recta tangente es $-3$. Ahora, calculamos $f(3)$:
+
+```math
+f(3) = \frac{3+1}{3-2} = 4
+```
+
+Armamos la ecuación de la recta tangente:
+
+```math
+y = Ax + B \implies y = -3x + (4 - (-3)\cdot3) \implies y = -3x + 13
+```
+
+***
+
+## Aproximación Lineal
+
+> Podemos **aproximar** una función $f$ en un punto $x$ con la recta tangente a la función en ese punto:\
+$f(x) \approx f(x_0) + f'(x_0)(x-x_0)$\
+($x_0$ es el punto de aproximación).
+
+### Ejercicios resueltos - Aproximación lineal
+
+**1.**
+
+Tomar el valor aproximado a $\sqrt{26}$.
+
+Definamos la función $f(x) = \sqrt{x}$. Primero, necesitamos un valor $x_0$ para aproximar. En este caso, podemos tomar $x_0 = 25$.
+
+Luego, calculamos $f(x_0)$:
+
+```math
+f(x_0) = \sqrt{25} = 5
+```
+
+Ahora, calculamos $f'(x)$ (regla de la cadena):
+
+```math
+f'(x) = x^{\frac{1}{2}} \cdot 1 = x^{\frac{1}{2}}
+```
+
+Seguimos resolviendo (regla de la potencia):
+
+```math
+f'(x) = \frac{1}{2} \cdot x^{\frac{1}{2}-1} = \frac{1}{2} \cdot x^{-\frac{1}{2}} = \frac{1}{2\sqrt{x}}
+```
+
+Ahora calculamos $f'(x_0)$, es decir $f'(25)$:
+
+```math
+f'(x_0) = \frac{1}{2\sqrt{25}} = \frac{1}{10}
+```
+
+Podemos armar la aproximación lineal alrededor de $x_0 = 25$:
+
+```math
+f(x) \approx f(x_0) + f'(x_0)(x-x_0) \implies f(26) \approx 5 + \frac{1}{10}(26-25)
+```
+
+Resolvemos:
+
+```math
+f(26) \approx 5 + \frac{1}{10} \approx 5.1
+```
+
+El resultado original es $5.09901951359$, por lo que la aproximación lineal es bastante buena.
+
+***
+
+**2.**
+
+Tomar el valor aproximado a $\sqrt{4.1}$.
+
+Definamos la función $f(x) = \sqrt{x}$. Primero, necesitamos un valor $x_0$ para aproximar. En este caso, podemos tomar $x_0 = 4$.
+
+Luego, calculamos $f(x_0)$:
+
+```math
+f(x_0) = \sqrt{4} = 2
+```
+
+Ahora, calculamos $f'(x)$ (regla de la cadena):
+
+```math
+f'(x) = x^{\frac{1}{2}} \cdot 1 = x^{\frac{1}{2}}
+```
+
+Seguimos resolviendo (regla de la potencia):
+
+```math
+f'(x) = \frac{1}{2} \cdot x^{\frac{1}{2}-1} = \frac{1}{2} \cdot x^{-\frac{1}{2}} = \frac{1}{2\sqrt{x}}
+```
+
+Ahora calculamos $f'(x_0)$, es decir $f'(4)$:
+
+```math
+f'(x_0) = \frac{1}{2\sqrt{4}} = \frac{1}{4}
+```
+
+Podemos armar la aproximación lineal alrededor de $x_0 = 4$:
+
+```math
+f(x) \approx f(x_0) + f'(x_0)(x-x_0) \implies f(4.1) \approx 2 + \frac{1}{4}(4.1-4)
+```
+
+Resolvemos:
+
+```math
+f(4.1) \approx 2 + \frac{1}{4}(\frac{1}{10}) \approx 2.025
+```
+
+El resultado original es $2.02484567313$, por lo que la aproximación lineal es bastante buena.
+
+***
+
+## Regla de L'Hôpital
+
+> Si $\;\displaystyle{\lim_{x \to a}} \; f(x) = \displaystyle{\lim_{x \to a}} \; g(x) = 0 \;\lor\; \displaystyle{\lim_{x \to a}} \; f(x) = \displaystyle{\lim_{x \to a}} \; g(x) = \infty$\
+\
+Entonces: $\displaystyle{\lim_{x \to a}} \; \frac{f(x)}{g(x)} = \displaystyle{\lim_{x \to a}} \; \frac{f'(x)}{g'(x)}$
+
+### Corolario de la Regla de L'Hôpital
+
+> Cuando $f$ es continua en $a$ y derivable en un intervalo abierto (no necesariamente en $a$):\
+1] Si $f'$ tiene límite en $a$, entonces $f'(a) = \displaystyle{\lim_{x \to a}} \; f'(x)$\
+2] Si $\nexists\; \displaystyle{\lim_{x \to a}} \; f'(x)$, entonces $f$ **no** es derivable en $a$.
+
+### Ejercicios resueltos - Regla de L'Hôpital
+
+**1.**
+
+Calcular $\displaystyle{\lim_{x \to 0}} \; \frac{\sin(x)}{x}$:
+
+Primero, sustituimos $x$ por $0$:
+
+```math
+\displaystyle{\lim_{x \to 0}} \; \frac{\sin(x)}{x} = \frac{\sin(0)}{0} = \frac{0}{0}
+```
+
+Como el límite es indeterminado, podemos aplicar la regla de L'Hôpital:
+
+```math
+\displaystyle{\lim_{x \to 0}} \; \frac{\sin(x)}{x} = \displaystyle{\lim_{x \to 0}} \; \frac{\cos(x)}{1} = \frac{\cos(0)}{1} = 1
+```
+
+**2.**
+
+Es $f(x) = \sqrt[3]{x}$ derivable en $0$?
+
+Primero, veamos si $f$ es continua en $0$
+
+```math
+\begin{array}{ll}
+    f(0) = 0 \\
+    \displaystyle{\lim_{x \to 0^-}} \; f(x) = 0 \\
+    \displaystyle{\lim_{x \to 0^+}} \; f(x) = 0
+\end{array}
+```
+
+Luego, veamos si $f'$ tiene límite en $0$. Para eso definimos $f'(x)$:
+
+```math
+f'(x) = \frac{1}{3} \cdot x^{-\frac{2}{3}}
+```
+
+Ahora veamos si $f'$ tiene límite en $0$:
+
+```math
+\displaystyle{\lim_{x \to ^+0}} \; f'(x) = \displaystyle{\lim_{x \to ^+0}} \; \frac{1}{3} \cdot x^{-\frac{2}{3}} = \displaystyle{\lim_{x \to ^+0}} \; \frac{1}{3\sqrt[3]{x^2}} = +\infty \\
+\displaystyle{\lim_{x \to ^-0}} \; f'(x) = \displaystyle{\lim_{x \to ^-0}} \; \frac{1}{3} \cdot x^{-\frac{2}{3}} = \displaystyle{\lim_{x \to ^-0}} \; \frac{1}{3\sqrt[3]{x^2}} = -\infty
+```
+
+Para cualquiera de los limites laterales, $f'$ diverge en $0$, por lo que $f$ no es derivable en $0$.

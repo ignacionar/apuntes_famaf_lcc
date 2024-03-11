@@ -1,0 +1,254 @@
+# Conjuntos Númericos 
+
+Los números se encuentran en distintos conjuntos, los cuales se pueden clasificar en:
+
+* Números Naturales: $\mathbb{N} = \{1,2,3,4,5,6,7,8,9,10,...\}$ (**No** incluye al 0)
+
+* Números Enteros: $\mathbb{Z} = \{...,-3,-2,-1,0,1,2,3,...\}$ (Incluye números **anteriores a 1**)
+
+**Propiedades del número 0**
+
+* Números Racionales: $\mathbb{Q} = \{\frac{a}{b} \;|\; a,b \in \mathbb{Z}, \;b \neq 0\}$ (Incluye números **decimales y fracciones**)
+* Números Irracionales: $\mathbb{I} = \{x \;|\; x \notin \mathbb{Q}\}$ (Ejemplos: $\pi$, $\sqrt{2}$, $e$, **no expresables como fracciones**)
+* Números Reales: $\mathbb{R} = \mathbb{Q} \cup \mathbb{I}$ (Incluye todos los **conjuntos anteriores**)
+* Números Complejos: $\mathbb{C} = \{a + bi \;|\; a,b \in \mathbb{R}, \;i = \sqrt{-1}\}$ (Incluye números **imaginarios**)
+
+La inclusión de los conjuntos es: $\mathbb{N} \subset \mathbb{Z} \subset (\mathbb{Q} \cup \mathbb{I}) \subset \mathbb{R} \subset \mathbb{C}$
+
+## Operaciones
+
+Las operaciones que se pueden realizar con los números son:
+
+### Suma
+
+La suma de dos números $a$ y $b$ se representa como $a + b$ y se lee como "a más b". La suma es **conmutativa** y **asociativa**.
+
+Sus propiedades son:
+
+* Conmutativa: $a + b = b + a$
+* Asociativa: $(a + b) + c = a + (b + c)$
+* Inverso aditivo: $a + (-a) = 0$
+
+### Resta
+
+La resta de dos números $a$ y $b$ se representa como $a - b$ y se lee como "a menos b". La resta es **no conmutativa** y **no asociativa**.
+
+Sus propiedades son:
+
+* No conmutativa: $a - b \neq b - a$
+* No asociativa: $(a - b) - c \neq a - (b - c)$
+* Inverso aditivo: $a - a = 0$
+
+### Multiplicación
+
+La multiplicación de dos números $a$ y $b$ se representa como $a \cdot b$ y se lee como "a por b". La multiplicación es **conmutativa** y **asociativa**.
+
+Sus propiedades son:
+
+* Conmutativa: $a \cdot b = b \cdot a$
+* Asociativa: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+* Distributividad: $a \cdot (b + c) = a \cdot b + a \cdot c$
+* Inverso multiplicativo: $a \cdot \frac{1}{a} = 1$
+
+### División
+
+La división de dos números $a$ y $b$ se representa como $\frac{a}{b}$ y se lee como "a sobre b". La división es **no conmutativa** y **no asociativa**.
+(En el ingreso también se suele representar como $a : b$)
+
+* Inverso multiplicativo: $a \cdot \frac{1}{a} = 1$
+
+### Potenciación
+
+La potenciación de un número $a$ a la $n$ se representa como $a^n$ y se lee como "a elevado a la n". 
+
+Sus propiedades son:
+
+* Potencia de 0: $a^0 = 1$
+* Potencia de 1: $a^1 = a$
+* Potencia de -1: $a^{-1} = \frac{1}{a}$
+* Potencia de fracción: $a^{\frac{1}{n}} = \sqrt[n]{a}$
+* Potencia de potencia: $(a^n)^m = a^{n \cdot m}$
+* Potencia de producto: $a^n \cdot b^n = (a \cdot b)^n$
+* Potencia de cociente: $\frac{a^n}{b^n} = (\frac{a}{b})^n$
+
+### Radicación
+
+La radicación de un número $a$ a la $n$ se representa como $\sqrt[n]{a}$ y se lee como "raíz n-ésima de a".
+
+Sus propiedades son:
+
+* Raíz de 0: $\sqrt[n]{0} = 0$
+* Raíz de 1: $\sqrt[n]{1} = 1$
+* Raíz de fracción: $\sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}}$
+* Raíz de potencia: $\sqrt[n]{a^m} = a^{\frac{m}{n}}$
+* Raíz de producto: $\sqrt[n]{a \cdot b} = \sqrt[n]{a} \cdot \sqrt[n]{b}$
+* Raíz de cociente: $\sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}}$
+
+### Valor Absoluto
+
+El valor absoluto de un número $a$ se representa como $|a|$ y se lee como "módulo de a" o "valor absoluto de a". El valor absoluto de un número es la distancia de dicho número a 0.
+
+Ejemplo:
+
+* $|3| = 3$
+* $|-3| = 3$
+
+### 0 y 1
+
+El 0 y el 1 tienen propiedades especiales:
+
+* $0 \cdot a = 0$ (Elemento Absorbente de la Multiplicación)
+* $1 \cdot a = a$ (Elemento Neutro de la Multiplicación)
+* $0 + a = a$ (Elemento Neutro de la Suma/Resta)
+* $a^0 = 1$ (Exponente 0)
+* $a^1 = a$ (Exponente 1)
+ 
+***
+
+### Ejercicios resueltos - Cálculos
+
+```math
+\frac{\left(\frac{1}{2} - \frac{4}{3}\right)^{-2} : \sqrt{-\left(\frac{-2^3}{50}\right)}}{(-27)^{\frac{1}{3}} - \frac{4}{5} \cdot \left(-\frac{7}{2}\right)}
+```
+Primero, separo en términos y resuelvo paréntesis.
+En los paréntesis con sumas o restas busco un **común denominador**. Luego el $(-27)^{\frac{1}{3}}$ queda como $\sqrt[3]{-27}$ porque $\sqrt[n]{a^m} = a^{\frac{m}{n}}$ y la multiplicación es numerador por numerador y denominador por denominador.
+
+```math
+\frac{\left(\frac{3 - 8}{6}\right)^{-2} : \sqrt{-\frac{-8}{50}}}{\sqrt[3]{-27} + \frac{28}{10}}
+```
+
+Resuelvo parentésis, los dos símbolos negativos de la raíz quedan positivos y simplifico la fracción. Por último, hago la raíz cubica de $-27$. 
+ 
+```math
+\frac{\left(\frac{-5}{6}\right)^{-2} : \sqrt{\frac{4}{25}}}{-3 + \frac{28}{10}}
+```
+
+Resuelvo la raíz arriba. Abajo busco común denominador nuevamente.
+
+```math
+\frac{\left(\frac{-6}{5}\right)^2 : \frac{2}{5}}{\frac{-30 + 28}{10}}
+```
+
+Doy vuelta la fracción para quitarle el signo (-) a la potencia. 
+
+```math
+\frac{\frac{36}{25} \cdot \frac{5}{2}}{-\frac{2}{10}}
+```
+
+Antes de hacer la multiplicación simplifico para una mejor precisión.
+
+```math
+\frac{\frac{18}{5}}{-\frac{1}{5}}
+``` 
+
+Al tener una división de dos fracciones, solamente queda multiplicar numerador con el denominador de la otra fracción y viceversa.
+
+```math
+=-18
+```
+Por regla de signos queda negativo.
+
+### Otro Ejercicio Resuelto - Cálculos
+
+```math
+(-1)^{41} \cdot \frac{(12345 - 12341)^2}{2 \cdot 2^{\frac{18}{9}}} \cdot \left(\sqrt[3]{3} - 0.5\right) - \frac{1}{\frac{11}{13} +
+ \left({\frac{9}{3} + \frac{7}{2}}\right)^{-1}}
+```
+
+```math
+(-1) \cdot \frac{4^2}{2 \cdot 2^{\frac{2}{1}}} \cdot \sqrt[3]{\frac{3}{8} - \frac{1}{2}} - \frac{1}{\frac{11}{13} + \left(\frac{18 + 21}{6}\right)^{-1}}
+```
+
+```math
+(-1) \cdot \frac{16}{2 \cdot 4} \cdot \sqrt[3]{\frac{3 - 4}{8}} - \frac{1}{\frac{11}{13} + \left(\frac{39}{6}\right)^{-1}}
+```
+
+```math
+(-1) \cdot \frac{2}{1} \cdot \sqrt[3]{-\frac{1}{8}} - \frac{1}{\frac{11}{13} + \left(\frac{6}{39}\right)^1}
+```
+
+```math
+(-1) \cdot 2 \cdot \left(-\frac{1}{2}\right) - \frac{1}{\frac{33 + 6}{39}}
+```
+
+```math
+(-2) \cdot \left(-\frac{1}{2}\right) - \frac{1}{\frac{39}{39}}
+```
+
+```math
+(-2) \cdot \left(-\frac{1}{2}\right) - \frac{1}{1}
+```
+
+```math
+\frac{2}{2} - 1
+```
+
+```math
+1 - 1
+``` 
+
+```math
+= 0
+```
+
+***
+
+### Números complejos 
+
+Un número complejo se representa en la forma $$a + b\mathrm{i}$$ donde $$a$$ y $$b$$ son números reales, e $$i$$ es la unidad imaginaria.
+
+El cuadrado de un número real **no** puede ser negativo, es por este motivo que se define $$i = \sqrt{-1}$$, por lo tanto, $$i^2 = -1$$.
+
+<br/>
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table style={{overflowX: "hidden"}}>
+      <thead>
+        <tr>
+          <th>$i^0$</th>
+          <th>$1$</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>$i^1$</td>
+        <td>$i$</td>
+      </tr>
+      <tr>
+        <td>$i^2$</td>
+        <td>$-1$</td>
+      </tr>
+      <tr>
+        <td>$i^3$</td>
+        <td>$-i$</td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+
+Para cada número complejo $a+bi$, se define su conjugado como el número $a−bi$, y se lo denota $\overline{a + bi}$. 
+
+***
+
+### Ejercicios resueltos - Números complejos
+ 
+```math
+= (1 + i)(2−i)
+``` 
+ 
+Al ser una multiplicación aplico la propiedad distributiva.
+
+```math
+= 2 - i + 2i - i^2
+``` 
+ 
+Una vez hecho este paso, hay que corroborar los valores que tiene $$i$$ cuando está elevado a una potencia y reemplazamos ese valor.
+
+```math
+=2 - i + 2i - (-1)
+``` 
+ 
+Ahora sumo o resto los términos independientes y lo mismo para los números que tengan $$i$$. Con el resultado final:
+
+```math
+= 3 + i
+``` 

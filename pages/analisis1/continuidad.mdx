@@ -1,0 +1,359 @@
+# Continuidad
+
+> La **continuidad de una función en un punto $a$** se define como la existencia de límite en $a$ y que dicho límite sea igual al valor de la función en $a$.
+
+En otras palabras, necesitamos tres condiciones para que una función sea continua en un punto $a$:
+
+1. $a \in Dom\;f(x)$
+2. $\exists\; \displaystyle{\lim_{x \to a}} \; f(x)$ 
+3. $\displaystyle{\lim_{x \to a}} \; f(x) = f(a)$
+
+Cuando una de estas condiciones no se cumple, decimos que la función es **discontinua en $a$**.
+
+## Discontinuidades
+
+En base a los criterios anteriores, se establecen tres tipos de discontinuidades:
+
+1. **Discontinuidad evitable**: $\displaystyle{\lim_{x \to a}} \; f(x) \neq f(a)$
+2. **Discontinuidad de salto**: $\displaystyle{\lim_{x \to a^-}} \; f(x) \neq \displaystyle{\lim_{x \to a^+}} \; f(x) \;\; (\cancel{\exists}\;\displaystyle{\lim_{x \to a}} \; f(x))$
+3. **Discontinuidad esencial**: $\displaystyle{\lim_{x \to a^\pm}} \; f(x) = \pm\infty \;\; (\cancel{\exists}\;\displaystyle{\lim_{x \to a}} \; f(x))$
+
+Si $a\;\cancel{\in}\;Dom\;f(x)$, entonces $a$ puede ser un punto de discontinuidad de salto o esencial.
+
+### Ejercicios resueltos - Continuidad y descontinuidad
+
+**1.**
+
+Dada la siguiente función por partes:
+
+```math
+f(x) = \left\{
+    \begin{array}{ll}
+        x^2 + 1, & x < 1 \\
+        3x, & x \geq 1
+    \end{array}
+\right.
+```
+
+a) ¿Es continua en $x = 1$?
+
+b) ¿Es continua en $x = 2$?
+
+a] 
+
+```math
+\begin{array}{ll}
+    f(1) = 3 \\
+    \displaystyle{\lim_{x \to 1^-}} \; f(x) = 2 \\
+    \displaystyle{\lim_{x \to 1^+}} \; f(x) = 3
+\end{array}
+```
+
+```math
+\nexists\;\displaystyle{\lim_{x \to 1}} \; f(x)
+```
+
+$f$ es discontinua si $x = 1$ (discontinuidad de salto).
+
+b] 
+
+```math
+\begin{array}{ll}
+    f(2) = 6 \\
+    \displaystyle{\lim_{x \to 2^-}} \; f(x) = 6 \\
+    \displaystyle{\lim_{x \to 2^+}} \; f(x) = 6
+\end{array}
+```
+
+```math
+\displaystyle{\lim_{x \to 2}} \; f(x) = f(2)
+```
+
+$f$ es continua si $x = 2$.
+
+***
+
+**2.**
+
+Dada la siguiente función por partes:
+
+```math
+f(x) = \left\{
+    \begin{array}{ll}
+        \frac{1}{x}, & x < 0 \\
+        0, & x = 0 \\
+        x, & x > 0 \\
+        2, & x = 3
+    \end{array}
+\right.
+```
+
+a) ¿Es continua en $x = 1$?
+
+b) ¿Es continua en $x = 3$?
+
+c) ¿Es continua en $x = 0$?
+
+a]
+
+```math
+\begin{array}{ll}
+    f(1) = 1 \\
+    \displaystyle{\lim_{x \to 1^-}} \; f(x) = 1 \\
+    \displaystyle{\lim_{x \to 1^+}} \; f(x) = 1
+\end{array}
+```
+
+```math
+\displaystyle{\lim_{x \to 1}} \; f(x) = f(1)
+```
+
+$f$ es continua si $x = 1$.
+
+b] 
+
+```math
+\begin{array}{ll}
+  f(3) = 2 \\
+  \displaystyle{\lim_{x \to 3^-}} \; f(x) = 3 \\
+  \displaystyle{\lim_{x \to 3^+}} \; f(x) = 3
+\end{array}
+```
+
+```math
+\displaystyle{\lim_{x \to 3}} \; f(x) \neq f(3) 
+```
+
+$f$ es discontinua si $x = 3$ (discontinuidad evitable).
+
+c] 
+
+```math
+\begin{array}{ll}
+    f(0) = 0 \\
+    \displaystyle{\lim_{x \to 0^-}} \; f(x) = -\infty \\
+    \displaystyle{\lim_{x \to 0^+}} \; f(x) = 0
+\end{array}
+```
+
+```math
+\nexists\;\displaystyle{\lim_{x \to 0}} \; f(x) 
+```
+
+$f$ es discontinua si $x = 0$ (discontinuidad esencial).
+
+***
+
+**3.**
+
+Dada la siguiente función por partes:
+
+```math
+f(x) = \left\{
+    \begin{array}{ll}
+        x^2\sin(\frac{1}{x}), & x \neq 0 \\
+        0, & x = 0 \\
+    \end{array}
+\right.
+```
+
+En este caso, no podemos reemplazar $x$ por $0$ en la función, ya que no está definida. 
+
+Por lo tanto, podemos razonar para aplicar el **Teorema del Sandwich**:
+
+```math
+-1 \leq \sin(\frac{1}{x}) \leq 1
+```
+
+La función $\sin(x)$ estará siempre acotada en $[-1, 1]$. Por lo tanto, podemos multiplicar por $x^2$ a ambos lados: 
+
+```math
+-x^2 \leq x^2\sin(\frac{1}{x}) \leq x^2
+```
+
+En lugar de reemplazar $x$ por $0$, evaluamos el límite cuando $x$ tiende a $0$ en $-x^2$ y $x^2$:
+
+```math
+\begin{array}{ll}
+    \displaystyle{\lim_{x \to 0^-}} \; -x^2 = 0 \\
+    \displaystyle{\lim_{x \to 0^+}} \; x^2 = 0
+\end{array}
+```
+
+Ambos valores son iguales, por lo tanto la función que está acotada entre ambas también lo es (Teorema del Sandwich).
+
+```math
+\displaystyle{\lim_{x \to 0}} \; f(x) = 0
+```
+
+***
+
+## Continuidad lateral
+
+> Definimos continuidad por izquierda si $\displaystyle{\lim_{x \to a^-}} \; f(x) = f(a)$ y por derecha si $\displaystyle{\lim_{x \to a^+}} \; f(x) = f(a)$
+
+## Continuidad en un Intervalo
+
+> $f$ es continua en $(a, b)$ si es continua en todo número del intervalo.
+
+> $f$ es continua en $[a, b]$ si es continua en todo número del intervalo, por derecha en $a$ e izquierda en $b$.
+
+## Propiedades - Funciones continuas
+
+Si $f$ y $g$ son continuas en $a$, entonces lo serán:
+
+* $(f + g)(x)$
+* $(f - g)(x)$
+* $(f \cdot g)(x)$
+* $(\frac{f}{g})(x)$, si $g(a) \neq 0$
+* $(f \circ g)(x)$, si $f$ continua en $g(a)$
+
+Si $a$ es un punto del dominio (**no extremos**):
+
+* Los polinomios son continuos en $\mathbb{R}$.
+* Las funciones racionales son continuas en su dominio.
+* Las radicación es continua en su dominio (**sin extremos**)
+* $sen(x)$ y $cos(x)$ son continuas en $\mathbb{R}$.
+
+### Ejercicios resueltos - Continuidad en un intervalo
+
+**1.**
+
+Dada la siguiente función, demostrar que es continua en $[-2, 2]$:
+
+```math
+f(x) = x + \sqrt{4 - x^2}
+```
+
+La función $f$ es una suma de 2 funciones:
+
+```math 
+\begin{array}{ll}
+  g(x) = x \; \\
+  h(x) = \sqrt{4 - x^2}
+\end{array}
+```
+
+Sabemos que $g(x)$ es continua en $\mathbb{R}$ y por ende continua en $[-2, 2]$.
+
+También podríamos expresar $h(x)$ como una función compuesta:
+
+```math
+\begin{array}{ll}
+  p(x) = \sqrt{x} \; \\
+  q(x) = 4 - x^2
+\end{array}
+```
+
+Sabiendo que la función es compuesta, queda saber su dominio:
+
+```math
+  4 - x^2 \geq 0 
+```
+
+Sumamos $x^2$ a ambos lados:
+
+```math
+  4 \geq x^2
+```
+
+Invertimos el orden de los términos:
+
+```math
+  x^2 \leq 4
+```
+
+Sacamos raíz cuadrada a ambos lados:
+
+```math
+  \sqrt{x^2} \leq \sqrt{4}
+```
+
+Aplicamos propiedad de Valor Absoluto:
+
+```math
+  |x| \leq 2
+```
+
+```math
+  -2 \leq x \leq 2
+```
+
+Su dominio es $[-2, 2]$. Sin embargo, al ser una función compuesta, es $(-2, 2)$ (**si es una función compuesta no incluimos extremos!**). Debemos verificar sus extremos/laterales.
+Para ello, necesitamos saber el valor de $f(-2)$ y $f(2)$:
+
+```math
+\begin{array}{ll}
+  f(-2) = -2 + \sqrt{4 - (-2)^2} = -2 + \sqrt{4 - 4} = -2 + \sqrt{0} = -2 + 0 = -2 \; \\
+  f(2) = 2 + \sqrt{4 - 2^2} = 2 + \sqrt{4 - 4} = 2 + \sqrt{0} = 2 + 0 = 2
+\end{array}
+```
+
+Ahora, comparamos los valores de $f(-2)$ y $f(2)$ con los límites laterales y verificamos su continuidad:
+
+```math
+\begin{array}{ll}
+   \displaystyle{\lim_{x \to -2^+}} \; f(x) = -2 + \sqrt{4 - (-2)^2} = -2 + \sqrt{4 - 4} = -2 + \sqrt{0} = -2 + 0 = -2 \; \\
+   \displaystyle{\lim_{x \to 2^-}} \; f(x) = 2 + \sqrt{4 - 2^2} = 2 + \sqrt{4 - 4} = 2 + \sqrt{0} = 2 + 0 = 2 \; \\
+\end{array}
+```
+
+La continuidad lateral se cumple, por lo que la $f$ es continua en $[-2, 2]$.
+
+## Teorema del Valor Intermedio
+
+> Si $f$ es continua en $[a, b]$, y $N$ es un número entre $f(a)$ y $f(b)$, hay un número $c$ en $[a, b]$ tal que $f(c) = N$.\
+(Puede ser: $f(a) < N < f(b) \; \lor \: f(b) < N < f(a)$)
+
+### Ejercicios resueltos - Teorema del Valor Intermedio
+
+**1.**
+ 
+Dada la ecuación: $cos(x) = 2x$, demostrar que tiene al menos una solución en $(0, \pi)$.
+
+Para poder resolver este problema, podemos igualar toda la ecuación a $0$:
+
+```math
+cos(x) - 2x = 0
+```
+
+$N = 0$ puede funcionar como solución. Para buscarla, definimos una función $f(x) = cos(x) - 2x$.\
+(**Sabemos que $cos(x)$ es continua en $\mathbb{R}$, por lo que también lo es en $[0, \pi]$**):
+
+```math
+\begin{array}{ll}
+  f(0) = cos(0) - 2(0) = 1 - 0 = 1 \; \\
+  f(1) = cos(\pi) - 2(1) = -1 - 2 = -3 \; \\
+\end{array}
+```
+
+Si $N = 0$, entonces $f(0) > 0 > f(\pi)$.\
+Por el Teorema del Valor Intermedio, existe un $c$ en $(0, \pi)$ tal que $f(c) = 0$.
+
+**2.**
+
+Dada la ecuación: $x^3 - 2x^2 = -3x + 1 $, demostrar que tiene al menos una solución en $(0, 1)$.
+
+Primero, igualamos la ecuación a $0$:
+
+```math
+x^3 - 2x^2 + 3x - 1 = 0
+```
+
+Luego, definimos una función: $f(x) = x^3 - 2x^2 + 3x - 1$.\
+(**Sabemos que $x^3$ es continua en $\mathbb{R}$, por lo que también lo es en $[0, 1]$**):
+
+```math
+\begin{array}{ll}
+  f(0) = 0^3 - 2(0)^2 + 3(0) - 1 = -1 \; \\
+  f(1) = 1^3 - 2(1)^2 + 3(1) - 1 = 1 \; \\
+\end{array}
+```
+
+Si $N = 0$, entonces $f(0) < 0 < f(1)$.\
+Por el Teorema del Valor Intermedio, existe un $c$ en $(0, 1)$ tal que $f(c) = 0$.
+
+## Teorema de Weierstrass
+
+> Si $f$ es continua en $[a, b]$, hay dos puntos $x_1$ y $x_2$ en $[a, b]$ tales que $f(x_1) \leq f(x) \leq f(x_2), \forall x \in [a, b]$.\
+Es decir, $f$ alcanza su **máximo** y **mínimo** en $[a, b]$.
