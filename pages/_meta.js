@@ -5,5 +5,6 @@ export default {
   acerca_del_proyecto: {
     title: <p>❓ Acerca del Proyecto</p>
   },
-  analisis1: "Análisis Matemático 1"
+  analisis1: "Análisis Matemático 1",
+  discreta1: "Matemática Discreta 1",
 }

@@ -1,0 +1,310 @@
+# Números enteros
+
+## Axiomas
+
+> Los axiomas son proposiciones que se aceptan como verdaderas sin necesidad de demostración. 
+
+## Axiomas - Operaciones entre enteros
+
+Dentro del conjunto de los números enteros $(\mathbb{Z})$, y considerando que $a, b, c \in \mathbb{Z}$ podemos establecer los siguientes:
+
+- **I1)** $a+b,\; a\cdot b \in \mathbb{Z}$ 
+- **I2)** Conmutatividad: $a+b=b+a,\;ab=ba$
+- **I3)** Asociatividad: $(a+b)+c = a+(b+c),\; (a \cdot b)\cdot c = a \cdot (b \cdot c)$
+- **I4)** EIemento Neutro: $a + 0 = a,\; a \cdot 1 = a$
+- **I5)** Distributividad: $a \cdot (b+c) = a \cdot b + a \cdot c$
+- **I6)** Inverso aditivo: $a + (-a) = 0$
+- **I7)** Cancelación: Si $a \neq 0, \; a \cdot b = a \cdot c \Rightarrow b = c$
+
+## Axiomas - Orden de enteros
+
+Pueden establecerse los siguientes axiomas con respecto a la relación "menor que" $(<)$:
+
+- **I8)** Tricotomía: Para cada par de enteros $a$ y $b$ se cumple que $a < b$, $a = b$ o $a > b$
+- **I9)** Transitividad: Si $a < b$ y $b < c \Rightarrow a < c$
+- **I10)** Compatbiilidad con la suma: Si $a < b \Rightarrow a + c < b + c$
+- **I11)** Compatibilidad con el producto: Si $a < b$ y $0 < c \Rightarrow ac < bc$
+
+## Axioma - Buena ordenación
+
+Si $X$ es subjconjunto de $\mathbb{Z}, \; b$ entero es una **cota inferior** de $X$ si:
+
+```math
+b \leq x,\;\forall x \in X
+```
+
+Algunos subconjuntos **no** tienen cotas inferiores (por ejemplo, el conjunto de los números negativos, ya que hay infinitos números negativos).
+
+La cota inferior de un conjunto $X$ **no necesariamente pertenece al mismo**.\
+Una cota inferior de un conjunto $X$ que a su vez pertenece a $X$ se llama **mínimo** de $X$.
+
+- **I12)** Si $X$ es un subconjunto no vacío de $\mathbb{Z}$ que tiene una cota inferior, **entonces $X$ tiene un mínimo**.
+
+### Ejercicios resueltos - Axiomas
+
+**1.** 
+
+Demostrar que el conjunto $\mathbb{Z}$ **no tiene cota inferior**.
+
+Supongamos que $\mathbb{Z}$ tiene cota inferior, es decir, que existe un número entero $b$ tal que $b \leq x, \; \forall x \in \mathbb{Z}$.\
+El número anterior a $b$, es decir, $b-1$, cumple con: $\;\;b-1 \leq x$. Por lo que $b$ no es cota inferior. Hay infinitos números enteros menores que $b$.
+
+{/* TODO */}
+
+Demostrar que $-(-a) = a$
+
+## Fórmulas cerradas y definiciones recursivas
+
+> Cuando una sucesión se puede expresar combinando un número determinado de operaciones, es una **fórmula cerrada**.
+
+Una sucesión $u_n$ por fórmula cerrada sería: $u_n = 2n + 1$
+
+> Cuando una sucesión se define a partir de un número finito de términos iniciales y una regla que permite obtener cualquier término a partir de los anteriores, está definida de manera **recursiva**.
+
+- $u_1 = 3,\; u_2 = 4$ (Casos base)
+- $u_n = u_{n-1} + u_{n-2}$ (Caso recursivo)
+
+Si quisieramos saber el valor de $u_3$, tendríamos que calcular: 
+
+```math
+\begin{align*}
+    u_3 &= u_2 + u_1 \\
+    7 &= 4 + 3
+\end{align*}
+```
+
+### Sumatoria 
+
+> Una sumatoria es una expresión matemática que representa la **suma de una secuencia de términos**. 
+
+```math
+\displaystyle{\sum_{i=1}^{n}} i = 1 + 2 + 3 + ... + n = \frac{n(n+1)}{2}
+```
+
+### Productoria 
+
+> Una productoria es una expresión matemática que representa el **producto de una secuencia de términos**.
+
+```math
+\displaystyle{\prod_{i=1}^{n}} i + i = (1 + 1) \cdot (2 + 2) \cdot ... \cdot (n + n)
+```
+
+También podemos definir: 
+
+```math
+\displaystyle{\prod_{i=1}^{n}} i = 1 \cdot 2 \cdot 3 \cdot ... \cdot n = n!
+```
+
+Se lee como "$n$ factorial", este carece de formula cerrada.
+
+### Potencias
+
+Definimos la $n$-ésima potencia de un número $a \in \mathbb{N}$ si:
+
+```math
+a^1 = a,\; a^n = a \cdot a^{n-1}\; (n \geq 2)
+```
+Finalmente definimos $a^0 = 1$.
+
+## Inducción
+
+> La inducción es un método de demostración matemática que se utiliza para probar que una proposición es verdadera para todos los números naturales.
+
+### Principio de Inducción
+
+**Ejemplo:**
+
+Supongamos que queremos probar que: $\displaystyle{\sum_{k=1}^n} k \cdot k! = (n + 1)! - 1, \; \forall n \in \mathbb{N}$.
+
+Podemos probarla por el principio de inducción de la siguiente manera:
+
+**1)** Definimos un **caso base**, por lo general usamos el de $n = 1$.
+
+```math
+\displaystyle{\sum_{k=1}^n} k \cdot k! = (n + 1)! - 1
+```
+
+Reemplazamos $n = 1$:
+
+```math
+\displaystyle{\sum_{k=1}^1} k \cdot k! = (1 + 1)! - 1
+```
+
+Reemplazamos $k = 1$:
+
+```math
+1 \cdot 1! = 2! - 1
+```
+
+Resolvemos:
+
+```math
+\begin{align*}
+    1 &= 2 - 1 \\
+    1 &= 1
+\end{align*}
+```
+
+Como podemos ver, la igualdad se cumple para el caso base $n=1$.
+
+**2)** Suponemos que se cumple para $n=k$, siendo $k$ un $\mathbb{N}$ arbitrario. Reemplazamos $n=k$ en la proposición a demostrar y definimos la **hipótesis inductiva**:
+
+```math
+\displaystyle{\sum_{k=1}^k} k \cdot k! = (k + 1)! - 1
+```
+
+**3)** Suponemos que se cumple para $n=k+1$, el siguiente de $k$ y cualquier $\mathbb{N}$ (**paso inductivo**). Reemplazamos $n=k+1$ en la proposición a demostrar:
+
+```math
+\begin{align*}
+  \displaystyle{\sum_{k=1}^{k+1}} k \cdot k! &= ((k + 1) + 1)! - 1 \\
+  \displaystyle{\sum_{k=1}^{k+1}} k \cdot k! &\stackrel{?}{=} (k + 2)! - 1
+\end{align*}
+```
+
+Procedemos a demostrar:
+
+```math
+\displaystyle{\sum_{k=1}^{k+1}} k \cdot k! = (k + 2)! - 1
+```
+
+Reemplazamos el primer término por la definición recursiva de $\sum$:
+
+```math
+\displaystyle{\sum_{k=1}^{k}} k \cdot k! + (k + 1) \cdot (k + 1)! = (k + 2)! - 1
+```
+
+Reemplazamos por la hipótesis inductiva:
+
+```math
+(k + 1)! - 1 + (k + 1) \cdot (k + 1)! = (k + 2)! - 1
+```
+
+Aplicamos propiedad conmutativa en el primer término:
+
+```math
+(k + 1)! + (k + 1) \cdot (k + 1)! - 1 = (k + 2)! - 1
+```
+
+Sacamos factor común de $(k + 1)!$:
+
+```math
+(k + 1)! \cdot (1 + (k + 1)) - 1 = (k + 2)! - 1
+```
+
+Aplicamos propiedad asociativa:
+
+```math
+(k + 1)! \cdot (k + 2) - 1 = (k + 2)! - 1
+```
+
+Si multiplicamos $(k+1)! \cdot (k+2)$ obtenemos $(k+2)!$, ya que $(k+2)$ es el siguiente número de $(k+1)$:
+
+```math
+(k + 2)! - 1 = (k + 2)! - 1
+```
+
+La igualdad se cumple para $n=k+1$, por lo que la proposición es verdadera para cualquier $n \in \mathbb{N}$.
+
+### Principio de Inducción Completa
+
+En algunos casos, es conveniente tomar valores distintos a $n=1$ o tomar como hipótesis inductiva que la proposición es verdadera para todos los valores $n \leq k$ en lugar de $n=k$.
+
+Sea $n_0$ un entero y $P(n)$ una proposición que depende de un entero $n \geq n_0$ tal que:
+
+a) $P(n_0)$ es verdadera.\
+b) Si $P(h)$ verdadera para toda $h$ tal que $n_0 \leq h \leq k$, entonces $P(k+1)$ es verdadera.
+
+Entonces, $P(n)$ es verdadera para todo $n \geq n_0$.
+
+**Ejemplo:**
+
+Sea $\{a_n\}_{n\in\mathbb{N}}$ una sucesión definida por:
+
+```math
+\left\{
+\begin{array}{ll}
+a_0 = 1, \\
+a_1 = 2, \\
+a_n = 7a_{n-1} - 12a_{n-2}, \quad n \geq 2
+\end{array}
+\right.
+```
+
+Probar que $a_n = 2 \cdot 3^n - 4^n, \; \forall n \in \mathbb{N}_0$:
+
+**1)** Por definición de la sucesión tenemos que $a_0 = 1$ y $a_1 = 2$ (casos base). Reemplazamos en la proposición a demostrar:
+
+```math
+a_0 = 2 \cdot 3^0 - 4^0 = 1
+```
+
+```math
+a_1 = 2 \cdot 3^1 - 4^1 = 2
+```
+
+La proposición es verdadera para $n=0$ y $n=1$.
+
+**2)** Debemos probar que si para algún $k \geq 1$ vale: $\;\;a_h = 2 \cdot 3^h - 4^h$ para $0 \leq h \leq k$ (hipótesis inductiva)
+
+**3)** Suponiendo que lo anterior es cierto, seguimos el paso inductivo y probamos que:
+
+```math
+a_{k+1} = 2 \cdot 3^{k+1} - 4^{k+1}
+```	
+
+Aplicamos la definición de $a_n$
+
+```math
+a_{k+1} = 7a_{k+1-1} - 12a_{k+1-2}
+```
+
+Resolvemos:
+
+```math
+a_{k+1} = 7a_k - 12a_{k-1}
+```
+
+Aplicamos la hipótesis inductiva:
+
+```math
+a_{k+1} = 7(2 \cdot 3^k - 4^k) - 12(2 \cdot 3^{k-1} - 4^{k-1})
+```
+
+Para poder probar la igualdad, necesitamos que los exponentes sean iguales a $k+1$, por lo que multiplicaremos las potencias por $3$ y $4$ como sea posible. En este caso, reexpresaremos $12 \cdot 2$ como $8 \cdot 3 \cdot 3$ y $12 \cdot 1$ como $3 \cdot 4 \cdot 4$:
+
+```math
+a_{k+1} = 14 \cdot 3^k - 7 \cdot 4^k - 8 \cdot 3 \cdot 3^{k-1} + 3 \cdot 4 \cdot 4^{k-1}
+```
+
+Multiplicamos las potencias:
+
+```math
+a_{k+1} = 14 \cdot 3^k - 7 \cdot 4^k - 8 \cdot 3^k + 3 \cdot 4^k
+```
+
+Aplicamos factor común:
+
+```math
+a_{k+1} = 3^k \cdot (14-8) + 4^k \cdot ((-7)+3)
+```
+
+Resolvemos:
+
+```math
+a_{k+1} = 6 \cdot 3^k - 4 \cdot 4^k
+```
+
+Reexpresamos $6$ como $2 \cdot 3$:
+
+```math
+a_{k+1} = 2 \cdot 3 \cdot 3^k - 4 \cdot 4^k
+```
+
+Multiplicamos $3^k$ por $3$ y $4^k$ por $4$:
+
+```math
+a_{k+1} = 2 \cdot 3^{k+1} - 4^{k+1}
+```
+
+La proposición es verdadera para $n=k+1$, por lo que la proposición es verdadera para cualquier $n \in \mathbb{N}_0$.
