@@ -22,8 +22,8 @@ Pueden establecerse los siguientes axiomas con respecto a la relación "menor qu
 
 - **I8)** Tricotomía: Para cada par de enteros $a$ y $b$ se cumple que $a < b$, $a = b$ o $a > b$
 - **I9)** Transitividad: Si $a < b$ y $b < c \Rightarrow a < c$
-- **I10)** Compatbiilidad con la suma: Si $a < b \Rightarrow a + c < b + c$
-- **I11)** Compatibilidad con el producto: Si $a < b$ y $0 < c \Rightarrow ac < bc$
+- **I10)** Compatibilidad de la suma con el orden: Si $a < b \Rightarrow a + c < b + c$
+- **I11)** Compatibilidad del producto con el orden: Si $a < b$ y $0 < c \Rightarrow ac < bc$
 
 ## Axioma - Buena ordenación
 
@@ -49,9 +49,109 @@ Demostrar que el conjunto $\mathbb{Z}$ **no tiene cota inferior**.
 Supongamos que $\mathbb{Z}$ tiene cota inferior, es decir, que existe un número entero $b$ tal que $b \leq x, \; \forall x \in \mathbb{Z}$.\
 El número anterior a $b$, es decir, $b-1$, cumple con: $\;\;b-1 \leq x$. Por lo que $b$ no es cota inferior. Hay infinitos números enteros menores que $b$.
 
-{/* TODO */}
+***
 
-Demostrar que $-(-a) = a$
+**2.**
+
+Sean $a, b \in \mathbb{Z}$, probar la siguiente afirmación: 
+
+Si $0 < a$ y $0 < b$, entonces $a < b \Leftrightarrow a^2 < b^2$.
+
+**Demostración:**
+
+Suponiendo que $a < b$:
+
+Si multiplicamos ambos lados de la desigualdad por $a$, obtenemos: 
+
+```math
+\begin{align*}
+  a \cdot a &< a \cdot b\\
+  a^2 &< ab
+\end{align*}
+```
+
+**a)** $a^2 < ab$ 
+
+Si multiplicamos ambos lados de la desigualdad por $b$, obtenemos: 
+
+```math
+\begin{align*}
+a \cdot b &< b \cdot b \\
+ab &< b^2
+\end{align*}
+```
+**b)** $ab < b^2$
+
+De **a)** y **b)**, concluimos por **transitividad** que $a^2 < b^2$.
+
+***
+
+**3.**
+
+Sean $a, b \in \mathbb{Z}$, probar la siguiente afirmación:
+
+Si $a \neq 0$, entonces $a^2 > 0$.
+
+**Demostración:**
+
+En el caso que $a > 0$:
+
+
+```math
+\begin{align*}
+  a \cdot a &> a \cdot 0 \\
+  a^2 &> 0
+\end{align*}
+```
+
+**a)** $a^2 > 0$
+
+En el caso que $a < 0$:
+
+```math
+\begin{align*}
+  a + (-a) &< (-a) \\
+  0 &< (-a) \\
+  0 &< (-a) \cdot (-a) \\
+  0 &< a^2
+\end{align*}
+```
+
+**b)** $0 < a^2$
+
+Por **a)** y **b)**, concluimos que $a^2 > 0$.
+
+***
+
+**4.**
+
+Sean $a, b \in \mathbb{Z}$, probar la siguiente afirmación:
+
+Si $a \neq b$, entonces $a^2 + b^2 > 0$.
+
+**Demostración:**
+
+Si $a > b$:
+
+```math
+\begin{align*}
+  a^2 &> b^2 \\
+  a^2 + b^2 &> b^2 
+\end{align*}
+```
+
+Si $a < b$:
+
+```math
+\begin{align*}
+  a^2 &< b^2 \\
+  a^2 + b^2 &> a^2
+\end{align*}
+```
+
+Al ser cuadrados, ambos son positivos. Contemplando si $a^2 = 0\;$ o $\;b^2 = 0$ ya que ambos serán distintos. Por lo que $a^2 + b^2 > 0$.
+
+***
 
 ## Fórmulas cerradas y definiciones recursivas
 
