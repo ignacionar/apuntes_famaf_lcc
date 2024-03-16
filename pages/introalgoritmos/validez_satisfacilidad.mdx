@@ -1,0 +1,255 @@
+import Image from 'next/image'
+
+# Validez y Satisfacilidad 
+
+## Aritmetica 
+> La aritmética es una rama de las matemáticas que se ocupa del estudio de los números y las operaciones fundamentales sobre ellos,
+ como la suma, la resta, la multiplicación y la división.
+
+
+Acá veremos la formalidad de conceptos matemáticos como números y aritmética.
+ Se introduce la sintaxis para construir expresiones matemáticas y su estructura definida.
+ Las cuales son:
+
+ * Un número, por ejemplo: 1, 35, 8. A estas expresiones les llamaremos constantes.
+
+ * Una letra, por ejemplo: x, y, z. A estas expresiones les llamaremos variables.
+
+ * Al combinar dos expresiones con un operador y encerrar el resultado entre paréntesis, se pueden crear expresiones más complejas.
+  Los operadores utilizados son +, −, *, / y ˆ (para potenciación). Por ejemplo, al usar el operador − entre la variable $$z$$ y la constante 6, 
+  se forma la expresión $$(z − 6)$$. Los paréntesis redundantes se pueden eliminar según las reglas que se explicarán más adelante.
+
+* A su vez, cada una de estas expresiones puede volver a combinarse con otras
+formando expresiones más complejas, por ejemplo: ((x + y)/(2ˆx)) + (6/3).
+Para poder expresar propiedades como 2 + 1 es igual a la expresión 3, o que x es menor a
+x + 1 agregaremos símbolos de relación.
+
+* Al combinar dos expresiones con un símbolo de relación, creamos una fórmula. Las fórmulas son un tipo específico de expresión. 
+Los símbolos de relación que consideramos incluyen $$=, <, ≤, > y ≥$$. Por ejemplo, al tomar las expresiones 2 * 6 y x + 7 con el símbolo de relación =,
+ obtenemos la fórmula 2 + 6 = x + 7.
+
+## Procedencia y Tipado 
+
+> La precedencia establece el orden de las operaciones en una expresión, mientras que el tipado asigna tipos de datos para definir qué se puede hacer con ellos.
+
+
+La precedencia de los operadores nos permite escribir fórmulas extensas de manera clara. Cuando un operador tiene mayor precedencia que otro, 
+podemos escribir la fórmula sin necesidad de paréntesis y sigue teniendo un significado único. Por ejemplo, el operador * tiene mayor precedencia que +, por lo que interpretamos
+ 2 + 4 * 3 como 2 + (4 * 3). Sin embargo, esto no siempre se aplica, como en (2 + 4) * 3, que 2 + 4 * 3, donde los paréntesis cambian el significado de la expresión.
+
+
+Los operadores asociativos permiten eliminar paréntesis cuando se aplican múltiples veces. Por ejemplo, (2 + 4) + 7 = 2 + (4 + 7), por lo que podemos escribir simplemente 2 + 4 + 7.
+ **Los operadores + y * son asociativos**.
+
+ El concepto de tipado en las expresiones matemáticas nos ayuda a asegurar que las expresiones tengan sentido y representen valores coherentes. Cada operador o función
+  tiene un tipo que indica qué tipo de valores acepta como entrada y qué tipo de valor produce como salida. En el contexto algebraico, los valores suelen ser de tipo número (Num)
+   o booleano (Bool). Por ejemplo, en una operación de suma, tanto los operandos como el resultado deben ser números. Además, debemos considerar los operadores de relación, 
+   como el igual (=) y los símbolos de desigualdad (≤, < , ≥, >), los cuales devuelven valores booleanos que representan la comparación entre dos expresiones. Estos 
+ conceptos son esenciales para garantizar la coherencia y el significado claro de las expresiones matemáticas, incluyendo la capacidad de expresar conceptos de verdad y falsedad.
+
+ **Ejemplo 1:**
+
+Procederemos sacando parentesis innencesarios teniendo en cuenta la precedencia de los operadores y la asociatividad de los mismos. 
+
+
+(8 − 6) * x = (6 * (x^2 )) + 3
+
+
+≡ ```{``` precedencia de * por sobre + ```}``` Se puede eliminar porque se sabe que el * tiene mayor precedencia que el +.
+
+
+(8 − 6) * x = 6 * (x^2 ) + 3
+
+≡ ```{``` precedencia de 2 sobre * ```}``` En este caso el 2 tiene mayor precedencia que el * por lo que se puede eliminar el parentesis.
+
+(8 − 6) * x = 6 * x^2 + 3
+
+En este punto los parentésis que quedan son importantes por lo tanto aca termina el proceso de eliminacion de parentesis innecesarios.
+
+## Precedencia y tipado con operaciones booleanas
+
+> Un booleano es un tipo de dato que puede tener uno de dos valores: verdadero (true) o falso (false).
+ Se utiliza en la lógica y la programación para representar condiciones de verdad o falsedad.
+
+La lógica proposicional usa True y False con operadores booleanos (∧, ∨,¬, ≡, ⇒) para expresar relaciones lógicas simples, como "si a > b y b > c, entonces a > c".
+
+```math
+(a > b) ∧ (b > c) ⇒ (a > c)
+```
+
+Al complejizarse el lenguaje, es necesario establecer reglas de notación para poder escribir
+las expresiones con mayor claridad y sin ambigüedades.
+
+<br/>
+
+<Image src="/introalgoritmos/precedencias.jpg" alt="recta" width={0} height={0} layout="responsive" style={{border: "1px solid black"}}/>
+
+<br/>
+
+**Ejemplo 1:**
+
+Debemos sacar  todos los paréntesis que sean superfluos según las reglas de precedencia
+de los operadores booleanos. 
+
+```math
+(((p ⇒ q) ∧ (q ⇒ p)) ⇒ (p ≡ q))
+```
+
+Sacamos el paréntesis mas grande que contiene a todos los demás.
+
+```math
+((p ⇒ q) ∧ (q ⇒ p)) ⇒ (p ≡ q)
+```
+
+Sacamos el paréntesis que contiene a (p ⇒ q) ∧ (q ⇒ p) ya que el operador ∧ tiene mayor precedencia que el operador ⇒.
+
+```math
+(p ⇒ q) ∧ (q ⇒ p) ⇒ (p ≡ q)
+```
+Una vez que se eliminaron los paréntesis superfluos, se da por terminado el proceso de eliminación de paréntesis innecesarios.
+
+***
+
+**Ejemplo 2:**
+
+Ahora al revés, debemos agregar paréntesis para que la expresión sea clara y no ambigua.
+
+```math
+ p ⇒ q ≡ p ∨ q ≡ q
+```
+
+
+Agregamos paréntesis en ⇒ y ∨ para que la expresión sea clara.
+
+
+```math
+(p ⇒ q) ≡ (p ∨ q) ≡ q
+```
+Como q no opera con nadie, no es necesario agregar paréntesis.
+
+## Validez y Satisfactibilidad
+
+> Validez: Cumple las reglas lógicas sin importar los valores específicos de las variables.
+Satisfacibilidad: Puede ser verdadero en al menos una interpretación. 
+
+La satisfactibilidad se refiere a si una fórmula es verdadera para al menos algunos valores de las variables,
+ mientras que la validez indica si es verdadera para todos los valores posibles de las variables. La validez es independiente de los valores de las variables,
+ mientras que para demostrar la no validez es suficiente encontrar un contraejemplo. Una fórmula es no satisfactible si no existe ningún valor que la haga verdadera.
+
+ En el siguiente ejemplo veremos en qué valores de x satisface la ecuación.
+
+**Ejemplo 1:** 
+
+6 * x + 8 = x + 3:
+Veamos cómo resolverlo:
+
+```math
+6 * x + 8 = x + 3
+```
+
+≡ ```{``` restar x en ambos miembros ```}```
+
+```math
+6 * x + 8 − x = x + 3 − x
+```
+
+≡ ```{``` aritmética ```}```
+
+```math
+5 * x + 8 = 3
+```
+
+≡ ```{``` restar 8 en ambos miembros ```}```
+
+```math
+5 * x + 8 − 8 = 3 − 8
+```
+
+≡ ```{``` aritmética ```}```
+
+```math
+5 * x = −5
+```
+
+≡ ```{``` dividir por 5 en ambos miembros, aritmética ```}```
+
+```math
+x = −1
+```
+
+• Por lo tanto, la ecuación es satisfactible para x = −1.
+
+***
+
+En el siguiente ejemplo demostraremos que las siguientes ecuaciones son válidas.
+
+**Ejemplo 2:** 
+
+```math
+4 * x + 14 = 2 * (2 * x + 5) + 4
+```
+
+≡ ```{``` distributividad de * con +, def. de * ```}```
+
+```math
+4 * x + 14 = 4 * x + 10 + 4
+```
+
+≡ ```{``` def. de + ```}```
+
+```math
+4 * x + 14 = 4 * x + 14
+```
+
+≡ ```{``` reflexividad de = (e = e) ```}```
+
+True
+
+<br/>
+
+<Image src="/introalgoritmos/propiedades.png" alt="recta" width={0} height={0} layout="responsive" style={{border: "1px solid black"}}/>
+
+<br/>
+
+*** 
+
+En el siguiente ejemplo veremos que la siguiente ecuación no es válida, es decir, que no es verdadera para todos los valores de x.
+
+**Ejemplo 3:** 
+
+
+para la ecuación 3 * x + 1 = 3 * (x + 1).
+Contraejemplo: x := 5 falsifica la fórmula ya que
+  
+   ```math
+3 * 5 + 1=3 * 5 + 3
+```
+
+≡ ```{``` def. de * ```}```
+
+```math
+15 + 1 = 15 + 3
+```
+
+≡ ```{``` def. de + ```}```
+
+```math
+16 = 18
+```
+
+≡ ```{``` igualdad de números ```}```
+
+False
+
+• Por lo tanto, la ecuación no es válida.
+
+***
+
+## Tabla de operadores 
+
+<br/>
+
+<Image src="/introalgoritmos/tabla.png" alt="recta" width={0} height={0} layout="responsive" style={{border: "1px solid black"}}/>
+
+<br/>
+
