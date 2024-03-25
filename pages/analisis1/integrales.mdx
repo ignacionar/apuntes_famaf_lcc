@@ -100,13 +100,9 @@ Si $F(x)$ es una antiderivada de $f$, entonces la integral indefinida es el conj
 \int \sin(2x)2\;dx
 ```
 
-Sabemos que $f(x) = \sin(x)$ y $g(x) = 2x$. Por lo tanto, $g'(x) = 2$.
+Para este método hacemos el cambio de variable $u = 2x$. Y definimos $du = 2\;dx$ (derivada de $u$). 
 
-```math
-\frac{du}{dx} = 2 \implies du = 2\;dx 
-```
-
-Ahora podemos reemplazar en la integral:
+Ahora podemos usar en la integral los valores de $u$ y $du$:
 
 ```math
 \int \sin(2x)2\;dx = \int \sin(u)\;du = -\cos(u) + c = -\cos(2x) + c
