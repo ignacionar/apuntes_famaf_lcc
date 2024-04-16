@@ -2,7 +2,7 @@
 
 ## Axiomas
 
-> Los axiomas son proposiciones que se aceptan como verdaderas sin necesidad de demostración. 
+> Los axiomas son proposiciones que se aceptan como **verdaderas sin necesidad de demostración**. 
 
 ## Axiomas - Operaciones entre enteros
 
@@ -283,23 +283,23 @@ Finalmente definimos $a^0 = 1$.
 
 **Ejemplo:**
 
-Supongamos que queremos probar que: $\displaystyle{\sum_{k=1}^n} k \cdot k! = (n + 1)! - 1, \; \forall n \in \mathbb{N}$.
+Supongamos que queremos probar que: $\displaystyle{\sum_{k=1}^n} i \cdot i! = (n + 1)! - 1, \; \forall n \in \mathbb{N}$.
 
 Podemos probarla por el principio de inducción de la siguiente manera:
 
 **1)** Definimos un **caso base**, por lo general usamos el de $n = 1$.
 
 ```math
-\displaystyle{\sum_{k=1}^n} k \cdot k! = (n + 1)! - 1
+\displaystyle{\sum_{k=1}^n} i \cdot i! = (n + 1)! - 1
 ```
 
 Reemplazamos $n = 1$:
 
 ```math
-\displaystyle{\sum_{k=1}^1} k \cdot k! = (1 + 1)! - 1
+\displaystyle{\sum_{k=1}^1} i \cdot i! = (1 + 1)! - 1
 ```
 
-Reemplazamos $k = 1$:
+Reemplazamos $i = 1$:
 
 ```math
 1 \cdot 1! = 2! - 1
@@ -319,28 +319,28 @@ Como podemos ver, la igualdad se cumple para el caso base $n=1$.
 **2)** Suponemos que se cumple para $n=k$, siendo $k$ un $\mathbb{N}$ arbitrario. Reemplazamos $n=k$ en la proposición a demostrar y definimos la **hipótesis inductiva**:
 
 ```math
-\displaystyle{\sum_{k=1}^k} k \cdot k! = (k + 1)! - 1
+\displaystyle{\sum_{k=1}^k} i \cdot i! = (k + 1)! - 1
 ```
 
 **3)** Suponemos que se cumple para $n=k+1$, el siguiente de $k$ y cualquier $\mathbb{N}$ (**paso inductivo**). Reemplazamos $n=k+1$ en la proposición a demostrar:
 
 ```math
 \begin{align*}
-  \displaystyle{\sum_{k=1}^{k+1}} k \cdot k! &= ((k + 1) + 1)! - 1 \\
-  \displaystyle{\sum_{k=1}^{k+1}} k \cdot k! &\stackrel{?}{=} (k + 2)! - 1
+  \displaystyle{\sum_{k=1}^{k+1}} i \cdot i! &= ((k + 1) + 1)! - 1 \\
+  \displaystyle{\sum_{k=1}^{k+1}} i \cdot i! &\stackrel{?}{=} (k + 2)! - 1
 \end{align*}
 ```
 
 Procedemos a demostrar:
 
 ```math
-\displaystyle{\sum_{k=1}^{k+1}} k \cdot k! = (k + 2)! - 1
+\displaystyle{\sum_{k=1}^{k+1}} i \cdot i! = (k + 2)! - 1
 ```
 
 Reemplazamos el primer término por la definición recursiva de $\sum$:
 
 ```math
-\displaystyle{\sum_{k=1}^{k}} k \cdot k! + (k + 1) \cdot (k + 1)! = (k + 2)! - 1
+\displaystyle{\sum_{k=1}^{k}} i \cdot i! + (k + 1) \cdot (k + 1)! = (k + 2)! - 1
 ```
 
 Reemplazamos por la hipótesis inductiva:
@@ -355,7 +355,7 @@ Aplicamos propiedad conmutativa en el primer término:
 (k + 1)! + (k + 1) \cdot (k + 1)! - 1 = (k + 2)! - 1
 ```
 
-Sacamos factor común de $(k + 1)!$:
+Sacamos factor común de $(k + 1)!$
 
 ```math
 (k + 1)! \cdot (1 + (k + 1)) - 1 = (k + 2)! - 1
@@ -381,8 +381,8 @@ En algunos casos, es conveniente tomar valores distintos a $n=1$ o tomar como hi
 
 Sea $n_0$ un entero y $P(n)$ una proposición que depende de un entero $n \geq n_0$ tal que:
 
-a) $P(n_0)$ es verdadera.\
-b) Si $P(h)$ verdadera para toda $h$ tal que $n_0 \leq h \leq k$, entonces $P(k+1)$ es verdadera.
+**a)** $P(n_0)$ es verdadera.\
+**b)** Si $P(h)$ verdadera para toda $h$ tal que $n_0 \leq h \leq k$, entonces $P(k+1)$ es verdadera.
 
 Entonces, $P(n)$ es verdadera para todo $n \geq n_0$.
 
@@ -477,3 +477,356 @@ a_{k+1} = 2 \cdot 3^{k+1} - 4^{k+1}
 ```
 
 La proposición es verdadera para $n=k+1$, por lo que la proposición es verdadera para cualquier $n \in \mathbb{N}_0$.
+
+### Ejercicios resueltos - Inducción 
+
+**1.**
+
+Demostrar que $\displaystyle{\sum_{i=0}^{n}}\;2^i = 2^{n+1}-1, \; \forall n \in \mathbb{N_0}$.
+
+**Demostración:**
+
+**1)** Definimos un **caso base**, por lo general usamos el de $n = 0$.
+
+```math
+\displaystyle{\sum_{i=0}^{n}}\;2^i = 2^{n+1}-1
+```
+
+Reemplazamos $n = 0$:
+
+```math
+\displaystyle{\sum_{i=0}^{0}}\;2^i = 2^{0+1}-1
+```
+
+Reemplazamos $i = 0$:
+
+```math
+2^0 = 2^1 - 1
+```
+
+Resolvemos:
+
+```math
+\begin{align*}
+    1 &= 2 - 1 \\
+    1 &= 1
+\end{align*}
+
+```
+
+Como podemos ver, la igualdad se cumple para el caso base $n=0$.
+
+**2)** Suponemos que se cumple para $n=k$, siendo $k$ un $\mathbb{N}$ arbitrario. Reemplazamos $n=k$ en la proposición a demostrar y definimos la **hipótesis inductiva**:
+
+```math
+\displaystyle{\sum_{i=0}^{k}}\;2^i = 2^{k+1}-1
+```
+
+**3)** Ahora, demostramos para $n=k+1$ (**paso inductivo**):
+
+```math
+\begin{align*}
+  \displaystyle{\sum_{i=0}^{k+1}}\;2^i &= 2^{k+1+1}-1 \\
+  \displaystyle{\sum_{i=0}^{k+1}}\;2^i &\stackrel{?}{=} 2^{k+2}-1
+\end{align*}
+```
+
+Procedemos a demostrar:
+
+```math
+\displaystyle{\sum_{i=0}^{k+1}}\;2^i = 2^{k+2}-1
+```
+
+Reemplazamos el primer término por la definición recursiva de $\sum$:
+
+```math
+\displaystyle{\sum_{i=0}^{k}}\;2^i + 2^{k+1} = 2^{k+2}-1
+```
+
+Reemplazamos por la hipótesis inductiva:
+
+```math
+2^{k+1}-1 + 2^{k+1} = 2^{k+2}-1
+```
+
+Resolvemos:
+
+```math
+2 \cdot 2^{k+1} - 1 = 2^{k+2} - 1
+```
+
+```math
+2^{k+2} - 1 = 2^{k+2} - 1
+```
+
+La igualdad se cumple para $n=k+1$, por lo que la proposición es verdadera para cualquier $n \in \mathbb{N}_0$.
+
+***
+
+**2.**
+
+Demostrar que $\displaystyle{\sum_{i=1}^{n}}\;i^2 = \frac{n(n+1)(2n+1)}{6}, \; \forall n \in \mathbb{N}$.
+
+**Demostración:**
+
+**1)** Definimos un **caso base**, por lo general usamos el de $n = 1$.
+
+```math
+\displaystyle{\sum_{i=1}^{n}}\;i^2 = \frac{n(n+1)(2n+1)}{6}
+```
+
+Reemplazamos $n = 1$:
+
+```math
+\displaystyle{\sum_{i=1}^{1}}\;i^2 = \frac{1(1+1)(2 \cdot 1+1)}{6}
+```
+
+Reemplazamos $i = 1$:
+
+```math
+1^2 = \frac{1(1+1)(2 \cdot 1+1)}{6}
+```
+
+Resolvemos:
+
+```math
+\begin{align*}
+    1 &= \frac{1 \cdot 2 \cdot 3}{6} \\
+    1 &= 1
+\end{align*}
+
+```
+
+Como podemos ver, la igualdad se cumple para el caso base $n=1$.
+
+**2)** Suponemos que se cumple para $n=k$, siendo $k$ un $\mathbb{N}$ arbitrario. Reemplazamos $n=k$ en la proposición a demostrar y definimos la **hipótesis inductiva**:
+
+```math
+\displaystyle{\sum_{i=1}^{k}}\;i^2 = \frac{k(k+1)(2k+1)}{6}
+```
+
+**3)** Ahora, demostramos para $n=k+1$ (**paso inductivo**):
+
+```math
+\begin{align*}
+  \displaystyle{\sum_{i=1}^{k+1}}\;i^2 &= \frac{(k+1)(k+1+1)(2(k+1)+1)}{6} \\
+  \displaystyle{\sum_{i=1}^{k+1}}\;i^2 &\stackrel{?}{=} \frac{(k+1)(k+2)(2k+3)}{6}
+\end{align*}
+```
+
+Procedemos a demostrar:
+
+```math
+\displaystyle{\sum_{i=1}^{k+1}}\;i^2 = \frac{(k+1)(k+1+1)(2(k+1)+1)}{6}
+```
+
+Reemplazamos el primer término por la definición recursiva de $\sum$:
+
+```math
+\displaystyle{\sum_{i=1}^{k}}\;i^2 + (k+1)^2 = \frac{(k+1)(k+1+1)(2(k+1)+1)}{6}
+```
+
+Reemplazamos por la hipótesis inductiva:
+
+```math
+\frac{k(k+1)(2k+1)}{6} + (k+1)^2 = \frac{(k+1)(k+1+1)(2(k+1)+1)}{6}
+```
+
+Resolvemos:
+
+```math
+\frac{k(k+1)(2k+1)}{6} + (k+1)^2 = \frac{(k+1)(k+1+1)(2(k+1)+1)}{6}
+```
+
+```math
+\frac{k(k+1)(2k+1)}{6} + k^2 + 2k + 1 = \frac{(k+1)(k+2)(2k+3)}{6}
+```
+
+```math
+\frac{k(k+1)(2k+1) + 6k^2 + 12k + 6}{6} = \frac{(k+1)(k+2)(2k+3)}{6}
+```
+
+```math
+\frac{2k^3 + 3k^2 + k + 6k^2 + 12k + 6}{6} = \frac{2k^3 + 9k^2 + 13k + 6}{6}
+```
+
+```math
+\frac{2k^3 + 9k^2 + 13k + 6}{6} = \frac{2k^3 + 9k^2 + 13k + 6}{6}
+```
+
+La igualdad se cumple para $n=k+1$, por lo que la proposición es verdadera para cualquier $n \in \mathbb{N}$.
+
+***
+
+**3.**
+
+Dada una sucesión $\{a_n\}_{n\in\mathbb{N_0}}$ definida por:
+
+```math
+\left\{
+\begin{array}{ll}
+a_0 = 2, \\
+a_1 = 4, \\
+a_n = 4a_{n-1} - 3a_{n-2}, \quad n \geq 2
+\end{array}
+\right.
+```
+
+Demostrar que $a_n = 3^n + 1, \; \forall n \in \mathbb{N_0}$.
+
+**Demostración:**
+
+**1)** Partimos de los **casos base** $n=0$ y $n=1$:
+
+```math
+a_0 = 3^0 + 1 = 2
+```
+
+```math
+a_1 = 3^1 + 1 = 4
+```
+
+La proposición es verdadera para $n=0$ y $n=1$.
+
+**2)** Suponemos que se cumple para $n=k$, siendo $k$ un $\mathbb{N}$ arbitrario y $0 \leq h \leq k$ (**hipótesis inductiva**):
+
+```math
+a_h = 3^h + 1
+```
+
+**3)** Ahora, demostramos para $n=k+1$ (**paso inductivo**):
+
+```math
+\begin{align*}
+  a_{k+1} &= 3^{k+1} + 1 \\
+  a_{k+1} &\stackrel{?}{=} 3^{k+1} + 1
+\end{align*}
+
+```
+
+Procedemos a demostrar:
+
+```math
+a_{k+1} = 3^{k+1} + 1
+```
+
+Reemplazamos el primer término por la definición recursiva de $a_n$
+
+```math
+a_{k+1} = 4a_k - 3a_{k-1}
+```
+
+Aplicamos la hipótesis inductiva:
+
+```math
+\begin{align*}
+a_{k+1} &= 4(3^k + 1) - 3(3^{k-1} + 1) \\
+a_{k+1} &= 4 \cdot 3^k + 4 - 3 \cdot 3^{k-1} - 3 \\
+\end{align*}
+```
+
+Multiplicamos $3$ por $3^{k-1}$:
+
+```math
+a_{k+1} = 4 \cdot 3^k + 4 - 3^k - 3 \\
+```
+
+Aplicamos factor común de $3^k$ y restamos $3$:
+
+```math
+a_{k+1} = 3^k \cdot (4 - 1) + 1 \\
+a_{k+1} = 3^{k+1} + 1
+```
+
+La proposición es verdadera para $n=k+1$, por lo que la proposición es verdadera para cualquier $n \in \mathbb{N_0}$.
+
+***
+
+**4.**
+
+Dada una sucesión $\{a_n\}_{n\in\mathbb{N}}$ definida por:
+
+```math
+\left\{
+\begin{array}{ll}
+a_1 = 9, \\
+a_2 = 33, \\
+a_n = 7a_{n-1} - 10a_{n-2}, \quad n \geq 3
+\end{array}
+\right.
+```
+
+Demostrar que $a_n = 2^{n+1} + 5^n, \; \forall n \in \mathbb{N}$.       
+
+**Demostración:**
+
+**1)** Partimos de los **casos base** $n=1$ y $n=2$:
+
+```math
+a_1 = 2^{1+1} + 5^1 = 9
+```
+
+```math
+a_2 = 2^{2+1} + 5^2 = 33
+```
+
+La proposición es verdadera para $n=1$ y $n=2$.
+
+**2)** Suponemos que se cumple para $n=k$, siendo $k$ un $\mathbb{N}$ arbitrario y $1 \leq h \leq k$ (**hipótesis inductiva**):
+
+```math
+a_h = 2^{h+1} + 5^h
+```
+
+**3)** Ahora, demostramos para $n=k+1$ (**paso inductivo**):
+
+```math
+\begin{align*}
+  a_{k+1} &= 2^{k+1+1} + 5^{k+1} \\
+  a_{k+1} &\stackrel{?}{=} 2^{k+2+1} + 5^{k+1}
+
+\end{align*}
+
+```
+
+Procedemos a demostrar:
+
+```math
+a_{k+1} = 2^{k+1+1} + 5^{k+1}
+```
+
+Reemplazamos el primer término por la definición recursiva de $a_n$
+
+```math
+a_{k+1} = 7a_k - 10a_{k-1}
+```
+
+Aplicamos la hipótesis inductiva:
+
+```math
+\begin{align*}
+a_{k+1} &= 7(2^{k+1} + 5^k) - 10(2^k + 5^{k-1}) \\
+a_{k+1} &= 7 \cdot 2^{k+1} + 7 \cdot 5^k - 10 \cdot 2^k - 10 \cdot 5^{k-1} 
+\end{align*}
+```
+
+Reexpresamos $10$ como $2 \cdot 5$:
+
+```math
+\begin{align*}
+a_{k+1} &= 7 \cdot 2^{k+1} + 7 \cdot 5^k - 2 \cdot 5 \cdot 2^k - 2 \cdot 5 \cdot 5^{k-1} \\
+a_{k+1} &= 7 \cdot 2^{k+1} + 7 \cdot 5^k - 5 \cdot 2^{k+1} - 2 \cdot 5^{k} 
+\end{align*}
+```
+
+Aplicamos factor común de $2^{k+1}$ y $5^k$:
+
+```math
+\begin{align*}
+a_{k+1} &= 2^{k+1} \cdot (7 - 5) + 5^k \cdot (7 - 2) \\
+a_{k+1} &= 2^{k+1} \cdot 2 + 5^k \cdot 5 \\
+a_{k+1} &= 2^{k+2} + 5^{k+1}
+\end{align*}
+```
+
+La proposición es verdadera para $n=k+1$, por lo que la proposición es verdadera para cualquier $n \in \mathbb{N}$.
