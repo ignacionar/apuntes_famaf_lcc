@@ -1,0 +1,287 @@
+# Divisibilidad 
+
+> Dados dos enteros $x$ e $y$ decimos que $y$ dvidide a $x$ ($y \mid x$),\
+si $x = y \cdot q, \;q \in \mathbb{Z}$.
+
+Si $x$ es _divisible_ por $y$, entonces $x$ es un _múltiplo_ de $y$.
+
+## Propiedades básicas _divide a_ 
+
+Sean $a, b, c \in \mathbb{Z}$, entonces:
+
+**1)** $1 \mid a$
+
+```math 
+a = 1 \cdot a \\
+a = a \cdot 1 \\
+-a = a \cdot (-1)
+```
+
+**2)** $a \mid 0$ y solo $0 \mid 0$
+
+```math
+0 = a \cdot 0 \\
+0 \mid a \implies a = 0 \cdot q = 0
+```
+
+**3)** Si $a \mid b \implies a \mid bc$
+
+```math
+a \mid b \implies b = a \cdot q \\
+bc = a \cdot qc \implies a \mid bc
+```
+
+**4)** Si $a \mid b$ y $a \mid (b + c)$
+
+```math
+a \mid b \land a \mid c \implies b = a \cdot q \land c = a \cdot q' \\
+b + c = a \cdot q + a \cdot q' = a(q + q') \implies a \mid (b + c)
+```
+
+**5)** Si $a \mid b$ y $a \mid c \implies a \mid (rb + sc) \forall r, s \in \mathbb{Z}$
+
+```math
+a \mid b \land a \mid c \implies b = a \cdot q \land c = a \cdot q' \\
+rb + sc = a \cdot rq + a \cdot sq' = a(rq + sq') \implies a \mid (rb + sc)
+```
+
+**6)** Si $a \mid b + c$ y $a \mid c \implies a \mid b$
+
+```math
+a \mid b + c \land a \mid c \implies b + c = a \cdot q \land c = a \cdot q' \\
+b = (b + c) - c = a \cdot q - a \cdot q' = a(q - q') \implies a \mid b
+```
+
+**7)** Si $a \mid b \implies \pm a \mid \pm b$
+
+```math
+a \mid b \implies b = a \cdot q \implies \\
+-b = a \cdot (-q) \implies a \mid -b \\
+-b = -a \cdot q \implies -a \mid -b \\
+b = -a \cdot (-q) \implies -a \mid b \\
+```
+
+**D1)** $a \mid a$ (**Reflexividad**)
+
+**D2)** $a \mid b \land b \mid a \implies a = b$ (**Antisimetría**)
+
+**D3)** $a \mid b \land b \mid c \implies a \mid c$ (**Transitividad**)
+
+## Algoritmo de la división
+
+> Sean $a \in \mathbb{Z}$ y $b \in \mathbb{N}$ existen enteros únicos $q$ y $r$ tales que:
+
+```math
+a = b \cdot q + r , \;0 \leq r < b
+```
+
+Donde $q$ es el _cociente_ y $r$ es el _resto_ de dividr $b$ por $a$. 
+
+**Ejemplo:** 
+
+```math
+a = 13, \;b = 5 \\
+13 = 5 \cdot 2 + 3
+```
+
+## Desarrollos en base $b$
+
+> Todo natural $x$ se puede expresar como:
+
+```math
+x = r_n 10^n + r_{n-1} 10^{n-1} + \ldots + r_1 10+ r_0
+```
+
+Donde $r_n \neq 0$ y $0 \leq r_i < 10$.
+
+$x$ se representa como $(r_n r_{n-1} \ldots r_1 r_0)_{10}$.
+
+**Ejemplo:**
+
+Si queremos escribir el número $407$ de la siguiente forma (base $5$):
+
+```math
+407 = r_n 5^n + r_{n-1} 5^{n-1} + \ldots + r_1 5 + r_0
+```
+
+Con $0 \leq r_i < 5$ lo podemos hacer de forma algorítmica: 
+
+Necesitamos dividir el número original y los sucesivos cocientes por $5$: 
+
+```math
+\begin{align*}
+407 &= 5 \cdot 81 + 2 \; (1) \\ 
+81 &= 5 \cdot 16 + 1 \; (2) \\
+16 &= 5 \cdot 3 + 1 \; (3) \\
+3 &= 5 \cdot 0 + 3 \; (4)
+\end{align*}
+```
+
+Y ahora reemplazamos los valores de los cocientes: 
+
+```math
+\begin{align*}
+407 &= 5 \cdot 81 + 2 \; (1) \\
+&= 5 \cdot (5 \cdot 16 + 1) + 2 \; (2) \\
+&= 5^2 \cdot 16 + 5 + 2 \; \\
+&= 5^2 \cdot (5 \cdot 3 + 1) + 5 + 2 \; (3) \\
+&= 5^3 \cdot 3 + 5^2 \cdot 1 + 5 \cdot 1 + 2 \; \\
+\end{align*}
+```
+
+Por lo que el número $407$ en base $5$ sería $(3112)_5$.
+
+### Conversiones de base 
+
+Podemos calcular la conversión de un número de base $b$ a base $10$. 
+
+**Ejemeplo:**
+
+Convertir $(1304)_6$ a base $10$:
+
+```math
+\begin{align*}
+(1304)_6 = 1 \cdot 6^3 + 3 \cdot 6^2 + 0 \cdot 6^1 + 4 \cdot 6^0 \\
+&= 1 \cdot 216 + 3 \cdot 36 + 0 \cdot 6 + 4 \cdot 1 \\
+&= 216 + 108 + 0 + 4 \\
+&= 328
+\end{align*}
+```
+
+Si quisieramos convertir $(1304)_6$ a otra base (por ejemplo, $5$), primero lo convertimos a base $10$ y luego a la base deseada. 
+
+## Máximo común divisor (mcd)
+
+> Sean $a, b \in \mathbb{Z}$ alguno de ellos no nulo, denotamos $mcd(a, b) o $(a, b) al máximo común divisor entre $a$ y $b$.
+
+### Propiedades del mcd
+
+**1)** $mcd(a, b) = mcd(b, a) = mcd(\pm a, \pm b)$
+
+**2)** $a > 0,\;mcd(a,0) = a,\;mcd(a, a) = a$
+
+**3)** $mcd(1, b) = 1$
+
+**4)** $mcd(a, b) = mcd(a, b - a)$
+
+***
+
+### Algoritmo de Euclides
+
+> Sean $a, b \in \mathbb{Z}$, con $b \neq 0$, entonces:\
+$a = bq + r \rightarrow mcd(a, b) = mcd(b, r)$
+
+**Ejemplo:**
+
+Encontrar el $mcd(174, 72)$
+
+```math
+174 = 72 \cdot 2 + 30 \implies mcd(174, 72) = mcd(72, 30) \\
+72 = 30 \cdot 2 + 12 \implies mcd(72, 30) = mcd(30, 12) \\
+30 = 12 \cdot 2 + 6 \implies mcd(30, 12) = mcd(12, 6) \\
+12 = 6 \cdot 2 + 0 \implies mcd(12, 6) = mcd(6, 0) = 6
+```
+
+Por lo tanto, $mcd(174, 72) = 6$.
+
+**Ejemplo 2:** 
+
+Encontrar el $mcd(174, 72)$ y escribir $d = s \cdot 174 + t \cdot 72$
+
+```math
+\begin{align*}
+174 = 72 \cdot 2 + 30 &\implies 30 = 174 - 72 \cdot 2 \; (1) \\
+72 = 30 \cdot 2 + 12 &\implies 12 = 72 - 30 \cdot 2 \; (2) \\
+30 = 12 \cdot 2 + 6 &\implies 6 = 30 - 12 \cdot 2 \; (3) \\
+12 = 6 \cdot 2 + 0 
+\end{align*}
+```
+
+Sabemos que $mcd(174, 72) = 6$, por lo que podemos reemplazar los valores de los restos: 
+
+```math
+\begin{align*}
+6 &= 30 - 12 \cdot 2 \; (3) \\ 
+&= 1 \cdot 30 - 2 \cdot (72 - 30 \cdot 2) \; (2) \\
+&= 1 \cdot 30 + (-2) \cdot 72 + 4 \cdot 30 \\
+&= 5 \cdot 30 + (-2) \cdot 72 \\
+&= 5 \cdot (174 - 72 \cdot 2) + (-2) \cdot 72 \\
+&= 5 \cdot 174 + (-10) \cdot 72 + (-2) \cdot 72 \\
+&= 5 \cdot 174 + (-12) \cdot 72
+\end{align*}
+```
+
+Por lo que $d = 6, \;s = 5, \;t = -12$.
+
+## Mínimo común múltiplo (mcm)
+
+> Si $a, b \in \mathbb{Z}$, alguno de ellos no nulo, denotamos $mcm(a, b)$ al mínimo común múltiplo entre $a$ y $b$.
+
+La forma de calcularlo es:
+
+```math
+mcm(a, b) = \frac{|ab|}{mcd(a, b)}
+```
+
+**Si $a$ y $b$ son naturales coprimos, entonces $mcd(a, b) = 1$ y $mcm(a, b) = ab$.**
+
+## Factorización prima 
+
+### Teorema Fundamental de la Aritmética
+
+> Todo entero $n > 1$ puede **ser escrito de manera única como producto de primos** (salvo el orden de los factores). 
+
+### Propiedades de la factorización prima
+
+Sean $a \in \mathbb{Z}$ y $p$ primo:
+
+**1)** $p \not{\mid} \; a \implies mcd(a, p) = 1$
+
+**2)** $p, p'$ primos y $p \mid p' \implies p = p'$
+
+**3)** $n > 0$ no primo $\implies \exists m > 0$ tal que $m \mid n, \; m \leq \sqrt{n}$
+
+### Criterio de la raíz 
+
+> Sea $n \geq 2$, si para todo $m$ tal que $1 < m \leq \sqrt{n}$, se cumple que $m \not{\mid} \; n$, entonces $n$ es primo.
+
+**Ejemplo:**
+
+Podemos verificar si $467$ es primo o no: 
+
+```math
+\begin{align*}
+\sqrt{467} &\approx 21.6 \\
+2 \leq m \leq 21 &\implies 3, 5, 7, 11, 13, 17, 19 \not{\mid} \; 467
+\end{align*}
+```	
+
+Comprobamos que los números no dividen a $467$, por lo que $467$ es primo.
+
+### Teorema - Numeros pares 
+
+> Si $m, n \in \mathbb{Z}$, tales que $m \geq 2 \land n \geq 2 \implies m^2 \neq 2n^2$.
+
+No puede ocurrir que $m^2 = 2n^2$ porque si ocurriera ese número tendría en la descomposición prima por un lado $2$ a una potencia impar y por otro lado $2$ a una potencia par. 
+
+Con esto podemos probar que $\sqrt{2}$ es irracional. Para ello suponemos que $\sqrt{2}$ es racional: 
+
+```math
+\sqrt{2} = \frac{m}{n} 
+```
+
+Entendemos esta fracción como una fracción irreducible, sin embargo esto no se cumple: 
+
+```math
+2 = \frac{m^2}{n^2} \implies 2n^2 = m^2
+```
+
+$m^2 = 2n^2$, por lo que $m$ es par. Sabiendo que $m$ es par, lo reescribimos como $m = 2k$:
+
+```math
+4k^2 = 2n^2 \implies 2k^2 = n^2
+```
+
+Ambos números son pares, la fracción **sigue siendo reducible**.
+
+Por lo que $m^2 = 2n^2$ es un absurdo y $\sqrt{2}$ es irracional.
