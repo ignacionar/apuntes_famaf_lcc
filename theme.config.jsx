@@ -42,7 +42,7 @@ export default {
     const { locale = 'es-ES' } = useRouter()
     return (
       <>
-        Última vez actualiado el{' '}
+        Última vez actualizado el{' '}
         <time dateTime={timestamp.toISOString()}>
           {timestamp.toLocaleDateString(locale, {
             day: 'numeric',
