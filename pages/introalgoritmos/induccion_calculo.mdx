@@ -1,0 +1,275 @@
+## Inducción 
+
+> Es un método para demostrar la validez de propiedades sobre estructuras de datos recursivas,
+ como listas o árboles, utilizando un caso base y un paso inductivo.
+
+ Una técnica poderosa para demostrar propiedades sobre un dominio inductivo, como son los naturales o
+las listas, es usar el **principio de inducción**. La idea que rige este principio consiste en demostrar dos cosas.
+Por un lado verificar que la propiedad se satisface para los elementos "más chicos" del dominio (por ejemplo,
+la lista $$[ㅤ]$$). Por otro lado demostrar para un elemento arbitrario del dominio (por ejemplo, la lista $$x:xs$$) que
+si suponemos que la propiedad es cierta para todos los elementos más chicos que él (por ejemplo $$xs$$), entonces
+la propiedad también es satisfecha por ese elemento. Dado que todo elemento de un dominio inductivo puede
+ser "construido" a partir de elementos más simples, este procedimiento demuestra que la propiedad es satisfecha
+por todos los elementos del dominio, y por lo tanto es válida.
+
+Considerando las definiciones de los ejercicios anteriores demostrá por inducción sobre $$xs$$ las siguientes
+propiedades:
+
+**a)** sum (sumar1 xs) = sum xs + (length xs)
+
+para resolver esto tenemos que numerar los casos de la funcion y numerarlos para utilizarlos en la demostracion. En este caso usamos la función sumar1.
+
+```hs
+sum :: [Int] -> Int
+sum [] = 0 -----------------------------------------(1)
+sum (x:xs) = x + sum xs ----------------------------(2)
+```
+
+
+```hs
+sumar1 :: [Int] -> [Int]
+sumar1 [] = [] -------------------------------------(3)
+sumar1 (x:xs) = (x + 1) : sumar1 xs ----------------(4)
+```
+```hs
+length :: [a] -> Int
+length [] = 0 -------------------------------------(5)
+length (_:xs) = 1 + length xs ----------------------(6)
+```
+
+Nosotros tenemos que demostrar el caso base y el paso inductivo.
+
+Sabiendo esto podemos decir que el caso base es cuando xs es la lista vacía, es decir, xs = [].
+
+### Caso base
+
+Entonces, sum (sumar1 [ ]) = sum [ ] + (length [ ]) 
+
+≡ ```{```(1)(5)```}```
+
+sum (sumar1 [ ]) = 0 + 0
+
+≡ ```{```(3)```}```
+
+sum [ ] = 0 + 0
+
+≡ ```{```(1)```}```
+
+0 = 0 + 0
+
+≡ ```{```aritmética```}```
+
+0 = 0
+
+≡ True
+
+Por lo tanto, la propiedad se cumple para el caso base y queda demostrado.
+
+Ahora, para el paso inductivo, supongamos que la propiedad se cumple para xs = (x:xs).
+
+Entonces, sum (sumar1 (x:xs)) = sum (x:xs) + (length (x:xs))
+
+Hay que tener en cuenta que nuestra Hipótesis Inductiva es: sum (sumar1 xs) = sum xs + (length xs) (HI)
+
+### Paso inductivo
+
+Entonces, sum (sumar1 (x:xs)) = sum (x:xs) + (length (x:xs))
+
+≡ ```{```(2)```}```
+
+sum (sumar (x:xs)) = x + sum xs + (length (x:xs))
+
+≡ ```{```(6)```}```
+
+sum (sumar (x:xs)) = x + sum xs + 1 + length xs
+
+≡ ```{```(4)```}```
+
+sum ((x + 1) : sumar1 xs) = x + sum xs + 1 + length xs
+
+≡ ```{```(2) x := x + 1, xs := sumar1 xs```}```
+
+(x + 1) + sum (sumar1 xs) = x + sum xs + 1 + length xs
+
+≡ ```{```HI```}```
+
+(x + 1) + (sum xs + length xs) = x + sum xs + 1 + length xs
+
+≡ ```{```asociatividad de +```}```
+
+≡ True
+
+***
+
+Demostrá por inducción las siguientes propiedades. Ayuda: Recordá la definición de cada uno de los
+operadores implicados en cada expresión.
+
+• length xs ⩾ 0
+
+```hs
+
+Length [ ] = 0 -------------------------------------(1)
+Length (x:xs) = 1 + length xs ----------------------(2)
+[ ] ++ ys = ys -------------------------------------(3)
+(x:xs) ++ ys = x : (xs ++ ys) ----------------------(4)
+```
+
+### Caso base
+
+Lenght [ ] ⩾ 0
+
+≡ ```{```(1)```}```
+
+0 ⩾ 0
+
+≡ ```{```Def de ⩾```}```
+
+≡ True
+
+### Paso inductivo
+
+Lenght (x:xs) ⩾ 0
+
+≡ ```{```(2)```}```
+
+1 + lenght xs ⩾ 0
+
+≡ ```{```Def de ⩾```}```
+
+≡ True
+
+***
+
+Demostrá por inducción las siguientes propiedades. Ayuda: Recordá la definición de cada uno de los
+operadores implicados en cada expresión.
+
+• xs ++ (ys ++ zs) = (xs ++ ys) ++ zs (la concatenación es asociativa)
+
+```hs
+[ ] ++ ys = ys -------------------------------------(1)
+(x:xs) ++ ys = x : (xs ++ ys) ----------------------(2)
+```
+
+### Caso base
+
+[ ] ++ (ys ++ zs) = ([ ] ++ ys) ++ zs
+
+≡ ```{```(1) ys := ys ++ zs```}```
+
+ys ++ zs = ([ ] ++ ys) ++ zs
+
+≡ ```{```(1)```}```
+
+ys ++ zs = ys ++ zs
+
+≡ ```{```Reflexividad de =```}```
+
+≡ True
+
+### Paso inductivo
+
+(x:xs) ++ (ys ++ zs) = ((x:xs) ++ ys) ++ zs
+
+≡ ```{```(2)  ys := ys ++ zs```}```
+
+x : (xs ++ (ys ++ zs)) = ((xs ++ ys) ++ zs)
+
+≡ ```{```(2)```}```
+
+x : (xs ++ (ys ++ zs)) = (xs ++ ys) ++ zs
+
+≡ ```{```HI```}```
+
+x : ((xs ++ ys) ++ zs) = (x : (xs ++ ys)) ++ zs
+
+≡ ```{```(2) xs := xs ++ ys, ys := zs```}```
+
+x : ((xs ++ ys) ++ zs) = x : ((xs : ys) ++ zs)
+
+≡ True 
+
+***
+
+### Otro ejemplo
+
+Dadas las siguientes funciones
+
+```hs
+sacaUnos :: [Int] -> [Int]
+sacaUnos [] = [] --- (1)
+sacaUnos (x:xs)
+| x == 1 = sacaUnos xs --- (2a)
+| x /= 1 = x:(sacaUnos xs) --- (2b)
+```
+
+```hs
+productoria :: [Int] -> Int
+productoria [] = 1 --- (3)
+productoria (x:xs) = x * (productoria xs) --- (4)
+```
+demuestre por inducción la siguiente propiedad:
+
+productoria (sacaUnos xs) = productoria xs.
+
+
+### Caso base
+
+productoria (sacaUnos [ ]) = productoria [ ]
+
+≡ ```{```(1)```}```
+
+productoria [ ] = productoria [ ]
+
+≡ ```{```(3)```}```
+
+1 = 1
+
+≡ ```{```Reflexividad de =```}```
+
+≡ True
+
+### Paso inductivo
+
+productoria (sacaUnos (x:xs)) = productoria (x:xs)
+
+≡ ```{```(4)```}```
+
+productoria (sacaUnos (x:xs)) = x * (productoria xs)
+
+≡ ```{```(2a) x == 1```}``` **Importante**: En este caso la función tiene guardas por lo tanto lo ideal es hacer un caso para x == 1 y otro para x /= 1
+
+productoria (sacaUnos (sacarUnos xs)) = 1 * productoria xs
+
+≡ ```{```HI```}```
+
+productoria xs = 1 * productoria xs
+
+≡ ```{```aritmética```}```
+
+productoria xs = productoria xs
+
+≡ ```{```Reflexividad de =```}```
+
+≡ true
+
+ Ahora vamos a demostrar el caso x /= 1, por lo que hay que volver a la ecuación original.
+
+
+≡ ```{```(2b) x /= 1```}```
+
+productoria (x : sacaUnos xs) = x * (productoria xs)
+
+≡ ```{```(4) xs := sacaUnos xs```}```
+
+productoria (sacaUnos xs) = x * (productoria xs)
+
+≡ ```{```HI```}```
+
+x * productoria xs = x * productoria xs
+
+≡ ```{```Reflexividad de =```}```
+
+≡ True 
+
+***
+

@@ -791,10 +791,173 @@ En este caso, se devuelve la suma de todos los números de la lista.
 
 ***
 
+Una función de tipo **zip** es aquella que dadas dos listas devuelve una lista de pares donde el primer elemento
+de cada par se corresponde con la primera lista, y el segundo elemento de cada par se corresponde con
+la segunda lista. Por ejemplo: $$repartir :: [String] -> [String] -> [(String,String)]$$ donde los
+elementos de la primera lista son nombres de personas y los de la segunda lista son cartas españolas es
+una función que devuelve una lista de pares que le asigna a cada persona una carta.
+
+Ej: repartir ["Juan", "Maria"] ["1 de Copa", "3 de Oro", "7 de Espada", "2 de Basto"] =
+[("Juan","1 de Copa"), ("Maria","3 de Oro")]
+
+Defina la función recursivamente.
+
+**a)** $$repartir :: [String] -> [String] -> [(String,String)]$$, que dadas dos listas de strings devuelve una lista 
+de pares donde el primer elemento de cada par se corresponde con la primera lista, y el segundo elemento de cada par se corresponde con la segunda lista.
+
+```hs  
+repartir :: [String] -> [String] -> [(String, String)]
+repartir [] [] = []
+repartir (x:xs) (y:ys) = (x, y) : repartir xs ys
+```
+
+***
+
+Una función de tipo **unzip** es aquella que dada una lista de tuplas devuelve una lista de alguna de las
+proyecciones de la tupla. Por ejemplo, si tenemos una lista de ternas donde el primer elemento representa
+el nombre de un alumno, el segundo el apellido, y el tercero la edad, la función que devuelve la lista de
+todos los apellidos de los alumnos en una de tipo unzip.
+
+Definir la función $$apellidos :: [(String, String, Int)] -> [String]$$.
+
+Ej: apellidos [("Juan","Dominguez",22), ("Maria","Gutierrez",19), ("Damian","Perez",43)]
+["Dominguez","Gutierrez","Perez"]
+
+
+```hs 
+apellidos :: [(String, String, Int)] -> [String]
+apellidos [] = []
+apellidos ((x, y, z):xs) = y : apellidos xs
+```
+
+***
+
+Definí funciones por recursión para cada una de las siguientes descripciones.
+ (ii) Evaluá los ejemplos manualmente 
+ (iii) Identificá si las funciones son de algún tipo ya conocido (filter, map, fold).
+
+ **a)** $$maximo :: [Int] -> Int$$, que calcula el máximo elemento de una lista de enteros.
+
+Por ejemplo: maximo [2,5,1,7,3] = 7
+
+Ayuda: Ir tomando de a dos elementos de la lista y `quedarse' con el mayor.
+
+```hs
+maximo :: [Int] -> Int
+maximo [x] = x
+maximo (x:y:xs) | x > y = maximo (x:xs)
+                | x <= y = maximo (y:xs)
+```
+
+En este caso, se va comparando el primer número con el segundo, y se va quedando con el mayor. Esta función es de tipo **fold**.
+
+***
+
+**b)** $$sumarPares :: [(Int, Int)] -> [Int]$$, que dada una lista de pares de enteros devuelve una lista con la suma de los elementos de cada par.
+
+Por ejemplo: sumaPares [(1,2)(7,8)(11,0)] = 29
+
+```hs
+sumarPares :: [(Int, Int)] -> [Int]
+sumarPares [] = []
+sumarPares ((x, y):xs) = (x + y) : sumarPares xs
+```
+
+En este caso, se va sumando cada par de números. Esta función es de tipo **map**.
+
+***
+
+**c)** $$todos0y1 :: [Int] -> Bool$$, que dada una lista devuelve $$True$$ si ésta consiste sólo de $$0s$$ y $$1s$$.
+
+Por ejemplo: todos0y1 [0,1,0,1] = True
+
+```hs
+todos0y1 :: [Int] -> Bool
+todos0y1 [] = True
+todos0y1 (x:xs) | x == 0 || x == 1 = todos0y1 xs
+                | x /= 0 || x /= 1 = False
+```
+
+En este caso, se va verificando si los números son $$0$$ o $$1$$. Esta función es de tipo **fold**.
+
+***
+
+**d)** $$quitar0s :: [Int] -> [Int]$$ que dada una lista de enteros devuelve la lista pero quitando todos
+los ceros.
+
+Por ejemplo: quitar0s [0,1,0,1] = [1,1]
+
+```hs
+quitar0s :: [Int] -> [Int]
+quitar0s [] = []
+quitar0s (x:xs) | x == 0 = quitar0s xs
+                | x /= 0 = x : quitar0s xs
+```
+
+En este caso, se va quitando los $$0$$. Esta función es de tipo **filter**.
+
+***
+
+**e)** $$ultimo :: [a] -> a$$, que devuelve el último elemento de una lista.
+
+Por ejemplo: ultimo [10,5,3,1] = 1
+
+```hs
+ultimo :: [a] -> a
+ultimo [x] = x
+ultimo (x:xs) = ultimo xs
+```
+
+En este caso, se va recorriendo la lista hasta llegar al último elemento. Esta función es de tipo **fold**.
+
+***
+
+**f)** $$repetir :: Int-> Int-> [Int]$$, que dado un número $$n$$ mayor o igual a $$0$$ y un número $$k$$ arbitrario
+construye una lista donde $$k$$ aparece repetido $$n$$ veces.
+
+Por ejemplo: repetir 36 = [6,6,6]
+
+```hs
+repetir :: Int -> Int -> [Int]
+repetir 0 k = []
+repetir n k = k : repetir (n - 1) k
+```
+
+En este caso, se va repitiendo el número $$n$$ veces. Esta función es de tipo **map**.
+
+***
+
+**g)** $$concat :: [[a]] -> [a]$$ que toma una lista de listas y devuelve la concatenación de todas ellas.
+
+Por ejemplo: concat [[1,4],[],[2]] = [1,4,2]
+
+```hs
+concat :: [[a]] -> [a]
+concat [] = []
+concat (x:xs) = x ++ concat xs
+```
+
+En este caso, se va concatenando cada lista. Esta función es de tipo **fold**.
+
+***
+
+**h)** $$rev :: [a] -> [a]$$ que toma una lista y devuelve una lista con los mismos elementos pero en orden
+inverso.
+
+Por ejemplo: rev [1,2,3] = [3,2,1]
+
+```hs
+rev :: [a] -> [a]
+rev [] = []
+rev (x:xs) = rev xs ++ [x]
+```
+      
+En este caso, se va recorriendo la lista en orden inverso. Esta función es de tipo **fold**.
+
+***
 
 
 
 
-
-
+ 
 
