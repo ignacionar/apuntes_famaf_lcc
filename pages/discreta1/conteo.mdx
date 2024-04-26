@@ -148,3 +148,90 @@ Por lo que la expansión sería:
 ```math
 a^3 + 3a^2b + 3ab^2 + b^3
 ```
+
+### Ejercicios resueltos - Conteo 
+
+**Nota:** Una de las características de los ejercicios de conteo es que se pueden resolver de distintas formas acorde a los distintos métodos de selección. Las consignas deben ser claras para evitar ambigüedades.
+
+**1.** 
+
+- ¿Cuántos números de $4$ cifras se pueden formar?
+
+Nuestro primer dato es la cantidad de cifras, que es $4$. Para que se considere como un número de $4$ cifras, el primer dígito debería ser distinto a $0$. Por lo tanto, nuestras posibilidades para ese dígito son: $1, 2, 3, 4, 5, 6, 7, 8, 9$. \
+Para los siguientes dígitos, no hay restricciones. Por lo tanto, hay $9 \cdot 10 \cdot 10 \cdot 10 = 9000$ números posibles. 
+
+***
+
+**2.** 
+
+- ¿Cuantas formas es posible ordenar la palabra "MATEMATICA"?
+
+En este caso, observemos que $\textnormal{MATEMATICA}$ tiene la letra $A$ repetida dos veces. Si distinguieramos la letra $A$ de $A'$ tendríamos: 
+
+```math
+\textnormal{MATEMATICA'} \\
+\textnormal{MA'TEMATICA}
+```
+
+De esta forma, si permutamos las letras obtendríamos palabras repetidas. En este caso necesitamos seleccionar $10$ letras con orden y sin repetición, y para ello tenemos $10!$ permutaciones. Sin embargo, debemos dividir por $2!$ para eliminar las permutaciones repetidas de la letra $A$. 
+
+```math
+\frac{10!}{2!} = 1814400
+```
+
+***
+
+**3.**
+
+- ¿Cuantas patentes de auto se pueden hacer con $3$ letras y $3$ números? 
+
+Sabemos que el alfabeto tiene $26$ letras y los números del $0$ al $9$, siendo un total de $10$ números. Las letras y los números no necesitan orden pero si pueden repetirse. Por lo tanto, tenemos: 
+
+```math
+26 \cdot 26 \cdot 26 = 26^3 \textnormal{ formas de elegir las letras} \\
+10 \cdot 10 \cdot 10 = 10^3 \textnormal{ formas de elegir los números}
+```
+
+Ahora multiplicamos ambos resultados para obtener la cantidad de patentes posibles: 
+
+```math
+26^3 \cdot 10^3 = 17576000
+```
+
+*** 
+
+**4.**
+
+_¿De cuántas formas puede formarse un comité de 5 personas tomadas de un grupo de 11 personas entre las cuales hay 4 profesores y 7 estudiantes, si:_ 
+
+**A)** _No hay restricciones_ 
+
+**B)** _El comité debe tener exactamente dos profesores_
+
+**C)** _El comité debe tener al menos tres profesores_
+
+**D)** _El profesor X y el estudiante Y no pueden estar juntos_
+
+Comenzando con el caso **A)**, no hay restricciones. Por lo tanto, podemos seleccionar $5$ personas de un total de $11$ sin restricciones, dicha selección no tiene orden ni repetición. 
+
+```math
+\binom{11}{5} = \frac{11!}{5!(11 - 5)!} = 462
+```
+
+Para el caso **B)**, debemos seleccionar $2$ profesores de $4$ **y** $3$ estudiantes de $7$. Multiplicando ambos resultados para obtener todas las posibilidades:
+
+```math
+\binom{4}{2} \cdot \binom{7}{3} = \frac{4!}{2!(4 - 2)!} \cdot \frac{7!}{3!(7 - 3)!} = 84
+```
+
+Para el caso **C)**, debemos tener al menos $3$ profesores, lo que implica que podemos tener $3$ profesores y $2$ estudiantes **o** $4$ profesores y $1$ estudiante. 
+
+```math
+\binom{4}{3} \cdot \binom{7}{2} + \binom{4}{4} \cdot \binom{7}{1} = 84 + 7 = 91
+```
+
+Para el caso **D)**, debemos seleccionar $5$ personas sin que el profesor X y el estudiante Y estén juntos. Para ello, seleccionamos $5$ personas sin restricciones y restamos las selecciones donde X e Y están juntos. 
+
+```math
+\binom{11}{5} - \binom{9}{3} = 462 - 84 = 378
+```
