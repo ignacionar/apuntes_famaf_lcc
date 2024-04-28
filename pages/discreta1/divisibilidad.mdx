@@ -84,6 +84,39 @@ a = 13, \;b = 5 \\
 13 = 5 \cdot 2 + 3
 ```
 
+### Ejercicios resueltos - Algoritmo de la división
+
+**1.** 
+
+Dado $m \in \mathbb{N}$ hallar los restos posibles de $m^2$ y $m^3$ en la división por $3$.
+
+El primer paso es dividir $m$ por $3$ usando el algoritmo:
+
+```math
+m = 3 \cdot q + r, \;0 \leq r < 3, r \in \{0, 1, 2\}
+```
+
+Para $m^2$:
+
+```math
+m^2 = (3 \cdot q + r)^2 
+```
+
+Ahora expandimos y aplicamos factor común de $3$:
+
+```math
+3 \cdot q^2 + 3 \cdot 2qr + r^2 = 3 \cdot (q^2 + 2qr) + r^2
+```
+
+El resto de dividir $m^2$ por $3$ es $r^2$. Ahora podemos calcular los restos posibles de $m^2$
+
+```math
+\begin{align*}
+0 \leq r < 3 
+&\implies 0 \leq r^2 < 3, \;r^2 \in \{0, 1\} \\ 
+\end{align*}
+```
+
 ## Desarrollos en base $b$
 
 > Todo natural $x$ se puede expresar como:
@@ -141,7 +174,7 @@ Convertir $(1304)_6$ a base $10$:
 
 ```math
 \begin{align*}
-(1304)_6 = 1 \cdot 6^3 + 3 \cdot 6^2 + 0 \cdot 6^1 + 4 \cdot 6^0 \\
+(1304)_6 &= 1 \cdot 6^3 + 3 \cdot 6^2 + 0 \cdot 6^1 + 4 \cdot 6^0 \\
 &= 1 \cdot 216 + 3 \cdot 36 + 0 \cdot 6 + 4 \cdot 1 \\
 &= 216 + 108 + 0 + 4 \\
 &= 328
@@ -149,6 +182,41 @@ Convertir $(1304)_6$ a base $10$:
 ```
 
 Si quisieramos convertir $(1304)_6$ a otra base (por ejemplo, $5$), primero lo convertimos a base $10$ y luego a la base deseada. 
+
+### Ejercicios resueltos - Desarrollos en base $b$ y conversiones de base
+
+**1.**
+
+Convertir $(1011)_2$ a base $10$:
+
+```math
+(1011)_2 = 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 8 + 0 + 2 + 1 = 11
+```
+
+***
+
+**2.**
+
+Convertir $(B38)_{16}$ a base $8$:
+
+Para resolver este ejercicio, primero necesitamos saber que los números en base $16$ son $0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F$. Sabiendo esto, necesitamos convertirlo a base $10$ y luego a base $8$.
+
+```math 
+(B38)_{16} = 11 \cdot 16^2 + 3 \cdot 16^1 + 8 \cdot 16^0 = 2816 + 48 + 8 = 2872
+```
+
+Ahora convertimos $2872$ a base $8$:
+
+```math
+\begin{align*}
+2872 &= 8 \cdot 359 + 0 \; (1) \\
+359 &= 8 \cdot 44 + 7 \; (2) \\
+44 &= 8 \cdot 5 + 4 \; (3) \\
+5 &= 8 \cdot 0 + 5 \; (4)
+\end{align*}
+```
+
+Podemos decir que $(B38)_{16} = (5470)_8$.
 
 ## Máximo común divisor (mcd)
 
