@@ -235,3 +235,59 @@ Para el caso **D)**, debemos seleccionar $5$ personas sin que el profesor X y el
 ```math
 \binom{11}{5} - \binom{9}{3} = 462 - 84 = 378
 ```
+
+***
+
+**5.**
+
+Demostrar si se cumple la siguiente desigualdad: 
+
+```math
+\binom{1000}{7} 120! > 9^{1000}
+```
+
+A simple vista los números son demasiado grandes para ser calculados de forma exacta. Podemos aplicar el Teorema del Binomio en la potencia de $9$ de la siguiente manera: 
+
+```math
+\begin{align*}
+\binom {1000}{7} \cdot 120! &> (8 + 1)^{1000} \\
+\binom{1000}{7} \cdot 120! &> \displaystyle{\sum_{k=0}^{1000}} \binom {1000}{k} \cdot 8^{1000 - k} \cdot 1^k 
+\end{align*}
+```
+
+$1$ elevado a cualquier número $\geq 0$ es 1, por lo que la suma se simplifica a: 
+
+```math
+\binom{1000}{7} \cdot 120! > \displaystyle{\sum_{k=0}^{1000}} \binom{1000}{k} \cdot 8^{1000-k}
+```
+
+Observemos que podríamos hacer el siguiente análisis (ya que no sabemos si la desigualdad es cierta o no): 
+
+```math
+\binom{1000}{7} \cdot 120! < \binom{1000}{7} \cdot 8^{993} \leq \displaystyle{\sum_{k=0}^{1000}} \binom{1000}{k} \cdot 8^{1000-k} = 9^{1000}
+```
+
+Por el axioma de la compatibilidad del producto con el orden podemos probar la desigualdad para el factorial y la potencia. 
+
+```math
+\binom{1000}{7} \cdot 120! < \binom{1000}{7} \cdot 8^{993}\;(ac < bc) \\
+\;\\
+120! < 8^{993}\;(a < b)
+```
+
+Ahora, por propiedad de las potencias, podemos escribir $8^{993}$ como $(8^3)^{331}$. 
+
+```math
+\begin{align*}
+120! &< (8^3)^{331} \\
+120 \cdot 119 ... \cdot 2 \cdot 1 &< 512 \cdot 512 ... \cdot 512
+\end{align*}
+```
+
+$512$ se multiplica $331$ veces, por lo que volviendo a la desigualdad original: 
+
+```math
+\binom{1000}{7} 120! > 9^{1000}
+```
+
+No se cumple, $9^{1000}$ es mayor que $\binom{1000}{7} 120!$
