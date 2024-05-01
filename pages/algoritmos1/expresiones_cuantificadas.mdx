@@ -1,0 +1,83 @@
+# Expresiones Cuanitificadas
+
+## Cuantificación
+
+> Es el uso de **variables con un alcance delimitado**. Estas pueden usarse para **consturir expresiones** dependientes de las mismas, pero solo en su rango.
+
+## Expresión Cuantificada
+
+Es una notación que tiene en cuenta lo siguiente:
+
+- El **operador** de la cuantificación.
+- Las **variables** para crear expresiones.
+- El **rango de especificación** de variación de las variables.
+- El **término** (expresión dependiente) de las variables.
+
+**Ejemplo:**
+
+En base a la función $par$:
+
+```math
+par : Num \to Bool \\
+par.x \doteq (x\;mod\;2 = 0)
+```
+
+Definimos la siguiente expresión cuantificada:
+
+```math
+\bigl \langle \; \exists i : 0 \leq i \leq n : par.i \; \bigr \rangle
+```
+
+```math 
+= \{\textnormal{ Idea intuitiva de } \exists\; \}
+```
+
+```math 
+par.0 \lor par.1 \lor ... \lor par.n 
+```
+
+Analizando la expresión cuantificada por parte tenemos:
+
+- El **cuantificador** $\exists$ el cual está ligado al **operador** $\lor$  
+- La **variable ligada** $i$ o _"dummy"_.
+- El **rango** $0 \leq i \leq n$ (de tipo $Bool$)
+- El **término** $par.i$ (de tipo $Bool$)
+
+Evaluar esta expresión nos devuelve un valor $Bool$.
+
+***
+
+Otro ejemplo puede ser la expresión: 
+
+```math
+\bigl \langle \; \sum i : 0 \leq i \leq n : 2 * i \; \bigr \rangle
+```
+
+Comparándola con su notación matemática: $\;\displaystyle{\sum_{i=0}^{n}}2*i$\
+la primera es más clara para programar.
+
+***
+
+Podemos establecer la siguiente expresión:
+
+```math
+\bigl \langle \bigoplus i : R : T \; \bigr \rangle
+```
+
+Donde $\bigoplus$ designa un operador asociativo y conmutativo $\oplus$ (por ejemplo, $+, \lor, \land, Max, Min$...)
+
+## Cuantificador de Conteo N
+
+El cuantificador de conteo $N$ se define como:
+
+```math
+\bigl \langle \; N \; i : R.i : T.i \; \bigr \rangle
+```
+
+Donde $N$ cuenta la cantidad de veces que el término $T.i$ es $True$ dentro del rango $R.i$
+
+En base a la definición, el cuantificador es igual a:
+
+```math
+\bigl \langle \; N \; i : R.i : T.i \; \bigr \rangle \doteq \bigl \langle \; \sum i : R.i \land T.i : 1 \ \bigr \rangle
+```

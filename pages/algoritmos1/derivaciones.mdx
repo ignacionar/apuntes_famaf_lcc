@@ -1,0 +1,270 @@
+# Especificaciones, Verificaciones y Derivaciones
+
+## Especificaciones
+
+Suponiendo que sabemos la definición de un programa dado: 
+
+```math
+\begin{array}{l}
+  \Big\vert\ sum : [Num] \to Num \\
+  \overline{\Big\vert \; sum.[] \doteq 0}   \\
+  \Big\vert\ sum.(x \triangleright xs) \doteq x + sum.xs
+\end{array}
+```
+
+Por la definición de la función, podemos escribir una **especificación** mediante una expresión cuantificada: 
+
+```math
+sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
+```
+
+Ya tenemos una una **descripción formal de la tarea que el programa tiene que realizar**
+
+## Verificación 
+
+Podemos demostrar que $\bigl \langle \forall xs :: P.xs \bigr \rangle$
+
+Cumple con:
+
+```math
+P.xs : sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
+```
+
+Para lograrlo podemos utilizar inducción matemática o inducción estructural sobre listas (en este caso, la segunda):
+
+**Caso base:**  ($xs = []$)
+
+Debemos demostrar que: 
+
+```math
+P.[] : sum.[] = \bigl \langle \; \sum i : 0 \leq i < \# [] : [].i \; \bigr \rangle
+```
+
+Para ello podemos comenzar del lado derecho: 
+
+```math
+\begin{array}{ll}
+  \bigl \langle \; \sum i : 0 \leq i < \underline{\#[]} : [].i \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Definición de } \# \; \} \\
+  \\
+  \bigl \langle \; \sum i : \underline{0 \leq i < 0} : [].i \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Aritmética } \} \\
+  \\
+  \bigl \langle \; \underline{\sum i : False : [].i} \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Rango vacío } \} \\
+  \\
+  0 \\
+  \\
+  = \{ \textnormal{ Definición de } sum\; \} \\
+  \\
+  sum.[]
+\end{array}
+```
+
+Por lo tanto, probamos la propiedad $P.[]$
+
+**Caso inductivo:** ($x \triangleright xs$)
+
+Debemos demostrar que: 
+
+```math
+\begin{array}{ll}
+P.xs : sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle \implies \\
+\\
+P.(x \triangleright xs) : sum.(x \triangleright xs) = \bigl \langle \; \sum i : 0 \leq i < \# (x \triangleright xs) : (x \triangleright xs).i \; \bigr \rangle
+\end{array}
+```	
+
+Donde $P.xs$ es la **hipótesis inductiva**.
+
+Para ello podemos comenzar del lado derecho:
+
+```math
+\begin{array}{ll}
+  \bigl \langle \; \sum i : 0 \leq i < \underline{ \# (x \triangleright xs) } : (x \triangleright xs).i \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Definición de } \# \; \} \\
+  \\
+  \bigl \langle \; \underline{ \sum i : 0 \leq i < 1 + \# xs : (x \triangleright xs).i } \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Separación de un término } \} \\
+  \\
+  \underline{ (x \triangleright xs).0 } + \bigl \langle \; \sum i : 0 \leq i < \# xs : \underline{(x \triangleright xs).(i + 1)} \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Definición de } .\; \} \\
+  \\
+  x + \underline{\bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle} \\
+  \\
+  = \{ \textnormal{ Hipótesis inductiva } \} \\
+  \\
+  x + sum.xs 
+\end{array}
+```
+
+Por lo tanto, probamos la propiedad $P.(x \triangleright xs)$, y su validez en cualquier lista.
+
+## Derivaciones
+
+Podemos no disponer de la definición de la función, pero sí de una especificación. En este caso, podemos derivar la definición de la función a partir de la especificación.
+
+Por ejemplo, para encontrar el programa de la función $sum$ a partir de la especificación:
+
+```math
+sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
+```
+
+**Caso base** (cuanto vale $sum.[]$)
+
+```math
+\begin{array}{ll}
+  sum.[] \\
+  \\
+  = \{ \textnormal{ Especificación de } sum \; \} \\
+  \\
+  \bigl \langle \; \sum i : 0 \leq i < \# [] : [].i \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Definición de } \# \; \} \\
+  \\
+  \bigl \langle \; \sum i : 0 \leq i < 0 : [].i \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Aritmética } \} \\
+  \\
+  \bigl \langle \; \sum i : False : [].i \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Rango vacío } \} \\
+  \\
+  0
+\end{array}
+```
+
+Por lo tanto, $sum.[] = 0$
+
+**Caso inductivo** (cuanto vale $sum.(x \triangleright xs)$)
+
+```math
+HI : sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
+```
+
+```math
+\begin{array}{ll}
+
+\underline{sum.(x \triangleright xs)} \\
+\\ 
+= \{ \textnormal{ Especificación de } sum \; \} \\
+\\
+\bigl \langle \; \sum i : 0 \leq i < \underline{\# (x \triangleright xs)} : (x \triangleright xs).i \; \bigr \rangle \\
+\\
+= \{ \textnormal{ Definición de } \# \; \} \\
+\\
+\underline{\bigl \langle \; \sum i : 0 \leq i < 1 + \# xs : (x \triangleright xs).i \; \bigr \rangle \\} \\
+\\
+= \{ \textnormal{ Separación de un término } \} \\
+\\
+\underline{(x \triangleright xs).0} + \bigl \langle \; \sum i : 0 \leq i < \# xs : \underline{(x \triangleright xs).(i + 1)} \; \bigr \rangle \\
+\\
+= \{ \textnormal{ Definición de } . \; \} \\
+\\
+x + \underline{\bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle} \\
+\\
+= \{ \textnormal{ Hipótesis inductiva } \} \\
+\\
+x + sum.xs
+\end{array}
+```
+
+Por lo tanto, $sum.(x \triangleright xs) = x + sum.xs$
+
+El programa sería:
+
+```math
+\begin{array}{l}
+  \Big\vert\ sum : [Num] \to Num \\
+  \overline{\Big\vert \; sum.[] \doteq 0}   \\
+  \Big\vert\ sum.(x \triangleright xs) \doteq x + sum.xs
+\end{array}
+```
+
+### Ejercicios - Derivaciones
+
+**1.** 
+
+Derivar la función $pin8$ a partir de la especificación (donde $prod$ es una función que devuelve el producto de los elementos de una lista):
+
+```math
+pin8.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle
+```	
+
+Comenzando por la especificación, evaluamos el caso base, $xs = []$:
+
+```math
+\begin{array}{ll}
+  \underline{pin8}.[] \\
+  \\
+  = \{ \textnormal{ Especificación de } pin8 \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : \underline{[] = as ⧺ bs} : prod.as = 8 \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Propiedad de } ⧺ \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : as = [] \land bs = [] : prod.\underline{as} = 8 \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Definición de } as \; \} \\
+  \\
+  \bigl \langle \; \underline{\exists as, bs : [] = as ⧺ bs : prod.[] = 8} \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Evalúo el Término } \} \\
+  \\
+  \underline{prod.[]} = 8 \\
+  \\
+  = \{ \textnormal{ Definición de } prod \; \} \\
+  \\
+  \underline{1 = 8} \\
+  \\
+  = \{ \textnormal{ Aritmética } \} \\
+  \\
+  False
+\end{array}
+```
+
+Por lo tanto, $pin8.[] = False$
+
+Para el caso inductivo, seguimos con $xs = (x \triangleright xs)$:
+
+```math
+\begin{array}{ll}
+  \underline{pin8}.(x \triangleright xs) \\
+  \\
+  = \{ \textnormal{ Especificación de } pin8 \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Posibles valores de } as \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{(as = [] \lor as \neq [])} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Partición de Rango } \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{[]} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Definición de } \textnormal{⧺}, \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \} \\
+  \\
+  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{\;⧺\;} bs} : prod.as = 8 \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Rango Unitario, Propiedad de las } [] \} \\
+  \\
+  (x \triangleright xs) = bs \; \lor \; \bigl \langle \; \exists as, bs : \underline{x = a} \land xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \\
+  = \{ \textnormal{ Eliminación de una variable }\; \} \\
+  \\
+  (x \triangleright xs) = bs \; \lor \; \underline{\bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle} \\
+  \\
+  = \{ \textnormal{ Hipótesis Inductiva } \} \\
+  \\
+  (x \triangleright xs) = bs \; \lor \; pin8.xs
+\end{array}
+```
+
+Por lo tanto, $pin8.(x \triangleright xs) = (x \triangleright xs) = bs \; \lor \; pin8.xs$

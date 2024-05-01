@@ -1,0 +1,223 @@
+# Sucesiones
+
+> Una sucesión infinita de números reales definida como $a : \mathbb{N} \rightarrow \mathbb{R}$ es una **función que asigna a cada número natural $n$ un número real $a_n$**.
+
+Se denota como $\{a_n\}_{n=1}^{\infty}$ o $\{a_n\}$.
+
+Si evaluamos en un número $n$ se obtiene el término $n$-ésimo de la sucesión, por ejemplo:
+
+```math
+\displaystyle{\{a_n\}_{n=1}^{\infty}} = \{1, 2, 3, 4, 5, \ldots\} \\
+```
+
+```math   
+\begin{array}{l}
+  a(1) = a_1 = 1 \\
+  a(2) = a_2 = 2 \\
+  a(n) = a_n = n
+\end{array}
+```
+
+**Ejemplos:**
+
+- $\{1, 2, 3, ...\} ,\; \{a_n\} ,\; a_n = n$
+- $\{1, 4, 9, 16, ...\} ,\; \{a_n\} ,\; a_n = n^2$
+- $\{(-1), 1, (-1), 1, ...\} ,\; \{a_n\} ,\; a_n = (-1)^{n}$
+- $\{1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, ...\} ,\; \{a_n\} ,\; a_n = \frac{1}{n}$
+
+Dada una función $f : \mathbb{R} \rightarrow \mathbb{R}$ su restricción de $f$ a $\mathbb{N}$ es una sucesión.
+
+## Límite de una sucesión
+
+> Una sucesión $\{a_n\}$ con límite $\ell \in \mathbb{R}$ se escribe: $\;\displaystyle{\lim_{n \to \infty}} a_n = \ell \;,\;\underset{n \to \infty}{a_n \to \ell}$  
+
+$\displaystyle{\lim_{n \to \infty}} a_n = \ell \iff \forall\;\epsilon > 0, \; \exists\; n_0 \in \mathbb{N}\;$ tal que $|a_n - \ell| < \epsilon, \; \forall \; n \geq n_0 $
+
+Una sucesión $\{a_n\}$, decimos que $\displaystyle{\lim_{n \to \infty}} a_n = \infty$ si los términos de la sucesión crecen indefinidamente y $\displaystyle{\lim_{n \to \infty}} a_n = -\infty$ si los términos de la sucesión decrecen indefinidamente.
+
+Si el $\displaystyle{\lim_{n \to \infty}} a_n$ es finito, decimos que la sucesión es **convergente**, en caso contrario, decimos que la sucesión es **divergente**.
+
+## Propiedades de los límites de sucesiones
+
+> Sean $\{a_n\}$ y $\{b_n\}$ dos sucesiones convergentes y $c \in \mathbb{R}$, entonces:
+
+1. $\displaystyle{\lim_{n \to \infty}} (a_n \pm b_n) = \displaystyle{\lim_{n \to \infty}} a_n \pm \displaystyle{\lim_{n \to \infty}} b_n$
+
+2. $\displaystyle{\lim_{n \to \infty}} (a_n \cdot b_n) = \displaystyle{\lim_{n \to \infty}} a_n \cdot \displaystyle{\lim_{n \to \infty}} b_n$
+
+3. $\displaystyle{\lim_{n \to \infty}} (c \cdot a_n) = c \cdot \displaystyle{\lim_{n \to \infty}} a_n$
+
+4. $\displaystyle{\lim_{n \to \infty}} \frac{a_n}{b_n} = \frac{\displaystyle{\lim_{n \to \infty}} a_n}{\displaystyle{\lim_{n \to \infty}} b_n}$, si $\displaystyle{\lim_{n \to \infty}} b_n \neq 0$
+
+5. $\displaystyle{\lim_{n \to \infty}} a_n = 0 \iff \displaystyle{\lim_{n \to \infty}} |a_n| = 0$
+
+## Teorema - Relación entre límite de funciones y sucesiones
+ 
+> Si $\displaystyle{\lim_{x \to \infty}} f(x) = \ell\;\land\;a_n = f(n) \implies \displaystyle{\lim_{n \to \infty}} a_n = \ell$\
+$(\;\forall\;n \geq n_0,\;n_0 \in \mathbb{N})$
+
+**Ejemplo:** 
+
+Calcular el límite de la sucesión: 
+
+```math 
+\displaystyle{\lim_{n \to \infty}} a_n \;,\;a_n = \frac{ln(n)}{n}
+```
+
+Aún no podemos conseguir el límite, pero podemos calcular el límite de la función $f(x) = \frac{ln(x)}{x}$:
+
+```math
+\displaystyle{\lim_{x \to \infty}} f(x) = \displaystyle{\lim_{x \to \infty}} \frac{ln(x)}{x} = \displaystyle{\lim_{x \to \infty}} \frac{\frac{1}{x}}{1} = 0
+```
+
+En este caso se aplica la Regla de L'Hôpital, ya que el límite es de la forma $\frac{0}{0}$.
+
+## Teorema del Sandwich para sucesiones 
+
+> Sean $\{a_n\}, \{b_n\}, \{c_n\}$ tres sucesiones tales que $\forall\;n \geq n_0, \;n_0 \in \mathbb{N}$ se cumple que\
+$a_n \leq b_n \leq c_n, \; \displaystyle{\lim_{n \to \infty}} a_n = \displaystyle{\lim_{n \to \infty}} c_n = \ell \implies \displaystyle{\lim_{n \to \infty}} b_n = \ell$
+
+**Ejemplo:**
+
+Calcular el límite de la sucesión:
+
+```math
+\displaystyle{\lim_{n \to \infty}} a_n \;,\;a_n = \frac{cos(n)}{n}
+```
+
+Para aplicar el teorema del sandwich, se puede considerar las sucesiones, analizamos alrededor del coseno:
+
+```math
+  -1 \leq cos(n) \leq 1 \\
+```
+
+Dividimos entre $n$:
+
+```math
+  -\frac{1}{n} \leq \frac{cos(n)}{n} \leq \frac{1}{n}
+```
+
+Calculamos el límite de las sucesiones:
+
+```math
+\begin{array}{l}
+  \displaystyle{\lim_{n \to \infty}} -\frac{1}{n} = 0 \\
+  \displaystyle{\lim_{n \to \infty}} \frac{1}{n} = 0
+\end{array}
+
+\implies \displaystyle{\lim_{n \to \infty}} \frac{cos(n)}{n} = 0
+```
+
+## Teorema - Sucesión y función continua
+
+> Si $\displaystyle{\lim_{n \to \infty}a_n} = a$ y $f$ continua en $a$, entonces: $\;\displaystyle{\lim_{n \to \infty}} f(a_n) = f(a)$
+
+**Ejemplo:** 
+
+Calcular el límite de la sucesión: $e^{\frac{1}{n}}$
+
+Para este caso, necesitamos definir una sucesión que pueda ser pasada a una función continua:
+
+```math
+\displaystyle{\lim_{n \to \infty}\frac{1}{n}} = 0 
+```
+
+$0$ es un valor continuo en la función exponencial, por lo que podemos aplicar el teorema:
+
+```math
+\displaystyle{\lim_{n \to \infty}} e^{\frac{1}{n}} = e^0 = 1
+```
+
+## Sucesiones crecientes y decrecientes
+
+Decimos que $\{a_n\}$ es: 
+
+- **Creciente** si $a_n \leq a_{n+1}, \; \forall n$
+- **Estrictamente creciente** si $a_n < a_{n+1}, \; \forall n$
+- **Decreciente** si $a_n \geq a_{n+1}, \; \forall n$
+- **Estrictamente decreciente** si $a_n > a_{n+1}, \; \forall n$
+- **Monótona** si es creciente o decreciente.
+
+## Sucesiones acotadas
+
+- **Acotada superiormente** si $\exists\;M \in \mathbb{R}$ tal que $a_n \leq M, \; \forall n$
+- **Acotada inferiormente** si $\exists\;M \in \mathbb{R}$ tal que $a_n \geq M, \; \forall n$
+- **Acotada** si $\exists\;M \in \mathbb{R}$ tal que $|a_n| \leq M, \; \forall n$
+
+**Si ${\{a_n\}}$ es convergente $\implies$ es acotada.**
+
+### Máximos y Mínimos
+
+> Todo conjunto no vacío acotado superiormente tiene una **menor cota superior** y todo conjunto no vacío acotado inferiormente tiene una **mayor cota inferior**.
+
+Sea $A \subset \mathbb{R}, \; A \neq \emptyset$:
+
+- Si $A$ es acotado sup., la menor cota superior se llama **supremo** y se denota como $sup(A)$.\
+Si $sup(A) \in A$, lo llamamos **máximo**.
+
+- Si $A$ es acotado inf., la mayor cota inferior se llama **ínfimo** y se denota como $inf(A)$.\
+Si $inf(A) \in A$, lo llamamos **mínimo**.
+
+### Teorema de Sucesiones Acotadas 
+
+- Si $\{a_n\}$ es creciente y acotada superiormente $\implies \{a_n\}$ converge y $\displaystyle{\lim_{n \to \infty}} a_n = sup\{a_n\}$
+
+- Si $\{a_n\}$ es decreciente y acotada inferiormente $\implies \{a_n\}$ converge y $\displaystyle{\lim_{n \to \infty}} a_n = inf\{a_n\}$
+
+## Subsucesiones 
+
+> Una subsucesión de $\{a_n\}$ es una sucesión $\{a_{n_1}, a_{n_2}, a_{n_3}, ...\} = \{a_{nj}\}_{j=1}^{\infty}\;$ donde $\;n_1 < n_2 < n_3 < ...$
+
+Supongamos que tenemos una sucesión $\{a_n\}$ donde $a_n = n$
+
+```math
+{ a_1, a_2, a_3, a_4, a_5, ... } = { 1, 2, 3, 4, 5, ... }
+```
+
+Si tomamos una subsucesión de los términos impares: 
+
+```math
+\{ a_1, a_3, a_5, a_7, a_9, ... \} = \{ a_{n_1}, a_{n_2}, a_{n_3}, a_{n_4}, a_{n_5}, ... \} \\
+```
+
+Cada elemento de la subsucesión es un término impar de la sucesión original, es decir: 
+
+```math
+\begin{array}{l}
+  a_{n_1} = 1 \\
+  a_{n_2} = 3 \\
+  a_{n_3} = 5 \\
+  a_{n_4} = 7 \\
+  a_{n_5} = 9 \\
+  ...
+\end{array}
+```
+
+Podríamos definir la subsucesión como: $\;a_{n_j} = 2j - 1 \;\;(j \in \mathbb{N})$
+
+### Teorema de Subsucesiones
+
+> Si $\{a_n\}$ es convergente, entonces toda subsucesión de $\{a_n\}$ es convergente y su límite es el mismo que el de la sucesión original.
+
+Por ejemplo: 
+
+```math
+\{ \frac{1}{n} \}, \; \{ \frac{1}{2j-1}\}
+```
+
+Podemos expresar ambas como: 
+
+```math 
+a_n = \frac{1}{n}, \; a_{n_j} = \frac{1}{2j-1}
+```
+
+Ahora, evaluamos el límite de la sucesión original:
+
+```math
+\displaystyle{\lim_{n \to \infty}} \; \frac{1}{n} = 0 \implies \displaystyle{\lim_{j \to \infty}} \; \frac{1}{2j-1} = 0
+```
+
+### Teorema de Bolzano-Weierstrass
+
+> Toda **sucesión acotada** tiene una **subsucesión convergente**. 
+
