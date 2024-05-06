@@ -1,0 +1,303 @@
+# Series
+
+> Una serie es la **suma de una sucesión de términos**.
+
+Dado ${a_n}$ una sucesión, si queremos **sumar sus infinitos términos**, definimos una serie. La **serie de términos** ${a_n}$ se denota:
+
+```math
+\sum_{n=1}^{\infty} a_n = a_1 + a_2 + a_3 + \ldots
+```
+
+Si tuviesemos el valor de la sucesión como por ejemplo, ${a_n} = \frac{1}{2^n}$, entonces la serie es:
+
+```math
+\sum_{n=1}^{\infty} \frac{1}{2^n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots
+```
+
+## Convergencia y Divergencia
+
+Para cada $k \in \mathbb{N}$, definimos la k-ésima **suma parcial** de la serie $\sum_{n=1}^{\infty} a_n$ como:
+
+```math
+S_k = a_1 + a_2 + \ldots + a_k
+```
+
+Donde ${S_k}$ es una sucesión de números reales.
+
+Si su límite existe y es finito, es decir, si: 
+
+```math
+\lim_{k \to \infty} S_k = S < \infty
+```
+
+La serie $\displaystyle{\sum_{n=1}^{\infty}} a_n$ es **convergente** y $\displaystyle{\sum_{n=1}^{\infty}} a_n = S$.
+
+De lo contrario, si su límite:
+
+```math
+\lim_{k \to \infty} S_k = \pm\infty
+```
+La serie $\displaystyle{\sum_{n=1}^{\infty}} a_n$ es **divergente**.
+
+**Ejemplos**:
+
+Determinas si las siguientes series divergen o convergen:
+
+**1.**
+
+```math
+\sum_{n=1}^{\infty} n
+```
+
+Primero, determinamos las **sumas parciales** $S_k$:
+
+```math
+\begin{array}{l}
+S_1 = 1 \\
+S_2 = 1 + 2 = 3 \\ 
+S_3 = 1 + 2 + 3 = 6 \\
+... \\ 
+S_k = 1 + 2 + 3 + \ldots + k = \frac{k(k+1)}{2}
+\end{array}
+```
+
+Ahora con la fórmula de $S_k$, determinamos el límite:
+
+```math
+\lim_{k \to \infty} S_k = \lim_{k \to \infty} \frac{k(k+1)}{2} = \infty
+```
+
+$\displaystyle{\lim_{k \to \infty}} S_k = \infty \implies \displaystyle{\sum_{n=1}^{\infty}} n$ es **divergente**.
+
+**2.**
+
+```math
+\sum_{n=1}^{\infty} \frac{1}{2^n}
+```
+
+Primero, determinamos las **sumas parciales** $S_k$:
+
+```math
+\begin{array}{l}
+S_1 = \frac{1}{2} \\
+S_2 = \frac{1}{2} + \frac{1}{4} = \frac{3}{4} \\
+... \\
+S_k = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots + \frac{1}{2^k} = 1 - \frac{1}{2^k}
+\end{array}
+```
+
+Ahora con la fórmula de $S_k$, determinamos el límite:
+
+```math
+\lim_{k \to \infty} S_k = \lim_{k \to \infty} 1 - \frac{1}{2^k} = 1
+```
+
+$\displaystyle{\lim_{k \to \infty}} S_k = 1 \implies \displaystyle{\sum_{n=1}^{\infty}} \frac{1}{2^n}$ es **convergente** y $\displaystyle{\sum_{n=1}^{\infty}} \frac{1}{2^n} = 1$.
+
+## Series Geométricas
+
+> Dado $r \in \mathbb{R}$, una **serie geométrica** es una serie de la forma $\displaystyle{\sum_{n=0}^{\infty}} r^{n}$
+
+### Teorema de la Serie Geométrica
+
+**1.** Si $|r| < 1$, entonces $\displaystyle{\sum_{n=0}^{\infty}} r^{n}$ es **convergente** y $\displaystyle{\sum_{n=0}^{\infty}} r^{n} = \frac{1}{1-r}$.
+
+**2.** Si $|r| \geq 1$, entonces $\displaystyle{\sum_{n=0}^{\infty}} r^{n}$ es **divergente**.
+
+
+**Ejemplos**:
+
+Determina si las siguientes series geométricas convergen o divergen y en caso de converger, determina su valor:
+
+**1.**
+
+```math
+\sum_{n=1}^{\infty} \frac{1}{2^n} = \sum_{n=1}^{\infty} (\frac{1}{2})^n \implies r = \frac{1}{2}
+```
+
+```math 
+|\frac{1}{2}| < 1 
+``` 
+
+Por el teorema, $\displaystyle{\sum_{n=1}^{\infty} \frac{1}{2^n}}$ converge y se cumple que:
+
+```math 
+\sum_{n=1}^{\infty} \frac{1}{2^n} = \frac{1}{1-\frac{1}{2}} = \frac{1}{\frac{1}{2}} = 2
+```
+
+**2.**
+
+```math
+\sum_{n=1}^{\infty} 2^n \implies r = 2
+```
+
+```math
+|2| \geq 1
+```
+
+Por el teorema, $\displaystyle{\sum_{n=1}^{\infty} 2^n}$ diverge.
+
+## Series Armónicas e Hiperarmónicas
+
+> Una **serie armónica** es una serie de la forma $\displaystyle{\sum_{n=1}^{\infty}} \frac{1}{n}$
+
+> Una **serie hiperarmónica** es una serie de la forma $\displaystyle{\sum_{n=1}^{\infty}} \frac{1}{n^p}$
+
+- $p > 1 \implies$ la serie **converge**
+- $p < 1 \implies$ la serie **diverge**
+- $p = 1 \implies$ la serie es armónica
+
+## Propiedades de las Series
+
+Sean $\displaystyle{\sum_{n=1}^{\infty} a_n}$ y $\displaystyle{\sum_{n=1}^{\infty} b_n}$ dos series convergentes y $c \in \mathbb{R}$, entonces:
+
+**1.** $\displaystyle{\sum_{n=1}^{\infty} (a_n + b_n)}$ y $\displaystyle{\sum_{n=1}^{\infty} c a_n}$ **convergen**\
+**2.** $\displaystyle{\sum_{n=1}^{\infty} (a_n \pm b_n)} = \displaystyle{\sum_{n=1}^{\infty} a_n} \pm \displaystyle{\sum_{n=1}^{\infty} b_n}$\
+**3.** $\displaystyle{\sum_{n=1}^{\infty} c \cdot a_n} = c \cdot \displaystyle{\sum_{n=1}^{\infty} a_n}$
+
+***
+
+### Criterio de la divergencia
+
+Si $\displaystyle{\sum_{n=1}^{\infty} a_n}$ converge, entonces $\displaystyle{\lim_{n \to \infty} a_n = 0}$\
+Si $\displaystyle{\sum_{n=1}^{\infty} a_n}$ es una serie tal que $\displaystyle{\lim_{n \to \infty} a_n \neq 0} \implies \displaystyle{\sum_{n=1}^{\infty} a_n}$ es **divergente**.
+
+***
+
+### Criterio de comparación 
+
+Sean $0 \leq a_n \leq b_n$ para todo $n \in \mathbb{N}$, entonces:
+
+**1.** Si $\displaystyle{\sum_{n=1}^{\infty} b_n}$ converge, entonces $\displaystyle{\sum_{n=1}^{\infty} a_n}$ converge.\
+**2.** Si $\displaystyle{\sum_{n=1}^{\infty} a_n}$ diverge, entonces $\displaystyle{\sum_{n=1}^{\infty} b_n}$ diverge.
+
+***
+
+### Criterio de comparación en el límite
+
+Sean $a_n, b_n \geq 0$ para todo $n \in \mathbb{N}$, entonces:
+
+**1.** $\displaystyle{\lim_{n \to \infty} \frac{a_n}{b_n} = L > 0} \implies $ Si $ \displaystyle{\sum_{n=1}^{\infty} a_n}$ converge $\iff \displaystyle{\sum_{n=1}^{\infty} b_n}$ converge.\
+**2.** $\displaystyle{\lim_{n \to \infty} \frac{a_n}{b_n} = 0} \implies $ Si $ \displaystyle{\sum_{n=1}^{\infty} b_n}$ converge, $\implies \displaystyle{\sum_{n=1}^{\infty} a_n}$ converge.\
+**3.** $\displaystyle{\lim_{n \to \infty} \frac{a_n}{b_n} = \infty} \implies $ Si $ \displaystyle{\sum_{n=1}^{\infty} b_n}$ diverge, $\implies \displaystyle{\sum_{n=1}^{\infty} a_n}$ diverge.
+
+### Criterio de la integral
+
+Sea $f: [1, \infty) \to \mathbb{R}$ una función decreciente y positiva, Si $f(n) = a_n$: 
+
+$\displaystyle{\sum_{n=1}^{\infty} a_n}$ converge $\iff \displaystyle{\int_{1}^{\infty} f(x)dx}$ converge.
+
+***
+
+## Serie alternante 
+
+> Una serie alternante es una serie en la que sus términos son $+$ y $-$ alternados.
+
+Por ejemplo: 
+
+```math
+\sum_{n=1}^{\infty} (-1)^{n} = -1 + 1 - 1 + 1 - 1 + \ldots
+```
+
+***
+
+### Criterio de comparación (Serie alternante)
+
+Si $a_n \geq a_{n+1} > 0 \; \forall n \;\land\; \displaystyle{\lim_{n \to \infty} a_n = 0}$, entonces la serie alternante $\displaystyle{\sum_{n=1}^{\infty} (-1)^{n} \; a_n}$ converge\
+(igual para $a_{n+1}$)
+
+## Convergencia absoluta y condicional 
+
+> Una serie $\displaystyle{\sum_{n=1}^{\infty} a_n}$ es **absolutamente convergente** si $\displaystyle{\sum_{n=1}^{\infty} |a_n|}$ converge.
+
+> Una serie $\displaystyle{\sum_{n=1}^{\infty} a_n}$ es **condicionalmente convergente** si $\displaystyle{\sum_{n=1}^{\infty} a_n}$ converge pero $\displaystyle{\sum_{n=1}^{\infty} |a_n|}$ diverge.
+
+### Criterio del cociente 
+
+Sea $a_n \neq 0 \; \forall n \in \mathbb{N}$ y $r = \displaystyle{\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|}$ : 
+
+**1.** Si $r < 1 \implies \displaystyle{\sum_{n=1}^{\infty} a_n}$ es **absolutamente convergente**.
+
+**2.** Si $r > 1 \implies \displaystyle{\sum_{n=1}^{\infty} a_n}$ es **divergente**.
+
+**3.** Si $r = 1 \implies$ el criterio no es concluyente.
+
+### Criterio de la raíz 
+
+Dada la serie $\displaystyle{\sum_{n=1}^{\infty} a_n}$ y $r = \displaystyle{\lim_{n \to \infty} \sqrt[n]{|a_n|}}$:
+
+**1.** Si $r < 1 \implies \displaystyle{\sum_{n=1}^{\infty} a_n}$ es **absolutamente convergente**.
+
+**2.** Si $r > 1 \implies \displaystyle{\sum_{n=1}^{\infty} a_n}$ es **divergente**.
+
+**3.** Si $r = 1 \implies$ el criterio no es concluyente.
+
+## Series de potencias 
+
+> Definimos una **serie de potencias centrada en $a$** : $\displaystyle{\sum_{n=0}^{\infty} c_n \; (x - a)^n}\;,\;a \in \mathbb{R}$ 
+
+Sea $\displaystyle{\sum_{n=0}^{\infty} c_n \; (x - a)^n}$, se cumple una de las siguientes:
+
+**1.** La serie converge solo para $x = a$
+
+**2.** La serie converge absolutamente para todo $x \in \mathbb{R}$
+
+**3.** $\exists R > 0$ tal que la serie converge absolutamente $\forall x \iff |x - a| < R$, y diverge $\forall x \iff |x - a| > R$
+
+### Radio de convergencia
+
+En base a lo definido anteriormente: 
+
+**1.** La serie tiene radio de convergencia $R = 0$ si solo converge para $x = a$
+
+**2.** La serie tiene radio de convergencia $R = \infty$ si converge $\forall x \in \mathbb{R}$
+
+**3.** Si ocurre el caso 3 anterior, el radio de convergencia es $R$
+
+### Intervalo de convergencia
+
+Llamamos **intervalo de convergencia** al conjunto de todos los valores de $x$ para los cuales la serie converge.
+
+```math
+I = \{ \;x \in \mathbb{R} \; : \; \displaystyle{\sum_{n=0}^{\infty} c_n \; (x - a)^n} \textnormal{ converge } \}
+```
+
+**1.** $R = 0 \implies I = \{a\}$
+
+**2.** $R = \infty \implies I = \mathbb{R}$
+
+**3.** $R > 0 \implies I = (a - R, a + R) \lor (a - R, a + R] \lor [a - R, a + R) \lor [a - R, a + R]$
+
+**Ejemplo:** 
+
+Dada la serie $\displaystyle{\sum_{n=1}^{\infty} \frac{1}{n} \; x^n}$, determina su radio e intervalo de convergencia.
+
+- Si $x = 1$ tenemos la serie armónica $\displaystyle{\sum_{n=1}^{\infty} \frac{1}{n}}$ la cual diverge. Luego, $R \leq 1$
+
+- Si $x = -1$ tenemos la serie alternante $\displaystyle{\sum_{n=1}^{\infty} \frac{(-1)^n}{n}}$ la cual converge. Luego, $R \geq 1$
+
+Por lo tanto, $R = 1$ y $I = (-1, 1]$
+
+### Criterio del cociente para series de potencias
+
+Dada la serie $\displaystyle{\sum_{n=0}^{\infty} c_n \; (x-a)^n}$:
+
+$L = \displaystyle{\lim_{n \to \infty} \frac{|c_{n+1}|}{|c_n|} }$
+
+**1.** Si $0 < L < \infty \implies R = \frac{1}{L}$
+
+**2.** Si $L = 0 \implies R = \infty$
+
+**3.** Si $L = \infty \implies R = 0$
+
+### Representación de funciones como series de potencias
+
+Una serie de potencias $\displaystyle{\sum_{n=0}^{\infty} c_n \; (x-a)^n}$ que converge en un intervalo $I$ es igual a una función $f(x)$ en ese intervalo: 
+
+Por ejemplo: 
+
+```math
+\frac{1}{1-x} = \displaystyle{\sum_{n=0}^{\infty} x^n} \;,\; |x| < 1
+```
+
+

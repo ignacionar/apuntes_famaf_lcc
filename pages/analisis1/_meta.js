@@ -7,5 +7,5 @@ export default {
   continuidad: "Continuidad",
   derivadas: "Derivadas",
   analisis_funciones: "Análisis de Funciones",
-  integrales: "Integrales"
+  integrales: "Integrales (AM1)"
 }

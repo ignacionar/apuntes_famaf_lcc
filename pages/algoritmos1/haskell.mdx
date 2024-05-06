@@ -1,0 +1,434 @@
+# Haskell
+
+> En esta sección se presentan distintas propiedades del lenguaje Haskell, basado en el paradigma de programación funcional.
+
+## Tipos
+
+> Haskell es un lenguaje de programación de tipado **fuerte** y **estático**. Esto significa que:\
+1 ) Toda expresión tiene un **tipo definido y sin cambiar**.\
+2 ) Los tipos son verificados **antes de ejecutar (al compilar)** el programa.
+
+Por ejemplo, veamos la siguiente función: 
+
+```hs
+add :: Int -> Int -> Int
+```
+
+Si intentamos ejecutar la función `add` con: `add 1 2.0`, Haskell nos arrojará un error de tipo, ya que el segundo argumento es de tipo `Float` y no de tipo `Int`.
+
+Haskell puede inferir el tipo de una función sin necesidad de declararlo explícitamente. Por ejemplo, la función `add` puede ser definida de la siguiente manera:
+
+```hs
+add x y = x + y
+```
+
+Haskell **inferirá** que `x` e `y` son de tipo `Num a => a`, donde `Num` es una **clase de tipo que incluye a todos los números**, y `a` es una variable de tipo. Esto se puede consultar con el siguiente comando:
+
+```hs
+:t add
+
+add :: Num a => a -> a -> a
+```
+
+Algunos de los tipos son básicos, como `Int`, `Float`, `Double`, `Bool`, `Char`, entre otros. También existen tipos compuestos, como las listas y tuplas vistas en IAA. 
+
+## Polimorfismo
+
+> Haskell soporta polimorfismo, lo que significa que las expreisones pueden tener más de un tipo. Existen dos tipos de polimorfismo: **paramétrico** y **ad-hoc**.
+
+### Polimorfismo paramétrico
+
+> El polimorfismo paramétrico es aquel en el que una función puede ser **aplicada a cualquier tipo de datos**. Por ejemplo, la función `id` que devuelve el mismo valor que recibe:
+
+```hs
+id :: a -> a
+
+id x = x
+
+-- ghci> id 1
+-- 1
+```
+
+Donde `a` es una variable de tipo reemplazable por cualquier tipo de dato (ej. `Int`, `Float`, `String`, etc.).
+
+Si tuviesemos la función definida: 
+
+```hs
+f x = x + 1
+```
+
+Haskell inferirá que `x` es de tipo `Num a => a`, ya que el operador `+` requiere que `x` sea un número.
+
+### Polimorfismo ad-hoc
+
+> El polimorfismo ad-hoc se refiere a la capacidad de una función de tener **distintos comportamientos según el tipo de datos a usar**. Por ejemplo, la función `elem`: 
+
+```hs
+elem :: Eq a => a -> [a] -> Bool
+```
+
+Donde `Eq` es una **typeclass que incluye a todos los tipos que pueden ser comparados por igualdad**. Las typeclases son como _interfaces_ en otros lenguajes de programación. 
+
+Si hubiesemos definido la función `elem` de la siguiente manera:
+
+```hs
+elem :: a -> [a] -> Bool
+```
+
+Haskell nos arrojaría un error de tipo, ya que el operador `==` requiere que `a` sea de tipo `Eq`.
+
+Existen otras typeclasses en Haskell, como `Ord` (para tipos ordenables), `Show` (para tipos que pueden ser convertidos a `String`), `Num` (para tipos numéricos), entre otros.
+
+## Currificación
+
+> En Haskell, todas las funciones son **currificadas**. Esto significa que una función que recibe múltiples argumentos, en realidad recibe un solo argumento y devuelve otra función que recibe el siguiente argumento.
+
+Tomemos por ejemplo la función `max`:
+
+```hs
+max :: Ord a => a -> a -> a
+```
+
+En primera instancia podemos pensar que la función `max` recibe dos argumentos, pero en realidad recibe un solo argumento y devuelve otra función que recibe el siguiente argumento y lo compara. Por ejemplo, si ejecutamos `max 1 2`, Haskell lo interpretará como `(max 1) 2`. 
+
+Sería como definir: 
+
+```hs
+max :: Ord a => a -> (a -> a)
+```
+
+## Aplicación parcial
+
+> La aplicación parcial es una técnica que consiste en **aplicar una función a menos argumentos de los que espera**. Por ejemplo, si tenemos la función `add`:
+
+```hs
+add :: Int -> Int -> Int
+
+add x y = x + y
+
+-- ghci> add 1 2
+-- 3
+```
+
+Podemos aplicar la función `add` a un solo argumento, y obtener otra función que recibe el siguiente argumento:
+
+```hs
+(add 1) :: Int -> Int
+
+-- ghci> (add 1) 2
+-- 3 
+```
+
+## Funciones de alto orden 
+
+> Las funciones de alto orden son aquellas que **toman funciones como argumentos y/o devuelven funciones como resultado**. Por ejemplo, la función:
+
+```hs
+applyTwice :: (a -> a) -> a -> a
+
+applyTwice f x = f (f x)
+
+-- ghci> applyTwice (+2) 1
+-- 5
+```
+
+Donde `applyTwice` toma una función como argumento (también llamado **callback**) y un valor, y aplica la función dos veces al valor.
+
+Haskell posee funciones de alto orden como `map`, `filter`, entre otras. 
+
+## Tipos algebraicos sin parámetros
+
+> Si bien Haskell ofrece tipos de datos básicos y compuestos, también es posible definir **nuevos tipos de datos**. 
+
+Supongamos que definimos una función que enuncia nuestra tarea según el día de la semana:
+
+```hs
+tareaDiaria :: Int -> String 
+
+tareaDiaria 0 = "Trabajar"
+tareaDiaria 1 = "Trabajar"
+tareaDiaria 2 = "Trabajar"
+... 
+```
+
+(En este ejemplo el 0 representa el lunes). Esto resulta difícil de leer y mantener. La codificación _ad hoc_ puede funcionar, pero requiere tener mucho más cuidado.\
+En su lugar, podemos definir un nuevo tipo de datos `Dia`:
+
+```hs
+data Dia = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo
+
+tareaDiaria :: Dia -> String
+
+tareaDiaria Lunes = "Trabajar"
+tareaDiaria Martes = "Trabajar"
+tareaDiaria Miercoles = "Trabajar"
+tareaDiaria Jueves = "Trabajar poco"
+tareaDiaria Viernes = "Trabajar poco"
+tareaDiaria Sabado = "Descansar"
+tareaDiaria Domingo = "Descansar"
+tareaDiaria _ = "Trabajar"
+```
+
+Donde `_` representa un **comodín** que captura cualquier otro valor que no esté definido en la función.
+
+Incluso podríamos mejorar el anterior ejemplo definiendo un nuevo tipo de datos `Tarea`:
+
+```hs
+data Dia = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo
+
+data Tarea = Trabajar | Descansar | TrabajarPoco
+
+tareaDiaria :: Dia -> Tarea
+
+tareaDiaria Lunes = Trabajar
+tareaDiaria Martes = Trabajar
+tareaDiaria Miercoles = Trabajar
+tareaDiaria Jueves = TrabajarPoco
+tareaDiaria Viernes = TrabajarPoco
+tareaDiaria Sabado = Descansar
+tareaDiaria Domingo = Descansar
+tareaDiaria _ = Trabajar
+
+-- ghci> tareaDiaria Lunes 
+-- Trabajar
+```
+
+### Sintaxis _case_ 
+
+Siguiendo el ejemplo anterior, si queremos definir una función `horasTrabajo` que devuelva la cantidad de horas de trabajo según nuestra tarea diaria, podríamos hacerlo: 
+
+```hs
+horasTrabajo :: Dia -> Int
+
+horasTrabajo d = case tareaDiaria d of
+    Trabajar -> 8
+    TrabajarPoco -> 4
+    _ -> 0
+```
+
+Donde `case` **es una expresión que permite hacer _pattern matching_ sobre una expresión**. En este caso usamos los valores del tipo `Tarea` para asignar una cantidad de horas según el día (valor).\
+(Esto es similar a un `switch` en otros lenguajes de programación).
+
+
+### Instancias derivadas y definiciones locales
+
+Siguiendo lo anterior, no podríamos haber definido `horasTrabajo` de la siguiente manera:
+
+```hs
+horasTrabajo :: Dia -> Int
+
+horasTrabajo d | tareaDiaria d == Trabajar = 8
+               | tareaDiaria d == TrabajarPoco = 4
+               | otherwise = 0
+
+-- ghci> horasTrabajo Lunes
+-- Error: ... 
+``` 
+
+(Podríamos hacerlo con `where`):
+
+```hs
+horasTrabajo :: Dia -> Int
+
+horasTrabajo d | tarea d == Trabajar = 8
+               | tarea d == TrabajarPoco = 4
+               | otherwise = 0
+                where tarea = tareaDiaria d
+```
+
+Sin embargo, esto no permite **comparar directamente** dos valores de tipo `Tarea` con `==`, ya que Haskell no sabe cómo compararlos.\
+Para ello, el tipo `Tarea` debe ser una instancia de la typeclass `Eq`:
+
+```hs
+data Tarea = Trabajar | Descansar | TrabajarPoco deriving Eq
+
+horasTrabajo :: Dia -> Int
+
+horasTrabajo d | tareaDiaria d == Trabajar = 8
+               | tareaDiaria d == TrabajarPoco = 4
+               | otherwise = 0
+
+-- ghci> horasTrabajo Lunes
+-- 8
+```
+
+De esta forma, `deriving` nos permite **derivar instancias de typeclasses** para nuestros tipos de datos.\
+`Tarea` ahora es una instancia de `Eq`, por lo que podemos comparar valores de tipo `Tarea` con `==`.
+
+## Tipos algebraicos con parámetros
+
+> Los tipos algebraicos pueden tener parámetros, lo que permite definir tipos de datos más genéricos. 
+
+Supongamos que tenemos el siguiente tipo de dato `Figura`:
+
+```hs
+data Figura = Circulo | Rectangulo
+```
+
+Lo que nos dice este tipo de dato es que una `Figura` puede ser un `Circulo` **o** un `Rectangulo`. Ambos son **constructores de datos, pero no tienen parámetros**.
+
+Si quisieramos diferenciar los tamaños de superficie en `Circulo` y `Rectangulo`, una forma podría ser la siguiente:
+
+```hs
+data Figura = CirculoChico 
+            | CirculoMediano 
+            | CirculoGrande
+            | RectanguloChico 
+            | RectanguloMediano 
+            | RectanguloGrande
+```
+
+Sin embargo, esto implica que debemos definir cada tipo de figura con su tamaño, lo que resulta tedioso (e impreciso).\
+Existe una forma mucho mejor de hacerlo, y de poder adoptar cualquier dimensión para cada figura:
+
+```hs
+data Figura = Circulo (Float, Float) Float | Rectangulo (Float, Float) (Float, Float)
+
+:t Circulo 
+
+- Circulo :: (Float, Float) -> Float -> Figura
+
+:t Rectangulo
+
+- Rectangulo :: (Float, Float) -> (Float, Float) -> Figura
+```
+
+Ahora `Circulo` y `Rectangulo` son constructores de datos **que reciben parámetros**.
+
+Para que `Circulo` y `Rectangulo` sean instancias válidas de `Figura`, es necesario que cumplan con los parámetros definidos.
+
+En el ejemplo `Circulo` recibe un par de coordenadas y un radio, mientras que `Rectangulo` recibe dos pares de coordenadas.
+
+Ahora podemos definir una función que nos diga el área de cada figura:
+
+```hs
+area :: Figura -> Float
+
+area (Circulo (x, y) r) = 3.1416 * r * r
+area (Rectangulo (x1, y1) (x2, y2)) = base * altura
+                                      where base = abs (x2 - x1)
+                                            altura = abs (y2 - y1)
+
+-- ghci> area (Circulo (0, 0) 2)
+-- 12.5664
+
+-- ghci> area (Rectangulo (0, 0) (2, 2))
+-- 4.0
+```
+
+Los identificadores `x`, `y`, `r`, `x1`, `y1`, `x2` e `y2` son cualquier valor de tipo `Float`.
+
+### Sinónimos de tipos
+
+> Los sinónimos de tipos son una forma de darle un **nombre alternativo a un tipo existente**. Por ejemplo, si quisieramos definir un tipo `Punto` o `Radio`:
+
+```hs
+type Punto = (Float, Float)
+type Radio = Float
+
+data Figura = Circulo Punto Radio | Rectangulo Punto Punto
+
+:t Circulo
+
+- Circulo :: Punto -> Radio -> Figura
+
+:t Rectangulo
+
+- Rectangulo :: Punto -> Punto -> Figura
+
+-- ghci> area (Circulo (0, 0) 2)
+-- 12.5664
+
+-- ghci> area (Rectangulo (0, 0) (2, 2))
+-- 4.0
+```
+
+La función que definimos anteriormente sigue funcionando, y ahora `Punto` y `Radio` son sinónimos de `Float, Float` y `Float`, respectivamente.
+
+## Definición de Igualdad
+
+> Es posible definir la igualdad entre dos valores de un tipo de dato específico mediante la instancia de la typeclass `Eq`.
+
+```hs 
+instance Eq Figura 
+  where
+    f1 == f2 = area f1 == area f2
+```
+
+Donde `f1` y `f2` son dos figuras, y `area` es la función que definimos anteriormente.
+
+## Tipos recursivos
+
+> Un tipo recursivo es aquel que se define en **términos de sí mismo**. 
+
+Por ejemplo, si quisieramos representar una palabra:
+
+```hs
+data Palabra = PVacia | Agregar Char Palabra
+```
+
+Donde `PVacia` representa una palabra vacía, y `Agregar` agrega un caracter a la palabra. Por ejemplo, la palabra "Hola" se representaría como:
+
+```hs
+let p = Agregar 'H' (Agregar 'o' (Agregar 'l' (Agregar 'a' PVacia)))
+```
+
+Para poder imprimir la palabra, necesitamos definir una función que recorra la palabra y la imprima:
+
+```hs
+imprimir :: Palabra -> String
+
+imprimir PVacia = ""
+imprimir (Agregar c p) = c : imprimir p
+
+-- ghci> imprimir p
+-- "Hola"
+```
+
+## Tipo _Maybe_
+
+> El tipo `Maybe` es un tipo de dato que **puede tener un valor o no tenerlo**.
+
+```hs 
+data Maybe a = Nothing | Just a
+``` 
+
+El tipo `Maybe` agrega un elemento `Nothing` que representa la ausencia de un valor, y un elemento `Just a` que representa un valor de tipo `a`.
+
+Por ejemplo, si quisieramos definir una función que divida dos números:
+
+```hs
+dividir :: Float -> Float -> Maybe Float
+
+dividir _ 0 = Nothing
+dividir x y = Just (x / y)
+
+-- ghci> dividir 1 0
+-- Nothing
+
+-- ghci> dividir 1 2
+-- Just 0.5
+```
+
+Si el divisor es 0, la función devuelve `Nothing`, ya que su resultado **no existe en el tipo de la imagen de la función**. 
+
+Podriamos saber si la división entre dos números es posible mediante el uso de `Maybe` y `case`:
+
+```hs
+dividir :: Float -> Float -> Maybe Float
+
+dividir _ 0 = Nothing
+dividir x y = Just (x / y)
+
+puedeDividirse :: Float -> Float -> String
+
+puedeDividirse x y = case dividir x y of
+    Nothing -> "No se puede dividir"
+    Just z -> "Se puede dividir" 
+
+-- ghci> puedeDividirse 1 0
+-- "No se puede dividir"
+
+-- ghci> puedeDividirse 1 2
+-- "Se puede dividir"
+```
