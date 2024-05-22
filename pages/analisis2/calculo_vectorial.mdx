@@ -1,0 +1,322 @@
+# Cálculo Vectorial
+
+## Vectores 
+
+> Definimos la noción de vector en el plano (2D) y en el espacio (3D):\
+$\mathbb{R}^n = \{ \mathbf{a} = (a_1, a_2, \ldots, a_n), a_i \in \mathbb{R} \;  \forall i \}$
+
+En $\mathbb{R}^n$ se definen las operaciones:
+
+- **Suma:** $(a_1, a_2, \ldots, a_n) + (b_1, b_2, \ldots, b_n) = (a_1 + b_1, a_2 + b_2, \ldots, a_n + b_n)$
+
+- **Multiplicación por un escalar:** $r \in \mathbb{R}, r \cdot (a_1, a_2, \ldots, a_n) = (r \cdot a_1, r \cdot a_2, \ldots, r \cdot a_n)$
+
+Con estas operaciones, $\mathbb{R}^n$ es un espacio vectorial sobre el cuerpo $\mathbb{R}$, y sus elementos son **vectores (o puntos)**.
+
+**Observaciones:**
+
+- Denotamos $- \mathbf{a} = (-1) \cdot \mathbf{a}$ 
+- Definimos la resta como $\mathbf{a} - \mathbf{b} = \mathbf{a} + (- \mathbf{b})$
+- Definimos el vector nulo como $\mathbf{0} = (0, 0, \ldots, 0)$
+
+### Representaciones en el plano y en el espacio
+
+Esta es una representación gráfica de dos puntos en $\mathbb{R}^2$ donde $\mathbf{A} = (2,3), \mathbf{-A} = (-2,-3)$
+
+<br />
+
+<iframe scrolling="no" title="puntos en el plano" src="https://www.geogebra.org/material/iframe/id/zenympdb/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" width="700px" height="500px" allowFullScreen />
+
+Y esta es una representación gráfica de los vectores $\mathbf{a} = (2,3), - \mathbf{a} = (-2,-3)$ en $\mathbb{R}^2$, como puede observarse, los vectores parten desde el origen.
+
+En este ejemplo comparten la misma dirección y longitud pero no el mismo sentido.
+
+<br />
+
+<iframe scrolling="no" title="Vectores en el plano" src="https://www.geogebra.org/material/iframe/id/s7jmqbqb/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" width="700px" height="500px" allowFullScreen />
+
+<br />
+
+Esta es una representación de un punto en $\mathbb{R}^3$ donde $\mathbf{A} = (1,2,2)$
+
+<br />
+
+<iframe scrolling="no" title="punto en el espacio" src="https://www.geogebra.org/material/iframe/id/q2uk75sf/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" width="700px" height="500px" allowFullScreen />
+
+Esta es una representación gráfica del vector $\mathbf{a} = (2,3,3)$ en $\mathbb{R}^{3}$
+
+<br />
+
+<iframe scrolling="no" title="vector en el espacio" src="https://www.geogebra.org/material/iframe/id/uvqjjhpd/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" width="700px" height="500px" allowFullScreen />
+
+### Regla del paralelogramo
+
+> Dados dos vectores, al completarlos con un paralelogramo, **la diagonal del paralelogramo es igual a la suma de los vectores**.
+
+## Producto escalar
+
+> Dados $\mathbf{a}, \mathbf{b} \in \mathbb{R}^n$ con $\mathbf{a} = (a_1, a_2, \ldots, a_n), \mathbf{b} = (b_1, b_2, \ldots, b_n)$, se define el **producto escalar** como:
+
+```math 
+<\mathbf{a}, \mathbf{b}> = a_1 \cdot b_1 + a_2 \cdot b_2 + \ldots + a_n \cdot b_n = \sum_{j=1}^{n} a_j \cdot b_j
+```
+
+### Propiedades - Producto escalar
+
+Dados $\mathbf{a}, \mathbf{b}, \mathbf{c} \in \mathbb{R}^n$ y $r \in \mathbb{R}$, se cumplen las siguientes propiedades:
+
+**1)** $<\mathbf{a}, \mathbf{b}> \; = \; <\mathbf{b}, \mathbf{a}>$
+
+**2)** $<\mathbf{a} + \mathbf{b}, \mathbf{c}> \; = \; <\mathbf{a}, \mathbf{c}> + <\mathbf{b}, \mathbf{c}> \land <\mathbf{a}, \mathbf{b} + \mathbf{c}> \; = \; <\mathbf{a}, \mathbf{b}> + <\mathbf{a}, \mathbf{c}>$
+
+**3)** $r <\mathbf{a}, \mathbf{b}> \; = \; <r \; \mathbf{a}, \mathbf{b}> \; = \; <\mathbf{a}, r \; \mathbf{b}>$
+
+**4)** $<\mathbf{a}, \mathbf{a}> \; \geq \; 0$ 
+
+**5)** $<\mathbf{a}, \mathbf{a}> \; = \; 0 \; \iff \; \mathbf{a} = 0$
+
+## Norma de un vector
+
+> Geométricamente en $\mathbb{R}^2, \mathbb{R}^3$ el valor de $||\mathbf{a}||$ es la longitud del vector $\mathbf{a}$. 
+
+En $\mathbb{R}^2$ $||\mathbf{a}|| = \sqrt{\mathbf{a}_1^2 + \mathbf{a}_2^2}$ (Teorema de Pitágoras)
+
+En $\mathbb{R}^3$ $||\mathbf{a}|| = \sqrt{\mathbf{a}_1^2 + \mathbf{a}_2^2 + \mathbf{a}_3^2}$ (Teorema de Pitágoras 2 veces)
+
+- $||\mathbf{a}||$ es la **distancia al origen**, $d(\mathbf{a}, 0) = ||\mathbf{a}||$
+
+- $||\mathbf{a} - \mathbf{b}|| = d(\mathbf{a}, \mathbf{b})$ (distancia entre dos puntos)
+
+### Propiedades de la norma de un vector
+
+Dado $\mathbf{a}, \mathbf{b} \in \mathbb{R}^n$ y $r \in \mathbb{R}$, se cumplen las siguientes propiedades:
+
+**1)** $||\mathbf{a}|| \geq 0 \land ||\mathbf{a}|| = 0 \iff \mathbf{a} = (0, 0, \ldots, 0)$
+
+**2)** $||r \cdot \mathbf{a}|| = |r| \cdot ||\mathbf{a}||$
+
+**3)** $||\mathbf{a} + \mathbf{b}|| \leq ||\mathbf{a}|| + ||\mathbf{b}||$ (**Desigualdad triangular**)
+
+**4)** $<\mathbf{a}, \mathbf{b}> \; = \; ||\mathbf{a}|| \cdot ||\mathbf{b}|| \cdot \cos(\theta), \; 0 \leq \theta \leq \pi$ 
+
+**5)** $|<\mathbf{a}, \mathbf{b}>| \leq ||\mathbf{a}|| \cdot ||\mathbf{b}||$ (**Desigualdad de Cauchy-Schwarz**)
+
+## Ángulo entre dos vectores
+
+> Dados $\mathbf{a}, \mathbf{b} \neq 0, \in \mathbb{R}^n$, decimos que:
+
+- Son **ortogonales** (o perpendiculares) si $<\mathbf{a}, \mathbf{b}> = 0$
+
+Si esto es cierto, entonces $\cos(\theta) = 0 \implies \theta = \frac{\pi}{2}$
+
+- Son **paralelos** si $\mathbf{a} = r \cdot \mathbf{b}$ para algún $r \in \mathbb{R}$
+
+Si esto es cierto, están en una misma recta, uno es múltiplo del otro.
+
+## Rectas en el plano y en el espacio
+
+> Sean $P_0, \mathbf{v} \in \mathbb{R}^n$ con $\mathbf{v} \neq 0$: 
+
+- Los puntos $t\mathbf{v}$ con $t \in \mathbb{R}$ describen la recta $\ell_1$ que **tiene dirección $\mathbf{v}$ y pasa por el origen**.
+
+- Los puntos $P_0 + t\mathbf{v}$ con $t \in \mathbb{R}$ describen la recta $\ell_2$ que **tiene dirección $\mathbf{v}$ y pasa por el punto $P_0$**.
+
+### Ecuación vectorial de una recta
+
+> La recta $\ell$ que pasa por el punto $P_0$ y tiene dirección $\mathbf{v}$ es el conjunto de todos los puntos tales que: 
+
+```math
+\underline{\overline{\mathbf{X}}} = (x, y) \in \mathbb{R}^2 \lor (x, y, z) \in \mathbb{R}^3 
+```
+
+```math
+\underline{\overline{\mathbf{X}}} = P_0 + t\mathbf{v} \;,\; t \in \mathbb{R}
+```
+
+Siendo la última ecuación la **ecuación vectorial de la recta**.
+
+## Tipos de rectas 
+
+> **Rectas paralelas:** Dos rectas son paralelas si sus vectores dirección son paralelos.
+
+> **Rectas perpendiculares:** Dos rectas son perpendiculares si sus vectores dirección son ortogonales.
+
+### Recta que pasa por dos puntos
+
+La ecuación vectorial de la recta que pasa por los puntos $P_0, P_1$ es:
+
+```math
+\underline{\overline{\mathbf{X}}} = P_0 + t(P_1 - P_0) \;,\; t \in \mathbb{R}
+```
+
+### Ecuación paramétrica de una recta en el plano
+
+Sean $P_0 = (x_0, y_0), \; \mathbf{v} = (v_1, v_2) \neq 0, \; r \in \mathbb{R}$ y considerando la equivalencia entre: 
+
+```math 
+\begin{align*}
+  \underline{\overline{\mathbf{X}}} &= P_0 + t\mathbf{v}\\
+  (x, y) &= (x_0, y_0) + t(v_1, v_2)
+\end{align*}
+```
+
+Definimos la ecuación paramétrica como: 
+
+```math
+EP = 
+\begin{cases}
+x = x_0 + tv_1 \\
+y = y_0 + tv_2
+\end{cases}
+```
+
+Suponiendo que $v_1 \neq 0$, despejando $t$ de la primera ecuación obtenemos:
+
+```math
+t = \frac{x - x_0}{v_1}
+```
+
+Sustituyendo $t$ en la segunda ecuación obtenemos:
+
+```math
+y = y_0 + (\frac{x - x_0}{v_1})\;v_2
+```
+
+Con estos datos, podemos obtener el valor de la pendiente de la recta y la ordenada al origen.
+
+```math 
+\frac{v_2}{v_1}\;x + (y_0 - \frac{v_2}{v_1}\;x_0) = y
+```
+
+Forma **explícita** de la recta: 
+
+```math
+y = ax + b
+```
+
+Forma **implícita** de la recta: 
+
+```math
+ax - y + b = 0
+```
+
+### Ecuación paramétrica de una recta en el espacio
+
+Sean $P_0 = (x_0, y_0, z_0), \; \mathbf{v} = (v_1, v_2, v_3) \neq 0, \; r \in \mathbb{R}$ y considerando la equivalencia entre: 
+
+```math
+\underline{\overline{\mathbf{X}}} = P_0 + t\mathbf{v} \;,\; t \in \mathbb{R}
+```
+
+```math
+(x, y, z) = (x_0, y_0, z_0) + t(v_1, v_2, v_3)
+```
+
+Definimos la ecuación paramétrica como: 
+
+```math
+EP =
+\begin{cases}
+x = x_0 + tv_1 \\
+y = y_0 + tv_2 \\
+z = z_0 + tv_3
+\end{cases}
+```
+
+No posee forma explícita o implícita. 
+
+## Planos en el espacio
+
+### Ecuación vectorial de un plano
+
+> Dados $\mathbf{v}, \mathbf{w} \in \mathbb{R}^3$ con $\mathbf{v} \neq 0 \neq \mathbf{w} \land \mathbf{v} \neq s \mathbf{w}$, y dado $P \in \mathbb{R}^3 \land r, s \in \mathbb{R}$ definimos la **ecuación vectorial de un plano**:
+
+```math
+\underline{\overline{\mathbf{X}}} = P + s\mathbf{v} + t\mathbf{w} 
+```
+
+Por geometría euclideana sabemos que un plano queda determinado por alguna de estas posibilidades: 
+
+**1)** Tres puntos no colineales
+
+**2)** Una recta y un punto fuera de ella 
+
+**3)** Dos rectas paralelas (distintas)
+
+Para el **primer caso**: 
+
+Sean los puntos $P, Q, R$ no colineales (no son paralelos), $P - Q$ y $R - Q$ dos vectores no nulos y no paralelos que generan el plano. 
+
+La ecuación vectorial del plano es: 
+
+```math
+\underline{\overline{\mathbf{X}}} = P + t(P - Q) + r(R - Q), \; t, r \in \mathbb{R}
+```
+
+Para el **segundo caso**: 
+
+Si tenemos una recta $\ell$ y un punto $P$ fuera de ella, entonces eligiendo dos puntos $Q$ y $R$ en la recta, tenemos tres puntos no colineales y aplicamos el caso anterior.
+
+Para el **tercer caso**:
+
+Si tenemos dos rectas paralelas, entonces eligiendo un punto $P$ y $Q$ en cada recta, y un punto $R$ sobre la otra recta, aplicamos el caso anterior.
+
+### Ecuación normal de un plano 
+
+> Sea $\mathbf{n}$ un vector perpendicular a un plano y un punto $P_0$ por el que pasa, entonces la **ecuación normal de un plano** es:
+
+```math
+< \overline{\underline{X}} - P_0, \mathbf{n} > = 0 
+```
+
+Tal que $\overline{\underline{X}} - P_0$ es perpendicular a $\mathbf{n}$.
+
+### Ecuación cartesiana del plano 
+
+> Sean $\overline{\underline{X}} = (x, y, z), \; P_0 = (x_0, y_0, z_0), \; \mathbf{n} = (a, b, c)$, entonces la **ecuación cartesiana de un plano** es:
+
+```math
+ax + by + cz = d
+```
+
+## Producto Vectorial 
+
+> Dados dos vectores $\mathbf{v} = (v_1, v_2, v_3), \; \mathbf{w} = (w_1, w_2, w_3)$, se define el **producto vectorial** $\mathbf{v} \times \mathbf{w}$ como:
+
+```math
+\mathbf{v} \times \mathbf{w} = (v_2w_3 - w_2v_3, w_1v_3 - v_1w_3, w_2v_1 - v_2w_1)
+```
+
+Esto nos sirve para pasar la ecuación vectorial del plano a la ecuación noraml del plano.
+
+Sabiendo la ecuación vectorial del plano que pasa por $P$ y tiene dirección $\mathbf{v}, \mathbf{w}$: 
+
+```math
+\underline{\overline{\mathbf{X}}} = P + s\mathbf{v} + t\mathbf{w} 
+```
+
+Como el vector $\mathbf{v} \times \mathbf{w}$ es ortogonal a $\mathbf{v}$ y $\mathbf{w}$, entonces podemos escribir la ecuación normal del plano como:
+
+```math
+< \overline{\underline{X}} - P, \mathbf{v} \times \mathbf{w} > = 0
+```
+
+## Calcular coseno del ángulo entre planos 
+
+> Decimos que $\alpha$ es el ángulo entre dos planos si $\alpha$ es el ángulo entre sus vectores normales. 
+
+**Ejemplo:** 
+
+Obtener el coseno del ángulo entre los planos $x+y+z=0$ y $x+2zy+3z=1$:
+
+Tenemos que $\mathbf{n}_1 = (1, 1, 1), \; \mathbf{n}_2 = (1, 2, 3)$, entonces:
+
+```math
+< \mathbf{n}_1, \mathbf{n}_2 > \; = \; 1 + 2 + 3 = 6 = ||\mathbf{n}_1|| \cdot ||\mathbf{n}_2|| \cdot \cos(\mathbf{n}_1, \mathbf{n}_2)
+```
+
+Como $||\mathbf{n}_1|| = \sqrt{3} \land ||\mathbf{n}_2|| = \sqrt{14}$, entonces:
+
+```math
+\cos(\mathbf{n}_1, \mathbf{n}_2) = \frac{6}{\sqrt{3}\sqrt{14}}
+```

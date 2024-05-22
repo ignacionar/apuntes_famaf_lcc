@@ -3,5 +3,6 @@ export default {
   integrales: "Integrales (AM2)",
   sucesiones: "Sucesiones",
   series: "Series",
-  series_de_taylor: "Series y Polinomio de Taylor"
+  series_de_taylor: "Series y Polinomio de Taylor",
+  calculo_vectorial: "Cálculo Vectorial"
 }
