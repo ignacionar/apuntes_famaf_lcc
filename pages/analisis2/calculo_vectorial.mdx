@@ -298,7 +298,7 @@ Sabiendo la ecuación vectorial del plano que pasa por $P$ y tiene dirección $\
 Como el vector $\mathbf{v} \times \mathbf{w}$ es ortogonal a $\mathbf{v}$ y $\mathbf{w}$, entonces podemos escribir la ecuación normal del plano como:
 
 ```math
-< \overline{\underline{X}} - P, \mathbf{v} \times \mathbf{w} > = 0
+< \overline{\underline{X}} - P, \mathbf{v} \times \mathbf{w} > \; = \; 0
 ```
 
 ## Calcular coseno del ángulo entre planos 
@@ -320,3 +320,54 @@ Como $||\mathbf{n}_1|| = \sqrt{3} \land ||\mathbf{n}_2|| = \sqrt{14}$, entonces:
 ```math
 \cos(\mathbf{n}_1, \mathbf{n}_2) = \frac{6}{\sqrt{3}\sqrt{14}}
 ```
+
+## Funciones vectoriales
+
+> Dados $f_i : \mathbb{R} \to \mathbb{R}, \; i = 1, \ldots, n$ definimos **función vectorial** a la función $f : \mathbb{R} \to \mathbb{R}^n$ dada por $f(t) = (f_1(t), f_2(t), \ldots, f_n(t))$. Donde los $f_i$ son las **funciones coordenadas de $f$**.
+
+### Dominio de una función vectorial
+
+El dominio de $f$ es $Dom(f) = \displaystyle{\cup_{i=1}^{n}} \; Dom(f_i)$
+
+**Ejemplo:**
+ 
+Dada la función $f(t) = (t+2, t^3)$, entonces como $Dom(f_1) = \mathbb{R} \land Dom(f_2) = \mathbb{R}$, entonces $Dom(f) = \mathbb{R}$
+
+### Imagen de una función vectorial
+
+Si $f : \mathbb{R} \to \mathbb{R}^n$ es una función vectorial, su imagen es el conjunto definido por: 
+
+```math
+Im(f) = \{ (y_1, \ldots, y_n) \in \mathbb{R}^n : \exists t \in Dom(f) | f(t) = (y_1, \ldots, y_n) \}
+```
+
+- En el plano decimos que la imagen de $f$ es una **curva en el plano**
+- En el espacio decimos que la imagen de $f$ es una **curva en el espacio**
+
+**Ejemplo:**
+
+Dada la función $f(t) = (t, 2-t, 3+2t) dar su imagen en el espacio:
+
+Sabemos que $Im(f)$ es una recta en el espacio paralela al vector $(1, -1, 2)$ ya que: 
+
+```math
+f(t) = (t, 2-t, 3+2t) = t \cdot (1, -1, 2) + (0, 2, 3)
+```
+
+Por lo tanto, la su imagen es: 
+
+```math
+Im(f) = \{ (y_1, y_2, y_3) \in \mathbb{R}^3 : (y_1, y_2, y_3) = t \cdot (1, -1, 2) + (0, 2, 3), r \in \mathbb{R} \}
+```
+
+### Límites de funciones vectoriales
+
+> Dada $f : \mathbb{R} \to \mathbb{R}^n$ y $a \in Dom(f)$, definimos la derivada de $f$ en $t=a$ como: 
+
+```math
+f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}
+```
+
+(Siempre que el límite exista)
+
+Decimos que $f(a)$ es el **vector posición** y que $f'(a)$ es el vector tangente a la curva en $f(a)$
