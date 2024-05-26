@@ -1,0 +1,202 @@
+# Funciones de varias variables
+
+> Una función $f$ de $n$ variables es una regla que asigna a cada $n$-tupla de números reales $\overline{x} = (x_1, x_2, \ldots, x_n)$ un único número real $f(\overline{x}) = f(x_1, x_2, \ldots, x_n)$.
+
+Podemos definir su dominio como:
+
+```math 
+Dom\;f = \{ \overline{x} \in \mathbb{R}^n \mid f(\overline{x}) \text{ está definida} \}
+```
+
+La imagen como: 
+
+```math
+Im\;f = \{ y \in \mathbb{R} \mid \exists \overline{x} \in Dom\;f | y = f(\overline{x}) \}
+```
+
+Su gráfica se define como: 
+
+```math
+G(f) = \{ (\overline{x}, f(\overline{x})) \in \mathbb{R}^{n+1} \mid \overline{x} \in Dom\;f \}
+```
+
+Y por lo general, la notación usual es $z = f(x, y)$.
+
+**Ejemplo:**
+
+Dar el dominio de la función $f(x, y) = ln(x+y-2)$ y su imagen:
+
+```math
+Dom\;f = \{ (x, y) \in \mathbb{R}^2 \mid x + y - 2 > 0 \} = \{ (x, y) \in \mathbb{R}^2 \mid y > 2 - x \}
+```
+
+Para la imagen, si elegimos $x = 0$ tenemos que:
+
+```math
+f(0, y) = ln(y - 2)
+```
+
+Si definimos una función $h(t) = ln(t - 2)$. Por la función logaritmo, independientemente de estar desplazada en el eje $x$, su imagen es $\mathbb{R}$. Por lo tanto, $Im\;f$ es $\mathbb{R}$.
+
+## Límite y continuidad de funciones de varias variables
+
+> Dado $r > 0$ y $\overline{a} \in \mathbb{R}^n$, llamamos bola abierta de centro $\overline{a}$ y radio $r$ al conjunto $B = \{ \overline{x} \in \mathbb{R}^n , ||\overline{x} - \overline{a}|| < r \}$
+
+- Si $n = 1$, $B(\overline{a}, r)$ es intervalo abierto centrado en $\overline{a}$ y de radio $r$).
+
+- Si $n = 2$, $B(\overline{a}, r)$ es un disco abierto centrado en $\overline{a}$ y de radio $r$.
+
+- Si $n = 3$, $B(\overline{a}, r)$ es una bola centrada en $\overline{a}$ y de radio $r$.
+
+### Límite 
+
+> Sea $\overline{a} \in \mathbb{R}^n$ y $f: Dom\;f \subset \mathbb{R}^n \rightarrow \mathbb{R}$, que incluye puntos arbitrarios cercanos a $\overline{a}$ decimos: 
+
+```math
+\lim_{\overline{x} \to \overline{a}} f(\overline{x}) = L
+```
+
+### Continuidad 
+
+> Sea $f : Dom\;f \subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ y $\overline{a} \in \mathbb{R}^n$, decimos que $f$ es continua en $\overline{a}$ si:
+
+```math
+\overline{a} \in Dom\;f \land \lim_{\overline{x} \to \overline{a}} f(\overline{x}) = f(\overline{a})
+```
+
+Entonces, $f$ es continua si $f$ es continua en todo punto de su dominio. Valen propiedades similares a funciones continuas de $R$ en $R$. 
+
+## Derivadas parciales
+
+> Sea $f : \mathbb{R}^2 \rightarrow \mathbb{R} \; \land \; (a, b) \in \mathbb{R}^2$, si fijamos $b$, tenemos que $g(x) = f(x, b)$ es una función de una variable. Podemos considerar su derivada en $x = a$ como:
+
+```math
+g'(a) = \displaystyle{\lim_{h \to 0}} \; \frac{g(a + h) - g(a)}{h} = \displaystyle{\lim_{h \to 0}} \; \frac{f(a + h, b) - f(a, b)}{h} = \frac{\partial f}{\partial x}(a, b)
+```
+
+En general, para cualquier punto $(x, y)$, dejamos la variable $y$ fija y definimos la derivada parcial de $f$ con respecto a $x$ como: 
+
+```math
+\frac{\partial f}{\partial x}(x, y) = f_x(x, y) = \displaystyle{\lim_{h \to 0}} \; \frac{f(x + h, y) - f(x, y)}{h}
+```
+
+- Si $n = 1$ tenemos que $f_{x_1}(a) = f'(a)$ (derivada ordinaria).
+
+- Si $n = 2$ escribimos $f_x, f_y$ en lugar de $f_{x_1}, f_{x_2}$
+
+- Si $n = 3$ escribimos $f_x, f_y, f_z$ en lugar de $f_{x_1}, f_{x_2}, f_{x_3}$
+
+**Si las derivadas parciales $f_{x_j}$ son continuas en $\overline{a}$, $f$ es continua en $\overline{a}$.**
+
+### Plano tangente
+
+> Sea $f : Dom\;f \subseteq \mathbb{R}^2$ y $(a, b) \in Dom\;f$, el plano tangente a la gráfica de $f$ en el punto $(a, b, f(a, b))$ es:
+
+**Ecuación vectorial:**
+
+```math
+(x, y, z) = (a, b, f(a, b)) + t(1, 0, f_x(a, b)) + s(0, 1, f_y(a, b))
+```
+
+**Ecuación normal:**
+
+```math
+< (x, y, z) - (a, b, f(a, b)), (f_x(a, b), \; f_y(a, b), \; -1) > \; = \; 0 
+```
+```math 
+z = (x-a)\;f_x(a, b) + (y-b)\;f_y(a, b) + f(a, b)
+```
+
+## Regla de la cadena
+
+> Al igual que funciones de una variable, podemos aplicar la regla de la cadena a funciones de varias variables. Tenemos dos casos posibles: 
+
+**Caso 1:**
+
+Sea $f : Dom \; f \subseteq \mathbb{R}^n \rightarrow \mathbb{R}, \; \overline{a} \in Dom \; f$ y tal que $\frac{\partial f}{\partial x_1}, \; \ldots, \; \frac{\partial f}{\partial x_n}$ existen y son continuas en $B(\overline{a}, r)$\
+para algún $r > 0$
+
+Para $1 \leq i \leq n$ y un intervalo $I \subseteq R$, sean $x_i : I \rightarrow \mathbb{R}$ funciones derivables $\forall t \in I$, la función $g(t) = f(x_1(t), \ldots, x_n(t))$ es derivable en $t \in I$ y:
+
+```math
+\frac{dg}{dt} = g'(t) = \frac{\partial f}{\partial x_1} (x_1(t), \ldots, x_n(t)) \cdot x_1'(t) + \ldots + \frac{\partial f}{\partial x_n} (x_1(t), \ldots, x_n(t)) \cdot x_n'(t)
+```
+
+**Caso 2:**
+
+Sea $f : Dom \; f \subseteq \mathbb{R}^2 \rightarrow \mathbb{R}, \; \overline{a_1} \in Dom \; f$ tal que $\frac{\partial f}{\partial x_1}, \; \frac{\partial f}{\partial x_2}$ existen y son continuas en $B(\overline{a_1}, r_1)$ \
+para algún $r_1 > 0$ 
+
+$x : Dom \; x \subset \mathbb{R}^2 \rightarrow \mathbb{R}$ e $y : Dom \; y \subset \mathbb{R}^2 \rightarrow \mathbb{R}$ son dos funciones con sus derivadas parciales continuas en $B(\overline{a_0}, r_0)$ para algún $r_0 > 0$, la función $g(s, t) = f(x(s, t), y(s, t)) \; \forall (s, t) \in B(\overline{a_0}, r_0)$ tiene derivadas parciales: 
+
+```math
+\frac{\partial g}{\partial s} (s, t) = \frac{\partial f}{\partial x} (x(s, t), y(s, t)) \cdot \frac{\partial x}{\partial s} (s, t) + \frac{\partial f}{\partial y} (x(s, t), y(s, t)) \cdot \frac{\partial y}{\partial s} (s, t)
+```
+```math
+\frac{\partial g}{\partial t} (s, t) = \frac{\partial f}{\partial x} (x(s, t), y(s, t)) \cdot \frac{\partial x}{\partial t} (s, t) + \frac{\partial f}{\partial y} (x(s, t), y(s, t)) \cdot \frac{\partial y}{\partial t} (s, t)
+```
+
+## Derivada direccional 
+
+> Decimos que la derivada direccional de $f$ en el punto $\overline{a}$ en la dirección de $\overline{u}$ (siendo $||\overline{u}|| = 1$) es:
+
+```math
+D_{\overline{u}} f(\overline{a}) = \displaystyle{\lim_{h \to 0}} \; \frac{f(\overline{a_1} + hu_1, \ldots, a_n + hu_n) - f(a_1, \ldots, a_n)}{h}
+```
+
+El gradiente de $f$ en $\overline{a}$ es el vector:
+
+```math
+\nabla f(\overline{a}) = \left( \frac{\partial f}{\partial x_1} (\overline{a}), \ldots, \frac{\partial f}{\partial x_n} (\overline{a}) \right)
+```
+
+## Derivada de orden 2 
+
+La cantidad de derivadas parciales de segundo orden dependerá de la cantidad de variables de la función. Para una función $f$ de $n$ variables, tenemos que: 
+
+Si $n=2$ hay $4$ posibilidades:
+
+```math
+(f_x)_x = \frac{\partial^2 f}{\partial x^2} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial x} \right)
+```
+```math
+(f_x)_y = \frac{\partial^2 f}{\partial x \partial y} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial y} \right)
+```
+```math
+(f_y)_x = \frac{\partial^2 f}{\partial y \partial x} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial x} \right)
+```
+```math
+(f_y)_y = \frac{\partial^2 f}{\partial y^2} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial y} \right)
+```
+
+Si $n=3$ hay $9$ posibilidades:
+
+$f_xx, f_xy, f_xz, f_yx, f_yy, f_yz, f_zx, f_zy, f_zz$
+
+## Punto crítico y funciones de dos variables
+
+> Sea $f : Dom \; f \subseteq \mathbb{R}^2 \rightarrow \mathbb{R}, \; (x_0, y_0)$ es un **punto crítico** si $\nabla f(x_0, y_0) = (0, 0)$
+
+> Si $\nexists \; f_x(x_0, y_0) \lor \nexists \; f_y(x_0, y_0)$, $(x_0, y_0)$ es un **punto singular**. 
+
+### Test de la derivada segunda
+
+> Sea $f : Dom \; f \subseteq \mathbb{R}^2 \rightarrow \mathbb{R}$ y $(x_0, y_0)$ un punto crítico. Definimos la matriz Hessiana de $f$ en $(x_0, y_0)$ como:
+
+```math
+H_f(x_0, y_0) = \begin{pmatrix} f_{xx}(x_0, y_0) & f_{xy}(x_0, y_0) \\ f_{yx}(x_0, y_0) & f_{yy}(x_0, y_0) \end{pmatrix}
+```
+
+Podemos reexpresar la matriz Hessiana como:
+
+```math
+D(x_0, y_0) = f_{xx}(x_0, y_0) \cdot f_{yy}(x_0, y_0) - [f_{xy}(x_0, y_0)]^2
+``` 
+
+- Si $D > 0$ y $f_{xx}(x_0, y_0) > 0 \lor f_{yy}(x_0, y_0) > 0$, $(x_0, y_0)$ es un **mínimo local**.
+
+- Si $D > 0$ y $f_{xx}(x_0, y_0) < 0 \lor f_{yy}(x_0, y_0) < 0$, $(x_0, y_0)$ es un **máximo local**.
+
+- Si $D < 0$, $(x_0, y_0)$ es un **punto de silla**.
+
+- Si $D = 0$, el test **no es concluyente**.

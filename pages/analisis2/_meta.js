@@ -4,5 +4,6 @@ export default {
   sucesiones: "Sucesiones",
   series: "Series",
   series_de_taylor: "Series y Polinomio de Taylor",
-  calculo_vectorial: "Cálculo Vectorial"
+  calculo_vectorial: "Cálculo Vectorial",
+  funciones_de_varias_variables: "Funciones de Varias Variables"
 }
