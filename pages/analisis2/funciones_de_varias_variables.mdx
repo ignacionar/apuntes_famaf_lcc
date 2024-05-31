@@ -1,23 +1,23 @@
 # Funciones de varias variables
 
-> Una función $f$ de $n$ variables es una regla que asigna a cada $n$-tupla de números reales $\overline{x} = (x_1, x_2, \ldots, x_n)$ un único número real $f(\overline{x}) = f(x_1, x_2, \ldots, x_n)$.
+> Una función $f$ de $n$ variables es una regla que asigna a cada $n$-tupla de números reales $\mathbf{\overline{x}} = (x_1, x_2, \ldots, x_n)$ un único número real $f(\mathbf{\overline{x}}) = f(x_1, x_2, \ldots, x_n)$.
 
 Podemos definir su dominio como:
 
 ```math 
-Dom\;f = \{ \overline{x} \in \mathbb{R}^n \mid f(\overline{x}) \text{ está definida} \}
+Dom\;f = \{ \mathbf{\overline{x}} \in \mathbb{R}^n \mid f(\mathbf{\overline{x}}) \text{ está definida} \}
 ```
 
 La imagen como: 
 
 ```math
-Im\;f = \{ y \in \mathbb{R} \mid \exists \overline{x} \in Dom\;f | y = f(\overline{x}) \}
+Im\;f = \{ y \in \mathbb{R} \mid \exists \mathbf{\overline{x}} \in Dom\;f \mid y = f(\mathbf{\overline{x}}) \}
 ```
 
 Su gráfica se define como: 
 
 ```math
-G(f) = \{ (\overline{x}, f(\overline{x})) \in \mathbb{R}^{n+1} \mid \overline{x} \in Dom\;f \}
+G(f) = \{ (\mathbf{\overline{x}}, f(\mathbf{\overline{x}})) \in \mathbb{R}^{n+1} \mid \mathbf{\overline{x}} \in Dom\;f \}
 ```
 
 Y por lo general, la notación usual es $z = f(x, y)$.
@@ -40,31 +40,31 @@ Si definimos una función $h(t) = ln(t - 2)$. Por la función logaritmo, indepen
 
 ## Límite y continuidad de funciones de varias variables
 
-> Dado $r > 0$ y $\overline{a} \in \mathbb{R}^n$, llamamos bola abierta de centro $\overline{a}$ y radio $r$ al conjunto $B = \{ \overline{x} \in \mathbb{R}^n , ||\overline{x} - \overline{a}|| < r \}$
+> Dado $r > 0$ y $\mathbf{\overline{a}} \in \mathbb{R}^n$, llamamos bola abierta de centro $\mathbf{\overline{a}}$ y radio $r$ al conjunto $B = \{ \mathbf{\overline{x}} \in \mathbb{R}^n , ||\mathbf{\overline{x}} - \mathbf{\overline{a}}|| < r \}$
 
-- Si $n = 1$, $B(\overline{a}, r)$ es intervalo abierto centrado en $\overline{a}$ y de radio $r$).
+- Si $n = 1$, $B(\mathbf{\overline{a}}, r)$ es intervalo abierto centrado en $\mathbf{\overline{a}}$ y de radio $r$.
 
-- Si $n = 2$, $B(\overline{a}, r)$ es un disco abierto centrado en $\overline{a}$ y de radio $r$.
+- Si $n = 2$, $B(\mathbf{\overline{a}}, r)$ es un disco abierto centrado en $\mathbf{\overline{a}}$ y de radio $r$.
 
-- Si $n = 3$, $B(\overline{a}, r)$ es una bola centrada en $\overline{a}$ y de radio $r$.
+- Si $n = 3$, $B(\mathbf{\overline{a}}, r)$ es una bola centrada en $\mathbf{\overline{a}}$ y de radio $r$.
 
 ### Límite 
 
-> Sea $\overline{a} \in \mathbb{R}^n$ y $f: Dom\;f \subset \mathbb{R}^n \rightarrow \mathbb{R}$, que incluye puntos arbitrarios cercanos a $\overline{a}$ decimos: 
+> Sea $\mathbf{\overline{a}} \in \mathbb{R}^n$ y $f: Dom\;f \subset \mathbb{R}^n \rightarrow \mathbb{R}$, que incluye puntos arbitrarios cercanos a $\mathbf{\overline{a}}$ decimos: 
 
 ```math
-\lim_{\overline{x} \to \overline{a}} f(\overline{x}) = L
+\lim_{\mathbf{\overline{x}} \to \mathbf{\overline{a}}} f(\mathbf{\overline{x}}) = L
 ```
 
 ### Continuidad 
 
-> Sea $f : Dom\;f \subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ y $\overline{a} \in \mathbb{R}^n$, decimos que $f$ es continua en $\overline{a}$ si:
+> Sea $f : Dom\;f \subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ y $\mathbf{\overline{a}} \in \mathbb{R}^n$, decimos que $f$ es continua en $\mathbf{\overline{a}}$ si:
 
 ```math
-\overline{a} \in Dom\;f \land \lim_{\overline{x} \to \overline{a}} f(\overline{x}) = f(\overline{a})
+\mathbf{\overline{a}} \in Dom\;f \land \lim_{\mathbf{\overline{x}} \to \mathbf{\overline{a}}} f(\mathbf{\overline{x}}) = f(\mathbf{\overline{a}})
 ```
 
-Entonces, $f$ es continua si $f$ es continua en todo punto de su dominio. Valen propiedades similares a funciones continuas de $R$ en $R$. 
+Entonces, $f$ es continua si $f$ es continua en todo punto de su dominio. Valen propiedades similares a funciones continuas de $\mathbb{R}$ en $\mathbb{R}$. 
 
 ## Derivadas parciales
 
@@ -86,7 +86,7 @@ En general, para cualquier punto $(x, y)$, dejamos la variable $y$ fija y defini
 
 - Si $n = 3$ escribimos $f_x, f_y, f_z$ en lugar de $f_{x_1}, f_{x_2}, f_{x_3}$
 
-**Si las derivadas parciales $f_{x_j}$ son continuas en $\overline{a}$, $f$ es continua en $\overline{a}$.**
+**Si las derivadas parciales $f_{x_j}$ son continuas en $\mathbf{\overline{a}}$, $f$ es continua en $\mathbf{\overline{a}}$.**
 
 ### Plano tangente
 
@@ -107,16 +107,32 @@ En general, para cualquier punto $(x, y)$, dejamos la variable $y$ fija y defini
 z = (x-a)\;f_x(a, b) + (y-b)\;f_y(a, b) + f(a, b)
 ```
 
+### Curvas y superficies de nivel
+
+
+**Recta tangente a la curva de nivel $f$ que pasa por $(x_0, y_0)$:** 
+
+```math
+t(-f_y(x_0, y_0), f_x(x_0, y_0)) + (x_0, y_0)
+```
+
+**Ecuación a la superficie de nivel:**
+
+```math
+< (x, y, z) - (x_0, y_0, z_0), \; \nabla f(x_0, y_0, z_0) > = 0
+```
+
 ## Regla de la cadena
 
 > Al igual que funciones de una variable, podemos aplicar la regla de la cadena a funciones de varias variables. Tenemos dos casos posibles: 
 
 **Caso 1:**
 
-Sea $f : Dom \; f \subseteq \mathbb{R}^n \rightarrow \mathbb{R}, \; \overline{a} \in Dom \; f$ y tal que $\frac{\partial f}{\partial x_1}, \; \ldots, \; \frac{\partial f}{\partial x_n}$ existen y son continuas en $B(\overline{a}, r)$\
+Sea $f : Dom \; f \subseteq \mathbb{R}^n \rightarrow \mathbb{R}, \; \mathbf{\overline{a}} \in Dom \; f$ y tal que $\frac{\partial f}{\partial x_1}, \; \ldots, \; \frac{\partial f}{\partial x_n}$ existen y son continuas en $B(\mathbf{\overline{a}}, r)$\
 para algún $r > 0$
 
-Para $1 \leq i \leq n$ y un intervalo $I \subseteq R$, sean $x_i : I \rightarrow \mathbb{R}$ funciones derivables $\forall t \in I$, la función $g(t) = f(x_1(t), \ldots, x_n(t))$ es derivable en $t \in I$ y:
+Para $1 \leq i \leq n$ y un intervalo $I \subseteq R$, sean $x_i : I \rightarrow \mathbb{R}$ funciones derivables $\forall t \in I$, la función\
+$g(t) = f(x_1(t), \ldots, x_n(t))$ es derivable en $t \in I$ y:
 
 ```math
 \frac{dg}{dt} = g'(t) = \frac{\partial f}{\partial x_1} (x_1(t), \ldots, x_n(t)) \cdot x_1'(t) + \ldots + \frac{\partial f}{\partial x_n} (x_1(t), \ldots, x_n(t)) \cdot x_n'(t)
@@ -138,16 +154,16 @@ $x : Dom \; x \subset \mathbb{R}^2 \rightarrow \mathbb{R}$ e $y : Dom \; y \subs
 
 ## Derivada direccional 
 
-> Decimos que la derivada direccional de $f$ en el punto $\overline{a}$ en la dirección de $\overline{u}$ (siendo $||\overline{u}|| = 1$) es:
+> Decimos que la derivada direccional de $f$ en el punto $\mathbf{\overline{a}}$ en la dirección de $\overline{u}$ (siendo $||\overline{u}|| = 1$) es:
 
 ```math
-D_{\overline{u}} f(\overline{a}) = \displaystyle{\lim_{h \to 0}} \; \frac{f(\overline{a_1} + hu_1, \ldots, a_n + hu_n) - f(a_1, \ldots, a_n)}{h}
+D_{\overline{u}} f(\mathbf{\overline{a}}) = \displaystyle{\lim_{h \to 0}} \; \frac{f(\overline{a_1} + hu_1, \ldots, a_n + hu_n) - f(a_1, \ldots, a_n)}{h}
 ```
 
-El gradiente de $f$ en $\overline{a}$ es el vector:
+El gradiente de $f$ en $\mathbf{\overline{a}}$ es el vector:
 
 ```math
-\nabla f(\overline{a}) = \left( \frac{\partial f}{\partial x_1} (\overline{a}), \ldots, \frac{\partial f}{\partial x_n} (\overline{a}) \right)
+\nabla f(\mathbf{\overline{a}}) = \left( \frac{\partial f}{\partial x_1} (\mathbf{\overline{a}}), \ldots, \frac{\partial f}{\partial x_n} (\mathbf{\overline{a}}) \right)
 ```
 
 ## Derivada de orden 2 
@@ -171,7 +187,7 @@ Si $n=2$ hay $4$ posibilidades:
 
 Si $n=3$ hay $9$ posibilidades:
 
-$f_xx, f_xy, f_xz, f_yx, f_yy, f_yz, f_zx, f_zy, f_zz$
+$f_{xx}, f_{xy}, f_{xz}, f_{yx}, f_{yy}, f_{yz}, f_{zx}, f_{zy}, f_{zz}$
 
 ## Punto crítico y funciones de dos variables
 
