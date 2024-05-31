@@ -159,6 +159,14 @@ $x : Dom \; x \subset \mathbb{R}^2 \rightarrow \mathbb{R}$ e $y : Dom \; y \subs
 D_{\overline{u}} f(\mathbf{\overline{a}}) = \displaystyle{\lim_{h \to 0}} \; \frac{f(\overline{a_1} + hu_1, \ldots, a_n + hu_n) - f(a_1, \ldots, a_n)}{h}
 ```
 
+Si el vector $\overline{u}$ no es unitario, podemos definir $\overline{v} = \frac{\overline{u}}{||\overline{u}||}$ (unitario y en dirección de $\overline{u}$). 
+
+Podemos calcular la derivada direccional como: 
+
+```math
+D_{\overline{u}} f(\mathbf{\overline{a}}) = < \nabla f(\mathbf{\overline{a}}), \overline{u} >
+```
+
 El gradiente de $f$ en $\mathbf{\overline{a}}$ es el vector:
 
 ```math
