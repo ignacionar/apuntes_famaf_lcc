@@ -37,19 +37,19 @@ Y se denomina Serie de Maclaurin.
 > Sea $f$ tal que existen $f^{(n)}(a)$, para $n \geq 0$ definimos el Polinomio de Taylor como: 
 
 ```math
-T_n,\;a(x) = \sum_{j=0}^{n} \frac{f^{(j)}(a)}{j!}(x-a)^j
+T_{n,\; a}(x) = \sum_{j=0}^{n} \frac{f^{(j)}(a)}{j!}(x-a)^j
 ```
 
 **1)** La n-ésima suma parcial de la serie de Taylor es el Polinomio de Taylor de grado $n$. 
 
-**2)** $T_1,\;a$ es la recta tangente al gráfico de $f$ en el punto $(a, f(a))$
+**2)** $T_{1,a}$ es la recta tangente al gráfico de $f$ en el punto $(a, f(a))$
 
 ## Resto de Taylor 
 
 > Se define el **Resto de Taylor de orden $n$ centrado en $a$** como: 
 
 ```math
-R_n,\;a(x) = f(x) - T_n,\;a(x) 
+R_{n,\; a}(x) = f(x) - T_{n,\; a}(x) 
 ```
 
 ### Teorema - Resto de Taylor
@@ -57,7 +57,7 @@ R_n,\;a(x) = f(x) - T_n,\;a(x)
 Sea $f$ una función tal que existe $f^{(n)}(a), \forall n \geq 0$ se cumple: 
 
 ```math
-f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n \iff \lim_{n \to \infty} R_n,\;a(x) = 0 \\
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n \iff \lim_{n \to \infty} R_{n,\; a}(x) = 0 \\
 \forall x \in (a-c, a+c)
 ```
 
@@ -66,13 +66,13 @@ f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n \iff \lim_{n \to \infty}
 > Sea $f$ una función tal que existen $f^{(n+1)}(a)$ en un intervalo abierto $I$ donde $a \in I$ entonces para cada $x \in I$ existe entre $a$ y $x$ un número $t$ tal que: 
 
 ```math
-R_n,\;a(x) = \frac{f^{(n+1)}(t)}{(n+1)!}(x-a)^{n+1}
+R_{n,\; a}(x) = \frac{f^{(n+1)}(t)}{(n+1)!}(x-a)^{n+1}
 ```
 
 Llamamos **fórmula de Taylor** a: 
 
 ```math
-f(x) = T_n,\;a(x) + R_n,\;a(x)
+f(x) = T_{n,\; a}(x) + R_{n,\; a}(x)
 ```
 
 con $t$ entre $a$ y $x$. 
