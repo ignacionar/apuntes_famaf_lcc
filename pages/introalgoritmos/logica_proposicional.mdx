@@ -1,0 +1,318 @@
+#  Cálculo Proposicional
+
+> Una demostración en el Cálculo Proposicional que veremos en este curso consiste en probar la **validez** de
+una fórmula mediante una serie de pasos justificados con **axiomas** y **teoremas** del Cálculo.
+
+El cálculo proposicional nos permite demostrar teoremas y propiedades al estilo de un cálculo; como
+cuando despejamos una $x$ para resolver una ecuación. 
+
+La expresión de un teorema es en esencia una expresión booleana, y su prueba es, en esencia, calcular que esa expresión tiene valor verdadero. La forma más directa de “evaluar” una expresión booleana es someterla a una o varias transformaciones que preserven el valor de verdad hasta que alcancemos una formulación simplificada de la expresión, en el caso de un teorema: $\; True$.
+
+Por lo tanto una demostración será una serie de formulas, equivalentes entre sí, donde la primera formula
+es la que queremos demostrar válida y la última es $\; True$.
+
+## Equivalencia, Discrepancia y Negación
+
+**A1** Asociatividad equivalencia: $((P ≡ Q) ≡ R) ≡ (P ≡ (Q ≡ R))$ 
+
+**A2** Conmutatividad equivalencia: $P ≡ Q ≡ Q ≡ P$
+
+**A3** Neutro equivalencia: $P ≡ True ≡ P$
+
+**A4** Definición de Negación: $¬(P ≡ Q) ≡ ¬P ≡ Q$
+
+**A5** Definición de False: $False ≡ ¬True$
+
+**A6** Definición de discrepancia: $P \not\equiv Q ≡ ¬(P ≡ Q)$
+
+**A7** Asociatividad de la discrepancia: $(p \not\equiv (q \not\equiv r)) ≡ ((p \not\equiv q) \not\equiv r)$
+
+**A8** Reflexividad del equivalente: $(p ≡ p) ≡ True$
+
+**A9** Equivalencia y negación: $p ≡ False ≡ ¬p$
+
+***
+
+### Ejercicios resueltos - Equivalencia, Discrepancia y Negación
+
+**1.** 
+
+Demostrar la asociatividad de la discrepancia: $(p \not\equiv (q \not\equiv r)) ≡ ((p \not\equiv q) \not\equiv r)$
+
+Para realizar la demostración, partimos del lado izquierdo:
+
+```math
+\underline{(p \not\equiv (q \not\equiv r))}
+```
+
+≡ ```{``` Definición de $\not\equiv Q := (q \not\equiv r)$ ```}```
+
+```math
+¬(p ≡ (\underline{q \not\equiv r}))
+```
+
+≡ ```{``` Definición de $\not\equiv(P, Q := q, r)$ ```}```
+
+```math
+¬(p ≡ \underline{¬(q ≡ r)})
+```
+
+≡ ```{``` Definición de $¬$ $(P, Q := q, r)$ ```}```
+
+```math
+\underline{¬(p ≡ ¬q ≡ r)}
+```
+
+≡ ```{``` Definición de $\not\equiv$ $(P, Q := (p ≡ ¬q), r)$ ```}```
+
+```math
+\underline{(p ≡ ¬q)} \not\equiv r
+```
+
+≡ ```{``` Conmutatividad de $≡ (Q := ¬q)$ ```}```
+
+```math
+\underline{(¬q ≡ p)} \not\equiv r
+```
+
+≡ ```{``` Definición de $¬$ $(P, Q := q, p)$ ```}```
+
+```math
+¬(\underline{q ≡ p}) \not\equiv r
+```
+
+≡ ```{``` Conmutatividad de ≡ ```}```
+
+```math
+\underline{¬(p ≡ q)} \not\equiv r
+```
+
+≡ ```{``` Definición de $\not\equiv$ ```}```
+
+```math
+(p \not\equiv q) \not\equiv r
+```
+
+***
+
+**2.**
+
+Demostrar la validez de la doble negación: $¬¬p ≡ p$:
+
+```math
+¬\underline{¬p ≡ p}
+```
+
+≡ ```{``` Definición de negación $¬(P ≡ Q) ≡ ¬P ≡ Q, P:= ¬p, Q:=p$ ```}```
+
+```math
+¬(\underline{¬p ≡ p})
+```
+
+≡ ```{```Conmutatividad del ≡ $(P ≡ Q ≡ Q ≡ P, P:= ¬p, Q:=p)$ ```}```
+
+```math
+\underline{¬(p ≡¬p)}
+```
+
+≡ ```{ ``` Definición de negación $(¬(P ≡ Q) ≡ ¬P ≡ Q, P:=p , Q:=¬p)$ ``` }```
+
+```math
+\underline{¬p ≡ ¬p }
+```
+
+≡ ```{``` Reflexividad del ≡ ```}```
+
+```math
+True
+```
+
+***
+
+**3.** 
+
+Demostrar la validez de la equivalencia y negación: $p ≡ False ≡ ¬p$
+
+```math
+p ≡ \underline{False ≡ ¬p}
+```
+
+```{``` Definición de conmutatividad $P ≡ Q ≡ Q ≡ P$ $(P:= False, Q:= ¬P)$ ```}```
+
+```math
+p ≡ \underline{¬(p ≡ False)}
+```
+
+```{``` Definición de negación $¬(P≡Q)≡¬P≡Q $ $(P:=P, Q:= False)$ ```}```
+
+```math
+p ≡ \underline{¬(False ≡ p)}
+```
+
+```{``` Definición de conmutatividad $P≡Q≡Q≡P$ $(P:=p, Q:= False)$ ```}```
+
+```math
+p ≡ \underline{¬False} ≡ p
+```
+
+```{``` Definición de negación $¬(P≡Q)≡¬P≡Q$ $(P:= False, Q:=P)$ ```}```
+
+```math
+\underline{p ≡ True ≡ p }
+```
+
+```{``` Neutro de la equivalencia, reflexividad de $≡$ ```}```
+
+```math
+True
+```
+
+## Disyunción y Conjunción
+
+**A7** Asociatividad disyunción: $(P ∨ Q) ∨ R ≡ P ∨ (Q ∨ R) $
+
+**A8** Conmutatividad disyunción: $P ∨ Q ≡ Q ∨ P$
+
+**A9** Idempotencia disyunción: $P ∨ P ≡ P$
+
+**A10** Distributividad disyunción con equivalencia: $P ∨ (Q ≡ R) ≡ (P ∨ Q) ≡ (P ∨ R)$
+
+**A11** Tercero excluido:  $P ∨ ¬P  ≡ True$
+
+**A12** Regla dorada: $P ∧ Q ≡ P ≡ Q ≡ P ∨ Q$
+
+**A13** Distributividad de la disyunción con la disyunción: $p ∨ (q ∨ r) ≡ (p ∨ q) ∨ (p ∨ r)$
+
+**A14** Elemento absorbente de la disyunción: $p ∨ True ≡ True$
+
+**A15** Elemento neutro de la disyunción: $p ∨ False ≡ p$
+
+**A16** Teorema Estrella : $p ∨ q ≡ p ∨ ¬q ≡ p$
+
+***
+
+### Ejercicios resueltos - Conjunción y Disyunción
+
+**1.**
+
+Demostrar la validez de la distributividad de la disyunción con la disyunción: $p ∨ (q ∨ r) ≡ (p ∨ q) ∨ (p ∨ r)$
+
+```math
+\underline{p ∨ (q ∨ r)} ≡ (p ∨ q) ∨ (p ∨ r)
+```
+
+≡```{``` Asociatividad disyunción  $(P ∨ Q) ∨ R ≡ P ∨ (Q ∨ R), P:= p, Q:= q, R:= r$ ```}```
+
+```math
+(\underline{p} ∨ q ) ∨ r ≡ (p ∨ q) ∨ (p ∨ r)
+```
+
+≡```{``` Idempotencia de la disyunción $P ∨ P ≡ P, P:= p$ ```}```
+
+```math
+(\underline{p ∨ p ∨ q} ) ∨ r ≡ (p ∨ q) ∨ (p ∨ r)
+```
+
+≡```{``` Conmutatividad  disyunción $P ∨ Q ≡ Q ∨ P, P:= p , Q:= q$ ```}```
+
+```math
+\underline{(p ∨ q ∨ p ) ∨ r} ≡ (p ∨ q) ∨ (p ∨ r)
+```
+
+≡```{``` Asociatividad disyunción  $(P ∨ Q) ∨ R ≡ P ∨ (Q ∨ R), P:= p ∨ q  , Q:= p, R:= r$ ```}```
+
+```math
+\underline{(p ∨ q ) ∨ (p ∨ r) ≡ (p ∨ q) ∨ (p ∨ r)}
+```
+
+≡```{``` Reflexividad de $≡$ ```}```
+
+```math
+True
+```
+
+***
+
+**2.** 
+
+Demostrar la validez del elemento absorbente de la disyunción: $p ∨ True ≡ True$
+
+```math
+p ∨ \underline{True} ≡ True
+```
+
+≡ ```{``` Reflexividad de equivalencia $(p ≡ p) ≡ True$ ```}```
+
+```math
+\underline{p ∨ (p ≡ p)} ≡ True
+```
+
+≡ ```{``` Distributividad disyunción con equivalencia\
+$(P ∨ (Q ≡ R) ≡ (P ∨ Q) ≡ (P ∨ R), P:= p, Q:= p, R:= p$ ```}```
+
+```math
+\underline{p ∨ p ≡ p ∨ p} ≡ True
+```
+
+≡```{``` Idempotencia de la disyunción $P ∨ P ≡ P, P:= p$ ```}```
+
+```math
+p ≡ \underline{p ≡ True}
+```
+
+≡```{``` Conmutatividad de equivalencia ```}```
+
+```math
+\underline{p ≡ True ≡ p}
+```
+ 
+≡```{``` Neutro de equivalencia $P ≡ True ≡ P$ ```}```
+
+```math
+True
+```
+
+***
+
+**3.**
+
+Demostrar la validez del Teorema Estrella : $p ∨ q ≡ p ∨ ¬q ≡ p$:
+
+```math
+\underline{p ∨ q ≡ p ∨ ¬q} ≡ p
+```
+
+≡ ```{``` Distributividad disyunción con equivalencia\
+$(P ∨ (Q ≡ R) ≡ (P ∨ Q) ≡ (P ∨ R), P:= p, Q:= q, R:= ¬ q)$```}```
+
+```math
+p ∨ (\underline{q  ≡  ¬q}) ≡ p 
+```
+
+≡```{``` Conmutatividad equivalencia ```}```
+
+```math
+p ∨ (\underline{¬q  ≡  q})  ≡ p 
+```
+
+≡```{``` Equivalencia y negación: $(P ≡ ¬P) ≡ False ≡ ¬P, P:= q$ ```}```
+
+```math
+p ∨ \underline{(False)} ≡ p 
+```
+
+≡```{``` Precedencia ```} ```
+
+```math
+\underline{p ∨ False ≡ p}
+```
+
+```{``` Elemento neutro de la disyunción $p ∨ False ≡ p$, Reflexividad de $≡$ ```}```
+
+```math
+True
+```
+
+***
+
+**Nota:** Existen más teoremas y axiomas dentro de la lógica proposicional que se pueden encontrar en el digesto proposicional de la materia. Lo importante de esta sección es entender el método para resolver los ejercicios. 

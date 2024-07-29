@@ -1,0 +1,803 @@
+## Inducción 
+
+> La inducción un método para demostrar la **validez de propiedades sobre estructuras de datos recursivas**, como listas o árboles, **utilizando un caso base y un paso inductivo**.
+
+La idea que rige este principio consiste en demostrar dos cosas:
+
+- Por un lado verificar que la propiedad se satisface para los elementos "más chicos" del dominio (por ejemplo,
+la lista $[]$). 
+
+- Por otro lado demostrar para un elemento arbitrario del dominio (por ejemplo, la lista $(x\;▹\;xs)$) que si suponemos que la propiedad es cierta para todos los elementos más chicos que él (por ejemplo $xs$), entonces
+la propiedad también es satisfecha por ese elemento. 
+
+Dado que todo elemento de un dominio inductivo puede ser "construido" a partir de elementos más simples, este procedimiento demuestra que la propiedad es **satisfecha
+por todos los elementos del dominio, y por lo tanto es válida.**
+
+### Ejercicios resueltos - Inducción en funciones
+
+Considerando las siguientes funciones, probar las siguientes propiedades por inducción.
+
+```math
+\begin{equation*}
+\begin{aligned}
+&sumatoria : [Int] \rightarrow Int \\
+&sumatoria.[ ] \; \dot{=} \; 0 \\
+&sumatoria.(x \;▹ \;xs) \; \dot{=} \; x + sumatoria.xs
+\end{aligned}
+\end{equation*}
+```
+
+```math
+\begin{equation*}
+\begin{aligned}
+&sumar1 : [Int] \rightarrow [Int] \\
+&sumar1.[ ] \; \dot{=} \; [ ] \\
+&sumar1.(x \;▹ \;xs) \; \dot{=} \; (x + 1) \;▹ \;sumar1.xs
+\end{aligned}
+\end{equation*}
+```
+
+```math
+\begin{equation*}
+\begin{aligned}
+&length : [a] \rightarrow Int \\
+&length.[ ] \; \dot{=} \; 0 \\
+&length.(x \;▹ \;xs) \; \dot{=} \; 1 + length.xs
+\end{aligned}
+\end{equation*}
+```
+
+**1.** 
+
+```math
+length.xs \geq 0
+```
+
+Definimos el caso base ($xs = [ ]$):
+
+```math
+\underline{length.[ ]} \geq 0
+```
+
+≡```{``` Caso base de $length$ ```}``` 
+
+```math
+\underline{0 \geq 0}
+```
+
+≡```{``` Aritmética ```}``` 
+
+```math
+True
+```
+
+Definimos el paso inductivo ($xs = (x \;▹ \;xs)$):
+
+```math
+\underline{length.(x \;▹ \;xs)} \geq 0
+```
+
+≡```{``` Definición de $length$ ```}``` 
+
+```math
+\underline{1 + length.xs \geq 0 }
+```
+
+≡```{``` Aritmética ```}``` 
+
+```math
+True
+```
+
+***
+
+**2.**
+
+```math
+sumatoria.(sumar1.xs) = sumatoria.xs + length.xs
+```
+
+Definimos el caso base ($xs = [ ]$):
+
+```math
+\underline{sumatoria.(sumar1.[ ])} = \underline{sumatoria.[ ]} + \underline{length.[ ]}
+```
+
+≡```{``` Caso base de $sumar1, length, sumatoria$ ```}```
+
+```math
+\underline{sumatoria.[ ]} = \underline{0 + 0}
+```
+
+≡```{``` Caso base de $sumatoria$, Aritmética ```}``` 
+
+```math
+\underline{0 = 0}
+```
+
+≡```{``` Aritmética ```}``` 
+
+```math
+True
+```
+
+Definimos el paso inductivo ($xs = (x \;▹ \;xs)$):
+
+```math
+sumatoria.(\underline{sumar1.(x \;▹ \;xs)}) = \underline{sumatoria.(x \;▹ \;xs)} + \underline{length.(x \;▹ \;xs)}
+```
+
+≡```{``` Definición de $sumar1, length, sumatoria$ ```}``` 
+ 
+
+```math
+\underline{sumatoria.((x + 1) \;▹ \;sumar1.xs)} = x + sumatoria.xs + 1 + length.xs
+```
+
+≡```{``` Definición de $sumatoria$ ```}``` 
+
+```math
+(x + 1) + \underline{sumatoria.(sumar1.xs)} = x + sumatoria.xs + 1 + length.xs
+```
+
+≡```{``` Hipótesis Inductiva ```}``` 
+
+```math
+\underline{(x + 1) + (sumatoria.xs + length.xs) = x + sumatoria.xs + 1 + length.xs}
+```
+
+≡```{``` Asociatividad de $+$, reflexividad de $=$ ```}``` 
+
+```math
+True
+```
+
+***
+
+Considerando las siguientes funciones, probar las siguientes propiedades por inducción.
+
+```math
+\begin{equation*}
+\begin{aligned}
+&sacaUnos : [Int] \rightarrow [Int] \\
+&sacaUnos.[ ] \; \dot{=} \; [ ] \\
+&sacaUnos.(x \;▹ \;xs) \; \dot{=} \; ( \\
+    &x = 1 → sacaUnos.xs \\
+    &□ \; x \neq 1 →  x \;▹ \;sacaUnos.xs \\
+    &)
+\end{aligned}
+\end{equation*}
+```
+
+```math
+\begin{equation*}
+\begin{aligned}
+&productoria : [Int] \rightarrow Int \\
+&productoria.[ ] \; \dot{=} \; 1 \\
+&productoria.(x \;▹ \;xs) \; \dot{=} \; x * productoria.xs
+\end{aligned}
+\end{equation*}
+```
+
+**3.**
+
+```math
+productoria.(sacaUnos.xs) = productoria.xs
+```
+
+Definimos el caso base ($xs = [ ]$):
+
+```math
+productoria.(\underline{sacaUnos.[ ]}) = \underline{productoria.[ ]}
+```
+
+≡```{``` Caso base de $sacaUnos, productoria$ ```}``` 
+
+```math
+\underline{productoria.[]} = 1
+```
+
+≡```{``` Caso base de $productoria$ ```}``` 
+
+```math
+\underline{1 = 1}
+```
+
+≡```{``` Reflexividad de $=$ ```}``` 
+
+```math
+True
+```
+
+Definimos el paso inductivo ($xs = (x \;▹ \;xs)$):
+
+```math
+productoria.(sacaUnos.(x \;▹ \;xs)) = productoria.(x \;▹ \;xs)
+```
+
+Caso 1: $x = 1$
+
+```math
+productoria.(\underline{sacaUnos.(x \;▹ \;xs)}) = \underline{productoria.(x \;▹ \;xs)}
+```
+
+≡```{``` Definición de $sacaUnos, productoria$ ```}``` 
+
+```math
+\underline{productoria.(sacaUnos.xs)} = \underline{1 * productoria.xs}
+```
+
+≡```{``` Hipótesis Inductiva, Aritmética ```}``` 
+
+```math
+\underline{productoria.xs = productoria.xs}
+```
+
+≡```{``` Reflexividad de $=$ ```}``` 
+
+```math
+True
+```
+
+Caso 2: $x \neq 1$
+
+```math
+productoria.(\underline{sacaUnos.(x \;▹ \;xs)}) = \underline{productoria.(x \;▹ \;xs)}
+```
+
+≡```{``` Definición de $sacaUnos, productoria$ ```}``` 
+
+```math
+\underline{productoria.(x \;▹ \;sacaUnos.xs)} = \underline{x * productoria.xs}
+```
+
+≡```{``` Definición de $productoria$ ```}``` 
+
+```math
+\underline{x * productoria.(sacaUnos.xs)} = x * productoria.xs
+```
+
+≡```{``` Hipótesis Inductiva```}``` 
+
+```math
+\underline{x * productoria.xs = x * productoria.xs}
+```
+
+≡```{``` Reflexividad de $=$ ```}``` 
+
+```math
+True
+```
+
+Al ser verdadera para ambos casos, la propiedad es válida.
+
+## Cálculo de Predicados 
+
+> El cálculo de predicados es una técnica **permite demostrar propiedades sobre estructuras de datos recursivas**, como listas o árboles, utilizando **reglas de inferencia y cuantificadores**.
+
+### Semántica de Lógica de Predicados
+
+La lógica de cuantificadores extiende la lógica proposicional incorporando dos operadores de cuantificación
+y el uso de predicados: 
+
+- El cuantificador **universal** $$∀$$ permite expresar que una fórmula se **satisface para todo valor posible del universo**. 
+
+Por ejemplo, si tenemos el predicado $$mult3.x$$ (devuelve $$True$$ si $$x$$ es múltiplo de $$3$$ y $$False$$ en caso contrario) el predicado **“todo** $$x$$ es múltiplo de $$3$$” se puede expresar formalmente como: $$⟨∀x : : mult3.x⟩$$.
+
+- El cuantificador **existencial** $$∃$$ expresa que la propiedad **es satisfecha por al menos un valor posible del universo**. 
+
+Por ejemplo, la expresión $$\bigl \langle \; ∃x : : mult3.x \; \bigr \rangle$$ significa “**existe** un $$x$$ que es múltiplo de $$3$$”.
+
+Para restringir o hacer explícito el universo al que nos referimos se utilizan otros predicados que diferenciamos como rango. Por ejemplo, si queremos restringir 
+el universo a aquellos elementos que cumplen con una determinada propiedad $$R.x$$ lo denotamos de la siguiente manera: 
+
+```math
+\bigl \langle \; ∀x : R.x : T.x \; \bigr \rangle
+```     
+
+```math
+\bigl \langle \; ∃x : R.x : T.x \; \bigr \rangle
+```
+
+Si decimos que "todos los hombres son mortales" lo podemos expresar formalmente como: 
+
+```math
+\bigl \langle \; ∀x : hombre.x : mortal.x \; \bigr \rangle
+```
+
+Si nuestro rango es verdadero para todos los elementos, podemos omitirlo y escribir simplemente: 
+
+```math
+\bigl \langle \; ∀x :: T.x \; \bigr \rangle
+```
+
+```math
+\bigl \langle \; ∃x :: T.x \; \bigr \rangle
+```
+
+Tanto los corchetes $$\bigl \langle \; \bigr \rangle$$ como el par de “dos puntos” ($:$) sirven para delimitar las distintas partes de las
+expresiones cuantificadas. Por tal motivo, las agrupan como paéntesis y esto debería ayudar a evitar confusiones
+de asociatividad y precedencia.
+
+Utilizaremos los cuantificadores en esta asignatura es para expresar propiedades sobre listas. En general, nos interesa referirnos a los elementos de la lista por lo que definiremos el
+predicado $$x ∈_ℓ xs$$ como “$x$ está en la lista $xs$”. Este predicado se puede definir recursivamente en Haskell como la función pert:
+
+```hs
+pert :: Eq a => a -> [a] -> Bool
+pert e [] = False
+pert e (x:xs) = e==x || (pert e xs)
+
+-- pert 3 [1,2,3,4,5] 
+-- True
+```
+
+Por ejemplo, si queremos decir que “todos los elementos de la lista $$xs$$ son múltiplos de $$3$$” lo podemos
+expresar utilizando el cuantificador universal y el predicado que ya definimos:
+
+```math
+\bigl \langle \; ∀x : x ∈_ℓ xs : mult3.x \; \bigr \rangle
+```
+
+### Ejercicios resueltos - Semántica de Lógica de Predicados
+
+Dada una lista de figuras $xs$ las siguientes propiedades, expresar formalmente y en Haskell utilizando los cuantificadores y los predicados y funciones ya definidas: 
+
+
+**1.** 
+
+_Todas las figuras de $$xs$$ son rojas._
+
+```math 
+\bigl \langle \; ∀x : x ∈_ℓ xs : roja.x \; \bigr \rangle
+```
+
+```hs 
+propA :: [Figura] -> Bool
+
+propA [] = True
+propA (x : xs) = roja x && propA xs
+
+-- propA [Circulo Rojo 3, Cuadrado Azul 4, Triangulo Rojo 5]
+-- False
+```
+
+**2.** 
+
+_Todas las figuras de $$xs$$ son de tamaño menor a $$5$$._
+
+```math
+\bigl \langle \; ∀x : x ∈_ℓ xs : tamaño.x < 5 \; \bigr \rangle
+```
+
+```hs
+propB :: [Figura] -> Bool
+
+propB [] = True
+propB (x : xs) = tamaño x < 5 && propB xs
+
+-- propB [Circulo Rojo 3, Cuadrado Azul 4, Triangulo Rojo 5]
+-- True
+```
+
+**3.**
+
+_Todos los triángulos de $$xs$$ son rojos._
+
+```math
+\bigl \langle \; ∀x : x ∈_ℓ xs : triangulo.x ∧ roja.x \; \bigr \rangle
+```
+
+```hs 
+propC :: [Figura] -> Bool
+
+propC [] = True
+propC (x : xs) = (triangulo x && roja x) && propC xs
+
+-- propC [Circulo Rojo 3, Cuadrado Azul 4, Triangulo Rojo 5]
+-- False
+```
+
+**4.** 
+
+_Existe un cuadrado verde en $$xs$$._
+
+```math
+\bigl \langle \; ∃x : x ∈_ℓ xs : cuadrado.x ∧ verde.x \; \bigr \rangle
+```
+
+```hs
+propD :: [Figura] -> Bool
+
+propD [] = False
+propD (x : xs) = (cuadrado x && verde x) || propD xs
+
+-- propD [Circulo Rojo 3, Cuadrado Azul 4, Triangulo Rojo 5]
+-- False
+```
+
+**5.**
+
+_Todos los círculos de $$xs$$ son azules y de tamaño menor a $$10$$._
+
+```math
+\bigl \langle \; ∀x : x ∈_ℓ xs : circulo.x ∧ azul.x ∧ tamaño.x < 10 \; \bigr \rangle
+```
+
+```hs
+propE :: [Figura] -> Bool
+
+propE [] = True
+propE (x : xs) = (circulo x && azul x && tamaño x < 10) && propE xs
+
+-- propE [Circulo Rojo 3, Cuadrado Azul 4, Triangulo Rojo 5]
+-- False
+```
+
+**6.** 
+
+Ningún triángulo de $$xs$$ es azul.
+
+```math
+\bigl \langle \; ∀x : x ∈_ℓ xs : triangulo.x ∧ ¬ azul.x \; \bigr \rangle
+```
+
+```hs
+propF :: [Figura] -> Bool
+
+propF [] = True
+propF (x : xs) = not (triangulo x && azul x) && propF xs
+
+-- propF [Circulo Rojo 3, Cuadrado Azul 4, Triangulo Rojo 5]
+-- True
+```
+
+**7.**
+
+En $$xs$$ no hay círculos amarillos ni verdes.
+
+```math
+\bigl \langle \; ∀x : x ∈_ℓ xs : ¬ amarillo.x ∧ ¬ verde.x \; \bigr \rangle
+``` 
+
+```hs
+propG :: [Figura] -> Bool
+
+propG [] = True
+propG (x : xs) = not (amarillo x) && not (verde x) && propG xs
+
+-- propG [Circulo Rojo 3, Cuadrado Azul 4, Triangulo Rojo 5]
+-- True
+```
+
+**8.** 
+
+En $$xs$$ no hay números pares.
+
+```math
+\bigl \langle \; ∀x : x ∈_ℓ xs : ¬ par.x \; \bigr \rangle
+```
+
+```hs
+propH :: [Int] -> Bool
+
+propH [] = True
+propH (x : xs) = not (par x) && propH xs
+
+-- propH [1,3,5,7,9]
+-- True
+```
+
+**9.**
+
+En $$xs$$ todos los números son 0.
+
+```math
+\bigl \langle \; ∀x : x ∈_ℓ xs : x = 0 \; \bigr \rangle
+```
+
+```hs
+propI :: [Int] -> Bool
+
+propI [] = True
+propI (x : xs) = x == 0 && propI xs
+
+-- propI [0,0,0,0,0]
+-- True
+```
+
+### Axiomas y Teoremas de Lógica de Predicados
+
+Podemos utilizar los axiomas y teoremas de la lógica de predicados (junto a los de lógica proposicional) para demostrar propiedades sobre listas.
+
+Axiomas: 
+
+**A1** Intercambio entre rango y término: $\bigl \langle \; ∀x : R.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∀x : : R.x ⇒ T.x \; \bigr \rangle$
+
+**A2** Regla del Término del $$∀$$: $\bigl \langle \; ∀x : : T.x \; \bigr \rangle \land \bigl \langle \; ∀x : : U.x \; \bigr \rangle ≡ \bigl \langle \; ∀x : : T.x \land U.x \; \bigr \rangle$
+
+**A3** Distributividad de $\lor$ con $\forall$: $Z \lor \bigl \langle \; ∀x :: T.x \; \bigr \rangle ≡ \bigl \langle \; ∀x :: Z \lor T.x \; \bigr \rangle$
+
+**A4** Rango unitario de $$∀$$: $\bigl \langle \; ∀x : x = A : T.x \; \bigr \rangle ≡ \; T.A$
+
+Donde $$A$$ representa una constante del universo.
+
+**A5** Definición de $$∃$$: $\bigl \langle \; ∃x : R.x : T.x \; \bigr \rangle ≡ \neg \bigl \langle \; ∀x : R.x : \neg T.x \; \bigr \rangle$
+
+**A6** Intercambio de cuantificadores del $\forall$: $\bigl \langle \; ∀x :: \bigl \langle \; ∀y :: T.x.y \; \bigr \rangle \; \bigr \rangle ≡ \bigl \langle \; ∀y :: \bigl \langle \; ∀x :: T.x.y \; \bigr \rangle \; \bigr \rangle$
+
+*** 
+
+Teoremas básicos del $$∀$$: 
+
+**T1** Partición de rango del $$∀$$: $\bigl \langle \; ∀x : R.x \lor S.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∀x : R.x : T.x \; \bigr \rangle \land \bigl \langle \; ∀x : S.x : T.x \; \bigr \rangle$
+
+**T2** Instanciación del $$∀$$: 
+
+$\bigl \langle \; ∀x :: T.x \; \bigr \rangle ⇒ \; T.A$
+
+$\bigl \langle \; ∀x :: T.x \; \bigr \rangle \equiv \bigl \langle \; ∀x :: T.x \; \bigr \rangle \land \; T.A$
+
+Donde $$A$$ representa una constante del universo.
+
+**T3** Cambio de variable en el $$∀$$:
+
+$\bigl \langle \; ∀x : R.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∀y : R.y : T.y \; \bigr \rangle$
+
+(Si $x$ no ocurre libre en $T.y$ ni $y$ en $T.x$)
+
+**T4** Regla del término constante de $$∀$$:
+
+$\bigl \langle \; ∀x :: C \; \bigr \rangle ≡ C$
+
+Donde $C$ es constante.
+
+**T5** Rango vacío del $$∀$$:
+
+$\bigl \langle \; ∀x : False : T.x \; \bigr \rangle ≡ False$
+
+***
+
+Teoremas básicos del $$∃$$:
+
+**T6** Intercambio entre rango y término del $$∃$$: $\bigl \langle \; ∃x : R.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∃x : : R.x \land T.x \; \bigr \rangle$ 
+
+**T7** Regla del término del $$∃$$: $\bigl \langle \; ∃x : : T.x \; \bigr \rangle \lor \bigl \langle \; ∃x : : S.x \; \bigr \rangle ≡ \bigl \langle \; ∃x : : T.x \lor S.x \; \bigr \rangle$
+
+**T8** Distributividad de $\land$ con $$∃$$: $Z \land \bigl \langle \; ∃x :: T.x \; \bigr \rangle ≡ \bigl \langle \; ∃x :: Z \land T.x \; \bigr \rangle$
+
+**T9** Rango unitario del $$∃$$: $\bigl \langle \; ∃x : x = A : T.x \; \bigr \rangle ≡ T.A$
+
+Donde $$A$$ representa una constante del universo.
+
+**T10** Partición de rango de $$∃$$: $\bigl \langle \; ∃x : R.x \lor S.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∃x : R.x : T.x \; \bigr \rangle \lor \bigl \langle \; ∃x : S.x : T.x \; \bigr \rangle$
+
+**T11** Testigo:
+
+$t.A ⇒ \bigl \langle \; ∃x :: T.x \; \bigr \rangle$
+
+$\bigl \langle \; ∃x :: T.x \; \bigr \rangle \equiv t.A \lor \bigl \langle \; ∃x :: T.x \; \bigr \rangle$
+
+Donde $$A$$ representa una constante del universo.
+
+**T12** Cambio de variable en el $$∃$$: $\bigl \langle \; ∃x : R.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∃y : R.y : T.y \; \bigr \rangle$
+
+(Si $x$ no ocurre libre en $T.y$ ni $y$ en $T.x$)
+
+**T13** Regla del término constante de $$∃$$: $\bigl \langle \; ∃x :: C \; \bigr \rangle ≡ C$
+
+Donde $C$ es constante
+
+**T14** Rango vacío del $$∃$$: $\bigl \langle \; ∃x : False : T.x \; \bigr \rangle ≡ False$
+
+**T15** Intercambio de cuantificadores del $$∃$$: $\bigl \langle \; ∃x :: \bigl \langle \; ∃y :: T.x.y \; \bigr \rangle \; \bigr \rangle ≡ \bigl \langle \; ∃y :: \bigl \langle \; ∃x :: T.x.y \; \bigr \rangle \; \bigr \rangle$
+
+***
+
+### Ejercicios resueltos - Demostraciones con Axiomas y Teoremas
+
+Mediante los axiomas y teoremas anteriormente presentados, demostrar las siguientes propiedades:
+
+**1.** 
+
+Intercambio entre rango y término $$∃$$: $$\bigl \langle \; ∃x : R.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∃x : : R.x ∧ T.x \; \bigr \rangle$$.
+
+```math
+\underline{\bigl \langle \; ∃x : R.x : T.x \; \bigr \rangle} ≡ \bigl \langle \; ∃x : : R.x ∧ T.x \; \bigr \rangle
+```
+
+$$≡$$ ```{``` Definición de $$ ∃ $$```}```
+
+```math
+¬ \bigl \langle \; ∀x : R.x : ¬T.x \; \bigr \rangle ≡ \underline{\bigl \langle \; ∃x : : R.x ∧ T.x \; \bigr \rangle}
+```
+
+$$≡$$ ```{``` Definición de $$∃$$, $$x:=x, R.x:= True, T.x := R.x ∧ T.x$$ ```}``` 
+
+```math
+\underline{¬ \bigl \langle \; ∀x : R.x : ¬T.x \; \bigr \rangle ≡ ¬ \bigl \langle \; ∀x : True : ¬(R.x ∧ T.x) \; \bigr \rangle}
+```
+
+$$≡$$ ```{``` Intercambio de rango y término de $$∀, x:=x , R.x:=R.x, T.x:=¬T.x$$ ```}```
+
+```math
+\underline{¬ \bigl \langle \; ∀x :: R.x ⇒ ¬T.x \; \bigr \rangle} ≡ ¬ \bigl \langle \; ∀x :: ¬(R.x ∧ T.x) \; \bigr \rangle
+```
+
+$$≡$$ ```{``` Definición de $$∃$$ ```}```
+
+```math
+\underline{¬ \bigl \langle \;  ∀x :: ¬(R.x ∧ T.x) \; \bigr \rangle ≡ ¬ \bigl \langle \; ∀x :: ¬(R.x ∧ T.x) \; \bigr \rangle}
+```
+
+$$≡$$ ```{``` Reflexividad de $≡$ ```}```
+
+```math
+True
+```
+
+***
+
+**2.** 
+
+Regla del Término del $$∀$$ (bis): $$\bigl \langle \; ∀x : R.x : T.x \; \bigr \rangle ∧ \bigl \langle \; ∀x : R.x : U.x \; \bigr \rangle ≡ \bigl \langle \; ∀x : R.x : T.x ∧ U.x \; \bigr \rangle.$$
+
+```math 
+\underline{\bigl \langle \; ∀x : R.x : T.x \; \bigr \rangle ∧ \bigl \langle \; ∀x : R.x : U.x \; \bigr \rangle ≡ \bigl \langle \; ∀x : R.x : T.x ∧ U.x \; \bigr \rangle}
+```
+
+$$≡$$ ```{```Intercambio de rango y término del para $∀$ , $\bigl \langle \; ∀x : R.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∀x :: R.x ⇒ T.x \; \bigr \rangle $```}```
+
+```math
+\underline{\bigl \langle \; ∀x :: R.x ⇒ T.x \; \bigr \rangle ∧ \bigl \langle \; ∀x :: R.x ⇒ U.x \; \bigr \rangle}  ≡ \bigl \langle \; ∀x :: R.x ⇒ T.x ∧ U.x \; \bigr \rangle
+```
+
+$$≡$$ ```{```Regla de termino de $∀$ ```}```
+
+```math
+\bigl \langle \; ∀x :: \underline{(R.x ⇒ T.x) ∧ (R.x ⇒ U.x)} \; \bigr \rangle ≡ \bigl \langle \; ∀x :: R.x ⇒ T.x ∧ U.x \; \bigr \rangle
+```
+
+$$≡$$ ```{```Distributividad de $$⇒$$ con $$∧$$, $$P ⇒ ( Q ∧ R ) ≡ (P ⇒ Q ) ∧ ( P  ⇒ R )$$  ```}```
+
+```math 
+\underline{\bigl \langle \; ∀x :: R.x ⇒ T.x ∧ U.x \; \bigr \rangle ≡ \bigl \langle \; ∀x :: R.x ⇒ T.x ∧ U.x \; \bigr \rangle}
+```
+
+$$≡$$ ```{```Relfex. de la $$≡$$``` }```
+
+```math
+True
+```
+ 
+***
+
+**3.** 
+
+Rango unitario: $$\bigl \langle \; ∃x : x = A : T.x \; \bigr \rangle ≡ \; T.A$$, donde $$A$$ representa una constante del universo
+
+```math 
+\underline{\bigl \langle \; ∃x : x = A : T.x \; \bigr \rangle} ≡ \; T.A
+```
+
+$$≡$$ ```{```Definición de $$∃$$: $$¬ \bigl \langle \; ∀x : R.x : ¬T.x \; \bigr \rangle$$```}```
+
+```math
+¬ \bigl \langle \; ∀x : \underline{x = A : ¬T.x} \; \bigr \rangle ≡ \; T.A
+```
+
+$$≡$$ ```{```Intercambio de rango y término de $$∀$$: $$\bigl \langle \; ∀x : R.x : T.x \; \bigr \rangle ≡ \bigl \langle \; ∀x :: R.x ⇒ T.x \; \bigr \rangle$$```}```
+
+```math 
+¬ \bigl \langle \; \underline{∀x :: x = A ⇒ ¬T.x} \; \bigr \rangle ≡ \; T.A
+```
+
+$$≡$$ ```{```Rango unitario de $$∀$$: $$ \bigl \langle \; ∀x :: R.x ⇒ T.x \; \bigr \rangle ≡ \; t.A$$```}```
+
+```math 
+\underline{¬¬T.A} ≡ T.A
+```
+
+$$≡$$ ```{```Doble negación $$¬¬P ≡ P$$```}```
+
+```math 
+T.A ≡ T.A
+```
+
+$$≡$$ ```{```Reflexividad de la equivalencia```}```
+
+```math 
+True
+```
+
+## Verificación de Programas 
+
+> La verificación de programas nos permite demostrar si una función cumple con su descripción formal (especificación) utilizando técnicas de inducción y cálculo de predicados.
+
+Por ejemplo, en base a la siguiente función:
+
+```math 
+\begin{equation*}
+\begin{aligned}
+&soloCeros : [Num] \rightarrow Bool \\
+&soloCeros.[ ] \; \dot{=} \; True \\
+&soloCeros.(x \;▹ \;xs) \; \dot{=} \; x = 0 \land soloCeros.xs
+\end{aligned}
+\end{equation*}
+```
+
+Y teniendo en cuenta la siguiente propiedad: 
+
+```math 
+x∈_ℓ [] = False
+```
+
+Podemos demostrar la siguiente fórmula por inducción:
+
+```math
+soloCeros.xs ≡ \bigl \langle \; ∀x : x ∈_ℓ xs : x = 0 \; \bigr \rangle
+```
+
+Definimos el caso base ($xs = [ ]$):
+
+```math
+\underline{soloCeros.[ ]} ≡ \bigl \langle \; ∀x : x ∈_ℓ [ ] : x = 0 \; \bigr \rangle
+```
+
+≡```{``` Caso base de $soloCeros$ ```}```
+
+```math
+\underline{True ≡ \bigl \langle \; ∀x : x ∈_ℓ [ ] : x = 0 \; \bigr \rangle}
+```
+
+≡```{``` Elemento Neutro de $$≡$$, Propiedad de lista vacía ```}```
+
+```math 
+True ≡ \underline{\bigl \langle \; ∀x : False \; \bigr \rangle}
+```
+
+≡```{``` Rango Vacío ```}```
+
+```math
+True ≡ True
+```
+
+≡```{``` Reflexividad de $$≡$$ ```}```
+
+```math
+True
+```
+
+Definimos el paso inductivo ($xs = (x \;▹ \;xs)$):
+
+```math
+\underline{soloCeros.(x \;▹ \;xs)} ≡ \bigl \langle \; ∀x : x ∈_ℓ (x \;▹ \;xs) : x = 0 \; \bigr \rangle
+```
+
+≡```{``` Definición de $soloCeros$ ```}```
+
+```math
+x = 0 \land soloCeros.xs ≡ \bigl \langle \; \underline{∀x : x ∈_ℓ (x \;▹ \;xs) : x = 0} \; \bigr \rangle
+```	
+
+≡```{``` Cambio de variable en el $$∀$$ ```}```
+
+```math
+x = 0 \land soloCeros.xs ≡ \bigl \langle \; \underline{∀y : y = x \lor y ∈_ℓ xs : y = 0} \; \bigr \rangle
+```
+≡```{``` Rango Unitario, Cambio de variable en el $$∀$$ ```}```
+
+```math
+x = 0 \land soloCeros.xs ≡ x = 0 \land \underline{\bigl \langle \; ∀x : x ∈_ℓ xs : x = 0 \; \bigr \rangle}
+```
+
+≡```{``` Hipótesis Inductiva ```}```
+
+```math
+\underline{x = 0 \land soloCeros.xs ≡ x = 0 \land soloCeros.xs}
+```
+
+≡```{``` Reflexividad de $$≡$$ ```}```
+
+```math
+True
+```
