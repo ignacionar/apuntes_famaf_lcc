@@ -1,6 +1,78 @@
 # Especificaciones, Verificaciones y Derivaciones
 
-## Especificaciones
+## Construcción de programas y paradigmas
+
+El proceso de construcción de programas se establece de la siguiente forma: 
+
+<>
+  <div style={{ textAlign: "center", margin: "20px auto" }}>
+    <p style={{fontWeight: "bold", fontSize: "24px"}}>Problema</p>
+    <p>(Impreciso/Informal, poco detallado)</p>
+    <p style={{fontSize: "24px"}}>&#8659;</p>
+    <p style={{fontWeight: "bold", fontSize: "24px"}}>Especificación</p>
+    <p>(Preciso/Formal, poco detallado)</p>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <div>
+        <p style={{fontSize: "24px"}}>&#8665;</p>
+        <p style={{fontWeight: "bold", fontSize: "24px"}}>Derivación</p>
+        <p>(Crear la definición)</p>
+        <p style={{fontSize: "24px"}}>&#8664;</p>
+      </div>
+      <div>
+        <p style={{fontSize: "24px"}}>&#8662;</p>
+        <p style={{fontWeight: "bold", fontSize: "24px"}}>Verificación</p>
+        <p>(Demostrar su validez)</p>
+        <p style={{fontSize: "24px"}}>&#8663;</p>
+      </div>
+    </div>
+    <p style={{fontWeight: "bold", fontSize: "24px"}}>Programa</p>
+    <p>(Preciso/Formal, detallado)</p>
+  </div>
+</>
+
+*** 
+
+La programación funcional, se basa en **la definición de funciones y el cálculo/reducción de expresiones.** 
+
+Podemos resolver problemas a través de funciones, y las especificaciones tendrán la siguiente estructura: 
+
+<div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
+  <ul style={{ width: "fit-content", textAlign: "left" }}>
+    <li style={{ marginBottom: "6px"}}>**1)** Nombre de la función</li>
+    <li style={{ marginBottom: "6px"}}>**2)** Tipo de la función (Input / Output)</li>
+    <li style={{ marginBottom: "6px"}}>**3)** Predicado que indica **qué debe satisfacer la función**.</li>
+  </ul>
+</div>
+
+Ejemplo: _quisiera saber si un número es impar_
+
+<div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
+  <ul style={{ width: "fit-content", textAlign: "left" }}>
+    <li style={{ marginBottom: "6px"}}>**1)** $esImpar$</li>
+    <li style={{ marginBottom: "6px"}}>**2)** $Int \to Bool$</li>
+    <li style={{ marginBottom: "6px"}}>**3)** $x \; / \; 2 \neq 0$</li>
+  </ul>
+</div>
+
+Nuestro programa sería: 
+
+```math
+\begin{array}{l}
+  \Big\vert\ esImpar : Int \to Bool \\ 
+  \overline{\Big\vert \; esImpar.x \doteq } \; x \; / \; 2 \neq 0
+\end{array}
+```
+
+Y también podemos definirlo en Haskell: 
+  
+```haskell
+esImpar :: Int -> Bool
+esImpar x = x `mod` 2 /= 0
+```
+
+***
+
+## Especificaciones (PF)
 
 Suponiendo que sabemos la definición de un programa dado: 
 
@@ -20,7 +92,7 @@ sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
 
 Ya tenemos una una **descripción formal de la tarea que el programa tiene que realizar**
 
-## Verificación 
+## Verificación (PF)
 
 Podemos demostrar que $\bigl \langle \forall xs :: P.xs \bigr \rangle$
 
@@ -106,7 +178,7 @@ Para ello podemos comenzar del lado derecho:
 
 Por lo tanto, probamos la propiedad $P.(x \triangleright xs)$, y su validez en cualquier lista.
 
-## Derivaciones
+## Derivaciones (PF)
 
 Podemos no disponer de la definición de la función, pero sí de una especificación. En este caso, podemos derivar la definición de la función a partir de la especificación.
 
@@ -187,7 +259,7 @@ El programa sería:
 \end{array}
 ```
 
-### Ejercicios - Derivaciones
+### Ejercicios - Derivaciones (PF)
 
 **1.** 
 

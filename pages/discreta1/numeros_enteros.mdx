@@ -11,7 +11,7 @@ Dentro del conjunto de los números enteros $(\mathbb{Z})$, y considerando que $
 - **I1)** $a+b,\; a\cdot b \in \mathbb{Z}$ 
 - **I2)** Conmutatividad: $a+b=b+a,\;ab=ba$
 - **I3)** Asociatividad: $(a+b)+c = a+(b+c),\; (a \cdot b)\cdot c = a \cdot (b \cdot c)$
-- **I4)** EIemento Neutro: $a + 0 = a,\; a \cdot 1 = a$
+- **I4)** Elemento Neutro: $a + 0 = a,\; a \cdot 1 = a$
 - **I5)** Distributividad: $a \cdot (b+c) = a \cdot b + a \cdot c$
 - **I6)** Inverso aditivo: $a + (-a) = 0$
 - **I7)** Cancelación: Si $a \neq 0, \; a \cdot b = a \cdot c \Rightarrow b = c$
@@ -224,11 +224,12 @@ Al ser cuadrados, ambos son positivos. Contemplando si $a^2 = 0\;$ o $\;b^2 = 0$
 
 ## Fórmulas cerradas y definiciones recursivas
 
-> Cuando una sucesión se puede expresar combinando un número determinado de operaciones, es una **fórmula cerrada**.
+> Cuando una sucesión se puede expresar combinando un **número determinado de operaciones**, es\
+una **fórmula cerrada**.
 
 Una sucesión $u_n$ por fórmula cerrada sería: $u_n = 2n + 1$
 
-> Cuando una sucesión se define a partir de un número finito de términos iniciales y una regla que permite obtener cualquier término a partir de los anteriores, está definida de manera **recursiva**.
+> Cuando una sucesión se define a partir de un **número finito de términos iniciales y una regla** que permite obtener cualquier término a partir de los anteriores, está definida de manera **recursiva**.
 
 - $u_1 = 3,\; u_2 = 4$ (Casos base)
 - $u_n = u_{n-1} + u_{n-2}$ (Caso recursivo)
@@ -265,6 +266,20 @@ También podemos definir:
 ```
 
 Se lee como "$n$ factorial", este carece de formula cerrada.
+
+Y en base a lo anterior, podemos definir recursivamente estas expresiones: 
+
+```math
+\displaystyle{\sum_{i=1}^{n}} a_i = \displaystyle{\sum_{i=1}^{n-1}} a_i + a_n
+```
+
+```math 
+\displaystyle{\prod_{i=1}^{n}} a_i = \displaystyle{\prod_{i=1}^{n-1}} a_i \cdot a_n
+```
+
+```math 
+n! = (n-1)! \cdot n
+```
 
 ### Potencias
 
