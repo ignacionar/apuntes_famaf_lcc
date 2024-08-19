@@ -2,6 +2,65 @@
 
 > En esta sección se presentan distintas propiedades del lenguaje Haskell, basado en el paradigma de programación funcional.
 
+## Creando Listas 
+
+Existen algunas formas distintas de crear listas en Haskell: 
+
+**1)** Por extensión: 
+
+```hs
+lista = [1, 2, 3, 4, 5]
+```
+
+
+**2)** Por rango: 
+
+```hs
+lista = [1..n]
+
+-- ghci> lista
+-- [1, 2, 3, 4, n]
+```
+
+En este caso se usa la notación `..` para definir un rango de valores.
+
+**3)** Por repetición: 
+
+```hs
+lista = replicate 5 1
+
+-- ghci> lista
+-- [1, 1, 1, 1, 1]
+```
+
+`replicate` toma un número `n` y un valor `x`, y devuelve una lista con `n` elementos iguales a `x`.
+
+**4)** Por comprensión: 
+
+```hs
+lista = [x | x <- [1..5]]
+
+listaConTuplas = [(x, y) | x <- [1..3], y <- [1..3]]
+
+-- ghci> lista
+-- [1, 2, 3, 4, 5]
+
+-- ghci> listaConTuplas
+-- [(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3)]
+```
+
+En este caso, `x` toma los valores de la lista `[1..3]` e `y` toma los valores de la lista `[1..3]`.\
+La notación `|` se lee como "tal que", y se usa para determinar los valores de `x` e `y` que cumplen con la condición (similar a definir un conjunto por comprensión en matemática).
+
+**5)** Por concatenación: 
+
+```hs
+lista = [1] ++ [2] ++ [3] ++ [4] ++ [5]
+
+-- ghci> lista
+-- [1, 2, 3, 4, 5]
+```
+
 ## Tipos
 
 > Haskell es un lenguaje de programación de tipado **fuerte** y **estático**. Esto significa que:\
@@ -89,7 +148,8 @@ Tomemos por ejemplo la función `max`:
 max :: Ord a => a -> a -> a
 ```
 
-En primera instancia podemos pensar que la función `max` recibe dos argumentos, pero en realidad recibe un solo argumento y devuelve otra función que recibe el siguiente argumento y lo compara. Por ejemplo, si ejecutamos `max 1 2`, Haskell lo interpretará como `(max 1) 2`. 
+En primera instancia podemos pensar que la función `max` recibe dos argumentos, pero en realidad recibe un solo argumento y devuelve otra función que recibe el siguiente argumento y lo compara.\
+Por ejemplo, si ejecutamos `max 1 2`, Haskell lo interpretará como `(max 1) 2`. 
 
 Sería como definir: 
 
@@ -135,6 +195,33 @@ applyTwice f x = f (f x)
 Donde `applyTwice` toma una función como argumento (también llamado **callback**) y un valor, y aplica la función dos veces al valor.
 
 Haskell posee funciones de alto orden como `map`, `filter`, entre otras. 
+
+
+### Funciones Lambda o Anónimas
+
+> Las funciones anónimas o **lambda** son funciones que no tienen un nombre asociado. Por ejemplo, la función `applyTwice` puede ser definida de la siguiente manera:
+
+```hs
+applyTwice :: (a -> a) -> a -> a
+
+applyTwice f x = f (f x)
+
+-- ghci> applyTwice (\x -> x + 2) 1
+-- 5
+```
+
+Por ejemplo podríamos definir una función que sume `3` a los elementos de una lista:
+
+```hs
+sumarTres :: [Int] -> [Int]
+
+sumarTres xs = map (\x -> x + 3) xs
+
+-- ghci> sumarTres [1, 2, 3, 4, 5]
+-- [4, 5, 6, 7, 8]
+```
+
+Usamos `\` para definir una función lambda, y `->` para separar los argumentos de la función del cuerpo de la función. Esta sintáxis corta es útil para funciones simples que no necesitan un nombre.
 
 ## Tipos algebraicos sin parámetros
 
