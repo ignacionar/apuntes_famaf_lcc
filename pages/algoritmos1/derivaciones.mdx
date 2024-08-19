@@ -50,7 +50,7 @@ Ejemplo: _quisiera saber si un número es impar_
   <ul style={{ width: "fit-content", textAlign: "left" }}>
     <li style={{ marginBottom: "6px"}}>**1)** $esImpar$</li>
     <li style={{ marginBottom: "6px"}}>**2)** $Int \to Bool$</li>
-    <li style={{ marginBottom: "6px"}}>**3)** $x mod 2 \neq 0$</li>
+    <li style={{ marginBottom: "6px"}}>**3)** $mod \; x \; 2 \neq 0$</li>
   </ul>
 </div>
 
@@ -59,7 +59,7 @@ Nuestro programa sería:
 ```math
 \begin{array}{l}
   \Big\vert\ esImpar : Int \to Bool \\ 
-  \overline{\Big\vert \; esImpar.x \doteq } \; x mod 2 \neq 0
+  \overline{\Big\vert \; esImpar.x \doteq } \; mod \; x \; 2 \neq 0
 \end{array}
 ```
 
@@ -67,7 +67,7 @@ Y también podemos definirlo en Haskell:
   
 ```haskell
 esImpar :: Int -> Bool
-esImpar x = x `mod` 2 /= 0
+esImpar x = mod x 2 /= 0
 ```
 
 ***
