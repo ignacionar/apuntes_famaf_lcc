@@ -75,7 +75,7 @@ b = -a \cdot (-q) \implies -a \mid b \\
 a = b \cdot q + r , \;0 \leq r < b
 ```
 
-Donde $q$ es el _cociente_ y $r$ es el _resto_ de dividr $b$ por $a$. 
+Donde $q$ es el _cociente_ y $r$ es el _resto_ de dividir $b$ por $a$. 
 
 **Ejemplo:** 
 
@@ -220,7 +220,7 @@ Podemos decir que $(B38)_{16} = (5470)_8$.
 
 ## Máximo común divisor (mcd)
 
-> Sean $a, b \in \mathbb{Z}$ alguno de ellos no nulo, denotamos $mcd(a, b) o $(a, b) al máximo común divisor entre $a$ y $b$.
+> Sean $a, b \in \mathbb{Z}$ alguno de ellos no nulo, denotamos $mcd(a, b)$ o $(a, b)$ al máximo común divisor entre $a$ y $b$.
 
 ### Propiedades del mcd
 
@@ -251,6 +251,22 @@ Encontrar el $mcd(174, 72)$
 ```
 
 Por lo tanto, $mcd(174, 72) = 6$.
+
+Notemos que: 
+
+```math 
+\begin{align*}
+mcd(72, 174) = (72, 174 - 72) = (72, 102) \\
+mcd(72, 102) = (72, 102 - 72) = (72, 30) \\
+mcd(30, 72) = (30, 72 - 30) = (30, 42) \\
+mcd(30, 42) = (30, 42 - 30) = (30, 12) \\
+mcd(12, 30) = (12, 30 - 12) = (12, 18) \\
+mcd(12, 18) = (12, 18 - 12) = (12, 6) \\
+mcd(6, 12) = (6, 12 - 6) = (6, 6) = 6
+\end{align*}
+```
+
+**Tenemos la propiedad de que** $mcd(a, b) = mcd(a, b - a)$
 
 **Ejemplo 2:** 
 
