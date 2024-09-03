@@ -285,7 +285,9 @@ sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land \underline{par.(n + 1)}
 \\
 sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land True : i \; \bigr \rangle \\
 \\
-...
+... \\
+\\
+sum \_ par.n + n + 1
 \end{array}
 ```
 
@@ -299,7 +301,22 @@ sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land \underline{par.(n + 1)}
 \\
 sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land False : i \; \bigr \rangle \\
 \\
-...
+... \\ 
+\\ 
+sum \_ par.n
+\end{array}
+```
+
+Nuestra definición final sería: 
+
+```math
+\begin{array}{l}
+  \Big\vert\ sum \_ par : Num \to Num \\ 
+  \overline{\Big\vert \; sum \_ par.0 \doteq 0}   \\
+  \Big\vert\ sum \_ par.(n + 1) \doteq ( \\
+  \Big\vert\ □ \; par.(n+1) → sum \_ par.n + n + 1 \\
+  \Big\vert\ □ \; \neg par.(n+1) → sum \_ par.n \\
+  \Big\vert\ )
 \end{array}
 ```
 
