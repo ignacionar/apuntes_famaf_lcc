@@ -1,0 +1,264 @@
+# Congruencia 
+
+> Sean $a, b \in \mathbb{Z}$ y $m \in \mathbb{Z}+$ decimos que $a$ es congruente a $b$ módulo $m$\
+$a \equiv b \pmod{m} \iff m \mid (a - b)$. Equivalente a decir que $a$ y $b$ tienen el mismo resto al dividirlos por $m$.
+
+## Propiedades básicas de la congruencia
+
+> Sean $x, y, z \in \mathbb{Z} \; \land \; m \in \mathbb{Z}+$, entonces:
+
+**1)** $x \equiv 0 \pmod{m} \iff m \mid x$
+
+```math
+x \equiv 0 \pmod{m} \iff m \mid (x - 0) \iff m \mid x
+```
+
+**2)** $x \equiv y \pmod{m} \iff x - y \equiv 0 \pmod{m}$
+
+```math
+x \equiv y \pmod{m} \iff m \mid (x - y) \iff x - y \equiv 0 \pmod{m}
+```
+
+**D1)** $x \equiv x \pmod{m}$ (**Reflexividad**)
+
+```math
+x - x = 0 = m \cdot 0 \implies m \mid (x - x)
+```
+
+**D2)** $x \equiv y \pmod{m} \implies y \equiv x \pmod{m}$ (**Simetría**)
+
+```math
+x \equiv y \pmod{m} \implies m \mid (x - y) \implies m \mid -(x - y) \implies m \mid (y - x) \implies y \equiv x \pmod{m}
+```
+
+**D3)** $x \equiv y \pmod{m} \; \land \; y \equiv z \pmod{m} \implies x \equiv z \pmod{m}$ (**Transitividad**)
+
+```math
+x \equiv y \pmod{m} \; \land \; y \equiv z \pmod{m} \implies m \mid (x - y) \; \land \; m \mid (y - z) \\ 
+\implies m \mid (x - y + y - z) \implies m \mid (x - z) \implies x \equiv z \pmod{m}
+```
+
+### Teorema - Operaciones con congruencias
+
+> La congruencia es una relación de equivalencia compatible con la suma y el producto.\
+Sean $x_1, x_2, y_1, y_2 \in \mathbb{Z} \; \land \; m \in \mathbb{Z}+$, tal que: 
+
+```math
+x_1 \equiv x_2 \pmod{m} \; \land \; y_1 \equiv y_2 \pmod{m}
+```
+
+**1)** $x_1 + y_1 \equiv x_2 + y_2 \pmod{m}$
+
+**2)** $x_1 \cdot y_1 \equiv x_2 \cdot y_2 \pmod{m}$
+
+**3)** Si $x \equiv y \pmod{m} \; \land \; j \in \mathbb{N} \implies x^j \equiv y^j \pmod{m}$
+
+## Ecuación lineal de congruencia
+
+> La ecuación lineal de congruencia es una ecuación de la forma $ax \equiv b \pmod{m}$ donde debemos encontrar los $x \in \mathbb{Z}$ que cumplan la congruencia.
+
+Algunas ecuaciones lineales no tienen solución, otras tienen infinitas soluciones. Por ejemplo: 
+
+### Teorema - mcd en congruencias
+
+> Sean $a, b \in \mathbb{Z} \; \land \; m \in \mathbb{Z}+$, y denotamos $d = mcd(a, m)$,\
+entonces hay solución para la ecuación $ax \equiv b \pmod{m} \iff d \mid b$.
+
+En este caso dada una solución $x_0$, todas las soluciones son de la forma $x = x_0 + kn \;, k \in \mathbb{Z} \; \land \; n = \frac{m}{d}$
+
+### Ejercicios resueltos - Ecuación lineal de congruencia
+
+**1.**
+
+Encontrar todos los $x \in \mathbb{Z}$ que cumplan la congruencia:
+
+```math 
+2x \equiv 3 \pmod{2}
+```
+
+No tiene solución, ya que $2x$ siempre será par y $3$ es impar. 
+
+***
+
+**2.**
+
+Encontrar todos los $x \in \mathbb{Z}$ que cumplan la congruencia:
+
+```math
+7^{12} \equiv x \pmod{11}
+```
+
+Para resolver esta ecuación, veamos que: 
+
+```math
+\begin{align*}
+7^2 &\equiv 5 \pmod{11} \\
+7^2 \cdot 7 &\equiv 5 \cdot 7 \pmod{11} \\
+7^3 &\equiv 2 \pmod{11} \\
+\end{align*}
+```
+
+Por lo que podemos usar propiedad de las potencias para:
+
+```math
+\begin{align*}
+7^{12} &= (7^3)^4 \\
+2^4 &\equiv 5 \pmod{11} \\
+7^{12} &\equiv 5 \pmod{11}
+\end{align*}
+```
+
+Por lo que $7^{12}$ es congruente a $5$ módulo $11$, y también congruente a los enteros de la forma $11k + 5, \; k \in \mathbb{Z}$.
+
+***
+
+**3.**
+
+Encontrar todos los $x \in \mathbb{Z}$ que cumplan la congruencia:
+
+```math
+3x \equiv 7 \pmod{11}
+```
+
+Una forma de resolver este problema es encontrar soluciones con enteros no tan grandes: 
+
+```math
+3 \cdot 0 \equiv 0 \pmod{11} \\
+3 \cdot 1 \equiv 3 \pmod{11} \\
+3 \cdot 2 \equiv 6 \pmod{11} \\
+3 \cdot 3 \equiv 9 \pmod{11} \\
+3 \cdot 4 \equiv 1 \pmod{11} \\
+3 \cdot 5 \equiv 4 \pmod{11} \\
+\textcolor{darkgreen}{3 \cdot 6 \equiv 7 \pmod{11}} \\
+3 \cdot 7 \equiv 10 \pmod{11} \\
+3 \cdot 8 \equiv 2 \pmod{11} \\
+3 \cdot 9 \equiv 5 \pmod{11} \\
+3 \cdot 10 \equiv 8 \pmod{11} \\
+3 \cdot 11 \equiv 0 \pmod{11} \\
+...
+```
+
+La solución general es $x = 6 + 11k, \; k \in \mathbb{Z}$. El patrón se repite cada $11$.
+
+Otra forma de resolver el problema, es mediante el $mcd(3, 11)$. 
+
+```math
+\begin{align*}
+11 &= 3 \cdot 3 + 2 \\
+3 &= 2 \cdot 1 + 1 \; (*) \\
+2 &= 1 \cdot 2 + 0 \\
+mcd(3, 11) &= 1 \\
+1 &\mid 7 
+\end{align*}
+```
+
+Con esto sabemos que hay solución para la ecuación. Expresando el mcd en términos de $3$ y $11$:
+
+```math
+\begin{align*}
+1 &= 11 \cdot (-1) + 3 \cdot 4 \\
+1 &\equiv 3 \cdot 4 \pmod{11} \\
+3 \cdot 4 &\equiv 1 \pmod{11} \\
+3 \cdot (4 \cdot 7) &\equiv 1 \cdot 7 \pmod{11} \\
+3 \cdot 28 &\equiv 7 \pmod{11} \; \land \; 28 \equiv 6 \pmod{11} \\
+3 \cdot 6 &\equiv 7 \pmod{11}
+\end{align*}
+```
+
+En este caso, fue necesario reducir el $28$ a $6$ en módulo $11$ para encontrar la solución $x = 6$.
+
+```math
+6 + k \cdot \frac{11}{1} = 6 + 11k, \; k \in \mathbb{Z}
+```
+
+***
+
+**4.**
+
+Encontrar todos los $x \in \mathbb{Z}$ que cumplan la congruencia tal que $0 \leq x \leq 100$:
+
+```math
+6x \equiv 3 \pmod{57}
+```
+
+Para resolver este problema, primero encontramos el $mcd(6, 57)$ y comprobamos si divide a $3$:
+
+```math
+\begin{align*}
+57 &= 6 \cdot 9 + 3 \\
+6 &= 3 \cdot 2 + 0 \\
+mcd(6, 57) &= 3 \\
+3 &\mid 3
+\end{align*}
+```
+
+Por lo que hay solución para la ecuación. Expresamos el mcd en términos de $6$ y $57$:
+
+```math
+\begin{align*}
+3 &= (-9) \cdot 6 + 57 \cdot 1 \\
+3 &\equiv (-9) \cdot 6 \pmod{57} \\
+6 \cdot (-9) &\equiv 3 \pmod{57} \; \land \; (-9) \equiv (-9) \pmod{57} \\
+6 \cdot (-9) &\equiv 3 \pmod{57} 
+\end{align*}
+```
+
+Todas las soluciones son $(-9) + k \cdot \frac{57}{3} = -9 + 19k, \; k \in \mathbb{Z}$.\
+Sin embargo, necesitamos las soluciones que cumplan con $0 \leq x \leq 100$:
+
+```math
+\begin{align*}
+0 &\leq -9 + 19k \leq 100 \\
+9 &\leq 19k \leq 109 \\
+\frac{9}{19} &\leq k \leq \frac{109}{19} \\
+0,... &\leq k \leq 5,... \\
+1 &\leq k \leq 5
+\end{align*}
+```
+
+Por lo que las soluciones son $-9 + 19k, \; k \in \{1, 2, 3, 4, 5\}$. (Fue necesario redondear a $1$ y $5$).
+
+*** 
+
+**5.**
+
+Hallar todos los $x$ que satisfacen: 
+
+```math
+x^2 \equiv 1 \pmod{4}
+```
+
+Si $x$ es solución, entonces $x + 4k$ también lo es: 
+
+```math
+\begin{align*}
+4k &\equiv 0 \pmod{4} \\
+x + 4k &\equiv x \pmod{4} \\
+(x + 4k)^2 &\equiv x^2 \pmod{4} \\
+x^2 &\equiv 1 \pmod{4}
+\end{align*}
+```
+
+Por lo que debemos buscar las soluciones para $x = 0, 1, 2, 3$:
+
+```math
+\begin{align*}
+0^2 &\equiv 0 \pmod{4} \\
+1^2 &\equiv 1 \pmod{4} \\
+2^2 &\equiv 0 \pmod{4} \\
+3^2 &\equiv 1 \pmod{4}
+\end{align*}
+```
+
+Por lo que las soluciones son $x = 1 \; \land \; x = 3$.
+
+***
+
+## Teorema de Fermat 
+
+> Si $p$ es un número primo y $a \in \mathbb{Z}$ entonces:\
+$a^{p} \equiv a \pmod{p}$
+
+> Si $a, p$ coprimos entonces:\
+$a^{p-1} \equiv 1 \pmod{p}$
+
