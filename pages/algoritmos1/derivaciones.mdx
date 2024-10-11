@@ -1,6 +1,6 @@
 # Especificaciones, Verificaciones y Derivaciones
 
-## Construcción de programas y paradigmas
+## Especificaciones y construcción de programas
 
 El proceso de construcción de programas se establece de la siguiente forma: 
 
@@ -32,7 +32,7 @@ El proceso de construcción de programas se establece de la siguiente forma:
 
 *** 
 
-La programación funcional, se basa en **la definición de funciones y el cálculo/reducción de expresiones.** 
+En programación funcional, un programa es **la definición de funciones y la reducción de expresiones.** 
 
 Podemos resolver problemas a través de funciones, y las especificaciones tendrán la siguiente estructura: 
 
@@ -44,13 +44,13 @@ Podemos resolver problemas a través de funciones, y las especificaciones tendr�
   </ul>
 </div>
 
-Ejemplo: _quisiera saber si un número es impar_
+Ejemplo: _"quisiera saber si un número es impar..."_
 
 <div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
   <ul style={{ width: "fit-content", textAlign: "left" }}>
     <li style={{ marginBottom: "6px"}}>**1)** $esImpar$</li>
     <li style={{ marginBottom: "6px"}}>**2)** $Int \to Bool$</li>
-    <li style={{ marginBottom: "6px"}}>**3)** $mod \; x \; 2 \neq 0$</li>
+    <li style={{ marginBottom: "6px"}}>**3)** $mod.x.2 \neq 0$</li>
   </ul>
 </div>
 
@@ -59,7 +59,7 @@ Nuestro programa sería:
 ```math
 \begin{array}{l}
   \Big\vert\ esImpar : Int \to Bool \\ 
-  \overline{\Big\vert \; esImpar.x \doteq } \; mod \; x \; 2 \neq 0
+  \overline{\Big\vert \; esImpar.x \doteq } \; mod.x.2 \neq 0
 \end{array}
 ```
 
@@ -71,6 +71,77 @@ esImpar x = mod x 2 /= 0
 ```
 
 ***
+
+En programación imperativa, un programa es **una secuencia de sentencias que modifican el estado (conjunto de variables con valores) de un sistema.**
+
+Podemos resolver problemas a través de instrucciones, y las especificaciones tendrán la siguiente estructura:
+
+<div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
+  <ul style={{ width: "fit-content", textAlign: "left" }}>
+    <li style={{ marginBottom: "6px"}}>**1)** Constantes</li>
+    <li style={{ marginBottom: "6px"}}>**2)** Variables</li>
+    <li style={{ marginBottom: "6px"}}>**3)** Precondición (**estado inicial**)</li>
+    <li style={{ marginBottom: "6px"}}>**4)** Programa incógnita (S)</li>
+    <li style={{ marginBottom: "6px"}}>**5)** Postcondición (**estado final**)</li>
+  </ul>
+</div>
+
+Ejemplo: _"Dado el entero $N > 0$, contar cuántos números entre $0$ y $N$ son múltiplos de $6$..."_
+
+<div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
+  <ul style={{ width: "fit-content", textAlign: "left" }}>
+    <li style={{ marginBottom: "6px"}}>**1)** $\textnormal{Const} \; N : Int;$</li>
+    <li style={{ marginBottom: "6px"}}>**2)** $\textnormal{Var} \; resultado : Int ;$</li>
+    <li style={{ marginBottom: "6px"}}>**3)** $\{ \; P : N > 0 \; \} $</li>
+    <li style={{ marginBottom: "6px"}}>**4)** $S$</li>
+    <li style={{ marginBottom: "6px"}}>**5)** $\{ \; Q : resultado = \bigl \langle \textnormal{N} i : 0 \leq i \leq N : i \; mod \; 6 = 0 \; \bigr \rangle \; \} $</li>
+  </ul>
+</div>
+
+Nuestro programa sería: 
+
+{/* <div style={{ width: "100%", display: "flex"}}> */}
+```math 
+\begin{aligned}
+&\{ \; N > 0 \; \} \\
+&numero\_actual, \; resultado := 0, \; 0 \\
+&\mathbf{do} \; numero\_actual \leq N \ \rightarrow \\
+&\quad \mathbf{if} \; numero\_actual \; mod \; 6 = 0 \rightarrow  \\
+&\quad \quad resultado := resultado + 1 \; ; \\
+&\quad □ \; numero\_actual \; mod \; 6 \neq 0 \rightarrow \\
+&\quad \quad \mathbf{skip} \; ; \\
+&\quad \mathbf{fi} \; ; \\
+&\quad numero\_actual := numero\_actual + 1 \; ; \\
+&\mathbf{od} \; ; \\
+&\{ \; numero\_actual = N + 1 \; \land \; resultado = \bigl \langle \textnormal{N} i : 0 \leq i \leq N : i \; mod \; 6 = 0 \; \bigr \rangle \; \}
+\end{aligned}
+```
+{/* </div> */}
+
+(La especificación no declara $numero\_actual$ puesto que es parte del programa final)
+
+Esto puede definirse en C: 
+
+```c
+#include <stdio.h>
+
+int main() {
+    int N = 10; // Adaptable a otro valor
+    int numero_actual = 0;
+    int resultado = 0;
+
+    do {
+        if (numero_actual % 6 == 0) {
+            resultado += 1; 
+        }         
+        numero_actual += 1; 
+    } while (numero_actual <= N); 
+
+    printf("Resultado: %d\n", resultado); 
+
+    return 0;
+}
+```
 
 ## Especificaciones (PF)
 
@@ -628,3 +699,11 @@ Para ello podemos comenzar del lado derecho:
 
 Por lo tanto, probamos la propiedad $P.(x \triangleright xs)$, y su validez en cualquier lista.
 
+## Verificación (PI)
+
+### Terna de Hoare
+
+> Si tenemos dos predicados $P$ y $Q$, y tenemos una sentencia $S$, podemos preguntarnos si vale o no lo siguiente:\
+**"Cuando empiezo de un estado inicial que cumple $P$, la ejecución de $S$ termina en un estado final que satisface $Q$"**, o también, $\; \{ P \} \; S \; \{ Q \}$
+
+Este predicado puede ser True o False, y se denomina <u>Terna de Hoare</u>.

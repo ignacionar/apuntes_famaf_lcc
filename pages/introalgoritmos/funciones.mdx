@@ -1,4 +1,4 @@
-# Funciones 
+# Funciones y estructuras de datos
 
 > Una función es una regla que asigna a cada elemento
 de un primer conjunto un único elemento de un segundo conjunto.
@@ -510,7 +510,7 @@ mismo tipo; por ejemplo, $[1, 2, 5]$. Denotamos a la lista vacía con $[ ]$.
  
 Contamos con distintos operadores para trabajar con listas, con su notación formal y su equivalente en Haskell.
 
-● `▹`, llamado **pegar o constructor**, toma un elemento x (a izquierda) y una lista xs, y devuelve una lista con x como primer elemento y los elementos de xs a continuación. Ej:
+● $▹$, llamado **pegar o constructor**, toma un elemento x (a izquierda) y una lista xs, y devuelve una lista con x como primer elemento y los elementos de xs a continuación. Ej:
 
 El operador $▹$ es fundamental (se lo denomina constructor), ya que permite **construir listas arbitrarias a partir de la lista vacía**. $▹$ toma un elemento $x$ (a izquierda) y una lista $xs$ y devuelve una lista con primer elemento $x$ seguido de los elementos de $xs$. Por ejemplo:
 
@@ -602,7 +602,7 @@ Este operador es asociativo por lo que podemos escribir sin ambigüedad expresio
 
 Este operador es asociativo a izquierda, luego es lo mismo $([ ] \; ◃ \; z) \; . . . \; ◃ \; y) \; ◃ \; x$ que $[ ] \; ◃ \; z \; . . . \; ◃ \; y \; ◃ \; x$.
 
-En Haskell $xs ◃ x$ no está definido, pero podríamos utilizar el operador de **concatenar** para implementarla de la siguiente manera: `xs ++ [x]`
+En Haskell $xs \; ◃ \; x$ no está definido, pero podríamos utilizar el operador de **concatenar** para implementarla de la siguiente manera: `xs ++ [x]`
 
 ```hs
 [1, 2] ++ [3] = [1, 2, 3]

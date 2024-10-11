@@ -1,0 +1,171 @@
+# Programas imperativos y estructuras de datos
+
+## Expresiones, Sentencias y Estado
+
+> **Expresiones** son fragmentos de código que producen un valor. Por ejemplo, `2 + 2` es una expresión que produce el valor `4`.
+
+> **Sentencias** son fragmentos de código que realizan una acción. Por ejemplo, `printf("Hola")` o `x = 2 + 2`. 
+
+> **Estado** el conjunto de variables y sus valores en un momento dado.
+
+Un programa sencillo, que utilice estos conceptos, podría ser: 
+
+```math 
+\textnormal{Var} \; x, y : Int; \\
+[\![ \sigma_0 : (x \mapsto 1, y \mapsto 2) ]\!] \\
+x := 5 + 5; \\
+[\![ \sigma_1 : (x \mapsto 10, y \mapsto 2) ]\!] 
+```
+
+Donde $\sigma_0$ es el **estado inicial**, $\sigma_1$ es el **estado final**, donde hay una sentencia $x := y + x$ que modifica el valor de la variable $x$ en el estado $\sigma_0$ y produce el estado $\sigma_1$. Las expresiones dependen del estado en el que se evalúan.
+
+## Declaración de Variables
+
+En el formalismo, **declaramos** variables y constantes con la palabra reservada $Var$ y $Const$, respectivamente. 
+
+```math
+\textnormal{Var} \; x, y : Int; \\
+\textnormal{Const} \; z : Int; \\
+```
+
+También podemos hacerlo en C de la siguiente forma: 
+
+```c
+int x, y;
+const int z;
+```
+
+Como también las variables pueden tener un valor inicial: 
+
+```math
+\textnormal{Var} \; x, y : Int; \\
+[\![ \sigma_n : (x \mapsto 1, y \mapsto 2) ]\!] 
+```
+
+```c
+int x = 1, y = 2;
+```
+
+## Evaluación de Sentencias 
+
+> Existen distintos de sentencia que pueden modificar el estado de un programa.
+
+- $:=$, llamado **asignación** nos permite cambiar el valor de una variable y por ende, cambiar el estado del programa.
+
+```math
+x:=10
+```
+
+Y en C sería: 
+
+```c
+x = 10;
+```
+
+Para el formalismo también podemos hacer uso de la asignación múltiple:
+
+```math
+\textnormal{Var} \; x, y : Int; \\
+[\![ \sigma_0 : (x \mapsto 1, y \mapsto 2) ]\!] \\
+x, y := y, x; \\
+[\![ \sigma_1 : (x \mapsto 2, y \mapsto 1) ]\!] 
+```
+
+Es importante mencionar que algunos lenguajes de programación cumplen con la propiedad, pero otros no, necesitando una variable temporal: 
+
+```py 
+# Python si tiene asignación múltiple
+
+x, y = 1, 2
+x, y = y, x
+
+print(x, y) 
+# 2, 1
+```
+
+```c
+// C no tiene asignación múltiple
+
+int x = 1, y = 2;
+int temp = x;
+x = y;
+y = temp;
+
+printf("%d %d", x, y);
+// 2, 1
+```
+
+- $\mathbf{if, fi}$, llamado **condicional** nos permite ejecutar una sentencia o instrucción si se cumple una expresión booleana. Dicha expresión también se conoce como **guarda**:
+
+```math
+\begin{aligned}
+&\textnormal{Var} \; x : Int; \\
+&[\![ \sigma_0 : (x \mapsto 1) ]\!] \\
+&\mathbf{if} \; x > 0 \rightarrow \\
+&\quad x := 0; \\
+&□ \; x \leq 0 \rightarrow \\
+&\quad x := 1; \\
+&\mathbf{fi}; \\
+&[\![ \sigma_1 : (x \mapsto 0) ]\!] 
+\end{aligned}
+```
+
+En C, sería: 
+
+```c
+int x = 1;
+
+if (x > 0) {
+    x = 0;
+} else {
+    x = 1;
+}
+```
+
+- $\mathbf{skip}$ es una sentencia que no hace nada, pero útil si necesitamos no alterar el estado del programa.
+
+```math
+\begin{aligned}
+&\textnormal{Var} \; x : Int; \\
+&[\![ \sigma_0 : (x \mapsto 1) ]\!] \\
+&\mathbf{if} \; x \geq 0 \rightarrow \\
+&\quad \mathbf{skip}; \\
+&□ \; x < 0 \rightarrow \\
+&\quad x := x * (-1); \\
+&\mathbf{fi}; \\
+&[\![ \sigma_1 : (x \mapsto 1) ]\!] 
+\end{aligned}
+```
+
+En el caso de C, no es aplicable, pero basta con dejar el espacio en blanco.
+
+```c 
+int x = 1;
+
+if (x < 0) {
+  x = x * (-1);
+}
+```
+
+- $\mathbf{do, od}$, llamado **repetición** sirve para la ejecución repetida de una acción (ciclo). Un ciclo puede ser infinito si la guarda siempre es verdadera o comportarse como un $\mathbf{skip}$ si la guarda es falsa.
+
+```math
+\begin{aligned}
+&\textnormal{Var} \; x : Int; \\
+&[\![ \sigma_0 : (x \mapsto 3) ]\!] \\
+&\mathbf{do} \; x > 0 \rightarrow \\
+&\quad x := x - 1; \\
+&\mathbf{od}; \\
+&[\![ \sigma_1 : (x \mapsto 0) ]\!]
+\end{aligned}
+```
+
+En C, sería: 
+
+```c
+int x = 3;
+
+while (x > 0) {
+    x = x - 1;
+}
+```
