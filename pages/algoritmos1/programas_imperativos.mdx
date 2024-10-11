@@ -169,3 +169,30 @@ while (x > 0) {
     x = x - 1;
 }
 ```
+
+## Arreglos 
+
+> Un arreglo o vector es una **función definida sobre un segmento de los naturales**. Declarado de la siguiente forma:
+
+```math
+a : array[p, q)of[A]
+```
+
+Donde $p \leq q$ y $A$ es el tipo de dato que tienen los elementos.
+
+- La cantidad de elementos de un arreglo es $q - p$. Si $q = p$, el arreglo es vacío.
+
+- Un elemento de un arreglo se referencia como $a.n$ donde $n \in [p, q)$.
+
+- Es posible usar variables cuantificadas en relación a arreglos. Por ejemplo si $a : array[p, q)ofInt$,\
+entonces $\bigl \langle \; \textnormal{Max} \; i : p \leq i < q : a.i \; \bigr \rangle$ indica el máximo elemento del arreglo.
+
+En C, la declaración de un arreglo sería: 
+
+```c
+int a[10];
+
+a[0] = 1;
+```
+
+Donde `a` es el nombre del arreglo y `10` es la cantidad de elementos, para acceder a un elemento se usa el índice entre `[]`.

@@ -2,6 +2,36 @@
 
 > En esta sección se presentan distintas propiedades del lenguaje Haskell, basado en el paradigma de programación funcional.
 
+## Tipos
+
+> Haskell es un lenguaje de programación de tipado **fuerte** y **estático**. Esto significa que:\
+1 ) Toda expresión tiene un **tipo definido y sin cambiar**.\
+2 ) Los tipos son verificados **antes de ejecutar (al compilar)** el programa.
+
+Por ejemplo, veamos la siguiente función: 
+
+```hs
+add :: Int -> Int -> Int
+```
+
+Si intentamos ejecutar la función `add` con: `add 1 2.0`, Haskell nos arrojará un error de tipo, ya que el segundo argumento es de tipo `Float` y no de tipo `Int`.
+
+Haskell puede inferir el tipo de una función sin necesidad de declararlo explícitamente. Por ejemplo, la función `add` puede ser definida de la siguiente manera:
+
+```hs
+add x y = x + y
+```
+
+Haskell **inferirá** que `x` e `y` son de tipo `Num a => a`, donde `Num` es una **clase de tipo que incluye a todos los números**, y `a` es una variable de tipo. Esto se puede consultar con el siguiente comando:
+
+```hs
+:t add
+
+add :: Num a => a -> a -> a
+```
+
+Algunos de los tipos son básicos, como `Int`, `Float`, `Double`, `Bool`, `Char`, entre otros. También existen tipos compuestos, como las listas y tuplas vistas en IAA. 
+
 ## Creando Listas 
 
 Existen algunas formas distintas de crear listas en Haskell: 
@@ -60,36 +90,6 @@ lista = [1] ++ [2] ++ [3] ++ [4] ++ [5]
 -- ghci> lista
 -- [1, 2, 3, 4, 5]
 ```
-
-## Tipos
-
-> Haskell es un lenguaje de programación de tipado **fuerte** y **estático**. Esto significa que:\
-1 ) Toda expresión tiene un **tipo definido y sin cambiar**.\
-2 ) Los tipos son verificados **antes de ejecutar (al compilar)** el programa.
-
-Por ejemplo, veamos la siguiente función: 
-
-```hs
-add :: Int -> Int -> Int
-```
-
-Si intentamos ejecutar la función `add` con: `add 1 2.0`, Haskell nos arrojará un error de tipo, ya que el segundo argumento es de tipo `Float` y no de tipo `Int`.
-
-Haskell puede inferir el tipo de una función sin necesidad de declararlo explícitamente. Por ejemplo, la función `add` puede ser definida de la siguiente manera:
-
-```hs
-add x y = x + y
-```
-
-Haskell **inferirá** que `x` e `y` son de tipo `Num a => a`, donde `Num` es una **clase de tipo que incluye a todos los números**, y `a` es una variable de tipo. Esto se puede consultar con el siguiente comando:
-
-```hs
-:t add
-
-add :: Num a => a -> a -> a
-```
-
-Algunos de los tipos son básicos, como `Int`, `Float`, `Double`, `Bool`, `Char`, entre otros. También existen tipos compuestos, como las listas y tuplas vistas en IAA. 
 
 ## Polimorfismo
 
