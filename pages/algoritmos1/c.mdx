@@ -1,3 +1,137 @@
 # C 
 
 > En esta sección se presentan distintas propiedades del lenguaje C, basado en el paradigma de programación imperativo.
+
+## Funciones 
+
+> Las funciones en C son bloques de código que realizan una tarea específica. Estas pueden recibir argumentos y retornar un valor.
+
+La función principal de un programa en C es `main`. Esta función es la que se ejecuta al correr el programa. 
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    // Todo el resto del código... 
+    return 0;
+}
+```
+
+El código dentro de las funciones se delimita por llaves `{}`. En el caso de la función `main`, el valor de retorno es un entero. En este caso, `0` indica que el programa se ejecutó correctamente.
+
+El tipo de dato que retorna una función se especifica antes de su nombre. Y su valor de retorno se indica con la palabra clave `return`.
+
+Una función puede recibir argumentos. Estos se especifican entre paréntesis, separados por comas. 
+
+```c
+#include <stdio.h>
+
+int suma(int a, int b) {
+    return a + b;
+}
+
+int main(void) {
+    int resultado = suma(5, 3);
+    printf("El resultado de la suma es %d\n", resultado);
+    return 0;
+}
+
+// El resultado de la suma es 8
+```
+
+## Tipos 
+
+> C es un lenguaje de programación de tipado **débil** y **estático**. Esto significa que:\
+1 ) Toda expresión tiene un **tipo definido**, sin embargo, el compilador puede realizar **conversiones implícitas entre** tipos.\
+2 ) Los tipos son verificados **antes de ejecutar (al compilar)** el programa.
+
+Algunos tipos básicos son: 
+
+- `char` (caracter) 
+
+- `bool` (booleano)
+
+- `int` (entero)
+ 
+- `float` (real de precisión simple) 
+
+- `double` (real de precisión doble, más números decimales) 
+
+- `void` (vacío, no retorna nada)
+
+La conversión de tipos puede ocurrir, por ejemplo, al sumar un entero con un real. En este caso, el entero se convierte a real y el resultado es un real.
+
+Es importante mencionar que C no tiene un tipo de dato `string`. En su lugar, se utilizan arreglos de caracteres: `char[]` 
+
+Además, los booleanos no son un tipo de dato primitivo en C. Para simular un booleano, se utiliza un entero, donde 0 es `false` y cualquier otro valor es `true`:
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int booleano = 1;
+    if (booleano) {
+        printf("Es verdadero\n");
+    } else {
+        printf("Es falso\n");
+    }
+    return 0;
+}
+
+// Es verdadero
+```
+
+## Entrada y salida (I/O)
+
+### Imprimiendo en pantalla
+
+Para imprimir en pantalla un texto o un valor, se utiliza la función `printf`: 
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Este es un mensaje\n");
+    return 0;
+}
+```
+
+Podemos imprimir valores de distintos tipos y variables de la siguiente manera: 
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int a = 5;
+    float b = 3.14;
+    printf("El valor de a es %d y el valor de b es %f\n", a, b);
+    return 0;
+}
+
+// El valor de a es 5 y el valor de b es 3.140000
+```
+
+Tanto `%d` como `%f` son **especificadores de formato**. Estos se utilizan para indicar el tipo de dato que se va a imprimir. En el caso de `%d`, se espera un entero, mientras que en el caso de `%f`, se espera un real.\
+Para hacer un salto de línea se utiliza `\n`.
+
+### Recibir valores de entrada 
+
+Para recibir valores de entrada, se utiliza la función `scanf`. Esta función recibe dos argumentos: el **especificador de formato** y la **dirección de memoria** de la variable donde se almacenará el valor. 
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int x;
+    printf("Ingrese un número entero: ");
+    scanf("%d", &x);
+    printf("El número ingresado es %d\n", x);
+    return 0;
+}
+
+// Ingrese un número entero: 5
+// ...
+// El número ingresado es 5
+```
+
+El caracter `&` se utiliza para obtener la dirección de memoria de una variable. 
