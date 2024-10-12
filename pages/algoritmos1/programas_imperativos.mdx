@@ -192,7 +192,11 @@ En C, la declaración de un arreglo sería:
 ```c
 int a[10];
 
-a[0] = 1;
+a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+printf("Indexando el arreglo: %d", a[0]);
+
+// Indexando el arreglo: 1
 ```
 
 Donde `a` es el nombre del arreglo y `10` es la cantidad de elementos, para acceder a un elemento se usa el índice entre `[]`.
