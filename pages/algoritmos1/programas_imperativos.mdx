@@ -1,4 +1,4 @@
-# Programas imperativos y estructuras de datos
+# Programas Imperativos y Estructuras de Datos
 
 ## Expresiones, Sentencias y Estado
 
@@ -48,7 +48,27 @@ int x = 1, y = 2;
 
 ## Evaluación de Sentencias 
 
-> Existen distintos de sentencia que pueden modificar el estado de un programa.
+> Existen distintos elementos para trabajar con sentencias que modifican el estado de un programa.
+
+- $;\;$, llamado **secuenciación** permite concatenar sentencias. 
+
+```math
+S_1 ; \; S_2 \\
+\; \\
+\textnormal{(o también,)} \\
+\; \\
+S_1; \\
+S_2
+```
+
+Un programa es en realidad **una sola sentencia**, cuando hablamos de varias sentencias estas se forman una sola a través de la secuenciación. 
+
+En C, sería: 
+
+```c
+x = 1;
+y = 2;
+```
 
 - $:=$, llamado **asignación** nos permite cambiar el valor de una variable y por ende, cambiar el estado del programa.
 
