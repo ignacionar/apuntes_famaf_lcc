@@ -32,7 +32,7 @@ El proceso de construcción de programas se establece de la siguiente forma:
 
 *** 
 
-En programación funcional, un programa es **la definición de funciones y la reducción de expresiones.** 
+En programación funcional, un programa consiste en **la definición de funciones y la reducción de expresiones.** 
 
 Podemos resolver problemas a través de funciones, y las especificaciones tendrán la siguiente estructura: 
 
@@ -80,9 +80,9 @@ Podemos resolver problemas a través de instrucciones, y las especificaciones te
   <ul style={{ width: "fit-content", textAlign: "left" }}>
     <li style={{ marginBottom: "6px"}}>**1)** Constantes</li>
     <li style={{ marginBottom: "6px"}}>**2)** Variables</li>
-    <li style={{ marginBottom: "6px"}}>**3)** Precondición (**estado inicial**)</li>
+    <li style={{ marginBottom: "6px"}}>**3)** Precondición</li>
     <li style={{ marginBottom: "6px"}}>**4)** Programa incógnita (S)</li>
-    <li style={{ marginBottom: "6px"}}>**5)** Postcondición (**estado final**)</li>
+    <li style={{ marginBottom: "6px"}}>**5)** Postcondición</li>
   </ul>
 </div>
 
@@ -165,6 +165,47 @@ sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
 ```
 
 Ya tenemos una una **descripción formal de la tarea que el programa tiene que realizar**
+
+## Especificaciones (PI)
+
+### Terna de Hoare
+
+> Si tenemos dos predicados $P$ y $Q$, y tenemos una sentencia $S$, podemos preguntarnos si vale o no lo siguiente:\
+**"Para todo estado inicial que cumple $P$, la ejecución de $S$ termina en un estado final que satisface $Q$"**, o también, $\; \{ P \} \; S \; \{ Q \}$
+
+Este predicado puede ser True o False, y se denomina <u>Terna de Hoare</u>.
+
+Por ejemplo: 
+
+```math
+\begin{aligned}
+&\{ \; P: \; x > 0 \; \} \\
+&x := x + 1 \\
+&\{ \; Q: \; x > 1 \; \}
+\end{aligned}
+```
+
+En este caso, $\; \{ P \} \; S \; \{ Q \} \equiv True$ , ya que si $x > 0$, entonces $x + 1 > 1$.
+
+El predicado $P$ puede ser **válido para cualquier estado, o puede ser válido para un conjunto de estados**.
+
+El predicado $\{ \; True \; \}$ es válido para cualquier estado, al igual que $\{ \; x > 0 \implies x \geq 0 \; \}$.
+
+$P_0$ es **más fuerte** que $P \iff (P_0 \implies P)$.\
+$P_0$ es **más débil** que $P \iff (P \implies P_0)$. 
+
+Podemos pensar en un estado débil si exige menos condiciones para cumplirse, y en un estado fuerte si exige más condiciones.\
+Por ejemplo, si $P_0 = \{ \; x > 0 \; \}$ y $P = \{ \; x \geq 0 \; \}$, entonces $P_0$ es más fuerte que $P$.
+
+### Weakest Precondition
+
+Dada la sentencia $S$ y el predicado $Q$, podemos preguntarnos cuál es el predicado más débil que garantiza que $Q$ se cumpla después de ejecutar $S$. Este predicado se llama **Weakest Precondition** y se denota $wp.S.Q$.
+
+La relación entre la Terna de Hoare y la Weakest Precondition es la siguiente: 
+
+```math
+\{ P \} \; S \; \{ Q \} \equiv P \implies wp.S.Q
+```
 
 ## Derivaciones (PF)
 
@@ -702,11 +743,5 @@ Para ello podemos comenzar del lado derecho:
 
 Por lo tanto, probamos la propiedad $P.(x \triangleright xs)$, y su validez en cualquier lista.
 
-## Verificación (PI)
+{/* ## Verificación (PI) */}
 
-### Terna de Hoare
-
-> Si tenemos dos predicados $P$ y $Q$, y tenemos una sentencia $S$, podemos preguntarnos si vale o no lo siguiente:\
-**"Cuando empiezo de un estado inicial que cumple $P$, la ejecución de $S$ termina en un estado final que satisface $Q$"**, o también, $\; \{ P \} \; S \; \{ Q \}$
-
-Este predicado puede ser True o False, y se denomina <u>Terna de Hoare</u>.
