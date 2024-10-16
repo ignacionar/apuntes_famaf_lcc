@@ -135,3 +135,110 @@ int main(void) {
 ```
 
 El caracter `&` se utiliza para obtener la dirección de memoria de una variable. 
+
+## Estructuras y sinónimos
+
+Las estructuras en C permiten agrupar distintos tipos de datos en una sola variable. 
+
+```c
+#include <stdio.h>
+
+struct Dupla {
+    int x;
+    int y;
+}
+
+int main(void) {
+    struct Dupla punto;
+    punto.x = 5;
+    punto.y = 3;
+    printf("Las coordenadas son (%d, %d)\n", punto.x, punto.y);
+    return 0;
+}
+
+// Las coordenadas son (5, 3)
+```
+
+Otra forma de definir estructuras es utilizando `typedef`. Esto permite crear un sinónimo de tipo para una estructura. 
+
+```c
+#include <stdio.h>
+
+typedef struct {
+    int x;
+    int y;
+} Dupla;
+
+int main(void) {
+    Dupla punto;
+    punto.x = 5;
+    punto.y = 3;
+    printf("Las coordenadas son (%d, %d)\n", punto.x, punto.y);
+    return 0;
+}
+
+// Las coordenadas son (5, 3)
+```
+
+En lugar de `struct Dupla`, ahora se puede utilizar simplemente `Dupla`.
+
+`typedef` se aplica a cualquier otro tipo de dato, no solo a estructuras. Por ejemplo, se puede crear un sinónimo para un número entero: 
+
+```c
+#include <stdio.h>
+
+typedef int Entero;
+
+int main(void) {
+    Entero a = 5;
+    printf("El valor de a es %d\n", a);
+    return 0;
+}
+
+// El valor de a es 5
+```
+
+## Librerías
+
+Algunas librerías utilizadas son:
+
+- `stdio.h` (entrada y salida estándar, `printf`, `scanf`)
+
+- `assert.h` (verificación de condiciones)
+
+- `limits.h` (límites de tipos de datos)
+
+En el caso de `assert.h` se utiliza la función `assert` para verificar condiciones. Si la condición es falsa, el programa se detiene. 
+
+```c
+#include <assert.h>
+
+int main(void) {
+    int a = 5;
+    assert(a == 4);
+    return 0;
+}
+
+// Assertion failed: (a == 4), function main, file main.c, line 5.
+```
+
+En este caso, el programa se detiene porque la condición `a == 4` es falsa.
+
+La librería `limits.h` contiene los límites de los tipos de datos. Por ejemplo, el límite de un entero se puede obtener con `INT_MAX` y `INT_MIN`. 
+
+```c
+#include <limits.h>
+
+int main(void) {
+    printf("El valor máximo de un caracter es %d\n", CHAR_MAX);
+    printf("El valor mínimo de un caracter es %d\n", CHAR_MIN);
+    printf("El valor máximo de un entero es %d\n", INT_MAX);
+    printf("El valor mínimo de un entero es %d\n", INT_MIN);
+    return 0;
+}
+
+// El valor máximo de un caracter es 127
+// El valor mínimo de un caracter es -128
+// El valor máximo de un entero es 2147483647
+// El valor mínimo de un entero es -2147483648
+```
