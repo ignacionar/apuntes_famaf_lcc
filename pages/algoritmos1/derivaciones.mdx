@@ -34,13 +34,13 @@ El proceso de construcción de programas se establece de la siguiente forma:
 
 En programación funcional, un programa consiste en **la definición de funciones y la reducción de expresiones.** 
 
-Podemos resolver problemas a través de funciones, y las especificaciones tendrán la siguiente estructura: 
+Podemos resolver problemas a través de funciones, las cuales tendrán la siguiente estructura: 
 
 <div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
   <ul style={{ width: "fit-content", textAlign: "left" }}>
     <li style={{ marginBottom: "6px"}}>**1)** Nombre de la función</li>
     <li style={{ marginBottom: "6px"}}>**2)** Tipo de la función (Input / Output)</li>
-    <li style={{ marginBottom: "6px"}}>**3)** Predicado que indica **qué debe satisfacer la función**.</li>
+    <li style={{ marginBottom: "6px"}}>**3)** Predicado que indica **qué debe satisfacer la función** (lo sabremos al derivar).</li>
   </ul>
 </div>
 
@@ -74,7 +74,7 @@ esImpar x = mod x 2 /= 0
 
 En programación imperativa, un programa es **una secuencia de sentencias que modifican el estado (conjunto de variables con valores) de un sistema.**
 
-Podemos resolver problemas a través de instrucciones, y las especificaciones tendrán la siguiente estructura:
+Podemos resolver problemas a través de instrucciones, siguiendo esta estructura:
 
 <div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
   <ul style={{ width: "fit-content", textAlign: "left" }}>
@@ -158,7 +158,7 @@ Suponiendo que sabemos la definición de un programa dado:
 \end{array}
 ```
 
-Por la definición de la función, podemos escribir una **especificación** mediante una expresión cuantificada: 
+Por la definición de la función o por el problema que se nos plantea, podemos escribir una **especificación** mediante una expresión cuantificada: 
 
 ```math
 sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
