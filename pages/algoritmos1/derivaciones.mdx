@@ -192,7 +192,7 @@ $P_0$ es **más fuerte** que $P \iff (P_0 \implies P)$.\
 $P_0$ es **más débil** que $P \iff (P \implies P_0)$. 
 
 Podemos pensar en un estado débil si exige menos condiciones para cumplirse, y en un estado fuerte si exige más condiciones.\
-Por ejemplo, si $P_0 = \{ \; x > 0 \; \}$ y $P = \{ \; x \geq 0 \; \}$, entonces $P_0$ es más fuerte que $P$.
+Por ejemplo, si $P_0 \equiv \{ \; x > 0 \; \}$ y $P \equiv \{ \; x \geq 0 \; \}$, entonces $P_0$ es más fuerte que $P$.
 
 ### Weakest Precondition
 
@@ -220,19 +220,19 @@ sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
 \begin{array}{ll}
   sum.[] \\
   \\
-  = \{ \textnormal{ Especificación de } sum \; \} \\
+  \equiv \{ \textnormal{ Especificación de } sum \; \} \\
   \\
   \bigl \langle \; \sum i : 0 \leq i < \# [] : [].i \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Definición de } \# \; \} \\
+  \equiv \{ \textnormal{ Definición de } \# \; \} \\
   \\
   \bigl \langle \; \sum i : 0 \leq i < 0 : [].i \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Aritmética } \} \\
+  \equiv \{ \textnormal{ Aritmética } \} \\
   \\
   \bigl \langle \; \sum i : False : [].i \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Rango vacío } \} \\
+  \equiv \{ \textnormal{ Rango vacío } \} \\
   \\
   0
 \end{array}
@@ -251,23 +251,23 @@ HI : sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
 
 \underline{sum.(x \triangleright xs)} \\
 \\ 
-= \{ \textnormal{ Especificación de } sum \; \} \\
+\equiv \{ \textnormal{ Especificación de } sum \; \} \\
 \\
 \bigl \langle \; \sum i : 0 \leq i < \underline{\# (x \triangleright xs)} : (x \triangleright xs).i \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Definición de } \# \; \} \\
+\equiv \{ \textnormal{ Definición de } \# \; \} \\
 \\
 \underline{\bigl \langle \; \sum i : 0 \leq i < 1 + \# xs : (x \triangleright xs).i \; \bigr \rangle \\} \\
 \\
-= \{ \textnormal{ Separación de un término } \} \\
+\equiv \{ \textnormal{ Separación de un término } \} \\
 \\
 \underline{(x \triangleright xs).0} + \bigl \langle \; \sum i : 0 \leq i < \# xs : \underline{(x \triangleright xs).(i + 1)} \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Definición de } . \; \} \\
+\equiv \{ \textnormal{ Definición de } . \; \} \\
 \\
 x + \underline{\bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle} \\
 \\
-= \{ \textnormal{ Hipótesis inductiva } \} \\
+\equiv \{ \textnormal{ Hipótesis inductiva } \} \\
 \\
 x + sum.xs
 \end{array}
@@ -287,91 +287,7 @@ El programa sería:
 
 Podemos recurrir a otras técnicas para derivar, estas se encuentran más abajo. 
 
-### Ejercicios - Derivaciones (PF)
-
-**1.** 
-
-Derivar la función $pin8$ a partir de la especificación (donde $prod$ es una función que devuelve el producto de los elementos de una lista):
-
-```math
-pin8.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle
-```	
-
-Comenzando por la especificación, evaluamos el caso base, $xs = []$:
-
-```math
-\begin{array}{ll}
-  \underline{pin8}.[] \\
-  \\
-  = \{ \textnormal{ Especificación de } pin8 \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{[] = as ⧺ bs} : prod.as = 8 \; \bigr \rangle \\
-  \\
-  = \{ \textnormal{ Propiedad de } ⧺ \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : as = [] \land bs = [] : prod.\underline{as} = 8 \; \bigr \rangle \\
-  \\
-  = \{ \textnormal{ Definición de } as \; \} \\
-  \\
-  \bigl \langle \; \underline{\exists as, bs : [] = as ⧺ bs : prod.[] = 8} \; \bigr \rangle \\
-  \\
-  = \{ \textnormal{ Evalúo el Término } \} \\
-  \\
-  \underline{prod.[]} = 8 \\
-  \\
-  = \{ \textnormal{ Definición de } prod \; \} \\
-  \\
-  \underline{1 = 8} \\
-  \\
-  = \{ \textnormal{ Aritmética } \} \\
-  \\
-  False
-\end{array}
-```
-
-Por lo tanto, $pin8.[] = False$
-
-Para el Paso inductivo, seguimos con $xs = (x \triangleright xs)$:
-
-```math
-\begin{array}{ll}
-  \underline{pin8}.(x \triangleright xs) \\
-  \\
-  = \{ \textnormal{ Especificación de } pin8 \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
-  \\
-  = \{ \textnormal{ Posibles valores de } as \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{(as = [] \lor as \neq [])} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
-  \\
-  = \{ \textnormal{ Partición de Rango } \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{[]} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
-  \\
-  = \{ \textnormal{ Definición de } \textnormal{⧺}, \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{\;⧺\;} bs} : prod.as = 8 \; \bigr \rangle \\
-  \\
-  = \{ \textnormal{ Rango Unitario, Propiedad de las } [] \} \\
-  \\
-  (x \triangleright xs) = bs \; \lor \; \bigl \langle \; \exists as, bs : \underline{x = a} \land xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
-  \\
-  = \{ \textnormal{ Eliminación de una variable }\; \} \\
-  \\
-  (x \triangleright xs) = bs \; \lor \; \underline{\bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle} \\
-  \\
-  = \{ \textnormal{ Hipótesis Inductiva } \} \\
-  \\
-  (x \triangleright xs) = bs \; \lor \; pin8.xs
-\end{array}
-```
-
-Por lo tanto, $pin8.(x \triangleright xs) = (x \triangleright xs) = bs \; \lor \; pin8.xs$
-
-***
-
-### Análisis por casos (PF)
+### Análisis por casos
 
 Supongamos que nuestro programa tiene la siguiente especificación: 
   
@@ -393,7 +309,7 @@ Observemos que la expresión $par.(n + 1)$ puede ser verdadera o falsa, por lo q
 \begin{array}{ll}
 sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land \underline{par.(n + 1)} : i \; \bigr \rangle \\
 \\
-= \{ \; \textnormal{Caso 1:} \; par.(n + 1) \; \} \\
+\equiv \{ \; \textnormal{Caso 1:} \; par.(n + 1) \; \} \\
 \\
 sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land True : i \; \bigr \rangle \\
 \\
@@ -409,7 +325,7 @@ sum \_ par.n + n + 1
 \begin{array}{ll}
 sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land \underline{par.(n + 1)} : i \; \bigr \rangle \\
 \\
-= \{ \; \textnormal{Caso 2:} \; \neg par.(n + 1) \; \} \\
+\equiv \{ \; \textnormal{Caso 2:} \; \neg par.(n + 1) \; \} \\
 \\
 sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land False : i \; \bigr \rangle \\
 \\
@@ -434,7 +350,7 @@ Nuestra definición final sería:
 
 ***
 
-### Modularización (PF)
+### Modularización
 
 Supongamos que nuestro programa tiene la siguiente especificación: 
 
@@ -477,7 +393,7 @@ Y podemos reemplazar la expresión en nuestra definición:
 
 ***
 
-### Generalización (PF)
+### Generalización
 
 Supongamos que nuestro programa tiene la siguiente especificación: 
 
@@ -491,35 +407,35 @@ Al seguir en el paso inductivo $(x \triangleright xs)$, llegamos a la siguiente 
 \begin{array}{ll}
 \underline{psum}.(x \triangleright xs) \\
 \\
-= \{ \textnormal{ Especificación de } psum \} \\
+\equiv \{ \textnormal{ Especificación de } psum \} \\
 \\
 \bigl \langle \; \forall i : 0 \leq i < \underline{\# (x \triangleright xs)} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Definición de } \# \} \\
+\equiv \{ \textnormal{ Definición de } \# \} \\
 \\
 \bigl \langle \; \forall i : \underline{0 \leq i < 1 + \# xs} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Aritmética } \} \\
+\equiv \{ \textnormal{ Aritmética } \} \\
 \\
 \bigl \langle \; \forall i : \underline{i = 0 \lor 1 \leq i < \# xs + 1} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Partición de Rango } \} \\
+\equiv \{ \textnormal{ Partición de Rango } \} \\
 \\
 \underline{\bigl \langle \; \forall i : i = 0 : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \; \land \; \bigl \langle \; \forall i : 1 \leq i < \# xs + 1 : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle} \\
 \\
-= \{ \textnormal{ Rango Unitario, Cambio de Variable: i ← i + 1 } \} \\
+\equiv \{ \textnormal{ Rango Unitario, Cambio de Variable: i ← i + 1 } \} \\
 \\
 sum.((\underline{x \triangleright xs)↑0}) \geq 0 \; \land \; \bigl \langle \; \forall i : 1 \leq i < \# xs + 1 : sum.(\underline{(x \triangleright xs)↑(i + 1)}) \geq 0 \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Definición de } ↑, \textnormal{ Aritmética } \} \\
+\equiv \{ \textnormal{ Definición de } ↑, \textnormal{ Aritmética } \} \\
 \\
 \underline{sum.[]} \geq 0 \land \bigl \langle \; \forall i : 0 \leq i < \# xs : \underline{sum.((x \triangleright (xs↑i)))} \geq 0 \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Definición de } sum \} \\
+\equiv \{ \textnormal{ Definición de } sum \} \\
 \\
 \underline{0 \geq 0} \land \bigl \langle \; \forall i : 0 \leq i < \# xs : x + sum.(xs↑i) \geq 0 \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Aritmética, Elemento neutro de } \land \} \\
+\equiv \{ \textnormal{ Aritmética, Elemento neutro de } \land \} \\
 \\
 \bigl \langle \; \forall i : 0 \leq i < \# xs : x + sum.(xs↑i) \geq 0 \; \bigr \rangle
 \end{array} 
@@ -547,15 +463,15 @@ Podemos decir que $psum.xs = gpsum.0.xs$, ya que:
 \begin{array}{ll}
 \underline{gpsum}.0.xs \\
 \\
-= \{ \textnormal{ Especificación de } gpsum \} \\
+\equiv \{ \textnormal{ Especificación de } gpsum \} \\
 \\
 \bigl \langle \; \forall i : 0 \leq i < \underline{0} : \underline{0 + sum.(xs↑i)} \geq 0 \; \bigr \rangle \\
 \\
-= \{ \textnormal{ Aritmética } \} \\
+\equiv \{ \textnormal{ Aritmética } \} \\
 \\
 \underline{\bigl \langle \; \forall i : 0 \leq i < 0 : sum.(xs↑i) \geq 0 \; \bigr \rangle} \\
 \\
-= \{ \textnormal{ Especificación de } psum \} \\
+\equiv \{ \textnormal{ Especificación de } psum \} \\
 \\
 psum.xs
 \end{array}
@@ -652,7 +568,165 @@ Para derivarlo, nuestro esquema inductivo debe ser el siguiente:
 
 **Paso Inductivo:** ($x \triangleright xs, y \triangleright ys$)
 
-{/* TODO: Segmentos Arbitrarios */}
+### Ejercicios - Derivaciones (PF)
+
+**1.** 
+
+Derivar la función $pin8$ a partir de la especificación (donde $prod$ es una función que devuelve el producto de los elementos de una lista):
+
+```math
+pin8.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle
+```	
+
+Comenzando por la especificación, evaluamos el caso base, $xs = []$:
+
+```math
+\begin{array}{ll}
+  \underline{pin8}.[] \\
+  \\
+  \equiv \{ \textnormal{ Especificación de } pin8 \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : \underline{[] = as ⧺ bs} : prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Propiedad de } ⧺ \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : as = [] \land bs = [] : prod.\underline{as} = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } as \; \} \\
+  \\
+  \bigl \langle \; \underline{\exists as, bs : [] = as ⧺ bs : prod.[] = 8} \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Evalúo el Término } \} \\
+  \\
+  \underline{prod.[]} = 8 \\
+  \\
+  \equiv \{ \textnormal{ Definición de } prod \; \} \\
+  \\
+  \underline{1 = 8} \\
+  \\
+  \equiv \{ \textnormal{ Aritmética } \} \\
+  \\
+  False
+\end{array}
+```
+
+Por lo tanto, $pin8.[] = False$
+
+Para el Paso inductivo, seguimos con $xs = (x \triangleright xs)$:
+
+```math
+\begin{array}{ll}
+  \underline{pin8}.(x \triangleright xs) \\
+  \\
+  \equiv \{ \textnormal{ Especificación de } pin8 \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Posibles valores de } as \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{(as = [] \lor as \neq [])} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Partición de Rango } \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{[]} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } \textnormal{⧺}, \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \} \\
+  \\
+  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{\;⧺\;} bs} : prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Rango Unitario, Propiedad de las } [] \} \\
+  \\
+  (x \triangleright xs) = bs \; \lor \; \bigl \langle \; \exists as, bs : \underline{x = a} \land xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Eliminación de una variable }\; \} \\
+  \\
+  (x \triangleright xs) = bs \; \lor \; \underline{\bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle} \\
+  \\
+  \equiv \{ \textnormal{ Hipótesis Inductiva } \} \\
+  \\
+  (x \triangleright xs) = bs \; \lor \; pin8.xs
+\end{array}
+```
+
+Por lo tanto, $pin8.(x \triangleright xs) = (x \triangleright xs) = bs \; \lor \; pin8.xs$
+
+## Derivaciones (PI)
+
+A través de una especificación dada como una terna: 
+
+```math 
+\{\; P \; \} \\ 
+S \\
+\{\; Q \; \}
+```
+Podemos derivar el programa incógnita $S$ con la precondición $P$ y la postcondición $Q$ dadas.\
+Para ello recurrimos a los predicados asociados a la Terna o a la definición de Weakest Precondition. De manera tal que se cumpla que $P \implies Q$.
+
+### _Skip_ 
+
+Si tenemos una especificación de la forma: 
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[p, q)ofInt; \\
+&\textnormal{Var} \; pos, \; i : Int; \\
+&\{ \; P: res=0 \land pos = 0 \; \} \\
+&S \\
+&\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+Podemos determinar si $S$ es un $\mathbf{skip}$ suponiendo $P$ y partiendo de la postcondición $Q$:
+
+```math
+\begin{array}{ll}
+  \underline{Q} \\
+  \\
+  \equiv \{ \textnormal{ Definición de } Q \; \} \\
+  \\
+  \underline{res} = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Hipótesis de } P \; \} \\
+  \\
+  0 = \bigl \langle \sum i : \underline{0 \leq i \leq 0} : A.i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Rango Vacío } \} \\
+  \\
+  \textnormal{0 = 0} \\
+  \\
+  \equiv \{ \textnormal{ Lógica } \} \\
+  \\
+  True
+\end{array}
+```
+
+En este caso sencillo, podemos determinar que $S$ es un $\mathbf{skip}$, ya que $P \implies Q$ sin necesidad de ejecutar ninguna sentencia:
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; A : array[p, q)ofInt; \\
+&\textnormal{Var} \; res, \; pos : Int; \\
+&\{ \; P: res=0 \land pos = 0 \; \} \\
+&\mathbf{skip}; \\
+&\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+### Asignación 
+
+Supongamos que $S$ no es un skip ($P$ no implica $Q$) podemos probar tomando las variables del programa y asignarlas a incógnitas. 
+
+Tomemos el siguiente ejemplo:
+  
+```math
+\begin{aligned}
+&\textnormal{Const} \; A : array[p, q)ofInt; \\
+&\textnormal{Var} \; res, \; pos : Int; \\
+&\{ \; P: \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
+&\mathbf{skip}; \\
+&\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+\end{aligned}
+```
 
 ## Verificación (PF)
 
@@ -680,19 +754,19 @@ Para ello podemos comenzar del lado derecho:
 \begin{array}{ll}
   \bigl \langle \; \sum i : 0 \leq i < \underline{\#[]} : [].i \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Definición de } \# \; \} \\
+  \equiv \{ \textnormal{ Definición de } \# \; \} \\
   \\
   \bigl \langle \; \sum i : \underline{0 \leq i < 0} : [].i \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Aritmética } \} \\
+  \equiv \{ \textnormal{ Aritmética } \} \\
   \\
   \bigl \langle \; \underline{\sum i : False : [].i} \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Rango vacío } \} \\
+  \equiv \{ \textnormal{ Rango vacío } \} \\
   \\
   0 \\
   \\
-  = \{ \textnormal{ Definición de } sum\; \} \\
+  \equiv \{ \textnormal{ Definición de } sum\; \} \\
   \\
   sum.[]
 \end{array}
@@ -720,19 +794,19 @@ Para ello podemos comenzar del lado derecho:
 \begin{array}{ll}
   \bigl \langle \; \sum i : 0 \leq i < \underline{ \# (x \triangleright xs) } : (x \triangleright xs).i \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Definición de } \# \; \} \\
+  \equiv \{ \textnormal{ Definición de } \# \; \} \\
   \\
   \bigl \langle \; \underline{ \sum i : 0 \leq i < 1 + \# xs : (x \triangleright xs).i } \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Separación de un término } \} \\
+  \equiv \{ \textnormal{ Separación de un término } \} \\
   \\
   \underline{ (x \triangleright xs).0 } + \bigl \langle \; \sum i : 0 \leq i < \# xs : \underline{(x \triangleright xs).(i + 1)} \; \bigr \rangle \\
   \\
-  = \{ \textnormal{ Definición de } .\; \} \\
+  \equiv \{ \textnormal{ Definición de } .\; \} \\
   \\
   x + \underline{\bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle} \\
   \\
-  = \{ \textnormal{ Hipótesis inductiva } \} \\
+  \equiv \{ \textnormal{ Hipótesis inductiva } \} \\
   \\
   x + sum.xs 
 \end{array}
