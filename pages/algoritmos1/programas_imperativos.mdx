@@ -31,11 +31,15 @@ En el formalismo, **declaramos** variables y constantes con la palabra reservada
 También podemos hacerlo en C de la siguiente forma: 
 
 ```c
+#define N 5
+
 int x, y;
-const int z;
 ```
 
-Como también las variables pueden tener un valor inicial: 
+Usamos `#define` para declarar una constante y `int` para declarar variables de tipo entero.\
+Si bien existe la palabra reservada `const`, usamos `#define` para definir la constante a nivel de preprocesador (antes de la compilación, sin asignar memoria).
+
+Las variables pueden tener un valor inicial: 
 
 ```math
 \textnormal{Var} \; x, y : Int; \\
