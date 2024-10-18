@@ -570,7 +570,7 @@ Para derivarlo, nuestro esquema inductivo debe ser el siguiente:
 
 **Paso Inductivo:** ($x \triangleright xs, y \triangleright ys$)
 
-### Ejercicios - Derivaciones (PF)
+### Ejercicios resueltos - Derivaciones (PF)
 
 **1.** 
 
@@ -580,7 +580,7 @@ Derivar la función $pin8$ a partir de la especificación (donde $prod$ es una f
 pin8.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle
 ```	
 
-Comenzando por la especificación, evaluamos el caso base, $xs = []$:
+Primero evaluamos el caso base, $xs = []$:
 
 ```math
 \begin{array}{ll}
@@ -588,19 +588,19 @@ Comenzando por la especificación, evaluamos el caso base, $xs = []$:
   \\
   \equiv \{ \textnormal{ Especificación de } pin8 \; \} \\
   \\
-  \bigl \langle \; \exists as, bs : \underline{[] = as ⧺ bs} : prod.as = 8 \; \bigr \rangle \\
+  \bigl \langle \; \exists as, bs : \underline{[] = as \textnormal{\;⧺\;} bs} : prod.as = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Propiedad de } ⧺ \; \} \\
+  \equiv \{ \textnormal{ Propiedad de } \textnormal{\;⧺\;} \; \} \\
   \\
-  \bigl \langle \; \exists as, bs : as = [] \land bs = [] : prod.\underline{as} = 8 \; \bigr \rangle \\
+  \bigl \langle \; \exists as, bs : \underline{as} = [] \land bs = [] : prod.\underline{as} = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Definición de } as \; \} \\
+  \equiv \{ \textnormal{ Eliminación de variable } as \; \} \\
   \\
-  \bigl \langle \; \underline{\exists as, bs : [] = as ⧺ bs : prod.[] = 8} \; \bigr \rangle \\
+  \bigl \langle \; \exists bs : \underline{bs = []} : prod.[] = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Evalúo el Término } \} \\
+  \equiv \{ \textnormal{ Rango unitario} \} \\
   \\
-  \underline{prod.[]} = 8 \\
+  {prod.[]} = 8 \\
   \\
   \equiv \{ \textnormal{ Definición de } prod \; \} \\
   \\
@@ -624,33 +624,234 @@ Para el Paso inductivo, seguimos con $xs = (x \triangleright xs)$:
   \\
   \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Posibles valores de } as \; \} \\
+  \equiv \{ \textnormal{ Tercero excluido de } as \; \} \\
   \\
-  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{(as = [] \lor as \neq [])} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \textnormal{\;⧺\;} bs \land (as = [] \lor as \neq [])} : prod.as = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Partición de Rango } \; \} \\
+  \equiv \{ \textnormal{ Distributividad de } \land \; \textnormal{con} \; \lor \; \} \\
   \\
-  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{[]} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \textnormal{\;⧺\;} bs \land as = [] \lor (x \triangleright xs) = as \textnormal{\;⧺\;} bs \land as \neq []} : prod.as = 8 \; \bigr \rangle \\ 
   \\
-  \equiv \{ \textnormal{ Definición de } \textnormal{⧺}, \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \} \\
+  \equiv \{ \textnormal{ Partición de rango, eliminación de variable } as \; \} \\
   \\
-  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{\;⧺\;} bs} : prod.as = 8 \; \bigr \rangle \\
+  \bigl \langle \; \exists bs : (x \triangleright xs) = \underline{[]} \textnormal{\;⧺\;} bs : prod.[] = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Rango unitario, Propiedad de las } [] \} \\
+  \equiv \{ \textnormal{ Definición de } \textnormal{⧺}, \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \; \} \\
   \\
-  (x \triangleright xs) = bs \; \lor \; \bigl \langle \; \exists as, bs : \underline{x = a} \land xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
+  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : prod.[] = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists a, as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{\;⧺\;} bs} : prod.(a \triangleright as) = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Eliminación de una variable }\; \} \\
+  \equiv \{ \textnormal{ Rango unitario, Propiedad de las } [] \; \} \\
   \\
-  (x \triangleright xs) = bs \; \lor \; \underline{\bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle} \\
+  prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : \underline{x = a} \land xs = as \textnormal{\;⧺\;} bs : prod.(a \triangleright as) = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Hipótesis Inductiva } \} \\
+  \equiv \{ \textnormal{ Eliminación de una variable } \} \\
   \\
-  (x \triangleright xs) = bs \; \lor \; pin8.xs
+  prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : xs = as \textnormal{\;⧺\;} bs : \underline{prod.(x \triangleright as)} = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } prod \; \} \\
+  \\
+  prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : xs = as \textnormal{\;⧺\;} bs : \textcolor{darkred}{x} * as = 8 \; \bigr \rangle
 \end{array}
 ```
 
-Por lo tanto, $pin8.(x \triangleright xs) = (x \triangleright xs) = bs \; \lor \; pin8.xs$
+Es necesario generalizar la función $pin8$ para poder derivarla. Definimos una nueva función $gpin8$ tal que:
+
+```math
+gpin8.1.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle
+```
+
+```math
+gpin8.n.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : \textcolor{darkred}{n} * prod.as = 8 \; \bigr \rangle
+```
+
+Evaluamos el caso base de $gpin8$:
+
+```math
+\begin{array}{ll}
+  \underline{gpin8}.n.[] \\
+  \\
+  \equiv \{ \textnormal{ Especificación de } gpin8 \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : [] = as  \textnormal{\;⧺\;} bs : n * prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Propiedad de } ⧺ \} \\
+  \\
+  \bigl \langle \; \exists \underline{as}, bs : \underline{as} = [] \land bs = [] : n * prod.\underline{as} = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Eliminación de variable } as \; \} \\
+  \\
+  \bigl \langle \; \exists bs : \underline{[] = bs} : n * prod.[] = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Rango unitario } \} \\
+  \\
+  n * \underline{prod.[]} = 8 \\
+  \\
+  \equiv \{ \textnormal{ Definición de } prod \; \} \\
+  \\
+  \underline{n * 1} = 8 \\
+  \\
+  \equiv \{ \textnormal{ Aritmética } \} \\
+  \\
+  n = 8
+\end{array}
+```
+
+Seguimos con el paso inductivo de $gpin8$:
+
+```math
+\begin{array}{ll}
+  \underline{gpin8}.n.(x \triangleright xs) \\
+  \\
+  \equiv \{ \textnormal{ Especificación de } gpin8 \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : n * prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Tercero excluido de } as \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \textnormal{\;⧺\;} bs \land (as = [] \lor as \neq [])} : n * prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Distributividad de } \land \; \textnormal{con} \; \lor \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \textnormal{\;⧺\;} bs \land as = [] \lor (x \triangleright xs) = as \textnormal{\;⧺\;} bs \land as \neq []} : n * prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Partición de rango, eliminación de variable } as \; \} \\
+  \\
+  \bigl \langle \; \exists bs : (x \triangleright xs) = \underline{[]} \textnormal{\;⧺\;} bs : n * prod.[] = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{\;⧺\;} bs : n * prod.as = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } \textnormal{⧺}, \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \; \} \\
+  \\
+  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : n * prod.[] = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists a, as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{\;⧺\;} bs} : n * prod.(a \triangleright as) = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Rango unitario, Propiedad de las } [] \; \} \\
+  \\
+  n * prod.[] = 8 \; \lor \; \bigl \langle \; \exists \underline{a}, as, bs : \underline{x = a} \land xs = as \textnormal{\;⧺\;} bs : n * prod.(\underline{a} \triangleright as) = 8 \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Eliminación de variable } a \; \} \\
+  \\
+  n * \underline{prod.[]} = 8 \; \lor \; \bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : \underline{n * prod.(x \triangleright as) = 8} \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } prod \; \} \\
+  \\
+  \underline{n * 1} = 8 \; \lor \; \underline{\bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : n * x * prod.as = 8 \; \bigr \rangle} \\
+  \\
+  \equiv \{ \textnormal{ Aritmética, hipótesis inductiva con } n = (n * x) \} \\
+  \\
+  n = 8 \; \lor \; gpin8.(n * x).xs
+\end{array}
+```
+
+Los programas son: 
+
+```math
+\begin{array}{l}
+  \Big\vert\ pin8 : [Num] \to Bool \\  
+  \overline{\Big\vert\ pin8.(x \triangleright xs)} \doteq gpin8.1.(x \triangleright xs)
+\end{array}
+```
+
+```math
+\begin{array}{l}
+  \Big\vert\ gpin8 : Num \to [Num] \to Bool \\
+  \overline{\Big\vert \; gpin8.n.xs} \doteq n = 8 \\
+  \Big\vert\ gpin8.n.(x \triangleright xs) \doteq n = 8 \; \lor \; gpin8.(n * x).xs
+\end{array}
+```
+
+***
+
+**2.**
+
+Derivar la función $minimo$ a partir de la especificación: 
+
+```math
+minimo.xs = \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
+```
+
+Primero evaluamos el caso base, $xs = []$:
+
+```math
+\begin{array}{ll}
+  \underline{minimo}.[] \\
+  \\
+  \equiv \{ \textnormal{ Especificación de } minimo \; \} \\
+  \\
+  \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# []} : [].i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } \# \; \} \\
+  \\
+  \bigl \langle \; \textnormal{Min} \; i : \underline{0 \leq i < 0} : [].i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Aritmética } \} \\
+  \\
+  \bigl \langle \; \textnormal{Min} \; i : \underline{False} : [].i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Rango vacío } \} \\
+  \\
+  +\infty
+\end{array}
+```
+
+No podemos computar $+\infty$, por lo que necesitamos cambiar nuestro esquema inductivo. Nuestra lista vacía no puede ser evaluada, por lo que necesitamos evaluar $[x]$.
+
+```math 
+\begin{array}{ll}
+  \underline{minimo}.[x] \\
+  \\
+  \equiv \{ \textnormal{ Especificación de } minimo \; \} \\
+  \\
+  \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# [x]} : [x].i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } \# \; \} \\
+  \\
+  \bigl \langle \; \textnormal{Min} \; i : \underline{0 \leq i < 1} : [x].i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Lógica } \} \\
+  \\
+  \bigl \langle \; \textnormal{Min} \; i : i = 0 : [x].i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Rango unitario } \} \\
+  \\
+  x
+\end{array}
+```
+
+Ahora seguimos con el paso inductivo $xs = (x \triangleright y \triangleright xs)$:
+
+```math
+\begin{array}{ll}
+  \underline{minimo}.(x \triangleright y \triangleright xs) \\
+  \\
+  \equiv \{ \textnormal{ Especificación de } minimo \; \} \\
+  \\
+  \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# (x \triangleright y \triangleright xs)} : (x \triangleright y \triangleright xs).i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } \# \; \} \\
+  \\
+  \underline{ \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < 1 + \# (y \triangleright xs) : (x \triangleright y \triangleright xs).i \; \bigr \rangle} \\
+  \\
+  \equiv \{ \textnormal{ Separación de un término } \} \\
+  \\
+  \underline{(x \triangleright y \triangleright xs).0} + \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# (y \triangleright xs) : \underline{(x \triangleright y \triangleright xs).(i + 1)} \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Definición de } . \; \} \\
+  \\
+  x \; \textnormal{min} \; \underline{\bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# (y \triangleright xs) : (y \triangleright xs).i \; \bigr \rangle} \\
+  \\
+  \equiv \{ \textnormal{ Hipótesis Inductiva con } (y \triangleright xs) \} \\
+  \\
+  x \; \textnormal{min} \; minimo.(y \triangleright xs)
+\end{array}
+```
+
+Nuestro programa final sería: 
+
+```math
+\begin{array}{l}
+  \Big\vert\ minimo : [Num] \to Num \\
+  \overline{\Big\vert \; minimo.[x] \doteq x}   \\
+  \Big\vert\ minimo.(x \triangleright y \triangleright xs) \doteq x \; \textnormal{min} \; minimo.(y \triangleright xs)
+\end{array}
+```
 
 ## Derivaciones (PI)
 
@@ -772,9 +973,9 @@ Entonces nuestro programa queda:
 \begin{aligned}
 &\textnormal{Const} \; A : array[p, q)ofInt; \\
 &\textnormal{Var} \; res, \; pos : Int; \\
-&\{ \; P: \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
+&\{ \; P: \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
 &res, \; pos := res + A.pos, \; pos + 1; \\
-&\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+&\{ \; res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
@@ -1059,6 +1260,8 @@ Por lo tanto, $S_2: pos, \; res := pos + 1, \; res + A.pos$. Ahora podemos dar c
 &\{ \; Q: \; res = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
+
+### Ejercicios resueltos - Derivaciones (PI)
 
 ## Verificación (PF)
 
