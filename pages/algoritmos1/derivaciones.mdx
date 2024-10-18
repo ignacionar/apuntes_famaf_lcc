@@ -287,6 +287,8 @@ El programa sería:
 
 Podemos recurrir a otras técnicas para derivar, estas se encuentran más abajo. 
 
+***
+
 ### Análisis por casos
 
 Supongamos que nuestro programa tiene la siguiente especificación: 
@@ -712,6 +714,8 @@ En este caso sencillo, podemos determinar que $S$ es un $\mathbf{skip}$, ya que 
 \end{aligned}
 ```
 
+***
+
 ### Asignación 
 
 Supongamos que $S$ no es un skip ($P$ no implica $Q$) podemos probar tomando las variables del programa y asignarlas a incógnitas. 
@@ -723,10 +727,178 @@ Tomemos el siguiente ejemplo:
 &\textnormal{Const} \; A : array[p, q)ofInt; \\
 &\textnormal{Var} \; res, \; pos : Int; \\
 &\{ \; P: \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
-&\mathbf{skip}; \\
+&S \\
 &\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
+
+Por intuición sabemos que $pos$ puede ser $pos + 1$. Sin embargo, debemos determinar el valor de $res$. Podemos probar asignar $res$ a una incógnita $E$ y usar la definición de Weakest Precondition:
+
+```math
+P \implies wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle) \\
+\; \\
+\begin{aligned}
+&\underline{wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle)} \\ 
+\\
+&\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+&E = \bigl \langle \; \sum i : \underline{0 \leq i \leq pos + 1} : A.i \; \bigr \rangle \\ 
+\\ 
+&\equiv \{ \textnormal{ Lógica } \; \} \\
+\\
+&E = \bigl \langle \; \sum i : \underline{0 \leq i \leq pos \lor i = pos } : A.i \; \bigr \rangle \\ 
+\\
+&\equiv \{ \textnormal{ Partición de Rango } \} \\
+\\
+&E = \underline{\bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle} + \bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle \\
+\\
+&\equiv \{ \textnormal{ Hipótesis de } res \; \} \\
+\\
+&E = res + \underline{\bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle} \\
+\\ 
+&\equiv \{ \textnormal{ Rango Unitario } \} \\
+\\
+&\underline{E = res + A.pos} \\ 
+\\
+&\equiv \{ \textnormal{ Elijo } E = res + A.pos \; \} \\
+\\
+&True
+\end{aligned}
+```
+
+Entonces nuestro programa queda:
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; A : array[p, q)ofInt; \\
+&\textnormal{Var} \; res, \; pos : Int; \\
+&\{ \; P: \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
+&res, \; pos := res + A.pos, \; pos + 1; \\
+&\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+*** 
+
+### Condicional 
+
+Si por ejemplo quisieramos saber el máximo entre dos números sin usar el operador $\textnormal{max}$, debemos descubrir la sentencia $S$ de:
+
+```math
+\begin{aligned}
+&\textnormal{Var} \; x, \; y, \; res : Int; \\
+&\{ \; P: x = X \land y = Y \} \\
+&S \\
+&\{ \; res = X \; \textnormal{max} \; Y \; \}
+\end{aligned}
+```
+
+(Tanto $X$ como $Y$ son variables de especificación)
+
+No debemos usar $\mathbf{skip}$, pero podemos probar asignando $res$ a una variable incógnita $E$ y aplicar la definición de Weakest Precondition:
+
+```math
+P \implies wp.(res := E).(res = X \; \textnormal{max} \; Y) \\
+\; \\
+\begin{aligned}
+&\underline{wp.(res := E).(res = X \; \textnormal{max} \; Y)} \\
+\\ 
+&\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+&E = X \; \textnormal{max} \; Y 
+\end{aligned} 
+```
+
+Siguiendo el enunciado no podemos usar el operador $\textnormal{max}$, podemos resolver esto mediante un análisis por casos:
+
+**Caso 1:** $x \geq y$
+
+```math
+\begin{aligned}
+&E = \underline{X \; \textnormal{max} \; Y} \\ 
+\\
+&\equiv \{ \textnormal{ Hipótesis de } P \; \} \\
+\\
+&E = \underline{x \; \textnormal{max} \; y} \\
+\\
+&\equiv \{ \textnormal{ Caso 1: } x \geq y \; \} \\
+\\
+&\underline{E = x} \\
+\\
+&\equiv \{ \textnormal{ Elijo } E = x \; \} \\
+\\
+&True
+\end{aligned} 
+```
+
+**Caso 2:** $x \leq y$
+
+```math
+\begin{aligned}
+&E = \underline{X \; \textnormal{max} \; Y} \\ 
+\\
+&\equiv \{ \textnormal{ Hipótesis de } P \; \} \\
+\\
+&E = \underline{x \; \textnormal{max} \; y} \\
+\\
+&\equiv \{ \textnormal{ Caso 2: } x \leq y \; \} \\
+\\
+&\underline{E = y} \\
+\\
+&\equiv \{ \textnormal{ Elijo } E = y \; \} \\
+\\
+&True
+\end{aligned} 
+```
+
+Derivando la asignación, llegamos a un análisis por casos, por lo que podemos usar $\mathbf{if}$ para determinar el programa final:
+
+```math 
+\begin{aligned}
+&\textnormal{Var} \; x, \; y, \; res : Int; \\
+&\{ \; P: x = X \land y = Y \} \\
+&\mathbf{if} \; x \geq y \rightarrow \\
+&\quad res := x; \\
+&□ \; x \leq y \rightarrow \\
+&\quad res := y; \\
+&\mathbf{fi}; \\
+&\{ \; res = X \; \textnormal{max} \; Y \; \}
+\end{aligned}
+```
+
+*** 
+
+### Secuenciación
+
+Muchas veces tenemos un problema principal y otro problema accesorio que resolver.\
+Por ejemplo, la siguiente especificación:
+
+```math 
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; promedio : Float; \\
+&\{ P: \; N > 0 \; \} \\
+&S \\
+&\{ Q: \; promedio = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; / \; N \; \}
+\end{aligned}
+```
+
+Primero podemos resolver el problema principal (sumar todos los elementos), y dividirlos por $N$ (problema accesorio).\
+Cambiando un poco la estructura y agregando una variable $suma$ sería:
+
+```math 
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; promedio : Float, \; suma : Int; \\
+&\{ P: \; N > 0 \; \} \\
+&S_1; \\
+&\{ Q: \; suma = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \} \\
+&S_2; \\
+&\{ R: \; promedio = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; / \; N \; \}
+\end{aligned}
+```
+
+Una vez realizado el trabajo de derivación en $S_1$ y $S_2$, daremos con el programa final.
 
 ## Verificación (PF)
 
