@@ -425,7 +425,7 @@ Al seguir en el paso inductivo $(x \triangleright xs)$, llegamos a la siguiente 
 \\
 \underline{\bigl \langle \; \forall i : i = 0 : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \; \land \; \bigl \langle \; \forall i : 1 \leq i < \# xs + 1 : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle} \\
 \\
-\equiv \{ \textnormal{ Rango Unitario, Cambio de Variable: i ← i + 1 } \} \\
+\equiv \{ \textnormal{ Rango unitario, Cambio de Variable: i ← i + 1 } \} \\
 \\
 sum.((\underline{x \triangleright xs)↑0}) \geq 0 \; \land \; \bigl \langle \; \forall i : 1 \leq i < \# xs + 1 : sum.(\underline{(x \triangleright xs)↑(i + 1)}) \geq 0 \; \bigr \rangle \\
 \\
@@ -636,7 +636,7 @@ Para el Paso inductivo, seguimos con $xs = (x \triangleright xs)$:
   \\
   \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : prod.as = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{\;⧺\;} bs} : prod.as = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Rango Unitario, Propiedad de las } [] \} \\
+  \equiv \{ \textnormal{ Rango unitario, Propiedad de las } [] \} \\
   \\
   (x \triangleright xs) = bs \; \lor \; \bigl \langle \; \exists as, bs : \underline{x = a} \land xs = as \textnormal{\;⧺\;} bs : prod.as = 8 \; \bigr \rangle \\
   \\
@@ -692,7 +692,7 @@ Podemos determinar si $S$ es un $\mathbf{skip}$ suponiendo $P$ y partiendo de la
   \\
   0 = \bigl \langle \sum i : \underline{0 \leq i \leq 0} : A.i \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Rango Vacío } \} \\
+  \equiv \{ \textnormal{ Rango vacío } \} \\
   \\
   \textnormal{0 = 0} \\
   \\
@@ -756,7 +756,7 @@ P \implies wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 
 \\
 &E = res + \underline{\bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle} \\
 \\ 
-&\equiv \{ \textnormal{ Rango Unitario } \} \\
+&\equiv \{ \textnormal{ Rango unitario } \} \\
 \\
 &\underline{E = res + A.pos} \\ 
 \\
@@ -851,7 +851,7 @@ Siguiendo el enunciado no podemos usar el operador $\textnormal{max}$, podemos r
 \end{aligned} 
 ```
 
-Derivando la asignación, llegamos a un análisis por casos, por lo que podemos usar $\mathbf{if}$ para determinar el programa final:
+Derivando la asignación, llegamos a un análisis por casos, por lo que podemos usar $\mathbf{if}$, donde cada caso es una guarda para determinar el programa final:
 
 ```math 
 \begin{aligned}
@@ -865,6 +865,24 @@ Derivando la asignación, llegamos a un análisis por casos, por lo que podemos 
 &\{ \; res = X \; \textnormal{max} \; Y \; \}
 \end{aligned}
 ```
+
+Cuando se utiliza el cuantificador de conteo $\textnormal{N}$ en una especificación, se puede terminar en un análisis por casos si se utiliza el rango unitario: 
+
+Por ejemplo:
+
+```math 
+\begin{aligned}
+&... \\
+&E = res + \bigl \langle \; \textnormal{N} i : \underline{i = numero\_actual} : i \; \textnormal{mod} \; 6 = 0 \; \bigr \rangle \\
+\\ 
+&\equiv \{ \textnormal{ Rango unitario } \} \\
+\\
+&E = res + (numero\_actual \; \textnormal{mod} \; 6 = 0 \rightarrow 1 \\
+& □ \; numero\_actual \; \textnormal{mod} \; 6 \neq 0 \rightarrow 0 )
+\end{aligned}
+```
+
+Tendríamos las dos posibilidades de que la variable $numero\_actual$ sea múltiplo de 6 o no.
 
 *** 
 
@@ -899,6 +917,146 @@ Cambiando un poco la estructura y agregando una variable $suma$ sería:
 ```
 
 Una vez realizado el trabajo de derivación en $S_1$ y $S_2$, daremos con el programa final.
+
+***
+
+### Repetición 
+
+Las repeticiones serán necesarias cuando necesitemos ejecutar una misma acción varias veces.\
+Por ejemplo, si queremos sumar los elementos de un arreglo, necesitaremos recorrerlo. 
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; res, \; i : Int; \\
+&\{ P: \; N > 0 \; \} \\
+&S \\
+&\{ Q: \; res = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+Para poder determinar la **inicialización** y el **cuerpo de ciclo**, necesitamos primero proponer una **invariante** y la **guarda**. 
+
+El invariante debe cumplir las siguientes condiciones: 
+
+- **1)** $P \implies I \;$ (El invariante debe ser verdadero al inicio)
+
+- **2)** $\{I \land B\} \; S \; \{I\} \;$ (El cuerpo de ciclo mantiene el invariante)
+
+- **3)** $I \land \neg B \implies Q \;$ (El invariante implica la postcondición al terminar el ciclo)
+
+- **4)** El ciclo debe terminar
+
+El problema surge en como determinar el invariante. Para ello podemos hacer un **reemplazo de constante por variable**
+
+Podemos reemplazar la constante $N$ por una variable $pos$, y proponer un invariante $I$:
+
+```math
+I \equiv res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N
+```
+
+Determinamos que $pos$ debe ser menor o igual a $N$ para no exceder el rango del arreglo.
+
+Una guarda $B$ puede ser $pos < N$, ya que queremos recorrer todos los elementos del arreglo. 
+
+En base a las condiciones anteriores de invariante y guarda, podemos proponer un ciclo:
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; res, \; pos : Int; \\
+&\{ \; P: \; N > 0 \; \} \\
+&S_1; \\
+&\{ \; I \; \} \\
+&\mathbf{do} \; pos < N \rightarrow \\
+&\quad \{ \; I \land B \; \} \\
+&\quad S_2; \\
+&\quad \{ \; I \; \} \\
+&\mathbf{do}; \\
+&\{ \; Q: \; res = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+Donde $S_1$ es la inicialización y $S_2$ es el cuerpo del ciclo. Ahora podemos derivar ambos para llegar al programa final.
+
+Para $S_1$, podemos probar con $pos, \; res := 0, \; E$, la posición a indexar será por defecto $0$:
+
+```math
+P \implies wp.(pos, \; res := 0, \; E).I \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(pos, \; res := 0, \; E).(res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N)} \\
+\\ 
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \bigl \langle \; \sum i : 0 \leq i \leq 0 : A.i \; \bigr \rangle \; \underline{\land \; 0 \leq 0 \leq N} \\
+\\
+\equiv \{ \textnormal{ Hipótesis de } P, \textnormal{ elemento neutro de} \; \land \; \} \\
+\\
+E = \bigl \langle \; \sum i : \underline{0 \leq i \leq 0} : A.i \; \bigr \rangle \\ 
+\\
+\equiv \{ \textnormal{ Rango vacío } \} \\
+\\
+\underline{E = 0} \\
+\\
+\equiv \{ \textnormal{ Elijo } E = 0 \; \} \\
+\\
+True
+\end{array} 
+```
+
+Tenemos que $S_1: pos, \; res := 0, \; 0$. Ahora podemos derivar $S_2$ probando con $pos, \; res := pos + 1, \; E$, queremos aumentar la posición a indexar:
+
+```math
+P \implies wp.(pos, \; res := pos + 1, \; E).I \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(pos, \; res := pos + 1, \; E).(res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N)} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \bigl \langle \; \sum i : 0 \leq i \leq pos + 1 : A.i \; \bigr \rangle \; \underline{\land \; 0 \leq pos + 1 \leq N} \\
+\\
+\equiv \{ \textnormal{ Validez por hipótesis } 0 \leq pos \land pos < N, \textnormal{ elemento neutro de } \; \land \; \} \\
+\\
+E = \bigl \langle \; \sum i : \underline{0 \leq i \leq pos + 1} : A.i \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Lógica } \} \\
+\\
+E = \bigl \langle \; \sum i : \underline{0 \leq i < pos \lor i = pos} : A.i \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Partición de Rango } \} \\
+\\
+E = \underline{\bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle} + \bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Hipótesis de } res \; \} \\
+\\
+E = res + \underline{\bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle} \\
+\\
+\equiv \{ \textnormal{ Rango unitario } \} \\
+\\
+\underline{E = res + A.pos} \\
+\\
+\equiv \{ \textnormal{ Elijo } E = res + A.pos \; \} \\
+\\
+True
+\end{array} 
+```
+
+Por lo tanto, $S_2: pos, \; res := pos + 1, \; res + A.pos$. Ahora podemos dar con el programa final:
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; res, \; pos : Int; \\
+&\{ \; P: \; N > 0 \; \} \\
+&pos, \; res := 0, \; 0; \\
+&\mathbf{do} \; pos < N \rightarrow \\
+&\quad pos, \; res := pos + 1, \; res + A.pos; \\
+&\mathbf{do}; \\
+&\{ \; Q: \; res = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \}
+\end{aligned}
+```
 
 ## Verificación (PF)
 
