@@ -254,6 +254,69 @@ Por lo que las soluciones son $x = 1 \land x = 3$.
 
 ***
 
+**6.** 
+
+Hallar la solución al sistema de congruencias:
+
+```math
+\left\{
+  \begin{array}{ll}
+    x \equiv 8 \pmod{13} \\
+    x \equiv 3 \pmod{11} \\
+    x \equiv 5 \pmod{8} \\
+    \end{array}
+  \right.
+```
+
+Primero debemos determinar si este sistema tiene solución. De acuerdo al **Teorema chino del resto**, si los módulos son coprimos, entonces el sistema tiene solución. En este caso $13, 11, 8$ son coprimos.
+
+Viendo la primera ecuación, podemos determinar que: 
+
+```math
+x = 8 + 13k, \; k \in \mathbb{Z}
+```
+
+Sustituyendo en la segunda ecuación:
+
+```math
+\begin{align*}
+8 + 13k &\equiv 3 \pmod{11} \\
+13k &\equiv -5 \pmod{11} \\
+11k + 2k &\equiv -5 \pmod{11} \\
+2k &\equiv -5 \pmod{11} \\
+2k + 11 &\equiv 6 \pmod{11} \\
+2k &\equiv 6 \pmod{11} \\
+k &\equiv 3 \pmod{11} 
+\end{align*}
+```
+
+Por lo que $k = 3 + 11t, \; t \in \mathbb{Z}$. Sustituyendo en el valor de $x$:
+
+```math
+x = 8 + 13(3 + 11t) = 8 + 39 + 143t = 47 + 143t
+```
+
+Sustituyendo en la tercera ecuación:
+
+```math
+\begin{align*}
+47 + 143t &\equiv 5 \pmod{8} \\
+7 + 7t &\equiv 5 \pmod{8} \\
+7t &\equiv -2 \pmod{8} \\
+8t - t &\equiv -2 \pmod{8} \\
+- t &\equiv -2 \pmod{8} \\
+t &\equiv 2 \pmod{8} \\
+\end{align*}
+```
+
+Sabemos el valor de $t$, por lo que podemos encontrar el valor de $x$:
+
+```math
+x = 47 + 143(2) = 47 + 286 = 333
+```
+
+Por lo que la solución al sistema de congruencias es $x = 333$.
+
 ## Teorema de Fermat 
 
 > Si $p$ es un número primo y $a \in \mathbb{Z}$ entonces:\
