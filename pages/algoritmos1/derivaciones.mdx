@@ -853,6 +853,46 @@ Nuestro programa final sería:
 \end{array}
 ```
 
+***
+
+**3.**
+
+Calcular el resultado para la lista $[1, 2, 3, 4]$ dada la siguiente especificación: 
+
+```math
+sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
+```
+
+Aplicamos la especificación de $sum$ para la lista $[1, 2, 3, 4]$:
+
+```math
+\begin{array}{ll}
+  \underline{sum}.[1, 2, 3, 4] \\
+  \\
+  \equiv \{ \textnormal{ Especificación de } sum \; \} \\
+  \\
+  \bigl \langle \; \sum i : \underline{0 \leq i < \# [1, 2, 3, 4]} : [1, 2, 3, 4].i \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Calculo rango sabiendo } \#xs = 4 \; \} \\
+  \\
+  \bigl \langle \; \underline{\sum i : i \in \{0, 1, 2, 3\} : [1, 2, 3, 4].i} \; \bigr \rangle \\
+  \\
+  \equiv \{ \textnormal{ Aplico el término a cada elemento del rango }  \} \\
+  \\
+  \underline{[1, 2, 3, 4].0} + \underline{[1, 2, 3, 4].1} + \underline{[1, 2, 3, 4].2} + \underline{[1, 2, 3, 4].3} \\
+  \\
+  \equiv \{ \textnormal{ Evalúo indexaciones } \} \\
+  \\
+  \underline{1 + 2 + 3 + 4} \\
+  \\
+  \equiv \{ \textnormal{ Aritmética } \} \\
+  \\
+  10
+\end{array}
+```
+
+El resultado para la lista $[1, 2, 3, 4]$ es $10$.
+
 ## Derivaciones (PI)
 
 A través de una especificación dada como una terna: 
@@ -887,15 +927,19 @@ Podemos determinar si $S$ es un $\mathbf{skip}$ suponiendo $P$ y partiendo de la
   \\
   \equiv \{ \textnormal{ Definición de } Q \; \} \\
   \\
-  \underline{res} = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \\
+  \underline{res} = \bigl \langle \sum i : 0 \leq i \leq \underline{pos} : A.i \; \bigr \rangle \\
   \\
   \equiv \{ \textnormal{ Hipótesis de } P \; \} \\
   \\
   0 = \bigl \langle \sum i : \underline{0 \leq i \leq 0} : A.i \; \bigr \rangle \\
   \\
+  \equiv \{ \textnormal{ Aritmética } \} \\
+  \\
+  0 = \bigl \langle \sum i : \underline{False} : A.i \; \bigr \rangle \\
+  \\
   \equiv \{ \textnormal{ Rango vacío } \} \\
   \\
-  \textnormal{0 = 0} \\
+  \underline{0 = 0} \\
   \\
   \equiv \{ \textnormal{ Lógica } \} \\
   \\
@@ -1098,7 +1142,7 @@ Por ejemplo, la siguiente especificación:
 \begin{aligned}
 &\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
 &\textnormal{Var} \; promedio : Float; \\
-&\{ P: \; N > 0 \; \} \\
+&\{ P: \; N \geq 0 \; \} \\
 &S \\
 &\{ Q: \; promedio = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; / \; N \; \}
 \end{aligned}
@@ -1111,7 +1155,7 @@ Cambiando un poco la estructura y agregando una variable $suma$ sería:
 \begin{aligned}
 &\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
 &\textnormal{Var} \; promedio : Float, \; suma : Int; \\
-&\{ P: \; N > 0 \; \} \\
+&\{ P: \; N \geq 0 \; \} \\
 &S_1; \\
 &\{ Q: \; suma = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \} \\
 &S_2; \\
@@ -1132,7 +1176,7 @@ Por ejemplo, si queremos sumar los elementos de un arreglo, necesitaremos recorr
 \begin{aligned}
 &\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
 &\textnormal{Var} \; res, \; i : Int; \\
-&\{ P: \; N > 0 \; \} \\
+&\{ P: \; N \geq 0 \; \} \\
 &S \\
 &\{ Q: \; res = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \}
 \end{aligned}
@@ -1168,7 +1212,7 @@ En base a las condiciones anteriores de invariante y guarda, podemos proponer un
 \begin{aligned}
 &\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
 &\textnormal{Var} \; res, \; pos : Int; \\
-&\{ \; P: \; N > 0 \; \} \\
+&\{ \; P: \; N \geq 0 \; \} \\
 &S_1; \\
 &\{ \; I \; \} \\
 &\mathbf{do} \; pos < N \rightarrow \\
@@ -1252,7 +1296,7 @@ Por lo tanto, $S_2: pos, \; res := pos + 1, \; res + A.pos$. Ahora podemos dar c
 \begin{aligned}
 &\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
 &\textnormal{Var} \; res, \; pos : Int; \\
-&\{ \; P: \; N > 0 \; \} \\
+&\{ \; P: \; N \geq 0 \; \} \\
 &pos, \; res := 0, \; 0; \\
 &\mathbf{do} \; pos < N \rightarrow \\
 &\quad pos, \; res := pos + 1, \; res + A.pos; \\
@@ -1262,6 +1306,463 @@ Por lo tanto, $S_2: pos, \; res := pos + 1, \; res + A.pos$. Ahora podemos dar c
 ```
 
 ### Ejercicios resueltos - Derivaciones (PI)
+
+**1.**
+
+Dado un arreglo $A$, derivar un programa que resuelva el problema: 
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; res : Bool; \\
+&\{ \; P: \; N \geq 0 \; \} \\
+&S \\ 
+&\{ \; Q: \; res = \langle \; \forall i : 0 \leq i \leq N : \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+Este problema involucra el uso de un ciclo. Para resolverlo podemos aplicar la **técnica de reemplazo de constante por variable**. Definimos una variable $pos$ que recorrerá el arreglo $A$ y definimos una invariante $I$:
+
+```math
+I \equiv res = \langle \; \forall i : 0 \leq i \leq pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land 0 \leq pos \leq N 
+```
+
+Nos interesa que $pos$ sea menor que $N$ para no exceeder el rango del arreglo.\
+Esa será nuestra guarda: $B \equiv pos < N$.
+
+Con esto podemos seguir la siguiente estructura:
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; res: Bool, \; pos : Int; \\
+&\{ \; P: \; N \geq 0 \; \} \\
+&S_1; \\
+&\{ \; I \; \} \\
+&\mathbf{do} \; pos < N \rightarrow \\
+&\quad \{ \; I \land B \; \} \\
+&\quad S_2; \\
+&\quad \{ \; I \; \} \\
+&\mathbf{do}; \\
+&\{ \; Q: \; res = \langle \; \forall i : 0 \leq i \leq N : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+Si queremos recorrer el arreglo, debemos partir de la posición $0$. La inicialización $S_1$ sería: $pos, \; res := 0, \; E$
+
+```math
+P \implies wp.(pos, \; res := 0, \; E).I \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(pos, \; res := 0, \; E).(res = \langle \; \forall i : 0 \leq i \leq pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land 0 \leq pos \leq N)} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \langle \; \forall i : 0 \leq i \leq 0 : \; \bigl \langle \; \sum j : 0 \leq j \leq 0 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \underline{\land \; 0 \leq 0 \leq N} \\
+\\
+\equiv \{ \textnormal{ Hipótesis de } P, \textnormal{ elemento neutro de } \land \} \\
+\\
+E = \langle \; \forall i : \underline{0 \leq i \leq 0} : \; \bigl \langle \; \sum j : 0 \leq j \leq 0 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Aritmética } \} \\
+\\
+E = \langle \; \forall i : \underline{False} : \; \bigl \langle \; \sum j : 0 \leq j \leq 0 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Rango vacío } \} \\
+\\
+\underline{E = True} \\
+\\
+\equiv \{ \textnormal{ Elijo } E = True \} \\
+\\
+True
+\end{array}
+```
+
+Por lo tanto, $S_1: pos, \; res := 0, \; True$. Ahora podemos derivar $S_2$ probando con $pos, \; res := pos + 1, \; E$, queremos aumentar la posición a indexar:
+
+```math
+P \implies wp.(pos, \; res := pos + 1, \; E).I \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(pos, \; res := pos + 1, \; E).(res = \langle \; \forall i : 0 \leq i \leq pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land 0 \leq pos \leq N)} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \langle \; \forall i : 0 \leq i \leq pos + 1 : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \underline{\land \; 0 \leq pos + 1 \leq N} \\
+\\
+\equiv \{ \textnormal{ Validez por hipótesis } 0 \leq pos \land pos < N, \textnormal{ elemento neutro de } \land \; \} \\
+\\
+E = \langle \; \forall i : \underline{0 \leq i \leq pos + 1} : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Lógica } \} \\
+\\
+E = \langle \; \forall i : \underline{0 \leq i < pos \lor i = pos} : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Partición de Rango } \} \\
+\\
+E = \underline{\langle \; \forall i : 0 \leq i < pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle} \land \langle \; \forall i : i = pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Hipótesis de } res \; \} \\
+\\
+E = res \land \underline{\langle \; \forall i : i = pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle} \\
+\\
+\equiv \{ \textnormal{ Rango unitario } \} \\
+\\
+E = res \land \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \\
+\end{array}
+```
+
+La expresión no es programable. Pero podríamos definir una nueva variable $suma$ tal que:
+
+```math
+suma = \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle
+```
+
+Para hacer su uso debemos declarar esta nueva variable y **fortalecer** la invariante:
+
+```math
+I' \equiv res = I \land suma = \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle
+```
+
+Debemos volver a calcular la inicialización $S_1$, partiendo de $pos, \; res, \; s := 0, \; E, \; F$:
+
+```math
+P \implies wp.(pos, \; res, \; suma := 0, \; E, \; F).I' \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(pos, \; res, \; suma := 0, \; E, \; F).I'} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \langle \; \forall i : 0 \leq i \leq 0 : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \underline{\land \; 0 \leq 0 \leq N} \land F = \langle \; \sum j : 0 \leq j < 0 : A.j \; \bigr \rangle \\  
+\\
+\equiv \{ \textnormal{ Hipótesis de } P, \textnormal{ elemento neutro de } \land \; \} \\
+\\
+E = \langle \; \forall i : \underline{0 \leq i \leq 0} : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land F = \langle \; \sum j : \underline{0 \leq j < 0} : A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Aritmética } \} \\
+\\
+E = \langle \; \forall i : \underline{False} : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land F = \langle \; \sum j : \underline{False} : A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Rango vacío } \} \\
+\\
+\underline{E = True} \land \underline{F = 0} \\
+\\
+\equiv \{ \textnormal{ Elijo } E = True, F = 0 \; \} \\
+\\
+True
+\end{array}
+```
+
+Por lo tanto, $S_1: pos, \; res, \; s := 0, \; True, \; 0$. Derivamos $S_2$ probando con $pos, \; res, \; s := pos + 1, \; E, \; F$, aumentamos la posición a indexar:
+
+```math
+P \implies wp.(pos, \; res, \; s := pos + 1, \; E, \; F).I' \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(pos, \; res, \; s := pos + 1, \; E, \; F).I'} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \langle \; \forall i : 0 \leq i \leq pos + 1 : \; \langle \; \sum j : 0 \leq j < pos + 1 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\ \underline{\land \; 0 \leq pos + 1 \leq N} \land F = \langle \; \sum j : 0 \leq j < pos + 1 : A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Validez por hipótesis } 0 \leq pos \land pos < N, \textnormal{ elemento neutro de } \land \; \} \\
+\\
+E = \langle \; \forall i : \underline{0 \leq i \leq pos + 1} : \; \langle \; \sum j : 0 \leq j < pos + 1 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land F = \langle \; \sum j : \underline{0 \leq j < pos + 1} : A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Lógica } \} \\
+\\
+E = \langle \; \forall i : \underline{0 \leq i < pos \lor i = pos} : \; \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \land \\ F = \langle \; \sum j : \underline{0 \leq j < pos \lor i = pos} : A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Partición de rango, rango unitario } \} \\
+\\
+E = (\underline{\langle \; \forall i : 0 \leq i < pos : \; \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle} \land \underline{\langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0}) \; \land \\ F = (\underline{\langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle} + \langle \; \sum j : j = pos : A.j \; \bigr \rangle) \\
+\\
+\equiv \{ \textnormal{ Hipótesis de } res \; \textnormal{y} \; suma \; \} \\
+\\
+E = (res \land suma \geq 0) \land F = (suma + \underline {\langle \; \sum j : j = pos : A.j \; \bigr \rangle}) \\
+\\
+\equiv \{ \textnormal{ Rango unitario } \} \\
+\\
+\underline{E = (res \land suma \geq 0)} \land \underline{F = (suma + A.pos)} \\
+\\
+\equiv \{ \textnormal{ Elijo } E = (res \land suma \geq 0), F = (suma + A.pos) \; \} \\
+\\
+True
+\end{array}
+```
+
+Por lo tanto, $S_2: pos, \; res, \; s := pos + 1, \; res \land suma \geq 0, \; suma + A.pos$. Ahora podemos dar con el programa final:
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; res : Bool, \; pos, \; suma : Int; \\
+&\{ \; P: \; N \geq 0 \; \} \\
+&pos, \; res, \; suma := 0, \; True, \; 0; \\
+&\mathbf{do} \; pos < N \rightarrow \\
+&\quad pos, \; res, \; suma := pos + 1, \; res \land suma \geq 0, \; suma + A.pos; \\
+&\mathbf{do}; \\
+&\{ \; Q: \; res = \langle \; \forall i : 0 \leq i \leq N : \; \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+***
+
+**2.**
+
+Dado un arreglo $A$, derivar un programa que resuelva el problema: 
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; r : Int; \\
+&\{ \; P: \; N \geq 0 \; \} \\
+&S; \\
+&\{ \; Q: \; r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < N : A.i = A.j \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+Este problema involucra un ciclo, ya que debemos recorrer el arreglo $A$ y comparar los elementos.
+
+Podemos aplicar la técnica de **reemplazo de constante por variable**. Definimos una variable $n$ que sustituirá a $N$, proponemos una invariante $I$ y nuestra guarda $B$ para el ciclo:
+
+```math
+I \equiv r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < n : A.i = A.j \; \bigr \rangle \; \land 0 \leq n \leq N \\
+\; \\
+B \equiv n < N
+```
+
+La estructura que debemos seguir es la siguiente:
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; r : Int, \; n : Int; \\
+&\{ \; P: \; N \geq 0 \; \} \\
+&S_1; \\
+&\{ \; I \; \} \\
+&\mathbf{do} \; n < N \rightarrow \\
+&\quad \{ \; I \land B \; \} \\
+&\quad S_2; \\
+&\quad \{ \; I \; \} \\
+&\mathbf{do}; \\
+&\{ \; Q: \; r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < N : A.i = A.j \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+Para la inicialización $S_1$, partimos de $n, \; r := 0, \; E$, queremos partir del primer elemento del arreglo:
+
+```math 
+P \implies wp.(n, \; r := 0, \; E).I \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(n, \; r := 0, \; E).(r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < n : A.i = A.j \; \bigr \rangle \; \land 0 \leq n \leq N)} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < 0 : A.i = A.j \; \bigr \rangle \; \; \underline{\land \; 0 \leq 0 \leq N} \\
+\\
+\equiv \{ \textnormal{ Hipótesis de } P, \textnormal{ elemento neutro de } \land \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : \underline{0 \leq i < j < 0} : A.i = A.j \; \bigr \rangle \; \\ 
+\\
+\equiv \{ \textnormal{ Aritmética } \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : \underline{False} : A.i = A.j \; \bigr \rangle \; \\
+\\
+\equiv \{ \textnormal{ Rango vacío } \} \\
+\\
+\underline{E = 0} \\
+\\
+\equiv \{ \textnormal{ Elijo } E = 0 \; \} \\
+\\
+True
+\end{array}
+```
+
+Por lo tanto, $S_1: n, \; r := 0, \; 0$. Ahora podemos derivar $S_2$ probando con $n, \; r := n + 1, \; E$, queremos aumentar la posición a indexar:
+
+```math
+P \implies wp.(n, \; r := n + 1, \; E).I \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(n, \; r := n + 1, \; E).(r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < n : A.i = A.j \; \bigr \rangle \; \} \land 0 \leq n \leq N)} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < n + 1 : A.i = A.j \; \bigr \rangle \; \} \; \underline{\land \; 0 \leq n + 1 \leq N} \\
+\\
+\equiv \{ \textnormal{ Validez por hipótesis } 0 \leq n \land n < N, \textnormal{ elemento neutro de } \land \; \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : \underline{0 \leq i < j < n + 1} : A.i = A.j \; \bigr \rangle \; \} \\
+\\
+\equiv \{ \textnormal{ Lógica } \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : \underline{0 \leq i < n \lor i = n} : A.i = A.j \; \bigr \rangle \; \} \\
+\\
+\equiv \{ \textnormal{ Partición de rango } \} \\
+\\
+E = \underline{\langle \; \textnormal{N} i, \; j : 0 \leq i < n : A.i = A.j \; \bigr \rangle} \; + \\ \langle \; \textnormal{N} i, \; j : i = n : A.i = A.j \; \bigr \rangle \; \\ 
+\\
+\equiv \{ \textnormal{ Hipótesis de } r \; \} \\
+\\
+E = r + \underline{\langle \; \textnormal{N} i, \; j : i = n : A.i = A.j \; \bigr \rangle } \\
+\\
+\equiv \{ \textnormal{ Rango unitario } \} \\
+\\
+E = r + \langle \; \sum j : 0 \leq j < n : A.n = A.j \; \bigr \rangle
+\end{array}
+```
+
+Hemos llegado a una expresión no programable, pero podemos definir una nueva variable $s$ tal que:
+
+```math
+s = \langle \; \sum j : 0 \leq j < n : A.n = A.j \; \bigr \rangle
+```
+
+Analizando la expresión, esta calcula la cantidad de veces que se repite un elemento $A.n$ en el arreglo $A$. Necesitamos un ciclo que incremente la constante $n$ y dentro de ese mismo ciclo, otro ciclo que recorra el arreglo $A$ y compare los elementos con $A.n$, un **ciclo anidado**.
+
+Antes de eso, podemos seguir derivando el cuerpo del ciclo $S_2$: 
+
+```math
+\begin{array}{ll}
+... \\
+\\
+E = r + {\langle \; \sum j : 0 \leq j < n : A.n = A.j \; \bigr \rangle} \\
+\\
+\equiv \{ \textnormal{ Definición de } s \; \} \\
+\\
+\underline{E = r + s} \\
+\\
+\equiv \{ \textnormal{ Elijo } E = r + s \; \} \\
+\\
+True
+\end{array}
+```
+
+Ahora si, para este ciclo anidado podemos aplicar la técnica de **reemplazo de constante por variable**. Donde la constante es $n$ y la nueva variable es $m$. Definimos una invariante $I'$ y una guarda $B'$:
+
+```math
+I' \equiv r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < m : A.i = A.j \; \bigr \rangle \land 0 \leq m \leq n \\
+\; \\
+B' \equiv m < n
+```
+
+Nuestro problema ahora mismo radica en definir el valor de $s$ mediante un ciclo anidado. Ahora mismo, tenemos un programa similar al siguiente: 
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; r : Int, \; n, \; s : Int; \\
+&\{ \; P: \; N \geq 0 \; \} \\
+&n, \; r := 0, \; 0; \\
+&\mathbf{do} \; n < N \rightarrow \\
+&\quad \{ \; I \land B \; \} \\
+&\quad S_3; \\
+&\quad \{ \; I' \; \} \\
+&\quad \mathbf{do} \; m < n \rightarrow \\
+&\quad \quad \{ \; I' \land B' \; \} \\
+&\quad \quad S_4; \\
+&\quad \quad \{ \; I' \; \} \\
+&\quad \mathbf{do}; \\
+&\quad n, \; r := n + 1, \; r + s; \\
+&\mathbf{do}; \\
+&\{ \; Q: \; r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < N : A.i = A.j \; \bigr \rangle \; \}
+\end{aligned}
+```
+
+Por la derivación anterior tenemos que $n, r := n + 1, r + s$ en el cuerpo de ciclo $S_2$. Ahora nos interesa derivar la inicialización $S_3$ y el cuerpo del ciclo anidado $S_4$.
+
+Partimos de la inicialización $S_3$ con $m, \; s := 0, \; E$, queremos partir del primer elemento del arreglo:
+
+```math
+P \implies wp.(m, \; s := 0, \; E).I' \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(m, \; s := 0, \; E).(r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < m : A.i = A.j \; \bigr \rangle \land 0 \leq m \leq n)} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < 0 : A.i = A.j \; \bigr \rangle \; \underline{\land \; 0 \leq 0 \leq n }\\
+\\
+\equiv \{ \textnormal{ Hipótesis de } P, \textnormal{ elemento neutro de } \land \; \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : \underline{0 \leq i < j < 0} : A.i = A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Aritmética } \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : \underline{False} : A.i = A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Rango vacío } \} \\
+\\
+\underline{E = 0} \\
+\\
+\equiv \{ \textnormal{ Elijo } E = 0 \; \} \\
+\\
+True
+\end{array}
+```
+
+Por lo tanto, $S_3: m, \; s := 0, \; 0$. Ahora podemos derivar $S_4$ probando con $m, \; s := m + 1, \; E$, queremos aumentar la posición a indexar:
+
+```math
+P \implies wp.(m, \; s := m + 1, \; E).I' \\
+\; \\
+\begin{array}{ll}
+\underline{wp.(m, \; s := m + 1, \; E).(r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < m : A.i = A.j \; \bigr \rangle \land 0 \leq m \leq n)} \\
+\\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < m + 1 : A.i = A.j \; \bigr \rangle \land 0 \leq m + 1 \leq n \\
+\\
+\equiv \{ \textnormal{ Validez por hipótesis } 0 \leq m \land m < n, \textnormal{ elemento neutro de } \land \; \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : \underline{0 \leq i < j < m + 1} : A.i = A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Lógica } \} \\
+\\
+E = \langle \; \textnormal{N} i, \; j : \underline{0 \leq i < m \lor i = m} : A.i = A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Partición de rango } \} \\
+\\
+E = \underline{\langle \; \textnormal{N} i, \; j : 0 \leq i < m : A.i = A.j \; \bigr \rangle} \; + \\ \langle \; \textnormal{N} i, \; j : i = m : A.i = A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Hipótesis de } s \; \} \\
+\\
+E = s + \underline{\langle \; \textnormal{N} i, \; j : i = m : A.i = A.j \; \bigr \rangle} \\
+\\
+\equiv \{ \textnormal{ Rango unitario } \} \\
+\\
+E = s + ( \\
+A.i = A.j \rightarrow 1 \\
+□ \; A.i \neq A.j \rightarrow 0 \\
+)
+\end{array}
+```
+
+Hemos llegado a una expresión programable mediante el uso de bloques condicionales. Nuestro programa final sería el siguiente: 
+
+```math
+\begin{aligned}
+&\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
+&\textnormal{Var} \; r : Int, \; n, \; s, \; m : Int; \\
+&\{ \; P: \; N \geq 0 \; \} \\
+&n, \; r := 0, \; 0; \\
+&\mathbf{do} \; n < N \rightarrow \\
+&\quad m, \; s := 0, \; 0; \\
+&\quad \mathbf{do} \; m < n \rightarrow \\
+&\quad \quad \mathbf{if} \; A.m = A.n \rightarrow \\
+&\quad \quad \quad m, \; s := m + 1, \; s + 1; \\
+&\quad \quad □ \; A.m \neq A.n \rightarrow \\
+&\quad \quad \quad m := m + 1; \\
+&\quad \quad \mathbf{fi}; \\
+&\quad \mathbf{do}; \\
+&\quad n, \; r := n + 1, \; r + s; \\
+&\mathbf{do}; \\
+&\{ \; Q: \; r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < N : A.i = A.j \; \bigr \rangle \; \}
+\end{aligned}
+```
 
 ## Verificación (PF)
 

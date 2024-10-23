@@ -179,10 +179,12 @@ if (x < 0) {
 &[\![ \sigma_0 : (i \mapsto 0, x \mapsto 3) ]\!] \\
 &i := 0; \\
 &\mathbf{do} \; i < 3 \rightarrow \\
+&\quad[\![ \sigma^1_1 : (i \mapsto 0, x \mapsto 3), \; \sigma^2_1 : (i \mapsto 1, x \mapsto 2), \; \sigma^3_1 : (i \mapsto 2, x \mapsto 1) ]\!] \\
 &\quad x := x - 1; \\
 &\quad i := i + 1; \\
+&\quad[\![ \sigma^1_2 : (i \mapsto 1, x \mapsto 2), \; \sigma^2_2 : (i \mapsto 2, x \mapsto 1), \; \sigma^3_2 : (i \mapsto 3, x \mapsto 0) ]\!] \\
 &\mathbf{od}; \\
-&[\![ \sigma_1 : (i \mapsto 3, x \mapsto 0) ]\!]
+&[\![ \sigma_3 : (i \mapsto 3, x \mapsto 0) ]\!]
 \end{aligned}
 ```
 
@@ -237,3 +239,6 @@ printf("Indexando el arreglo: %d", a[0]);
 ```
 
 Donde `a` es el nombre del arreglo y `10` es la cantidad de elementos, para acceder a un elemento se usa el índice entre `[]`.
+
+A diferencia de las listas, los arreglos tienen un tamaño fijo. El acceso al elemento de un arreglo es instantáneo, mientras que en una lista es lineal (depende de la cantidad de elementos).\
+Es más complejo insertar o eliminar elementos en un arreglo ya que deben moverse los elementos restantes, en una lista es más sencillo.

@@ -31,7 +31,7 @@ Definimos la siguiente expresión cuantificada:
 ```
 
 ```math 
-= \{\textnormal{ Idea intuitiva de } \exists\; \}
+\equiv \{\textnormal{ Idea intuitiva de } \exists\; \}
 ```
 
 ```math 
@@ -55,7 +55,7 @@ Otro ejemplo puede ser la expresión:
 \bigl \langle \; \sum i : 0 \leq i \leq n : 2 * i \; \bigr \rangle
 ```
 
-Comparándola con su notación matemática: $\;\displaystyle{\sum_{i=0}^{n}}2*i$\
+Comparándola con su notación matemática: $\;\displaystyle{\sum_{i=0}^{n}} \; 2*i$\
 la primera es más clara para programar.
 
 ***
@@ -70,16 +70,16 @@ Donde $\bigoplus$ designa un operador asociativo y conmutativo $\oplus$ (por eje
 
 ## Cuantificador de Conteo N
 
-El cuantificador de conteo $N$ se define como:
+El cuantificador de conteo $\textnormal{N}$ se define como:
 
 ```math
-\bigl \langle \; N \; i : R.i : T.i \; \bigr \rangle
+\bigl \langle \; \textnormal{N} i : R.i : T.i \; \bigr \rangle
 ```
 
-Donde $N$ cuenta la cantidad de veces que el término $T.i$ es $True$ dentro del rango $R.i$
+Donde $\textnormal{N}$ cuenta la cantidad de veces que el término $T.i$ es $True$ dentro del rango $R.i$
 
 En base a la definición, el cuantificador es igual a:
 
 ```math
-\bigl \langle \; N \; i : R.i : T.i \; \bigr \rangle \doteq \bigl \langle \; \sum i : R.i \land T.i : 1 \ \bigr \rangle
+\bigl \langle \; \textnormal{N} i : R.i : T.i \; \bigr \rangle \doteq \bigl \langle \; \sum i : R.i \land T.i : 1 \ \bigr \rangle
 ```
