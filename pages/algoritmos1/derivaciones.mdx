@@ -911,11 +911,11 @@ Si tenemos una especificación de la forma:
 
 ```math
 \begin{aligned}
-&\textnormal{Const} \; N : Int, \; A : array[p, q)ofInt; \\
+&\textnormal{Const} \; N : Int, \; A : array[p, N)ofInt; \\
 &\textnormal{Var} \; pos, \; i : Int; \\
 &\{ \; P: res=0 \land pos = 0 \; \} \\
 &S \\
-&\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+&\{ \; res = \bigl \langle \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
@@ -927,11 +927,11 @@ Podemos determinar si $S$ es un $\mathbf{skip}$ suponiendo $P$ y partiendo de la
   \\
   \equiv \{ \textnormal{ Definición de } Q \; \} \\
   \\
-  \underline{res} = \bigl \langle \sum i : 0 \leq i \leq \underline{pos} : A.i \; \bigr \rangle \\
+  \underline{res} = \bigl \langle \sum i : 0 \leq i < \underline{pos} : A.i \; \bigr \rangle \\
   \\
   \equiv \{ \textnormal{ Hipótesis de } P \; \} \\
   \\
-  0 = \bigl \langle \sum i : \underline{0 \leq i \leq 0} : A.i \; \bigr \rangle \\
+  0 = \bigl \langle \sum i : \underline{0 \leq i < 0} : A.i \; \bigr \rangle \\
   \\
   \equiv \{ \textnormal{ Aritmética } \} \\
   \\
@@ -955,7 +955,7 @@ En este caso sencillo, podemos determinar que $S$ es un $\mathbf{skip}$, ya que 
 &\textnormal{Var} \; res, \; pos : Int; \\
 &\{ \; P: res=0 \land pos = 0 \; \} \\
 &\mathbf{skip}; \\
-&\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+&\{ \; res = \bigl \langle \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
@@ -971,31 +971,31 @@ Tomemos el siguiente ejemplo:
 \begin{aligned}
 &\textnormal{Const} \; A : array[p, q)ofInt; \\
 &\textnormal{Var} \; res, \; pos : Int; \\
-&\{ \; P: \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
+&\{ \; P: \bigl \langle \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
 &S \\
-&\{ \; res = \bigl \langle \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+&\{ \; res = \bigl \langle \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
 Por intuición sabemos que $pos$ puede ser $pos + 1$. Sin embargo, debemos determinar el valor de $res$. Podemos probar asignar $res$ a una incógnita $E$ y usar la definición de Weakest Precondition:
 
 ```math
-P \implies wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle) \\
+P \implies wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle) \\
 \; \\
 \begin{aligned}
-&\underline{wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle)} \\ 
+&\underline{wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle)} \\ 
 \\
 &\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
 \\
-&E = \bigl \langle \; \sum i : \underline{0 \leq i \leq pos + 1} : A.i \; \bigr \rangle \\ 
+&E = \bigl \langle \; \sum i : \underline{0 \leq i < pos + 1} : A.i \; \bigr \rangle \\ 
 \\ 
 &\equiv \{ \textnormal{ Lógica } \; \} \\
 \\
-&E = \bigl \langle \; \sum i : \underline{0 \leq i \leq pos \lor i = pos } : A.i \; \bigr \rangle \\ 
+&E = \bigl \langle \; \sum i : \underline{0 \leq i < pos \lor i = pos } : A.i \; \bigr \rangle \\ 
 \\
 &\equiv \{ \textnormal{ Partición de Rango } \} \\
 \\
-&E = \underline{\bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle} + \bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle \\
+&E = \underline{\bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle} + \bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle \\
 \\
 &\equiv \{ \textnormal{ Hipótesis de } res \; \} \\
 \\
@@ -1017,9 +1017,9 @@ Entonces nuestro programa queda:
 \begin{aligned}
 &\textnormal{Const} \; A : array[p, q)ofInt; \\
 &\textnormal{Var} \; res, \; pos : Int; \\
-&\{ \; P: \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
+&\{ \; P: \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \land 0 \leq pos < N \; \} \\
 &res, \; pos := res + A.pos, \; pos + 1; \\
-&\{ \; res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \; \}
+&\{ \; res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
@@ -1144,7 +1144,7 @@ Por ejemplo, la siguiente especificación:
 &\textnormal{Var} \; promedio : Float; \\
 &\{ P: \; N \geq 0 \; \} \\
 &S \\
-&\{ Q: \; promedio = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; / \; N \; \}
+&\{ Q: \; promedio = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; / \; N \; \}
 \end{aligned}
 ```
 
@@ -1157,9 +1157,9 @@ Cambiando un poco la estructura y agregando una variable $suma$ sería:
 &\textnormal{Var} \; promedio : Float, \; suma : Int; \\
 &\{ P: \; N \geq 0 \; \} \\
 &S_1; \\
-&\{ Q: \; suma = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \} \\
+&\{ Q: \; suma = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; \} \\
 &S_2; \\
-&\{ R: \; promedio = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; / \; N \; \}
+&\{ R: \; promedio = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; / \; N \; \}
 \end{aligned}
 ```
 
@@ -1178,7 +1178,7 @@ Por ejemplo, si queremos sumar los elementos de un arreglo, necesitaremos recorr
 &\textnormal{Var} \; res, \; i : Int; \\
 &\{ P: \; N \geq 0 \; \} \\
 &S \\
-&\{ Q: \; res = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \}
+&\{ Q: \; res = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
@@ -1199,7 +1199,7 @@ El problema surge en como determinar el invariante. Para ello podemos hacer un *
 Podemos reemplazar la constante $N$ por una variable $pos$, y proponer un invariante $I$:
 
 ```math
-I \equiv res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N
+I \equiv res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N
 ```
 
 Determinamos que $pos$ debe ser menor o igual a $N$ para no exceder el rango del arreglo.
@@ -1220,7 +1220,7 @@ En base a las condiciones anteriores de invariante y guarda, podemos proponer un
 &\quad S_2; \\
 &\quad \{ \; I \; \} \\
 &\mathbf{do}; \\
-&\{ \; Q: \; res = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \}
+&\{ \; Q: \; res = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
@@ -1232,17 +1232,17 @@ Para $S_1$, podemos probar con $pos, \; res := 0, \; E$, la posición a indexar 
 P \implies wp.(pos, \; res := 0, \; E).I \\
 \; \\
 \begin{array}{ll}
-\underline{wp.(pos, \; res := 0, \; E).(res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N)} \\
+\underline{wp.(pos, \; res := 0, \; E).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N)} \\
 \\ 
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
 \\
-E = \bigl \langle \; \sum i : 0 \leq i \leq 0 : A.i \; \bigr \rangle \; \underline{\land \; 0 \leq 0 \leq N} \\
+E = \bigl \langle \; \sum i : 0 \leq i < 0 : A.i \; \bigr \rangle \; \underline{\land \; 0 \leq 0 \leq N} \\
 \\
 \equiv \{ \textnormal{ Hipótesis de } P, \textnormal{ elemento neutro de} \; \land \; \} \\
 \\
-E = \bigl \langle \; \sum i : \underline{0 \leq i \leq 0} : A.i \; \bigr \rangle \\ 
+E = \bigl \langle \; \sum i : \underline{0 \leq i < 0} : A.i \; \bigr \rangle \\ 
 \\
-\equiv \{ \textnormal{ Rango vacío } \} \\
+\equiv \{ \textnormal{ Aritmética, rango vacío } \} \\
 \\
 \underline{E = 0} \\
 \\
@@ -1258,15 +1258,15 @@ Tenemos que $S_1: pos, \; res := 0, \; 0$. Ahora podemos derivar $S_2$ probando 
 P \implies wp.(pos, \; res := pos + 1, \; E).I \\
 \; \\
 \begin{array}{ll}
-\underline{wp.(pos, \; res := pos + 1, \; E).(res = \bigl \langle \; \sum i : 0 \leq i \leq pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N)} \\
+\underline{wp.(pos, \; res := pos + 1, \; E).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N)} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
 \\
-E = \bigl \langle \; \sum i : 0 \leq i \leq pos + 1 : A.i \; \bigr \rangle \; \underline{\land \; 0 \leq pos + 1 \leq N} \\
+E = \bigl \langle \; \sum i : 0 \leq i < pos + 1 : A.i \; \bigr \rangle \; \underline{\land \; 0 \leq pos + 1 \leq N} \\
 \\
 \equiv \{ \textnormal{ Validez por hipótesis } 0 \leq pos \land pos < N, \textnormal{ elemento neutro de } \; \land \; \} \\
 \\
-E = \bigl \langle \; \sum i : \underline{0 \leq i \leq pos + 1} : A.i \; \bigr \rangle \\
+E = \bigl \langle \; \sum i : \underline{0 \leq i < pos + 1} : A.i \; \bigr \rangle \\
 \\
 \equiv \{ \textnormal{ Lógica } \} \\
 \\
@@ -1301,7 +1301,7 @@ Por lo tanto, $S_2: pos, \; res := pos + 1, \; res + A.pos$. Ahora podemos dar c
 &\mathbf{do} \; pos < N \rightarrow \\
 &\quad pos, \; res := pos + 1, \; res + A.pos; \\
 &\mathbf{do}; \\
-&\{ \; Q: \; res = \bigl \langle \; \sum i : 0 \leq i \leq N : A.i \; \bigr \rangle \; \}
+&\{ \; Q: \; res = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
@@ -1364,11 +1364,23 @@ E = \langle \; \forall i : 0 \leq i \leq 0 : \; \bigl \langle \; \sum j : 0 \leq
 \\
 E = \langle \; \forall i : \underline{0 \leq i \leq 0} : \; \bigl \langle \; \sum j : 0 \leq j \leq 0 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
 \\
+\equiv \{ \textnormal{ Lógica } \} \\
+\\
+E = \langle \; \forall i : \underline{i = 0} : \; \bigl \langle \; \sum j : 0 \leq j \leq 0 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Rango unitario } \} \\
+\\
+E = \langle \; \sum j : \underline{0 \leq j \leq 0} : A.j \; \bigr \rangle \geq 0 \\
+\\
 \equiv \{ \textnormal{ Aritmética } \} \\
 \\
-E = \langle \; \forall i : \underline{False} : \; \bigl \langle \; \sum j : 0 \leq j \leq 0 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+E = \langle \; \sum j : \underline{False} : A.j \; \bigr \rangle \geq 0 \\
 \\
 \equiv \{ \textnormal{ Rango vacío } \} \\
+\\
+E = \underline{0 \geq 0} \\
+\\
+\equiv \{ \textnormal{ Lógica } \} \\
 \\
 \underline{E = True} \\
 \\
@@ -1396,11 +1408,11 @@ E = \langle \; \forall i : \underline{0 \leq i \leq pos + 1} : \; \bigl \langle 
 \\
 \equiv \{ \textnormal{ Lógica } \} \\
 \\
-E = \langle \; \forall i : \underline{0 \leq i < pos \lor i = pos} : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+E = \langle \; \forall i : \underline{0 \leq i \leq pos \lor i = pos} : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
 \\
 \equiv \{ \textnormal{ Partición de Rango } \} \\
 \\
-E = \underline{\langle \; \forall i : 0 \leq i < pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle} \land \langle \; \forall i : i = pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
+E = \underline{\langle \; \forall i : 0 \leq i \leq pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle} \land \langle \; \forall i : i = pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\
 \\
 \equiv \{ \textnormal{ Hipótesis de } res \; \} \\
 \\
@@ -1434,17 +1446,29 @@ P \implies wp.(pos, \; res, \; suma := 0, \; E, \; F).I' \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
 \\
-E = \langle \; \forall i : 0 \leq i \leq 0 : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \underline{\land \; 0 \leq 0 \leq N} \land F = \langle \; \sum j : 0 \leq j < 0 : A.j \; \bigr \rangle \\  
+E = (\langle \; \forall i : 0 \leq i \leq 0 : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \underline{\land \; 0 \leq 0 \leq N}) \land F = (\langle \; \sum j : 0 \leq j < 0 : A.j \; \bigr \rangle) \\  
 \\
 \equiv \{ \textnormal{ Hipótesis de } P, \textnormal{ elemento neutro de } \land \; \} \\
 \\
-E = \langle \; \forall i : \underline{0 \leq i \leq 0} : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land F = \langle \; \sum j : \underline{0 \leq j < 0} : A.j \; \bigr \rangle \\
+E = \langle \; \forall i : \underline{0 \leq i \leq 0} : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land F = \langle \; \sum j : 0 \leq j < 0 : A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Lógica } \} \\
+\\
+E = \langle \; \forall i : \underline{i = 0} : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land F = \langle \; \sum j : 0 \leq j < 0 : A.j \; \bigr \rangle \\
+\\
+\equiv \{ \textnormal{ Rango unitario } \} \\
+\\
+E = \langle \; \sum j : \underline{0 \leq j < pos} : A.j \; \bigr \rangle \geq 0 \land F = \langle \; \sum j : \underline{0 \leq j < 0} : A.j \; \bigr \rangle \\
 \\
 \equiv \{ \textnormal{ Aritmética } \} \\
 \\
-E = \langle \; \forall i : \underline{False} : \; \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land F = \langle \; \sum j : \underline{False} : A.j \; \bigr \rangle \\
+E = \langle \; \sum j : \underline{False} : A.j \; \bigr \rangle \geq 0 \land F = \langle \; \sum j : \underline{False} : A.j \; \bigr \rangle \\
 \\
 \equiv \{ \textnormal{ Rango vacío } \} \\
+\\
+E = \underline{0 \geq 0} \land F = 0 \\
+\\
+\equiv \{ \textnormal{ Lógica } \} \\
 \\
 \underline{E = True} \land \underline{F = 0} \\
 \\
@@ -1464,7 +1488,7 @@ P \implies wp.(pos, \; res, \; s := pos + 1, \; E, \; F).I' \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
 \\
-E = \langle \; \forall i : 0 \leq i \leq pos + 1 : \; \langle \; \sum j : 0 \leq j < pos + 1 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\ \underline{\land \; 0 \leq pos + 1 \leq N} \land F = \langle \; \sum j : 0 \leq j < pos + 1 : A.j \; \bigr \rangle \\
+E = (\langle \; \forall i : 0 \leq i \leq pos + 1 : \; \langle \; \sum j : 0 \leq j < pos + 1 : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \\ \underline{\land \; 0 \leq pos + 1 \leq N}) \land F = \langle \; \sum j : 0 \leq j < pos + 1 : A.j \; \bigr \rangle \\
 \\
 \equiv \{ \textnormal{ Validez por hipótesis } 0 \leq pos \land pos < N, \textnormal{ elemento neutro de } \land \; \} \\
 \\
@@ -1472,11 +1496,11 @@ E = \langle \; \forall i : \underline{0 \leq i \leq pos + 1} : \; \langle \; \su
 \\
 \equiv \{ \textnormal{ Lógica } \} \\
 \\
-E = \langle \; \forall i : \underline{0 \leq i < pos \lor i = pos} : \; \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \land \\ F = \langle \; \sum j : \underline{0 \leq j < pos \lor i = pos} : A.j \; \bigr \rangle \\
+E = \langle \; \forall i : \underline{0 \leq i \leq pos \lor i = pos} : \; \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \land \\ F = \langle \; \sum j : \underline{0 \leq j < pos \lor i = pos} : A.j \; \bigr \rangle \\
 \\
 \equiv \{ \textnormal{ Partición de rango, rango unitario } \} \\
 \\
-E = (\underline{\langle \; \forall i : 0 \leq i < pos : \; \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle} \land \underline{\langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0}) \; \land \\ F = (\underline{\langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle} + \langle \; \sum j : j = pos : A.j \; \bigr \rangle) \\
+E = (\underline{\langle \; \forall i : 0 \leq i \leq pos : \; \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle} \land \underline{\langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle \geq 0}) \; \land \\ F = (\underline{\langle \; \sum j : 0 \leq j < pos : A.j \; \bigr \rangle} + \langle \; \sum j : j = pos : A.j \; \bigr \rangle) \\
 \\
 \equiv \{ \textnormal{ Hipótesis de } res \; \textnormal{y} \; suma \; \} \\
 \\
