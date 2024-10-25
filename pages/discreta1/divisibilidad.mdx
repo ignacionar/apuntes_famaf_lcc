@@ -220,57 +220,57 @@ Podemos decir que $(B38)_{16} = (5470)_8$.
 
 ## Máximo común divisor (mcd)
 
-> Sean $a, b \in \mathbb{Z}$ alguno de ellos no nulo, denotamos $mcd(a, b)$ o $(a, b)$ al máximo común divisor entre $a$ y $b$.
+> Sean $a, b \in \mathbb{Z}$ alguno de ellos no nulo, denotamos $\textnormal{mcd}(a, b)$ o $(a, b)$ al máximo común divisor entre $a$ y $b$.
 
 ### Propiedades del mcd
 
-**1)** $mcd(a, b) = mcd(b, a) = mcd(\pm a, \pm b)$
+**1)** $\textnormal{mcd}(a, b) = \textnormal{mcd}(b, a) = \textnormal{mcd}(\pm a, \pm b)$
 
-**2)** $a > 0,\;mcd(a,0) = a,\;mcd(a, a) = a$
+**2)** $a > 0,\;\textnormal{mcd}(a,0) = a,\;\textnormal{mcd}(a, a) = a$
 
-**3)** $mcd(1, b) = 1$
+**3)** $\textnormal{mcd}(1, b) = 1$
 
-**4)** $mcd(a, b) = mcd(a, b - a)$
+**4)** $\textnormal{mcd}(a, b) = \textnormal{mcd}(a, b - a)$
 
 ***
 
 ### Algoritmo de Euclides
 
 > Sean $a, b \in \mathbb{Z}$, con $b \neq 0$, entonces:\
-$a = bq + r \rightarrow mcd(a, b) = mcd(b, r)$
+$a = bq + r \rightarrow \textnormal{mcd}(a, b) = \textnormal{mcd}(b, r)$
 
 **Ejemplo:**
 
-Encontrar el $mcd(174, 72)$
+Encontrar el $\textnormal{mcd}(174, 72)$
 
 ```math
-174 = 72 \cdot 2 + 30 \implies mcd(174, 72) = mcd(72, 30) \\
-72 = 30 \cdot 2 + 12 \implies mcd(72, 30) = mcd(30, 12) \\
-30 = 12 \cdot 2 + 6 \implies mcd(30, 12) = mcd(12, 6) \\
-12 = 6 \cdot 2 + 0 \implies mcd(12, 6) = mcd(6, 0) = 6
+174 = 72 \cdot 2 + 30 \implies \textnormal{mcd}(174, 72) = \textnormal{mcd}(72, 30) \\
+72 = 30 \cdot 2 + 12 \implies \textnormal{mcd}(72, 30) = \textnormal{mcd}(30, 12) \\
+30 = 12 \cdot 2 + 6 \implies \textnormal{mcd}(30, 12) = \textnormal{mcd}(12, 6) \\
+12 = 6 \cdot 2 + 0 \implies \textnormal{mcd}(12, 6) = \textnormal{mcd}(6, 0) = 6
 ```
 
-Por lo tanto, $mcd(174, 72) = 6$.
+Por lo tanto, $\textnormal{mcd}(174, 72) = 6$.
 
 Notemos que: 
 
 ```math 
 \begin{align*}
-mcd(72, 174) = (72, 174 - 72) = (72, 102) \\
-mcd(72, 102) = (72, 102 - 72) = (72, 30) \\
-mcd(30, 72) = (30, 72 - 30) = (30, 42) \\
-mcd(30, 42) = (30, 42 - 30) = (30, 12) \\
-mcd(12, 30) = (12, 30 - 12) = (12, 18) \\
-mcd(12, 18) = (12, 18 - 12) = (12, 6) \\
-mcd(6, 12) = (6, 12 - 6) = (6, 6) = 6
+\textnormal{mcd}(72, 174) = (72, 174 - 72) = (72, 102) \\
+\textnormal{mcd}(72, 102) = (72, 102 - 72) = (72, 30) \\
+\textnormal{mcd}(30, 72) = (30, 72 - 30) = (30, 42) \\
+\textnormal{mcd}(30, 42) = (30, 42 - 30) = (30, 12) \\
+\textnormal{mcd}(12, 30) = (12, 30 - 12) = (12, 18) \\
+\textnormal{mcd}(12, 18) = (12, 18 - 12) = (12, 6) \\
+\textnormal{mcd}(6, 12) = (6, 12 - 6) = (6, 6) = 6
 \end{align*}
 ```
 
-**Tenemos la propiedad de que** $mcd(a, b) = mcd(a, b - a)$
+**Tenemos la propiedad de que** $\textnormal{mcd}(a, b) = \textnormal{mcd}(a, b - a)$
 
 **Ejemplo 2:** 
 
-Encontrar el $mcd(174, 72)$ y escribir $d = s \cdot 174 + t \cdot 72$
+Encontrar el $\textnormal{mcd}(174, 72)$ y escribir $d = s \cdot 174 + t \cdot 72$
 
 ```math
 \begin{align*}
@@ -281,7 +281,7 @@ Encontrar el $mcd(174, 72)$ y escribir $d = s \cdot 174 + t \cdot 72$
 \end{align*}
 ```
 
-Sabemos que $mcd(174, 72) = 6$, por lo que podemos reemplazar los valores de los restos: 
+Sabemos que $\textnormal{mcd}(174, 72) = 6$, por lo que podemos reemplazar los valores de los restos: 
 
 ```math
 \begin{align*}
@@ -299,15 +299,15 @@ Por lo que $d = 6, \;s = 5, \;t = -12$.
 
 ## Mínimo común múltiplo (mcm)
 
-> Si $a, b \in \mathbb{Z}$, alguno de ellos no nulo, denotamos $mcm(a, b)$ al mínimo común múltiplo entre $a$ y $b$.
+> Si $a, b \in \mathbb{Z}$, alguno de ellos no nulo, denotamos $\textnormal{mcm}(a, b)$ al mínimo común múltiplo entre $a$ y $b$.
 
 La forma de calcularlo es:
 
 ```math
-mcm(a, b) = \frac{|ab|}{mcd(a, b)}
+\textnormal{mcm}(a, b) = \frac{|ab|}{\textnormal{mcd}(a, b)}
 ```
 
-**Si $a$ y $b$ son naturales coprimos, entonces $mcd(a, b) = 1$ y $mcm(a, b) = ab$.**
+**Si $a$ y $b$ son naturales coprimos, entonces $\; \textnormal{mcd}(a, b) = 1 \; \land \; \textnormal{mcm}(a, b) = ab$**
 
 ## Factorización prima 
 
@@ -319,7 +319,7 @@ mcm(a, b) = \frac{|ab|}{mcd(a, b)}
 
 Sean $a \in \mathbb{Z}$ y $p$ primo:
 
-**1)** $p \not{\mid} \; a \implies mcd(a, p) = 1$
+**1)** $p \not{\mid} \; a \implies \textnormal{mcd}(a, p) = 1$
 
 **2)** $p, p'$ primos y $p \mid p' \implies p = p'$
 
@@ -374,13 +374,13 @@ Por lo tanto, tenemos que:
 Ahora, tenemos ambos números expresados como producto de primos. Para dar con el mcd, debemos elegir los primos comunes con menor exponente:
 
 ```math
-mcd(4032, 11^8 \cdot 7^5 \cdot 3^2 \cdot 2) = 2^6 \cdot 3^2 \cdot 7
+\textnormal{mcd}(2^6 \cdot 3^2 \cdot 7, 11^8 \cdot 7^5 \cdot 3^2 \cdot 2) = 2^6 \cdot 3^2 \cdot 7
 ```
 
 Para el mcm, debemos elegir todos los primos con mayor exponente entre ambos números:
 
 ```math
-mcm(4032, 11^8 \cdot 7^5 \cdot 3^2 \cdot 2) = 2^6 \cdot 3^2 \cdot 7^5 \cdot 11^8
+\textnormal{mcm}(2^6 \cdot 3^2 \cdot 7, 11^8 \cdot 7^5 \cdot 3^2 \cdot 2) = 2^6 \cdot 3^2 \cdot 7^5 \cdot 11^8
 ```
 
 ***
