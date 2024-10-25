@@ -342,6 +342,48 @@ Podemos verificar si $467$ es primo o no:
 
 Comprobamos que los números no dividen a $467$, por lo que $467$ es primo.
 
+### Ejercicios resueltos - Factorización prima
+
+**1.**
+
+Calcular el mínimo común múltiplo y el máximo común divisor de $4032$ y $11^8 \cdot 7^5 \cdot 3^2 \cdot 2$.
+
+Primero podemos expresar el número $4032$ como producto de primos. Para ello necesitamos dividir el número por los primos más pequeños posibles:
+
+```math
+\begin{align*}
+2 &\mid 4032 \\
+2 &\mid 2016 \\
+2 &\mid 1008  \\
+2 &\mid 504 \\
+2 &\mid 252 \\
+2 &\mid 126 \\
+3 &\mid 63 \\
+3 &\mid 63 \\
+3 &\mid 21 \\
+7 &\mid 7
+\end{align*}
+```
+
+Por lo tanto, tenemos que: 
+
+```math
+2^6 \cdot 3^2 \cdot 7 = 4032
+```
+
+Ahora, tenemos ambos números expresados como producto de primos. Para dar con el mcd, debemos elegir los primos comunes con menor exponente:
+
+```math
+mcd(4032, 11^8 \cdot 7^5 \cdot 3^2 \cdot 2) = 2^6 \cdot 3^2 \cdot 7
+```
+
+Para el mcm, debemos elegir todos los primos con mayor exponente entre ambos números:
+
+```math
+mcm(4032, 11^8 \cdot 7^5 \cdot 3^2 \cdot 2) = 2^6 \cdot 3^2 \cdot 7^5 \cdot 11^8
+```
+
+
 ### Teorema - Numeros pares 
 
 > Si $m, n \in \mathbb{Z}$, tales que $m \geq 2 \land n \geq 2 \implies m^2 \neq 2n^2$.
