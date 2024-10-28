@@ -1,8 +1,9 @@
 export default {
   intro: "Introducción (AyED1)",
-  derivaciones: "Especificaciones, Verificaciones y Derivaciones",
   expresiones_cuantificadas: "Expresiones Cuantificadas",
+  programas_funcionales: "Programas Funcionales",
   haskell: "Haskell",
-  programas_imperativos: "Programas Imperativos y Estructuras de Datos",
+  estados_arreglos: "Estados y Arreglos",
+  programas_imperativos: "Programas Imperativos",
   c: "C"
 }

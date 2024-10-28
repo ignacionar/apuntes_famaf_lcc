@@ -3,3 +3,146 @@
 En **Algoritmos y Estructuras de Datos 1** se estudia el concepto de Especificación durante el desarrollo de Software; el paso intermedio entre un problema y su programa correspondiente. La especificación será la metodología aplicada para programas funcionales e imperativos. Se retoman conceptos de **Introducción a los Algoritmos**. 
 
 Entre algunos objetivos se encuentran: poder analizar algoritmos y verificarlos, identificar abstracciones al abordar problemas, e implementar soluciones eficientes.
+
+## Especificaciones y construcción de programas
+
+El proceso de construcción de programas se establece de la siguiente forma: 
+
+<>
+  <div style={{ textAlign: "center", margin: "20px auto" }}>
+    <p style={{fontWeight: "bold", fontSize: "24px"}}>Problema</p>
+    <p>(Impreciso/Informal, poco detallado)</p>
+    <p style={{fontSize: "24px"}}>&#8659;</p>
+    <p style={{fontWeight: "bold", fontSize: "24px"}}>Especificación</p>
+    <p>(Preciso/Formal, poco detallado)</p>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <div>
+        <p style={{fontSize: "24px"}}>&#8665;</p>
+        <p style={{fontWeight: "bold", fontSize: "24px"}}>Derivación</p>
+        <p>(Crear la definición)</p>
+        <p style={{fontSize: "24px"}}>&#8664;</p>
+      </div>
+      <div>
+        <p style={{fontSize: "24px"}}>&#8662;</p>
+        <p style={{fontWeight: "bold", fontSize: "24px"}}>Verificación</p>
+        <p>(Demostrar su validez)</p>
+        <p style={{fontSize: "24px"}}>&#8663;</p>
+      </div>
+    </div>
+    <p style={{fontWeight: "bold", fontSize: "24px"}}>Programa</p>
+    <p>(Preciso/Formal, detallado)</p>
+  </div>
+</>
+
+*** 
+
+En programación funcional, un programa consiste en **la definición de funciones y la reducción de expresiones.** 
+
+Podemos resolver problemas a través de funciones, las cuales tendrán la siguiente estructura: 
+
+<div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
+  <ul style={{ width: "fit-content", textAlign: "left" }}>
+    <li style={{ marginBottom: "6px"}}>**1)** Nombre de la función</li>
+    <li style={{ marginBottom: "6px"}}>**2)** Tipo de la función (Input / Output)</li>
+    <li style={{ marginBottom: "6px"}}>**3)** Predicado que indica **qué debe satisfacer la función** (lo sabremos al derivar).</li>
+  </ul>
+</div>
+
+Ejemplo: _"quisiera saber si un número es impar..."_
+
+<div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
+  <ul style={{ width: "fit-content", textAlign: "left" }}>
+    <li style={{ marginBottom: "6px"}}>**1)** $esImpar$</li>
+    <li style={{ marginBottom: "6px"}}>**2)** $Int \to Bool$</li>
+    <li style={{ marginBottom: "6px"}}>**3)** $mod.x.2 \neq 0$</li>
+  </ul>
+</div>
+
+Nuestro programa sería: 
+
+```math
+\begin{array}{l}
+  \Big\vert\ esImpar : Int \to Bool \\ 
+  \overline{\Big\vert \; esImpar.x \doteq } \; mod.x.2 \neq 0
+\end{array}
+```
+
+Y también podemos definirlo en Haskell: 
+  
+```haskell
+esImpar :: Int -> Bool
+esImpar x = mod x 2 /= 0
+```
+
+***
+
+En programación imperativa, un programa es **una secuencia de sentencias que modifican el estado (conjunto de variables con valores) de un sistema.**
+
+Podemos resolver problemas a través de instrucciones, siguiendo esta estructura:
+
+<div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
+  <ul style={{ width: "fit-content", textAlign: "left" }}>
+    <li style={{ marginBottom: "6px"}}>**1)** Constantes</li>
+    <li style={{ marginBottom: "6px"}}>**2)** Variables</li>
+    <li style={{ marginBottom: "6px"}}>**3)** Precondición</li>
+    <li style={{ marginBottom: "6px"}}>**4)** Programa incógnita (S)</li>
+    <li style={{ marginBottom: "6px"}}>**5)** Postcondición</li>
+  </ul>
+</div>
+
+Ejemplo: _"Dado el entero $N > 0$, contar cuántos números entre $0$ y $N$ son múltiplos de $6$..."_
+
+<div style={{margin: "20px auto", display: "flex", justifyContent: "center" }}>
+  <ul style={{ width: "fit-content", textAlign: "left" }}>
+    <li style={{ marginBottom: "6px"}}>**1)** $\textnormal{Const} \; N : Int;$</li>
+    <li style={{ marginBottom: "6px"}}>**2)** $\textnormal{Var} \; resultado : Int ;$</li>
+    <li style={{ marginBottom: "6px"}}>**3)** $\{ \; P : N > 0 \; \} $</li>
+    <li style={{ marginBottom: "6px"}}>**4)** $S$</li>
+    <li style={{ marginBottom: "6px"}}>**5)** $\{ \; Q : resultado = \bigl \langle \textnormal{N} i : 0 \leq i \leq N : i \; mod \; 6 = 0 \; \bigr \rangle \; \} $</li>
+  </ul>
+</div>
+
+Nuestro programa sería: 
+
+{/* <div style={{ width: "100%", display: "flex"}}> */}
+```math 
+\begin{aligned}
+&\{ \; N > 0 \; \} \\
+&numero\_actual, \; resultado := 0, \; 0 \\
+&\mathbf{do} \; numero\_actual \leq N \ \rightarrow \\
+&\quad \mathbf{if} \; numero\_actual \; mod \; 6 = 0 \rightarrow  \\
+&\quad \quad resultado := resultado + 1 \; ; \\
+&\quad □ \; numero\_actual \; mod \; 6 \neq 0 \rightarrow \\
+&\quad \quad \mathbf{skip} \; ; \\
+&\quad \mathbf{fi} \; ; \\
+&\quad numero\_actual := numero\_actual + 1 \; ; \\
+&\mathbf{od} \; ; \\
+&\{ \; numero\_actual = N + 1 \; \land \; resultado = \bigl \langle \textnormal{N} i : 0 \leq i \leq N : i \; mod \; 6 = 0 \; \bigr \rangle \; \}
+\end{aligned}
+```
+{/* </div> */}
+
+(La especificación no declara $numero\_actual$ puesto que es parte del programa final)
+
+Esto puede definirse en C: 
+
+```c
+#include <stdio.h>
+#define N 5
+
+int main() {
+    int numero_actual = 0;
+    int resultado = 0;
+
+    do {
+        if (numero_actual % 6 == 0) {
+            resultado += 1; 
+        }         
+        numero_actual += 1; 
+    } while (numero_actual <= N); 
+
+    printf("Resultado: %d\n", resultado); 
+
+    return 0;
+}
+```
