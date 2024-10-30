@@ -34,19 +34,19 @@ sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
 
 ```math
 \begin{array}{ll}
-  sum.[] \\
+  \underline{sum.[]} \\
   \\
   \equiv \{ \textnormal{ Especificación de } sum \; \} \\
   \\
-  \bigl \langle \; \sum i : 0 \leq i < \# [] : [].i \; \bigr \rangle \\
+  \bigl \langle \; \sum i : 0 \leq i < \underline{ \# []} : [].i \; \bigr \rangle \\
   \\
   \equiv \{ \textnormal{ Definición de } \# \; \} \\
   \\
-  \bigl \langle \; \sum i : 0 \leq i < 0 : [].i \; \bigr \rangle \\
+  \bigl \langle \; \sum i : \underline{0 \leq i < 0 }: [].i \; \bigr \rangle \\
   \\
   \equiv \{ \textnormal{ Aritmética } \} \\
   \\
-  \bigl \langle \; \sum i : False : [].i \; \bigr \rangle \\
+  \bigl \langle \; \sum i : \underline{False} : [].i \; \bigr \rangle \\
   \\
   \equiv \{ \textnormal{ Rango vacío } \} \\
   \\
@@ -446,9 +446,9 @@ Primero evaluamos el caso base, $xs = []$:
   \\
   \equiv \{ \textnormal{ Especificación de } pin8 \; \} \\
   \\
-  \bigl \langle \; \exists as, bs : \underline{[] = as \textnormal{\;⧺\;} bs} : prod.as = 8 \; \bigr \rangle \\
+  \bigl \langle \; \exists as, bs : \underline{ [] = as \textnormal{\;⧺\;} bs }: prod.as = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Propiedad de } \textnormal{\;⧺\;} \; \} \\
+  \equiv \{ \textnormal{ Propiedad de } \textnormal{⧺\;} \} \\
   \\
   \bigl \langle \; \exists as, bs : \underline{as} = [] \land bs = [] : prod.\underline{as} = 8 \; \bigr \rangle \\
   \\
@@ -456,9 +456,9 @@ Primero evaluamos el caso base, $xs = []$:
   \\
   \bigl \langle \; \exists bs : \underline{bs = []} : prod.[] = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Rango unitario} \} \\
+  \equiv \{ \textnormal{ Rango unitario} \; \} \\
   \\
-  {prod.[]} = 8 \\
+  \underline{prod.[]} = 8 \\
   \\
   \equiv \{ \textnormal{ Definición de } prod \; \} \\
   \\
@@ -530,9 +530,9 @@ Evaluamos el caso base de $gpin8$:
   \\
   \equiv \{ \textnormal{ Especificación de } gpin8 \; \} \\
   \\
-  \bigl \langle \; \exists as, bs : [] = as  \textnormal{\;⧺\;} bs : n * prod.as = 8 \; \bigr \rangle \\
+  \bigl \langle \; \exists as, bs : \underline{ [] = as  \textnormal{\;⧺\;} bs } : n * prod.as = 8 \; \bigr \rangle \\
   \\
-  \equiv \{ \textnormal{ Propiedad de } ⧺ \} \\
+  \equiv \{ \textnormal{ Propiedad de } ⧺ \; \} \\
   \\
   \bigl \langle \; \exists \underline{as}, bs : \underline{as} = [] \land bs = [] : n * prod.\underline{as} = 8 \; \bigr \rangle \\
   \\
@@ -592,7 +592,7 @@ Seguimos con el paso inductivo de $gpin8$:
   \\
   \underline{n * 1} = 8 \; \lor \; \underline{\bigl \langle \; \exists as, bs : xs = as \textnormal{\;⧺\;} bs : n * x * prod.as = 8 \; \bigr \rangle} \\
   \\
-  \equiv \{ \textnormal{ Aritmética, hipótesis inductiva con } n = (n * x) \} \\
+  \equiv \{ \textnormal{ Aritmética, hipótesis inductiva con } n = (n * x) \; \} \\
   \\
   n = 8 \; \lor \; gpin8.(n * x).xs
 \end{array}
@@ -665,11 +665,15 @@ No podemos computar $+\infty$, por lo que necesitamos cambiar nuestro esquema in
   \\
   \equiv \{ \textnormal{ Lógica } \} \\
   \\
-  \bigl \langle \; \textnormal{Min} \; i : i = 0 : [x].i \; \bigr \rangle \\
+  \bigl \langle \; \textnormal{Min} \; i : \underline{i = 0} : [x].i \; \bigr \rangle \\
   \\
   \equiv \{ \textnormal{ Rango unitario } \} \\
   \\
-  x
+  \underline{[x].0} \\
+  \\
+  \equiv \{ \textnormal{ Definición de } . \; \} \\
+  \\
+  x 
 \end{array}
 ```
 
@@ -695,7 +699,7 @@ Ahora seguimos con el paso inductivo $xs = (x \triangleright y \triangleright xs
   \\
   x \; \textnormal{min} \; \underline{\bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# (y \triangleright xs) : (y \triangleright xs).i \; \bigr \rangle} \\
   \\
-  \equiv \{ \textnormal{ Hipótesis Inductiva con } (y \triangleright xs) \} \\
+  \equiv \{ \textnormal{ Hipótesis Inductiva con } (y \triangleright xs) \; \} \\
   \\
   x \; \textnormal{min} \; minimo.(y \triangleright xs)
 \end{array}
@@ -747,7 +751,7 @@ Para ello podemos comenzar del lado derecho:
   \\
   \equiv \{ \textnormal{ Rango vacío } \} \\
   \\
-  0 \\
+  \underline{0} \\
   \\
   \equiv \{ \textnormal{ Definición de } sum\; \} \\
   \\
@@ -796,6 +800,3 @@ Para ello podemos comenzar del lado derecho:
 ```
 
 Por lo tanto, probamos la propiedad $P.(x \triangleright xs)$, y su validez en cualquier lista.
-
-{/* ## Verificación (PI) */}
-

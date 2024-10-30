@@ -290,9 +290,9 @@ Por ejemplo, la siguiente especificación:
 \begin{aligned}
 &\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
 &\textnormal{Var} \; promedio : Float; \\
-&\{ P: \; N \geq 0 \; \} \\
+&\{ \; P: \; N \geq 0 \; \} \\
 &S \\
-&\{ Q: \; promedio = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; / \; N \; \}
+&\{ \; Q: \; promedio = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; / \; N \; \}
 \end{aligned}
 ```
 
@@ -303,11 +303,11 @@ Cambiando un poco la estructura y agregando una variable $suma$ sería:
 \begin{aligned}
 &\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
 &\textnormal{Var} \; promedio : Float, \; suma : Int; \\
-&\{ P: \; N \geq 0 \; \} \\
+&\{ \; P: \; N \geq 0 \; \} \\
 &S_1; \\
-&\{ Q: \; suma = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; \} \\
+&\{ \; Q: \; suma = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; \} \\
 &S_2; \\
-&\{ R: \; promedio = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; / \; N \; \}
+&\{ \; R: \; promedio = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; / \; N \; \}
 \end{aligned}
 ```
 
@@ -324,9 +324,9 @@ Por ejemplo, si queremos sumar los elementos de un arreglo, necesitaremos recorr
 \begin{aligned}
 &\textnormal{Const} \; N : Int, \; A : array[0,N) of Int; \\
 &\textnormal{Var} \; res, \; i : Int; \\
-&\{ P: \; N \geq 0 \; \} \\
+&\{ \; P: \; N \geq 0 \; \} \\
 &S \\
-&\{ Q: \; res = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; \}
+&\{ \; Q: \; res = \bigl \langle \; \sum i : 0 \leq i < N : A.i \; \bigr \rangle \; \}
 \end{aligned}
 ```
 
@@ -576,7 +576,7 @@ E = \underline{0 \geq 0} \\
 \\
 \underline{E = True} \\
 \\
-\equiv \{ \textnormal{ Elijo } E = True \} \\
+\equiv \{ \textnormal{ Elijo } E = True \; \} \\
 \\
 True
 \end{array}
@@ -819,7 +819,7 @@ E = \langle \; \textnormal{N} i, \; j : \underline{0 \leq i < n \lor i = n} : A.
 \\
 \equiv \{ \textnormal{ Partición de rango } \} \\
 \\
-E = \underline{\langle \; \textnormal{N} i, \; j : 0 \leq i < n : A.i = A.j \; \bigr \rangle} \; + \\ \langle \; \textnormal{N} i, \; j : i = n : A.i = A.j \; \bigr \rangle \; \\ 
+E = \underline{\langle \; \textnormal{N} i, \; j : 0 \leq i < n : A.i = A.j \; \bigr \rangle} \; + \langle \; \textnormal{N} i, \; j : i = n : A.i = A.j \; \bigr \rangle \; \\ 
 \\
 \equiv \{ \textnormal{ Hipótesis de } r \; \} \\
 \\
@@ -942,7 +942,7 @@ E = \langle \; \textnormal{N} i, \; j : \underline{0 \leq i < m \lor i = m} : A.
 \\
 \equiv \{ \textnormal{ Partición de rango } \} \\
 \\
-E = \underline{\langle \; \textnormal{N} i, \; j : 0 \leq i < m : A.i = A.j \; \bigr \rangle} \; + \\ \langle \; \textnormal{N} i, \; j : i = m : A.i = A.j \; \bigr \rangle \\
+E = \underline{\langle \; \textnormal{N} i, \; j : 0 \leq i < m : A.i = A.j \; \bigr \rangle} \; + \langle \; \textnormal{N} i, \; j : i = m : A.i = A.j \; \bigr \rangle \\
 \\
 \equiv \{ \textnormal{ Hipótesis de } s \; \} \\
 \\
