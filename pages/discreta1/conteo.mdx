@@ -166,17 +166,10 @@ Para los siguientes dígitos, no hay restricciones. Por lo tanto, hay $9 \cdot 1
 
 - ¿Cuantas formas es posible ordenar la palabra "MATEMATICA"?
 
-En este caso, observemos que $\textnormal{MATEMATICA}$ tiene la letra $A$ repetida dos veces. Si distinguieramos la letra $A$ de $A'$ tendríamos: 
+En este caso, observemos que $\textnormal{MATEMATICA}$ tiene las letras "A", "M" y "T" repetidas. Por lo tanto, si las letras fuesen distintas, habría $10!$ formas de ordenar la palabra. Sin embargo, debemos dividir por las permutaciones repetidas. 
 
 ```math
-\textnormal{MATEMATICA'} \\
-\textnormal{MA'TEMATICA}
-```
-
-De esta forma, si permutamos las letras obtendríamos palabras repetidas. En este caso necesitamos seleccionar $10$ letras con orden y sin repetición, y para ello tenemos $10!$ permutaciones. Sin embargo, debemos dividir por $2!$ para eliminar las permutaciones repetidas de la letra $A$. 
-
-```math
-\frac{10!}{2!} = 1814400
+\frac{10!}{3!2!2!} = 151200
 ```
 
 ***
