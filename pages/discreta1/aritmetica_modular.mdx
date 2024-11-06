@@ -61,7 +61,7 @@ Algunas ecuaciones lineales no tienen solución, otras tienen infinitas solucion
 
 ### Teorema - mcd en congruencias
 
-> Sean $a, b \in \mathbb{Z} \; \land \; m \in \mathbb{Z}+$, y denotamos $d = mcd(a, m)$,\
+> Sean $a, b \in \mathbb{Z} \; \land \; m \in \mathbb{Z}+$, y denotamos $d = \textnormal{mcd}(a, m)$,\
 entonces hay solución para la ecuación $ax \equiv b \pmod{m} \iff d \mid b$.
 
 En este caso dada una solución $x_0$, todas las soluciones son de la forma $x = x_0 + kn, \; k \in \mathbb{Z} \; \land \; n = \frac{m}{d}$
@@ -140,14 +140,14 @@ Una forma de resolver este problema es encontrar soluciones con enteros no tan g
 
 La solución general es $x = 6 + 11k, \; k \in \mathbb{Z}$. El patrón se repite cada $11$.
 
-Otra forma de resolver el problema, es mediante el $mcd(3, 11)$. 
+Otra forma de resolver el problema, es mediante el $\textnormal{mcd}(3, 11)$. 
 
 ```math
 \begin{align*}
 11 &= 3 \cdot 3 + 2 \\
 3 &= 2 \cdot 1 + 1 \; (*) \\
 2 &= 1 \cdot 2 + 0 \\
-mcd(3, 11) &= 1 \\
+\textnormal{mcd}(3, 11) &= 1 \\
 1 &\mid 7 
 \end{align*}
 ```
@@ -181,13 +181,13 @@ Encontrar todos los $x \in \mathbb{Z}$ que cumplan la congruencia tal que $0 \le
 6x \equiv 3 \pmod{57}
 ```
 
-Para resolver este problema, primero encontramos el $mcd(6, 57)$ y comprobamos si divide a $3$:
+Para resolver este problema, primero encontramos el $\textnormal{mcd}(6, 57)$ y comprobamos si divide a $3$:
 
 ```math
 \begin{align*}
 57 &= 6 \cdot 9 + 3 \\
 6 &= 3 \cdot 2 + 0 \\
-mcd(6, 57) &= 3 \\
+\textnormal{mcd}(6, 57) &= 3 \\
 3 &\mid 3
 \end{align*}
 ```
@@ -268,7 +268,7 @@ Hallar la solución al sistema de congruencias:
   \right.
 ```
 
-Primero debemos determinar si este sistema tiene solución. De acuerdo al **Teorema chino del resto**, si los módulos son coprimos, entonces el sistema tiene solución. En este caso $13, 11, 8$ son coprimos.
+Primero debemos determinar si este sistema tiene solución. De acuerdo al **Teorema chino del resto**, si los módulos son coprimos entre sí, entonces el sistema tiene solución. En este caso si se cumple.
 
 Viendo la primera ecuación, podemos determinar que: 
 
