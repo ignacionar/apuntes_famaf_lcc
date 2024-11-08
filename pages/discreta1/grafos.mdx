@@ -1,0 +1,192 @@
+import Image from 'next/image';
+
+# Grafos y sus representaciones 
+
+> Un grafo $G$ consiste de un conjunto finito $V$, cuyos miembros son llamados **vértices**, y un conjunto de 2-subconjuntos de $V$, cuyos miembros son **aristas**
+
+Escribimos $G = (V, E)$ para denotar un grafo $G$ con conjunto de vértices $V$ y conjunto de aristas $E$.
+
+Un ejemplo de un grafo $G = (V, E)$ dado por los conjuntos: 
+
+```math
+V = \{a, b, c, d, e\}, \; \; E = \{\{a, b\}, \{a, d\}, \{b, z\}, \{c, d\}, \{d, z\} \}
+```
+
+La _representación pictórica_ de un grafo puede ser más fácil de entender a simple vista:
+
+<br />
+
+<center>
+  <Image src="/discreta1/grafo1.png" alt="grafo" height={500} width={500} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+</center>
+
+<br />
+
+Sin embargo esta representación no es útil para comunicarse con una computadora. Debe representarse mediante conjuntos o una tabla. 
+
+Los vértices $x, y$ de un grafo son **adyacentes** cuando $\{x, y\}$ es una arista. 
+
+Podemos representar un grafo $G = (V, E)$ por su **lista de adyacencia**, donde cada vértice $v$ encabeza una lista de los vértices adyacentes a $v$: 
+
+<br />
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table>
+      <thead style={{outline: "black 1px solid" }}>
+        <tr >
+          <th>$a$</th>
+          <th>$b$</th>
+          <th>$c$</th>
+          <th>$d$</th>
+          <th>$z$</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>$b$</td>
+        <td>$a$</td>
+        <td>$d$</td>
+        <td>$a$</td>
+        <td>$b$</td>
+      </tr>
+      <tr>
+        <td>$d$</td>
+        <td>$z$</td>
+        <td></td>
+        <td>$c$</td>
+        <td>$d$</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>$z$</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Este grafo podría representarse en Python como:
+
+```python
+[[b, d], [a, z], [d], [a, c, z], [b, d]]
+```
+
+## Isomorfismo de grafos 
+
+> Dos grafos $G_1$ y $G_2$ son **isomorfos** si existe una biyección $\alpha$ entre el conjunto de vértices de $G_1$ y $G_2$ tal que\
+Si $\{x, y\}$ es una arista en $G_1$ entonces $\{\alpha(x), \alpha(y)\}$ es una arista en $G_2$.\
+Si $\{z, w\}$ es una arista en $G_2$ entonces $\{\alpha^{-1}(z), \alpha^{-1}(w)\}$ es una arista en $G_1$.
+
+Por ejemplo: 
+
+<br />
+
+<div style={{ display: "flex", flexDirection: "row", margin: "0 auto", width: "100%", justifyContent: "center", gap: "20px" }}>
+  <Image src="/discreta1/grafo2.png" alt="grafo" height={300} width={300} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+  <Image src="/discreta1/grafo3.png" alt="grafo" height={300} width={300} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+</div>
+
+La biyección es dada por: 
+
+```math 
+\alpha(a) = t, \; \alpha(b) = v, \; \alpha(c) = w, \; \alpha(d) = u
+```
+
+Comprobando que a cada arista en $G_1$ le corresponde una arista de $G_2$ y viceversa.
+
+Si dos grafos tienen diferente cantidad de vértices, entonces **no pueden ser isomorfos**. Si tienen la misma cantidad de vértices, pero diferente cantidad de aristas, entonces hay biyecciones de vértices pero **ninguna de estas puede ser un isomorfismo**.
+
+Determinar la igualdad de dos grafos puede ser una tarea computacional costosa dependiendo de la cantidad de vértices y aristas.
+
+### Subgrafos 
+
+> Sea $G = (V, E)$ un grafo. Un **subgrafo** de $G$ es un grafo $G' = (V', E')$ donde $V' \subset V$ y $E' \subset E$.
+
+Podemos determinar si dos grafos no son isomorfos en base a sus subgrafos:
+
+<br />
+
+<div style={{ display: "flex", flexDirection: "row", margin: "0 auto", width: "100%", justifyContent: "center", gap: "20px" }}>
+  <Image src="/discreta1/grafo4.png" alt="grafo" height={400} width={400} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+  <Image src="/discreta1/grafo5.png" alt="grafo" height={400} width={400} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+</div>
+
+Hay un subgrafo $K_1 \subset G_1$ que contiene 1 arista. Pero $K_1 \not\subset G_2$. Por lo tanto, $G_1$ y $G_2$ no son isomorfos.
+
+## Valencias 
+
+> La **valencia** de un vértice $v$ en un grafo $G = (V, E)$ es el número de aristas que tienen a $v$ como extremo. Se utiliza la notación $\delta(v)$ para la valencia de $v$.
+
+```math 
+\delta(v) = |D_v|, \; D_v = \{e \in E \mid v \in e \}
+```
+
+En una lista de adyacencia, la valencia de un vértice es la cantidad de elementos de la columna del vértice: 
+
+<br />
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table>
+      <thead style={{outline: "black 1px solid" }}>
+        <tr >
+          <th>$a$</th>
+          <th>$b$</th>
+          <th>$c$</th>
+          <th>$d$</th>
+          <th>$z$</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>$b$</td>
+        <td>$a$</td>
+        <td>$b$</td>
+        <td>$a$</td>
+        <td>$a$</td>
+      </tr>
+      <tr>
+        <td>$d$</td>
+        <td>$z$</td>
+        <td></td>
+        <td>$z$</td>
+        <td>$b$</td>
+      </tr>
+      <tr>
+        <td>$z$</td>
+        <td>$c$</td>
+        <td></td>
+        <td>$b$</td>
+        <td>$d$</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>$d$</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+```math 
+\delta(a) = 3, \; \delta(b) = 4, \; \delta(c) = 1, \; \delta(d) = 3, \; \delta(z) = 3 
+```
+
+Diremos que un vértice es **par** si su valencia es par, e **impar** si su valencia es impar.
+
+### _Handshaking lemma_
+
+> La suma de las valencias de los vértices de un grafo $G = (V, E)$ es igual al doble de la cantidad de aristas de $G$.
+
+```math
+\sum_{v \; \in \; V} \delta(v) = 2|E|
+```
+
+Por ejemplo, en base a la lista de valencias anterior: 
+
+```math
+\delta(a) + \delta(b) + \delta(c) + \delta(d) + \delta(z) = 3 + 4 + 1 + 3 + 3 = 14
+```
