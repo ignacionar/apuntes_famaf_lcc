@@ -309,7 +309,52 @@ La forma de calcularlo es:
 
 **Si $a$ y $b$ son naturales coprimos, entonces $\; \textnormal{mcd}(a, b) = 1 \; \land \; \textnormal{mcm}(a, b) = ab$**
 
-## Factorización prima 
+## Reglas de divisibilidad 
+
+Existen reglas o patrones determinados que nos permiten saber si un número es divisible por otro. Algunos de los mas utilizados son:
+
+- Un número es divisible por $2$ si su última cifra es par. 
+
+- Un número es divisible por $3$ si la suma de sus cifras es divisible por $3$. 
+
+- Un número es divisible por $4$ si termina en $00$ o es divisible por $4$. 
+
+- Un número es divisible por $5$ si termina en $5$ o $0$
+
+- Un número es divisible por $6$ si la suma de sus cifras es divisible por $2$ y $3$. 
+
+- Un número es divisible por $9$ si la suma de sus cifras da $9$. 
+
+- Un número es divisible por $10$ si su última cifra es $0$. 
+
+- Un número es divisible por $11$ si la resta entre la suma de cifras en posición impar y la suma de cifras en posición par es divisible por $11$.
+
+### Ejercicios resueltos - Reglas de divisibilidad  
+
+**1.**
+
+Determinar si $110110001100$ es primo.
+
+La última cifra es $0$, por lo tanto es divisible por $2$. La suma de sus cifras es $6$, por lo que es divisible por $2, 3, 6$. El número termina en $0$, también es divisible por $5, 10$. El número no es primo. 
+
+***
+
+**2.**
+
+Existe un único número $d \in \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9 \}$ tal que $11 \mid 15646897d$
+ 
+Primero sumamos las cifras en posición impares y sumar las cifras en posición pares:
+
+```math 
+1 + 6 + 6 + 9 + d = 22 + d \\
+5 + 4 + 8 + 7 = 24 
+```
+
+Descartamos $0, 1$ ya que $(22 - 24) \lor (23 - 24) < 0$. Mientras que $2$ es candidato, $22 + 2 - 24 = 0$. 
+
+Si $22 + d = 35$ podriamos restar $24$ y obtener el siguiente número divisible por $11$. Sin embargo, esto no es posible con los números del conjunto, por lo tanto solo tenemos que $d = 2$ cumple la condición. Verdadero.
+
+## Factorización prima
 
 ### Teorema Fundamental de la Aritmética
 
