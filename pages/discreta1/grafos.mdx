@@ -190,6 +190,8 @@ Por ejemplo, en base a la lista de valencias anterior:
 \delta(a) + \delta(b) + \delta(c) + \delta(d) + \delta(e) = 3 + 3 + 1 + 2 + 3 = 12
 ```
 
+**No** existe un grafo que pueda contradecir esta propiedad.
+
 ## Grafos regulares, planares y conexos
 
 > Un grafo regular es aquel con la **misma valencia $r$ en todos sus vértices.** 
@@ -222,7 +224,6 @@ Algunos ejemplos en el grafo $G_1$ anterior son:
 
 - $a, b, e, d, a$ es un ciclo. 
 
-
 ### Ciclo _Hamiltoniano_
 
 > Un ciclo _Hamiltoniano_ en un grafo $G$ es un ciclo que **pasa por todos los vértices de $G$ exactamente una vez.**
@@ -230,3 +231,206 @@ Algunos ejemplos en el grafo $G_1$ anterior son:
 ### Caminata _Euleriana_
 
 > Una caminata _Euleriana_ en un grafo $G$ es una caminata que **usa todas las aristas de $G$ exactamente una vez.**
+
+## Coloreo de grafos
+
+> Un **coloreo** de un grafo $G = (V, E)$ es una función $c: V \rightarrow S$ donde $S$ es un conjunto de colores. El **número cromático** de $G$ es el mínimo número de colores necesarios para colorear $G$.
+
+La función de coloreo cumple la propiedad: 
+
+```math
+\forall \{x, y\} \in E, \; c(x) \neq c(y)
+```
+
+Es decir, dos vértices adyacentes no pueden tener el mismo color. Si bien no existe un algoritmo definitivo para determinar el número cromático de un grafo, podemos usar el Algoritmo _Greedy_ para obtener una aproximación.
+
+### Algoritmo _Greedy_
+
+> Si hay vértices no coloreados, elegimos un vértice sin color y le otorgamos un color que no tengan sus vecinos.
+
+Primero definimos un orden a los vértices: $v_0, v_1, \ldots, v_n$. Definimos $S$ como el conjunto de colores.
+
+- Le damos el color $0$ a $v_0$.
+- Tomamos el siguiente vértice, y le damos el color más bajo que no tengan sus vecinos.
+- Al terminar el último vértice, el número cromático es el cardinal de $S$.
+
+### Ejercicios resueltos - Grafos 
+
+**1.**
+
+Dar los componentes/subgrafos del grafo cuya lista de adyacencias es: 
+
+<br />
+
+<div style={{display: "flex", justifyContent: "center"}}>
+  <table>
+      <thead style={{outline: "black 1px solid" }}>
+        <tr>
+          <th>$a$</th>
+          <th>$b$</th>
+          <th>$c$</th>
+          <th>$d$</th>
+          <th>$e$</th>
+          <th>$f$</th>
+          <th>$g$</th>
+          <th>$h$</th>
+          <th>$i$</th>
+          <th>$j$</th>
+          <th>$k$</th>
+          <th>$l$</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>$c$</td>
+        <td>$d$</td>
+        <td>$a$</td>
+        <td>$b$</td>
+        <td>$c$</td>
+        <td>$b$</td>
+        <td>$a$</td>
+        <td>$d$</td>
+        <td>$a$</td>
+        <td>$f$</td>
+        <td>$e$</td>
+        <td>$f$</td>
+      </tr>
+      <tr>
+        <td>$g$</td>
+        <td>$f$</td>
+        <td>$e$</td>
+        <td>$h$</td>
+        <td>$k$</td>
+        <td>$h$</td>
+        <td>$k$</td>
+        <td>$f$</td>
+        <td>$k$</td>
+        <td>$l$</td>
+        <td>$g$</td>
+        <td>$h$</td>
+      </tr>
+      <tr>
+        <td>$i$</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>$j$</td>
+        <td></td>
+        <td>$l$</td>
+        <td></td>
+        <td></td>
+        <td>$i$</td>
+        <td>$j$</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>$l$</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Podemos dibujar los siguientes subgrafos $G_1, G_2$: 
+
+<br />
+
+<div style={{ display: "flex", flexDirection: "row", margin: "0 auto", width: "100%", justifyContent: "center", gap: "20px" }}>
+  <Image src="/discreta1/grafo6.png" alt="grafo" height={400} width={400} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+  <Image src="/discreta1/grafo7.png" alt="grafo" height={400} width={400} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+</div>
+
+***
+
+**2.**
+
+Determinar si los subgrafos $G_1, G_2$ son isomorfos.
+
+Podemos determinar que no son isomorfos, observando el vértice $f$ hay un subgrafo $K_4 \subset G_1$ que contiene 4 aristas y $K_4 \not\subset G_2$.
+
+***
+
+**3.**
+
+Determinar si alguno de los subgrafos tiene un ciclo _Hamiltoniano_.
+
+El subgrafo $G_2$ tiene un ciclo _Hamiltoniano_ que pasa por todos los vértices exactamente una vez: 
+
+```math
+b, f, j, l, h, d, b 
+```
+
+***
+
+**4.**
+
+Aplicar el Algoritmo _Greedy_ para colorear $G_1, G_2$ y dar sus números cromáticos.
+
+Para aplicar el Algoritmo _Greedy_ en $G_1$, podemos seguir el siguiente orden: 
+
+```math
+i, e, k, c, a, g 
+```
+
+Ahora aplicamos los pasos del Algoritmo: 
+
+- **1)** $\; i$ tiene colores vecinos $S = \emptyset \implies $c(i) = 0$.
+- **2)** $\; e$ tiene colores vecinos $S = \emptyset \implies $c(e) = 0$.
+- **3)** $\; k$ tiene colores vecinos $S = \{0\} \implies c(k) = 1$.
+- **4)** $\; c$ tiene colores vecinos $S = \{0\} \implies c(c) = 1$.
+- **5)** $\; a$ tiene colores vecinos $S = \{0, 1\} \implies c(a) = 2$.
+- **6)** $\; g$ tiene colores vecinos $S = \{1, 2\} \implies c(g) = 3$.
+
+Por lo tanto, el número cromático de $G_1$ es $3$. Podría colorearse de la siguiente forma:
+
+<br />
+
+<center>
+  <Image src="/discreta1/grafo8.png" alt="grafo" height={500} width={500} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+</center>
+
+<br />
+
+Para $G_2$, podemos seguir el siguiente orden: 
+
+```math
+l, d, h, b, j, f 
+```
+
+Aplicando los pasos del Algoritmo:
+
+- **1)** $\; l$ tiene colores vecinos $S = \emptyset \implies $c(l) = 0$.
+- **2)** $\; d$ tiene colores vecinos $S = \emptyset \implies $c(d) = 0$.
+- **3)** $\; h$ tiene colores vecinos $S = \{0\} \implies c(h) = 1$.
+- **4)** $\; b$ tiene colores vecinos $S = \{0\} \implies c(b) = 1$.
+- **5)** $\; j$ tiene colores vecinos $S = \{0\} \implies c(j) = 1$.
+- **6)** $\; f$ tiene colores vecinos $S = \{0, 1\} \implies c(f) = 2$.
+
+Por lo tanto, el número cromático de $G_2$ es $2$. Podría colorearse de la siguiente forma:
+
+<br />
+
+<center>
+  <Image src="/discreta1/grafo9.png" alt="grafo" height={500} width={500} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+</center>
+
+***
+
+**5.**
+
+Determinar las valencias de todos los vértices en $G_1, G_2$:
+
+```math
+\delta(a) = 3, \; \delta(b) = 2, \; \delta(c) = 2, \; \delta(d) = 2, \; \delta(e) = 2, \; \delta(f) = 4, \\ \delta(g) = 2, \; \delta(h) = 3, \; \delta(i) = 2, \; \delta(j) = 2, \; \delta(k) = 3, \;
+\delta(l) = 3
+```
