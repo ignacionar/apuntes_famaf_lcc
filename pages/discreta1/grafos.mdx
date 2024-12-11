@@ -208,6 +208,28 @@ Un ejemplo que cumple ambas condiciones es este grafo:
   <Image src="/discreta1/grafo4.png" alt="grafo" height={500} width={500} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
 </center>
 
+## Árboles 
+
+> Un grafo $G = (V, E)$ es árbol si es **conexo y sin ciclos**, tal que $|E| = |V| - 1$ y donde cada par de vértices está conectado por **un único camino.**
+
+Un árbol sin vértices es un **árbol vacío**. Un árbol con vértices tiene un vértice especial llamado **raíz**, del cual pueden derivarse otros vértices estableciendo una jerarquía o relación de dependencia entre ellos.
+
+En Haskell, podríamos definir un árbol binario de búsqueda, donde partiendo de un nodo o vértice podemos obtener como máximo, dos adyacentes:
+
+```haskell
+data ABB a = Vacio | Nodo a (ABB a) (ABB a) deriving (Show)
+```
+
+Una representación podría ser: 
+
+<br />
+
+<center>
+  <Image src="/discreta1/grafo10.png" alt="grafo" height={500} width={500} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}  />
+</center>
+
+En este tipo de árbol se cumple que los valores del subárbol izquierdo son menores al valor del nodo raíz, y los valores del subárbol derecho son mayores al valor del nodo raíz.
+
 ## Ciclos, caminos y caminatas
 
 > Una **caminata** en un grafo $G$ es una secuencia de vértices $v_0, v_1, \ldots, v_k$ tal que $\{v_i, v_{i+1}\}$ es una arista de $G$ para $0 \leq i < k$.
@@ -434,3 +456,4 @@ Determinar las valencias de todos los vértices en $G_1, G_2$:
 \delta(a) = 3, \; \delta(b) = 2, \; \delta(c) = 2, \; \delta(d) = 2, \; \delta(e) = 2, \; \delta(f) = 4, \\ \delta(g) = 2, \; \delta(h) = 3, \; \delta(i) = 2, \; \delta(j) = 2, \; \delta(k) = 3, \;
 \delta(l) = 3
 ```
+
