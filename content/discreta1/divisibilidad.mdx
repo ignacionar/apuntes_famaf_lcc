@@ -12,53 +12,67 @@ Sean $a, b, c \in \mathbb{Z}$, entonces:
 **1)** $1 \mid a$
 
 ```math 
-a = 1 \cdot a \\
-a = a \cdot 1 \\
--a = a \cdot (-1)
+\begin{aligned}
+a &= 1 \cdot a \\
+a &= a \cdot 1 \\
+-a &= a \cdot (-1)
+\end{aligned}
 ```
 
 **2)** $a \mid 0$ y solo $0 \mid 0$
 
 ```math
-0 = a \cdot 0 \\
-0 \mid a \implies a = 0 \cdot q = 0
+\begin{aligned}
+0 &= a \cdot 0 \\
+0 \mid a &\implies a = 0 \cdot q = 0
+\end{aligned}
 ```
 
 **3)** Si $a \mid b \implies a \mid bc$
 
 ```math
-a \mid b \implies b = a \cdot q \\
-bc = a \cdot qc \implies a \mid bc
+\begin{aligned}
+a \mid b &\implies b = a \cdot q \\
+bc = a \cdot qc &\implies a \mid bc
+\end{aligned}
 ```
 
 **4)** Si $a \mid b \; \land \; a \mid (b + c)$
 
 ```math
-a \mid b \land a \mid c \implies b = a \cdot q \land c = a \cdot q' \\
-b + c = a \cdot q + a \cdot q' = a(q + q') \implies a \mid (b + c)
+\begin{aligned}
+&a \mid b \land a \mid c \implies b = a \cdot q \land c = a \cdot q' \\
+&b + c = a \cdot q + a \cdot q' = a(q + q') \implies a \mid (b + c)
+\end{aligned}
 ```
 
-**5)** Si $a \mid b \; \land \; a \mid c \implies a \mid (rb + sc) \forall r, s \in \mathbb{Z}$
+**5)** Si $a \mid b \; \land \; a \mid c \implies a \mid (rb + sc) \; \forall r, s \in \mathbb{Z}$
 
 ```math
-a \mid b \land a \mid c \implies b = a \cdot q \land c = a \cdot q' \\
-rb + sc = a \cdot rq + a \cdot sq' = a(rq + sq') \implies a \mid (rb + sc)
+\begin{aligned}
+&a \mid b \land a \mid c \implies b = a \cdot q \land c = a \cdot q' \\
+&rb + sc = a \cdot rq + a \cdot sq' = a(rq + sq') \implies a \mid (rb + sc)
+\end{aligned}
 ```
 
 **6)** Si $a \mid b + c \; \land \; a \mid c \implies a \mid b$
 
 ```math
-a \mid b + c \land a \mid c \implies b + c = a \cdot q \land c = a \cdot q' \\
-b = (b + c) - c = a \cdot q - a \cdot q' = a(q - q') \implies a \mid b
+\begin{aligned}
+&a \mid b + c \land a \mid c \implies b + c = a \cdot q \land c = a \cdot q' \\
+&b = (b + c) - c = a \cdot q - a \cdot q' = a(q - q') \implies a \mid b
+\end{aligned}
 ```
 
 **7)** Si $a \mid b \implies \pm a \mid \pm b$
 
 ```math
-a \mid b \implies b = a \cdot q \implies \\
--b = a \cdot (-q) \implies a \mid -b \\
--b = -a \cdot q \implies -a \mid -b \\
-b = -a \cdot (-q) \implies -a \mid b \\
+\begin{aligned}
+a &\mid b \implies b = a \cdot q \\
+-b &= a \cdot (-q) \implies a \mid -b \\
+-b &= -a \cdot q \implies -a \mid -b \\
+b &= -a \cdot (-q) \implies -a \mid b \\
+\end{aligned}
 ```
 
 **D1)** $a \mid a$ (**Reflexividad**)
@@ -80,8 +94,10 @@ Donde $q$ es el _cociente_ y $r$ es el _resto_ de dividir $b$ por $a$.
 **Ejemplo:** 
 
 ```math
-a = 13, \;b = 5 \\
-13 = 5 \cdot 2 + 3
+\begin{aligned}
+a &= 13, \;b = 5 \\
+13 &= 5 \cdot 2 + 3
+\end{aligned}
 ```
 
 ### Ejercicios resueltos - Algoritmo de la división
@@ -117,7 +133,7 @@ El resto de dividir $m^2$ por $3$ es $r^2$. Ahora podemos calcular los restos po
 \end{align*}
 ```
 
-## Desarrollos en base $b$
+## Desarrollos en base _b_
 
 > Todo natural $x$ se puede expresar como:
 
@@ -181,9 +197,11 @@ Convertir $(1304)_6$ a base $10$:
 \end{align*}
 ```
 
+
 Si quisieramos convertir $(1304)_6$ a otra base (por ejemplo, $5$), primero lo convertimos a base $10$ y luego a la base deseada. 
 
-### Ejercicios resueltos - Desarrollos en base $b$ y conversiones de base
+
+### Ejercicios resueltos - Desarrollos en base _b_ y conversiones de base
 
 **1.**
 
@@ -191,7 +209,8 @@ Convertir $(1011)_2$ a base $10$:
 
 ```math
 (1011)_2 = 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 8 + 0 + 2 + 1 = 11
-```
+``` 
+
 
 ***
 
@@ -205,6 +224,7 @@ Para resolver este ejercicio, primero necesitamos saber que los números en base
 (B38)_{16} = 11 \cdot 16^2 + 3 \cdot 16^1 + 8 \cdot 16^0 = 2816 + 48 + 8 = 2872
 ```
 
+
 Ahora convertimos $2872$ a base $8$:
 
 ```math
@@ -216,11 +236,13 @@ Ahora convertimos $2872$ a base $8$:
 \end{align*}
 ```
 
+
 Podemos decir que $(B38)_{16} = (5470)_8$.
 
 ## Máximo común divisor (mcd)
 
 > Sean $a, b \in \mathbb{Z}$ alguno de ellos no nulo, denotamos $\textnormal{mcd}(a, b)$ o $(a, b)$ al máximo común divisor entre $a$ y $b$.
+
 
 ### Propiedades del mcd
 
@@ -234,6 +256,7 @@ Podemos decir que $(B38)_{16} = (5470)_8$.
 
 ***
 
+
 ### Algoritmo de Euclides
 
 > Sean $a, b \in \mathbb{Z}$, con $b \neq 0$, entonces:\
@@ -244,10 +267,12 @@ $a = bq + r \rightarrow \textnormal{mcd}(a, b) = \textnormal{mcd}(b, r)$
 Encontrar el $\textnormal{mcd}(174, 72)$
 
 ```math
-174 = 72 \cdot 2 + 30 \implies \textnormal{mcd}(174, 72) = \textnormal{mcd}(72, 30) \\
-72 = 30 \cdot 2 + 12 \implies \textnormal{mcd}(72, 30) = \textnormal{mcd}(30, 12) \\
-30 = 12 \cdot 2 + 6 \implies \textnormal{mcd}(30, 12) = \textnormal{mcd}(12, 6) \\
-12 = 6 \cdot 2 + 0 \implies \textnormal{mcd}(12, 6) = \textnormal{mcd}(6, 0) = 6
+\begin{align}
+&174 = 72 \cdot 2 + 30 \implies \textnormal{mcd}(174, 72) = \textnormal{mcd}(72, 30) \\
+&72 = 30 \cdot 2 + 12 \implies \textnormal{mcd}(72, 30) = \textnormal{mcd}(30, 12) \\
+&30 = 12 \cdot 2 + 6 \implies \textnormal{mcd}(30, 12) = \textnormal{mcd}(12, 6) \\
+&12 = 6 \cdot 2 + 0 \implies \textnormal{mcd}(12, 6) = \textnormal{mcd}(6, 0) = 6
+\end{align}
 ```
 
 Por lo tanto, $\textnormal{mcd}(174, 72) = 6$.
@@ -255,15 +280,15 @@ Por lo tanto, $\textnormal{mcd}(174, 72) = 6$.
 Notemos que: 
 
 ```math 
-\begin{align*}
-\textnormal{mcd}(72, 174) = (72, 174 - 72) = (72, 102) \\
-\textnormal{mcd}(72, 102) = (72, 102 - 72) = (72, 30) \\
-\textnormal{mcd}(30, 72) = (30, 72 - 30) = (30, 42) \\
-\textnormal{mcd}(30, 42) = (30, 42 - 30) = (30, 12) \\
-\textnormal{mcd}(12, 30) = (12, 30 - 12) = (12, 18) \\
-\textnormal{mcd}(12, 18) = (12, 18 - 12) = (12, 6) \\
-\textnormal{mcd}(6, 12) = (6, 12 - 6) = (6, 6) = 6
-\end{align*}
+\begin{align}
+&\textnormal{mcd}(72, 174) = (72, 174 - 72) = (72, 102) \\
+&\textnormal{mcd}(72, 102) = (72, 102 - 72) = (72, 30) \\
+&\textnormal{mcd}(30, 72) = (30, 72 - 30) = (30, 42) \\
+&\textnormal{mcd}(30, 42) = (30, 42 - 30) = (30, 12) \\
+&\textnormal{mcd}(12, 30) = (12, 30 - 12) = (12, 18) \\
+&\textnormal{mcd}(12, 18) = (12, 18 - 12) = (12, 6) \\
+&\textnormal{mcd}(6, 12) = (6, 12 - 6) = (6, 6) = 6
+\end{align}
 ```
 
 **Tenemos la propiedad de que** $\textnormal{mcd}(a, b) = \textnormal{mcd}(a, b - a)$
@@ -467,4 +492,4 @@ $m^2 = 2n^2$, por lo que $m$ es par. Sabiendo que $m$ es par, lo reescribimos co
 
 Ambos números son pares, la fracción **sigue siendo reducible**.
 
-Por lo que $m^2 = 2n^2$ es un absurdo y $\sqrt{2}$ es irracional.
+Por lo que $m^2 = 2n^2$ es un absurdo y $\sqrt{2}$ es irracional. 

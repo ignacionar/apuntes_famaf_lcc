@@ -11,10 +11,12 @@
 Un programa sencillo, que utilice estos conceptos, podría ser: 
 
 ```math 
+\begin{array}{c}
 \textnormal{Var} \; x, y : Int; \\
 [\![ \sigma_0 : (x \mapsto 1, y \mapsto 2) ]\!] \\
 x := 5 + 5; \\
 [\![ \sigma_1 : (x \mapsto 10, y \mapsto 2) ]\!] 
+\end{array}
 ```
 
 Donde $\sigma_0$ es el **estado inicial**, $\sigma_1$ es el **estado final**, donde hay una sentencia $x := y + x$ que modifica el valor de la variable $x$ en el estado $\sigma_0$ y produce el estado $\sigma_1$. Las expresiones dependen del estado en el que se evalúan.
@@ -24,8 +26,10 @@ Donde $\sigma_0$ es el **estado inicial**, $\sigma_1$ es el **estado final**, do
 En el formalismo, **declaramos** variables y constantes con la palabra reservada $Var$ y $Const$, respectivamente. 
 
 ```math
+\begin{array}{c}
 \textnormal{Var} \; x, y : Int; \\
 \textnormal{Const} \; z : Int; \\
+\end{array}
 ```
 
 También podemos hacerlo en C de la siguiente forma: 
@@ -42,8 +46,10 @@ Si bien existe la palabra reservada `const`, usamos `#define` para definir la co
 Las variables pueden tener un valor inicial: 
 
 ```math
+\begin{array}{c}
 \textnormal{Var} \; x, y : Int; \\
 [\![ \sigma_n : (x \mapsto 1, y \mapsto 2) ]\!] 
+\end{array}
 ```
 
 ```c
@@ -57,12 +63,14 @@ int x = 1, y = 2;
 - $;\;$, llamado **secuenciación** permite concatenar sentencias. 
 
 ```math
+\begin{array}{c}
 S_1 ; \; S_2 \\
 \; \\
 \textnormal{(o también,)} \\
 \; \\
 S_1; \\
 S_2
+\end{array}
 ```
 
 Un programa es en realidad **una sola sentencia**, cuando hablamos de varias sentencias estas se forman una sola a través de la secuenciación. 
@@ -89,10 +97,12 @@ x = 10;
 Para el formalismo también podemos hacer uso de la asignación múltiple:
 
 ```math
+\begin{array}{c}
 \textnormal{Var} \; x, y : Int; \\
 [\![ \sigma_0 : (x \mapsto 1, y \mapsto 2) ]\!] \\
 x, y := y, x; \\
 [\![ \sigma_1 : (x \mapsto 2, y \mapsto 1) ]\!] 
+\end{array}
 ```
 
 Es importante mencionar que algunos lenguajes de programación cumplen con la propiedad, pero otros no, necesitando una variable temporal: 

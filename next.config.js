@@ -1,18 +1,21 @@
-import remarkMdxDisableExplicitJsx from 'remark-mdx-disable-explicit-jsx'
 import nextra from 'nextra'
 
 const withNextra = nextra({
-  latex: true,
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.jsx',
-  mdxOptions: {
-    remarkPlugins: [
-      [
-        remarkMdxDisableExplicitJsx,
-        { whiteList: ['table', 'thead', 'tbody', 'tr', 'th', 'td'] }
-      ]
-    ]
-  }
+  whiteListTagsStyling: ['table', 'thead', 'tbody', 'tr', 'th', 'td'],
+  latex: {
+    renderer: 'mathjax',
+    // options: {
+    //   config: {
+    //     tex: {
+    //       macros: {
+    //         RR: '\\mathbb{R}',
+    //       }
+    //     }
+    //   }
+    // }
+  },
 })
  
-export default withNextra()
+export default withNextra({
+  reactStrictMode: false,
+})

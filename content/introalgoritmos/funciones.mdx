@@ -159,13 +159,13 @@ absoluto que dado un número devuelve su valor absoluto.
 Una definición por casos de una función tendrá la siguiente forma general:
 
 ```math
-f.x ≐ ( B_0 → f_0 \\
-
-□ \; B_1 → f_1 \\
-
-... \\ 
- 
-□ \; B_n → f_n )
+\begin{aligned}
+&f.x ≐ ( B_0 → f_0 \\
+&□ \; B_1 → f_1 \\
+&... \\ 
+&□ \; B_n → f_n )
+&
+\end{aligned}
 ```
 
 Donde las $B_i$ son expresiones de tipo booleano, llamadas guardas, y las $f_i$ son expresiones
@@ -186,9 +186,11 @@ $x$ es positivo, $-1$ si es negativo y $0$ en cualquier otro caso.
 Podemos definirla como:
 
 ```math
-signo.x ≐ ( x > 0 → 1 \\
-□ \; x < 0 → -1 \\
-□ \; x = 0 → 0 \; )
+\begin{aligned}
+&signo.x ≐ ( x > 0 → 1 \\
+&□ \; x < 0 → -1 \\
+&□ \; x = 0 → 0 \; )
+\end{aligned}
 ```
 
 Esta definición, en haskell se anota de la siguiente manera
@@ -386,12 +388,10 @@ Una manera de formar un nuevo tipo es combinando los otros ya existentes en tupl
 Por ejemplo, podemos definir una función que toma dos pares y los suma coordenada a coordenada de la siguiente forma:
 
 ```math
-\begin{equation*}
 \begin{aligned}
-\text{sumaPares} : (\text{Num}, \text{Num}) &\rightarrow (\text{Num}, \text{Num}) \rightarrow (\text{Num}, \text{Num}) \\
-\text{sumaPares}.(a, b).(c, d) \; &\dot{=} \; (a+c,\; b+d)
+&\text{sumaPares} : (\text{Num}, \text{Num}) \rightarrow (\text{Num}, \text{Num}) \rightarrow (\text{Num}, \text{Num}) \\
+&\text{sumaPares}.(a, b).(c, d) \; \dot{=} \; (a+c,\; b+d)
 \end{aligned}
-\end{equation*}
 ```
 
 ***
@@ -515,8 +515,10 @@ Contamos con distintos operadores para trabajar con listas, con su notación for
 El operador $▹$ es fundamental (se lo denomina constructor), ya que permite **construir listas arbitrarias a partir de la lista vacía**. $▹$ toma un elemento $x$ (a izquierda) y una lista $xs$ y devuelve una lista con primer elemento $x$ seguido de los elementos de $xs$. Por ejemplo:
 
 ```math
-3 \; ▹ \; [ ] = [3] \\
-1 \; ▹ \; [2, 3] = [1, 2, 3]
+\begin{aligned}
+&3 \; ▹ \; [ ] = [3] \\
+&1 \; ▹ \; [2, 3] = [1, 2, 3]
+\end{aligned}
 ```
 
 Para denotar listas no vacías utilizamos expresiones de la forma $[x, y, . . . , z]$, que son
@@ -949,8 +951,8 @@ Definir recursivamente la siguiente función de tipo unzip.
 
 $apellidos : [(String, String, Int)] → [String]$.
 
-Ej: $apellidos.[("Juan","Dominguez",22), ("Maria","Gutierrez",19)]\
-["Dominguez","Gutierrez"]$
+Ej: $apellidos.[(\textnormal{"Juan"},\textnormal{"Dominguez"},22), (\textnormal{"Maria"},\textnormal{"Gutierrez"},19)]$\
+Devuelve $[\textnormal{"Dominguez"},\textnormal{"Gutierrez"}]$
 
 
 ```hs 

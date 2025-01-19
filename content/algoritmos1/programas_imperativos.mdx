@@ -46,9 +46,11 @@ La relación entre la Terna de Hoare y la Weakest Precondition es la siguiente:
 A través de una especificación dada como una terna: 
 
 ```math 
+\begin{array}{c}
 \{\; P \; \} \\ 
 S \\
 \{\; Q \; \}
+\end{array}
 ```
 Podemos derivar el programa incógnita $S$ con la precondición $P$ y la postcondición $Q$ dadas.\
 Para ello recurrimos a los predicados asociados a la Terna o a la definición de Weakest Precondition. De manera tal que se cumpla que $P \implies Q$.
@@ -128,35 +130,35 @@ Tomemos el siguiente ejemplo:
 Por intuición sabemos que $pos$ puede ser $pos + 1$. Sin embargo, debemos determinar el valor de $res$. Podemos probar asignar $res$ a una incógnita $E$ y usar la definición de Weakest Precondition:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle) \\
 \; \\
-\begin{aligned}
-&\underline{wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle)} \\ 
+\underline{wp.(res, \; pos := E, \; pos + 1).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle)} \\ 
 \\
-&\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
 \\
-&E = \bigl \langle \; \sum i : \underline{0 \leq i < pos + 1} : A.i \; \bigr \rangle \\ 
+E = \bigl \langle \; \sum i : \underline{0 \leq i < pos + 1} : A.i \; \bigr \rangle \\ 
 \\ 
-&\equiv \{ \textnormal{ Lógica } \; \} \\
+\equiv \{ \textnormal{ Lógica } \; \} \\
 \\
-&E = \bigl \langle \; \sum i : \underline{0 \leq i < pos \lor i = pos } : A.i \; \bigr \rangle \\ 
+E = \bigl \langle \; \sum i : \underline{0 \leq i < pos \lor i = pos } : A.i \; \bigr \rangle \\ 
 \\
-&\equiv \{ \textnormal{ Partición de Rango } \} \\
+\equiv \{ \textnormal{ Partición de Rango } \} \\
 \\
-&E = \underline{\bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle} + \bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle \\
+E = \underline{\bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle} + \bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle \\
 \\
-&\equiv \{ \textnormal{ Hipótesis de } res \; \} \\
+\equiv \{ \textnormal{ Hipótesis de } res \; \} \\
 \\
-&E = res + \underline{\bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle} \\
+E = res + \underline{\bigl \langle \; \sum i : i = pos : A.i \; \bigr \rangle} \\
 \\ 
-&\equiv \{ \textnormal{ Rango unitario } \} \\
+\equiv \{ \textnormal{ Rango unitario } \} \\
 \\
-&\underline{E = res + A.pos} \\ 
+\underline{E = res + A.pos} \\ 
 \\
-&\equiv \{ \textnormal{ Elijo } E = res + A.pos \; \} \\
+\equiv \{ \textnormal{ Elijo } E = res + A.pos \; \} \\
 \\
-&True
-\end{aligned}
+True
+\end{array}
 ```
 
 Entonces nuestro programa queda:
@@ -191,15 +193,15 @@ Si por ejemplo quisieramos saber el máximo entre dos números sin usar el opera
 No debemos usar $\mathbf{skip}$, pero podemos probar asignando $res$ a una variable incógnita $E$ y aplicar la definición de Weakest Precondition:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(res := E).(res = X \; \textnormal{max} \; Y) \\
 \; \\
-\begin{aligned}
-&\underline{wp.(res := E).(res = X \; \textnormal{max} \; Y)} \\
+\underline{wp.(res := E).(res = X \; \textnormal{max} \; Y)} \\
 \\ 
-&\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
+\equiv \{ \textnormal{ Definición de wp para } := \; \} \\
 \\
-&E = X \; \textnormal{max} \; Y 
-\end{aligned} 
+E = X \; \textnormal{max} \; Y 
+\end{array} 
 ```
 
 Siguiendo el enunciado no podemos usar el operador $\textnormal{max}$, podemos resolver esto mediante un análisis por casos:
@@ -264,17 +266,17 @@ Cuando se utiliza el cuantificador de conteo $\textnormal{N}$ en una especificac
 Por ejemplo:
 
 ```math 
-\begin{aligned}
-&... \\
-&E = res + \bigl \langle \; \textnormal{N} i : \underline{i = numero\_actual} : i \; \textnormal{mod} \; 6 = 0 \; \bigr \rangle \\
+\begin{array}{ll}
+... \\
+E = res + \bigl \langle \; \textnormal{N} i : \underline{i = numero\_actual} : i \; \textnormal{mod} \; 6 = 0 \; \bigr \rangle \\
 \\ 
-&\equiv \{ \textnormal{ Rango unitario } \} \\
+\equiv \{ \textnormal{ Rango unitario } \} \\
 \\
-&E = res + ( \\
-& numero\_actual \; \textnormal{mod} \; 6 = 0 \rightarrow 1 \\
-& □ \; numero\_actual \; \textnormal{mod} \; 6 \neq 0 \rightarrow 0 \\
-&)
-\end{aligned}
+E = res + ( \\
+ numero\_actual \; \textnormal{mod} \; 6 = 0 \rightarrow 1 \\
+ □ \; numero\_actual \; \textnormal{mod} \; 6 \neq 0 \rightarrow 0 \\
+)
+\end{array}
 ```
 
 Tendríamos las dos posibilidades de que la variable $numero\_actual$ sea múltiplo de 6 o no.
@@ -347,7 +349,7 @@ El problema surge en como determinar el invariante. Para ello podemos hacer un *
 Podemos reemplazar la constante $N$ por una variable $pos$, y proponer un invariante $I$:
 
 ```math
-I \equiv res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N
+I \equiv res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \; \land \; 0 \leq pos \leq N
 ```
 
 Determinamos que $pos$ debe ser menor o igual a $N$ para no exceder el rango del arreglo.
@@ -377,9 +379,9 @@ Donde $S_1$ es la inicialización y $S_2$ es el cuerpo del ciclo. Ahora podemos 
 Para $S_1$, podemos probar con $pos, \; res := 0, \; E$, la posición a indexar será por defecto $0$:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(pos, \; res := 0, \; E).I \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(pos, \; res := 0, \; E).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N)} \\
 \\ 
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -403,9 +405,9 @@ True
 Tenemos que $S_1: pos, \; res := 0, \; 0$. Ahora podemos derivar $S_2$ probando con $pos, \; res := pos + 1, \; E$, queremos aumentar la posición a indexar:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(pos, \; res := pos + 1, \; E).I \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(pos, \; res := pos + 1, \; E).(res = \bigl \langle \; \sum i : 0 \leq i < pos : A.i \; \bigr \rangle \land 0 \leq pos \leq N)} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -516,7 +518,7 @@ Dado un arreglo $A$, derivar un programa que resuelva el problema:
 Este problema involucra el uso de un ciclo. Para resolverlo podemos aplicar la **técnica de reemplazo de constante por variable**. Definimos una variable $pos$ que recorrerá el arreglo $A$ y definimos una invariante $I$:
 
 ```math
-I \equiv res = \langle \; \forall i : 0 \leq i \leq pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land 0 \leq pos \leq N 
+I \equiv res = \langle \; \forall i : 0 \leq i \leq pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \; \land \; 0 \leq pos \leq N 
 ```
 
 Nos interesa que $pos$ sea menor que $N$ para no exceeder el rango del arreglo.\
@@ -543,9 +545,9 @@ Con esto podemos seguir la siguiente estructura:
 Si queremos recorrer el arreglo, debemos partir de la posición $0$. La inicialización $S_1$ sería: $pos, \; res := 0, \; E$
 
 ```math
+\begin{array}{ll}
 P \implies wp.(pos, \; res := 0, \; E).I \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(pos, \; res := 0, \; E).(res = \langle \; \forall i : 0 \leq i \leq pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land 0 \leq pos \leq N)} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -585,9 +587,9 @@ True
 Por lo tanto, $S_1: pos, \; res := 0, \; True$. Ahora podemos derivar $S_2$ probando con $pos, \; res := pos + 1, \; E$, queremos aumentar la posición a indexar:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(pos, \; res := pos + 1, \; E).I \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(pos, \; res := pos + 1, \; E).(res = \langle \; \forall i : 0 \leq i \leq pos : \; \bigl \langle \; \sum j : 0 \leq j < i : A.j \; \bigr \rangle \geq 0 \; \bigr \rangle \land 0 \leq pos \leq N)} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -631,9 +633,9 @@ I' \equiv res = I \land suma = \langle \; \sum j : 0 \leq j < pos : A.j \; \bigr
 Debemos volver a calcular la inicialización $S_1$, partiendo de $pos, \; res, \; s := 0, \; E, \; F$:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(pos, \; res, \; suma := 0, \; E, \; F).I' \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(pos, \; res, \; suma := 0, \; E, \; F).I'} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -670,12 +672,12 @@ True
 \end{array}
 ```
 
-Por lo tanto, $S_1: pos, \; res, \; s := 0, \; True, \; 0$. Derivamos $S_2$ probando con $pos, \; res, \; s := pos + 1, \; E, \; F$, aumentamos la posición a indexar:
+Por lo tanto, $S_1: pos, \; res, \; s := 0, \; True, \; 0$. Derivamos $S_2$ probando con $pos, \; res, \; s := pos + 1, \; E, \; F$ aumentamos la posición a indexar:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(pos, \; res, \; s := pos + 1, \; E, \; F).I' \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(pos, \; res, \; s := pos + 1, \; E, \; F).I'} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -744,9 +746,10 @@ Este problema involucra un ciclo, ya que debemos recorrer el arreglo $A$ y compa
 Podemos aplicar la técnica de **reemplazo de constante por variable**. Definimos una variable $n$ que sustituirá a $N$, proponemos una invariante $I$ y nuestra guarda $B$ para el ciclo:
 
 ```math
-I \equiv r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < n : A.i = A.j \; \bigr \rangle \; \land 0 \leq n \leq N \\
-\; \\
+\begin{array}{ll}
+I \equiv r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < n : A.i = A.j \; \bigr \rangle \; \land \; 0 \leq n \leq N \\
 B \equiv n < N
+\end{array}
 ```
 
 La estructura que debemos seguir es la siguiente:
@@ -770,9 +773,9 @@ La estructura que debemos seguir es la siguiente:
 Para la inicialización $S_1$, partimos de $n, \; r := 0, \; E$, queremos partir del primer elemento del arreglo:
 
 ```math 
+\begin{array}{ll}
 P \implies wp.(n, \; r := 0, \; E).I \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(n, \; r := 0, \; E).(r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < n : A.i = A.j \; \bigr \rangle \; \land 0 \leq n \leq N)} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -800,9 +803,9 @@ True
 Por lo tanto, $S_1: n, \; r := 0, \; 0$. Ahora podemos derivar $S_2$ probando con $n, \; r := n + 1, \; E$, queremos aumentar la posición a indexar:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(n, \; r := n + 1, \; E).I \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(n, \; r := n + 1, \; E).(r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < n : A.i = A.j \; \bigr \rangle \; \} \land 0 \leq n \leq N)} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -860,9 +863,10 @@ True
 Ahora si, para este ciclo anidado podemos aplicar la técnica de **reemplazo de constante por variable**. Donde la constante es $n$ y la nueva variable es $m$. Definimos una invariante $I'$ y una guarda $B'$:
 
 ```math
-I' \equiv r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < m : A.i = A.j \; \bigr \rangle \land 0 \leq m \leq n \\
-\; \\
+\begin{array}{ll}
+I' \equiv r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < m : A.i = A.j \; \bigr \rangle \; \land \; 0 \leq m \leq n \\
 B' \equiv m < n
+\end{array}
 ```
 
 Nuestro problema ahora mismo radica en definir el valor de $s$ mediante un ciclo anidado. Ahora mismo, tenemos un programa similar al siguiente: 
@@ -893,9 +897,9 @@ Por la derivación anterior tenemos que $n, r := n + 1, r + s$ en el cuerpo de c
 Partimos de la inicialización $S_3$ con $m, \; s := 0, \; E$, queremos partir del primer elemento del arreglo:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(m, \; s := 0, \; E).I' \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(m, \; s := 0, \; E).(r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < m : A.i = A.j \; \bigr \rangle \land 0 \leq m \leq n)} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\
@@ -923,9 +927,9 @@ True
 Por lo tanto, $S_3: m, \; s := 0, \; 0$. Ahora podemos derivar $S_4$ probando con $m, \; s := m + 1, \; E$, queremos aumentar la posición a indexar:
 
 ```math
+\begin{array}{ll}
 P \implies wp.(m, \; s := m + 1, \; E).I' \\
 \; \\
-\begin{array}{ll}
 \underline{wp.(m, \; s := m + 1, \; E).(r = \langle \; \textnormal{N} i, \; j : 0 \leq i < j < m : A.i = A.j \; \bigr \rangle \land 0 \leq m \leq n)} \\
 \\
 \equiv \{ \textnormal{ Definición de wp para } := \; \} \\

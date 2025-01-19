@@ -3,7 +3,7 @@
 ## Vectores 
 
 > Definimos la noción de vector en el plano (2D) y en el espacio (3D):\
-$\mathbb{R}^n = \{ \mathbf{a} = (a_1, a_2, \ldots, a_n), a_i \in \mathbb{R} \;  \forall i \}$
+$\mathbb{R}^n = \{ \mathbf{a} = (a_1, a_2, \ldots, a_n), \; a_i \in \mathbb{R}, \;  1 \leq i \leq n \}$
 
 En $\mathbb{R}^n$ se definen las operaciones:
 
@@ -21,7 +21,7 @@ Con estas operaciones, $\mathbb{R}^n$ es un espacio vectorial sobre el cuerpo $\
 
 ### Representaciones en el plano y en el espacio
 
-Esta es una representación gráfica de dos puntos en $\mathbb{R}^2$ donde $\mathbf{A} = (2,3), \mathbf{-A} = (-2,-3)$
+Esta es una representación gráfica de dos puntos en $\mathbb{R}^2$ donde $\mathbf{A}(2,3), \mathbf{-A}(-2,-3)$
 
 <br />
 
@@ -58,7 +58,7 @@ Esta es una representación gráfica del vector $\mathbf{a} = (2,3,3)$ en $\math
 > Dados $\mathbf{a}, \mathbf{b} \in \mathbb{R}^n$ con $\mathbf{a} = (a_1, a_2, \ldots, a_n), \mathbf{b} = (b_1, b_2, \ldots, b_n)$, se define el **producto escalar** como:
 
 ```math 
-<\mathbf{a}, \mathbf{b}> = a_1 \cdot b_1 + a_2 \cdot b_2 + \ldots + a_n \cdot b_n = \sum_{j=1}^{n} a_j \cdot b_j
+<\mathbf{a}, \mathbf{b}> \; = a_1 \cdot b_1 + a_2 \cdot b_2 + \ldots + a_n \cdot b_n = \sum_{j=1}^{n} a_j \cdot b_j
 ```
 
 ### Propiedades - Producto escalar
@@ -105,9 +105,11 @@ Dado $\mathbf{a}, \mathbf{b} \in \mathbb{R}^n$ y $r \in \mathbb{R}$, se cumplen 
 
 > Dados $\mathbf{a}, \mathbf{b} \neq 0, \in \mathbb{R}^n$, decimos que:
 
-- Son **ortogonales** (o perpendiculares) si $<\mathbf{a}, \mathbf{b}> = 0$
+- Son **ortogonales** (o perpendiculares) si $\; <\mathbf{a}, \mathbf{b}> \; = 0$
 
 Si esto es cierto, entonces $\cos(\theta) = 0 \implies \theta = \frac{\pi}{2}$
+
+Además pueden denotarse como: $\; \mathbf{a} \; \bot \; \mathbf{b}$
 
 - Son **paralelos** si $\mathbf{a} = r \cdot \mathbf{b}$ para algún $r \in \mathbb{R}$
 
@@ -266,7 +268,7 @@ Si tenemos dos rectas paralelas, entonces eligiendo un punto $P$ y $Q$ en cada r
 > Sea $\mathbf{n}$ un vector perpendicular a un plano $\overline{\underline{X}} = (x, y, z)$ y un punto $P_0$ por el que pasa, entonces la **ecuación normal de un plano** es:
 
 ```math
-< \overline{\underline{X}} - P_0, \mathbf{n} > \; = \; 0 
+< \overline{\underline{X}} - P_0, \; \mathbf{n} > \; = \; 0 
 ```
 
 Tal que $\overline{\underline{X}} - P_0$ es perpendicular a $\mathbf{n}$.
@@ -362,12 +364,12 @@ f(t) = (t, 2-t, 3+2t) = t \cdot (1, -1, 2) + (0, 2, 3)
 Por lo tanto, la su imagen es: 
 
 ```math
-Im(f) = \{ (y_1, y_2, y_3) \in \mathbb{R}^3 : (y_1, y_2, y_3) = t \cdot (1, -1, 2) + (0, 2, 3), t \in \mathbb{R} \}
+Im(f) = \{ (y_1, y_2, y_3) \in \mathbb{R}^3 : (y_1, y_2, y_3) = t \cdot (1, -1, 2) + (0, 2, 3), \; t \in \mathbb{R} \}
 ```
 
 ### Límites de funciones vectoriales
 
-> Dada $f : \mathbb{R} \to \mathbb{R}^n$ y $a \in Dom(f)$, definimos la derivada de $f$ en $t=a$ como: 
+> Dada $f : \mathbb{R} \to \mathbb{R}^n \; \land \; a \in Dom(f)$, definimos la derivada de $f$ en $t=a$ como: 
 
 ```math
 f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}
@@ -379,8 +381,8 @@ Decimos que $f(a)$ es el **vector posición** y que $f'(a)$ es el **vector tange
 
 **Ejemplo:**
 
-Sea $f(t) = (3, sen^2(t), 2t + 1)$ calcular $\displaystyle{\lim_{t \to 0}} \; f(t)$
+Sea $f(t) = (3, \; sen^2(t), \; 2t + 1)$ calcular $\displaystyle{\lim_{t \to 0}} \; f(t)$
 
 ```math
-\displaystyle{\lim_{t \to 0}} \; f(t) = (3, sen^2(t), 2 \cdot 0 + 1) = (\displaystyle{\lim_{t \to 0}} \; 3, \displaystyle{\lim_{t \to 0}} \; sen^2(t), \displaystyle{\lim_{t \to 0}} \; 2t + 1) = (3, 0, 1)
+\displaystyle{\lim_{t \to 0}} \; f(t) = (3, sen^2(t), 2 \cdot 0 + 1) = (\displaystyle{\lim_{t \to 0}} \; 3, \; \displaystyle{\lim_{t \to 0}} \; sen^2(t), \; \displaystyle{\lim_{t \to 0}} \; 2t + 1) = (3, 0, 1)
 ```

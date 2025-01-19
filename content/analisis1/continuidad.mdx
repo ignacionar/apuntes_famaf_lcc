@@ -15,10 +15,10 @@ Cuando una de estas condiciones no se cumple, decimos que la función es **disco
 En base a los criterios anteriores, se establecen tres tipos de discontinuidades:
 
 1. **Discontinuidad evitable**: $\displaystyle{\lim_{x \to a}} \; f(x) \neq f(a)$
-2. **Discontinuidad de salto**: $\displaystyle{\lim_{x \to a^-}} \; f(x) \neq \displaystyle{\lim_{x \to a^+}} \; f(x) \;\; (\cancel{\exists}\;\displaystyle{\lim_{x \to a}} \; f(x))$
-3. **Discontinuidad esencial**: $\displaystyle{\lim_{x \to a^\pm}} \; f(x) = \pm\infty \;\; (\cancel{\exists}\;\displaystyle{\lim_{x \to a}} \; f(x))$
+2. **Discontinuidad de salto**: $\displaystyle{\lim_{x \to a^-}} \; f(x) \neq \displaystyle{\lim_{x \to a^+}} \; f(x) \;\; (\not\exists\;\displaystyle{\lim_{x \to a}} \; f(x))$
+3. **Discontinuidad esencial**: $\displaystyle{\lim_{x \to a^\pm}} \; f(x) = \pm\infty \;\; (\not\exists\;\displaystyle{\lim_{x \to a}} \; f(x))$
 
-Si $a\;\cancel{\in}\;Dom\;f(x)$, entonces $a$ puede ser un punto de discontinuidad de salto o esencial.
+Si $a \not\in Dom\;f(x)$, entonces $a$ puede ser un punto de discontinuidad de salto o esencial.
 
 ### Ejercicios resueltos - Continuidad y descontinuidad
 
@@ -190,7 +190,7 @@ Ambos valores son iguales, por lo tanto la función que está acotada entre amba
 
 ## Continuidad lateral
 
-> Definimos continuidad por izquierda si $\displaystyle{\lim_{x \to a^-}} \; f(x) = f(a)$ y por derecha si $\displaystyle{\lim_{x \to a^+}} \; f(x) = f(a)$
+> Definimos continuidad por izquierda si $\displaystyle{\lim_{x \to a^-}} \; f(x) = f(a)$ y por derecha si $\displaystyle{\lim_{x \to a^+}} \; f(x) = f(a)$ 
 
 ## Continuidad en un Intervalo
 
@@ -280,7 +280,7 @@ Aplicamos propiedad de Valor Absoluto:
 ```
 
 Su dominio es $[-2, 2]$. Sin embargo, al ser una función compuesta, es $(-2, 2)$ (**si es una función compuesta no incluimos extremos!**). Debemos verificar sus extremos/laterales.
-Para ello, necesitamos saber el valor de $f(-2)$ y $f(2)$:
+Necesitamos saber el valor de $f(-2)$ y $f(2)$:
 
 ```math
 \begin{array}{ll}

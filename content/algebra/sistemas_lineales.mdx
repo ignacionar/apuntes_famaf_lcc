@@ -1,0 +1,400 @@
+# Sistemas Lineales
+
+## Método de eliminación de incógnitas 
+
+> Sean $c_1, \ldots, c_m \in \mathbb{K}$, si $(x_1, \ldots, x_n) \in \mathbb{K}^n$ es solución del sistema de ecuaciones:
+
+```math 
+\begin{array}{cccc}
+  a_{11}x_1 + \ldots + a_{1n}x_n = y_1 \\
+  \vdots \hphantom{a_{11}x_1 + a_{1n}x_n} \vdots \; \; \; (*) \\
+  a_{m1}x_1 + \ldots + a_{mn}x_n = y_m
+\end{array}
+```
+
+> Tal que $y_1, \ldots, y_m, \; a_{ij} (1 \leq i \leq m, 1 \leq j \leq n) \in \mathbb{K}$, entonces $(x_1, \ldots, x_n)$ también es solución de la ecuación
+
+```math 
+\displaystyle{\sum_{i=1}^m} c_i(a_{i1}x_1 + \ldots + a_{in}x_n ) = \sum_i c_iy_i
+```
+
+Las ecuaciones $(*)$ forman un _sistema de ecuaciones lineales_ de $m$ ecuaciones y $n$ incógnitas. \
+El sistema es **homogeneo** si $y_i = 0 \; \forall i$ , y **no homogeneo** si $\exists i \mid y_i \neq 0$ 
+
+Dos sistemas de ecuaciones son **equivalentes** si cada ecuación de un sistema es combinación lineal del otro.
+
+Por ejemplo, es posible resolver ecuaciones con el método de eliminación de incógnitas de la siguiente forma:
+
+```math
+\begin{cases}
+x + 2y + z = 7 \\
+3x + y + z = 5 \\
+2x + 3y - z = 3
+\end{cases} 
+```
+
+Sumamos la primera y tercera ecuación:
+
+```math
+\begin{align*}
+  &x + 2y + z = 7 \\ 
+  &\underline{2x + 3y - z = 3} \\
+  &3x + 5y = 10 \; (*)
+\end{align*}
+```
+
+Hacemos lo mismo para la segunda y tecera ecuación 
+
+```math 
+\begin{align*}
+  &3x + y + z = 5 \\ 
+  &\underline{2x + 3y - z = 3} \\
+  &5x + 4y = 8 \; (**)
+\end{align*}
+```
+
+Ahora lo hacemos para $(*)$ y $(**)$ y despejamos $y$: 
+
+```math 
+\begin{align*}
+  &3x + 5y \cdot 5 = 10 \cdot 5 \\ 
+  &5x + 4y \cdot (-3) = 8 \cdot (-3)
+\end{align*}
+```
+
+```math 
+\begin{align*}
+  15x + 25y = 50 & \\ 
+  \underline{-15x - 12y = -24} & \\
+  13y = 26 & \\
+  y = 2 
+\end{align*}
+```
+
+Ahora con el valor de $y$ buscamos el valor de $x$:
+
+```math 
+\begin{align*}
+  3x + 5y &= 10 \\
+  3x + 5(2) &= 10 \\
+  3x &= 0 \\
+  x &= 0
+\end{align*}
+```
+
+Buscamos el valor de $z$: 
+
+```math
+\begin{align*}
+  x + 2y + z &= 7 \\
+  4 + z &= 7 \\ 
+  z &= 3
+\end{align*}
+```
+
+Finalmente, verificamos:
+ 
+```math 
+\begin{align*}
+  0 + 2(2) + 3 = 7 \\
+  3(0) + 2 + 3 = 5 \\
+  2(0) + 3(2) - 3 = 3
+\end{align*}
+```
+
+Esta forma de resolver las ecuaciones es cada vez más lenta y tediosa dependiendo la complejidad del problema a resolver. Existe una forma algorítmica y más conveniente de aplicar el método.
+
+## Matrices 
+
+> Una **matriz** $m \times n$ es un arreglo $\in \mathbb{R}$ de $m$ filas y $n$ columnas
+
+Se utliza la notación $A = [a_{ij}] \in \mathbb{R}^{m \times n}$ para decir que $A$ es matriz $m \times n$
+
+```math 
+\begin{bmatrix}
+a_{11} & \ldots & a_{1j} & \ldots & a_{1n} \\
+\vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{i1} & \ldots & a_{ij} & \ldots & a_{in} \\
+\vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{m1} & \ldots & a_{mj} & \ldots & a_{mn} 
+\end{bmatrix}
+```
+
+Denotamos $F_i$ ($n$-upla) a la fila $i$ ubicada en la posición $i$ desde arriba:
+
+```math 
+F_i \rightarrow \begin{bmatrix}
+a_{11} & \ldots & a_{1j} & \ldots & a_{1n} \\
+\vdots & \ddots & \vdots & \ddots & \vdots \\
+\color{purple}{a_{i1}} & \color{purple}{\ldots} & \color{purple}{a_{ij}} & \color{purple}{\ldots} & \color{purple}{a_{in}} \\
+\vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{m1} & \ldots & a_{mj} & \ldots & a_{mn} 
+\end{bmatrix}
+```
+
+Y también $C_j$ ($m$-upla) a la columna $j$ ubicada en la posición $j$ desde la izquierda:
+
+```math 
+
+\begin{array}{ccccc}
+  C_j & & \\
+  \downarrow & & \\
+  \begin{bmatrix}
+  a_{11} & \ldots & \color{purple}{a_{1j}} & \ldots & a_{1n} \\
+  \vdots & \ddots & \color{purple}{\vdots} & \ddots & \vdots \\
+  a_{i1} & \ldots & \color{purple}{a_{ij}} & \ldots & a_{in} \\
+  \vdots & \ddots & \color{purple}{\vdots} & \ddots & \vdots \\
+  a_{m1} & \ldots & \color{purple}{a_{mj}} & \ldots & a_{mn}
+  \end{bmatrix} & & &
+\end{array}
+```
+
+Escribimos $[A]_{ij}$ para denotar la **entrada/elemento** $a_{ij}$ de $A$.\
+Dos matrices del mismo tamaño $A = [a_{ij}], \; B = [b_{ij}] \in \mathbb{R}^{m \times n}$ son iguales si cada una de sus entradas lo son:
+
+```math 
+A = B \iff a_{ij} = b_{ij} \; (\forall i, j)
+```
+
+### Sistemas de ecuaciones
+
+Para representar el sistema de ecuaciones:
+
+```math 
+\begin{array}{cccc}
+  a_{11}x_1 + \ldots + a_{1n}x_n = y_1 \\
+  \vdots \hphantom{a_{11}x_1 + a_{1n}x_n} \vdots \; \; \; \\
+  a_{m1}x_1 + \ldots + a_{mn}x_n = y_m
+\end{array}
+```
+
+Podemos usar matrices: 
+
+```math
+\begin{align*}
+A = [a_{ij}] \in \mathbb{R}^{m \times n}, \\
+X = [x_i] \in \mathbb{R}^{m \times 1}, \\ 
+Y = [y_i] \in \mathbb{R}^{m \times 1} 
+\end{align*} \implies AX = Y
+```
+
+```math 
+\begin{bmatrix}
+a_{11} & \ldots & a_{1n} \\
+\vdots & \ddots & \vdots \\
+a_{m1} & \ldots & a_{mn} 
+\end{bmatrix}
+
+\begin{bmatrix}
+x_{1} \\
+\vdots \\
+x_{n} 
+\end{bmatrix}
+
+= \begin{bmatrix}
+y_{1} \\
+\vdots \\
+y_{m} 
+\end{bmatrix}
+```
+
+Un ejemplo podría ser el siguiente: 
+
+```math 
+\begin{bmatrix}
+2 & 3 & -1 \\
+4 & -1 & 2 \\
+-3 & 2 & 4
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+8 \\
+6 \\
+7
+\end{bmatrix}
+```
+
+Algunos aspectos a considerar son: 
+
+- Si una incógnita no aparece en la ecuación su coeficiente será 0 
+- De determinan la cnatidad de incógnitas por la cantidad de columnas de $A$
+
+### Filas como vectores
+
+Podemos considerar las filas dentro de una matriz $A$ de $m \times n$ como un vector en $R^n$. 
+
+Tomando por ejemplo $F_i(A) = \begin{bmatrix} a_{i1} & \ldots & a_{in} \end{bmatrix}$ y $c \in \mathbb{K}$:
+
+- $cF_i = \begin{bmatrix} ca_{i1} & \ldots & ca_{in} \end{bmatrix}$
+- $Fr + Fs = \begin{bmatrix} a_{r1} + a_{s1} & \ldots & a_{in} + a_{sn} \end{bmatrix}$ 
+- $F_i = \begin{bmatrix} 0 & \ldots & 0 \end{bmatrix}$ es fila nula.
+
+### Operaciones elementales por fila
+
+> Dado $A = [a_{ij}]$ una matriz $m \times n$, $e$ es **operación elemental por fila** si al aplicarla a la matriz se obtiene $e(A)$.
+
+Algunas formas de obtener $e(A)$ son: 
+
+- **E1)** Multiplicando $F_r$ por $c \neq 0$. Su inversa es multiplicarla por $\frac{1}{c}$
+- **E2)** Cambiando $F_r$ por $F_r + tF_s$ con $r \neq s$ donde $t \in \mathbb{K}$. Su inversa es multiplicar $F_s$ por $-t \in \mathbb{K}$ y sumarla a $F_r$ 
+- **E3)** Permutando $F_r$ por $F_s$. Su inversa es hacer otra vez la permutación.
+
+### Matriz ampliada 
+
+Sea $A$ la matriz de un sistema de ecuaciones, su matriz ampliada es: 
+
+```math 
+A' = \begin{bmatrix}
+a_{11} & \ldots & a_{1n} & \big| & y_1 \\
+\vdots & \ddots & \vdots & \big| & \vdots \\
+a_{m1} & \ldots & a_{mn} & \big| & y_m
+\end{bmatrix}
+```
+
+También podemos aplicar operaciones elementales en ellas.\
+Si tenemos una matriz ampliada de un sistema de ecuaciones lineales $[A \mid Y]$ al obtener $[B \mid Z]$ aplicando operaciones elementales en $[A \mid Y]$, **ambos sistemas tendrán las mismas soluciones**.\
+Si el sistema de ecuaciones lineales es homogéneo, la matriz ampliada es $[A \mid 0]$
+
+Si tenemos un sistema de ecuaciones lineales, podemos representarlo como matriz ampliada y resolver:
+
+```math 
+\begin{cases}
+x + y + z = 6 \\
+2x + 3y + z = 14 \\
+y - z = -2
+\end{cases} \implies \begin{bmatrix}
+1 & 1 & 1 & \big| & 6 \\
+2 & 3 & 1 & \big| & 14 \\
+0 & 1 & -1 & \big| & -2
+\end{bmatrix}
+\xrightarrow[]{F_2 - 2F_1}
+\begin{bmatrix}
+1 & 1 & 1 & \big| & 6 \\
+0 & 1 & -1 & \big| & 2 \\
+0 & 1 & -1 & \big| & -2
+\end{bmatrix}
+```
+
+```math 
+\xrightarrow[]{F_3 - F_2}
+\begin{bmatrix}
+1 & 1 & 1 & \big| & 6 \\
+0 & 1 & -1 & \big| & 2 \\
+0 & 0 & 0 & \big| & -4
+\end{bmatrix}
+, 
+
+\; 0 \neq -4 
+```
+
+### Matriz MRF
+
+> Una matriz A de $m \times n$ es reducida por filas o _MRF_ si:\
+1 ) La primera entrada no nula de una fila es $1$, llamado **1 principal** y\
+2 ) Cada columna que contiene un 1 principal tiene **todos los otros elementos iguales a $0$**
+
+**Ejemplos:** 
+
+```math 
+\begin{bmatrix}
+0 & 1 & 3 \\
+1 & 0 & -1 \\
+0 & 0 & 0
+\end{bmatrix}
+
+\begin{bmatrix}
+1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 2 \\
+0 & 0 & 1 & 3
+\end{bmatrix}
+```
+
+### Matriz MERF
+
+> Una matriz A de $m \times n$ es escalón reducida por fila o _MERF_ si:\
+1 ) Es **MRF**,\
+2 ) Todas las filas cuyas **entradas son todas nulas** están al **final de la matriz**, y\
+3 ) En **dos filas consecutivas no nulas el 1 principal de la fila inferior** está **más a la derecha que el 1 principal de la fila anterior.** 
+
+**Ejemplos:** 
+
+```math 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+
+\begin{bmatrix}
+1 & 2 & 3 & 4 \\
+0 & 1 & 2 & 3 \\
+0 & 0 & 1 & 2
+\end{bmatrix}
+```
+
+## Algoritmo de Gauss 
+
+Dada la matriz $A$ de $m \times n$ podemos implementar el siguiente algoritmo: 
+
+**1)** Ubicarse en la primer fila.\
+**2)** Si la fila es $0$ y no es la última, pasar a la siguiente y repetir el paso.\
+**3)** Si la fila **no** es $0$:
+
+  - Si la primera entrada no nula está en la columna $k$ con valor $c$, dividir la fila por $c$ 
+  - Con operaciones elementales $F_r + tF_s$ hacer $0$ las entradas en la columna $k$ 
+
+**4)** Si la fila no es la última, pasar a la siguiente y aplicar paso 2.\
+**5)** Intercambinado las filas, ponemos los **1 principal** de forma escalonadas y las filas nulas al último.
+
+Finalmente, obtenemos una matriz MERF. 
+
+Para describir el conjunto solución despejamos en cada ecuación la incógnita correspondiente al 1 prinicipal.\
+Tendremos tres opciones: no tener solución, tener soluciones infinitas y por último parametrizadas por incógnitas que no corresponden al 1 principal.
+
+**Ejemplo:**
+
+```math
+\begin{bmatrix}
+1 & 0 & 2 & \big| & 1 \\
+1 & -3 & 3 & \big| & 2 \\
+2 & -3 & 5 & \big| & 3
+\end{bmatrix}
+\xrightarrow[]{F_2 - F_1}
+\begin{bmatrix}
+1 & 0 & 2 & \big| & 1 \\
+0 & -3 & 1 & \big| & 1 \\
+2 & -3 & 5 & \big| & 3
+\end{bmatrix}
+\xrightarrow[]{F_3 + 2F_1}
+\begin{bmatrix}
+1 & 0 & 2 & \big| & 1 \\
+0 & -3 & 1 & \big| & 1 \\
+0 & -3 & 1 & \big| & 1
+\end{bmatrix}
+```
+
+```math 
+\xrightarrow[]{- \frac{1}{3} F_2}
+\begin{bmatrix}
+1 & 0 & 2 & \big| & 1 \\
+0 & 1 & - \frac{1}{3} & \big| & - \frac{1}{3} \\
+0 & -3 & 1 & \big| & 1
+\end{bmatrix}
+\xrightarrow[]{F_3 - 3F_2}
+\begin{bmatrix}
+1 & 0 & 2 & \big| & 1 \\
+0 & 1 & - \frac{1}{3} & \big| & - \frac{1}{3} \\
+0 & 0 & 0 & \big| & 
+\end{bmatrix}
+```
+
+Tenemos el final conjunto solución: 
+
+```math
+\left\{ (-2x_3 + 1, \; \frac{1}{3}x_3 - \frac{1}{3}, \; x_3) \mid x_3 \in \mathbb{R} \right\}
+```

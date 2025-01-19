@@ -20,8 +20,10 @@ Es una notación que tiene en cuenta lo siguiente:
 En base a la función $par$:
 
 ```math
-par : Num \to Bool \\
-par.x \doteq (x\;mod\;2 = 0)
+\begin{align}
+&par : Num \to Bool \\
+&par.x \doteq (x\;mod\;2 = 0)
+\end{align}
 ```
 
 Definimos la siguiente expresión cuantificada:
@@ -55,7 +57,7 @@ Otro ejemplo puede ser la expresión:
 \bigl \langle \; \sum i : 0 \leq i \leq n : 2 * i \; \bigr \rangle
 ```
 
-Comparándola con su notación matemática: $\;\displaystyle{\sum_{i=0}^{n}} \; 2*i$\
+{/* Comparándola con su notación matemática: $\;\displaystyle{\sum_{i=0}^{n}} \; 2*i$\ */}
 la primera es más clara para programar.
 
 ***

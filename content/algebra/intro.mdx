@@ -1,0 +1,53 @@
+# Introducción (ALG)
+
+En **Álgebra**, se estudian estructuras algebraicas que involucran espacios vectoriales y transformaciones lineales.
+
+Algunos temas son la resolución de sistemas de ecuaciones lineales mediante el método de Gauss, matrices, determinantes y espacios vectoriales, funciones lineales, entre otros.
+
+Los principales problemas en los que esta materia se enfoca son: 
+
+- Resolver sistemas homogéneos de ecuaciones lineales
+- Caracterizar el conjunto de soluciones como subconjunto de $\mathbb{R}^n$ (espacios vectoriales)
+
+_Los vectores y sus propiedades serán temas centrales en esta materia, para seguir, recomendamos repasar la siguiente sección: [Cálculo Vectorial (AM2)](/analisis2/calculo_vectorial)_
+ 
+## Combinación lineal 
+
+> Sean $\mathbf{v}_1, \ldots, \mathbf{v}_k$ vectores en $\mathbb{R}^n$ y sean $r_1, \ldots, r_k \in \mathbb{R}$ la combinación lineal de los vectores es:\
+$r_1\mathbf{v}_1 + \ldots + r_k\mathbf{v}_k$
+
+Un ejemplo de combinación lineal es la siguiente suma de vectores en $\mathbb{R}^3$:
+
+```math
+5(1, 2, 3) + 3(4, 5, 6) = (5, 10, 15) + (12, 15, 18) = (17, 25, 33)
+```
+
+Donde $(17, 25, 33)$ es combinación lineal de los vectores $(1, 2, 3)$ y $(4, 5, 6)$.
+
+### Vectores canónicos y base canónica
+
+> Se denota por $\; \mathbf{e}_i, \; 1 \leq i \leq n$ a los vectores canónicos de $\mathbb{R}^n$ donde solo hay una coordenada $i = 1$ y el resto son nulos.
+
+Por ejemplo, en $\mathbb{R}^3$ los vectores canónicos son:
+
+```math
+\mathbf{e}_1 = (1, 0, 0) \quad \mathbf{e}_2 = (0, 1, 0) \quad \mathbf{e}_3 = (0, 0, 1)
+```
+
+El conjunto dado por $\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ es llamado **base canónica** de $\mathbb{R}^n$.
+
+Todo vector de $\mathbb{R}^n$ se puede expresar como combinación lineal de la base canónica tal que: 
+
+```math
+(x_1, \ldots, x_n) = x_1\mathbf{e}_1 + \ldots + x_n\mathbf{e}_n
+```
+
+Por ejemplo, el vector $(2, 3, 4)$ se puede expresar como:
+
+```math
+\begin{align*}
+  (2, 3, 4) &= 2(1, 0, 0) + 3(0, 1, 0) + 4(0, 0, 1) \\ 
+  &= 2(1, 0, 0) + 3(0, 1, 0) + 4(0, 0, 1) \\
+  &= \mathbf{e}_1 + 3\mathbf{e}_2 + 4\mathbf{e}_3
+\end{align*}
+```
