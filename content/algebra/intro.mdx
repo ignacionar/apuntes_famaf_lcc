@@ -10,7 +10,38 @@ Los principales problemas en los que esta materia se enfoca son:
 - Caracterizar el conjunto de soluciones como subconjunto de $\mathbb{R}^n$ (espacios vectoriales)
 
 _Los vectores y sus propiedades serán temas centrales en esta materia, para seguir, recomendamos repasar la siguiente sección: [Cálculo Vectorial (AM2)](/analisis2/calculo_vectorial)_
- 
+
+## Anillos y cuerpos 
+
+Un **anillo** es un conjunto $R$ con dos operaciones $(+) \Rightarrow R + R, \; (\cdot) \Rightarrow R \times R$ que simplifican las siguientes propiedades (donde $a, b, c \in R$): 
+
+- **P1)** $a+b, \; a \cdot b \in R$ 
+- **P2)** Conmutatividad: $a+b=b+a,\;ab=ba$
+- **P3)** Asociatividad: $(a+b)+c = a+(b+c),\; (a \cdot b)\cdot c = a \cdot (b \cdot c)$
+- **P4)** Elemento Neutro: $a + 0 = a,\; a \cdot 1 = a$
+- **P5)** Distributividad: $a \cdot (b+c) = a \cdot b + a \cdot c$
+- **P6)** Inverso aditivo: $a + (-a) = 0$
+
+Un anillo $R$ es **conmutativo** cuando la multiplicación cumple la propiedad conmutativa: $a \cdot b = b \cdot a$ 
+
+> Un **cuerpo** $\KK$ es un anillo conmutativo donde todo elemento $a \in \KK, \; a \neq 0$ **tiene inverso multiplicativo**,\
+ es decir $a^{-1}$ tal que $a \cdot a^{-1} = 1$
+
+## Números complejos 
+
+> Los números complejos es el conjunto $\CC$ de los pares ordenados $(a, b)$ denotados $a + ib, \; a, b \in \RR$ con operaciones $(+) \; (\cdot)$ definidas. 
+
+```math 
+\begin{align}
+(a + ib) + (c + id) &= (a + c) + i(b + d) \\
+(a + ib) \cdot (c + id) &= (ac - bd) + i(b + d) \\
+\end{align}
+```
+
+Se define el conjugado de $a + bi$ como $\overline{a + bi} = a - bi$
+
+La norma $||a + bi|| = \sqrt{a^2 + b^2} \in \RR \geq 0$ 
+
 ## Combinación lineal 
 
 > Sean $\mathbf{v}_1, \ldots, \mathbf{v}_k$ vectores en $\mathbb{R}^n$ y sean $r_1, \ldots, r_k \in \mathbb{R}$ la combinación lineal de los vectores es:\

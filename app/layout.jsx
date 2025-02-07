@@ -41,7 +41,7 @@ export default async function RootLayout({ children }) {
   )
   return (
     <html lang="es" dir="ltr" suppressHydrationWarning>
-      <Head faviconGlyph="✦🇫" />
+      <Head faviconGlyph="✦" />
       <body>
         <Layout
           docsRepositoryBase={"https://github.com/ignacionar/apuntes_famaf_lcc"}

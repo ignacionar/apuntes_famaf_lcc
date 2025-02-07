@@ -123,6 +123,14 @@ Si esto es cierto, están en una misma recta, uno es múltiplo del otro.
 
 - Los puntos $P_0 + t\mathbf{v}$ con $t \in \mathbb{R}$ describen la recta $\ell_2$ que **tiene dirección $\mathbf{v}$ y pasa por el punto $P_0$**.
 
+### Ecuación implícita de una recta
+
+> Dados $a, b, c \in \RR$ con $a, b$ no simultáneamente nulos, la ecuación implícita de la recta es:
+
+```math
+ax + by = c
+```
+
 ### Ecuación vectorial de una recta
 
 > La recta $\ell$ que pasa por el punto $P_0$ y tiene dirección $\mathbf{v}$ es el conjunto de todos los puntos tales que: 
@@ -153,12 +161,12 @@ La ecuación vectorial de la recta que pasa por los puntos $P_0, P_1$ es:
 
 ### Ecuación paramétrica de una recta en el plano
 
-Sean $P_0 = (x_0, y_0), \; \mathbf{v} = (v_1, v_2) \neq 0, \; r \in \mathbb{R}$ y considerando la equivalencia entre: 
+Sean $P_0 = (x_0, y_0), \; \mathbf{v} = (\mathbf{v_1}, \mathbf{v_2}) \neq 0, \; r \in \mathbb{R}$ y considerando la equivalencia entre: 
 
 ```math 
 \begin{align*}
   \underline{\overline{\mathbf{X}}} &= P_0 + t\mathbf{v}\\
-  (x, y) &= (x_0, y_0) + t(v_1, v_2)
+  (x, y) &= (x_0, y_0) + t(\mathbf{v_1}, \mathbf{v_2})
 \end{align*}
 ```
 
@@ -167,27 +175,27 @@ Definimos la ecuación paramétrica como:
 ```math
 EP = 
 \begin{cases}
-x = x_0 + tv_1 \\
-y = y_0 + tv_2
+x = x_0 + t\mathbf{v_1} \\
+y = y_0 + t\mathbf{v_2}
 \end{cases}
 ```
 
-Suponiendo que $v_1 \neq 0$, despejando $t$ de la primera ecuación obtenemos:
+Suponiendo que $\mathbf{v_1} \neq 0$, despejando $t$ de la primera ecuación obtenemos:
 
 ```math
-t = \frac{x - x_0}{v_1}
+t = \frac{x - x_0}{\mathbf{v_1}}
 ```
 
 Sustituyendo $t$ en la segunda ecuación obtenemos:
 
 ```math
-y = y_0 + (\frac{x - x_0}{v_1})\;v_2
+y = y_0 + (\frac{x - x_0}{\mathbf{v_1}})\;\mathbf{v_2}
 ```
 
 Con estos datos, podemos obtener el valor de la pendiente de la recta y la ordenada al origen.
 
 ```math 
-\frac{v_2}{v_1}\;x + (y_0 - \frac{v_2}{v_1}\;x_0) = y
+\frac{\mathbf{v_2}}{\mathbf{v_1}}\;x + (y_0 - \frac{\mathbf{v_2}}{\mathbf{v_1}}\;x_0) = y
 ```
 
 Forma **explícita** de la recta: 
@@ -202,16 +210,70 @@ Forma **implícita** de la recta:
 ax - y + b = 0
 ```
 
+### Representando ecuaciones implícitas y paramétricas
+
+**Ejemplo 1:**
+
+Obtener la ecuación implícita de una representación paramétrica $X$: 
+
+```math 
+X(t) = (2, 1) + t(-1, 5) = (2 - t, 1 + 5t)
+```
+
+Podemos igualar cada coordenada como: 
+
+```math 
+x = 2 - t, \; y = 1 + 5t
+```
+
+Sustituyendo valores despejando $t$: 
+
+```math
+\begin{align} 
+y &= 1 + 5(2 - x) \\
+y &= 1 + 10 - 2x \\
+y &= 11 - 5x 
+\end{align}
+```
+
+Por lo que su ecuación implícita es: 
+
+```math
+5x + y = 11
+```
+
+**Ejemplo 2:**
+
+Obtener la representación paramétrica $Y$ de la ecuación implícita: 
+
+```math 
+5x + 2y = 11
+```
+
+Despejamos $y$ en función de $x$
+
+```math 
+5x + 2y = 11 \implies 2y = 11 - 5x \implies y = - \frac{5}{2}x + \frac{11}{2}
+```
+
+Solo por notación, reemplazamos $x$ por $t$ tal que: 
+
+```math 
+Y(t) = (t, - \frac{5}{2}t + \frac{11}{2})
+``` 
+
+Donde se parametrizan $x, y$ como $x = t, \; y = - \frac{5}{2}t + \frac{11}{2}$
+
 ### Ecuación paramétrica de una recta en el espacio
 
-Sean $P_0 = (x_0, y_0, z_0), \; \mathbf{v} = (v_1, v_2, v_3) \neq 0, \; r \in \mathbb{R}$ y considerando la equivalencia entre: 
+Sean $P_0 = (x_0, y_0, z_0), \; \mathbf{v} = (\mathbf{v_1}, \mathbf{v_2}, \mathbf{\mathbf{v_3}}) \neq 0, \; r \in \mathbb{R}$ y considerando la equivalencia entre: 
 
 ```math
 \underline{\overline{\mathbf{X}}} = P_0 + t\mathbf{v} \;,\; t \in \mathbb{R}
 ```
 
 ```math
-(x, y, z) = (x_0, y_0, z_0) + t(v_1, v_2, v_3)
+(x, y, z) = (x_0, y_0, z_0) + t(\mathbf{v_1}, \mathbf{v_2}, \mathbf{\mathbf{v_3}})
 ```
 
 Definimos la ecuación paramétrica como: 
@@ -219,9 +281,9 @@ Definimos la ecuación paramétrica como:
 ```math
 EP =
 \begin{cases}
-x = x_0 + tv_1 \\
-y = y_0 + tv_2 \\
-z = z_0 + tv_3
+x = x_0 + t\mathbf{v_1} \\
+y = y_0 + t\mathbf{v_2} \\
+z = z_0 + t\mathbf{v_3}
 \end{cases}
 ```
 
@@ -265,17 +327,17 @@ Si tenemos dos rectas paralelas, entonces eligiendo un punto $P$ y $Q$ en cada r
 
 ### Ecuación normal de un plano 
 
-> Sea $\mathbf{n}$ un vector perpendicular a un plano $\overline{\underline{X}} = (x, y, z)$ y un punto $P_0$ por el que pasa, entonces la **ecuación normal de un plano** es:
+> Sea $\mathbf{n}$ un vector perpendicular a un plano $\underline{\overline{\mathbf{X}}} = (x, y, z)$ y un punto $P_0$ por el que pasa, entonces la **ecuación normal de un plano** es:
 
 ```math
-< \overline{\underline{X}} - P_0, \; \mathbf{n} > \; = \; 0 
+< \underline{\overline{\mathbf{X}}} - P_0, \; \mathbf{n} > \; = \; 0 
 ```
 
-Tal que $\overline{\underline{X}} - P_0$ es perpendicular a $\mathbf{n}$.
+Tal que $\underline{\overline{\mathbf{X}}} - P_0$ es perpendicular a $\mathbf{n}$.
 
-### Ecuación cartesiana del plano 
+### Ecuación cartesiana/implícita del plano 
 
-> Sean $\overline{\underline{X}} = (x, y, z), \; \mathbf{n} = (a, b, c)$, entonces la **ecuación cartesiana de un plano** es:
+> Sean $\underline{\overline{\mathbf{X}}} = (x, y, z), \; \mathbf{n} = (a, b, c)$, entonces la **ecuación cartesiana de un plano** es:
 
 ```math
 ax + by + cz = d
@@ -283,10 +345,10 @@ ax + by + cz = d
 
 ## Producto Vectorial 
 
-> Dados dos vectores $\mathbf{v} = (v_1, v_2, v_3), \; \mathbf{w} = (w_1, w_2, w_3)$, se define el **producto vectorial** $\mathbf{v} \times \mathbf{w}$ como:
+> Dados dos vectores $\mathbf{v} = (\mathbf{v_1}, \mathbf{v_2}, \mathbf{\mathbf{v_3}}), \; \mathbf{w} = (\mathbf{w_1}, \mathbf{w_2}, \mathbf{w_3})$, se define el **producto vectorial** $\mathbf{v} \times \mathbf{w}$ como:
 
 ```math
-\mathbf{v} \times \mathbf{w} = (v_2w_3 - w_2v_3, w_1v_3 - v_1w_3, w_2v_1 - v_2w_1)
+\mathbf{v} \times \mathbf{w} = (\mathbf{v_2}\mathbf{w_3} - \mathbf{w_2}\mathbf{v_3}, \mathbf{w_1}\mathbf{v_3} - \mathbf{v_1}\mathbf{w_3}, \mathbf{w_2}\mathbf{v_1} - \mathbf{v_2}\mathbf{w_1})
 ```
 
 Esto nos sirve para pasar la ecuación vectorial del plano a la ecuación normal del plano.
@@ -300,7 +362,7 @@ Sabiendo la ecuación vectorial del plano que pasa por $P$ y tiene dirección $\
 Como el vector $\mathbf{v} \times \mathbf{w}$ es ortogonal a $\mathbf{v}$ y $\mathbf{w}$, entonces podemos escribir la ecuación normal del plano como:
 
 ```math
-< \overline{\underline{X}} - P, \mathbf{v} \times \mathbf{w} > \; = \; 0
+< \underline{\overline{\mathbf{X}}} - P, \mathbf{v} \times \mathbf{w} > \; = \; 0
 ```
 
 ## Calcular coseno del ángulo entre planos 
