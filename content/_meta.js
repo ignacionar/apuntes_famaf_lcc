@@ -10,5 +10,6 @@ export default {
   discreta1: "Matemática Discreta 1",
   algoritmos1: "Algoritmos y Estructuras de Datos 1",
   analisis2: "Análisis Matemático 2",
-  algebra: "Álgebra"
+  algebra: "Álgebra",
+  algoritmos2: "Algoritmos y Estructuras de Datos 2"
 }
