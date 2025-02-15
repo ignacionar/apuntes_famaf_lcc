@@ -8,6 +8,7 @@ const withNextra = nextra({
       config: {
         tex: {
           macros: {
+            NN: '\\mathbb{N}',
             RR: '\\mathbb{R}',
             CC: '\\mathbb{C}',
             KK: '\\mathbb{K}',
@@ -32,7 +33,7 @@ const withNextra = nextra({
             do: '\\mathbf{do}',
             od: '\\mathbf{od}',
             for: '\\mathbf{for}',
-            to: '\\mathbf{to}',
+            too: '\\mathbf{to}',
             downto: '\\mathbf{downto}',
             bool: '\\mathbf{bool}',
             int: '\\mathbf{int}',
@@ -41,6 +42,7 @@ const withNextra = nextra({
             char: '\\mathbf{char}',
             string: '\\mathbf{string}',
             pointer: '\\mathbf{pointer}',
+            bigO: '\\mathcal{O}',
             mcalx: '\\mathcal{X}'
           }
         }

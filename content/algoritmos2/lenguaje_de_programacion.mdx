@@ -1,12 +1,12 @@
 # Lenguaje de la Materia
 
-Se utiliza un lenguaje inventado específicamente para la materia, que nos permite definir procedimientos y funciones. 
+Se utiliza un lenguaje inventado específicamente para la materia, que nos permite definir procedimientos y funciones.
 
 ## Procedimientos
 
 > Un procedimiento encapsula un bloque de código con su respectiva declaración de variables (que define el estado).
 
-```math 
+```math
 \begin{align}
 &\proc \; nombre(< \bfin | \out | \inout > p_1 : T_1, \; \ldots, \; < \bfin | \out | \inout > p_n : T_n) \\
 &\quad < \textnormal{declaraciones de variables} > \\
@@ -15,17 +15,17 @@ Se utiliza un lenguaje inventado específicamente para la materia, que nos permi
 \end{align}
 ```
 
-Donde $p_1, \; \ldots, \; p_n$ son nombres de variables (parámetros) y $T_1, \; \ldots, \; T_n$ sus respectivos tipos. 
+Donde $p_1, \; \ldots, \; p_n$ son nombres de variables (parámetros) y $T_1, \; \ldots, \; T_n$ sus respectivos tipos.
 
 **Entrada/salida de parámetros:**
 
 - $\bfin$ es el parámetro de entrada (no modificable)
-- $\out$ el parámetro de salida. 
-- $\inout$ el parámetro de entrada/salida. 
+- $\out$ el parámetro de salida.
+- $\inout$ el parámetro de entrada/salida.
 
-Un ejemplo de declaración de procedimiento es el siguiente: 
+Un ejemplo de declaración de procedimiento es el siguiente:
 
-```math 
+```math
 \begin{align}
 &\proc \; abs(\bfin \; x : \int, \; \out \; y : \int) \\
 &\quad \if \; x >= 0 \; \then \\
@@ -37,9 +37,9 @@ Un ejemplo de declaración de procedimiento es el siguiente:
 \end{align}
 ```
 
-Un ejemplo de llamada de este procedmiento puede ser: 
+Un ejemplo de llamada de este procedmiento puede ser:
 
-```math 
+```math
 \begin{align}
 &\proc \; llamadordeabs() \\
 &\quad \var \; a, b : \int \\
@@ -53,14 +53,14 @@ Un ejemplo de llamada de este procedmiento puede ser:
 
 **Observaciones:**
 
-- Los procedimientos no devuelven cosas (pero pueden escribir varios parámetros $\out$). 
-- Las llamadas a estos son sentencias del lenguaje. 
+- Los procedimientos no devuelven cosas (pero pueden escribir varios parámetros $\out$).
+- Las llamadas a estos son sentencias del lenguaje.
 
-## Funciones 
+## Funciones
 
-> Las funciones son como procedimientos salvo que todos los parámetros son $/bfin$ y devuelven algo. 
+> Las funciones son como procedimientos salvo que todos los parámetros son $/bfin$ y devuelven algo.
 
-```math 
+```math
 \begin{align}
 &\fun \; nombre(p_1 : T_1, \; \ldots, \; p_n : T_n) \; \ret \; r : T \\
 &\quad < \textnormal{declaraciones de variables} > \\
@@ -69,11 +69,11 @@ Un ejemplo de llamada de este procedmiento puede ser:
 \end{align}
 ```
 
-Donde $p_1, \; \ldots, \; p_n$ y $r$ son nombres de variables (parámetros) y $T_1, \; \ldots, \; T_n$ sus respectivos tipos. 
+Donde $p_1, \; \ldots, \; p_n$ y $r$ son nombres de variables (parámetros) y $T_1, \; \ldots, \; T_n$ sus respectivos tipos.
 
 Un ejemplo de declaración de función es el siguiente:
 
-```math 
+```math
 \begin{align}
 &\fun \; abs(\bfin \; x : \int) \; \ret \; y : \int  \\
 &\quad \if \; x >= 0 \; \then \\
@@ -85,9 +85,9 @@ Un ejemplo de declaración de función es el siguiente:
 \end{align}
 ```
 
-Y un ejemplo de llamada es: 
+Y un ejemplo de llamada es:
 
-```math 
+```math
 \begin{align}
 &\proc \; llamadordeabs() \\
 &\quad \var \; a, b : \int \\
@@ -113,7 +113,7 @@ Y un ejemplo de llamada es:
 - No importa el orden en que se declaran, un procedimiento puede llamar a otro que esté definido más adelante.
 - **No se pueden** definir procedimientos ni funciones dentro de procedimientos o funciones (no hay anidamiento, todas las definiciones están al mismo nivel).
 
-## Tipos Nativos 
+## Tipos Nativos
 
 > Los tipos nativos son los tipos que trae predefinido el lenguaje de programación.
 
@@ -126,24 +126,25 @@ Y un ejemplo de llamada es:
 - $\char$: caracteres ($\textnormal{'} a \textnormal{'}$)
 - $\string$: secuencias de caracteres ($\textnormal{"} string \textnormal{"}$)
 
-Se utilizan constantes que sirven como infinito/-infinito, etc. 
+Se utilizan constantes que sirven como infinito/-infinito, etc.
 
 **Tipos estructurados:**
 
-- $\array$: arreglos 
-- $\pointer$: punteros 
+- $\array$: arreglos
+- $\pointer$: punteros
 
-### Arreglos 
+### Arreglos
 
 **Sintaxis de Arreglos:**
 
-Su declaración es: 
+Su declaración es:
 
-```math  
-\var \; a : \array [N_1 \ldots M_1, \; \ldots, \; N_k \ldots M_k] \; \of \; T 
+```math
+\var \; a : \array [N_1 \ldots M_1, \; \ldots, \; N_k \ldots M_k] \; \of \; T
 ```
 
 Donde:
+
 - $a$ es el nombre de la variable,
 - $k$ es la cantidad de dimensiones del arreglo.
 - $N_1,M_1, \ldots N_k,M_k \;$ son números que indican el rango del arreglo para cada dimensión
@@ -151,21 +152,21 @@ Donde:
 
 Para acceder un elemento (expresión):
 
-```math 
+```math
 a[i_1, \; \ldots , \; i_k]
 ```
 
 Para asignar un valor a un elemento (sentencia):
 
-```math 
+```math
 a[i_1, \; \ldots , \; i_k] := E
 ```
 
-Donde $E$ es una expresión de tipo $T$. 
+Donde $E$ es una expresión de tipo $T$.
 
-Algunos ejemplos: 
+Algunos ejemplos:
 
-```math 
+```math
 \begin{align}
 &\var \; precios : \array [1..10] \; \of \; \int \\
 &\{- \;\; \textnormal{arreglo de 10 elementos} \; precios[1], precios[2], \ldots , precios[10] \;\; -\} \\
@@ -180,7 +181,7 @@ Algunos ejemplos:
 \end{align}
 ```
 
-## Expresiones 
+## Expresiones
 
 Expresiones válidas en programación imperativa:
 
@@ -190,97 +191,98 @@ Expresiones válidas en programación imperativa:
 - accesos a elementos de arreglos
 - llamadas a funciones
 
-## Sentencias 
+## Sentencias
 
-### _Skip_ 
+### _Skip_
 
-Utilizamos $\skip$ para no hacer nada. 
+Utilizamos $\skip$ para no hacer nada.
 
-### Asignación 
+### Asignación
 
 La sintaxis es: $v := E$ donde $v$ es variable y $E$ expresión. **No se utiliza la asignación múltiple en este lenguaje**
 
-### Llamada a procedimiento 
+### Llamada a procedimiento
 
 Llamamos los procedimientos como $nombreproc(e_1, \ldots, e_n)$
 
 ### Condicional
 
-Utilizamos $\if, \; \then, \; \else$ de las siguientes maneras: 
+Utilizamos $\if, \; \then, \; \else$ de las siguientes maneras:
 
-```math 
+```math
 \begin{align}
 &\if \; B \; \then \\
 &\quad S_1 \\
 &\else \\
 &\quad S_2 \\
-&\fi 
+&\fi
 \end{align}
 ```
 
-O también, sin el $\else$ 
+O también, sin el $\else$
 
-```math 
+```math
 \begin{align}
 &\if \; B \; \then \\
 &\quad S \\
-&\fi 
+&\fi
 \end{align}
 ```
 
-Donde $B$ es una guarda y expresión booleana, y $S, S_1, S_2$ sentencias. 
+Donde $B$ es una guarda y expresión booleana, y $S, S_1, S_2$ sentencias.
 
-### Repetición 
+### Repetición
 
-Utilizamos $\while, \; do$: 
+Utilizamos $\while, \; do$:
 
-```math 
+```math
 \begin{align}
 &\while \; B \; \do \\
 &\quad S \\
-&\od 
+&\od
 \end{align}
 ```
 
-Donde $B$ es una guarda y expresión booleana, y $S$ una sentencia. 
+Donde $B$ es una guarda y expresión booleana, y $S$ una sentencia.
 
 ### Otras repeticiones, _for to_, _for downto_
 
-Sintaxis de $\for \; \to$: 
+Sintaxis de $\for \; \too$:
 
-```math 
+```math
 \begin{align}
-&\for \; i:=N \; \to \; M \; \do \\
+&\for \; i:=N \; \too \; M \; \do \\
 &\quad S \\
-&\od 
+&\od
 \end{align}
 ```
 
 Donde $N$ y $M$ son expresiones de tipo $\int$ y $S$ es sentencia.
 
-Su semántica es la siguiente: 
+Su semántica es la siguiente:
 
 1. Se declara la variable $i$ (sólo exisitirá dentro de la sentencia $S$)
 2. Se le asigna a $i$ el valor $N$
-3. Se ejecuta $S$ 
-4. **Se incrementa $i$ en $1$** 
-5. **Si $i > M$ termina**, si no vuelve al punto 3. 
-6. $i$ deja de existir al terminar. 
+3. Se ejecuta $S$
+4. **Se incrementa $i$ en $1$**
+5. **Si $i > M$ termina**, si no vuelve al punto 3.
+6. $i$ deja de existir al terminar.
 
-Sintaxis de $\for \; \downto$: 
+Sintaxis de $\for \; \downto$:
 
-```math 
+```math
 \begin{align}
 &\for \; i:=N \; \downto \; M \; \do \\
 &\quad S \\
-&\od 
+&\od
 \end{align}
 ```
+
 Donde $N$ y $M$ son expresiones de tipo $int$ y $S$ es sentencia.
 
-Su semántica es igual a $\for \; \to$ pero restando $1$.
+Su semántica es igual a $\for \; \too$ pero restando $1$.
 
-**Observaciones:** 
+**Observaciones:**
 
 - No hace falta declarar el $i$ (el $\for$ ya lo declara)
 - Si había otra variable $i$ afuera, esta $i$ la tapa.
@@ -288,29 +290,29 @@ Su semántica es igual a $\for \; \to$ pero restando $1$.
 - No agrega expresividad al lenguaje (todo se puede hacer con $\while$).
 - itera desde $N$ hasta $M$ **inclusive**
 
-Un ejemplo de $\for \; \to$ podría ser:  
+Un ejemplo de $\for \; \too$ podría ser:
 
-```math 
+```math
 \begin{align}
 &\var \; precios : \array [1..100] \; \of \; \int \\
-&\for \; i:=1 \; \to \; 100 \; \do \\
+&\for \; i:=1 \; \too \; 100 \; \do \\
 &\quad precios[i] := 0 \\
-&\od 
+&\od
 \end{align}
 ```
 
 Y para $\for \; \downto$,
 
-```math 
+```math
 \begin{align}
 &\var \; precios : \array [1..100] \; \of \; \int \\
 &precios[100] := 35 \\
 &\for \; i:=99 \; \downto \; 1 \; \do \\
 &\quad precios[i] := precios[i+1] * 2 \\
-&\od 
+&\od
 \end{align}
 ```
 
-### Secuenciación 
+### Secuenciación
 
-No hay secuenciación explícita como en Algoritmos 1, basta con poner una sentencia después de otra. 
+No hay secuenciación explícita como en Algoritmos 1, basta con poner una sentencia después de otra.

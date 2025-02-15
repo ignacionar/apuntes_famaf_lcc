@@ -722,7 +722,7 @@ La función **logarítmica** de base $a$ es $f(x) = \log_a(x)$. Su dominio es $\
 
 La función logarítmica es la inversa de la exponencial. Si tenemos $f : \mathbb{R} \rightarrow \mathbb{R^+}$ y $f(x) = a^x$, entonces $f$ es biyectiva, por lo que $f^{-1}(x) = \log_a(x)$. 
 
-El **logaritmo natural** es la función logarítmica de base $e$. Suponiendo que $f(x) = e^x$, entonces $f^{-1}(x) = \ln(x)$. El siguiente gráfico muestra la función exponencial y logarítmica:
+El **logaritmo natural** es la función logarítmica de base $e$. Suponiendo que $f(x) = e^x$, entonces $f^{-1}(x) = \\ln(x)$. El siguiente gráfico muestra la función exponencial y logarítmica:
 
 <br/>
 
@@ -778,7 +778,7 @@ x = 2
 
 **2.**
 
-Resolver la ecuación: $ln(x + 2) + ln(x - 3) = ln(2x - 1)$
+Resolver la ecuación: $\ln(x + 2) + \ln(x - 3) = \ln(2x - 1)$
 
 Para resolver esta ecuación, debemos pensar en los valores que $x$ puede tomar (debe ser mayor a $0$):
 
@@ -794,13 +794,13 @@ Se cumplen todos los casos $\iff x > -2$.
 Ahora podemos resolver la ecuación:
 
 ```math
-ln(x + 2) + ln(x - 3) = ln(2x - 1)
+\ln(x + 2) + \ln(x - 3) = \ln(2x - 1)
 ```
 
 Aplicamos la propiedad de la suma de logaritmos:
 
 ```math
-ln((x + 2)(x - 3)) = ln(2x - 1)
+\ln((x + 2)(x - 3)) = \ln(2x - 1)
 ```
 
 Igualamos los argumentos de los logaritmos:
@@ -845,12 +845,12 @@ $x$ no puede ser un número complejo, por lo que no hay solución.
 
 **3.**
 
-Resolver la ecuación: $\sqrt[3]{ln(x)} = ln(\sqrt[3]{x})$
+Resolver la ecuación: $\sqrt[3]{\ln(x)} = \ln(\sqrt[3]{x})$
 
 Para resolver esta ecuación, debemos pensar en los valores que $x$ puede tomar (debe ser mayor a $0$):
 
 ```math
-(ln(x) > 0) \land (\sqrt[3]{x} > 0)
+(\ln(x) > 0) \land (\sqrt[3]{x} > 0)
 ```
 
 Se cumplen los casos $\iff x > 0$
@@ -858,43 +858,43 @@ Se cumplen los casos $\iff x > 0$
 Podemos usar la propiedad de la potencia de un logaritmo:
 
 ```math
-ln(\sqrt[3]{x}) = ln(x^{\frac{1}{3}}) = \frac{1}{3} \cdot ln(x)
+\ln(\sqrt[3]{x}) = \ln(x^{\frac{1}{3}}) = \frac{1}{3} \cdot \ln(x)
 ```
 
 Reemplazamos en la ecuación:
 
 ```math
-\sqrt[3]{ln(x)} = \frac{1}{3} ln(x)
+\sqrt[3]{\ln(x)} = \frac{1}{3} \ln(x)
 ```
 
 Elevamos ambos miembros al cubo:
 
 ```math
-ln(x) = \frac{1}{27} ln(x)^3
+\ln(x) = \frac{1}{27} \ln(x)^3
 ```
 
-Restamos $\frac{1}{27} ln(x)^3$ en ambos miembros:
+Restamos $\frac{1}{27} \ln(x)^3$ en ambos miembros:
 
 ```math
-ln(x) - \frac{1}{27} ln(x)^3 = 0
+\ln(x) - \frac{1}{27} \ln(x)^3 = 0
 ```
 
 Factorizamos:
 
 ```math
-ln(x)(1 - \frac{1}{27} ln(x)^2) = 0
+\ln(x)(1 - \frac{1}{27} \ln(x)^2) = 0
 ```
 
 Si $ab = 0 \Rightarrow a = 0\;\lor\;b = 0$:
 
 ```math
-ln(x) = 0\;\lor\;1 - \frac{1}{27} ln(x)^2 = 0
+\ln(x) = 0\;\lor\;1 - \frac{1}{27} \ln(x)^2 = 0
 ```
 
 Resolvemos el primer caso:
 
 ```math
-ln(x) = 0
+\ln(x) = 0
 ```
 
 Buscamos el valor de $x$:
@@ -910,19 +910,19 @@ x = 1
 Resolvemos el segundo caso:
 
 ```math
-1 - \frac{1}{27} ln(x)^2 = 0
+1 - \frac{1}{27} \ln(x)^2 = 0
 ```
 
 ```math
-\frac{1}{27} ln(x)^2 = 1
+\frac{1}{27} \ln(x)^2 = 1
 ```
 
 ```math
-ln(x)^2 = 27
+\ln(x)^2 = 27
 ```
 
 ```math
-ln(x) = \pm \sqrt{27}
+\ln(x) = \pm \sqrt{27}
 ```
 
 Buscamos el valor de $x$:

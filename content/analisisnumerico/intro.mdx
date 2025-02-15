@@ -1,0 +1,179 @@
+# Introducción (AN)
+
+En **Análisis Numérico** se adquieren las herramientas básicas para formular y resolver problemas de matemática, los algoritmos necesarios, discernir las técnicas más convenientes para resolver cada problema e interpretar los resultados obtenidos.
+
+Algunos temas son: análisis de errores, sistemas de punto flotante, interpolación polinomial, entre otros.
+
+## Modelos matemáticos
+
+> Un modelo matemático es una **representación aproximada** de un problema/situación de la vida real.
+
+Podemos considerar un modelo matemático como una buena descripción del problema a estudiar.
+
+Existen dos caminos posibles para solucionar el problema planteado en el modelo: la primera es hacer simplificaciones para obtener una solución analítica (pudiendo diferir mucho del problema real). La segunda es hacer aproximaciones numéricas (pudiendo introducir errores), estudiando/estimando como las aproximaciones afectan a la precisión de la solución.
+
+<br />
+
+<>
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", textAlign: "center" }}>
+    <div>
+      <p>Modelo Matemático 1</p>
+      <br />
+      <p style={{ fontWeight: "bold", fontSize: "20px" }}>Problema Matemático</p>
+      <p style={{ fontSize: "24px" }}>&#8659;</p>
+      <p style={{ fontWeight: "bold", fontSize: "20px" }}>Solución Analítica</p>
+    </div>
+    <div>
+      <p>Modelo Matemático 2</p>
+      <br />
+      <p style={{ fontWeight: "bold", fontSize: "20px" }}>Problema Matemático</p>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
+        <span style={{ fontSize: "24px" }}>&#8659;</span>
+        <span>Aproximaciones</span>
+      </div>
+      <p style={{ fontWeight: "bold", fontSize: "20px" }}>Problema Numérico</p>
+      <p style={{ fontSize: "24px" }}>&#8659;</p>
+      <p style={{ fontWeight: "bold", fontSize: "20px" }}>Solución Numérica</p>
+    </div>
+  </div>
+</>
+
+> Un **problema numérico** es una descrición clara de la conexión funcional entre datos de entrada (variables independientes / input) y datos de salida (resultados deseados / output). Estos datos consisten en un conjunto finito de cantidades reales.
+
+Para resolver un problema numérico, además de la teoría matemática, se utilizan computadoras y algoritmos.
+
+> Para un problema numérico, un **algoritmo** es una descripción de un número finito de pasos con operaciones definidas (sin ambiguedades), donde una lista de datos de entrada se convierte en una lista de datos de salida.
+
+La materia **Análisis Numérico** formula y estudia métodos numéricos/algoritmos para obtener la solución de problemas modelizados matemáticamente.
+
+## Órdenes de convergencia
+
+Las soluciones de problemas numéricos no suelen ser fórmulas cerradas, sino una **sucesión de aproximaciones cuya precisión aumenta progresivamente**. Por ello es necesario comprender los conceptos de convergencia de sucesiones (y su velocidad)
+
+> Sea $\{ X_n \}$ una sucesión de reales que converge a $x_* \;$,\
+$\{ X_n \}$ tiene tasa de convergencia es (al menos) **lineal** si existe una constante $c$ donde $\; 0 < c < 1 \; \land \; N \in \NN$ tal que:
+
+```math
+|x_{n+1} - x_*| \leq c|x_{n} - x_*|, \; \forall n \geq N
+```
+
+**Ejemplo:**
+
+La sucesión dada por $x_n = 3^{-n}, \; n \in \NN$
+
+```math
+x_n = 3^{-n} = \frac{1}{3^n} \\
+```
+
+Su valor de convergencia es: 
+
+```math 
+\displaystyle{\lim_{n \to \infty}} \; \frac{1}{3^n} = 0 
+```
+
+Buscamos la constante $c$ en base a la definición anterior:
+
+```math
+\frac{|x_{n+1} - x_*|}{|x_n - x_*|} = c
+```
+
+Reemplazamos $x_n$ por el valor de la sucesión y $x_*$ por su valor de convergencia:
+
+```math
+\frac{|3^{-(n+1)} - 0|}{|3^{-n} - 0|} = \frac{3^{-(n+1)}}{3^{-n}} = \frac{3^n}{3^{n+1}} = \frac{\cancel{3^n}}{\cancel{3^n} \cdot 3} = \frac{1}{3} 
+```
+
+Por lo tanto,
+
+```math
+|x_{n+1} - 0| = \frac{1}{3}|x_n - 0| , \; \forall n
+```
+
+***
+
+> La tasa de convergencia es (al menos) **superlineal** si existe una sucesión $\{ \epsilon_n \}$ que converge a $\;  0 \; \land \; N \in \NN$ tal que:
+
+```math
+|x_{n+1} - x_*| \leq \epsilon_n|x_{n} - x_*|, \; \forall n \geq N
+```
+
+**Ejemplo:**
+
+La sucesión dada por $x_n = \frac{1}{n!}, \; n \in \NN$. Como esta sucesión converge en $0$, tenemos que:
+
+```math 
+\frac{|x_{n+1} - 0|}{|x_n - 0|} = \frac{n!}{(n+1)!} = \frac{\cancel{n!}}{\cancel{n!} \cdot (n+1)} = \frac{1}{n!}
+```
+
+La sucesión $\frac{1}{n+1}$ también converge a $0$, se cumple que:
+
+```math
+|x_{n+1} - 0| = \frac{1}{n!}|x_n - 0| , \; \forall n
+```
+
+***
+
+> La tasa de convergencia es (al menos) **cuadrática** si existe una constante $\; c > 0 \; \land \; N \in \NN$ tal que:
+
+```math
+|x_{n+1} - x_*| \leq c|x_{n} - x_*|^2, \; \forall n \geq N
+```
+
+## Notación Big-O y Little-O
+
+> Sean $\{x_n\}, \{\alpha_n\}$ sucesiones distintas, si existen una constante $\; c > 0 \; \land \; r \in \NN$ se establece:
+
+```math 
+|x_n| \leq c|\alpha_n|, \; \forall n \geq r \implies x_n = \bigO(\alpha_n)
+```
+
+> Si existe una sucesión $\{\epsilon_n\}$ que converge a $\; 0$, con $\epsilon_n \geq 0 \; \land \; r \in \NN$ se establece:
+
+```math 
+|x_n| \leq \epsilon_n|\alpha_n|, \; \forall n \geq r \implies x_n = o(\alpha_n)
+```
+
+(intuitivamente esto dice $\displaystyle{\lim_{n \to \infty}} \; \frac{x_n}{\alpha_n} = 0$) 
+
+Esta notación también se puede usar para comparar funciones de la siguiente forma:
+
+```math 
+|f(x)| \leq c|g(x)| , \; \forall x \geq r \implies  f(x) = \bigO(g(x)), \; x \rightarrow \infty
+```
+
+Análogamente, 
+
+```math 
+\displaystyle{\lim_{x \to \infty}} \; \frac{f(x)}{g(x)} = 0 \implies f(x) = o(g(x)), \; x \rightarrow \infty
+```
+
+**Ejemplo 1:**
+
+```math 
+\frac{n+1}{n^2} = \bigO(\frac{1}{n})
+```
+
+En base a la definición: 
+
+```math 
+\begin{align}
+\frac{n+1}{n^2} &\leq c \frac{1}{n}  \\
+\frac{n+1}{n} &\leq c 
+\end{align}
+```
+
+Basta con tomar $c = 2, \; r = 1$
+
+**Ejemplo 2:**
+
+```math
+\frac{1}{n \ln n} = o(\frac{1}{n}) 
+```
+
+Siguiendo la definición: 
+
+```math 
+\frac{1}{n \ln n} \leq \epsilon_n \frac{1}{n}
+```
+
+Basta con tomar $\epsilon_n = \frac{1}{\ln n}$
