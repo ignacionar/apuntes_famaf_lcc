@@ -36,7 +36,7 @@ const withNextra = nextra({
             too: '\\mathbf{to}',
             downto: '\\mathbf{downto}',
             bool: '\\mathbf{bool}',
-            int: '\\mathbf{int}',
+            intt: '\\mathbf{int}',
             nat: '\\mathbf{nat}',
             real: '\\mathbf{real}',
             char: '\\mathbf{char}',

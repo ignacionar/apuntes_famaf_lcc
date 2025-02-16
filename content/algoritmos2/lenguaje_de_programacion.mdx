@@ -27,7 +27,7 @@ Un ejemplo de declaración de procedimiento es el siguiente:
 
 ```math
 \begin{align}
-&\proc \; abs(\bfin \; x : \int, \; \out \; y : \int) \\
+&\proc \; abs(\bfin \; x : \intt, \; \out \; y : \intt) \\
 &\quad \if \; x >= 0 \; \then \\
 &\quad \quad y := x \\
 &\quad \else \\
@@ -42,7 +42,7 @@ Un ejemplo de llamada de este procedmiento puede ser:
 ```math
 \begin{align}
 &\proc \; llamadordeabs() \\
-&\quad \var \; a, b : \int \\
+&\quad \var \; a, b : \intt \\
 &\quad a := -10 \\
 &\quad \else \\
 &\quad abs(a,b) \\
@@ -75,7 +75,7 @@ Un ejemplo de declaración de función es el siguiente:
 
 ```math
 \begin{align}
-&\fun \; abs(\bfin \; x : \int) \; \ret \; y : \int  \\
+&\fun \; abs(\bfin \; x : \intt) \; \ret \; y : \intt  \\
 &\quad \if \; x >= 0 \; \then \\
 &\quad \quad y := x \\
 &\quad \else \\
@@ -90,7 +90,7 @@ Y un ejemplo de llamada es:
 ```math
 \begin{align}
 &\proc \; llamadordeabs() \\
-&\quad \var \; a, b : \int \\
+&\quad \var \; a, b : \intt \\
 &\quad a := -10 \\
 &\quad b := 35 \\
 &\quad b := abs(a) \\
@@ -120,7 +120,7 @@ Y un ejemplo de llamada es:
 **Tipos básicos:**
 
 - $\bool$: booleanos ($True$ y $False$)
-- $\int$: enteros
+- $\intt$: enteros
 - $\nat$: naturales (con el $0$)
 - $\real$: reales
 - $\char$: caracteres ($\textnormal{'} a \textnormal{'}$)
@@ -168,7 +168,7 @@ Algunos ejemplos:
 
 ```math
 \begin{align}
-&\var \; precios : \array [1..10] \; \of \; \int \\
+&\var \; precios : \array [1..10] \; \of \; \intt \\
 &\{- \;\; \textnormal{arreglo de 10 elementos} \; precios[1], precios[2], \ldots , precios[10] \;\; -\} \\
 \\
 &\var \; matriz : \array [0..25,5..10] \; \of \; \char \\
@@ -257,7 +257,7 @@ Sintaxis de $\for \; \too$:
 \end{align}
 ```
 
-Donde $N$ y $M$ son expresiones de tipo $\int$ y $S$ es sentencia.
+Donde $N$ y $M$ son expresiones de tipo $\intt$ y $S$ es sentencia.
 
 Su semántica es la siguiente:
 
@@ -294,7 +294,7 @@ Un ejemplo de $\for \; \too$ podría ser:
 
 ```math
 \begin{align}
-&\var \; precios : \array [1..100] \; \of \; \int \\
+&\var \; precios : \array [1..100] \; \of \; \intt \\
 &\for \; i:=1 \; \too \; 100 \; \do \\
 &\quad precios[i] := 0 \\
 &\od
@@ -305,7 +305,7 @@ Y para $\for \; \downto$,
 
 ```math
 \begin{align}
-&\var \; precios : \array [1..100] \; \of \; \int \\
+&\var \; precios : \array [1..100] \; \of \; \intt \\
 &precios[100] := 35 \\
 &\for \; i:=99 \; \downto \; 1 \; \do \\
 &\quad precios[i] := precios[i+1] * 2 \\
