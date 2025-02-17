@@ -102,7 +102,7 @@ Por lo tanto,
 La sucesión dada por $x_n = \frac{1}{n!}, \; n \in \NN$. Como esta sucesión converge en $0$, tenemos que:
 
 ```math 
-\frac{|x_{n+1} - 0|}{|x_n - 0|} = \frac{n!}{(n+1)!} = \frac{\cancel{n!}}{\cancel{n!} \cdot (n+1)} = \frac{1}{n!}
+\frac{|x_{n+1} - 0|}{|x_n - 0|} = \frac{n!}{(n+1)!} = \frac{\cancel{n!}}{\cancel{n!} \cdot (n+1)} = \frac{1}{n+1!}
 ```
 
 La sucesión $\frac{1}{n+1}$ también converge a $0$, se cumple que:
@@ -139,6 +139,10 @@ Esta notación también se puede usar para comparar funciones de la siguiente fo
 
 ```math 
 |f(x)| \leq c|g(x)| , \; \forall x \geq r \implies  f(x) = \bigO(g(x)), \; x \rightarrow \infty
+```
+
+```math 
+0 < \displaystyle{\lim_{x \to \infty}} \; \frac{f(x)}{g(x)} < \infty \implies f(x) = \bigO(g(x)), \; x \rightarrow \infty
 ```
 
 Análogamente, 

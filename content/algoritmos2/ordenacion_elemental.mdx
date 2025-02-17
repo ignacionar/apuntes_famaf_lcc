@@ -6,8 +6,94 @@ import Image from 'next/image'
 
 > Este algoritmo consiste en seleccionar el menor elemento de todos e intercambiarlo por el que está en la primera posición. Luego el menor elemento de los siguientes a la primera posición va en la segunda posición, y asi sucesivamente.
 
-{/* Veamos como aplicar este algoritmo en un arreglo $a\;$: */}
+Veamos como aplicar este algoritmo en un arreglo: 
 
-{/* <br /> */}
+<br />
 
-{/* <Image src="/algoritmos2/selectionsort1.png" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/> */}
+<Image src="/algoritmos2/selectionsort1.png" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+El arreglo $a$ es una permutación del original. A partir del segmento $a[1, i)$ los elementos menores del arreglo están ordenados (invariante del ciclo).
+
+Si quisieramos escribir este algoritmo en pseudocódigo, primero podemos escribir un procedimiento que recorra el arreglo, llamando una función que nos devuelva la posición del menor elemento a partir de una posición dada. Luego, intercambiamos el elemento de la posición actual con el menor elemento encontrado con un procedimiento.   
+
+```math
+\begin{align}
+&\{ \; n \geq 0 \land a = A \; \} \\
+&\proc \; selection\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
+&\quad \var \; i, \; minp: \; \nat \\
+&\quad i := 1 \quad\quad\quad\quad\quad\quad \{- \;\; \textnormal{Invariante} \;\; -\} \\ 
+&\quad \while \; i < n \; \do \\
+&\quad \quad minp := min\_pos\_from (a,i) \\
+&\quad \quad swap(a, i, minp) \\
+&\quad \quad i := i+1 \\
+&\quad \od \\
+&\bfend \; \proc \\
+&\{ \; a \; \textnormal{está ordenado y es permutación de} \; A \; \} \\
+\end{align}
+```
+
+El $swap$ sería:
+
+```math
+\begin{align}
+&\{ \; a = A \land 1 \leq i, j \leq n \; \} \\
+&\proc \; swap(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; i, j : \nat) \\
+&\quad \var \; tmp : T \\
+&\quad tmp := a[i] \\
+&\quad a[i] := a[j] \\
+&\quad a[j] := tmp \\
+&\bfend \; \proc \\
+&\{\; a[i] = A[j] \land a[j] = A[i] \land \forall k \not\in \{ i, j \} \implies a[k]=A[k] \; \} \\
+\end{align}
+```
+
+Para hacer $min\_pos\_from$, podemos seguir la siguiente lógica:
+
+<br />
+
+<Image src="/algoritmos2/selectionsort2.png" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+El invariante es igual al anterior, pero ahora incluimos el mínimo del segmento $a[i, j)$ en la posición $minp$.
+
+```math
+\begin{align}
+&\{ \; 0 < i \leq n \; \} \\
+&\fun \; min\_pos\_from(a : \array [1..n] \; \of \; T, \; i : \nat) \; \ret \; minp: \; \nat \\
+&\quad \var \; j : \nat \\
+&\quad minp := i \\
+&\quad j := i+1 \quad\quad\quad\quad\quad\quad \{- \;\; \textnormal{Invariante: } \; a[minp] \; \textnormal{es el mínimo de} \; a[i,j] \;\; -\} \\  
+&\quad \while \; j \leq n \; \do \\
+&\quad \quad \if \; a[j] < a[minp] \; \then \\
+&\quad \quad \quad minp := j \\
+&\quad \quad \fi \\
+&\quad \quad j := j+1 \\
+&\quad \od \\
+&\bfend \; \fun \\
+&\{ \; a[minp] \; \textnormal{es el mínimo de} \; a[i,n] \; \} \\
+\end{align}
+```
+
+Una manera de hacer lo mismo y con menos código es usando $\for$: 
+
+```math 
+\begin{align}
+&\proc \; selection\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
+&\quad \for \; i := 1 \; \too \; n \; \do \\
+&\quad \quad minp := min\_pos\_from(a,i) \\
+&\quad \quad swap(a, i, minp) \\
+&\quad \od \\
+&\bfend \; \proc \\
+&&\\
+&\fun \; min\_pos\_from(a : \array [1..n] \; \of \; T, \; i : \nat) \; \ret \; minp: \; \nat \\
+&\quad minp := i \\
+&\quad \for \; j := i+1 \; \too \; n \; \do \\
+&\quad \quad \if \; a[j] < a[minp] \; \then \\
+&\quad \quad \quad minp := j \\
+&\quad \quad \fi \\
+&\quad \od \\
+&\bfend \; \fun \\
+\end{align}
+```
+
+De esta forma, las variables que sirven de índices estan declaradas en el contexto/scope de $\for$ 
+
