@@ -2,9 +2,9 @@ import Image from 'next/image'
 
 # Ordenación Elemental 
 
-## Ordenación por selección 
+## Ordenación por selección (_Selection Sort_)
 
-> Este algoritmo consiste en seleccionar el menor elemento de todos e intercambiarlo por el que está en la primera posición. Luego el menor elemento de los siguientes a la primera posición va en la segunda posición, y asi sucesivamente.
+> Este algoritmo consiste en seleccionar el menor elemento de un arreglo e intercambiarlo por el que está en la primera posición. Luego el menor elemento de los siguientes a la primera posición va en la segunda posición, y asi sucesivamente.
 
 Veamos como aplicar este algoritmo en un arreglo: 
 
@@ -97,3 +97,53 @@ Una manera de hacer lo mismo y con menos código es usando $\for$:
 
 De esta forma, las variables que sirven de índices estan declaradas en el contexto/scope de $\for$ 
 
+## Ordenación por inserción (_Insertion Sort_)
+
+> Este algoritmo consiste en insertar un elemento en la posición correcta de un arreglo ordenado. Se comprueba si el elemento es distinto al anterior, y si lo es, se intercambian.
+
+Veamos como aplicar este algoritmo en un arreglo: 
+
+<br />
+
+<Image src="/algoritmos2/insertionsort1.png" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+El arreglo $a$ es una permutación del original. Un segmento inicial $a[1,i]$ del arreglo está ordenado, en general, $a[1,i]$ **no** contiene los mínimos del arreglo (invariante del ciclo).
+
+Si quisieramos escribir este algoritmo en pseudocódigo, podemos escribir un procedimiento que recorra el arreglo, utilizando un procedimiento que se encargue de insertar un elemento en la posición correcta. 
+
+```math
+\begin{align}
+&\{ \; n \geq 0 \land a = A \; \} \\
+&\proc \; insertion\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
+&\quad \for \; i := 2 \; \too \; n \; \do \\
+&\quad \quad insert(a, i) \\
+&\quad \od \\
+&\bfend \; \proc \\
+&\{ \; a \; \textnormal{está ordenado y es permutación de} \; A \; \} \\
+\end{align}
+```
+
+Para hacer $insert$, podemos seguir la siguiente lógica:
+
+<br />
+
+<Image src="/algoritmos2/insertionsort2.png" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+Como invariante, tenemos que $a$ es una permutación de $A$, el segmento $a[1,i]$ **sin celda** $j$ está ordenado y, $a[j,i]$ también está ordenado.
+
+```math
+\begin{align}
+&\{ \; 0 < i \leq n \land a = A \; \} \\
+&\proc \; insert(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; i : \nat) \\
+&\quad \var \; j : \nat \\
+&\quad j := i \quad\quad\quad\quad\quad\quad \{- \;\; \textnormal{Invariante mencionado} \;\; -\} \\
+&\quad \while \; j > 1 \; \land \; a[j] < a[j-1] \; \do \\
+&\quad \quad swap(a, j-1, j) \\
+&\quad \quad j := j-1 \\
+&\quad \od \\
+&\bfend \; \proc \\
+&\{ \; a[1,i] \; \textnormal{está ordenado y es permutación de} \; A \; \} \\
+\end{align}
+```
+
+(Se utiliza el mismo $swap$ que en el algoritmo de selección)
