@@ -1,0 +1,63 @@
+import Image from 'next/image'
+
+# Ordenación Avanzada 
+
+## Ordenación por intercalación (_Merge Sort_)
+
+> Este algoritmo consiste en dividir el arreglo en dos mitades (cuantas veces sea posible), ordenar cada mitad y luego intercalarlas.
+
+En pseudocódigo:
+
+```math
+\begin{align}
+&\proc \; merge\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
+&\quad merge\_sort\_rec(a, 1, n) \\
+&\bfend \; \proc \\
+&\\
+&\{ \; n \geq rgt \geq lft > 0 \land a = A \; \} \\
+&\proc \; merge\_sort\_rec(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, rgt: \nat) \\
+&\quad \var \; mid : \nat \\
+&\quad \if \; rgt > lft \; \then \\
+&\quad \quad mid := (lft+rgt) \div 2 \\
+&\quad \quad merge\_sort\_rec(a, lft, mid) \\
+&\quad \quad \{- \;\; a[lft,mid] \; \textnormal{permutación ordenada de } A[lft,mid] \;\; -\} \\
+&\quad \\
+&\quad \quad merge\_sort\_rec(a, mid+1, rgt) \\
+&\quad \quad \{- \;\; a[mid+1,rgt] \; \textnormal{permutación ordenada de } A[mid+1,rgt] \;\; -\} \\
+&\quad \\
+&\quad \quad merge(a, lft, mid, rgt) \\
+&\quad \quad \{- \;\; a[lft,rgt] \; \textnormal{permutación ordenada de } A[lft,rgt] \;\; -\} \\
+&\quad \fi \\
+&\bfend \; \proc \\
+&\{ \; a \; \textnormal{es permutación de} \; A \; \land \; a[lft,rgt] \; \textnormal{permutación ordenada de} \; A[lft, rgt] \; \} \\
+\end{align}
+```
+
+El procedimiento $merge$ se encarga de intercalar dos arreglos ordenados, en la siguiente imagen se puede ver su invariante:
+
+<br />
+
+<Image src="/algoritmos2/mergesort1.png" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+Su pseudocódigo es:
+
+```math
+\begin{align}
+&\proc \; merge(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, mid, rgt : \nat) \\
+&\quad \var \; tmp: \array [1..n] \; \of \; T; \; i, j, k : \nat \\
+&\quad \for \; i := lft \; \too \; mid \; \do \\
+&\quad \quad j := i \\
+&\quad \quad k := mid+1 \\
+&\quad \quad \for \; j := lft \; \too \; rgt \; \do \\
+&\quad \quad \quad \if \; j \leq mid \; \land \; (k > rgt \; \lor \; tmp[j] \leq a[k]) \; \then \\
+&\quad \quad \quad \quad a[i] := tmp[j] \\
+&\quad \quad \quad \quad j := j+1 \\
+&\quad \quad \quad \else \\
+&\quad \quad \quad \quad a[i] := a[k] \\
+&\quad \quad \quad \quad k := k+1 \\
+&\quad \quad \quad \fi \\
+&\quad \quad \od \\
+&\quad \od \\
+&\bfend \; \proc \\
+\end{align}
+```
