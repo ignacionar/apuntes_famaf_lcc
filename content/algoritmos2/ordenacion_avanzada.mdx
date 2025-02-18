@@ -18,7 +18,7 @@ En pseudocódigo:
 &\proc \; merge\_sort\_rec(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, rgt: \nat) \\
 &\quad \var \; mid : \nat \\
 &\quad \if \; rgt > lft \; \then \\
-&\quad \quad mid := (lft+rgt) \div 2 \\
+&\quad \quad mid := (lft+rgt) \; \textnormal{div} \; 2 \\
 &\quad \quad merge\_sort\_rec(a, lft, mid) \\
 &\quad \quad \{- \;\; a[lft,mid] \; \textnormal{permutación ordenada de } A[lft,mid] \;\; -\} \\
 &\quad \\
