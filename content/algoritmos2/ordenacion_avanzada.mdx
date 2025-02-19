@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 ## Ordenación por intercalación (_Merge Sort_)
 
-> Este algoritmo consiste en dividir el arreglo en dos mitades (cuantas veces sea posible), ordenar cada mitad y luego intercalarlas.
+> Este algoritmo consiste en dividir el arreglo en dos mitades (hasta llegar a arreglos de un elemento), ordenar cada mitad y luego intercalarlas.
 
 En pseudocódigo:
 
@@ -33,7 +33,9 @@ En pseudocódigo:
 \end{align}
 ```
 
-El procedimiento $merge$ se encarga de intercalar dos arreglos ordenados, en la siguiente imagen se puede ver su invariante:
+El arreglo dejará de dividirse cuando este tenga un solo elemento, en ese caso, ya estará ordenado. 
+
+El procedimiento $merge$ se encarga de intercalar dos arreglos ordenados, en la siguiente imagen se puede ver su invariante, donde cada sublista está siempre ordenada antes de intercalarlas.
 
 <br />
 
@@ -46,18 +48,80 @@ Su pseudocódigo es:
 &\proc \; merge(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, mid, rgt : \nat) \\
 &\quad \var \; tmp: \array [1..n] \; \of \; T; \; i, j, k : \nat \\
 &\quad \for \; i := lft \; \too \; mid \; \do \\
-&\quad \quad j := i \\
-&\quad \quad k := mid+1 \\
-&\quad \quad \for \; j := lft \; \too \; rgt \; \do \\
-&\quad \quad \quad \if \; j \leq mid \; \land \; (k > rgt \; \lor \; tmp[j] \leq a[k]) \; \then \\
-&\quad \quad \quad \quad a[i] := tmp[j] \\
-&\quad \quad \quad \quad j := j+1 \\
-&\quad \quad \quad \else \\
-&\quad \quad \quad \quad a[i] := a[k] \\
-&\quad \quad \quad \quad k := k+1 \\
-&\quad \quad \quad \fi \\
-&\quad \quad \od \\
+&\quad \quad tmp[i] := a[i] \\
+&\quad \quad \{- \;\; \textnormal{copia con la primera mitad} \; a[lft,mid] \;\; -\} \\
+&\quad \od \\
+&\quad j := i \\
+&\quad k := mid+1 \\
+&\quad \for \; j := lft \; \too \; rgt \; \do \\
+&\quad \quad \if \; j \leq mid \; \land \; (k > rgt \; \lor \; tmp[j] \leq a[k]) \; \then \\
+&\quad \quad \quad a[i] := tmp[j] \\
+&\quad \quad \quad j := j+1 \\
+&\quad \quad \else \\
+&\quad \quad \quad a[i] := a[k] \\
+&\quad \quad \quad k := k+1 \\
+&\quad \quad \fi \\
 &\quad \od \\
 &\bfend \; \proc \\
 \end{align}
 ```
+
+Se considera el caso en el que todos los elementos de la segunda mitad se comparan, lo cual sucede si $k > rgt$, por lo que completamos con los elementos restantes de la primera mitad. 
+
+Este algoritmo posee una complejidad de $O(n \log n)$ en el peor caso. 
+
+## Ordenación rápida (_Quick Sort_)
+
+> Se toma el primer elemento del arreglo como pivote, se colocan los elementos menores a la izquierda y los mayores a la derecha. Luego se repite el proceso con las dos mitades.
+
+En pseudocódigo:
+
+```math
+\begin{align}
+&\proc \; quick\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
+&\quad quick\_sort\_rec(a, 1, n) \\
+&\bfend \; \proc \\
+&\\
+&\{ \; 0 \leq rgt \leq n \; \land \; 1 \leq lft \leq n+1 \; \land \; lft-1 \leq rgt \; \land \; a = A \; \} \\
+&\proc \; quick\_sort\_rec(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, rgt: \nat) \\
+&\quad \var \; ppiv : \nat \\
+&\quad \if \; rgt > lft \; \then \\
+&\quad \quad ppiv := partition(a, lft, rgt, ppiv) \\
+&\quad \quad quick\_sort\_rec(a, lft, ppiv-1) \\
+&\quad \quad quick\_sort\_rec(a, ppiv+1, rgt) \\
+&\quad \fi \\
+&\bfend \; \proc \\
+&\{ \; a \; \textnormal{es permutación de} \; A \; \land \; a[lft,rgt] \; \textnormal{permutación ordenada de} \; A[lft, rgt] \; \} \\
+\end{align}
+```
+
+La invariante de $partition$ puede verse en la siguiente imagen, donde $lft = piv$ y se cumple que todos los elementos a la izquierda son menores o iguales a $a[piv]$ y los de la derecha son mayores a $a[piv]$.
+
+<br />
+
+<Image src="/algoritmos2/quicksort1.png" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+El pseudocódigo de $partition$ es:
+
+```math
+\begin{align}
+&\proc \; partition(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, rgt : \nat, \; \out \; ppiv : \nat) \\
+&\quad \var \; i, j : \nat \\
+&\quad ppiv := lft \\
+&\quad i := lft+1 \\
+&\quad j := rgt \\
+&\quad \while \; i \leq j \; \do \\
+&\quad \quad \if \; a[i] \leq a[ppiv] \; \rightarrow \; i := i+1 \\
+&\quad \quad \quad \; a[j] > a[ppiv] \; \rightarrow \; j := j-1 \\
+&\quad \quad \quad \; a[i] > a[ppiv] \; \land \; a[j] \leq a[ppiv] \; \rightarrow \; swap(a, i, j) \\
+&\quad \quad \fi \\
+&\quad \od \\
+&\quad swap(a,ppiv,j) \\
+&\quad ppiv := j \\
+&\quad \bfend \; \proc \\
+\end{align}
+```
+
+Comparamos si $a[i]$ es menor o igual al pivote y si $a[j]$ es mayor o igual. De ser el caso aumentamos los índices, de lo contrario intercambiamos los elementos. Por último, ubicamos correctamente a $a[ppiv]$ y asignamos su nuevo índice.
+
+En el peor caso, la complejidad de este algoritmo en el peor caso es de $O(n^2)$, pero en promedio es de $O(n \log n)$. Por lo general es más rápido que _Merge Sort_, es una buena opción para conjuntos de datos que caben en memoria. De lo contrario, _Merge Sort_ es más eficiente. 
