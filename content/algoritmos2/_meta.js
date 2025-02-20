@@ -2,5 +2,6 @@ export default {
   intro: "Introducción (AyED2)",
   lenguaje_de_programacion: "Lenguaje de la Materia",
   ordenacion_elemental: "Ordenación Elemental",
-  ordenacion_avanzada: "Ordenación Avanzada"
+  ordenacion_avanzada: "Ordenación Avanzada",
+  recurrencias_jerarquia_de_funciones: "Recurrencias y Jerarquía de Funciones"
 }

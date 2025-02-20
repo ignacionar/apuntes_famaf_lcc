@@ -2,6 +2,59 @@ import Image from 'next/image'
 
 # Ordenación Elemental 
 
+## Número de ejecuciones de un programa 
+
+> Para analizar la eficiencia de un algoritmo, es necesario contar el número de veces que se ejecutan las instrucciones.
+
+Para contar cuántas veces se ejecuta una operación, debemos tener en cuenta todos los comandos disponibles. 
+
+En el comando $\skip$ no se ejecuta ninguna operación, por lo que el número de operaciones es 0. 
+
+```math 
+ops(\skip) = 0
+```
+
+En el caso de $\for$, debemos tener en cuenta que la siguiente ecuación vale si **no hay interés en contar las operaciones que involucran el índice $k$**. 
+
+```math 
+ops(\for \; k:= n \; \too \; m \; \do \; C(k) \; \od) = \displaystyle{\sum_{n}^{m} ops(C(k))}
+```
+
+Para $\if$ contamos cuantas veces se ejecuta durante la evaluiación de $b$ y luego cuantas en la ejecución de $C$ y $D$ (caso verdadero y falso)
+
+```math
+ops(\if \; b \; \then \; C \; \else \; D \; \fi) = \begin{cases}
+    ops(b) + ops(C) & \text{si } b \text{ es verdadero} \\
+    ops(b) + ops(D) & \text{si } b \text{ es falso}
+\end{cases}
+```
+
+Para la asignación, debemos considerar el caso de modificación de la variable. Debemos considerar que tal vez, el nuevo valor es la llamada a una función que también tiene un costo.  
+
+```math
+ops(x := e) = \begin{cases}
+    ops(e) + 1 & \text{si } x \text{ es modificada} \\
+    ops(e) & \text{si } x \text{ no es modificada}
+\end{cases}
+```
+
+Para las expresiones, consideramos el caso de contar comparaciones: 
+
+```math
+ops(e<f) = \begin{cases}
+    ops(e) + ops(f) + 1 & \text{si se cuentan comparaciones} \\
+    ops(e) + ops(f) & \text{caso contrario } 
+\end{cases}
+```
+
+En el caso de los ciclos ($\do$) tenemos que: 
+
+```math
+ops(\do \; b \rightarrow C \; \od) = ops(b) + \displaystyle{\sum_{k=1}^n \; d_k}
+```
+
+Donde $n$ es el número de veces que el cuerpo del ciclo se ejecuta, y $d_k$ s el número de operaciones que se ejecutan en la $k$-ésima iteración.
+
 ## Ordenación por selección (_Selection Sort_)
 
 > Este algoritmo consiste en seleccionar el menor elemento de un arreglo e intercambiarlo por el que está en la primera posición. Luego el menor elemento de los siguientes a la primera posición va en la segunda posición, y asi sucesivamente.
