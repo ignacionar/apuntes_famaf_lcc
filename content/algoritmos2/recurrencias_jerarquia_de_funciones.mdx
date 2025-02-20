@@ -101,3 +101,48 @@ Planteada la recurrencia tenemos que:
 - $g(n) = n^3 \implies k = 3$
 - $8 > 2^3 \implies$ el orden de $r(n)$ es $n^3 \; \log \; n$
 
+## Jerarquía de funciones 
+
+> Es posible ordenar las funciones de acuerdo a su crecimiento. Se denota $f(n) \sqsubset g(n)$ si $g$ crece más rápido que $f$, y $f(n) \simeq g(n)$ si crecen al mismo ritmo.
+
+Podemos establecer la siguiente jerarquía de funciones:
+
+```math
+\begin{align}
+&1 \sqsubset \log(\log(\log(n))) \sqsubset \log(\log \; n) \sqsubset \log(n) \sqsubset n^{0.001} \sqsubset n \\
+&\sqsubset n \log \; n \sqsubset n^{1.001} \sqsubset n^{100} \sqsubset 1.01^{n} \sqsubset n^{100} * 1.01^n \\ 
+&\sqsubset 1.02^n \sqsubset 100^n \sqsubset 10000^n \sqsubset (n-1)! \sqsubset n! \sqsubset n^n
+\end{align}
+```
+
+**Propiedades:**
+
+- No afectan las constantes multiplicativas
+- Sea $a, b > 1 \implies \log_a \; n \simeq \log_b \; n$
+- Sea $f(n) > 0$ para casi todo $n \in \NN$: 
+
+```math
+\begin{align}
+&g(n) \sqsubset h(n) \iff f(n)g(n) \sqsubset f(n)h(n) \\
+&g(n) \simeq h(n) \iff f(n)g(n) \simeq f(n)h(n)
+\end{align}
+```
+ 
+- Sea $\displaystyle{\lim_{n \to \infty}} h(n) = \infty$: 
+
+```math
+\begin{align}
+&f(n) \sqsubset g(n) \iff f(h(n)) \sqsubset g(h(n)) \\
+&f(n) \simeq g(n) \iff f(h(n)) \simeq g(h(n))
+\end{align}
+```
+
+- Sean $\displaystyle{\lim_{n \to +\infty}} f(n) = \infty = \displaystyle{\lim_{n \to +\infty}} g(n)$ y $\displaystyle{\lim_{n \to +\infty}} \frac{f(n)}{g(n)}$ existente: 
+
+```math
+\begin{align}
+&\displaystyle{\lim_{n \to \infty}} \frac{f(n)}{g(n)} = 0 \implies f(n) \sqsubset g(n)  \\
+&\displaystyle{\lim_{n \to \infty}}\frac{f(n)}{g(n)} = \infty \implies g(n) \sqsubset f(n) \\
+&\textnormal{caso contrario} \implies f(n) \simeq g(n)
+\end{align}
+```
