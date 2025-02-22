@@ -1,0 +1,139 @@
+# Sistemas de Numeración
+
+## Números Decimales y Binarios  
+
+_Para seguir con este tema, recomendamos repasar esta sección: [Matemática Discreta 1 (MD1)](/discreta1/divisibilidad#desarrollos-en-base-b)_
+
+> El sistema numérico decimal es **base $10$**, porque usa $10$ dígitos y los coeficientes se multiplican por potencias de $10$.\
+El sistema binario es **base $2$**, porque usa $2$ dígitos (los coeficientes solo pueden ser $0 \lor 1$).\
+Cada coeficiente $a_j$ se multiplica por $2^j$.
+
+Un número con punto decimal se representa con una serie de coeficientes: 
+
+```math 
+\begin{align}
+&a_{n} \; a_{4} \; a_{3} \; a_{2} \; a_{1} \; a_{0} \; .a_{-1} \; a_{-2} \; a_{-3} \; \ldots a_{-n} \;  \\
+&10^{n}a_{n} + 10^{4}a_{4} + 10^{3}a_{3} + 10^{2}a_{2} + 10^{1}a_{1} + 10^{0}a_{0} + 10^{-1}a_{-1} + 10^{-2}a_{-2} + 10^{-3}a_{-3} + \ldots + 10^{-n}a_{-n} \\
+\end{align}
+```
+
+Donde $a_{n}$ es el coeficiente más grande y $a_{-n}$ es el coeficiente más pequeño.\
+El punto decimal se usa para separar la parte entera de la parte fraccionaria.
+
+El sistema binario sería:
+
+```math
+\begin{align}
+&2^{n}a_{n} + 2^{4}a_{4} + 2^{3}a_{3} + 2^{2}a_{2} + 2^{1}a_{1} + 2^{0}a_{0} + 2^{-1}a_{-1} + 2^{-2}a_{-2} + 2^{-3}a_{-3} + \ldots + 2^{-n}a_{-n} \\
+\end{align}
+```
+
+Un ejemplo de número decimal a binario es $13.62 = (1101)_{2}$. En lugar de denominar a los binarios como _binary digits_ se les llama _bits_.
+
+Podemos realizar operaciones aritméticas con números binarios de la siguiente forma:
+
+```math 
+\begin{align}
+&\quad \; 1101 \\ 
+&+1011 \\
+&\quad \overline{11000} \\
+&\\
+&\quad \; 1101 \\
+&-1011 \\
+&\quad\overline{\;0010} \\
+& \\
+&\quad \; 1101 \\
+&\times \;\; 101 \\
+&\quad \overline{\;\; 1101} \\
+&\quad 0000 \\
+&\;\; 1101 \\
+&\overline{\; 1000001} \\
+\end{align}
+```
+
+Como no es posible $1+1=2$ en binario, se deja un $0$ y se lleva un $1$ al siguiente coeficiente.
+
+### Conversiones de base numérica 
+
+> La conversión de una fracción decimal a un número en base $r$, pero en lugar de dividir se multiplica por $r$ y se toma la parte entera.
+
+**Ejemplo:** Convertir $0.6875$ a binario y a base $8$.
+
+```math
+\begin{align}
+0.6875 \times 2 &= 1 + 0.375 &\implies a_{-1} = 1 \\
+0.375 \times 2 &= 0 + 0.75 &\implies a_{-2} = 0 \\
+0.75 \times 2 &= 1 + 0.5 &\implies a_{-3} = 1 \\
+0.5 \times 2 &= 1 + 0 &\implies a_{-4} = 1 \\
+\end{align}
+```
+
+Tenemos que $0.6875 = (0.1011)_2$.
+
+```math
+\begin{align}
+0.6875 \times 8 &= 5 + 0.5 &\implies a_{-1} = 5 \\
+0.5 \times 8 &= 4 + 0 &\implies a_{-2} = 4 \\
+\end{align}
+```
+
+Tenemos que $0.6875 = (0.54)_8$.
+
+## Números Octales y Hexadecimales
+
+> Las conversiones entre binario, octal y hexadecimal son fundamentales en las computadoras, ya que $2^3 = 8 \land 2^4 = 16$. Por lo que cada dígito en octal representa $3$ bits y cada dígito en hexadecimal representa $4$ bits.
+
+La siguiente tabla muestra los núemros con diferente base: 
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+  | Decimal   | Binario   | Octal   | Hexadecimal  |
+  |:---------:|:---------:|:-------:|:------------:|
+  | $0$       | $0000$    | $0$     | $0$          |
+  | $1$       | $0001$    | $1$     | $1$          |
+  | $2$       | $0010$    | $2$     | $2$          |
+  | $3$       | $0011$    | $3$     | $3$          |
+  | $4$       | $0100$    | $4$     | $4$          |
+  | $5$       | $0101$    | $5$     | $5$          |
+  | $6$       | $0110$    | $6$     | $6$          |
+  | $7$       | $0111$    | $7$     | $7$          |
+  | $8$       | $1000$    | $10$    | $8$          |
+  | $9$       | $1001$    | $11$    | $9$          |
+  | $10$      | $1010$    | $12$    | $A$          |
+  | $11$      | $1011$    | $13$    | $B$          |
+  | $12$      | $1100$    | $14$    | $C$          |
+  | $13$      | $1101$    | $15$    | $D$          |
+  | $14$      | $1110$    | $16$    | $E$          |
+  | $15$      | $1111$    | $17$    | $F$          |
+</div>
+
+Podemos hacer conversiones de base numérica acomodando los dígitos de forma correspondiente.
+
+**Ejemplo:** Convertir $(1101.1011)_2$ a octal y hexadecimal.
+
+```math
+\begin{align}
+(1101.1011)_2 &= (001 \; 101 \; .001 \; 011)_2 = (15.13)_8 = (D.5)_8 \\
+&\\
+(1101.1011)_2 &= (D.B)_{16}
+\end{align}
+```
+
+## Complementos 
+
+> Los complementos son una forma de representar números negativos.\
+Dado un número $N$ en base $r$ con $n$ dígitos, el complemento a $(r - 1)$ es $(r^n - 1) - N$.\
+En el caso de los binarios $r = 2 \land r - 1 = 1$, por lo que el complemento a $1$ es $(2^n - 1) - N$.
+
+El complemento a $1$ se obtiene cambiando los $0$ por $1$ y los $1$ por $0$.
+
+Por ejemplo, el complemento a $1$ de $(1101)_2$ es $(0010)_2$.
+
+El complemento a $2$ se obtiene sumando $1$ al complemento a $1$
+
+Por ejemplo, el complemento a $2$ de $(1101)_2$ es $(0011)_2$.
+
+En la definición anterior se considera que el número no lleva punto. De ser el caso, se quita temporalmente para formar el complemento a $1$ y luego se vuelve a colocar en su lugar.
+
+Por ejemplo, el complemento a $1$ de $(1101.1011)_2$ es $(0010.0100)_2$.
