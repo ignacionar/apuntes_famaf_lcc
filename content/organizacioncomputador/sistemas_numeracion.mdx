@@ -137,3 +137,41 @@ Por ejemplo, el complemento a $2$ de $(1101)_2$ es $(0011)_2$.
 En la definición anterior se considera que el número no lleva punto. De ser el caso, se quita temporalmente para formar el complemento a $1$ y luego se vuelve a colocar en su lugar.
 
 Por ejemplo, el complemento a $1$ de $(1101.1011)_2$ es $(0010.0100)_2$.
+
+## Números Flotantes 
+
+> Los números flotantes son una representación de números reales extremadamente grandes o pequeños en notación científica. Este formato puede ser de precisión simple o doble, dependiendo de la cantidad de bits que se usen. En lenguajes como C se usan los tipos `float` y `double` para representarlos.
+
+Su formato sería el siguiente: 
+
+```math
+x = (-1)^{s} \times (1 + F) \times 2^{E - B}
+```
+
+- $s$ corresponde a un bit de signo. 
+- $F$ es la mantisa, un número fraccionario. Si es de precisión simple, se usan $23$ bits y si es de precisión doble, se usan $52$ bits.
+- $E$ es el exponente, un número entero. Si es de precisión simple, se usan $8$ bits y si es de precisión doble, se usan $11$ bits. Su valor se calcula como $E = e - B$, donde $e$ es el valor del exponente y $B$ es el sesgo. 
+- El sesgo es un número que se le suma al exponente para que no sea negativo. En precisión simple, $B = 127$ y en precisión doble, $B = 1023$.
+
+Por ejemplo, el número $-13.625$ en precisión simple sería:
+
+```math
+\begin{align}
+13.625 &= 1101.1011 \\
+&= 1.1011011 \times 2^3 \\
+&= 1.1011011 \times 2^{(3 + 127)} \\
+&= 1.1011011 \times 2^{130} \\
+\end{align}
+```
+
+Por lo que $S$ = $1$, $E$ = $130$ y $F$ = $10110110000000000000000$.
+
+### Infinitos y NaN
+
+> En los números flotantes, existen valores especiales como el infinito y el NaN (_Not a Number_).
+
+El $\pm \infty$ se representa con exponente $= 111 \ldots 1$, y mantisa $= 000 \ldots 0$.\
+Este se utiliza cuando un número excede el rango de representación. 
+
+El NaN se representa con exponente $= 111 \ldots 1$, y mantisa $\neq 000 \ldots 0$.\
+Este se utiliza cuando se realiza una operación inválida, como dividir por $0$.

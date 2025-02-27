@@ -1,0 +1,107 @@
+import Image from 'next/image'
+
+# Álgebra Booleana y Compuertas Lógicas
+
+## Axiomas y Propiedades de Álgebra Booleana
+
+> Sea $B$ un conjunto de elementos: $B = \{a, b, c, \ldots\}$ y el conjunto $\{0, 1\}$\
+Sea $\Phi$ un conjunto de operaciones binarias: $\Phi = \{+, \cdot, '\}$ (or, and, not)
+
+Estos elementos conforman un álgebra de Boole si se cumplen los axiomas:
+
+- **Clausura:** $\;a, b \in B \implies a + b, \; a \cdot b \in B$
+
+- **Conmutatividad:** $\;a + b = b + a, \; a \cdot b = b \cdot a$
+
+- **Axioma del $0$:** $\; \exists \; 0 \in B \; | \; a + 0 = a, \; a \cdot 0 = 0$
+
+- **Axioma del $1$:** $\; \exists \; 1 \in B \; | \; a + 1 = 1, \; a \cdot 1 = a$
+
+- **Distributividad de $+$ respecto a $\cdot$,** $\;a \cdot (b + c) = a \cdot b + a \cdot c$
+
+- **Distributividad de $\cdot$ respecto a $+$,** $\;a + b \cdot c = (a + b) \cdot (a + c)$
+
+- **Inverso:** $\;a \in B \implies \exists \; a' \in B \; | \; a + a' = 1, \; a \cdot a' = 0$
+
+- **Cardinalidad:** $\;|B| \geq 2$
+
+### Leyes de Morgan
+
+> Sean $a, b \in B:$ $(a + b)' = a' \cdot b', \; (a \cdot b)' = a' + b'$
+
+### Funciones Booleanas
+
+> Una función booleana es una función que toma valores booleanos y devuelve valores booleanos. Se puede representar mediante una tabla de verdad.
+
+**Ejemplo:** $F_1 = x + y'z$
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| $x$ | $y$ | $z$ | $F_1$ |
+|:---:|:---:|:---:|:-----:|
+|  $0$  |  $0$  |  $0$  |   $0$  |
+|  $0$  |  $0$  |  $1$  |   $1$  |
+|  $0$  |  $1$  |  $0$  |   $0$  |
+|  $0$  |  $1$  |  $1$  |   $1$  |
+|  $1$  |  $0$  |  $0$  |   $0$  |
+|  $1$  |  $0$  |  $1$  |   $1$  |
+|  $1$  |  $1$  |  $0$  |   $0$  |
+|  $1$  |  $1$  |  $1$  |   $1$  |
+</div>
+
+## Compuertas Lógicas
+
+> Las compuertas lógicas son circuitos electrónicos que realizan operaciones booleana según los valores de entrada. 
+
+Estas son las compuertas con su respectiva ecuación: 
+
+<br />
+
+<Image src="/organizacioncomputador/compuertaslogicas.png" alt="Compuertas Lógicas" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Las funciones booleanas se pueden representar mediante compuertas lógicas. Es posible simplificar las funciones booleanas como suma de minitérminos $m_i$ o producto de maxitérminos $M_i$
+
+Tomemos la tabla de verdad de tres variables binarias: 
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| $x$ | $y$ | $z$ | Términos | Minitérminos | Términos | Maxitérminos |
+|:---:|:---:|:---:|:-------:|:-----------:|:------:|:------------:|
+|  $0$  |  $0$  |  $0$  | $x'y'z'$ | $m_0$ | $x+y+z$ | $M_0$ |
+|  $0$  |  $0$  |  $1$  | $x'y'z$ | $m_1$ | $x+y+z'$ | $M_1$ |
+|  $0$  |  $1$  |  $0$  | $x'yz'$ | $m_2$ | $x+y'+z$ | $M_2$ |
+|  $0$  |  $1$  |  $1$  | $x'yz$ | $m_3$ | $x+y'+z'$ | $M_3$ |
+|  $1$  |  $0$  |  $0$  | $xy'z'$ | $m_4$ | $x'+y+z$ | $M_4$ |
+|  $1$  |  $0$  |  $1$  | $xy'z$ | $m_5$ | $x'+y+z'$ | $M_5$ |
+|  $1$  |  $1$  |  $0$  | $xyz'$ | $m_6$ | $x'+y'+z$ | $M_6$ |
+|  $1$  |  $1$  |  $1$  | $xyz$ | $m_7$ | $x'+y'+z'$ | $M_7$ |
+</div>
+
+Una función $f = x'y'z' + xyz\;$ se puede expresar como $f = m_0 + m_7$
+
+### Mapas de Karnaugh
+
+> Los mapas de Karnaugh son una herramienta para simplificar funciones booleanas. Cada cuadrado representa un minitérmino y se agrupan los cuadrados que contienen $1$'s.
+
+Un mapa de dos variables se ve así: 
+
+<br />
+
+<Image src="/organizacioncomputador/mapak1.png" alt="Mapa 1" width={0} height={0} layout='responsive' style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+
+Si queremos representar una función de tres variables como $f(x, y, z) = \sum (2, 3, 4, 5)$ (suma correspondiente a minitérminos) en un mapa de Karnaugh, se vería así:
+
+<br />
+
+<Image src="/organizacioncomputador/mapak2.png" alt="Mapa 2" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Para mantener ese orden solo un bit cambia por columna. El cuadrado $m_5$, por ejemplo, corresponde a la fila $1$ y a la columna $01$. Concatenados son $101$, es decir, en decimal $5$.
+
+<br />
+
+<Image src="/organizacioncomputador/mapak3.png" alt="Mapa 3" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Observando el mapa, sumando los elementos que contienen $1$'s, se obtiene: $f(x, y, z) = x'y + xy'$
