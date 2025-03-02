@@ -124,7 +124,7 @@ Y un ejemplo de llamada es:
 - $\nat$: naturales (con el $0$)
 - $\real$: reales
 - $\char$: caracteres ($\textnormal{'} a \textnormal{'}$)
-- $\string$: secuencias de caracteres ($\textnormal{"} string \textnormal{"}$)
+- $\string$: secuencias de caracteres ($\textnormal{"string"}$)
 
 Se utilizan constantes que sirven como infinito/-infinito, etc.
 
@@ -132,54 +132,6 @@ Se utilizan constantes que sirven como infinito/-infinito, etc.
 
 - $\array$: arreglos
 - $\pointer$: punteros
-
-### Arreglos
-
-**Sintaxis de Arreglos:**
-
-Su declaración es:
-
-```math
-\var \; a : \array [N_1 \ldots M_1, \; \ldots, \; N_k \ldots M_k] \; \of \; T
-```
-
-Donde:
-
-- $a$ es el nombre de la variable,
-- $k$ es la cantidad de dimensiones del arreglo.
-- $N_1,M_1, \ldots N_k,M_k \;$ son números que indican el rango del arreglo para cada dimensión
-- $T$ es el tipo de los elementos del arreglo.
-
-Para acceder un elemento (expresión):
-
-```math
-a[i_1, \; \ldots , \; i_k]
-```
-
-Para asignar un valor a un elemento (sentencia):
-
-```math
-a[i_1, \; \ldots , \; i_k] := E
-```
-
-Donde $E$ es una expresión de tipo $T$.
-
-Algunos ejemplos:
-
-```math
-\begin{align}
-&\var \; precios : \array [1..10] \; \of \; \intt \\
-&\{- \;\; \textnormal{arreglo de 10 elementos} \; precios[1], precios[2], \ldots , precios[10] \;\; -\} \\
-\\
-&\var \; matriz : \array [0..25,5..10] \; \of \; \char \\
-&\{- \;\; \textnormal{arreglo de caracteres de dos dimensiones} \; (26 \times 6): \\
-&matriz[0,5], \;  matriz[0,6], \; matriz[0,7], \; \ldots , \; matriz[0,10] \\
-&matriz[1,5], \;  matriz[1,6], \; matriz[1,7], \; \ldots , \; matriz[1,10] \\
-&\ldots \\
-&matriz[25,5], \;  matriz[25,6], \; matriz[25,7], \; \ldots , \; matriz[25,10] \\
-&- \}
-\end{align}
-```
 
 ## Expresiones
 

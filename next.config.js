@@ -42,7 +42,13 @@ const withNextra = nextra({
             char: '\\mathbf{char}',
             string: '\\mathbf{string}',
             pointer: '\\mathbf{pointer}',
+            type: '\\mathbf{type}',
+            enumerate: '\\mathbf{enumerate}',
+            tuple: '\\mathbf{tuple}',
             bigO: '\\mathcal{O}',
+            alloc: '\\mathbf{alloc}',
+            free: '\\mathbf{free}',
+            null: '\\mathbf{null}',
             mcalx: '\\mathcal{X}'
           }
         }

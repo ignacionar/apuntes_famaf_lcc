@@ -1,0 +1,214 @@
+import Image from 'next/image'
+
+# Tipos concretos 
+
+Los tipos de datos **concretos** son aquellos que: 
+
+- Son **nativos** del lenguaje de programación.
+- Es un concepto dependiente del lenguaje de programación.
+- Algunos ejemplos son enteros, arreglos, cadenas de texto, etc.
+
+En el lenguaje de la materia existen distintos tipos de datos concretos. 
+
+## Tipos enumerados 
+
+> Un tipo enumerado consiste en una serie finita de constantes, únicos en su tipo.
+
+```math 
+\begin{align}
+&\type \; E = \enumerate \\
+&\quad elem1 \\
+&\quad elem2 \\
+&\quad \ldots \\
+&\quad elemk \\
+&\bfend \; \enumerate 
+\end{align}
+```
+
+De esta forma se definen únicamente los $k$ elementos que pertenecen al tipo $E$.
+
+Si quisieramos usar el elemento $elem1$ de un tipo enumerado $E$, sería: 
+
+```math
+\begin{align}
+&\var \; v : E \\
+&v := elem1 
+\end{align}
+```
+
+Puede ser útil para ciclos $\for$ dodne el índice tome el valor de un tipo enumerado.
+
+```math 
+\for \; i := elem1 \; \too \; elemk \; \do \; \ldots \; \od 
+```
+
+## Tuplas 
+
+> Las tuplas representan productos cartesianos de distintos tipos. También se conocen como registros/estructuras.
+
+```math
+\begin{align}
+&\type \; personType = \tuple \\
+&\quad name : \string \\
+&\quad age : \nat \\
+&\quad height : \real \\
+&\bfend \; \tuple
+\end{align}
+```
+
+$personType$ corresponde al producto de los tipos $\string$, $\nat$ y $\real$. Donde $name$, $age$ y $height$ son los **campos** de la tupla.
+
+Para acceder a los campos de una tupla se hace mediante el operador $.$ 
+
+```math
+\begin{align}
+&\{- \;\; \textnormal{Declaración y asignación a campos de tupla} \;\; -\} \\
+&\var \; p : personType \\
+&p.name := \textnormal{"Juan"} \\
+&p.age := 20 \\
+&p.height := 1.80 \\
+&\\
+&\{- \;\; \textnormal{Acceder a campo de tupla} \;\; -\} \\
+&p.name \\
+\end{align}
+```
+
+En la mayoría de lenguajes, cuando se ejecuta un programa a los elementos de un tipo tupla estos son alojados en espacios de memoria contiguos, su espacio es igual a la suma de los espacios que ocupan sus campos.
+
+## Arreglos
+
+> Los arreglos son colecciones de tamaño fijo de elementos del mismo tipo.
+
+Su declaración es:
+
+```math
+\begin{align}
+&\{- \;\; \textnormal{Arreglo unidimensional} \;\; -\} \\
+&\var \; a : \array [N_1 \ldots M_1] \; \of \; T \\
+&\\
+&\{- \;\; \textnormal{Arreglo multidimensional} \;\; -\} \\
+&\var \; a : \array [N_1 \ldots M_1, \; \ldots, \; N_k \ldots M_k] \; \of \; T \\
+\end{align}
+```
+
+Donde:
+
+- $a$ es el nombre de la variable,
+- $k$ es la cantidad de dimensiones del arreglo.
+- $N_1,M_1, \ldots, N_k,M_k \;$ son números o tipos enumerados que representan los límites de cada dimensión.
+- $T$ es el tipo de los elementos del arreglo.
+
+```math
+\begin{align}
+&\{- \;\; \textnormal{Asignación a elemento de arreglo} \;\; -\} \\
+&a[i_1, \; \ldots , \; i_k] := E \\
+& \\
+&\{- \;\; \textnormal{Acceder a elemento de arreglo} \;\; -\} \\
+&a[i_1, \; \ldots , \; i_k]
+\end{align}
+```
+
+Donde $E$ es una expresión de tipo $T$.
+
+Algunos ejemplos:
+
+```math
+\begin{align}
+&\var \; precios : \array [1..10] \; \of \; \intt \\
+&\{- \;\; \textnormal{arreglo de 10 elementos} \; precios[1], precios[2], \ldots , precios[10] \;\; -\} \\
+\\
+&\var \; matriz : \array [0..25,5..10] \; \of \; \char \\
+&\{- \;\; \textnormal{arreglo de caracteres de dos dimensiones} \; (26 \times 6): \\
+&matriz[0,5], \;  matriz[0,6], \; matriz[0,7], \; \ldots , \; matriz[0,10] \\
+&matriz[1,5], \;  matriz[1,6], \; matriz[1,7], \; \ldots , \; matriz[1,10] \\
+&\ldots \\
+&matriz[25,5], \;  matriz[25,6], \; matriz[25,7], \; \ldots , \; matriz[25,10] \\
+&- \} \\
+&\\ 
+&\{- \;\; \textnormal{Recorriendo} \; matriz \;\; -\} \\
+&\for \; i := 0 \; \too \; 25 \; \do \\
+&\quad \for \; j := 5 \; \too \; 10 \; \do \\
+&\quad \quad matriz[i,j] := \textnormal{"A"} \\
+&\quad \od \\
+&\od
+\end{align}
+```
+
+## Punteros 
+
+> Dado un tipo $T$ un puntero a $T$ es un tipo de datos que representa el lguar de memoria donde se encuentra almacenado un valor de tipo $T$.
+
+Por ejemplo, declarar un puntero a un entero:
+
+```math
+\var \; p : \pointer \; \too \; \intt
+```
+
+Mediante punteros se puede manipular la memoria disponible al ejecutar un programa. 
+
+Para **reservar** un nuevo bloque de memoria donde pueda almacenarse un elemento de tipo $T$ se utiliza el operador $\alloc$. Siguiendo el ejemplo anterior:
+
+```math
+\alloc (p)
+```
+
+Para acceder al valor en el bloque de memoria apuntado por $p$ se utiliza el operador $\star$
+
+```math
+\star p := 10
+```
+
+Decimos que $p$ _apunta_ al valor $10$.
+
+***
+
+Para **liberar** un bloque de memoria que haya sido reservado antes se usa $\free$ 
+
+```math
+\free (p)
+```
+
+Luego de liberar un bloque de memoria, el puntero $p$ no apunta a ningún lugar. Por lo que no se puede saber que valor tiene $\star p$. 
+
+La constante utilizada para representar punteros que no apuntan un lugar es $\null$
+
+```math
+p := \null
+```
+
+***
+
+Analizando las posibles situaciones de: $\var \; p : \pointer \; \too \; personType$
+
+<br />
+
+<Image src="/algoritmos2/punteros.png" alt="punteros"  width={900} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+- $(1)$: el valor de $p$ es $\null$, no señala a una posición de memoria. 
+
+En esta situación no se señala ningún lugar de memoria, no tiene acceder a ella con $\star p$.
+
+- $(2)$: la posición de memoria señalada por $p$ no está reservada.
+
+En esta situación el valor de $p$ es inconsistente, no debe ser utilizado/accedido. Ya que no se sabe que valor está guardado en memoria (modificarlo puede causar errores o corromper datos).\
+Los punteros en esta situación se llaman **referencias** o **punteros colgantes** (_dangling pointers_).
+
+- $(3)$: el valor de $p$ es la dirección de memoria donde se aloja $personType$ después de $alloc(p)$.
+
+En esta última situación, $\star p$ denota la tupla $personType$ señalada por $p$.\
+Por lo que podemos acceder a sus campos $\star p.name$, $\star p.age, \star p.height$ o asignar nuevos valores a ellos.
+
+Otra notación que reemplaza los operadores $(\star), (.)$ para acceder a los campos de una tupla es $\rightarrow$
+
+```math
+\begin{align}
+&p \rightarrow name := \textnormal{"Juan"} \\
+&p \rightarrow age := 20 \\
+&p \rightarrow height := 1.80
+\end{align}
+```
+
+Si por ejemplo, tuvieramos una variable $q$ tal que $q := p$ entonces $q$ y $p$ apuntan al mismo lugar de memoria, esto es llamado **aliasing**. Si uno de los punteros modifica el valor de la memoria, el otro puntero también verá el cambio.
+
+Los punteros permiten decidir exactamente cuando reservar espacio en memoria y cuando liberarlo. 
+
