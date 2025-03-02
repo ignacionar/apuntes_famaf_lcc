@@ -1,0 +1,241 @@
+import Image from 'next/image'
+
+# Lógica Combinacional 
+
+En este apartado se incluyen algunos módulos básicos de circuitos combinacionales:
+
+## Salida código exceso-3
+
+La salida código exceso-3 es un código de 4 bits que se obtiene sumando 3 al número decimal que se quiere codificar.\
+Esta tabla de verdad muestra la relación entre los BCD o _Binary Coded Decimals_ y la salida código exceso-3:
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content", display: 'flex', flexDirection: 'row', gap: '10px' }}>
+  <div>
+    <p style={{ textAlign: 'center', fontWeight: "bold", fontSize: "16px" }}>Entrada BCD</p>
+    | $A$ | $B$ | $C$ | $D$ 
+    |:-:|:-:|:-:|:-:|
+    | $0$ | $0$ | $0$ | $0$ |
+    | $0$ | $0$ | $0$ | $1$ |
+    | $0$ | $0$ | $1$ | $0$ | 
+    | $0$ | $0$ | $1$ | $1$ | 
+    | $0$ | $1$ | $0$ | $0$ | 
+    | $0$ | $1$ | $0$ | $1$ | 
+    | $0$ | $1$ | $1$ | $0$ | 
+    | $0$ | $1$ | $1$ | $1$ |
+    | $1$ | $0$ | $0$ | $0$ |
+    | $1$ | $0$ | $0$ | $1$ |
+  </div>
+
+  <div>
+    <p style={{ textAlign: 'center', fontWeight: "bold", fontSize: "16px" }}>Salida código exceso-3</p>
+    | $w$ | $x$ | $y$ | $z$ |
+    |:-:|:-:|:-:|:-:|
+    | $0$ | $0$ | $1$ | $1$ |
+    | $0$ | $1$ | $0$ | $0$ |
+    | $0$ | $1$ | $0$ | $1$ |
+    | $0$ | $1$ | $1$ | $0$ |
+    | $0$ | $1$ | $1$ | $1$ |
+    | $1$ | $0$ | $0$ | $0$ |
+    | $1$ | $0$ | $0$ | $1$ |
+    | $1$ | $0$ | $1$ | $0$ |
+    | $1$ | $0$ | $1$ | $1$ |
+    | $1$ | $1$ | $0$ | $0$ |
+  </div>
+</div>
+
+Luego es posible hacer un mapa de Karnaugh para las salidas/funciones $x, y , z, w$\
+Es importante mencionar que los BCD posibles son 10, cualquier entrada $BCD > 9 \; \lor \; BCD < (1001)_2$ no es posible (valor indiferente marcado con $X$).
+
+En este mapa se pueden ver las salidas $z, y$. 
+
+<br />
+
+<Image src="/organizacioncomputador/mapak4.png" alt="Salida código exceso-3" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+De esta forma transformarlas en un diagrama lógico ahora es más sencillo (faltarían ver las salidas $w, x$). 
+
+## Sumadores 
+
+### Semisumador
+
+> Un semisumador es un circuito que suma dos bits de entrada $x$ y $y$ y produce dos salidas: la suma $S$ y el acarreo $C$. 
+
+La tabla de verdad de un semisumador es la siguiente:
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+  | $x$ | $y$ | $S$ | $C$ |
+  |:-:|:-:|:-:|:-:|
+  | $0$ | $0$ | $0$ | $0$ |
+  | $0$ | $1$ | $1$ | $0$ |
+  | $1$ | $0$ | $1$ | $0$ |
+  | $1$ | $1$ | $0$ | $1$ |
+</div>
+
+Su diagrama es el siguiente:
+
+<br />
+
+<Image src="/organizacioncomputador/semisumador.png" alt="Semisumador" width={600} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Donde $\;S = x \oplus y, \; C = xy$
+
+### Sumador completo 
+
+> Un sumador completo tiene tres entradas: dos bits $x$ y $y$ y un acarreo de entrada $z$. Produce dos salidas: la suma $S$ y el acarreo de salida $C$.
+
+La tabla de verdad de un sumador completo es la siguiente:
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+  | $x$ | $y$ | $z$ | $C$ | $S$ |
+  |:-:|:-:|:-:|:-:|:-:|
+  | $0$ | $0$ | $0$ | $0$ | $0$ |
+  | $0$ | $0$ | $1$ | $0$ | $1$ |
+  | $0$ | $1$ | $0$ | $0$ | $1$ |
+  | $0$ | $1$ | $1$ | $1$ | $0$ |
+  | $1$ | $0$ | $0$ | $0$ | $1$ |
+  | $1$ | $0$ | $1$ | $1$ | $0$ |
+  | $1$ | $1$ | $0$ | $1$ | $0$ |
+  | $1$ | $1$ | $1$ | $1$ | $1$ |
+</div>
+
+Su diagrama es el siguiente:
+
+<br />
+
+<Image src="/organizacioncomputador/sumadorcompleto1.png" alt="Sumador completo" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Donde $\;S = z \oplus (x \oplus y), \; C = z(xy + x'y) + xy$
+
+### Sumador binario 
+
+> Un sumador binario es un circuito que suma dos números binarios. El mismo se compone de distintos sumadores completos (dependiendo de la cantidad de bits de los números a sumar).
+
+Si tomamos por ejemplo, la suma de los números de cuatro bits $A, B$ debemos sumar cada $A_i$ con $B_i$ y el acarreo de la suma anterior: 
+
+```math 
+\begin{align}
+&\quad \; \\
+&\quad \quad C_3 C_2 C_1 C_0 \\
+&\quad \quad A_3 A_2 A_1 A_0 \\ 
+&+ \;\;\; B_3 B_2 B_1 B_0 \\
+&\quad \;\; \overline{C_4 S_3 S_2 S_1 S_0} \\
+\end{align}
+```
+
+<br />
+
+<Image src="/organizacioncomputador/sumadorbinario.png" alt="Sumador binario" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Uno de los problemas que radican en este sumadro es que, al ser un proceso en cascada, su velocidad depende del cálculo de los acarreos. 
+
+La forma de resolver este problema es paralelizando el proceso, obteniendo los acarreos anticipadamente.
+
+## Acarreo anticipado
+
+> El acarreo anticipado es un método que permite calcular los acarreos de un sumador binario de forma paralela.
+
+Observando el diagrama del sumador completo: 
+
+<br />
+
+<Image src="/organizacioncomputador/sumadorcompleto2.png" alt="Sumador completo" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Mediante las variables binarias:
+
+```math 
+\begin{align}
+P_i &= A_i \oplus B_i \\
+G_i &= A_iB_i \\
+\end{align}
+```
+
+Expresamos la suma y el acarreo como: 
+
+```math
+\begin{align}
+S_i &= P_i \oplus C_i \\
+C_{i+1} &= G_i + P_iC_i \\
+\end{align}
+```
+
+Los acarreos serían: 
+
+```math
+\begin{align}
+&C_0 \\
+&C_1 = G_0 + P_0C_0 \\
+&C_2 = G_1 + P_1C_1 = G_1 + P_1(G_0 + P_0C_0) \\
+&C_3 = G_2 + P_2C_2 = G_2 + P_2(G_1 + P_1(G_0 + P_0C_0)) \\
+\end{align}
+```
+
+Un diagrama lógico de un acarreo anticipado sería:  
+
+<br />
+
+<Image src="/organizacioncomputador/acarreoanticipado.png" alt="Acarreo anticipado" width={600} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+## Multiplicador binario
+
+> Un multiplicador binario es un circuito que realiza la multiplicación de dos números binarios.
+
+Si queremos multiplicar dos números de dos bits $A, B$ seguimos de la siguiente manera:
+
+```math 
+\begin{align}
+&\quad \quad \quad \quad \quad \quad \; B_1 \quad \quad \quad B_0 \\
+&\quad \quad \quad \quad \quad \times \; \; A_1 \quad \quad \quad A_0 \\
+&+ \quad \quad \quad \quad \quad \overline{A_0 B_1 \quad A_0 B_0} \\
+&\quad \quad \;\;\; A_1 B_1 \quad A_1 B_0 \\
+&\overline{C_3 \quad \quad C_2 \quad  \quad C_1 \quad \quad  C_0} \\
+\end{align}
+```
+
+Aplicado a un diagrama lógico:
+
+<br />
+
+<Image src="/organizacioncomputador/multiplicadorbinario.png" alt="Multiplicador binario" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+## Decodificadores 
+
+> Los decodificadores son circuitos combinacionales que dadas $n$ variables de entrada generan $2^n$ salidas (minitérminos).
+
+Este sería un diagrama lógico de un decodificador de $3$ entradas $x, y, z$
+
+<br />
+
+<Image src="/organizacioncomputador/decodificadores.png" alt="Decodificador" width={500} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+## Multiplexores 
+
+> Los multiplexores son circuitos que permiten seleccionar una de las $2^n$ entradas en base a $n$ entradas de selección y enviarla a la salida.
+
+Un multiplexor de $2$ a $1$ sería:
+
+<br />
+
+<Image src="/organizacioncomputador/multiplexor.png" alt="Multiplexor" layout='responsive' width={0} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Si $S = 0 \implies Y = I_0$\
+Si $S = 1 \implies Y = I_1$
+
+### Buffer triestado 
+
+> Un buffer triestado posee una entrada, una salida y una entrada de control.\
+Si la entrada de control es $0$ la salida es de alta impedancia, si es $1$ la salida es igual a la entrada.
+
+<br />
+
+<Image src="/organizacioncomputador/buffertriestado.png" alt="Buffer triestado" width={500} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+En otras palabras, dependiendo de la entrada de control la salida puede estar o no conectada.
+
+Los multiplexores también pueden ser creados a partir de buffers triestado.
+

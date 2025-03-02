@@ -105,3 +105,47 @@ Para mantener ese orden solo un bit cambia por columna. El cuadrado $m_5$, por e
 <Image src="/organizacioncomputador/mapak3.png" alt="Mapa 3" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
 
 Observando el mapa, sumando los elementos que contienen $1$'s, se obtiene: $f(x, y, z) = x'y + xy'$
+
+Dependiendo el caso, podemos marcar una celda con una $X$ si su valor es indiferente. 
+
+### Funciones pares e impares 
+
+> La función par es un detector de paridad entre $0$'s o $1$'s, esta se puede simplificar como $f = (A \oplus B \oplus C)'$\
+La función impar es un detector de imparidad entre $0$'s p $1$'s, esta se puede simplificar como $f = A \oplus B \oplus C$
+
+Un generador de paridad par en un mensaje de tres bits podría verse así: 
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| $x$ | $y$ | $z$ | Paridad $x \oplus y \oplus z$ |
+|:---:|:---:|:---:|:------:|
+|  $0$  |  $0$  |  $0$  |   $0$  |
+|  $0$  |  $0$  |  $1$  |   $1$  |
+|  $0$  |  $1$  |  $0$  |   $1$  |
+|  $0$  |  $1$  |  $1$  |   $0$  |
+|  $1$  |  $0$  |  $0$  |   $1$  |
+|  $1$  |  $0$  |  $1$  |   $0$  |
+|  $1$  |  $1$  |  $0$  |   $0$  |
+|  $1$  |  $1$  |  $1$  |   $1$  |
+</div>
+
+Esto funciona como una detección de bits erróneos en un mensaje, necesitando un verificador de errores de paridad que compare el mensaje con el detector de paridad:
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| $x$ | $y$ | $z$ | Paridad $x \oplus y \oplus z$ | Verificador |
+|:---:|:---:|:---:|:------:|:------------:|
+|  $0$  |  $0$  |  $0$  |   $0$  |   $0$  |
+|  $0$  |  $0$  |  $0$  |   $1$  |   $1$  |
+|  $0$  |  $0$  |  $1$  |   $0$  |   $1$  |
+|  $0$  |  $0$  |  $1$  |   $1$  |   $0$  |
+|  $0$  |  $1$  |  $0$  |   $0$  |   $1$  |
+|  $0$  |  $1$  |  $0$  |   $1$  |   $0$  |
+|  $0$  |  $1$  |  $1$  |   $0$  |   $0$  |
+|  $0$  |  $1$  |  $1$  |   $1$  |   $1$  |
+|  $\ldots$  |  $\ldots$  |  $\ldots$  |   $\ldots$  |   $\ldots$  |
+</div>
+
+Cuando el verificador es $1$, se sabe que hay un error en el mensaje.
