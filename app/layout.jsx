@@ -6,6 +6,20 @@ import 'nextra-theme-docs/style.css'
 
 export const { viewport } = Head
 
+const defaultUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000"
+
+export const metadata = {
+  metadataBase: new URL(defaultUrl),
+  title: "Apuntes FAMAF | LCC",
+  description: "Mis apuntes de FAMAF | LCC",
+  icons: {
+    icon: [{ url: "/favicon-196.png", sizes: "196x196", type: "image/png" }],
+    apple: [{ url: "/apple-icon-180.png" }],
+  },
+}
+
 export default async function RootLayout({ children }) {
   const lastUpdatedDate = new Date();
   const formattedDate = `${lastUpdatedDate.getDate()} de ${lastUpdatedDate.toLocaleString('es-ES', { month: 'long' })} de ${lastUpdatedDate.getFullYear()}`;
