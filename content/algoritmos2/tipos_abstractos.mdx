@@ -1,0 +1,267 @@
+import Image from 'next/image'
+
+# Tipos abstractos 
+
+Los tipos de datos **abstractos** son aquellos que: 
+
+- Se definen **especificando** constructores/operaciones. 
+- Pueden haber varias **implementaciones** para el mismo TAD.
+- El problema muestra qué necesitamos representar y qué operaciones tener.
+
+*** 
+
+Para especificarlo debemos: 
+
+- Indicar su nombre 
+- Especificar constructores $(\proc, \; \fun)$ los cuales permiten crear elementos del tipo especificado. 
+- Especificar operaciones $(\proc, \; \fun)$ que permiten manipular elementos del tipo especificado.
+- Especificar tipos de cada constructor/operación, explicar su función mediante lenguaje natural 
+- Definir **precondiciones** (restricciones)
+- Especificar operaciones de _destrucción_ que liberan memoria del tipo (en caso necesario)
+
+***
+
+Su implementación:
+
+- Definir un nuevo tipo con el nombre de TAD especificado. Se utilizan tipos concretos/definidos. 
+- Implementar constructores respetando los tipos.
+- Implementar operaciones respetando los tipos.
+- Implementar operacion de destrucción si es que se ha reservado al contstruir los elementos. 
+- Pueden surgir nuevas restricciones que dependen de cómo implementamos el tipo.
+- Pueden necesitarse operaciones auxiliares no especificadas en el tipo. 
+
+## Listas 
+
+> Colecciones de elementos de un mismo tipo, de tamaño variable. Todas son vacías o tienen un elemento al comienzo 
+
+### Especificación de listas
+
+```math 
+\begin{align}
+& \\
+&\spec \; List \; \of \; \where \\
+&\\ 
+&\cons \\ 
+&\quad \fun \; empty() \; \ret \; l : List \; \of \; T \\  
+&\quad\{- \;\; \textnormal{Crea una lista vacía} \;\; -\} \\
+&\\
+&\quad \proc \; addl (\bfin \; e : T, \; \inout \; l : List \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al comienzo de una lista} \; l \;\; -\} \\
+&\\ 
+&\destroy \\
+&\quad \proc \; destroy(\inout \; l : List \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Libera memoria en caso que sea necesario} \;\; -\} \\
+&\\ 
+&\ops \\
+&\quad \fun \; is\_empty(l : List \; \of \; T) \; \ret \; b : \bool \\ 
+&\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; l \;\textnormal{es vacía.} \;\; -\} \\
+&\\ 
+&\quad \fun \; head(l : List \; \of \; T) \; \ret \; e : T \\ 
+&\quad\{- \;\; \textnormal{Devuelve el primer elemento de} \; l \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
+&\\
+&\quad \proc \; tail(\inout \; l : List \; \of \; T, \; \bfin e : T) \; \ret \; e : T \\ 
+&\quad\{- \;\; \textnormal{Elimina el primer elemento de} \; l \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
+&\\
+&\quad \proc \; addr(\inout \; l : List \; \of \; T, \; \bfin e : T) \; \ret \; e : T \\ 
+&\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al final de la lista} \; l \;\; -\} \\
+&\\
+&\quad \fun \; length(l : List \; \of \; T) \; \ret \; n : \nat \\ 
+&\quad\{- \;\; \textnormal{Devuelve la cantidad de elementos de} \; l \;\; -\} \\
+&\\ 
+&\quad \proc \; concat(\inout \; l : List \; \of \; T, \; \bfin \; l0 : List \; \of \; T) \; \ret \; e : T \\ 
+&\quad\{- \;\; \textnormal{Agrega al final de} \; l \; \textnormal{todos los elementos de} \; l- \; \textnormal{en el mismo orden} \;\; -\} \\
+&\\
+&\quad \fun \; index(l : List \; \of \; T, \; n : \nat) \; \ret \; e : T \\ 
+&\quad\{- \;\; \textnormal{Devuelve el} \; n\textnormal{ésimo elemento de la lista} \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; length(l) > n \;\; -\} \\
+&\\
+&\quad \proc \; take(\inout \; l : List \; \of \; T, \; n : \nat) \\ 
+&\quad\{- \;\; \textnormal{Deja en} \; l \; \textnormal{los primeros} n \; \textnormal{elementos, elimina el resto} \;\; -\} \\
+&\\ 
+&\quad \proc \; drop(\inout \; l : List \; \of \; T, \; n : \nat) \\ 
+&\quad\{- \;\; \textnormal{Elimina los primeros} \; n \; \textnormal{de} l \;\; -\} \\
+&\\
+&\quad \fun \; copy\_list(l1 : List \; \of \; T) \; \ret \; l2 : List \; \of \; T \\ 
+&\quad\{- \;\; \textnormal{Copia los elementos de} \; l1 \; \textnormal{en la nueva lista} l2 \;\; -\} \\
+&\\
+\end{align}
+```
+
+Para usar el tipo de las listas basta con especificarlas. **No** es necessario conocer la implementación para usar el TAD.
+
+Sus constructores $empty, \; addl$ permiten crear listas vacías o agregar un elemento nuevo, respectivamente.\
+Las operaciones permiten manipular listas de acuerdo a la funcionalidad del TAD. 
+
+**Ejemplo de uso:**
+
+```math 
+\begin{align}
+&\fun \; promedio(l : List \of \; float) \; \ret \; r : \float \\
+&\quad \var \; largo : \nat \\
+&\quad \var \; elem : \float \\
+&\quad \var \; laux : List \; \of \; \float \\
+&\\
+&\quad laux := copy(l) \\
+&\quad r:=0.0 \\
+&\quad largo := length(l) \\
+&\quad \do \; (\textnormal{not} \; is\_empty(laux)) \\
+&\quad \quad elem := head(laux) \\
+&\quad \quad r := r + elem \\ 
+&\quad \quad tail(laux) \\
+&\quad \od \\
+&\quad destroy(laux) \\
+&\quad r:= r \; / \; largo  \\
+&\bfend \; \proc
+\end{align}
+```
+
+### Implementación de Listas mediante punteros 
+
+La implementación del TAD lista utiliza punteros, dicha implementación es una **lista enlazada**. Cada elemento de la lista estará alojado en un _nodo_ conteniendo además un puntero hacia el siguiente.\
+Una lista será un puntero a un nodo (se sigue un patrón recursivo)
+
+```math 
+\begin{align}
+&\impt \; List \; \of \; T \; \where \\
+&\\ 
+&\type \; Node \; \of \; T = \tuple \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad elem : T \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad next : \pointer \; \too \; (Node \; \of \; T) \\
+&\quad\quad\quad\quad\quad\quad\quad\quad \; \bfend \; \tuple \\
+&\\
+&\type \; List \; \of \; T = \pointer \; \too \; (Node \; \of \; T) \\
+\end{align}
+```
+
+El constructor $empty$ (lista vacía) se implementa fácilmente con el puntero $\null$ 
+
+```math 
+\begin{align}
+&\fun \; empty() \; \ret \; l : List \; \of \; T \\ 
+&\quad l := \null \\
+&\bfend \; \fun 
+\end{align}
+```
+
+Lo que falta es la implementación del constructor $addl$ (para agregar un elemento nuevo):
+
+Para agregar un elemento a una lista $l$, definimos un puntero $p$ y reservamos memoria al mismo.\
+El puntero $p$ apunta a un nodo (el cual contiene un elemento y un puntero).\
+El campo $elem$ que apunta el puntero $p$ es el elemento $e$ que queremos agregar a $l$
+
+<br />
+
+<Image src="/algoritmos2/lista1.png" alt="lista" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+Ahora definimos el siguiente elemento de la lista, $next$. El cual, es el que ya está apuntado por la lista $l$
+
+<br />
+
+<Image src="/algoritmos2/lista2.png" alt="lista" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+Entonces $l$ no debe apuntar a $e_1$ sino a $e$ (nuevo primer elemento)
+
+<br />
+
+<Image src="/algoritmos2/lista3.png" alt="lista" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
+
+En el código tenemos: 
+
+```math 
+\begin{align}
+&\proc \; addl (\bfin \; e : T, \; \inout \; l : List \; \of \; T) \\
+&\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
+&\quad alloc(p) \\
+&\quad p \to elem := e \\ 
+&\quad p \to next := l \\
+&\quad l := p \\
+&\bfend \; \proc 
+\end{align}
+```
+
+Algunas operaciones como $is\_empty, \; head$ son más fáciles de implementar:
+
+```math 
+\begin{align}
+&\fun \; is\_empty(l : List \; \of \; T) \; \ret \; b : \bool \\
+&\quad b := (l = \null) \\
+&\bfend \; \fun \\
+&\\
+&\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
+&\fun \; head(l : List \; \of \; T) \; \ret \; e : T \\
+&\quad e := (l \to elem) \\
+&\bfend \; \fun \\
+\end{align}
+```
+
+## Contador 
+
+> El TAD contador se define por sus operaciones de **inicializar** un valor, **incrementarlo**, **comprobar** si su valor es el inicial y **decrementarlo** en caso de no serlo.    
+
+- La inicialización e incrementación pueden generar todos los valores posibles del contador, estos son los **constructores**.
+- La comprobación solo examina el contador, 
+- La decrementación no genera más valores que los obtenibles por inicializar/incrementar. 
+
+### Especificación de Contador
+
+```math
+\begin{align}
+&\spec \; Counter \; \where \\
+&\\
+&\cons \\
+&\quad \proc \; init(\out \; c: Counter) \\ 
+&\quad\{- \;\; \textnormal{Crea un contador inicial} \;\; -\} \\
+&\\
+&\quad \proc \; inc(\inout \; c : Counter) \\
+&\quad\{- \;\; \textnormal{Incrementa el contador}\; c \;\; -\} \\
+&\\
+&\destroy \\ 
+&\quad \proc \; destroy(\inout \; c : Counter) \\
+&\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
+&\\
+&\ops \\
+&\quad \fun \; is\_init(c : Counter) \; \ret \; b : \bool \\
+&\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; c \;\textnormal{es el valor inicial} \;\; -\} \\
+&\\
+&\quad \proc \; dec(\inout \; c : Counter) \\
+&\quad\{- \;\; \textnormal{Decrementa el contador} \; c \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_init(c) \;\; -\} \\
+\end{align}
+```
+
+### Implementación de Contador
+
+La implementación de un contador es sencilla, se puede hacer con un natural. 
+
+```math
+\begin{align}
+&\impt \; Counter \; \where \\
+&\\
+&\type \; Counter = \nat \\
+&\\
+&\proc \; init(\out \; c : Counter)  \\
+&\quad c := 0 \\
+&\bfend \; \proc \\
+&\\
+&\proc \; inc(\inout \; c : Counter) \\
+&\quad c := c + 1 \\
+&\bfend \; \proc \\
+&\\
+&\fun \; is\_init(c : Counter) \; \ret \; b : \bool \\
+&\quad b := (c = 0) \\
+&\bfend \; \fun \\
+&\\
+&\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_init(c) \;\; -\} \\
+&\proc \; dec(\inout \; c : Counter) \\
+&\quad c := c - 1 \\
+&\bfend \; \proc \\
+&\\
+&\proc \; destroy(\inout \; c : Counter) \\
+&\quad \skip \\
+&\bfend \; \proc \\
+\end{align}
+```
+
+Todas las operaciones son $\bigO(1)$ (constantes).

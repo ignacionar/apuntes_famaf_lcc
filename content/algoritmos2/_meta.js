@@ -4,5 +4,6 @@ export default {
   ordenacion_elemental: "Ordenación Elemental",
   ordenacion_avanzada: "Ordenación Avanzada",
   recurrencias_jerarquia_de_funciones: "Recurrencias y Jerarquía de Funciones",
-  tipos_concretos: "Tipos Concretos"
+  tipos_concretos: "Tipos Concretos",
+  tipos_abstractos: "Tipos Abstractos"
 }

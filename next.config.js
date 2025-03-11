@@ -37,6 +37,7 @@ const withNextra = nextra({
             downto: '\\mathbf{downto}',
             bool: '\\mathbf{bool}',
             intt: '\\mathbf{int}',
+            float: '\\mathbf{float}',
             nat: '\\mathbf{nat}',
             real: '\\mathbf{real}',
             char: '\\mathbf{char}',
@@ -49,6 +50,12 @@ const withNextra = nextra({
             alloc: '\\mathbf{alloc}',
             free: '\\mathbf{free}',
             null: '\\mathbf{null}',
+            where: '\\mathbf{where}',
+            spec: '\\mathbf{spec}',
+            cons: '\\mathbf{constructors}',
+            destroy: '\\mathbf{destroy}',
+            ops: '\\mathbf{operations}',
+            impt: '\\mathbf{implement}',
             mcalx: '\\mathcal{X}'
           }
         }
