@@ -119,7 +119,8 @@ Las operaciones permiten manipular listas de acuerdo a la funcionalidad del TAD.
 
 ### Implementación de Listas mediante punteros 
 
-La implementación del TAD lista utiliza punteros, dicha implementación es una **lista enlazada**. Cada elemento de la lista estará alojado en un _nodo_ conteniendo además un puntero hacia el siguiente.\
+La implementación del TAD lista utiliza punteros, dicha implementación es una **lista enlazada**.\
+Cada elemento de la lista estará alojado en un _nodo_ conteniendo además un puntero hacia el siguiente.\
 Una lista será un puntero a un nodo (se sigue un patrón recursivo)
 
 ```math 
@@ -200,7 +201,7 @@ Algunas operaciones como $is\_empty, \; head$ son más fáciles de implementar:
 
 > El TAD contador se define por sus operaciones de **inicializar** un valor, **incrementarlo**, **comprobar** si su valor es el inicial y **decrementarlo** en caso de no serlo.    
 
-- La inicialización e incrementación pueden generar todos los valores posibles del contador, estos son los **constructores**.
+- La inicialización e incrementación son los **constructores** (generan todos los valores posibles del contador).
 - La comprobación solo examina el contador, 
 - La decrementación no genera más valores que los obtenibles por inicializar/incrementar. 
 
