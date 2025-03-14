@@ -32,7 +32,7 @@ Su implementación:
 
 ## Listas 
 
-> Colecciones de elementos de un mismo tipo, de tamaño variable. Todas son vacías o tienen un elemento al comienzo 
+> Colecciones de elementos de un mismo tipo, de tamaño variable. Todas son vacías o tienen un elemento al comienzo.
 
 ### Especificación de listas
 
@@ -203,7 +203,7 @@ Algunas operaciones como $is\_empty, \; head$ son más fáciles de implementar:
 
 - La inicialización e incrementación son los **constructores** (generan todos los valores posibles del contador).
 - La comprobación solo examina el contador, 
-- La decrementación no genera más valores que los obtenibles por inicializar/incrementar. 
+- La decrementación no genera más valores que los obtenibles por inicializar/incrementar (no se decrementa si el valor es nulo)
 
 ### Especificación de Contador
 
@@ -266,3 +266,102 @@ La implementación de un contador es sencilla, se puede hacer con un natural.
 ```
 
 Todas las operaciones son $\bigO(1)$ (constantes).
+
+## Pila 
+
+> Una pila es una colección de datos de mismo tipo **inicializada en vacía**. Se pueden **apilar** y **desapilar** elementos, **comprobar** si hay primer elemento o **examinarlo**.\
+La pila sigue el principio **LIFO** (Last In, First Out)
+
+Su especificación es: 
+
+```math 
+\begin{align}
+&\spec \; Stack \; \of \; T \; \where \\
+&\\
+&\cons \\
+&\quad \fun \; empty\_stack() \; \ret \; s: Stack \; \of \; T \\
+&\quad\{- \;\; \textnormal{Crea una pila vacía} \;\; -\} \\
+&\\
+&\quad \proc \; push(\bfin \; e : T, \; \inout \; s : Stack \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al tope de la pila} \; s \;\; -\} \\
+&\\
+&\destroy \\
+&\quad \proc \; destroy(\inout \; s : Stack \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
+&\\
+&\ops \\
+&\quad \fun \; is\_empty\_stack(s : Stack \; \of \; T) \; \ret \; b : \bool \\
+&\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; s \;\textnormal{está vacía} \;\; -\} \\
+&\\
+&\quad \fun \; top(s : Stack \; \of \; T) \; \ret \; e : T \\
+&\quad\{- \;\; \textnormal{Devuelve el elemento en el tope de} \; s \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_stack(s) \;\; -\} \\
+&\\
+&\quad \proc \; pop(\inout \; s : Stack \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Elimina el elemento en el tope de} \; s \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_stack(s) \;\; -\} \\
+\end{align}
+```
+
+## Cola 
+
+> Una cola es una colección de datos de mismo tipo **inicializada en vacía**. Se puede **encolar** y **decolar** elementos, **comprobar si es vacía**, o **examinar** el primer elemento.\
+La cola sigue el principio **FIFO** (First In, First Out)
+
+Su especificación es: 
+
+```math
+\begin{align}
+&\spec \; Queue \; \of \; T \; \where \\
+&\\
+&\cons \\
+&\quad \fun \; empty\_queue() \; \ret \; q: Queue \; \of \; T \\
+&\quad\{- \;\; \textnormal{Crea una cola vacía} \;\; -\} \\
+&\\
+&\quad \proc \; enqueue(\bfin \; q : Queue \; \of \; T, \; \inout \; e : T) \\
+&\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al final de la cola} \; q \;\; -\} \\
+&\\
+&\destroy \\
+&\quad \proc \; destroy(\inout \; q : Queue \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
+&\\
+&\ops \\
+&\quad \fun \; is\_empty\_queue(q : Queue \; \of \; T) \; \ret \; b : \bool \\
+&\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; q \;\textnormal{está vacía} \;\; -\} \\
+&\\
+&\quad \fun \; first(q : Queue \; \of \; T) \; \ret \; e : T \\
+&\quad\{- \;\; \textnormal{Devuelve el elemento al comienzo de} \; q \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_queue(q) \;\; -\} \\
+&\\
+&\quad \proc \; deq  ueue(\inout \; q : Queue \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Elimina el elemento al comienzo de} \; q \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_queue(q) \;\; -\} \\
+\end{align}
+```
+
+**Ejemplo de buffer de datos:**
+
+```math 
+\begin{align}
+&\proc \; buffer() \\ 
+&\quad \var \; d: data \\ 
+&\quad \var \; q: Queue \; \of \; data \\ 
+&\quad empty\_queue(q) \\ 
+&\quad \do \; (\neg finish()) \\
+&\quad\quad \if \; there\_is\_product() \; \then \\
+&\quad\quad\quad d:= get\_product() \\
+&\quad\quad\quad enqueue(q,d) \\
+&\quad\quad\ \else \; \if \; there\_is\_demand() \land \neg is\_empty(q) \; \then \\
+&\quad\quad\quad d:= first(q) \\
+&\quad\quad\quad consume(d) \\
+&\quad\quad \fi \\
+&\quad \od \\
+&\bfend \; \proc 
+\end{align}
+```
+
+Sus funciones auxiliares:
+
+- $finish()$ devuelve $True$ si el servicio productor-consumidor ha finalizado.
+- $there\_is\_product(), \; there\_is\_demand()$ comprueban si hay producción o demanda respectivamente.
+- $get\_product()$ obtiene un producto desde el productor, y $consume(d)$ le envía al consumidor el producto $d$. 
