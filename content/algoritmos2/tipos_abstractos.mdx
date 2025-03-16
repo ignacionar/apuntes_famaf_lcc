@@ -117,7 +117,7 @@ Las operaciones permiten manipular listas de acuerdo a la funcionalidad del TAD.
 \end{align}
 ```
 
-### Implementación de Listas mediante punteros 
+### Implementación de listas 
 
 La implementación del TAD lista utiliza punteros, dicha implementación es una **lista enlazada**.\
 Cada elemento de la lista estará alojado en un _nodo_ conteniendo además un puntero hacia el siguiente.\
@@ -365,3 +365,121 @@ Sus funciones auxiliares:
 - $finish()$ devuelve $True$ si el servicio productor-consumidor ha finalizado.
 - $there\_is\_product(), \; there\_is\_demand()$ comprueban si hay producción o demanda respectivamente.
 - $get\_product()$ obtiene un producto desde el productor, y $consume(d)$ le envía al consumidor el producto $d$. 
+
+## Árboles binarios 
+
+> Consisten en nodos que almacenan un elemento y dos subestructuras, que pueden ser otro nodo o el vacío.\
+
+- Uno de sus constructores es el árbol vacío, 
+- Su otro constructor es el nodo consistente de un elemento tipo $T$ y dos árboles. 
+
+En el nivel $i$ de un árbol hay a lo sumo $2^{i-1}$ nodos, (Por ejemplo, nivel $3 \implies 4$ nodos)
+
+En un árbol "balanceado" la altura es del orden del $\log_2 k$ donde $k$ es el número de nodos. 
+
+Podemos recorrer un árbol indicando caminos desde la raíz y representarlos como secuencias donde los elementos indican si bajamos por **izquierda** o **derecha**.
+
+Su especificación es: 
+
+```math 
+\begin{align} 
+&\type \; Direction = \enumerate \\ 
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad Left \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad Right \\
+&\quad\quad\quad\quad\quad\quad\quad\quad \bfend \; \enumerate \\
+&\\
+&\type \; Path = List \; \of \; Direction \\
+&\\
+&\spec \; Tree \; \of \; \where \\
+&\\
+&\cons \\
+&\quad \fun \; empty\_tree() \; \ret \; t : Tree \; \of \; T \\
+&\quad\{- \;\; \textnormal{Crea un árbol vacío} \;\; -\} \\
+&\\
+&\quad \fun \; node(tl: Tree \; \of \; T, \; e : T, \; tr: Tree \; \of \; T) \; \ret \; t : Tree \; \of \; T \\
+&\quad\{- \;\; \textnormal{Crea el nodo con elemento} \; e \; \textnormal{y subárboles} \; tl, \; tr \;\; -\} \\
+&\destroy \\
+&\quad \proc \; destroy(\inout \; tr : Tree \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Libera memoria en caso que sea necesario} \;\; -\} \\
+&\\ 
+&\ops \\ 
+&\quad \fun \; is\_empty\_tree(t : Tree \; \of \; T) \; \ret \; b : \bool \\
+&\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; t \;\textnormal{es vacío} \;\; -\} \\
+&\\
+&\quad \fun \; root(t : Tree \; \of \; T) \; \ret \; e : T \\
+&\quad\{- \;\; \textnormal{Devuelve el elemento de la raíz de} \; t \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_tree(t) \;\; -\} \\
+&\\
+&\quad \fun \; left(t : Tree \; \of \; T) \; \ret \; tl : Tree \; \of \; T \\         
+&\quad\{- \;\; \textnormal{Devuelve el subárbol izquierdo de} \; t \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_tree(t) \;\; -\} \\
+&\\
+&\quad \fun \; right(t : Tree \; \of \; T) \; \ret \; tr : Tree \; \of \; T \\
+&\quad\{- \;\; \textnormal{Devuelve el subárbol derecho de} \; t \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_tree(t) \;\; -\} \\
+&\\
+&\quad \fun \; height(t : Tree \; \of \; T) \; \ret \; n : \nat \\
+&\quad\{- \;\; \textnormal{Devuelve la distancia entre la raíz de} \; t \; \textnormal{y la hoja más profunda} \;\; -\} \\
+&\\ 
+&\quad \fun \; is\_path(t : Tree \; \of \; T, \; p : Path) \; \ret \; b : \bool \\
+&\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; p \;\textnormal{es un camino válido en} \; t \;\; -\} \\
+&\\
+&\quad \fun \; subtree\_at(t : Tree \; \of \; T, \; p : Path) \; \ret \; t0 : Tree \; \of \; T \\
+&\quad\{- \;\; \textnormal{Devuelve el subárbol de} \; t \; \textnormal{al seguir el camino} \; p \; \textnormal{en} \; t \;\; -\} \\
+&\\
+&\quad \fun \; elem\_at(t : Tree \; \of \; T, \; p : Path) \; \ret \; e : T \\
+&\quad\{- \;\; \textnormal{Devuelve el elemento al seguir el camino} \; p \; \textnormal{en} \; t \;\; -\} \\
+&\quad\{- \;\; \mathbf{PRE:} \; is\_path(t,p) \;\; -\} \\
+\end{align}
+```
+
+### Implementación de árboles binarios 
+
+Su implementación es similar a la de listas enlazadas. Se define un tipo $Node$ como tupla con un elemento y dos punteros a sí mismo: 
+
+```math
+\begin{align}
+&\impt \; Tree \; \of \; T \; \where \\
+&\\
+&\type \; Node \; \of \; T = \tuple \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad left: \pointer \; \too \; (Node \; \of \; T) \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad value: T \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad right: \pointer \; \too \; (Node \; \of \; T) \\
+&\quad\quad\quad\quad\quad\quad\quad\quad \; \; \bfend \; \tuple \\ 
+&\\
+&\type \; Tree \; \of \; T = \pointer \; \too \; (Node \; \of \; T) \\
+&\\
+&\fun \; empty\_tree() \; \ret \; t : Tree \; \of \; T \\
+&\quad t := \null \\
+&\bfend \; \fun \\
+&\\
+&\fun \; node(tl: Tree \; \of \; T, \; e : T, \; tr: Tree \; \of \; T) \; \ret \; t : Tree \; \of \; T \\
+&\quad alloc(t) \\
+&\quad t \to left := tl \\
+&\quad t \to value := e \\
+&\quad t \to right := tr \\
+&\bfend \; \fun 
+\end{align}
+```
+
+### Árboles binarios de búsqueda 
+
+Un arbol binario de búsqueda o ABB es aquel árbol $t$ donde: 
+
+**1)** Los valores alojados en el subárbol izquierdo de $t$ deben ser menores que el alojado en la raíz de $t$.\
+**2)** Los valores alojados en el subárbol derecho de $t$ deben ser mayores que el alojado en la raíz de $t$.\
+**3)** Las condiciones anteriores deben cumplirse para todos los subárboles de $t$ 
+
+Si el algoritmo está "balanceado", es un algoritmo logarítmico.
+
+***
+
+Si queremos agregar un elemento $e$ se sigue este procedimiento:
+
+**1)** Si $t$ es vacío, se forma el nodo que consta del elemento $e$ y los dos subárboles vacíos.\
+**2)** En caso contrario, se compara el elemento $e$ con la raíz del árbol $t$. 
+
+<div style={{ marginLeft: "1.5em"}}>
+- Si $e$ es menor que la raíz, se agrega al subárbol izquierdo. 
+- Si $e$ es mayor o igual a la raíz, se agrega al subárbol derecho. 
+</div>
