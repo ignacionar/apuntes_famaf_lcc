@@ -2,7 +2,7 @@
 
 ## Números Decimales y Binarios  
 
-_Para seguir con este tema, recomendamos repasar esta sección: [Desarrollos en base _b_ (MD1)](/discreta1/divisibilidad#desarrollos-en-base-b)_
+_Para seguir con este tema, es útil repasar esta sección: [Desarrollos en base _b_ (MD1)](/discreta1/divisibilidad#desarrollos-en-base-b)_
 
 > El sistema numérico decimal es **base $10$**, porque usa $10$ dígitos y los coeficientes se multiplican por potencias de $10$.\
 El sistema binario es **base $2$**, porque usa $2$ dígitos (los coeficientes solo pueden ser $0 \lor 1$).\
@@ -52,6 +52,8 @@ Podemos realizar operaciones aritméticas con números binarios de la siguiente 
 ```
 
 Como no es posible $1+1=2$ en binario, se deja un $0$ y se lleva un $1$ al siguiente coeficiente.
+
+Existen distintos registros (tamaños de bits) para representar números binarios, como los bytes ($8$ bits).
 
 ### Conversiones de base numérica 
 
@@ -120,23 +122,66 @@ Podemos hacer conversiones de base numérica acomodando los dígitos de forma co
 \end{align}
 ```
 
+Puede darse el caso que el número no sea exactamente divisible por $3$ o $4$, por lo que se agregan ceros a la izquierda (en la paret entera) o a la derecha (en la parte fraccionaria) para completar el número.
+
+**Ejemplo:** Expresar $(11010011011011)_2$ y $(0.101101)_2$ en hexadecimal.
+
+```math
+\begin{align}
+(11010011011011)_2 &= 1011 \; 0011 \; 0110 \; 11 = 1011 \; 0011 \; 0110 \; 0011 = (B36B)_{16} \\
+&\\
+(0.101101)_2 &= 1011 \; 01 = 1011 \; 0100 = (0.B4)_{16}
+\end{align}
+```
+
 ## Complementos 
 
 > Los complementos son una forma de representar números negativos.\
 Dado un número $N$ en base $r$ con $n$ dígitos, el complemento a $(r - 1)$ es $(r^n - 1) - N$.\
 En el caso de los binarios $r = 2 \land r - 1 = 1$, por lo que el complemento a $1$ es $(2^n - 1) - N$.
 
-El complemento a $1$ se obtiene cambiando los $0$ por $1$ y los $1$ por $0$.
-
-Por ejemplo, el complemento a $1$ de $(1101)_2$ es $(0010)_2$.
-
+El complemento a $1$ se obtiene cambiando los $0$ por $1$ y los $1$ por $0$.\
 El complemento a $2$ se obtiene sumando $1$ al complemento a $1$
 
-Por ejemplo, el complemento a $2$ de $(1101)_2$ es $(0011)_2$.
+**Ejemplo:**
+
+El complemento a $1$ de $(1101)_2$ es $(0010)_2$.\
+El complemento a $2$ de $(1101)_2$ es $(0011)_2$.
 
 En la definición anterior se considera que el número no lleva punto. De ser el caso, se quita temporalmente para formar el complemento a $1$ y luego se vuelve a colocar en su lugar.
 
-Por ejemplo, el complemento a $1$ de $(1101.1011)_2$ es $(0010.0100)_2$.
+**Ejemplo:** 
+
+El complemento a $1$ de $(1101.1011)_2$ es $(0010.0100)_2$.
+
+***
+
+Podemos expresar un número decimal negativo a binario (negativos en complemento a $2$):
+
+**Ejemplo:** Convertir $-63$ a binario, donde su tamaño de registro es de $8$ bits.
+
+Primero calculamos el valor absoluto de $63$ en binario y agregamos ceros a la izquierda para completar los $8$ bits.
+
+```math
+63 = (00111111)_2
+```
+
+Ahora obtenemos el complemento a $2$ de $(00111111)_2$.
+
+```math
+\begin{align}
+(00111111)_2 &\implies (11000000)_2 \\
++1 &\implies (11000001)_2
+\end{align}
+```
+
+Por lo que $-63 = (11000001)_2$.
+
+Si quisiéramos aumentar el tamaño del registro, al ser **negativo, se agregan unos a la izquierda**.
+
+***
+
+Para hacer una resta entre dos números binarios, **es más sencillo hacer el complemento a $2$ del sustraendo y sumar ambos números**. 
 
 ## Números Flotantes 
 
@@ -150,21 +195,32 @@ x = (-1)^{s} \times (1 + F) \times 2^{E - B}
 
 - $s$ corresponde a un bit de signo. 
 - $F$ es la mantisa, un número fraccionario. Si es de precisión simple, se usan $23$ bits y si es de precisión doble, se usan $52$ bits.
-- $E$ es el exponente, un número entero. Si es de precisión simple, se usan $8$ bits y si es de precisión doble, se usan $11$ bits. Su valor se calcula como $E = e - B$, donde $e$ es el valor del exponente y $B$ es el sesgo. 
+- $E$ es el exponente, un número entero. Si es de precisión simple, se usan $8$ bits y si es de precisión doble, se usan $11$ bits. Su valor se calcula como $E = e + B$, donde $e$ es el valor del exponente y $B$ es el sesgo. 
 - El sesgo es un número que se le suma al exponente para que no sea negativo. En precisión simple, $B = 127$ y en precisión doble, $B = 1023$.
 
 Por ejemplo, el número $-13.625$ en precisión simple sería:
 
+```math 
+13.625 = 1101.1011 
+```
+
+Para seguir el formato, necesitamos desplazar el $.$ cuantas veces sea necesario para solo tener una unidad entera. En este caso, tres veces $\implies e=3$
+
 ```math
 \begin{align}
-13.625 &= 1101.1011 \\
 &= 1.1011011 \times 2^3 \\
 &= 1.1011011 \times 2^{(3 + 127)} \\
 &= 1.1011011 \times 2^{130} \\
 \end{align}
 ```
 
-Por lo que $S$ = $1$, $E$ = $130$ y $F$ = $10110110000000000000000$.
+Tenemos que: 
+
+- $s = 1$ (es negativo)
+- $F = 10110110000000000000000$ (agregamos ceros para llegar a $23$ bits)
+- $E = 130 = (10000110)_2$
+
+Sumando todos los bits, tenemos $32$ bits. Agrupando $s, E, F$ (en ese orden) de a cuatro podemos dar con el número hexadecimal $0xC15A0000$
 
 ### Infinitos y NaN
 
