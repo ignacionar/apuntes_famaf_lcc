@@ -51,7 +51,7 @@ Su pseudocódigo es:
 &\quad \quad tmp[i] := a[i] \\
 &\quad \quad \{- \;\; \textnormal{copia con la primera mitad} \; a[lft,mid] \;\; -\} \\
 &\quad \od \\
-&\quad j := i \\
+&\quad j := lft \\
 &\quad k := mid+1 \\
 &\quad \for \; j := lft \; \too \; rgt \; \do \\
 &\quad \quad \if \; j \leq mid \; \land \; (k > rgt \; \lor \; tmp[j] \leq a[k]) \; \then \\
