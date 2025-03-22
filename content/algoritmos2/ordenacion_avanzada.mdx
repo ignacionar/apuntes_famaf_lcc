@@ -46,7 +46,7 @@ Su pseudocódigo es:
 ```math
 \begin{align}
 &\proc \; merge(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, mid, rgt : \nat) \\
-&\quad \var \; tmp: \array [1..n] \; \of \; T; \; i, j, k : \nat \\
+&\quad \var \; tmp: \array [1..n] \; \of \; T; \; j, k : \nat \\
 &\quad \for \; i := lft \; \too \; mid \; \do \\
 &\quad \quad tmp[i] := a[i] \\
 &\quad \quad \{- \;\; \textnormal{copia con la primera mitad} \; a[lft,mid] \;\; -\} \\
@@ -84,11 +84,11 @@ En pseudocódigo:
 &\\
 &\{ \; 0 \leq rgt \leq n \; \land \; 1 \leq lft \leq n+1 \; \land \; lft-1 \leq rgt \; \land \; a = A \; \} \\
 &\proc \; quick\_sort\_rec(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, rgt: \nat) \\
-&\quad \var \; ppiv : \nat \\
+&\quad \var \; pivot : \nat \\
 &\quad \if \; rgt > lft \; \then \\
-&\quad \quad ppiv := partition(a, lft, rgt, ppiv) \\
-&\quad \quad quick\_sort\_rec(a, lft, ppiv-1) \\
-&\quad \quad quick\_sort\_rec(a, ppiv+1, rgt) \\
+&\quad \quad partition(a, lft, rgt, pivot) \\
+&\quad \quad quick\_sort\_rec(a, lft, pivot-1) \\
+&\quad \quad quick\_sort\_rec(a, pivot+1, rgt) \\
 &\quad \fi \\
 &\bfend \; \proc \\
 &\{ \; a \; \textnormal{es permutación de} \; A \; \land \; a[lft,rgt] \; \textnormal{permutación ordenada de} \; A[lft, rgt] \; \} \\
@@ -105,23 +105,25 @@ El pseudocódigo de $partition$ es:
 
 ```math
 \begin{align}
-&\proc \; partition(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, rgt : \nat, \; \out \; ppiv : \nat) \\
+&\proc \; partition(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, rgt : \nat, \; \out \; pivot : \nat) \\
 &\quad \var \; i, j : \nat \\
-&\quad ppiv := lft \\
+&\quad pivot := lft \\
 &\quad i := lft+1 \\
 &\quad j := rgt \\
 &\quad \while \; i \leq j \; \do \\
-&\quad \quad \if \; a[i] \leq a[ppiv] \; \rightarrow \; i := i+1 \\
-&\quad \quad \quad \; a[j] > a[ppiv] \; \rightarrow \; j := j-1 \\
-&\quad \quad \quad \; a[i] > a[ppiv] \; \land \; a[j] \leq a[ppiv] \; \rightarrow \; swap(a, i, j) \\
+&\quad \quad \if \; a[i] \leq a[pivot] \; \rightarrow \; i := i+1 \\
+&\quad \quad \quad \; a[j] \geq a[pivot] \; \rightarrow \; j := j-1 \\
+&\quad \quad \quad \; a[i] > a[pivot] \; \land \; a[j] < a[pivot] \; \rightarrow \; swap(a, i, j) \\
+&\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \; i := i + 1 \\
+&\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \; j := j - 1 \\
 &\quad \quad \fi \\
 &\quad \od \\
-&\quad swap(a,ppiv,j) \\
-&\quad ppiv := j \\
-&\quad \bfend \; \proc \\
+&\quad swap(a,pivot,j) \quad\; \{- \;\;\textnormal{dejando al} \; pivot \; \textnormal{en una posición más central} \;\; -\} \\
+&\quad pivot := j \quad\quad\quad\quad \{- \;\; \textnormal{señalando la nueva posición del} \; pivot \;\; -\} \\
+&\bfend \; \proc \\
 \end{align}
 ```
 
-Comparamos si $a[i]$ es menor o igual al pivote y si $a[j]$ es mayor o igual. De ser el caso aumentamos los índices, de lo contrario intercambiamos los elementos. Por último, ubicamos correctamente a $a[ppiv]$ y asignamos su nuevo índice.
+Comparamos si $a[i]$ es menor o igual al pivote y si $a[j]$ es mayor o igual. De ser el caso aumentamos los índices, de lo contrario intercambiamos los elementos. Por último, ubicamos correctamente a $a[pivot]$ y asignamos su nuevo índice.
 
 En el peor caso, la complejidad de este algoritmo en el peor caso es de $O(n^2)$, pero en promedio es de $O(n \log n)$. Por lo general es más rápido que _Merge Sort_, es una buena opción para conjuntos de datos que caben en memoria. De lo contrario, _Merge Sort_ es más eficiente. 
