@@ -228,7 +228,7 @@ Los decodificadores pueden tener una entrada de habilitación ($E$) la cual dete
 $E=1 \implies$ decodificador activo por alto funciona y activo por bajo no funciona.\
 $E=0 \implies$ decodificador activo por bajo funciona y activo por alto no funciona. 
 
-**Ejemplo:**
+**Ejemplo:** los siguientes diagramas de bloque,
 
 <br />
 
@@ -289,7 +289,7 @@ La tabla de verdad del segundo decodificador (activo por bajo) sería:
 
 ## Multiplexores 
 
-> Los multiplexores son circuitos que permiten seleccionar una de las $2^n$ entradas en base a $n$ entradas de selección y enviarla a la salida.
+> Los multiplexores son circuitos que permiten seleccionar una de las $2^n$ entradas en base a $n$ entradas de selección $S$ y enviarla a la salida.
 
 Un multiplexor de $2$ a $1$ sería:
 
@@ -299,6 +299,19 @@ Un multiplexor de $2$ a $1$ sería:
 
 Si $S = 0 \implies Y = I_0$\
 Si $S = 1 \implies Y = I_1$
+
+**Ejemplo:** tabla de verdad de multiplexor de 4 entradas
+
+<div style={{ margin: "0 auto", width: "fit-content", display: 'flex', flexDirection: 'row', gap: '10px' }}>
+  <div>
+  | $S_1$ | $S_0$ | $Y$ |
+  |:-:|:-:|:-:|
+  | $0$ | $0$ | $I_0$ |
+  | $0$ | $1$ | $I_1$ |
+  | $1$ | $0$ | $I_2$ |
+  | $1$ | $1$ | $I_3$ |
+  </div>
+</div>
 
 ### Buffer triestado 
 
