@@ -110,9 +110,18 @@ Para mantener ese orden solo un bit cambia por columna. El cuadrado $m_5$, por e
 
 <Image src="/organizacioncomputador/mapak3.png" alt="Mapa 3" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
 
-Observando el mapa, sumando los elementos que contienen $1$'s, se obtiene: $f(x, y, z) = x'y + xy'$
+Al igual que con una tabla de verdad, podemos expresar la función como suma de minitérminos o producto de maxitérminos. Para ello agrupamos en forma de cuadrado/rectángulo los $1$'s' o $0$'s, respectivamente.
 
-Dependiendo el caso, podemos marcar una celda con una $X$ si su valor es indiferente. 
+Una vez agrupados, tenemos una **expresión canónica** de la función, que se puede simplificar. En este ejemplo si sumamos minitérminos no es necesario reducir.
+
+```math 
+\begin{align}
+f(x, y, z) &= xy' + x'y \\
+f(x, y, z) &= (x'+y'+z')(x'+y'+z)(x+y+z)(x+y+z')
+\end{align}
+```
+
+Dependiendo el caso, podemos marcar una celda con una $X$ si su valor es indiferente. Dependiendo los valores del mapa, puede resultar más sencillo agrupar $0$ o $1$.
 
 ### Funciones pares e impares 
 
@@ -154,4 +163,4 @@ Esto funciona como una detección de bits erróneos en un mensaje, necesitando u
 |  $\ldots$  |  $\ldots$  |  $\ldots$  |   $\ldots$  |   $\ldots$  |
 </div>
 
-Cuando el verificador es $1$, se sabe que hay un error en el mensaje.
+Cuando el verificador es $1$, se sabe que hay un error en el mensaje (**activo por alto**).

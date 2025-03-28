@@ -4,6 +4,16 @@ import Image from 'next/image'
 
 En este apartado se incluyen algunos módulos básicos de circuitos combinacionales:
 
+## PLA (_Programmable Logic Array_)
+
+> Un PLA es un circuito integrado que contiene una matriz de compuertas AND y OR que pueden ser programadas.
+
+<br />
+
+<Image src="/organizacioncomputador/PLA.png" alt="PLA" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+ 
+(Los círculos negros representan aquellos valores que sí están conectados a la compuerta correspondiente) 
+
 ## Salida código exceso-3
 
 La salida código exceso-3 es un código de 4 bits que se obtiene sumando 3 al número decimal que se quiere codificar.\
@@ -132,7 +142,7 @@ Si tomamos por ejemplo, la suma de los números de cuatro bits $A, B$ debemos su
 
 <Image src="/organizacioncomputador/sumadorbinario.png" alt="Sumador binario" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
 
-Uno de los problemas que radican en este sumadro es que, al ser un proceso en cascada, su velocidad depende del cálculo de los acarreos. 
+Uno de los problemas que radican en este sumador es que, al ser un proceso en cascada, su velocidad depende del cálculo de los acarreos. 
 
 La forma de resolver este problema es paralelizando el proceso, obteniendo los acarreos anticipadamente.
 
@@ -207,11 +217,75 @@ Aplicado a un diagrama lógico:
 
 > Los decodificadores son circuitos combinacionales que dadas $n$ variables de entrada generan $2^n$ salidas (minitérminos).
 
-Este sería un diagrama lógico de un decodificador de $3$ entradas $x, y, z$
+Este sería un diagrama lógico de un decodificador de $3$ a $8$. 
 
 <br />
 
 <Image src="/organizacioncomputador/decodificadores.png" alt="Decodificador" width={500} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Los decodificadores pueden tener una entrada de habilitación ($E$) la cual determina si el decodificador funciona o no.
+
+$E=1 \implies$ decodificador activo por alto funciona y activo por bajo no funciona.\
+$E=0 \implies$ decodificador activo por bajo funciona y activo por alto no funciona. 
+
+**Ejemplo:**
+
+<br />
+
+<div style={{ display: "flex", flexDirection: "row", margin: "0 auto", width: "100%", justifyContent: "center" }}>
+  <Image src="/organizacioncomputador/decodificadoraltoniv.png" alt="Decodificador" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+  <Image src="/organizacioncomputador/decodificadorbajoniv.png" alt="Decodificador" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+</div>
+
+La tabla de verdad del primer decodificador (activo por alto) sería:
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content", display: 'flex', flexDirection: 'row', gap: '10px' }}>
+  <div>
+  | $E$ | $A_1$ | $A_0$ | 
+  |:-:|:-:|:-:|
+  | $1$ | $0$ | $0$ | 
+  | $1$ | $0$ | $1$ |
+  | $1$ | $1$ | $0$ |
+  | $1$ | $1$ | $1$ |
+  | $0$ | $X$ | $X$ |
+  </div>
+  <div> 
+  | $Q_3$ | $Q_2$ | $Q_1$ | $Q_0$ |
+  |:-:|:-:|:-:|:-:|
+  | $0$ | $0$ | $0$ | $1$ |
+  | $0$ | $0$ | $1$ | $0$ |
+  | $0$ | $1$ | $0$ | $0$ |
+  | $1$ | $0$ | $0$ | $0$ |
+  | $0$ | $0$ | $0$ | $0$ |
+  </div>
+</div>
+
+La tabla de verdad del segundo decodificador (activo por bajo) sería:
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content", display: 'flex', flexDirection: 'row', gap: '10px' }}>
+  <div>
+  | $E$ | $A_1$ | $A_0$ | 
+  |:-:|:-:|:-:|
+  | $0$ | $0$ | $0$ | 
+  | $0$ | $0$ | $1$ |
+  | $0$ | $1$ | $0$ |
+  | $0$ | $1$ | $1$ |
+  | $1$ | $X$ | $X$ |
+  </div>
+  <div> 
+  | $Q_3$ | $Q_2$ | $Q_1$ | $Q_0$ |
+  |:-:|:-:|:-:|:-:|
+  | $1$ | $1$ | $1$ | $0$ |
+  | $1$ | $1$ | $0$ | $1$ |
+  | $1$ | $0$ | $1$ | $1$ |
+  | $0$ | $1$ | $1$ | $1$ |
+  | $1$ | $1$ | $1$ | $1$ |
+  </div>
+</div>
 
 ## Multiplexores 
 
