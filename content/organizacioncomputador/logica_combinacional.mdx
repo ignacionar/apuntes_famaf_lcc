@@ -4,16 +4,6 @@ import Image from 'next/image'
 
 En este apartado se incluyen algunos módulos básicos de circuitos combinacionales:
 
-## PLA (_Programmable Logic Array_)
-
-> Un PLA es un circuito integrado que contiene una matriz de compuertas AND y OR que pueden ser programadas.
-
-<br />
-
-<Image src="/organizacioncomputador/PLA.png" alt="PLA" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
- 
-(Los círculos negros representan aquellos valores que sí están conectados a la compuerta correspondiente) 
-
 ## Salida código exceso-3
 
 La salida código exceso-3 es un código de 4 bits que se obtiene sumando 3 al número decimal que se quiere codificar.\
@@ -328,3 +318,24 @@ En otras palabras, dependiendo de la entrada de control la salida puede estar o 
 
 Los multiplexores también pueden ser creados a partir de buffers triestado.
 
+## PLAs (_Programmable Logic Arrays_)
+
+> Un PLA es un circuito integrado que contiene una matriz de compuertas AND y OR que pueden ser programadas.
+
+<br />
+
+<Image src="/organizacioncomputador/PLA.png" alt="PLA" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+ 
+En lugar de poner distintas lineas correspondientes a varias entradas en una puerta AND, se pone una sola línea que y se marcan los valores que ingresen a ella (en la imagen, los círculos negros representan aquellos valores que sí están conectados a la compuerta correspondiente) 
+
+## ROMs (_Read-Only Memories_)
+
+> Una ROM o memoria de solo lectura es un circuito integrado que almacena datos binarios de forma permanente. A diferencia de las PROMs (_Programmable Read-Only Memories_), las ROMs no pueden ser programadas por el usuario, ya que los datos son grabados durante el proceso de fabricación.
+
+Un diagrama de bloque de una ROM sería:
+
+<br />
+
+<Image src="/organizacioncomputador/rom.png" alt="rom" width={0} height={0} layout='responsive' style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+En general una ROM de $2^k \times n$ se compone de un decodificador interno de $k \times 2^k$ y $n$ compuertas OR (conectadas a cada salida del decodificador)   
