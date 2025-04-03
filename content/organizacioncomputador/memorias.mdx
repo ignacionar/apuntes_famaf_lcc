@@ -1,0 +1,137 @@
+import Image from "next/image";
+
+# Memorias 
+
+> Las memorias son dispositivos de almacenamiento que permiten guardar y recuperar datos. Existen diferentes tipos de memorias, cada una con sus características y usos específicos. Todos los sistemas de computación la necesitan para funcionar. 
+
+Sus funciones principales son:
+
+- **Procesar** datos (mediante procesadores).
+- **Almacenar** datos (retención de datos).
+- **Comunicar** datos (transferencia de datos entre procesadores y memorias).
+
+## Bus
+
+> El procesador y la memoria se comunican a través de un bus, que es un conjunto de cables que transportan datos, direcciones y señales de control. 
+
+La estructura del bus es en tres conjuntos de líneas: 
+
+- **Señales del control** (para saber si se está leyendo o escribiendo).
+- **Direcciones** (dónde)
+- **Datos** (qué)
+
+## Clasificación de semiconductores 
+
+> Un sistema de memoria con semiconductores es aquel que mantiene la información manipulando cargas eléctricas.
+
+Podemos clasicar las memorias según su capacidad de lectura y escritura:
+
+### _Read-Write Memory_
+
+Las memorias de lectura y escritura son volátiles, lo que significa que pierden su contenido cuando se apaga la energía.
+
+Estas pueden diferenciarse según su tipo de acceso: aleatorio o no aleatorio. La primera permite acceder a cualquier ubicación de memoria en un tiempo constante y la segunda requiere recorrer una secuencia para acceder a una ubicación específica.
+
+Tanto SRAM como DRAM son ejemplos de memoria volátil. La SRAM es más rápida y costosa, mientras que la DRAM es más lenta y económica. La SRAM se utiliza en cachés de procesadores, mientras que la DRAM se utiliza en la memoria principal del sistema (RAM).  
+
+Los _shift registers_ o cache son memorias no volátiles.
+
+### _Non-Volatile Read-Write Memory_
+
+Un ejemplo de memoria no volátil es la memoria flash, que se utiliza en dispositivos como pendrives y tarjetas de memoria. Esta memoria retiene los datos incluso cuando no hay energía eléctrica.
+
+### _Read-Only Memory_
+
+Estas pueden diferenciarse entre ROMs y PROMs, la primera es una memoria de solo lectura que no se puede modificar, mientras que la segunda es una memoria programable que se puede escribir una sola vez.
+
+## Organización de la memoria RAM 
+
+> La memoria se compone por palabras (_words_) que son conjuntos de bits y la unidad de acceso a un sistema de memoria. Cada una de estas palabras tiene una dirección única que permite acceder a ella.
+
+Cada bit se guarda en una celda de memoria. Una word está compuesta por $n$ celdas de memoria, a través de la dirección de la celda se accede a la palabra.
+
+La capacidad de almacenar palabras es igual a la capacidad de direccionamiento de $2^n$ bits.
+
+**Ejemplo:** 1Kword x 8bits 
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content", display: 'flex', flexDirection: 'row', gap: '10px' }}>
+  <div>
+    <p style={{ textAlign: 'center', fontWeight: "bold", fontSize: "16px" }}>Dirección de memoria</p>
+    | Binario | Decimal |
+    | --- | --- |
+    | $0000000000$ | $0$ |
+    | $0000000001$ | $1$ |
+    | $0000000010$ | $2$ |
+    | $\ldots$ | $\ldots$ | 
+    | $1111111111$ | $1023$ |
+  </div>
+
+  <div>
+    <p style={{ textAlign: 'center', fontWeight: "bold", fontSize: "16px" }}>Word de $4$ bits</p>
+    | $C_1$ | $C_2$ | $C_3$ | $C_4$ |
+    | --- | --- | --- | --- |
+    | $0$ | $0$ | $0$ | $0$ |
+    | $0$ | $0$ | $0$ | $1$ |
+    | $0$ | $1$ | $1$ | $0$ |
+    | $\ldots$ | $\ldots$ | $\ldots$ | $\ldots$ |
+    | $0$ | $0$ | $1$ | $1$ | 
+  </div>
+</div>
+
+Si elegimos la señal de selección $0000000010$ tenemos la palabra $0110$.
+
+Al tener $2^n = k$ direcciones posibles, podemos usar un decodificador para seleccionar más eficientemente la dirección de memoria. Reduciendo así a $\log _2 k$ líneas de selección.
+
+La siguiente tabla muestra la capacidad de direccionamiento y de words posibles: 
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }} >
+| Direccionamiento $2^n$ | Capacidad de words | Símbolo [Prefijo] |
+| --- | --- | --- |
+| $2^{10}$ | $1024$ words | 1Kw [Kilo] |
+| $2^{20}$ | $1024$ Kw | 1Mw [Mega] |
+| $2^{30}$ | $1024$ Mw | 1Gw [Giga] |
+| $2^{40}$ | $1024$ Gw | 1Tw [Tera] |
+| $2^{50}$ | $1024$ Tw | 1Pw [Peta] |
+| $2^{60}$ | $1024$ Pw | 1Xw [Exa] |
+| $\ldots$ | $\ldots$ | $\ldots$ |
+</div>
+
+## Direccionamiento de memoria
+
+> El direccionamiento de memoria es el proceso de acceder a una ubicación específica en la memoria. 
+
+### Conexión en paralelo 
+
+La conexión en paralelo permite aumentar el ancho de la palabra.\
+Si necesitamos un chip de 1Kword x 16bits podemos usar dos chips de 1Kword x 8bits y conectarlos en paralelo.
+
+<br />
+
+<Image src="/organizacioncomputador/conexionparalela.png" alt="conexionparalela" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Analizando por partes el diagrama: 
+
+- $A[0..9]$ son la cantidad de bits de la dirección de memoria.
+- $ADDRs$ son las líneas de dirección de memoria. Se pasa el mismo valor a ambos chips. 
+- $R'/W$ es la señal de lectura/escritura. Si es $0$ se lee y si es $1$ se escribe. 
+- $D[0..7], \; D[8..15]$ son los datos/words utilizados. Conformando un bus de $16$ bits.
+- $CS$ o _chip select_ es la señal de selección del chip (en este caso, activo por bajo)
+
+### Conexión en serie 
+
+La conexión en serie permite aumentar la capacidad de almacenamiento de words.\
+Si necesitamos un chip de 4Kword x 8bits podemos usar cuatro chips de 1Kword x 8bits y juntarlos en el bus de datos.
+
+<br />
+
+<Image src="/organizacioncomputador/conexionserie.png" alt="conexionserie" width={500} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Al tener un total de 4Kwords ($4096$ words), necesitamos $2^{12}$ direcciones. Podemos utilizar los primeros dos bits más significativos para seleccionar el chip y los otros diez bits para seleccionar la palabra dentro del chip.
+
+- $A[0..9]$ son la cantidad de bits de la dirección de memoria.
+- $A[10..11]$ son los bits de selección del chip.
+
