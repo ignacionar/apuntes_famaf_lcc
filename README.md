@@ -1,6 +1,6 @@
 # Mis apuntes digitales - FAMAF
 
-En este repositorio guardamos nuestros apuntes de la Licenciatura en Ciencias de la Computación (FAMAF).
+En este repositorio se guardan mis apuntes de FAMAF.
 
 Dentro de los apuntes de cada materia se encuentran los temas abarcados, como así también ejercicios y formas de resolver los mismos.
 

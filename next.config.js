@@ -6,7 +6,11 @@ const withNextra = nextra({
     renderer: 'mathjax',
     options: {
       config: {
+        loader: {
+          load: ['[tex]/color', '[tex]/cancel'] 
+        },
         tex: {
+          packages: { '[+]': ['color', 'cancel'] },
           macros: {
             NN: '\\mathbb{N}',
             RR: '\\mathbb{R}',
@@ -63,7 +67,7 @@ const withNextra = nextra({
     }
   },
 })
- 
+
 export default withNextra({
   reactStrictMode: false,
 })
