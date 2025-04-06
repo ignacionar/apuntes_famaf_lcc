@@ -1,6 +1,24 @@
+import Image from "next/image";
+
 # Datos y Modelos
 
 ## Medidas de tendencia central 
+
+Esta imagen muestra las tres medidas definidas abajo (mismo orden):
+
+<br />
+
+<Image src="/analisisvisualizaciondatos/medidas.png" alt="medidas" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+### Moda
+
+> La **moda** es el dato con **mayor frecuencia, el más repetido**
+
+### Mediana 
+
+> La **mediana** es el **valor del medio** de las realizaciones ordenadas ($n$).\
+Si $n$ es impar, la mediana es el valor central: $x_{(n+1)/2}$\
+Si $n$ es par, es el promedio de los dos valores centrales: $(x_{n/2}+x_{n/2+1})/2$
 
 ### Media muestral
 
@@ -11,19 +29,32 @@ La **media muestral** (aritmética) o promedio se calcula como:
 \overline{x} = \frac{1}{N} \; \displaystyle{\sum_i^n} \; x_i
 ```
 
-### Mediana 
-
-> La **mediana** es el **valor del medio** de las realizaciones ordenadas ($n$).\
-Si $n$ es impar, la mediana es el valor central: $x_{(n+1)/2}$\
-Si $n$ es par, es el promedio de los dos valores centrales: $(x_{n/2}+x_{n/2+1})/2$
- 
-### Moda
-
-> La **moda** es el dato con **mayor frecuencia, el más repetido**
-
-## Medidas de posición 
-
-### Percentil
+## Medidas de posición
 
 > El **percentil** $= k$ es el valor $x_i$ tal que $k\%$ de los valores de la muestra son menores a $x_i$.\
-El percentil $\;50$ es la mediana.
+El percentil $\;50$ es la mediana y el segundo cuartil $Q_2$ 
+
+## Variable Binomial 
+
+> Es la $\mathbf{v.a.}\;X$ discreta que modela la cantidad de éxitos en una $n$-upla:
+
+```math 
+P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}, \; k = 0,1,\ldots,n
+```
+
+Cuando una $\mathbf{v.a.}$ discreta $X$ sigue una distribución binomial, se denota como $X \sim \textnormal{B} (n,p)$ donde $n$ es la cantidad de ensayos y $p$ la probabilidad de éxito.
+
+## Función de distribución acumulada 
+
+> La función de distribución acumulada de la $\mathbf{v.a.}\; X$ es la función $F : R \to [0,1]$ definida por:
+
+```math 
+F(t) = P(X \leq t) = P(\{\omega \mid X(\omega) \leq t \})
+```
+
+Nos muestra la probabilidad acumulada de que $X \leq t$ 
+
+### Función de densidad
+
+> La densidad discreta es la función/probabilidad puntual $f(t)=P(X=t)$\
+La densidad continua es la función $f(t)=F'(t)$ donde $F(t)$ es la función de distribución acumulada.
