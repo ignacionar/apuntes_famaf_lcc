@@ -35,7 +35,7 @@ export default async function RootLayout({ children }) {
   
   const navbar = (
     <Navbar
-      logo={<span>Apuntes - FAMAF | LCC</span>}
+      logo={<span>Apuntes - FAMAF</span>}
       projectLink={'https://github.com/ignacionar/apuntes_famaf_lcc'}
     />
   )

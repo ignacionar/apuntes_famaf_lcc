@@ -1,0 +1,98 @@
+# Probabilidad
+
+## Variable Aleatoria 
+
+> Una **variable aleatoria** $(\mathbf{v.a.})\;X$ es una función $X : \Omega \to R_x$\
+donde $\; \Omega$ es el universo de posibilidades y $R_x$ (rango) es un conjunto de valores que toma la variable.
+
+$\Omega$ es un conjunto de estados posibles, podría pensarse como, por ejemplo, una población a estudiar:
+
+```math 
+\Omega = \{ \; \omega \mid \omega \; \textnormal{es una persona que vive en Argentina} \; \}
+```
+
+Puede tener más de una definición:
+
+```math 
+\Omega = \{ \; \omega \mid \omega \; \textnormal{es una persona que vive en Argentina y es mayor de edad} \; \}
+```
+
+El rango $R_x$ puede ser igual a $\NN$ o $\RR$
+
+***
+
+**Ejemplo:** $X \; \mathbf{v.a.}$ edad
+
+$X : \Omega \to R_x$ 
+
+$\omega$ = persona que vive en Argentina
+
+$X(\omega) = 40$
+
+Denominamos $X(\omega)$ como **realización** de la $\mathbf{v.a.} \; X$ 
+
+### Tipos de variables aleatorias
+
+> Las $\mathbf{v.a.}$ pueden ser de distinto tipo según los valores presentes en el Rango y su interpretación
+
+- Categóricas
+- Ordinales
+- Numéricas
+<div style={{ marginLeft: "1.5em"}}>
+1. Continuas  
+2. Discretas (conjunto finito o infinito numerable de valores posibles) 
+</div>
+
+## Interpretación Axiomática de Probabilidad
+
+> $P$ es una **medida de probabilidad** en el **espacio** $\; \Omega$ si para cada subconjunto $A$ de $\;\Omega, P(A)$ es un número tal que:
+
+- $0 \leq P(A) \leq 1$
+- $P(\Omega) = 1$
+- $P(A \cup B) = P(A) + P(B)$ , para $A, B$ disjuntos (o excluyente)
+- $P(\cup_i A_i) = \sum_i \; P(A_i)$ para $A_1, A_2, \ldots$ disjuntos
+
+La forma de calcularla es la siguiente:
+
+Si $\Omega$ tiene $k$ elementos equiprobables (es decir, si $\omega_i$ es un elemento de $\;\Omega, \; P(\{\omega_i\}) = 1/k$)\
+Si el conjunto $A$ son los elementos en los que el fenómeno ocurre.\
+Entonces la probabilidad de un conjunto $A \subset \Omega$ es la proporción $A$ en $\Omega$
+
+```math 
+P(\{\omega_i \}) = 1/k \implies |A|/k
+```
+
+### Probabilidad conjunta
+
+> La **probabilidad conjunta** de que ocurran eventos **al mismo tiempo** se modela con la intersección de los conjuntos:
+
+```math
+P(A \cap B)
+```
+
+### Probabilidad condicional 
+
+> La **probabilidad condicional** de que ocurra un evento **dado que ocurrió otro** se denota $P(A|B)$ y se calcula:
+
+```math 
+P(B) \neq 0 \implies P(A|B) = \frac{P(A \cap B)}{P(B)}
+```
+
+### Idependencia de conjuntos 
+
+> $A, B$ se dicen conjuntos independientes si:
+
+```math 
+\begin{align}
+&P(A \cap B) = P(A)P(B) \\
+&P(B) \neq 0 \implies P(A|B) = P(A) 
+\end{align}
+```
+
+### Teorema de Bayes 
+
+> Dados los conjuntos $A, B$ se cumple que:
+
+```math 
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+```

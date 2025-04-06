@@ -5,6 +5,14 @@ export default {
   acerca_del_proyecto: {
     title: <p>❓ Acerca del Proyecto</p>
   },
+  '-': {
+    type: 'separator',
+    title: (
+      <div style={{ backgroundColor: "#d4fff1	", textAlign: "center", color: "oklch(.21 .034 264.665)", padding: "5px" }}>
+        💻 Lic. en Cs. de la Computación
+      </div>
+    )
+  },
   introalgoritmos: "Introducción a los Algoritmos",
   analisis1: "Análisis Matemático 1",
   discreta1: "Matemática Discreta 1",
@@ -13,5 +21,14 @@ export default {
   algebra: "Álgebra",
   algoritmos2: "Algoritmos y Estructuras de Datos 2",
   analisisnumerico: "Análisis Numérico",
-  organizacioncomputador: "Organización del Computador"
+  organizacioncomputador: "Organización del Computador",
+  '--': {
+    type: 'separator',
+    title: (
+      <div style={{ backgroundColor: "#ccffc7", textAlign: "center", color: "oklch(.21 .034 264.665)", padding: '5px' }}>
+        📊 Dipl. en Cs. de Datos, Aprendizaje Automático y sus Aplicaciones
+      </div>
+    )
+  },
+  analisisvisualizaciondatos: "Análisis y Visualización de Datos"
 }
