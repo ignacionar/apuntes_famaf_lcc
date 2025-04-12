@@ -1,0 +1,110 @@
+import Image from 'next/image'
+
+# Lógica Secuencial Sincrónica
+
+A diferencia de los circuitos combinacionales, los circuitos secuenciales nos permiten la memorización de estados.
+
+Se utiliza un circuito combinacional con entradas y salidas, pero con la capacidad de detectar el estado actual y calcular el estado siguiente (a través de elementos de memoria)
+
+<br />
+
+<Image src="/organizacioncomputador/circuitosecuencial1.png" alt="circuitosecuencial" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Un elemento de memoria encargado de almacenar el estado del sistema es el **flip-flop**. Este se actualiza al llegar a un pulso de reloj:
+
+<br />
+
+<Image src="/organizacioncomputador/circuitosecuencial2.png" alt="circuitosecuencial" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+## Latchs SR
+
+> Un Latch SR es un circuito secuencial que almacena un bit. Es compuesto por dos compuertas NOR acopladas en cruz, con entradas $S, R$ (**_set_, _reset_** respectivamente).
+
+<br />
+
+<Image src="/organizacioncomputador/latchsr.png" alt="latchsr" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+$S, R$ no deben ser iguales $1$ al mismo tiempo, el latch detecta el nivel de las señales y dicho caso es un estado inválido. 
+
+Siguiendo la tabla:\
+Si $Q = 1, \; Q' = 0 \implies$ tiene **estado establecido**.\
+Si $Q=0, \; Q'=1 \implies$ tiene **estado reestablecido**.
+
+Es posible hacer un Latch S'R' (activo por bajo) mediante compuertas NAND.
+
+### Latch D 
+
+Una forma de garantizar que $Q,Q'$ no sean iguales a $1$ a la vez, es mediante el siguiente Latch:
+
+<br />
+
+<Image src="/organizacioncomputador/latchd.png" alt="latchd" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Donde $D, C$ corresponden a **_data_, _clock_**, respectivamente.
+
+## Flip-Flops 
+
+> El Flip-Flop es un circuito secuencial que puede capturar el valor de la entrada en un momento específico (en el flanco de subida o bajada del reloj).
+
+Una de sus implementaciones en con el Flip-Flop D, compuesto dos Latchs D (amo - esclavo) capturando el valor del reloj ($CLK$) 
+
+<br />
+
+<Image src="/organizacioncomputador/flipflop.png" alt="flipflop" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+La única cosa faltante en este flip-flop es el reseteo. Lo cual puede está implementado en un Flip-Flop con reset asíncrono.
+
+<br />
+
+<Image src="/organizacioncomputador/flipflopr.png" alt="flipflopreset" width={400} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+Con la tabla de verdad:
+
+<div style={{ margin: "0 auto", width: "fit-content", display: 'flex', flexDirection: 'row', gap: '10px' }}>
+  <div>
+    | $R$ | $C$ | $D$ |  
+    |:---:|:---:|:---:|
+    |  $0$  |  $X$  |  $X$  |
+    |  $1$  |  $\uparrow$  |  $0$  |
+    |  $1$  |  $\uparrow$  |  $1$  |
+  </div>
+  <div>
+    | $Q$ | $Q'$ |  
+    |:---:|:----:|
+    |  $0$  |  $1$   | 
+    |  $0$  |  $1$   | 
+    |  $1$  |  $0$   | 
+  </div>
+</div>
+
+## Registros 
+
+> Consisten en un grupo de flip-flops y pueden contener, además, compuertas lógicas (para transicionar la información entre los flip-flops)\
+Un registro de $n$ bits consiste en un grupo de $n$ flip-flops que almacenan $n$ bits.
+
+**Ejemplo 1:** Registro de entrada y salida en paralelo de $4$ bits.
+
+<br />
+
+<Image src="/organizacioncomputador/shiftregister1.png" alt="shiftregister1" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+***
+
+**Ejemplo 2:** Registro de entrada y salida en serie de $4$ bits (unidireccional).
+
+<br />
+
+<Image src="/organizacioncomputador/shiftregister2.png" alt="shiftregister2" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
+
+***
+
+**Ejemplo 3:** Registro de $4$ bits con entradas y salidas de datos en serie y paralelo, con dos señales de control $C_1, C_2$ tales que:
+
+- $C_1C_0 = 00 \implies$ todas las salidas del registro son $0$ (reset)
+- $C_1C_0 = 01 \implies$ el registro se desplaza un bit a la derecha
+- $C_1C_0 = 10 \implies$ el registro mantiene la información
+- $C_1C_0 = 11 \implies$ el registro carga información por su entrada en paralelo
+
+<br />
+
+<Image src="/organizacioncomputador/shiftregister3.png" alt="shiftregister3" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
