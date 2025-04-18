@@ -101,6 +101,35 @@ Planteada la recurrencia tenemos que:
 - $g(n) = n^3 \implies k = 3$
 - $8 > 2^3 \implies$ el orden de $r(n)$ es $n^3 \; \log \; n$
 
+### Algoritmo de búsqueda binaria 
+
+> La búsqueda binaria es un algoritmo para encontrar un elemento en una lista ordenada. Dividiendo repetidamente la lista en mitades y comparando el elemento buscado con el elemento del medio.
+
+```math 
+\begin{align}
+&\\
+&\{  1 \leq lft \leq n+1 \; \land 0 \leq rgt \leq n \; \land \; a \; \textnormal{está ordenado} \} \\
+&\fun \; binary\_search\_rec(a: \array[1..n] \; \of \; T , \; x: T, \; lft, rgt: \nat) \; \ret \; i : \nat \\
+&\quad \var \; mid: \nat \\
+&\quad \if \; lft > rgt \; \to \; i := 0 \\
+&\quad \quad lft \leq rgt \to mid := (lft + rgt) \; \textnormal{div} \; 2 \\
+&\quad \quad \quad \if \; x < a[mid] \to i := binary\_search\_rec(a, x, lft, mid - 1) \\
+&\quad \quad \quad \quad x = a[mid] \to i := mid \\
+&\quad \quad \quad \quad x > a[mid] \to i := binary\_search\_rec(a, x, mid + 1, rgt) \\
+&\quad \quad \quad \fi \\
+&\quad \fi \\
+&\bfend \; \fun \\
+&\{ i = 0 \implies x \; \textnormal{no está en} \; a[lft,rgt] \; \land \; (i \neq 0 \implies x = a[i]) \} \\
+&\\ 
+&\\
+&\{ n \geq 0 \} \\
+&\fun \; binary\_search(a: \array[1..n] \; \of \; T , \; x: T) \; \ret \; i : \nat \\
+&\quad i := binary\_search\_rec(a, x, 1, n) \\
+&\bfend \; \fun \\
+&\{ i = 0 \implies x \; \textnormal{no está en} \; a \; \land \; (i \neq 0 \implies x = a[i]) \}
+\end{align}
+```
+
 ## Jerarquía de funciones 
 
 > Es posible ordenar las funciones de acuerdo a su crecimiento. Se denota $f(n) \sqsubset g(n)$ si $g$ crece más rápido que $f$, y $f(n) \simeq g(n)$ si crecen al mismo ritmo.
