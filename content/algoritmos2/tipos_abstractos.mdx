@@ -84,7 +84,7 @@ Su implementación:
 &\quad\{- \;\; \textnormal{Elimina los primeros} \; n \; \textnormal{de} l \;\; -\} \\
 &\\
 &\quad \fun \; copy\_list(l1 : List \; \of \; T) \; \ret \; l2 : List \; \of \; T \\ 
-&\quad\{- \;\; \textnormal{Copia los elementos de} \; l1 \; \textnormal{en la nueva lista} l2 \;\; -\} \\
+&\quad\{- \;\; \textnormal{Copia los elementos de} \; l1 \; \textnormal{en la nueva lista} \; l2 \;\; -\} \\
 &\\
 \end{align}
 ```
@@ -178,14 +178,8 @@ En el código tenemos:
 &\quad p \to elem := e \\ 
 &\quad p \to next := l \\
 &\quad l := p \\
-&\bfend \; \proc 
-\end{align}
-```
-
-Algunas operaciones como $is\_empty, \; head$ son más fáciles de implementar:
-
-```math 
-\begin{align}
+&\bfend \; \proc \\ 
+&\\
 &\fun \; is\_empty(l : List \; \of \; T) \; \ret \; b : \bool \\
 &\quad b := (l = \null) \\
 &\bfend \; \fun \\
@@ -194,8 +188,44 @@ Algunas operaciones como $is\_empty, \; head$ son más fáciles de implementar:
 &\fun \; head(l : List \; \of \; T) \; \ret \; e : T \\
 &\quad e := (l \to elem) \\
 &\bfend \; \fun \\
+&\\
+&\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
+&\proc \; tail(\inout \; l : List \; \of \; T) \\
+&\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
+&\quad p := l \\
+&\quad l := l \to next \\
+&\quad free(p) \\
+&\bfend \; \proc \\
+&\\
+&\proc \; addr(\inout \; l : List \; \of \; T, \; \bfin e : T) \\
+&\quad var \; p,q : \pointer \; \too \; (Node \; \of \; T) \\
+&\quad alloc(p) \\
+&\quad q \to elem := e \\
+&\quad q \to next := \null \\
+&\quad \if \; \neg is\_empty(l) \; \then \\
+&\quad\quad p := l \\
+&\quad\quad \while \; (p \to next \neq \null) \; \do \\
+&\quad\quad\quad p := p \to next \\
+&\quad\quad \od \\
+&\quad\quad p \to next := q \\
+&\quad \else \\
+&\quad\quad l := q \\
+&\quad \fi \\
+&\bfend \; \proc \\
+&\\
+&\fun \; length(l : List \; \of \; T) \; \ret \; n : \nat \\
+&\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
+&\quad n := 0 \\
+&\quad p := l \\
+&\quad \while (p \neq \null) \; \do \\
+&\quad \quad n := n + 1 \\
+&\quad \quad p := p \to next \\
+&\quad \od \\
+&\bfend \; \fun \\
 \end{align}
 ```
+
+{/* TODO: Resto de implementaciones */}
 
 ## Contador 
 
@@ -272,7 +302,7 @@ Todas las operaciones son $\bigO(1)$ (constantes).
 > Una pila es una colección de datos de mismo tipo **inicializada en vacía**. Se pueden **apilar** y **desapilar** elementos, **comprobar** si hay primer elemento o **examinarlo**.\
 La pila sigue el principio **LIFO** (Last In, First Out)
 
-Su especificación es: 
+### Especificación de pila
 
 ```math 
 \begin{align}
@@ -300,6 +330,55 @@ Su especificación es:
 &\quad \proc \; pop(\inout \; s : Stack \; \of \; T) \\
 &\quad\{- \;\; \textnormal{Elimina el elemento en el tope de} \; s \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_stack(s) \;\; -\} \\
+&\\
+&\quad \fun \; is\_full(s : Stack) \; \ret \; b : \bool \\ 
+&\quad\{- \;\; \textnormal{Devuelve} \; True \; \textnormal{si} \; s \; \textnormal{está llena} \;\; -\} \\
+\end{align}
+```
+
+### Implementación de pila 
+
+Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en este caso se usará un arreglo: 
+
+```math
+\begin{align}
+&\impt \; Stack \; \of \; T \; \where \\
+&\\
+&\type \; Stack \; \of \; T = \tuple \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad elems: \array[1..N] \; \of \; T \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad size: \nat \\
+&\quad\quad\quad\quad\quad\quad\quad\quad \;\; \bfend \; \tuple \\
+&\\
+&\proc \; empty(\out \; s: Stack) \\
+&\quad s.size := 0 \\
+&\bfend \; \proc \\
+&\\
+&\proc \; push(\bfin \; e : T, \; \inout \; s : Stack) \\
+&\quad s.size := s.size + 1 \\
+&\quad s.elems[s.size] := e \\
+&\bfend \; \proc \\
+&\\
+&\fun \; top(s: Stack) \; \ret \; e : T \\
+&\quad e := s.elems[s.size] \\
+&\bfend \; \fun \\
+&\\
+&\proc \; pop(\inout \; s : Stack) \\
+&\quad s.size := s.size - 1 \\
+&\bfend \; \proc \\
+&\\
+&\fun \; is\_empty\_stack(s : Stack) \; \ret \; b : \bool \\
+&\quad b := (s.size = 0) \\
+&\bfend \; \fun \\
+&\\
+&\fun \; is\_full(s : Stack) \; \ret \; b : \bool \\ 
+&\quad b := (s.size = N) \\
+&\bfend \; \fun \\
+&\\
+&\proc \; destroy(\inout \; s : Stack) \\
+&\quad \while \; (\neg is\_empty\_stack(s)) \; \do \\
+&\quad\quad pop(s) \\
+&\quad \od \\
+&\bfend \; \proc \\
 \end{align}
 ```
 
@@ -308,7 +387,7 @@ Su especificación es:
 > Una cola es una colección de datos de mismo tipo **inicializada en vacía**. Se puede **encolar** y **decolar** elementos, **comprobar si es vacía**, o **examinar** el primer elemento.\
 La cola sigue el principio **FIFO** (First In, First Out)
 
-Su especificación es: 
+### Especificación de cola
 
 ```math
 \begin{align}
@@ -339,6 +418,55 @@ Su especificación es:
 \end{align}
 ```
 
+### Implementación de cola 
+
+Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en este caso se usará un arreglo: 
+
+```math
+\begin{align}
+&\impt \; Queue \; \of \; T \; \where \\
+&\\
+&\type \; Queue \; \of \; T = \tuple \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad elems: \array[0..N-1] \; \of \; T \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad fst: \nat \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad size: \nat \\
+&\quad\quad\quad\quad\quad\quad\quad\quad \;\;\; \bfend \; \tuple \\
+&\\
+&\proc \; empty(\out \; q: Queue) \\
+&\quad q.fst := 0 \\
+&\quad q.size := 0 \\
+&\bfend \; \proc \\
+&\\
+&\proc \; enqueue(\inout \; q : Queue, \; \bfin \;e: elem) \\
+&\quad q.elems[(q.fst + q.size) \; \textnormal{ mod } \; N] := e \\
+&\quad q.size := q.size + 1 \\
+&\bfend \; \proc \\
+&\\ 
+&\fun \; first(q : Queue) \; \ret \; e : T \\ 
+&\quad e := q.elems[q.fst] \\
+&\bfend \; \fun \\
+&\\
+&\proc \; dequeue(\inout \; q : Queue) \\
+&\quad q.size := q.size - 1 \\
+&\quad q.fst := (q.fst + 1) \; \textnormal{ mod } \; N \\
+&\bfend \; \proc \\
+&\\ 
+&\fun \; is\_empty\_queue(q : Queue) \; \ret \; b : \bool \\
+&\quad b := (q.size = 0) \\
+&\bfend \; \fun \\
+&\\
+&\fun \; is\_full(q : Queue) \; \ret \; b : \bool \\
+&\quad b := (q.size = N) \\
+&\bfend \; \fun \\
+&\\
+&\proc \; destroy(\inout \; q : Queue) \\
+&\quad \while \; (\neg is\_empty\_queue(q)) \; \do \\
+&\quad\quad dequeue(q) \\
+&\quad \od \\
+&\bfend \; \proc \\
+\end{align}
+```
+
 **Ejemplo de buffer de datos:**
 
 ```math 
@@ -365,6 +493,60 @@ Sus funciones auxiliares:
 - $finish()$ devuelve $True$ si el servicio productor-consumidor ha finalizado.
 - $there\_is\_product(), \; there\_is\_demand()$ comprueban si hay producción o demanda respectivamente.
 - $get\_product()$ obtiene un producto desde el productor, y $consume(d)$ le envía al consumidor el producto $d$. 
+
+## Conjunto finito de elementos 
+
+> Como su nombre lo indica, es un conjunto de elementos de un mismo tipo con una cantidad dinámica pero no infinita.
+
+Como **constructores** tenemos:
+
+- El conjunto vacío.
+- Agregar un elemento a un conjunto. 
+
+Como **operaciones** tenemos:
+
+- Chequear si un elemento pertenece al conjunto.
+- Chequear si el conjunto es vacío.
+- Unir un conjunto a otro. 
+- Intersecar un conjunto con otro.
+- Obtener la diferencia entre dos conjuntos.
+
+### Especificación de conjunto finito de elementos
+
+```math
+\begin{align}
+&\spec \; Set \; \of \; T \; \where \\
+&\\
+&\cons \\
+&\quad \fun \; empty\_set() \; \ret \; s : Set \; \of \; T \\
+&\quad\{- \;\; \textnormal{Crea un conjunto vacío} \;\; -\} \\
+&\\
+&\quad \proc \; add(\inout \; s : Set \; \of \; T, \; \bfin \; e : T) \\
+&\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al conjunto} \; s \;\; -\} \\
+&\\
+&\destroy \\
+&\quad \proc \; destroy(\inout \; s : Set \; \of \; T) \\ 
+&\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
+&\\
+&\ops \\
+&\quad \fun \; is\_empty(s : Set \; \of \; T) \; \ret \; b : \bool \\
+&\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; s \;\textnormal{es vacío} \;\; -\} \\
+&\\
+&\quad \fun \; member(s : Set \; \of \; T, \; e : T) \; \ret \; b : \bool \\
+&\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; e \;\textnormal{pertenece al conjunto} \; s \;\; -\} \\
+&\\
+&\quad \proc \; union(\inout \; s1 : Set \; \of \; T, \; \bfin \; s2 : Set \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Agrega a} \; s1 \; \textnormal{los elementos de} \; s2 \;\; -\} \\
+&\\
+&\quad \proc \; intersection(\inout \; s1 : Set \; \of \; T, \; \bfin \; s2 : Set \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Elimina de} \; s1 \; \textnormal{los elementos que NO pertenezcan a} \; s2 \;\; -\} \\
+&\\
+&\quad \proc \; diff(\inout \; s1 : Set \; \of \; T, \; \bfin \; s2 : Set \; \of \; T) \\
+&\quad\{- \;\; \textnormal{Elimina de} \; s1 \; \textnormal{los elementos que pertenezcan a} \; s2 \;\; -\} \\
+\end{align}
+```
+
+{/* TODO: ### Implementacion de conjunto finito de elementos */}
 
 ## Árboles binarios 
 
