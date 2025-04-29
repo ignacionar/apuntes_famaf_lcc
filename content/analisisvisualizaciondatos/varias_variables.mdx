@@ -1,0 +1,52 @@
+import Image from "next/image";
+
+# Varias Variables
+
+> En un mismo análisis pueden intervenir varias variables, por ello es importante conocer cómo se relacionan entre sí.\
+Sean $X, Y \; \mathbf{v.a.}$ su función de densidad conjunta es $f(x,y)$. Su densidad puntual es $f(x,y)=P(X=x, Y=y)$.
+
+## Densidad marginal de una variable
+
+> La **densidad marginal** de una variable $X$ es la función $f_X(x)$ es la sumatoria/integral de la función de densidad conjunta $f(x,y)$ respecto a la otra variable $Y$ (o viceversa).
+
+```math
+\begin{align}
+&f_X(x) = \displaystyle{\sum_x} \; f(x,y), \quad\quad\quad f_Y(y) = \displaystyle{\sum_y} \; f(x,y) \quad \textnormal{(variables discretas)} \\
+&f_X(x) = \int f(x,y)\; dy, \quad\quad f_Y(y) = \int f(x,y) \;dx \quad \textnormal{(variables continuas)}
+\end{align}
+```
+
+## Independencia de variables
+
+> Dos variables $X, Y$ son **independientes** (el valor de una no influye en la probabilidad de otra)\
+si la probabilidad conjunta de que ocurran es el producto de sus probabilidades marginales:
+
+```math
+\begin{align}
+&f(x,y) = f_X(x)f_Y(y) \\
+&\\
+&f_{X|Y}(x|y) = \frac{f(x,y)}{f_Y(y)} = f_X(x) \\
+\end{align}
+```
+
+## Covarianza y correlación
+
+> La **covarianza** de dos variables $X, Y$ es la medida de la relación lineal entre ellas. Se denota como $Cov(X,Y)$ y se calcula como:
+
+```math
+Cov(X,Y) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]
+```
+
+> La **correlación** es la covarianza normalizada entre dos variables. El coeficiente de correlación se denota como $\rho(X,Y)$ y se calcula como:
+
+```math
+\rho(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}} \in [-1,1]
+```
+
+### Interpreación del coeficiente de correlación
+
+- $\rho = 1 \implies$ correlación positiva perfecta (una variable aumenta y la otra también).
+- $0 < \rho < 1 \implies$ existe una correlación positiva. 
+- $\rho = 0 \implies$ no existe relación lineal. No necesariamente las variables son independientes, pueden tener una relación no lineal.
+- $-1 < \rho < 0 \implies$ existe una correlación negativa.
+- $\rho = -1 \implies$ correlación negativa perfecta (una variable aumenta y la otra disminuye).

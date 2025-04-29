@@ -1,0 +1,141 @@
+# Estadísticos y Estadística
+
+## Muestreo aleatorio 
+
+> El muestreo aleatorio es un método de selección de una muestra de una población en el que cada individuo tiene la misma probabilidad de ser seleccionado. La muestra debe ser representativa de la población. 
+
+Este conjunto de variables se llama muestra aleatoria $\mathbf{m.a.}$,
+
+- Los objetos son elegidos al azar. 
+- Las variables son independientes. 
+- Las distribuciones son iguales.
+
+La sucesión de $\mathbf{v.a.} \; x_1, x_2, \ldots, x_n$ se dice $\mathbf{m.a.}$ si estas son independientes e idénticamente distribuidas (i.i.d.) (clones de una misma $x$).
+
+### Media muestral 
+
+> Una media muestral se utiliza para estimar la media de la población. 
+
+```math 
+\overline{X} = \frac{1}{n} \sum_{i=1}^{n} x_i
+```
+
+### Ley de los grandes números
+
+> Al aumentar el tamaño de la muestra, la media muestral se aproxima a la media poblacional. 
+
+### Teorema central del límite
+
+> La media muestral de tamaño $n$ se distribuye normalmente, independientemente de la distribución de la población, si $n$ es suficientemente grande.
+
+## Inferencia estadística
+
+> Métodos utilizados con clones de una población para tomar decisiones y obtener conclusiones sobre la población.\
+Permiten inferir propiedades de una población con un riesgo medible en términos de error.
+
+Dentro de la estadística paramétrica: 
+
+- Se considera una característica de interés de la población $\Omega$
+- Se supone que la característica está modelada por una $\mathbf{v.a.}\;X$ con distribución “conocida” y paramétrica $f_\theta(x)=f(x,\theta)$. (ej: $\theta=(\mu,\sigma^2)$ en normal)
+- Se considera una $\mathbf{m.a.} \; x_1, \ldots, X_n$, con la misma distribución (paramétrica) que $x$.
+ 
+## Estimación puntual: estadístico 
+
+> Un estadístico es una función definida sobre una $\mathbf{m.a.}$ (el estadístico estima una característica de la población).
+
+Se definen **estadísticos** para estimar un **parámetro** de la población:
+
+- **Parámetro:** medida resumen del modelo-población. 
+- **Estadístico:** medida resumen de la muestra. 
+
+Algunos ejemplos de estimadores de parámetros son: 
+
+- La media muestral 
+
+```math
+\overline{X} = \frac{1}{n} \sum_{i=1}^{n} x_i
+```
+
+- La varianza muestral
+
+```math
+S^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \overline{X})^2
+```
+
+- La proporción muestral
+
+```math
+\hat{p} = \frac{1}{n} \sum_{i=1}^{n} x_i
+```
+
+### Exactitud de un estimador
+
+> La exactitud de un estimador se refiere a qué tan cerca está el estimador del parámetro que se está estimando.
+
+El sesgo de un estimador es la diferencia entre el valor esperado del estimador (esperanza) y el valor real del parámetro que se está estimando.  Si el sesgo es cero, el estimador es insesgado.
+
+```math
+\text{Sesgo}(\hat{\theta}) = E(\hat{\theta}) - \theta
+```
+
+El sesgo se relaciona con la **exactitud** y la varianza con la **precisión**. Esta última es la dispersión de los valores del estimador alrededor de su media.
+
+## Intervalos de confianza
+
+> Un intervalo de confianza es un rango de valores que se utiliza para estimar un parámetro poblacional. Se construye a partir de una muestra y se expresa como un rango de valores con un nivel de confianza asociado.
+
+Se define un intervalo aleatorio (con extremos aleatorios dados por estadísticos)
+
+```math 
+P(\theta \in (\hat{\theta_1}, \hat{\theta_2})) = 1 - \alpha
+```
+
+Donde $\theta$ es el parámetro desconocido a estimar y $\alpha$ es el error (valor entre $0$ y $1$).
+
+**Ejemplo:**
+
+Si se pide un intervalo de confianza del $95\%$, necesitamos un $\alpha$ de $0.05$:
+
+```math
+P(\hat{\theta_1} \leq \theta \leq \hat{\theta_2}) = 0.95
+```
+
+### Método del pivote 
+
+> Se define un estadístico (pivote) que depende de la m.a. y del parámetro a estimar y cuya distribución es conocida (o aproximada a una conocida) y no depende del parámetro. Al saber la distribución del pivote, se establecen los límites donde el pivote tiene probabilidad de valer $1 - \alpha$.
+
+**Ejemplo:**
+
+Sea $X_1, \ldots, X_n$ una $\mathbf{m.a.}$ de una $\mathbf{v.a.} \; X \sim N(\mu, \sigma^2)$, con $\sigma^2$ conocido, si queremos construir el de nivel $1 - \alpha$ para $\mu$, se puede usar el estadístico pivote:
+
+```math 
+\begin{align}
+&\overline{X} - \mu \sim N(0, \sigma^2 /n) \\
+& \\
+&\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \sim N(0,1) \\
+& \\
+& P(-z_{\alpha/2} \leq \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \leq z_{\alpha/2}) \approx 1 - \alpha \\
+& \\
+& P(\overline{X} - \frac{\sigma z_{\alpha/2}}{\sqrt{n}} \; \leq \mu \leq \; \overline{X} + \frac{\sigma z_{\alpha/2}}{\sqrt{n}}) \approx 1 - \alpha \\
+\end{align}
+```
+
+Donde $\overline{X} - \frac{\sigma z_{\alpha/2}}{\sqrt{n}}$ y $\overline{X} + \frac{\sigma z_{\alpha/2}}{\sqrt{n}}$ son los límites inferior y superior del intervalo de confianza, respectivamente.
+
+### Casos y tests 
+
+> Si se conoce la varianza poblacional, se utiliza un Z test, que se basa en la distribución normal. Si no se conoce la varianza poblacional, se utiliza un T test, que se basa en la distribución t de Student.
+
+Entonces, si se conoce la varianza poblacional, el intervalo de confianza para $\mu$ es:
+
+<br />
+
+<div style={{ width: "fit-content", margin: "0 auto"}}>
+| Valor de $n$ | Población Normal | $\sigma^2$ conocido | Distribución |
+| --- | --- | --- | --- |
+| $n$ cualquiera | Si | Si | $\overline{X} \pm z\frac{\sigma}{\sqrt{n}}$ |
+| $n \geq 30$ | No | Si | $\overline{X} \pm z\frac{\sigma}{\sqrt{n}}$ (Por TCL) |
+| $n < 30$ | Si | No | $\overline{X} \pm t_{n-1} \frac{\hat{s}}{\sqrt{n}}$   (T-test) |
+| $n \geq 30$ | Si | No | $\overline{X} \pm z\frac{\hat{s}}{\sqrt{n}}$ (Por TCL)|
+| $n \geq 30$ | No | No | $\overline{X} \pm z\frac{\hat{s}}{\sqrt{n}}$ (Por TCL)|
+</div>
