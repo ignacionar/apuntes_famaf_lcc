@@ -60,11 +60,11 @@ Su implementación:
 &\quad\{- \;\; \textnormal{Devuelve el primer elemento de} \; l \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
 &\\
-&\quad \proc \; tail(\inout \; l : List \; \of \; T, \; \bfin e : T) \; \ret \; e : T \\ 
+&\quad \proc \; tail(\inout \; l : List \; \of \; T) \; \ret \; e : T \\ 
 &\quad\{- \;\; \textnormal{Elimina el primer elemento de} \; l \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
 &\\
-&\quad \proc \; addr(\inout \; l : List \; \of \; T, \; \bfin e : T) \; \ret \; e : T \\ 
+&\quad \proc \; addr(\inout \; l : List \; \of \; T, \; \bfin \; e : T) \; \ret \; e : T \\ 
 &\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al final de la lista} \; l \;\; -\} \\
 &\\
 &\quad \fun \; length(l : List \; \of \; T) \; \ret \; n : \nat \\ 
@@ -81,7 +81,7 @@ Su implementación:
 &\quad\{- \;\; \textnormal{Deja en} \; l \; \textnormal{los primeros} n \; \textnormal{elementos, elimina el resto} \;\; -\} \\
 &\\ 
 &\quad \proc \; drop(\inout \; l : List \; \of \; T, \; n : \nat) \\ 
-&\quad\{- \;\; \textnormal{Elimina los primeros} \; n \; \textnormal{de} l \;\; -\} \\
+&\quad\{- \;\; \textnormal{Elimina los primeros} \; n \; \textnormal{de} \; l \;\; -\} \\
 &\\
 &\quad \fun \; copy\_list(l1 : List \; \of \; T) \; \ret \; l2 : List \; \of \; T \\ 
 &\quad\{- \;\; \textnormal{Copia los elementos de} \; l1 \; \textnormal{en la nueva lista} \; l2 \;\; -\} \\
@@ -217,7 +217,7 @@ En el código tenemos:
 &\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
 &\quad n := 0 \\
 &\quad p := l \\
-&\quad \while (p \neq \null) \; \do \\
+&\quad \while \; (p \neq \null) \; \do \\
 &\quad \quad n := n + 1 \\
 &\quad \quad p := p \to next \\
 &\quad \od \\
