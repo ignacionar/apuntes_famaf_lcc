@@ -37,7 +37,7 @@ Dentro de la estadística paramétrica:
 
 - Se considera una característica de interés de la población $\Omega$
 - Se supone que la característica está modelada por una $\mathbf{v.a.}\;X$ con distribución “conocida” y paramétrica $f_\theta(x)=f(x,\theta)$. (ej: $\theta=(\mu,\sigma^2)$ en normal)
-- Se considera una $\mathbf{m.a.} \; x_1, \ldots, X_n$, con la misma distribución (paramétrica) que $x$.
+- Se considera una $\mathbf{m.a.} \; X_1, \ldots, X_n$, con la misma distribución (paramétrica) que $x$.
  
 ## Estimación puntual: estadístico 
 
@@ -133,3 +133,11 @@ Entonces, si se conoce la varianza poblacional, el intervalo de confianza para $
 | $n \geq 30$ | Si | No | $\overline{X} \pm z\frac{\hat{s}}{\sqrt{n}}$ (Por TCL)|
 | $n \geq 30$ | No | No | $\overline{X} \pm z\frac{\hat{s}}{\sqrt{n}}$ (Por TCL)|
 </div>
+
+### Diferencia de medias 
+
+> Un IC con varianzas conocidas para la diferencia $\mu_1 - \mu_2$ de nivel $1 - \alpha$ es:
+
+```math
+(\overline{X_1} - \overline{X_2}) \pm z_{\alpha/2} \cdot \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}
+```
