@@ -1,0 +1,67 @@
+# LEGv8
+
+> **LEGv8** es un conjunto de instrucciones. Es una versión simplificada y un subconjunto de ARMv8.
+
+## Convención de registros 
+
+- `X0 - X7`: Argumentos de entrada/salida de funciones. 
+- `X8`: Resultado indirecto de localización de registro. 
+- `X9 - X15`: Registros temporales.
+- `X16 - X17`: Sobreescrito por el sistema como _scratch register_. 
+- `X18`: Registro de uso especial del OS o temporal 
+- `X19 - X27`: Registros de uso general.
+- `X28`: Puntero a stack.
+- `X29`: Puntero a frame.
+- `X30`: Registro de enlace (link register).
+- `XZR`: Valor constante cero.
+
+## Operaciones
+
+### Operaciones inmediatas (valores constantes)
+
+```c 
+// Ejemplo de código C
+f = g + 5;
+```
+
+Sean `g => X21` y `f => X19`, la instrucción se traduce a:
+
+```assembly
+ADD X19, X21, #5
+```
+
+### Operaciones en registros 
+
+Las operaciones en registros se hacen de la siguiente forma 
+
+```c 
+// Ejemplo de código C
+f = (g + h) - (i + j);
+```
+
+Solo se puede operar sobre dos registros a la vez, por lo que se requieren valores temporales: 
+
+```assembly
+ADD X9, X21, X22 // g + h
+ADD X10, X22, X23 // i + j
+SUB X19, X9, X10 // f = (g + h) - (i + j)
+```
+
+### Operaciones en memoria
+
+Operar en datos almacenados en memoria es más lento que operar en registros, ya que requieren más instrucciones: 
+
+```c 
+// Ejemplo de código C
+a[12] = h + a[8];
+```
+
+Sean `h => X21` y `a => X22`, la instrucción se traduce a:
+
+```assembly 
+LDUR X9, [X22, #64] 
+ADD X9, X21, X9
+STUR X9, [X22, #96]
+```
+
+Cada elemento de memoria es de $8$ bits, para obtener los $64$ bits necesarios de cada elemento del arreglo `a` hay que usar un offset de $n * 8$ bits.

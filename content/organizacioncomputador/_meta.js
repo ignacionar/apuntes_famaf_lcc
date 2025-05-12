@@ -5,4 +5,5 @@ export default {
   logica_combinacional: "Lógica Combinacional",
   memorias: "Memorias",
   logica_secuencial: "Lógica Secuencial",
+  legv8: "LEGv8"
 }
