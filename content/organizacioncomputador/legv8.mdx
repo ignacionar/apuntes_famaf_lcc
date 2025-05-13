@@ -13,9 +13,21 @@
 - `X28`: Puntero a stack.
 - `X29`: Puntero a frame.
 - `X30`: Registro de enlace (link register).
-- `XZR`: Valor constante cero.
+- `XZR`: Valor constante `0`. 
 
 ## Operaciones
+
+- `ADD`: Suma de registros 
+- `ADDI`: Suma con valor constante 
+- `SUB`: Resta de registros 
+- `SUBI`: Resta con valor constante 
+- `LSL`: Recibe una constante `#c`y recibe un registro para multiplicarlo por `2^c`
+- `LDUR`: Copia al registro `X1` el contenido en la posición de memoria direccionada por `X2` sumado a la constante `#c` (memoria doubleword)
+- `STUR `: Copia el contenido del registro `X1` en la posición de memoria direccionada por `X2` sumado a la constante `#c` (memoria doubleword)
+- `LDURSW`: Lo mismo que `LDUR` (memoria word)
+- `STURSW`: Lo mismo que `STUR` (memoria word) 
+- `LDURB`: Lo mismo que `LDUR` (memoria byte)
+- `STURB`: Lo mismo que `STUR` (memoria byte)
 
 ### Operaciones inmediatas (valores constantes)
 
@@ -27,7 +39,7 @@ f = g + 5;
 Sean `g => X21` y `f => X19`, la instrucción se traduce a:
 
 ```assembly
-ADD X19, X21, #5
+ADDI X19, X21, #5
 ```
 
 ### Operaciones en registros 
@@ -65,3 +77,91 @@ STUR X9, [X22, #96]
 ```
 
 Cada elemento de memoria es de $8$ bits, para obtener los $64$ bits necesarios de cada elemento del arreglo `a` hay que usar un offset de $n * 8$ bits.
+
+### Ejercicios resueltos - Operaciones 
+
+Escribir las secuencias de assembler LEGv8 en base al código C: 
+
+**1.** 
+
+```c
+// A)
+f = g + h + i + j;
+
+// B)
+f = g + (h + 5);
+
+// C)
+f = (g + h) + (i + j);
+```
+
+Para este ejercicio, se asignan a las variables `f, g, h, i, j` los registros `X0, X1, X2, X3, X4`, respectivamente:
+
+```assembly
+// A)
+ADD X0, X1, X2   
+ADD X0, X0, X3   
+ADD X0, X0, X4   
+   
+// B)
+ADD X0, X0, X1    
+ADDI X0, X2, #5  
+  
+// C)
+ADD X9, X1, X2   
+ADD X10, X3, X4
+ADD X0, X9, X10  
+```
+
+*** 
+
+**2.**
+
+```c
+// A) 
+f = -g - f;
+
+// B)
+f = g + (-f - 5);
+```
+
+Para este ejercicio, se asignan a las variables `f, g` los registros `X0, X1`, respectivamente:
+
+```assembly
+// A) 
+ADD X0, X1, X0
+SUB X0, XZR, X0  
+  
+// B) 
+ADDI X0, X0, #5 
+SUB X0, X1, X0  
+```
+
+***
+
+**3.**
+
+```c
+// A)
+f = -g - a[4];
+
+// B)
+b[8] = a[i - j]; 
+```
+
+Para este ejercicio, se asignan a las variables `f, g, i, j` los registros `X0, X1, X2, X3`, respectivamente.\
+La dirección base de los arrays `a, b` se almacenan en los registros `X6, X7` 
+
+```assembly
+// A)
+LDUR X0, [X6, #32]   // f = a[4]
+ADD X0, X0, X1       // f = (a[4]) + g 
+SUB X0, XZR, X0      // f = 0 - (a[4] + g)
+  
+// B)
+SUB X9, X2, X3       // X9 = i - j 
+LSL X9, X9, #3       // X9 = (i - j) * 8 
+ADD X10, X6, X9      // X10 = &a + [(i - j) * 8] 
+LDUR X11, [X10, #0]  // X11 = a[i - j]
+STUR X11, [X7, #64]  // b[8] = a[i - j]
+```
