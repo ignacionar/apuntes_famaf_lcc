@@ -15,12 +15,16 @@
 - `X30`: Registro de enlace (link register).
 - `XZR`: Valor constante `0`. 
 
-## Operaciones
+## Instrucciones
 
 - `ADD`: Suma de registros 
 - `ADDI`: Suma con valor constante 
 - `SUB`: Resta de registros 
 - `SUBI`: Resta con valor constante 
+- `AND`: Operación AND entre registros
+- `ANDI`: Operación AND con valor constante
+- `ORR`: Operación OR entre registros
+- `ORRI`: Operación OR con valor constante
 - `LSL`: Recibe una constante `#c`y recibe un registro para multiplicarlo por `2^c`
 - `LDUR`: Copia al registro `X1` el contenido en la posición de memoria direccionada por `X2` sumado a la constante `#c` (memoria doubleword)
 - `STUR `: Copia el contenido del registro `X1` en la posición de memoria direccionada por `X2` sumado a la constante `#c` (memoria doubleword)
@@ -28,6 +32,10 @@
 - `STURSW`: Lo mismo que `STUR` (memoria word) 
 - `LDURB`: Lo mismo que `LDUR` (memoria byte)
 - `STURB`: Lo mismo que `STUR` (memoria byte)
+- `MOVZ`: Mueve un valor inmediato a un registro (cero extendido)
+- `MOVK`: Mueve un valor inmediato a un registro y lo combina con el contenido del registro.
+
+## Operaciones 
 
 ### Operaciones inmediatas (valores constantes)
 
@@ -164,4 +172,33 @@ LSL X9, X9, #3       // X9 = (i - j) * 8
 ADD X10, X6, X9      // X10 = &a + [(i - j) * 8] 
 LDUR X11, [X10, #0]  // X11 = a[i - j]
 STUR X11, [X7, #64]  // b[8] = a[i - j]
+```
+
+*** 
+
+**4.** 
+
+Usar `MOVZ, MOVK` para cargar los registros: 
+
+```assembly 
+{X0 = 0x1234000000000000}
+{X1 = 0xBBB0000000000AAA} 
+{X2 = 0xA0A0B1B10000C2C2} 
+{X3 = 0x0123456789ABCDEF}
+```
+
+```assembly 
+MOVZ X0, 0x1234, LSL 48  // 0x1234000000000000
+ 
+MOVZ X1, 0xBBB, LSL 52   // 0xBBB0000000000000
+MOVK X1, 0xAAA, LSL 00    // 0xBBB0000000000AAA
+
+MOVZ X2, 0xA0A0, LSL 48  // 0xA0A0000000000000
+MOVK X2, 0xB1B1, LSL 32  // 0xA0A00000B1B10000
+MOVK X2, 0xC2C2, LSL 00  // 0xA0A0B1B10000C2C2
+
+MOVZ X3, 0x0123, LSL 48  // 0x0123000000000000
+MOVK X3, 0x4567, LSL 32  // 0x0123456700000000
+MOVK X3, 0x89AB, LSL 16  // 0x0123456789AB0000
+MOVK X3, 0xCDEF, LSL 00   // 0x0123456789ABCDEF
 ```
