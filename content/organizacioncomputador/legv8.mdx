@@ -24,6 +24,7 @@
 - `AND`: Operación AND entre registros
 - `ANDI`: Operación AND con valor constante
 - `ORR`: Operación OR entre registros
+- `EOR`: Operación XOR entre registros
 - `ORRI`: Operación OR con valor constante
 - `LSL`: Recibe una constante `#c`y recibe un registro para multiplicarlo por `2^c`
 - `LDUR`: Copia al registro `X1` el contenido en la posición de memoria direccionada por `X2` sumado a la constante `#c` (memoria doubleword)
@@ -189,16 +190,97 @@ Usar `MOVZ, MOVK` para cargar los registros:
 
 ```assembly 
 MOVZ X0, 0x1234, LSL 48  // 0x1234000000000000
- 
+  
 MOVZ X1, 0xBBB, LSL 52   // 0xBBB0000000000000
-MOVK X1, 0xAAA, LSL 00    // 0xBBB0000000000AAA
-
+MOVK X1, 0xAAA, LSL 00   // 0xBBB0000000000AAA
+  
 MOVZ X2, 0xA0A0, LSL 48  // 0xA0A0000000000000
 MOVK X2, 0xB1B1, LSL 32  // 0xA0A00000B1B10000
 MOVK X2, 0xC2C2, LSL 00  // 0xA0A0B1B10000C2C2
-
+  
 MOVZ X3, 0x0123, LSL 48  // 0x0123000000000000
 MOVK X3, 0x4567, LSL 32  // 0x0123456700000000
 MOVK X3, 0x89AB, LSL 16  // 0x0123456789AB0000
-MOVK X3, 0xCDEF, LSL 00   // 0x0123456789ABCDEF
+MOVK X3, 0xCDEF, LSL 00  // 0x0123456789ABCDEF
+```
+
+## Condicionales y saltos
+
+> Mediante el uso de `CBZ` y `CBNZ` se puede hacer un salto condicional.\
+`CBZ` recibe un registro y una rama, y si el registro es `0` salta a la rama.\
+`CBNZ` recibe un registro y una rama, y si el registro es distinto de `0` salta a la rama.
+
+**Ejemplo:** bloque `if` en C:
+
+```c 
+if (i == j) {
+  f = g + h;
+} else {
+  f = g - h;
+}
+```
+
+Asignamos a las variables `f, g, h, i, j` los registros `X0, X1, X2, X3, X4`, respectivamente:
+
+```assembly
+      SUB X9, X3, X4  // i - j
+      CBNZ X9, Else   // i != j  ⇒  salta a Else
+      ADD X0, X1, X2  // f = g + h
+      B Exit          // salta a Exit
+Else: SUB X9, X1, X2  // f = g - h
+Exit: ...
+```
+
+***
+
+**Ejemplo:** bloque `while` en C:
+
+```c
+while (save[i] == k) { 
+  i += 1;
+}
+```
+
+Asignamos a las variables `i, k` los registros `X0, X1`, respectivamente.
+La dirección base del array `save` se almacena en el registro `X2`:
+
+```assembly
+      LSL X9, X0, #3    // i * 8
+      ADD X9, X9, X2    // &save[i]
+Loop: LDUR X10, [X9]    // save[i]
+      CBNZ X10, End     // save[i] != k  ⇒  salta a End
+      ADDI X0, X0, #1   // i += 1
+      B Loop
+End:  ...
+```
+
+## Operaciones condicionales 
+
+> Es posible modificar los valores de los flags `N, Z, C, V` mediante el uso de una instrucción con sufijo `S` (`ADDS, ADDIS, SUBS, SUBIS, ANDS, ANDIS...`)\
+Con la comparación, se puede hacer un salto condicional con `B.EQ`, `B.NE`, `B.GE`, `B.LT`, `B.GT`, `B.LE...`
+
+**Ejemplo:** bloque `if` en C:
+
+```c
+if (a > b) {
+  a += 1;
+}
+```
+
+Asignamos a las variables `a, b` los registros `X0, X1`, respectivamente:
+
+```assembly
+      SUBS X9, X0, X1   // a - b
+      B.GE Else         // a <= b  ⇒  salta a Else
+      ADDI X0, X0, #1   // a += 1
+Else: ...
+```
+
+También se puede usar `CMP, CMPI` para comparar sin almacenar el resultado en un registro:
+
+```assembly
+      CMP X0, X1        // comparar a, b
+      B.GE Else         // a <= b  ⇒  salta a Else
+      ADDI X0, X0, #1   // a += 1
+Else: ...
 ```
