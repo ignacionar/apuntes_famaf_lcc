@@ -26,7 +26,9 @@
 - `ORR`: Operación OR entre registros
 - `EOR`: Operación XOR entre registros
 - `ORRI`: Operación OR con valor constante
-- `LSL`: Recibe una constante `#c`y recibe un registro para multiplicarlo por `2^c`
+- `LSL`: Recibe una constante `#c`y recibe un registro para multiplicarlo por `2^c`.\
+Desplaza a la izquierda el registro `X1` `#c` veces y lo almacena en `X2`.
+- `LSR`: Recibe una constante `c`, desplaza a la derecha el registro `X1` `#c` veces y lo almacena en `X2`.  
 - `LDUR`: Copia al registro `X1` el contenido en la posición de memoria direccionada por `X2` sumado a la constante `#c` (memoria doubleword)
 - `STUR `: Copia el contenido del registro `X1` en la posición de memoria direccionada por `X2` sumado a la constante `#c` (memoria doubleword)
 - `LDURSW`: Lo mismo que `LDUR` (memoria word)
@@ -285,3 +287,93 @@ También se puede usar `CMP, CMPI` para comparar sin almacenar el resultado en u
       ADDI X0, X0, #1   // a += 1
 Else: ...
 ```
+
+## Formato y ensamblado de instrucciones
+
+> Todas las instrucciones tienen un formato de $32$ bits, donde la distribución de los bits depende del tipo de instrucción. 
+
+### Instrucciones de tipo R 
+
+> Las instrucciones de tipo R son aquellas que operan y reciben registros como argumentos.
+
+- opcode: la instrucción a ejecutar (por ejemplo, `ADD`, `SUB`, `AND`, `ORR`, etc.)
+- Rm: segundo registro operando. 
+- shamt: desplazamiento (shift amount).
+- Rn: primer registro operando.
+- Rd: registro destino (donde se almacena el resultado de la operación).
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| Opcode | Rm | Shamt | Rn | Rd | 
+|--------|----|-------|----|----|
+| $11$ bits | $5$ bits | $6$ bits | $5$ bits | $5$ bits |
+</div>
+
+### Instrucciones de tipo D 
+
+> Las instrucciones de tipo D son aquellas que transfieren datos entre memoria y registros.
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| Opcode | address | op2 | Rn | Rt | 
+|--------|----|-------|----|----|
+| $11$ bits | $9$ bits | $2$ bits | $5$ bits | $5$ bits |
+</div>
+
+- `address`: offset de la dirección de memoria.
+- `op2`: expande el opcode (**siempre debe estar seteado a `00`**).
+
+### Instrucciones de tipo I
+
+> Las instrucciones de tipo I son aquellas que operan con un valor inmediato.
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| Opcode | immediate | Rn  | Rd | 
+|--------|----|-------|----|
+| $10$ bits | $12$ bits | $5$ bits | $5$ bits |
+</div>
+
+- `immediate`: valor inmediato (constante). (de $0$ a $2^{12})
+
+### Instrucciones de tipo IM 
+
+> Las instrucciones de tipo IM son aquellas que mueven contenidos entre registros. 
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| Opcode | LSL | MOV immediate  | Rd |
+|--------|----|-------|----|
+| $9$ bits | $2$ bits | $16$ bits | $5$ bits |
+
+- `LSL`: desplazamiento a la izquierda (shift left). $00 = 0, 01 = 16, 10 = 32, 11 = 48$ 
+- `MOV immediate`: valor inmediato (constante). (de $0$ a $2^{16}$)
+</div>
+
+### Instrucciones de tipo B
+
+> Las instrucciones de tipo B son aquellas que realizan saltos directos a otras instrucciones.
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+  | Opcode | BR address | 
+  | --------|----|
+  | $6$ bits | $26$ bits |
+</div>  
+
+### Instrucciones de tipo CB
+
+> Las instrucciones de tipo CB son aquellas que realizan saltos condicionales a otras instrucciones.
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| Opcode | COND BR address | Rt |
+|--------|----|----|
+| $8$ bits | $19$ bits | $5$ bits | 
+</div>
