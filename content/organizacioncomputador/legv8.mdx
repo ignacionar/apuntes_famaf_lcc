@@ -323,6 +323,10 @@ Else: ...
 </div>
 
 - `address`: offset de la dirección de memoria.
+
+El valor de `address` debe ser el valor de la constante en base $2$,\
+agregando los bits necesarios para llegar a $9$ bits.
+
 - `op2`: expande el opcode (**siempre debe estar seteado a `00`**).
 
 ### Instrucciones de tipo I
@@ -356,7 +360,7 @@ Else: ...
 
 ### Instrucciones de tipo B
 
-> Las instrucciones de tipo B son aquellas que realizan saltos directos a otras instrucciones.
+> Las instrucción de tipo B (solo `B`) realiza saltos directos a otras instrucciones.
 
 <br />
 
@@ -365,6 +369,11 @@ Else: ...
   | --------|----|
   | $6$ bits | $26$ bits |
 </div>  
+
+El valor de `BR address` es un binario cuyo valor es la cantidad de saltos realizados para llegar a la rama seleccionada (colocando los bits necesarios para llegar a $26$) 
+
+Si se realizan tres saltos hacia adelante, su valor sería `00000000000000000000000011 = 3`\
+Si se realizan tres saltos hacia atrás, su valor sería `11111111111111111111110011 = -3` 
 
 ### Instrucciones de tipo CB
 
@@ -377,3 +386,5 @@ Else: ...
 |--------|----|----|
 | $8$ bits | $19$ bits | $5$ bits | 
 </div>
+
+El criterio para poner el valor de `COND BR address` es el mismo que `BR address`, ajustando a $19$ bits.
