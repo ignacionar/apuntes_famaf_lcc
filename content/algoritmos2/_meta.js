@@ -5,5 +5,6 @@ export default {
   ordenacion_avanzada: "Ordenación Avanzada",
   recurrencias_jerarquia_de_funciones: "Recurrencias y Jerarquía de Funciones",
   tipos_concretos: "Tipos Concretos",
-  tipos_abstractos: "Tipos Abstractos"
+  tipos_abstractos: "Tipos Abstractos",
+  algoritmos_voraces: "Algoritmos Voraces"
 }

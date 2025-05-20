@@ -1,0 +1,21 @@
+# Algoritmos Voraces
+
+> Los algoritmos voraces o de tipo _greedy_ son aquellos que resuelven problemas de **optimización**, construyen la solución óptima **paso a paso** eligiendo la componente de la solución\
+(sin revisar elecciones previas de componentes).
+
+Su esquema general es el siguiente:
+
+```math 
+\begin{align}
+&\fun \; voraz(C: Set \; \of \; \textnormal{Candidato}) \; \ret \; S: \textnormal{Solución a construir} \\
+&\quad S := \textnormal{solución vacía} \\
+&\quad \while \; S \; \textnormal{no es solución} \; \do \\
+&\quad\quad c:= \textnormal{seleccionar de} \; C \\
+&\quad\quad elim(C, c) \\
+&\quad\quad \if \; \textnormal{agregar} \; c \; \textnormal{a} \; S \; \textnormal{es factible} \; \then \\
+&\quad\quad\quad \textnormal{agregar} \; c \; \textnormal{a} \; S \\
+&\quad\quad \fi \\
+&\quad \od \\
+&\bfend \; \fun 
+\end{align}
+```
