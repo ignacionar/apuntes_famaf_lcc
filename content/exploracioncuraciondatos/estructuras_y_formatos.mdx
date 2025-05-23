@@ -1,0 +1,190 @@
+# Estructuras y Formatos de Datos
+
+## Datos estructurados 
+
+> Estos se organizan por filas y columnas, donde todos los registros tienen el mismo tipo de dato (numérico, texto, booleano, etc.).
+
+- **Estructura de datos:** dataframes. 
+- **Formato de datos:** CSV, XLSX, TXT, etc.
+ 
+## Datos semi-estructurados 
+
+> En estos los registros tienen un conjunto distinto de características y pueden estar anidados, son más flexibles pero requieren más procesamiento para analizarlos.
+
+- **Estructura de datos:** objetos, diccionarios, etc. 
+- **Formato de datos:** JSON, XML, etc.
+
+## Datos no estructurados
+
+> Estos no tienen un esquema definido y pueden ser de cualquier tipo, como texto, audio, video, etc. Pueden (o no) tener metadatos definidos, su análisis es más complejo. 
+
+- **Estructura de datos:** strings, binary, etc.
+- **Formato de datos:** imágenes, videos, audios, etc.
+
+## Bases de datos 
+
+> Colecciones de datos organizados y estructurados almacenada en una computadora. 
+
+### Bases de datos relacionales (_SQL_)
+
+> Se basan en tuplas y relaciones entre tablas, donde cada tabla es un conjutno de campos (columnas) y registros (filas). Se establecen relaciones entre tablas a través de claves primarias y foráneas.\
+Utilizan SQL para la manipulación de datos.
+
+### Bases de datos no relacionales (_NoSQL_)
+
+> Estas manejan datos semi estructurados y no definen un esquema rígido. Se utilizan para almacenar grandes volúmenes de datos y son más flexibles que las bases de datos relacionales. Algunas utilizan documentos, grafos, pares clave-valor, etc.
+
+## Operaciones Pandas y SQL
+
+<br />
+
+<center>
+**Seleccionar columnas:**
+</center>
+
+```py
+df[['columna1', 'columna2']]
+```
+
+```sql 
+SELECT columna1, columna2 FROM tabla;
+```
+
+***
+
+<center>
+**Ordenar de forma ascendente o descendente:**
+</center>
+
+
+```py
+df.sort_values(by=['columna1', 'columna2'], ascending=[True, False])
+```
+
+```sql  
+SELECT columna1, columna2
+FROM tabla
+ORDER BY
+  columna1 ASC
+  columna2 DESC;
+```
+
+***
+
+<center>
+  **Remolición de duplicados**
+</center>
+
+```py
+df[['columna1', 'columna2']].drop_duplicates()
+```
+
+```sql
+SELECT DISTINCT columna1, columna2 FROM tabla;
+```
+
+***
+
+<center>
+  **Filtrar filas**
+</center>
+
+```py
+df[(df['columna1'] >= 5) & (df['columna1'] <= 10)][['columna1', 'columna2']]
+```
+
+```sql
+-- Además de WHERE se utilizan operadores como: =, <, >, <=, >=, LIKE, BETWEEN x AND y
+
+SELECT columna1, columna2 
+FROM tabla
+WHERE columna1 BETWEEN 5 AND 10;
+```
+
+***
+
+<center>
+  **Limitar resultados**
+</center>
+
+```py
+# Primeras 10 filas de un DataFrame
+df.head(10)
+
+# Seleccionar 10 filas desde la 30 hasta la 40 
+df[['columna1']].iloc[30:40]
+```
+
+```sql
+-- LIMIT/OFFSET 
+-- Limitar cantidad / A partir de qué registro
+
+SELECT columna1
+FROM tabla
+LIMIT 10 OFFSET 30
+```
+
+***
+
+<center>
+  **Agrupar resultados y aplicar función de agregación**
+</center>
+
+```py
+# Agrupar por vendedor
+df.groupby('vendedor')
+
+# Agrupar por vendedor y sumar los montos
+df.groupby('vendedor')['monto'].sum().reset_index(name='total_vendido')
+```
+
+```sql 
+-- Agrupar por vendedor
+SELECT vendedor
+FROM ventas
+GROUP BY vendedor;
+
+-- Agrupar por vendedor y sumar los montos
+SELECT vendedor, SUM(monto) AS total_vendido
+FROM ventas
+GROUP BY vendedor;
+```
+
+***
+
+<center>
+  **Agrupar resultados con condición**
+</center>
+
+```py
+df.groupby('vendedor')['monto'].sum().reset_index(name='total_vendido') \
+  .query('total_vendido > 10000')
+```
+
+```sql
+SELECT vendedor, SUM(monto) AS total_vendido
+FROM ventas
+GROUP BY vendedor
+HAVING SUM(monto) > 10000;
+```
+
+***
+
+<center>
+  **Combinaciones en base a tablas relacionadas**
+</center>
+
+```py
+merged_df = pd.merge(albums, artists, on='artistId', how='inner')
+result = merged_df[['title', 'song_year']]
+```
+
+```sql 
+-- Busca coincidencias entre campos de tablas mediante la palabra ON 
+-- Algunos tipos de uniones son: INNER, OUTER, LEFT, RIGHT, FULL OUTER, entre otras
+
+SELECT title, song_year
+FROM albums
+INNER JOIN artists
+  ON artists.artistId = albums.artistId
+```

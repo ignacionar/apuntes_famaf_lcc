@@ -30,5 +30,6 @@ export default {
       </div>
     )
   },
-  analisisvisualizaciondatos: "Análisis y Visualización de Datos"
+  analisisvisualizaciondatos: "Análisis y Visualización de Datos",
+  exploracioncuraciondatos: "Exploración y Curación de Datos"
 }
