@@ -19,3 +19,21 @@ Su esquema general es el siguiente:
 &\bfend \; \fun 
 \end{align}
 ```
+
+## Algoritmos voraces sobre grafos 
+
+### Árbol generador de costo mínimo (Algoritmo de Prim)
+
+> Sea $G = (V, A)$ un grafo conexo no dirigido con un costo no negativo asociado a cada arista:\
+$T \subseteq A$ es un árbol generador si el grafo $(V, T)$ es conexo y no contiene ciclos.\
+Su costo total es la suma de costos de sus aristas. El algoritmo busca $T$ cuyo costo sea mínimo. 
+
+Para resolver este problema, el algoritmo de Prim parte desde un vértice origen y se va extendiendo el tendido a partir de ese vértice. Se selecciona la arista de menor costo capaz de incorporar un nuevo vértice.
+
+### Camino de costo mínimo (Algoritmo de Dijkstra)
+
+> Sea $G = (V, A)$ un grafo dirigido con costos no negativos en sus aristas, y sea $v \in V$ uno de sus vértices:\
+Se busca obtener los caminos de menor costo desde $v$ hacia cada uno de los demás vértices. 
+
+Para resolver este problema, el algoritmo de Dijkstra realiza una secuencia de $n$ pasos, donde $n$ es el número de vértices.\
+En cada paso "aprende" el camino de menor costo desde $v$ a un nuevo vértice, pintandolo de color (finalizado). Tras esos $n$ pasos, conoce los costos de los caminos de menor costo a cada uno de los vértices. 
