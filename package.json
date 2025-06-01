@@ -1,19 +1,18 @@
 {
-  "dependencies": {
-    "next": "^15.1.5",
-    "nextra": "^4.0.4",
-    "nextra-theme-docs": "^4.0.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build && npm run postbuild",
+    "dev": "node next dev",
+    "build": "node next build && npm run postbuild",
     "start": "next start",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
   },
-  "type": "module",
-  "devDependencies": {
-    "pagefind": "^1.3.0"
+  "dependencies": {
+    "katex": "^0.16.22",
+    "next": "^15.3.3",
+    "nextra": "^4.2.17",
+    "nextra-theme-docs": "^4.2.17",
+    "pagefind": "^1.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }

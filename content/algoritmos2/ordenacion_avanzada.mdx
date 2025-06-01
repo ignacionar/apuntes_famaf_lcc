@@ -9,7 +9,7 @@ import Image from 'next/image'
 En pseudocódigo:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\proc \; merge\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
 &\quad merge\_sort\_rec(a, 1, n) \\
 &\bfend \; \proc \\
@@ -30,7 +30,7 @@ En pseudocódigo:
 &\quad \fi \\
 &\bfend \; \proc \\
 &\{ \; a \; \textnormal{es permutación de} \; A \; \land \; a[lft,rgt] \; \textnormal{permutación ordenada de} \; A[lft, rgt] \; \} \\
-\end{align}
+\end{aligned}
 ```
 
 El arreglo dejará de dividirse cuando este tenga un solo elemento, en ese caso, ya estará ordenado. 
@@ -44,7 +44,7 @@ El procedimiento $merge$ se encarga de intercalar dos arreglos ordenados, en la 
 Su pseudocódigo es:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\proc \; merge(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, mid, rgt : \nat) \\
 &\quad \var \; tmp: \array [1..n] \; \of \; T; \; j, k : \nat \\
 &\quad \for \; i := lft \; \too \; mid \; \do \\
@@ -63,7 +63,7 @@ Su pseudocódigo es:
 &\quad \quad \fi \\
 &\quad \od \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 Se considera el caso en el que todos los elementos de la segunda mitad se comparan, lo cual sucede si $k > rgt$, por lo que completamos con los elementos restantes de la primera mitad. 
@@ -77,7 +77,7 @@ Este algoritmo posee una complejidad de $O(n \log n)$ en el peor caso.
 En pseudocódigo:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\proc \; quick\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
 &\quad quick\_sort\_rec(a, 1, n) \\
 &\bfend \; \proc \\
@@ -92,7 +92,7 @@ En pseudocódigo:
 &\quad \fi \\
 &\bfend \; \proc \\
 &\{ \; a \; \textnormal{es permutación de} \; A \; \land \; a[lft,rgt] \; \textnormal{permutación ordenada de} \; A[lft, rgt] \; \} \\
-\end{align}
+\end{aligned}
 ```
 
 La invariante de $partition$ puede verse en la siguiente imagen, donde $lft = pivot$ y se cumple que todos los elementos a la izquierda son menores o iguales a $a[pivot]$ y los de la derecha son mayores a $a[piv]$.
@@ -104,7 +104,7 @@ La invariante de $partition$ puede verse en la siguiente imagen, donde $lft = pi
 El pseudocódigo de $partition$ es:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\proc \; partition(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; lft, rgt : \nat, \; \out \; pivot : \nat) \\
 &\quad \var \; i, j : \nat \\
 &\quad pivot := lft \\
@@ -121,7 +121,7 @@ El pseudocódigo de $partition$ es:
 &\quad swap(a,pivot,j) \quad\; \{- \;\;\textnormal{dejando al} \; pivot \; \textnormal{en una posición más central} \;\; -\} \\
 &\quad pivot := j \quad\quad\quad\quad \{- \;\; \textnormal{señalando la nueva posición del} \; pivot \;\; -\} \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 Comparamos si $a[i]$ es menor o igual al pivote y si $a[j]$ es mayor o igual. De ser el caso aumentamos los índices, de lo contrario intercambiamos los elementos. Por último, ubicamos correctamente a $a[pivot]$ y asignamos su nuevo índice.

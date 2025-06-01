@@ -137,7 +137,7 @@ printf("%d %d", x, y);
 &[\![ \sigma_0 : (x \mapsto 1) ]\!] \\
 &\mathbf{if} \; x > 0 \rightarrow \\
 &\quad x := 0; \\
-&□ \; x \leq 0 \rightarrow \\
+&\Box \; x \leq 0 \rightarrow \\
 &\quad x := 1; \\
 &\mathbf{fi}; \\
 &[\![ \sigma_1 : (x \mapsto 0) ]\!] 
@@ -164,7 +164,7 @@ if (x > 0) {
 &[\![ \sigma_0 : (x \mapsto 1) ]\!] \\
 &\mathbf{if} \; x \geq 0 \rightarrow \\
 &\quad \mathbf{skip}; \\
-&□ \; x < 0 \rightarrow \\
+&\Box \; x < 0 \rightarrow \\
 &\quad x := x * (-1); \\
 &\mathbf{fi}; \\
 &[\![ \sigma_1 : (x \mapsto 1) ]\!] 

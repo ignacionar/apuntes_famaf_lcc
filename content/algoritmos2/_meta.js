@@ -6,5 +6,5 @@ export default {
   recurrencias_jerarquia_de_funciones: "Recurrencias y Jerarquía de Funciones",
   tipos_concretos: "Tipos Concretos",
   tipos_abstractos: "Tipos Abstractos",
-  algoritmos_voraces: "Algoritmos Voraces"
+  tecnicas_de_programacion: "Técnicas de Programación"
 }

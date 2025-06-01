@@ -19,7 +19,7 @@
 ```
 
 Las ecuaciones $(*)$ forman un _sistema de ecuaciones lineales_ de $m$ ecuaciones y $n$ incógnitas. \
-El sistema es **homogéneo** si $y_i = 0 \; \forall i$ , y **no homogéneo** si $\exists i \mid y_i \neq 0$ 
+El sistema es **homogéneo** si $y_i = 0 \; \forall i$ , y **no homogéneo** si $\exists i \mid y_i \not=0$ 
 
 Dos sistemas de ecuaciones son **equivalentes** si cada ecuación de un sistema es combinación lineal del otro.
 
@@ -36,70 +36,70 @@ x + 2y + z = 7 \\
 Sumamos la primera y tercera ecuación:
 
 ```math
-\begin{align*}
+\begin{aligned}
   &x + 2y + z = 7 \\ 
   &\underline{2x + 3y - z = 3} \\
   &3x + 5y = 10 \; (*)
-\end{align*}
+\end{aligned}
 ```
 
 Hacemos lo mismo para la segunda y tecera ecuación 
 
 ```math 
-\begin{align*}
+\begin{aligned}
   &3x + y + z = 5 \\ 
   &\underline{2x + 3y - z = 3} \\
   &5x + 4y = 8 \; (**)
-\end{align*}
+\end{aligned}
 ```
 
 Ahora lo hacemos para $(*)$ y $(**)$ y despejamos $y$: 
 
 ```math 
-\begin{align*}
+\begin{aligned}
   &3x + 5y \cdot 5 = 10 \cdot 5 \\ 
   &5x + 4y \cdot (-3) = 8 \cdot (-3)
-\end{align*}
+\end{aligned}
 ```
 
 ```math 
-\begin{align*}
+\begin{aligned}
   15x + 25y = 50 & \\ 
   \underline{-15x - 12y = -24} & \\
   13y = 26 & \\
   y = 2 
-\end{align*}
+\end{aligned}
 ```
 
 Ahora con el valor de $y$ buscamos el valor de $x$:
 
 ```math 
-\begin{align*}
+\begin{aligned}
   3x + 5y &= 10 \\
   3x + 5(2) &= 10 \\
   3x &= 0 \\
   x &= 0
-\end{align*}
+\end{aligned}
 ```
 
 Buscamos el valor de $z$: 
 
 ```math
-\begin{align*}
+\begin{aligned}
   x + 2y + z &= 7 \\
   4 + z &= 7 \\ 
   z &= 3
-\end{align*}
+\end{aligned}
 ```
 
 Finalmente, verificamos:
  
 ```math 
-\begin{align*}
+\begin{aligned}
   0 + 2(2) + 3 = 7 \\
   3(0) + 2 + 3 = 5 \\
   2(0) + 3(2) - 3 = 3
-\end{align*}
+\end{aligned}
 ```
 
 Esta forma de resolver las ecuaciones es cada vez más lenta y tediosa dependiendo la complejidad del problema a resolver. Existe una forma algorítmica y más conveniente de aplicar el método.
@@ -171,11 +171,11 @@ Para representar el sistema de ecuaciones:
 Podemos usar matrices: 
 
 ```math
-\begin{align*}
+\begin{aligned}
 A = [a_{ij}] \in \mathbb{R}^{m \times n}, \\
 X = [x_i] \in \mathbb{R}^{m \times 1}, \\ 
 Y = [y_i] \in \mathbb{R}^{m \times 1} 
-\end{align*} \implies AX = Y
+\end{aligned} \implies AX = Y
 ```
 
 ```math 
@@ -240,8 +240,8 @@ Tomando por ejemplo $F_i(A) = \begin{bmatrix} a_{i1} & \ldots & a_{in} \end{bmat
 
 Algunas formas de obtener $e(A)$ son: 
 
-- **E1)** Multiplicando $F_r$ por $c \neq 0$. Su inversa es multiplicarla por $\frac{1}{c}$
-- **E2)** Cambiando $F_r$ por $F_r + tF_s$ con $r \neq s$ donde $t \in \mathbb{K}$. Su inversa es multiplicar $F_s$ por $-t \in \mathbb{K}$ y sumarla a $F_r$ 
+- **E1)** Multiplicando $F_r$ por $c \not=0$. Su inversa es multiplicarla por $\frac{1}{c}$
+- **E2)** Cambiando $F_r$ por $F_r + tF_s$ con $r \not=s$ donde $t \in \mathbb{K}$. Su inversa es multiplicar $F_s$ por $-t \in \mathbb{K}$ y sumarla a $F_r$ 
 - **E3)** Permutando $F_r$ por $F_s$. Su inversa es hacer otra vez la permutación.
 
 ### Matriz ampliada 
@@ -289,7 +289,7 @@ y - z = -2
 \end{bmatrix}
 , 
 
-\; 0 \neq -4 
+\; 0 \not=-4 
 ```
 
 ### Matriz MRF
@@ -645,18 +645,18 @@ A =
 ```
 
 ```math
-\begin{align}
+\begin{aligned}
 det \; A &= \displaystyle{\sum_{i=1}^2} \; (-1)^{1+i} a_{i1} \; det \; A(i \mid 1) \\ 
 &= (-1)^{1+1} a_{11} \; det \; A(1 \mid 1) + ((-1)^{1+2} a_{21} \; det \; A(2 \mid 1)) \\
 &= 5 \cdot 4 + (-1) \cdot 6 \cdot (-3) \\
 &= 20 + 18 \\
 &= 38
-\end{align}
+\end{aligned}
 ```
 
 ### Teorema - Matriz 2x2 y determinante 
 
-> $A \in \mathbb{R}^{2 \times 2}$ es invertible $\iff det \; A \neq 0$ 
+> $A \in \mathbb{R}^{2 \times 2}$ es invertible $\iff det \; A \not=0$ 
 
 Si tenemos una matriz $A$ como: 
 

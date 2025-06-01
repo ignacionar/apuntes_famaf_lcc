@@ -7,7 +7,7 @@
 El esquema de este algoritmo es el siguiente:
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\fun \; DyV(x) \; \ret \; y \\
 &\quad \if \; x \; \textnormal{suficientemente simple} \; \then \; y:=ad\_hoc(x) \\
 &\quad \else \; \textnormal{descomponer} \; x \; \textnormal{en} \; x_1,x_2,\ldots,x_a \\
@@ -15,7 +15,7 @@ El esquema de este algoritmo es el siguiente:
 &\quad \quad \{- \;\; \textnormal{combinar} \; y_1,y_2,\ldots,y_a \; \textnormal{para obtener la solución} \; y \; \textnormal{de} \; x \;\; -\} \\
 &\quad \fi \\
 &\bfend \; \fun
-\end{align}
+\end{aligned}
 ```
 
 Los $x_i$ son subproblemas de $x$, podemos considerarlos **fracciones** de $x$:
@@ -36,12 +36,12 @@ Si tomamos por ejemplo el algoritmo _Merge Sort_:
 Para calcular el costo computacional de $DyV$ definimos una función **recursiva** $r(n)$ de la siguiente forma:
 
 ```math 
-\begin{align}
+\begin{aligned}
 t(n) &= \begin{cases}
 c & ,\; n \leq 1 \\
 a * t(n / b) + g(n) & ,\; n > 1
 \end{cases}
-\end{align}
+\end{aligned}
 ```
 
 Donde $c$ es una constante que representa el costo computacional de la función $ad\_hoc$ y $g(n)$ es el costo computacional de procesos de descomposición/combinación. 
@@ -49,19 +49,19 @@ Donde $c$ es una constante que representa el costo computacional de la función 
 Podemos determinar el orden de $t(n)$ de la siguiente forma: 
 
 ```math 
-\begin{align}
+\begin{aligned}
 t(n) &= \begin{cases}
 n^{\log_b a} & ,\; a > b^k \\
 n^k \; \log \; n  & ,\; a = b^k \\
 n^k & ,\; a < b^k
 \end{cases}
-\end{align}
+\end{aligned}
 ```
 
 **Ejemplo:**
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\proc \; f_1 (\bfin \; n : \nat) \\
 &\quad \if \; n \leq 1 \; \then \; \skip \\
 &\quad \else \\
@@ -69,29 +69,29 @@ n^k & ,\; a < b^k
 &\quad \quad \for \; i:=1 \; \too \; n^3 \; \do \; t:=1 \; \od \\
 &\quad \fi \\
 &\bfend \; \proc
-\end{align}
+\end{aligned}
 ```
 
 Siguiendo el anterior esquema, obtenemos:
 
 ```math
-\begin{align}
+\begin{aligned}
 r(n) &= \begin{cases}
 0 & ,\; n \leq 1 \\
 \displaystyle{\sum^8_{i=1} \; r(n/2)} + \displaystyle{\sum^{n^3}_{i=1} \; 1} & ,\; n > 1 \\
 \end{cases}
-\end{align}
+\end{aligned}
 ``` 
 
 El primer término de la sucesión corresponde a la cantidad de veces que se llama a la función $f_1$ y el segundo término corresponde a la cantidad de veces que se ejecuta la instrucción $t:=1$.
 
 ```math
-\begin{align}
+\begin{aligned}
 r(n) &= \begin{cases}
 0 & ,\; n \leq 1 \\
 8 * r(n/2) + n^3 & ,\; n > 1 \\
 \end{cases}
-\end{align}
+\end{aligned}
 ``` 
 
 Planteada la recurrencia tenemos que: 
@@ -106,7 +106,7 @@ Planteada la recurrencia tenemos que:
 > La búsqueda binaria es un algoritmo para encontrar un elemento en una lista ordenada. Dividiendo repetidamente la lista en mitades y comparando el elemento buscado con el elemento del medio.
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\\
 &\{  1 \leq lft \leq n+1 \; \land 0 \leq rgt \leq n \; \land \; a \; \textnormal{está ordenado} \} \\
 &\fun \; binary\_search\_rec(a: \array[1..n] \; \of \; T , \; x: T, \; lft, rgt: \nat) \; \ret \; i : \nat \\
@@ -119,15 +119,15 @@ Planteada la recurrencia tenemos que:
 &\quad \quad \quad \fi \\
 &\quad \fi \\
 &\bfend \; \fun \\
-&\{ i = 0 \implies x \; \textnormal{no está en} \; a[lft,rgt] \; \land \; (i \neq 0 \implies x = a[i]) \} \\
+&\{ i = 0 \implies x \; \textnormal{no está en} \; a[lft,rgt] \; \land \; (i \not=0 \implies x = a[i]) \} \\
 &\\ 
 &\\
 &\{ n \geq 0 \} \\
 &\fun \; binary\_search(a: \array[1..n] \; \of \; T , \; x: T) \; \ret \; i : \nat \\
 &\quad i := binary\_search\_rec(a, x, 1, n) \\
 &\bfend \; \fun \\
-&\{ i = 0 \implies x \; \textnormal{no está en} \; a \; \land \; (i \neq 0 \implies x = a[i]) \}
-\end{align}
+&\{ i = 0 \implies x \; \textnormal{no está en} \; a \; \land \; (i \not=0 \implies x = a[i]) \}
+\end{aligned}
 ```
 
 ## Jerarquía de funciones 
@@ -137,11 +137,11 @@ Planteada la recurrencia tenemos que:
 Podemos establecer la siguiente jerarquía de funciones:
 
 ```math
-\begin{align}
+\begin{aligned}
 &1 \sqsubset \log(\log(\log(n))) \sqsubset \log(\log \; n) \sqsubset \log(n) \sqsubset n^{0.001} \sqsubset n \\
 &\sqsubset n \log \; n \sqsubset n^{1.001} \sqsubset n^{100} \sqsubset 1.01^{n} \sqsubset n^{100} * 1.01^n \\ 
 &\sqsubset 1.02^n \sqsubset 100^n \sqsubset 10000^n \sqsubset (n-1)! \sqsubset n! \sqsubset n^n
-\end{align}
+\end{aligned}
 ```
 
 **Propiedades:**
@@ -151,27 +151,27 @@ Podemos establecer la siguiente jerarquía de funciones:
 - Sea $f(n) > 0$ para casi todo $n \in \NN$: 
 
 ```math
-\begin{align}
+\begin{aligned}
 &g(n) \sqsubset h(n) \iff f(n)g(n) \sqsubset f(n)h(n) \\
 &g(n) \simeq h(n) \iff f(n)g(n) \simeq f(n)h(n)
-\end{align}
+\end{aligned}
 ```
  
 - Sea $\displaystyle{\lim_{n \to \infty}} h(n) = \infty$: 
 
 ```math
-\begin{align}
+\begin{aligned}
 &f(n) \sqsubset g(n) \iff f(h(n)) \sqsubset g(h(n)) \\
 &f(n) \simeq g(n) \iff f(h(n)) \simeq g(h(n))
-\end{align}
+\end{aligned}
 ```
 
 - Sean $\displaystyle{\lim_{n \to +\infty}} f(n) = \infty = \displaystyle{\lim_{n \to +\infty}} g(n)$ y $\displaystyle{\lim_{n \to +\infty}} \frac{f(n)}{g(n)}$ existente: 
 
 ```math
-\begin{align}
+\begin{aligned}
 &\displaystyle{\lim_{n \to \infty}} \frac{f(n)}{g(n)} = 0 \implies f(n) \sqsubset g(n)  \\
 &\displaystyle{\lim_{n \to \infty}}\frac{f(n)}{g(n)} = \infty \implies g(n) \sqsubset f(n) \\
 &\textnormal{caso contrario} \implies f(n) \simeq g(n)
-\end{align}
+\end{aligned}
 ```

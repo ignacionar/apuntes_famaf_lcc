@@ -248,10 +248,10 @@ Demostrar si se cumple la siguiente desigualdad:
 A simple vista los números son demasiado grandes para ser calculados de forma exacta. Podemos aplicar el Teorema del Binomio en la potencia de $9$ de la siguiente manera: 
 
 ```math
-\begin{align*}
+\begin{aligned}
 \binom {1000}{7} \cdot 120! &> (8 + 1)^{1000} \\
 \binom{1000}{7} \cdot 120! &> \displaystyle{\sum_{k=0}^{1000}} \binom {1000}{k} \cdot 8^{1000 - k} \cdot 1^k 
-\end{align*}
+\end{aligned}
 ```
 
 $1$ elevado a cualquier número $\geq 0$ es 1, por lo que la suma se simplifica a: 
@@ -277,10 +277,10 @@ Por el axioma de la compatibilidad del producto con el orden podemos probar la d
 Ahora, por propiedad de las potencias, podemos escribir $8^{993}$ como $(8^3)^{331}$. 
 
 ```math
-\begin{align*}
+\begin{aligned}
 120! &< (8^3)^{331} \\
-120 \cdot 119 ... \cdot 2 \cdot 1 &< 512 \cdot 512 ... \cdot 512
-\end{align*}
+120 \cdot 119 \ldots \cdot 2 \cdot 1 &< 512 \cdot 512 \ldots \cdot 512
+\end{aligned}
 ```
 
 $512$ se multiplica $331$ veces, por lo que volviendo a la desigualdad original: 

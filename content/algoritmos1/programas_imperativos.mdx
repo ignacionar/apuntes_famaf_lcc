@@ -254,7 +254,7 @@ Derivando la asignación, llegamos a un análisis por casos, por lo que podemos 
 &\{ \; P: x = X \land y = Y \} \\
 &\mathbf{if} \; x \geq y \rightarrow \\
 &\quad res := x; \\
-&□ \; x \leq y \rightarrow \\
+&\Box \; x \leq y \rightarrow \\
 &\quad res := y; \\
 &\mathbf{fi}; \\
 &\{ \; res = X \; \textnormal{max} \; Y \; \}
@@ -266,17 +266,17 @@ Cuando se utiliza el cuantificador de conteo $\textnormal{N}$ en una especificac
 Por ejemplo:
 
 ```math 
-\begin{array}{ll}
-... \\
-E = res + \bigl \langle \; \textnormal{N} i : \underline{i = numero\_actual} : i \; \textnormal{mod} \; 6 = 0 \; \bigr \rangle \\
-\\ 
-\equiv \{ \textnormal{ Rango unitario } \} \\
-\\
-E = res + ( \\
- numero\_actual \; \textnormal{mod} \; 6 = 0 \rightarrow 1 \\
- □ \; numero\_actual \; \textnormal{mod} \; 6 \neq 0 \rightarrow 0 \\
-)
-\end{array}
+\begin{aligned}
+&... \\
+&E = res + \bigl \langle \; \textnormal{N} i : \underline{i = numero\_actual} : i \; \textnormal{mod} \; 6 = 0 \; \bigr \rangle \\
+&\\ 
+&\equiv \{ \textnormal{ Rango unitario } \} \\
+&\\
+&E = res + ( \\
+&numero\_actual \; \textnormal{mod} \; 6 = 0 \rightarrow 1 \\
+&\Box \; numero\_actual \; \textnormal{mod} \; 6 \not= 0 \rightarrow 0 \\
+&)
+\end{aligned}
 ```
 
 Tendríamos las dos posibilidades de que la variable $numero\_actual$ sea múltiplo de 6 o no.
@@ -956,7 +956,7 @@ E = s + \underline{\langle \; \textnormal{N} i, \; j : i = m : A.i = A.j \; \big
 \\
 E = s + ( \\
 A.i = A.j \rightarrow 1 \\
-□ \; A.i \neq A.j \rightarrow 0 \\
+\Box \; A.i \not{=} A.j \rightarrow 0 \\
 )
 \end{array}
 ```
@@ -974,7 +974,7 @@ Hemos llegado a una expresión programable mediante el uso de bloques condiciona
 &\quad \mathbf{do} \; m < n \rightarrow \\
 &\quad \quad \mathbf{if} \; A.m = A.n \rightarrow \\
 &\quad \quad \quad m, \; s := m + 1, \; s + 1; \\
-&\quad \quad □ \; A.m \neq A.n \rightarrow \\
+&\quad \quad \Box \; A.m \not{=} A.n \rightarrow \\
 &\quad \quad \quad m := m + 1; \\
 &\quad \quad \mathbf{fi}; \\
 &\quad \mathbf{do}; \\
