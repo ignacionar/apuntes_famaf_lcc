@@ -161,9 +161,9 @@ Una definición por casos de una función tendrá la siguiente forma general:
 ```math
 \begin{aligned}
 &f.x ≐ ( B_0 → f_0 \\
-&□ \; B_1 → f_1 \\
+&\Box \; B_1 → f_1 \\
 &... \\ 
-&□ \; B_n → f_n )
+&\Box \; B_n → f_n )
 &
 \end{aligned}
 ```
@@ -188,8 +188,8 @@ Podemos definirla como:
 ```math
 \begin{aligned}
 &signo.x ≐ ( x > 0 → 1 \\
-&□ \; x < 0 → -1 \\
-&□ \; x = 0 → 0 \; )
+&\Box \; x < 0 → -1 \\
+&\Box \; x = 0 → 0 \; )
 \end{aligned}
 ```
 
@@ -510,22 +510,22 @@ mismo tipo; por ejemplo, $[1, 2, 5]$. Denotamos a la lista vacía con $[ ]$.
  
 Contamos con distintos operadores para trabajar con listas, con su notación formal y su equivalente en Haskell.
 
-● $▹$, llamado **pegar o constructor**, toma un elemento x (a izquierda) y una lista xs, y devuelve una lista con x como primer elemento y los elementos de xs a continuación. Ej:
+● $\triangleright$, llamado **pegar o constructor**, toma un elemento x (a izquierda) y una lista xs, y devuelve una lista con x como primer elemento y los elementos de xs a continuación. Ej:
 
-El operador $▹$ es fundamental (se lo denomina constructor), ya que permite **construir listas arbitrarias a partir de la lista vacía**. $▹$ toma un elemento $x$ (a izquierda) y una lista $xs$ y devuelve una lista con primer elemento $x$ seguido de los elementos de $xs$. Por ejemplo:
+El operador $\triangleright$ es fundamental (se lo denomina constructor), ya que permite **construir listas arbitrarias a partir de la lista vacía**. $\triangleright$ toma un elemento $x$ (a izquierda) y una lista $xs$ y devuelve una lista con primer elemento $x$ seguido de los elementos de $xs$. Por ejemplo:
 
 ```math
 \begin{aligned}
-&3 \; ▹ \; [ ] = [3] \\
-&1 \; ▹ \; [2, 3] = [1, 2, 3]
+&3 \; \triangleright \; [ ] = [3] \\
+&1 \; \triangleright \; [2, 3] = [1, 2, 3]
 \end{aligned}
 ```
 
 Para denotar listas no vacías utilizamos expresiones de la forma $[x, y, . . . , z]$, que son
-abreviaciones de $x \; ▹ \; (y \; ▹ \; . . . (z \; ▹ \; [ ])$.
+abreviaciones de $x \; \triangleright \; (y \; \triangleright \; . . . (z \; \triangleright \; [ ])$.
 
-El operador $▹$ es asociativo a derecha, por lo tanto, es lo mismo escribir $x \; ▹ \; (y \; ▹ \; . . . (z \; ▹ \; [ ])$
-que $x \; ▹ \; y \; ▹ \; . . . \; z \; ▹ \; [ ]$. 
+El operador $\triangleright$ es asociativo a derecha, por lo tanto, es lo mismo escribir $x \; \triangleright \; (y \; \triangleright \; . . . (z \; \triangleright \; [ ])$
+que $x \; \triangleright \; y \; \triangleright \; . . . \; z \; \triangleright \; [ ]$. 
 
 En Haskell se escribe:
 
@@ -596,15 +596,15 @@ Este operador es asociativo por lo que podemos escribir sin ambigüedad expresio
 [1, 2, 4] ++ [1, 0, 7] = [1, 2, 4, 1, 0, 7]
 ```
 
-● $◃$, llamado **pegar a izquierda** toma una lista $xs$ (a izquierda) y un elemento y devuelve una lista con todos los elementos de $xs$ seguidos por $x$ como último elemento. Ej:
+● $\triangleleft$, llamado **pegar a izquierda** toma una lista $xs$ (a izquierda) y un elemento y devuelve una lista con todos los elementos de $xs$ seguidos por $x$ como último elemento. Ej:
 
 ```math
-[1, 2] \; ◃ \; 3 = [1, 2, 3]
+[1, 2] \; \triangleleft \; 3 = [1, 2, 3]
 ```
 
-Este operador es asociativo a izquierda, luego es lo mismo $([ ] \; ◃ \; z) \; . . . \; ◃ \; y) \; ◃ \; x$ que $[ ] \; ◃ \; z \; . . . \; ◃ \; y \; ◃ \; x$.
+Este operador es asociativo a izquierda, luego es lo mismo $([ ] \; \triangleleft \; z) \; . . . \; \triangleleft \; y) \; \triangleleft \; x$ que $[ ] \; \triangleleft \; z \; . . . \; \triangleleft \; y \; \triangleleft \; x$.
 
-En Haskell $xs \; ◃ \; x$ no está definido, pero podríamos utilizar el operador de **concatenar** para implementarla de la siguiente manera: `xs ++ [x]`
+En Haskell $xs \; \triangleleft \; x$ no está definido, pero podríamos utilizar el operador de **concatenar** para implementarla de la siguiente manera: `xs ++ [x]`
 
 ```hs
 [1, 2] ++ [3] = [1, 2, 3]
@@ -724,7 +724,7 @@ Para dar un ejemplo de función recursiva, supongamos que tenemos una lista de n
 \begin{aligned}
 &sumatoria : [Int] \rightarrow Int \\
 &sumatoria.[ ] \; \dot{=} \; 0 \\
-&sumatoria.(x \;▹ \;xs) \; \dot{=} \; x + sumatoria.xs
+&sumatoria.(x \;\triangleright \;xs) \; \dot{=} \; x + sumatoria.xs
 \end{aligned}
 \end{equation*}
 ```

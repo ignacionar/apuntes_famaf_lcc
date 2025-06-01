@@ -14,8 +14,8 @@ Cuando una de estas condiciones no se cumple, decimos que la función es **disco
 
 En base a los criterios anteriores, se establecen tres tipos de discontinuidades:
 
-1. **Discontinuidad evitable**: $\displaystyle{\lim_{x \to a}} \; f(x) \neq f(a)$
-2. **Discontinuidad de salto**: $\displaystyle{\lim_{x \to a^-}} \; f(x) \neq \displaystyle{\lim_{x \to a^+}} \; f(x) \;\; (\not\exists\;\displaystyle{\lim_{x \to a}} \; f(x))$
+1. **Discontinuidad evitable**: $\displaystyle{\lim_{x \to a}} \; f(x) \not=f(a)$
+2. **Discontinuidad de salto**: $\displaystyle{\lim_{x \to a^-}} \; f(x) \not=\displaystyle{\lim_{x \to a^+}} \; f(x) \;\; (\not\exists\;\displaystyle{\lim_{x \to a}} \; f(x))$
 3. **Discontinuidad esencial**: $\displaystyle{\lim_{x \to a^\pm}} \; f(x) = \pm\infty \;\; (\not\exists\;\displaystyle{\lim_{x \to a}} \; f(x))$
 
 Si $a \not\in Dom\;f(x)$, entonces $a$ puede ser un punto de discontinuidad de salto o esencial.
@@ -121,7 +121,7 @@ b]
 ```
 
 ```math
-\displaystyle{\lim_{x \to 3}} \; f(x) \neq f(3) 
+\displaystyle{\lim_{x \to 3}} \; f(x) \not=f(3) 
 ```
 
 $f$ es discontinua si $x = 3$ (discontinuidad evitable).
@@ -151,7 +151,7 @@ Dada la siguiente función por partes:
 ```math
 f(x) = \left\{
     \begin{array}{ll}
-        x^2\sin(\frac{1}{x}), & x \neq 0 \\
+        x^2\sin(\frac{1}{x}), & x \not=0 \\
         0, & x = 0 \\
     \end{array}
 \right.
@@ -205,7 +205,7 @@ Si $f$ y $g$ son continuas en $a$, entonces lo serán:
 * $(f + g)(x)$
 * $(f - g)(x)$
 * $(f \cdot g)(x)$
-* $(\frac{f}{g})(x)$, si $g(a) \neq 0$
+* $(\frac{f}{g})(x)$, si $g(a) \not=0$
 * $(f \circ g)(x)$, si $f$ continua en $g(a)$
 
 Si $a$ es un punto del dominio (**no extremos**):

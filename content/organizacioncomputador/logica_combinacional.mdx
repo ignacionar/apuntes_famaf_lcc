@@ -119,13 +119,13 @@ Donde $\;S = z \oplus (x \oplus y), \; C = z(xy + x'y) + xy$
 Si tomamos por ejemplo, la suma de los números de cuatro bits $A, B$ debemos sumar cada $A_i$ con $B_i$ y el acarreo de la suma anterior: 
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\quad \; \\
 &\quad \quad C_3 C_2 C_1 C_0 \\
 &\quad \quad A_3 A_2 A_1 A_0 \\ 
 &+ \;\;\; B_3 B_2 B_1 B_0 \\
 &\quad \;\; \overline{C_4 S_3 S_2 S_1 S_0} \\
-\end{align}
+\end{aligned}
 ```
 
 <br />
@@ -149,30 +149,30 @@ Observando el diagrama del sumador completo:
 Mediante las variables binarias:
 
 ```math 
-\begin{align}
+\begin{aligned}
 P_i &= A_i \oplus B_i \\
 G_i &= A_iB_i \\
-\end{align}
+\end{aligned}
 ```
 
 Expresamos la suma y el acarreo como: 
 
 ```math
-\begin{align}
+\begin{aligned}
 S_i &= P_i \oplus C_i \\
 C_{i+1} &= G_i + P_iC_i \\
-\end{align}
+\end{aligned}
 ```
 
 Los acarreos serían: 
 
 ```math
-\begin{align}
+\begin{aligned}
 &C_0 \\
 &C_1 = G_0 + P_0C_0 \\
 &C_2 = G_1 + P_1C_1 = G_1 + P_1(G_0 + P_0C_0) \\
 &C_3 = G_2 + P_2C_2 = G_2 + P_2(G_1 + P_1(G_0 + P_0C_0)) \\
-\end{align}
+\end{aligned}
 ```
 
 Un diagrama lógico de un acarreo anticipado sería:  
@@ -188,13 +188,13 @@ Un diagrama lógico de un acarreo anticipado sería:
 Si queremos multiplicar dos números de dos bits $A, B$ seguimos de la siguiente manera:
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\quad \quad \quad \quad \quad \quad \; B_1 \quad \quad \quad B_0 \\
 &\quad \quad \quad \quad \quad \times \; \; A_1 \quad \quad \quad A_0 \\
 &+ \quad \quad \quad \quad \quad \overline{A_0 B_1 \quad A_0 B_0} \\
 &\quad \quad \;\;\; A_1 B_1 \quad A_1 B_0 \\
 &\overline{C_3 \quad \quad C_2 \quad  \quad C_1 \quad \quad  C_0} \\
-\end{align}
+\end{aligned}
 ```
 
 Aplicado a un diagrama lógico:

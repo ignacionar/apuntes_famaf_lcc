@@ -1,4 +1,6 @@
-# Algoritmos Voraces
+# Técnicas de programación
+
+## Algoritmos voraces
 
 > Los algoritmos voraces o de tipo _greedy_ son aquellos que resuelven problemas de **optimización**, construyen la solución óptima **paso a paso** eligiendo la componente de la solución\
 (sin revisar elecciones previas de componentes).
@@ -6,7 +8,7 @@
 Su esquema general es el siguiente:
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\fun \; voraz(C: Set \; \of \; \textnormal{Candidato}) \; \ret \; S: \textnormal{Solución a construir} \\
 &\quad S := \textnormal{solución vacía} \\
 &\quad \while \; S \; \textnormal{no es solución} \; \do \\
@@ -17,7 +19,7 @@ Su esquema general es el siguiente:
 &\quad\quad \fi \\
 &\quad \od \\
 &\bfend \; \fun 
-\end{align}
+\end{aligned}
 ```
 
 ## Algoritmos voraces sobre grafos 
@@ -37,3 +39,9 @@ Se busca obtener los caminos de menor costo desde $v$ hacia cada uno de los dem�
 
 Para resolver este problema, el algoritmo de Dijkstra realiza una secuencia de $n$ pasos, donde $n$ es el número de vértices.\
 En cada paso "aprende" el camino de menor costo desde $v$ a un nuevo vértice, pintandolo de color (finalizado). Tras esos $n$ pasos, conoce los costos de los caminos de menor costo a cada uno de los vértices. 
+
+## Backtracking 
+
+> El _backtracking_ es una técnica de programación que se utiliza al no poder resolver un problema de forma voraz (no hay criterio de selección óptimo).\
+Se basa en la idea de **explorar todas las soluciones posibles** y quedarnos con la mejor de ellas. Si se elige un fragmento de solución que no es óptimo, se descarta y se vuelve atrás (_backtrack_) para probar otra opción.
+

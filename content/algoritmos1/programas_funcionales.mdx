@@ -5,11 +5,11 @@
 Suponiendo que sabemos la definición de un programa dado: 
 
 ```math
-\begin{array}{l}
-  \Big\vert\ sum : [Num] \to Num \\
-  \overline{\Big\vert \; sum.[] \doteq 0}   \\
-  \Big\vert\ sum.(x \triangleright xs) \doteq x + sum.xs
-\end{array}
+\begin{aligned}
+  &\Big\vert\ sum : [Num] \to Num \\
+  &\overline{\Big\vert \; sum.[] \doteq 0}   \\
+  &\Big\vert\ sum.(x \triangleright xs) \doteq x + sum.xs
+\end{aligned}
 ```
 
 Por la definición de la función o por el problema que se nos plantea, podemos escribir una **especificación** mediante una expresión cuantificada: 
@@ -33,25 +33,25 @@ sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
 **Caso base** (cuanto vale $sum.[]$)
 
 ```math
-\begin{array}{ll}
-  \underline{sum.[]} \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } sum \; \} \\
-  \\
-  \bigl \langle \; \sum i : 0 \leq i < \underline{ \# []} : [].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } \# \; \} \\
-  \\
-  \bigl \langle \; \sum i : \underline{0 \leq i < 0 }: [].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Aritmética } \} \\
-  \\
-  \bigl \langle \; \sum i : \underline{False} : [].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Rango vacío } \} \\
-  \\
-  0
-\end{array}
+\begin{aligned}
+  &\underline{sum.[]} \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } sum \; \} \\
+  &\\
+  &\bigl \langle \; \sum i : 0 \leq i < \underline{ \# []} : [].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } \# \; \} \\
+  &\\
+  &\bigl \langle \; \sum i : \underline{0 \leq i < 0 }: [].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Aritmética } \} \\
+  &\\
+  &\bigl \langle \; \sum i : \underline{False} : [].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Rango vacío } \} \\
+  &\\
+  &0
+\end{aligned}
 ```
 
 Por lo tanto, $sum.[] = 0$
@@ -63,30 +63,29 @@ HI : sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
 ```
 
 ```math
-\begin{array}{ll}
-
-\underline{sum.(x \triangleright xs)} \\
-\\ 
-\equiv \{ \textnormal{ Especificación de } sum \; \} \\
-\\
-\bigl \langle \; \sum i : 0 \leq i < \underline{\# (x \triangleright xs)} : (x \triangleright xs).i \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Definición de } \# \; \} \\
-\\
-\underline{\bigl \langle \; \sum i : 0 \leq i < 1 + \# xs : (x \triangleright xs).i \; \bigr \rangle \\} \\
-\\
-\equiv \{ \textnormal{ Separación de un término } \} \\
-\\
-\underline{(x \triangleright xs).0} + \bigl \langle \; \sum i : 0 \leq i < \# xs : \underline{(x \triangleright xs).(i + 1)} \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Definición de } . \; \} \\
-\\
-x + \underline{\bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle} \\
-\\
-\equiv \{ \textnormal{ Hipótesis inductiva } \} \\
-\\
-x + sum.xs
-\end{array}
+\begin{aligned}
+&\underline{sum.(x \triangleright xs)} \\
+&\\ 
+&\equiv \{ \textnormal{ Especificación de } sum \; \} \\
+&\\
+&\bigl \langle \; \sum i : 0 \leq i < \underline{\# (x \triangleright xs)} : (x \triangleright xs).i \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Definición de } \# \; \} \\
+&\\
+&\underline{\bigl \langle \; \sum i : 0 \leq i < 1 + \# xs : (x \triangleright xs).i \; \bigr \rangle \\} \\
+&\\
+&\equiv \{ \textnormal{ Separación de un término } \} \\
+&\\
+&\underline{(x \triangleright xs).0} + \bigl \langle \; \sum i : 0 \leq i < \# xs : \underline{(x \triangleright xs).(i + 1)} \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Definición de } . \; \} \\
+&\\
+&x + \underline{\bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle} \\
+&\\
+&\equiv \{ \textnormal{ Hipótesis inductiva } \} \\
+&\\
+&x + sum.xs
+\end{aligned}
 ```
 
 Por lo tanto, $sum.(x \triangleright xs) = x + sum.xs$
@@ -94,11 +93,11 @@ Por lo tanto, $sum.(x \triangleright xs) = x + sum.xs$
 El programa sería:
 
 ```math
-\begin{array}{l}
-  \Big\vert\ sum : [Num] \to Num \\
-  \overline{\Big\vert \; sum.[] \doteq 0}   \\
-  \Big\vert\ sum.(x \triangleright xs) \doteq x + sum.xs
-\end{array}
+\begin{aligned}
+  &\Big\vert\ sum : [Num] \to Num \\
+  &\overline{\Big\vert \; sum.[] \doteq 0}   \\
+  &\Big\vert\ sum.(x \triangleright xs) \doteq x + sum.xs
+\end{aligned}
 ```
 
 Podemos recurrir a otras técnicas para derivar, estas se encuentran más abajo. 
@@ -124,46 +123,46 @@ Observemos que la expresión $par.(n + 1)$ puede ser verdadera o falsa, por lo q
 **Caso 1:** $par.(n + 1)$
 
 ```math
-\begin{array}{ll}
-sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land \underline{par.(n + 1)} : i \; \bigr \rangle \\
-\\
-\equiv \{ \; \textnormal{Caso 1:} \; par.(n + 1) \; \} \\
-\\
-sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land True : i \; \bigr \rangle \\
-\\
-... \\
-\\
-sum \_ par.n + n + 1
-\end{array}
+\begin{aligned}
+&sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land \underline{par.(n + 1)} : i \; \bigr \rangle \\
+&\\
+&\equiv \{ \; \textnormal{Caso 1:} \; par.(n + 1) \; \} \\
+&\\
+&sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land True : i \; \bigr \rangle \\
+&\\
+&... \\
+&\\
+&sum \_ par.n + n + 1
+\end{aligned}
 ```
 
 **Caso 2:** $\neg par.(n + 1)$
 
 ```math
-\begin{array}{ll}
-sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land \underline{par.(n + 1)} : i \; \bigr \rangle \\
-\\
-\equiv \{ \; \textnormal{Caso 2:} \; \neg par.(n + 1) \; \} \\
-\\
-sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land False : i \; \bigr \rangle \\
-\\
-... \\ 
-\\ 
-sum \_ par.n
-\end{array}
+\begin{aligned}
+&sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land \underline{par.(n + 1)} : i \; \bigr \rangle \\
+&\\
+&\equiv \{ \; \textnormal{Caso 2:} \; \neg par.(n + 1) \; \} \\
+&\\
+&sum \_ par.n + \bigl \langle \; \sum i : i = n + 1 \land False : i \; \bigr \rangle \\
+&\\
+&... \\ 
+&\\ 
+&sum \_ par.n
+\end{aligned}
 ```
 
 Nuestra definición final sería: 
 
 ```math
-\begin{array}{l}
-  \Big\vert\ sum \_ par : Num \to Num \\ 
-  \overline{\Big\vert \; sum \_ par.0 \doteq 0}   \\
-  \Big\vert\ sum \_ par.(n + 1) \doteq ( \\
-  \Big\vert\ □ \; par.(n+1) → sum \_ par.n + n + 1 \\
-  \Big\vert\ □ \; \neg par.(n+1) → sum \_ par.n \\
-  \Big\vert\ )
-\end{array}
+\begin{aligned}
+  &\Big\vert\ sum \_ par : Num \to Num \\ 
+  &\overline{\Big\vert \; sum \_ par.0 \doteq 0}   \\
+  &\Big\vert\ sum \_ par.(n + 1) \doteq ( \\
+  &\Big\vert\ \Box \; par.(n+1) → sum \_ par.n + n + 1 \\
+  &\Big\vert\ \Box \; \neg par.(n+1) → sum \_ par.n \\
+  &\Big\vert\ )
+\end{aligned}
 ```
 
 ***
@@ -192,21 +191,21 @@ exp.x.n = x^n
 Tras derivarla obtenemos: 
 
 ```math	
-\begin{array}{l}
-  \Big\vert\ exp : Num \to Num \to Num \\
-  \overline{\Big\vert \; exp.x.0 \doteq 1}   \\
-  \Big\vert\ exp.x.(n + 1) \doteq n * exp.x.n 
-\end{array}
+\begin{aligned}
+  &\Big\vert\ exp : Num \to Num \to Num \\
+  &\overline{\Big\vert \; exp.x.0 \doteq 1}   \\
+  &\Big\vert\ exp.x.(n + 1) \doteq n * exp.x.n 
+\end{aligned}
 ```
 
 Y podemos reemplazar la expresión en nuestra definición: 
 
 ```math
-\begin{array}{l}
-  \Big\vert\ f : Num \to Num \to Num \\
-  \overline{\Big\vert \; f.x.0 \doteq x}   \\
-  \Big\vert\ f.x.(n + 1) \doteq f.x.n + exp.x.n
-\end{array}
+\begin{aligned}
+  &\Big\vert\ f : Num \to Num \to Num \\
+  &\overline{\Big\vert \; f.x.0 \doteq x}   \\
+  &\Big\vert\ f.x.(n + 1) \doteq f.x.n + exp.x.n
+\end{aligned}
 ```
 
 ***
@@ -222,51 +221,51 @@ psum.xs = \bigl \langle \; \forall i : 0 \leq i < \# xs : sum.(xs↑i) \geq 0 \;
 Al seguir en el paso inductivo $(x \triangleright xs)$, llegamos a la siguiente expresión: 
 
 ```math
-\begin{array}{ll}
-\underline{psum}.(x \triangleright xs) \\
-\\
-\equiv \{ \textnormal{ Especificación de } psum \} \\
-\\
-\bigl \langle \; \forall i : 0 \leq i < \underline{\# (x \triangleright xs)} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Definición de } \# \} \\
-\\
-\bigl \langle \; \forall i : \underline{0 \leq i < 1 + \# xs} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Aritmética } \} \\
-\\
-\bigl \langle \; \forall i : \underline{i = 0 \lor 1 \leq i < \# xs + 1} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Partición de Rango } \} \\
-\\
-\underline{\bigl \langle \; \forall i : i = 0 : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \; \land \; \bigl \langle \; \forall i : 1 \leq i < \# xs + 1 : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle} \\
-\\
-\equiv \{ \textnormal{ Rango unitario, Cambio de Variable: i ← i + 1 } \} \\
-\\
-sum.((\underline{x \triangleright xs)↑0}) \geq 0 \; \land \; \bigl \langle \; \forall i : 1 \leq i < \# xs + 1 : sum.(\underline{(x \triangleright xs)↑(i + 1)}) \geq 0 \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Definición de } ↑, \textnormal{ Aritmética } \} \\
-\\
-\underline{sum.[]} \geq 0 \land \bigl \langle \; \forall i : 0 \leq i < \# xs : \underline{sum.((x \triangleright (xs↑i)))} \geq 0 \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Definición de } sum \} \\
-\\
-\underline{0 \geq 0} \land \bigl \langle \; \forall i : 0 \leq i < \# xs : x + sum.(xs↑i) \geq 0 \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Aritmética, Elemento neutro de } \land \} \\
-\\
-\bigl \langle \; \forall i : 0 \leq i < \# xs : x + sum.(xs↑i) \geq 0 \; \bigr \rangle
-\end{array} 
+\begin{aligned}
+&\underline{psum}.(x \triangleright xs) \\
+&\\
+&\equiv \{ \textnormal{ Especificación de } psum \} \\
+&\\
+&\bigl \langle \; \forall i : 0 \leq i < \underline{\# (x \triangleright xs)} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Definición de } \# \} \\
+&\\
+&\bigl \langle \; \forall i : \underline{0 \leq i < 1 + \# xs} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Aritmética } \} \\
+&\\
+&\bigl \langle \; \forall i : \underline{i = 0 \lor 1 \leq i < \# xs + 1} : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Partición de Rango } \} \\
+&\\
+&\underline{\bigl \langle \; \forall i : i = 0 : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle \; \land \; \bigl \langle \; \forall i : 1 \leq i < \# xs + 1 : sum.((x \triangleright xs)↑i) \geq 0 \; \bigr \rangle} \\
+&\\
+&\equiv \{ \textnormal{ Rango unitario, Cambio de Variable: i /leftarrow i + 1 } \} \\
+&\\
+&sum.((\underline{x \triangleright xs)↑0}) \geq 0 \; \land \; \bigl \langle \; \forall i : 1 \leq i < \# xs + 1 : sum.(\underline{(x \triangleright xs)↑(i + 1)}) \geq 0 \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Definición de } ↑, \textnormal{ Aritmética } \} \\
+&\\
+&\underline{sum.[]} \geq 0 \land \bigl \langle \; \forall i : 0 \leq i < \# xs : \underline{sum.((x \triangleright (xs↑i)))} \geq 0 \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Definición de } sum \} \\
+&\\
+&\underline{0 \geq 0} \land \bigl \langle \; \forall i : 0 \leq i < \# xs : x + sum.(xs↑i) \geq 0 \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Aritmética, Elemento neutro de } \land \} \\
+&\\
+&\bigl \langle \; \forall i : 0 \leq i < \# xs : x + sum.(xs↑i) \geq 0 \; \bigr \rangle
+\end{aligned} 
 ```
 
 No aplicar nuestra Hipótesis Inductiva, ya que tenemos: 
 
 ```math 
-\begin{array}{ll}
-\bigl \langle \; \forall i : 0 \leq i < \# xs : sum.(xs↑i) \geq 0 \; \bigr \rangle \; (HI) \\
-\\
-\bigl \langle \; \forall i : 0 \leq i < \# xs : \textcolor{darkred}{x} + sum.(xs↑i) \geq 0 \; \bigr \rangle
-\end{array}
+\begin{aligned}
+&\bigl \langle \; \forall i : 0 \leq i < \# xs : sum.(xs↑i) \geq 0 \; \bigr \rangle \; (HI) \\
+&\\
+&\bigl \langle \; \forall i : 0 \leq i < \# xs : \textcolor{darkred}{x} + sum.(xs↑i) \geq 0 \; \bigr \rangle
+\end{aligned}
 ```
 
 Podemos generalizar $psum$ definiendo una nueva función $gpsum$, de forma tal que:
@@ -278,45 +277,45 @@ gpsum.n.xs = \bigl \langle \; \forall i : 0 \leq i < n : \textcolor{darkred}{n} 
 Podemos decir que $psum.xs = gpsum.0.xs$, ya que: 
 
 ```math
-\begin{array}{ll}
-\underline{gpsum}.0.xs \\
-\\
-\equiv \{ \textnormal{ Especificación de } gpsum \} \\
-\\
-\bigl \langle \; \forall i : 0 \leq i < \underline{0} : \underline{0 + sum.(xs↑i)} \geq 0 \; \bigr \rangle \\
-\\
-\equiv \{ \textnormal{ Aritmética } \} \\
-\\
-\underline{\bigl \langle \; \forall i : 0 \leq i < 0 : sum.(xs↑i) \geq 0 \; \bigr \rangle} \\
-\\
-\equiv \{ \textnormal{ Especificación de } psum \} \\
-\\
-psum.xs
-\end{array}
+\begin{aligned}
+&\underline{gpsum}.0.xs \\
+&\\
+&\equiv \{ \textnormal{ Especificación de } gpsum \} \\
+&\\
+&\bigl \langle \; \forall i : 0 \leq i < \underline{0} : \underline{0 + sum.(xs↑i)} \geq 0 \; \bigr \rangle \\
+&\\
+&\equiv \{ \textnormal{ Aritmética } \} \\
+&\\
+&\underline{\bigl \langle \; \forall i : 0 \leq i < 0 : sum.(xs↑i) \geq 0 \; \bigr \rangle} \\
+&\\
+&\equiv \{ \textnormal{ Especificación de } psum \} \\
+&\\
+&psum.xs
+\end{aligned}
 ```
 
 ```math 
-\begin{array}{l}
-  \Big\vert\ psum : [Num] \to Bool \\
-  \overline{\Big\vert \; psum.xs} \doteq gpsum.0.xs 
-\end{array}
+\begin{aligned}
+  &\Big\vert\ psum : [Num] \to Bool \\
+  &\overline{\Big\vert \; psum.xs} \doteq gpsum.0.xs 
+\end{aligned}
 ```
 
 Una vez derivado $gpsum$, tendremos dos programas finales: 
 
 ```math 
-\begin{array}{l}
-  \Big\vert\ gpsum : Num \to [Num] \to Bool \\
-  \overline{\Big\vert \; gpsum.n.[]} \doteq ... \\
-  \Big\vert\ gpsum.n.(x \triangleright xs) \doteq ...
-\end{array}
+\begin{aligned}
+  &\Big\vert\ gpsum : Num \to [Num] \to Bool \\
+  &\overline{\Big\vert \; gpsum.n.[]} \doteq ... \\
+  &\Big\vert\ gpsum.n.(x \triangleright xs) \doteq ...
+\end{aligned}
 ```
 
 ```math 
-\begin{array}{l}
-  \Big\vert\ psum : [Num] \to Bool \\
-  \overline{\Big\vert \; psum.xs} \doteq gpsum.0.xs 
-\end{array}
+\begin{aligned}
+  &\Big\vert\ psum : [Num] \to Bool \\
+  &\overline{\Big\vert \; psum.xs} \doteq gpsum.0.xs 
+\end{aligned}
 ```
 
 ***
@@ -330,20 +329,20 @@ En el caso de la inducción con naturales, tenemos:
 **Inducción Básica:**
 
 ```math
-\begin{align}
+\begin{aligned}
 f.0 &\doteq \; ? \\
 f.(n + 1) &\doteq \; ? 
-\end{align}
+\end{aligned}
 ```
 
 **Inducción a lo Fibonacci:**
 
 ```math
-\begin{align}
+\begin{aligned}
 fib.0 &\doteq 0 \\
 fib.1 &\doteq 1 \\
 fib.(n + 2) &\doteq fib.(n + 1) + fib.n
-\end{align}
+\end{aligned}
 ```
 
 En el caso de la inducción con listas, tenemos: 
@@ -351,20 +350,20 @@ En el caso de la inducción con listas, tenemos:
 **Inducción básica:** ($sum$, $prod$, etc.)
 
 ```math
-\begin{align}
+\begin{aligned}
 f.[] &\doteq ? \\
 f.(x \triangleright xs) &\doteq ?
-\end{align}
+\end{aligned}
 ```
 
 **Inducción con dos o más elementos:** (funciones $iguales$, $minimo$ y $creciente$)
 
 ```math
-\begin{align}
+\begin{aligned}
 f.[] &\doteq ? \\
 f.[x] &\doteq ? \\
 f.(x \triangleright y \triangleright xs) &\doteq ?
-\end{align}
+\end{aligned}
 ```
 
 Ejemplo: 
@@ -383,7 +382,7 @@ Necesitamos reemplazar el caso base por $[x]$ y el Paso inductivo por $(x \trian
 Podemos buscar un **segmento inicial** de una lista derivando la siguiente especificación. 
 
 ```math
-Q.xs.ys = \bigl \langle \; \exists bs :: ys = xs \textnormal{⧺} bs \; \bigr \rangle
+Q.xs.ys = \bigl \langle \; \exists bs :: ys = xs \; \textnormal{⧺} \; bs \; \bigr \rangle
 ```
 
 Para derivarlo, nuestro esquema inductivo debe ser el siguiente: 
@@ -409,29 +408,29 @@ sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle
 Aplicamos la especificación de $sum$ para la lista $[1, 2, 3, 4]$:
 
 ```math
-\begin{array}{ll}
-  \underline{sum}.[1, 2, 3, 4] \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } sum \; \} \\
-  \\
-  \bigl \langle \; \sum i : \underline{0 \leq i < \# [1, 2, 3, 4]} : [1, 2, 3, 4].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Calculo rango sabiendo } \#xs = 4 \; \} \\
-  \\
-  \bigl \langle \; \underline{\sum i : i \in \{0, 1, 2, 3\} : [1, 2, 3, 4].i} \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Aplico el término a cada elemento del rango }  \} \\
-  \\
-  \underline{[1, 2, 3, 4].0} + \underline{[1, 2, 3, 4].1} + \underline{[1, 2, 3, 4].2} + \underline{[1, 2, 3, 4].3} \\
-  \\
-  \equiv \{ \textnormal{ Evalúo indexaciones } \} \\
-  \\
-  \underline{1 + 2 + 3 + 4} \\
-  \\
-  \equiv \{ \textnormal{ Aritmética } \} \\
-  \\
-  10
-\end{array}
+\begin{aligned}
+  &\underline{sum}.[1, 2, 3, 4] \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } sum \; \} \\
+  &\\
+  &\bigl \langle \; \sum i : \underline{0 \leq i < \# [1, 2, 3, 4]} : [1, 2, 3, 4].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Calculo rango sabiendo } \#xs = 4 \; \} \\
+  &\\
+  &\bigl \langle \; \underline{\sum i : i \in \{0, 1, 2, 3\} : [1, 2, 3, 4].i} \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Aplico el término a cada elemento del rango }  \} \\
+  &\\
+  &\underline{[1, 2, 3, 4].0} + \underline{[1, 2, 3, 4].1} + \underline{[1, 2, 3, 4].2} + \underline{[1, 2, 3, 4].3} \\
+  &\\
+  &\equiv \{ \textnormal{ Evalúo indexaciones } \} \\
+  &\\
+  &\underline{1 + 2 + 3 + 4} \\
+  &\\
+  &\equiv \{ \textnormal{ Aritmética } \} \\
+  &\\
+  &10
+\end{aligned}
 ```
 
 El resultado para la lista $[1, 2, 3, 4]$ es $10$.
@@ -443,184 +442,188 @@ El resultado para la lista $[1, 2, 3, 4]$ es $10$.
 Derivar la función $pin8$ a partir de la especificación (donde $prod$ es una función que devuelve el producto de los elementos de una lista):
 
 ```math
-pin8.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{⧺} bs : prod.as = 8 \; \bigr \rangle
+pin8.xs = \bigl \langle \; \exists as, bs : xs = as \; \textnormal{⧺} \; bs : prod.as = 8 \; \bigr \rangle
 ```	
 
 Primero evaluamos el caso base, $xs = []$:
 
 ```math
-\begin{array}{ll}
-  \underline{pin8}.[] \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } pin8 \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{ [] = as \textnormal{⧺} bs }: prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Propiedad de } \textnormal{⧺} \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{as} = [] \land bs = [] : prod.\underline{as} = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Eliminación de variable } as \; \} \\
-  \\
-  \bigl \langle \; \exists bs : \underline{bs = []} : prod.[] = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Rango unitario} \; \} \\
-  \\
-  \underline{prod.[]} = 8 \\
-  \\
-  \equiv \{ \textnormal{ Definición de } prod \; \} \\
-  \\
-  \underline{1 = 8} \\
-  \\
-  \equiv \{ \textnormal{ Aritmética } \} \\
-  \\
-  False
-\end{array}
+\begin{aligned}
+  &\underline{pin8}.[] \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } pin8 \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{ [] = as \; \textnormal{⧺} \; bs }: prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Propiedad de } \; \textnormal{⧺} \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{as} = [] \land bs = [] : prod.\underline{as} = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Eliminación de variable } as \; \} \\
+  &\\
+  &\bigl \langle \; \exists bs : \underline{bs = []} : prod.[] = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Rango unitario} \; \} \\
+  &\\
+  &\underline{prod.[]} = 8 \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } prod \; \} \\
+  &\\
+  &\underline{1 = 8} \\
+  &\\
+  &\equiv \{ \textnormal{ Aritmética } \} \\
+  &\\
+  &False
+\end{aligned}
 ```
 
 Por lo tanto, $pin8.[] = False$
 
-Para el Paso inductivo, seguimos con $xs = (x \triangleright xs)$:
+Para el paso inductivo, seguimos con $xs = (x \triangleright xs)$:
 
 ```math
-\begin{array}{ll}
-  \underline{pin8}.(x \triangleright xs) \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } pin8 \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{⧺} bs : prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Tercero excluido de } as \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \textnormal{⧺} bs \land (as = [] \lor as \neq [])} : prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Distributividad de } \land \; \textnormal{con} \; \lor \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \textnormal{⧺} bs \land as = [] \lor (x \triangleright xs) = as \textnormal{⧺} bs \land as \neq []} : prod.as = 8 \; \bigr \rangle \\ 
-  \\
-  \equiv \{ \textnormal{ Partición de rango, eliminación de variable } as \; \} \\
-  \\
-  \bigl \langle \; \exists bs : (x \triangleright xs) = \underline{[]} \textnormal{⧺} bs : prod.[] = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{⧺} bs : prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } \textnormal{⧺}, \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : prod.[] = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists a, as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{⧺} bs} : prod.(a \triangleright as) = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Rango unitario, Propiedad de las } [] \; \} \\
-  \\
-  prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : \underline{x = a} \land xs = as \textnormal{⧺} bs : prod.(a \triangleright as) = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Eliminación de una variable } \} \\
-  \\
-  prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : xs = as \textnormal{⧺} bs : \underline{prod.(x \triangleright as)} = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } prod \; \} \\
-  \\
-  prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : xs = as \textnormal{⧺} bs : \textcolor{darkred}{x} * as = 8 \; \bigr \rangle
-\end{array}
+\begin{aligned}
+  &\underline{pin8}.(x \triangleright xs) \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } pin8 \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \; \textnormal{⧺} \; bs : prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Tercero excluido de } as \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \; \textnormal{⧺} \; bs \land (as = [] \lor as \not= [])} : prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Distributividad de } \land \; \textnormal{con} \; \lor \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \; \textnormal{⧺} \; bs \land as = [] \lor (x \triangleright xs) = as \; \textnormal{⧺} \; bs \land as \not= []} : prod.as = 8 \; \bigr \rangle \\ 
+  &\\
+  &\equiv \{ \textnormal{ Partición de rango, eliminación de variable } as \; \} \\
+  &\\
+  &\bigl \langle \; \exists bs : (x \triangleright xs) = \underline{[]} \; \textnormal{⧺} \; bs : prod.[] = 8 \; \bigr \rangle \\ 
+  &\lor \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \; \textnormal{⧺} \; bs : prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } \; \textnormal{⧺}, \; \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : prod.[] = 8 \; \bigr \rangle \\ 
+  &\lor \bigl \langle \; \exists a, as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \; \textnormal{⧺} \; bs} : prod.(a \triangleright as) = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Rango unitario, Propiedad de las } [] \; \} \\
+  &\\
+  &prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : \underline{x = a} \land xs = as \; \textnormal{⧺} \; bs : prod.(a \triangleright as) = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Eliminación de una variable } \} \\
+  &\\
+  &prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : xs = as \; \textnormal{⧺} \; bs : \underline{prod.(x \triangleright as)} = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } prod \; \} \\
+  &\\
+  &prod.[] = 8 \; \lor \; \bigl \langle \; \exists a, as, bs : xs = as \; \textnormal{⧺} \; bs : \textcolor{darkred}{x} * as = 8 \; \bigr \rangle
+\end{aligned}
 ```
 
 Es necesario generalizar la función $pin8$ para poder derivarla. Definimos una nueva función $gpin8$ tal que:
 
 ```math
-gpin8.1.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{⧺} bs : prod.as = 8 \; \bigr \rangle
+gpin8.1.xs = \bigl \langle \; \exists as, bs : xs = as \; \textnormal{⧺} \; bs : prod.as = 8 \; \bigr \rangle
 ```
 
 ```math
-gpin8.n.xs = \bigl \langle \; \exists as, bs : xs = as \textnormal{⧺} bs : \textcolor{darkred}{n} * prod.as = 8 \; \bigr \rangle
+gpin8.n.xs = \bigl \langle \; \exists as, bs : xs = as \; \textnormal{⧺} \; bs : \textcolor{darkred}{n} * prod.as = 8 \; \bigr \rangle
 ```
 
 Evaluamos el caso base de $gpin8$:
 
 ```math
-\begin{array}{ll}
-  \underline{gpin8}.n.[] \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } gpin8 \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{ [] = as  \textnormal{⧺} bs } : n * prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Propiedad de } ⧺ \; \} \\
-  \\
-  \bigl \langle \; \exists \underline{as}, bs : \underline{as} = [] \land bs = [] : n * prod.\underline{as} = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Eliminación de variable } as \; \} \\
-  \\
-  \bigl \langle \; \exists bs : \underline{[] = bs} : n * prod.[] = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Rango unitario } \} \\
-  \\
-  n * \underline{prod.[]} = 8 \\
-  \\
-  \equiv \{ \textnormal{ Definición de } prod \; \} \\
-  \\
-  \underline{n * 1} = 8 \\
-  \\
-  \equiv \{ \textnormal{ Aritmética } \} \\
-  \\
-  n = 8
-\end{array}
+\begin{aligned}
+  &\underline{gpin8}.n.[] \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } gpin8 \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{ [] = as  \; \textnormal{⧺} \; bs } : n * prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Propiedad de } \; \textnormal{⧺} \; \; \} \\
+  &\\
+  &\bigl \langle \; \exists \underline{as}, bs : \underline{as} = [] \land bs = [] : n * prod.\underline{as} = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Eliminación de variable } as \; \} \\
+  &\\
+  &\bigl \langle \; \exists bs : \underline{[] = bs} : n * prod.[] = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Rango unitario } \} \\
+  &\\
+  &n * \underline{prod.[]} = 8 \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } prod \; \} \\
+  &\\
+  &\underline{n * 1} = 8 \\
+  &\\
+  &\equiv \{ \textnormal{ Aritmética } \} \\
+  &\\
+  &n = 8
+\end{aligned}
 ```
 
 Seguimos con el paso inductivo de $gpin8$:
 
 ```math
-\begin{array}{ll}
-  \underline{gpin8}.n.(x \triangleright xs) \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } gpin8 \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{⧺} bs : n * prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Tercero excluido de } as \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \textnormal{⧺} bs \land (as = [] \lor as \neq [])} : n * prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Distributividad de } \land \; \textnormal{con} \; \lor \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \textnormal{⧺} bs \land as = [] \lor (x \triangleright xs) = as \textnormal{⧺} bs \land as \neq []} : n * prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Partición de rango, eliminación de variable } as \; \} \\
-  \\
-  \bigl \langle \; \exists bs : (x \triangleright xs) = \underline{[]} \textnormal{⧺} bs : n * prod.[] = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \textnormal{⧺} bs : n * prod.as = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } \textnormal{⧺}, \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \; \} \\
-  \\
-  \bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : n * prod.[] = 8 \; \bigr \rangle \\ \lor \\ \bigl \langle \; \exists a, as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \textnormal{⧺} bs} : n * prod.(a \triangleright as) = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Rango unitario, Propiedad de las } [] \; \} \\
-  \\
-  n * prod.[] = 8 \; \lor \; \bigl \langle \; \exists \underline{a}, as, bs : \underline{x = a} \land xs = as \textnormal{⧺} bs : n * prod.(\underline{a} \triangleright as) = 8 \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Eliminación de variable } a \; \} \\
-  \\
-  n * \underline{prod.[]} = 8 \; \lor \; \bigl \langle \; \exists as, bs : xs = as \textnormal{⧺} bs : \underline{n * prod.(x \triangleright as) = 8} \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } prod \; \} \\
-  \\
-  \underline{n * 1} = 8 \; \lor \; \underline{\bigl \langle \; \exists as, bs : xs = as \textnormal{⧺} bs : n * x * prod.as = 8 \; \bigr \rangle} \\
-  \\
-  \equiv \{ \textnormal{ Aritmética, hipótesis inductiva con } n = (n * x) \; \} \\
-  \\
-  n = 8 \; \lor \; gpin8.(n * x).xs
-\end{array}
+\begin{aligned}
+  &\underline{gpin8}.n.(x \triangleright xs) \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } gpin8 \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \; \textnormal{⧺} \; bs : n * prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Tercero excluido de } as \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \; \textnormal{⧺} \; bs \land (as = [] \lor as \not= [])} : n * prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Distributividad de } \land \; \textnormal{con} \; \lor \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = as \; \textnormal{⧺} \; bs \land as = [] \lor (x \triangleright xs) = as \; \textnormal{⧺} \; bs \land as \not= []} : n * prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Partición de rango, eliminación de variable } as \; \} \\
+  &\\
+  &\bigl \langle \; \exists bs : (x \triangleright xs) = \underline{[]} \; \textnormal{⧺} \; bs : n * prod.[] = 8 \; \bigr \rangle \\ 
+  &\lor \bigl \langle \; \exists as, bs : (x \triangleright xs) = \underline{as} \; \textnormal{⧺} \; bs : n * prod.as = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } \; \textnormal{⧺}, \; \textnormal{ Cambio de variable: } as \rightarrow (a \triangleright as) \; \} \\
+  &\\
+  &\bigl \langle \; \exists as, bs : \underline{(x \triangleright xs) = bs} : n * prod.[] = 8 \; \bigr \rangle \\
+  &\lor \bigl \langle \; \exists a, as, bs : \underline{(x \triangleright xs) = (a \triangleright as) \; \textnormal{⧺} \; bs} : n * prod.(a \triangleright as) = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Rango unitario, Propiedad de las } [] \; \} \\
+  &\\
+  &n * prod.[] = 8 \; \lor \; \bigl \langle \; \exists \underline{a}, as, bs : \underline{x = a} \land xs = as \; \textnormal{⧺} \; bs : n * prod.(\underline{a} \triangleright as) = 8 \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Eliminación de variable } a \; \} \\
+  &\\
+  &n * \underline{prod.[]} = 8 \; \lor \; \bigl \langle \; \exists as, bs : xs = as \; \textnormal{⧺} \; bs : \underline{n * prod.(x \triangleright as) = 8} \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } prod \; \} \\
+  &\\
+  &\underline{n * 1} = 8 \; \lor \; \underline{\bigl \langle \; \exists as, bs : xs = as \; \textnormal{⧺} \; bs : n * x * prod.as = 8 \; \bigr \rangle} \\
+  &\\
+  &\equiv \{ \textnormal{ Aritmética, hipótesis inductiva con } n = (n * x) \; \} \\
+  &\\
+  &n = 8 \; \lor \; gpin8.(n * x).xs
+\end{aligned}
 ```
 
 Los programas son: 
 
 ```math
-\begin{array}{l}
-  \Big\vert\ pin8 : [Num] \to Bool \\  
-  \overline{\Big\vert\ pin8.(x \triangleright xs)} \doteq gpin8.1.(x \triangleright xs)
-\end{array}
+\begin{aligned}
+  &\Big\vert\ pin8 : [Num] \to Bool \\  
+  &\overline{\Big\vert\ pin8.(x \triangleright xs)} \doteq gpin8.1.(x \triangleright xs)
+\end{aligned}
 ```
 
 ```math
-\begin{array}{l}
-  \Big\vert\ gpin8 : Num \to [Num] \to Bool \\
-  \overline{\Big\vert \; gpin8.n.xs} \doteq n = 8 \\
-  \Big\vert\ gpin8.n.(x \triangleright xs) \doteq n = 8 \; \lor \; gpin8.(n * x).xs
-\end{array}
+\begin{aligned}
+  &\Big\vert\ gpin8 : Num \to [Num] \to Bool \\
+  &\overline{\Big\vert \; gpin8.n.xs} \doteq n = 8 \\
+  &\Big\vert\ gpin8.n.(x \triangleright xs) \doteq n = 8 \; \lor \; gpin8.(n * x).xs
+\end{aligned}
 ```
 
 ***
@@ -636,91 +639,91 @@ minimo.xs = \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# xs : xs.i \; 
 Primero evaluamos el caso base, $xs = []$:
 
 ```math
-\begin{array}{ll}
-  \underline{minimo}.[] \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } minimo \; \} \\
-  \\
-  \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# []} : [].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } \# \; \} \\
-  \\
-  \bigl \langle \; \textnormal{Min} \; i : \underline{0 \leq i < 0} : [].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Aritmética } \} \\
-  \\
-  \bigl \langle \; \textnormal{Min} \; i : \underline{False} : [].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Rango vacío } \} \\
-  \\
-  +\infty
-\end{array}
+\begin{aligned}
+  &\underline{minimo}.[] \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } minimo \; \} \\
+  &\\
+  &\bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# []} : [].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } \# \; \} \\
+  &\\
+  &\bigl \langle \; \textnormal{Min} \; i : \underline{0 \leq i < 0} : [].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Aritmética } \} \\
+  &\\
+  &\bigl \langle \; \textnormal{Min} \; i : \underline{False} : [].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Rango vacío } \} \\
+  &\\
+  &+\infty
+\end{aligned}
 ```
 
 No podemos computar $+\infty$, por lo que necesitamos cambiar nuestro esquema inductivo. Nuestra lista vacía no puede ser evaluada, por lo que necesitamos evaluar $[x]$.
 
 ```math 
-\begin{array}{ll}
-  \underline{minimo}.[x] \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } minimo \; \} \\
-  \\
-  \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# [x]} : [x].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } \# \; \} \\
-  \\
-  \bigl \langle \; \textnormal{Min} \; i : \underline{0 \leq i < 1} : [x].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Lógica } \} \\
-  \\
-  \bigl \langle \; \textnormal{Min} \; i : \underline{i = 0} : [x].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Rango unitario } \} \\
-  \\
-  \underline{[x].0} \\
-  \\
-  \equiv \{ \textnormal{ Definición de } . \; \} \\
-  \\
-  x 
-\end{array}
+\begin{aligned}
+  &\underline{minimo}.[x] \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } minimo \; \} \\
+  &\\
+  &\bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# [x]} : [x].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } \# \; \} \\
+  &\\
+  &\bigl \langle \; \textnormal{Min} \; i : \underline{0 \leq i < 1} : [x].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Lógica } \} \\
+  &\\
+  &\bigl \langle \; \textnormal{Min} \; i : \underline{i = 0} : [x].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Rango unitario } \} \\
+  &\\
+  &\underline{[x].0} \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } . \; \} \\
+  &\\
+  &x 
+\end{aligned}
 ```
 
 Ahora seguimos con el paso inductivo $xs = (x \triangleright y \triangleright xs)$:
 
 ```math
-\begin{array}{ll}
-  \underline{minimo}.(x \triangleright y \triangleright xs) \\
-  \\
-  \equiv \{ \textnormal{ Especificación de } minimo \; \} \\
-  \\
-  \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# (x \triangleright y \triangleright xs)} : (x \triangleright y \triangleright xs).i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } \# \; \} \\
-  \\
-  \underline{ \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < 1 + \# (y \triangleright xs) : (x \triangleright y \triangleright xs).i \; \bigr \rangle} \\
-  \\
-  \equiv \{ \textnormal{ Separación de un término } \} \\
-  \\
-  \underline{(x \triangleright y \triangleright xs).0} + \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# (y \triangleright xs) : \underline{(x \triangleright y \triangleright xs).(i + 1)} \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } . \; \} \\
-  \\
-  x \; \textnormal{min} \; \underline{\bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# (y \triangleright xs) : (y \triangleright xs).i \; \bigr \rangle} \\
-  \\
-  \equiv \{ \textnormal{ Hipótesis Inductiva con } (y \triangleright xs) \; \} \\
-  \\
-  x \; \textnormal{min} \; minimo.(y \triangleright xs)
-\end{array}
+\begin{aligned}
+  &\underline{minimo}.(x \triangleright y \triangleright xs) \\
+  &\\
+  &\equiv \{ \textnormal{ Especificación de } minimo \; \} \\
+  &\\
+  &\bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \underline{\# (x \triangleright y \triangleright xs)} : (x \triangleright y \triangleright xs).i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } \# \; \} \\
+  &\\
+  &\underline{ \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < 1 + \# (y \triangleright xs) : (x \triangleright y \triangleright xs).i \; \bigr \rangle} \\
+  &\\
+  &\equiv \{ \textnormal{ Separación de un término } \} \\
+  &\\
+  &\underline{(x \triangleright y \triangleright xs).0} + \bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# (y \triangleright xs) : \underline{(x \triangleright y \triangleright xs).(i + 1)} \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } . \; \} \\
+  &\\
+  &x \; \textnormal{min} \; \underline{\bigl \langle \; \textnormal{Min} \; i : 0 \leq i < \# (y \triangleright xs) : (y \triangleright xs).i \; \bigr \rangle} \\
+  &\\
+  &\equiv \{ \textnormal{ Hipótesis Inductiva con } (y \triangleright xs) \; \} \\
+  &\\
+  &x \; \textnormal{min} \; minimo.(y \triangleright xs)
+\end{aligned}
 ```
 
 Nuestro programa final sería: 
 
 ```math
-\begin{array}{l}
-  \Big\vert\ minimo : [Num] \to Num \\
-  \overline{\Big\vert \; minimo.[x] \doteq x}   \\
-  \Big\vert\ minimo.(x \triangleright y \triangleright xs) \doteq x \; \textnormal{min} \; minimo.(y \triangleright xs)
-\end{array}
+\begin{aligned}
+  &\Big\vert\ minimo : [Num] \to Num \\
+  &\overline{\Big\vert \; minimo.[x] \doteq x}   \\
+  &\Big\vert\ minimo.(x \triangleright y \triangleright xs) \doteq x \; \textnormal{min} \; minimo.(y \triangleright xs)
+\end{aligned}
 ```
 
 ## Verificación (PF)
@@ -746,25 +749,25 @@ P.[] : sum.[] = \bigl \langle \; \sum i : 0 \leq i < \# [] : [].i \; \bigr \rang
 Para ello podemos comenzar del lado derecho: 
 
 ```math
-\begin{array}{ll}
-  \bigl \langle \; \sum i : 0 \leq i < \underline{\#[]} : [].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } \# \; \} \\
-  \\
-  \bigl \langle \; \sum i : \underline{0 \leq i < 0} : [].i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Aritmética } \} \\
-  \\
-  \bigl \langle \; \underline{\sum i : False : [].i} \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Rango vacío } \} \\
-  \\
-  \underline{0} \\
-  \\
-  \equiv \{ \textnormal{ Definición de } sum\; \} \\
-  \\
-  sum.[]
-\end{array}
+\begin{aligned}
+  &\bigl \langle \; \sum i : 0 \leq i < \underline{\#[]} : [].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } \# \; \} \\
+  &\\
+  &\bigl \langle \; \sum i : \underline{0 \leq i < 0} : [].i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Aritmética } \} \\
+  &\\
+  &\bigl \langle \; \underline{\sum i : False : [].i} \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Rango vacío } \} \\
+  &\\
+  &\underline{0} \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } sum\; \} \\
+  &\\
+  &sum.[]
+\end{aligned}
 ```
 
 Por lo tanto, probamos la propiedad $P.[]$
@@ -774,11 +777,11 @@ Por lo tanto, probamos la propiedad $P.[]$
 Debemos demostrar que: 
 
 ```math
-\begin{array}{ll}
-P.xs : sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle \implies \\
-\\
-P.(x \triangleright xs) : sum.(x \triangleright xs) = \bigl \langle \; \sum i : 0 \leq i < \# (x \triangleright xs) : (x \triangleright xs).i \; \bigr \rangle
-\end{array}
+\begin{aligned}
+&P.xs : sum.xs = \bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle \implies \\
+&\\
+&P.(x \triangleright xs) : sum.(x \triangleright xs) = \bigl \langle \; \sum i : 0 \leq i < \# (x \triangleright xs) : (x \triangleright xs).i \; \bigr \rangle
+\end{aligned}
 ```	
 
 Donde $P.xs$ es la **hipótesis inductiva**.
@@ -786,25 +789,25 @@ Donde $P.xs$ es la **hipótesis inductiva**.
 Para ello podemos comenzar del lado derecho:
 
 ```math
-\begin{array}{ll}
-  \bigl \langle \; \sum i : 0 \leq i < \underline{ \# (x \triangleright xs) } : (x \triangleright xs).i \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } \# \; \} \\
-  \\
-  \bigl \langle \; \underline{ \sum i : 0 \leq i < 1 + \# xs : (x \triangleright xs).i } \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Separación de un término } \} \\
-  \\
-  \underline{ (x \triangleright xs).0 } + \bigl \langle \; \sum i : 0 \leq i < \# xs : \underline{(x \triangleright xs).(i + 1)} \; \bigr \rangle \\
-  \\
-  \equiv \{ \textnormal{ Definición de } .\; \} \\
-  \\
-  x + \underline{\bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle} \\
-  \\
-  \equiv \{ \textnormal{ Hipótesis inductiva } \} \\
-  \\
-  x + sum.xs 
-\end{array}
+\begin{aligned}
+  &\bigl \langle \; \sum i : 0 \leq i < \underline{ \# (x \triangleright xs) } : (x \triangleright xs).i \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } \# \; \} \\
+  &\\
+  &\bigl \langle \; \underline{ \sum i : 0 \leq i < 1 + \# xs : (x \triangleright xs).i } \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Separación de un término } \} \\
+  &\\
+  &\underline{ (x \triangleright xs).0 } + \bigl \langle \; \sum i : 0 \leq i < \# xs : \underline{(x \triangleright xs).(i + 1)} \; \bigr \rangle \\
+  &\\
+  &\equiv \{ \textnormal{ Definición de } .\; \} \\
+  &\\
+  &x + \underline{\bigl \langle \; \sum i : 0 \leq i < \# xs : xs.i \; \bigr \rangle} \\
+  &\\
+  &\equiv \{ \textnormal{ Hipótesis inductiva } \} \\
+  &\\
+  &x + sum.xs 
+\end{aligned}
 ```
 
-Por lo tanto, probamos la propiedad $P.(x \triangleright xs)$, y su validez en cualquier lista.
+Por lo tanto, probamos la propiedad $P.(x \triangleright xs)$, y su validez en cualquier lista. 

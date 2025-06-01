@@ -14,7 +14,7 @@ Dentro del conjunto de los números enteros $(\mathbb{Z})$, y considerando que $
 - **I4)** Elemento Neutro: $a + 0 = a,\; a \cdot 1 = a$
 - **I5)** Distributividad: $a \cdot (b+c) = a \cdot b + a \cdot c$
 - **I6)** Inverso aditivo: $a + (-a) = 0$
-- **I7)** Cancelación: Si $a \neq 0, \; a \cdot b = a \cdot c \Rightarrow b = c$
+- **I7)** Cancelación: Si $a \not=0, \; a \cdot b = a \cdot c \Rightarrow b = c$
 
 ## Axiomas - Orden de enteros
 
@@ -133,10 +133,10 @@ Suponiendo que $a < b$:
 Si multiplicamos ambos lados de la desigualdad por $a$, obtenemos: 
 
 ```math
-\begin{align*}
-  a \cdot a &< a \cdot b\\
+\begin{aligned}
+  a \cdot a &< a \cdot b \\
   a^2 &< ab
-\end{align*}
+\end{aligned}
 ```
 
 **a)** $a^2 < ab$ 
@@ -144,10 +144,10 @@ Si multiplicamos ambos lados de la desigualdad por $a$, obtenemos:
 Si multiplicamos ambos lados de la desigualdad por $b$, obtenemos: 
 
 ```math
-\begin{align*}
+\begin{aligned}
 a \cdot b &< b \cdot b \\
 ab &< b^2
-\end{align*}
+\end{aligned}
 ```
 **b)** $ab < b^2$
 
@@ -159,7 +159,7 @@ De **a)** y **b)**, concluimos por **transitividad** que $a^2 < b^2$.
 
 Sean $a, b \in \mathbb{Z}$, probar la siguiente afirmación:
 
-Si $a \neq 0$, entonces $a^2 > 0$.
+Si $a \not=0$, entonces $a^2 > 0$.
 
 **Demostración:**
 
@@ -167,10 +167,10 @@ En el caso que $a > 0$:
 
 
 ```math
-\begin{align*}
+\begin{aligned}
   a \cdot a &> a \cdot 0 \\
   a^2 &> 0
-\end{align*}
+\end{aligned}
 ```
 
 **a)** $a^2 > 0$
@@ -178,12 +178,12 @@ En el caso que $a > 0$:
 En el caso que $a < 0$:
 
 ```math
-\begin{align*}
+\begin{aligned}
   a + (-a) &< (-a) \\
   0 &< (-a) \\
   0 &< (-a) \cdot (-a) \\
   0 &< a^2
-\end{align*}
+\end{aligned}
 ```
 
 **b)** $0 < a^2$
@@ -196,26 +196,26 @@ Por **a)** y **b)**, concluimos que $a^2 > 0$.
 
 Sean $a, b \in \mathbb{Z}$, probar la siguiente afirmación:
 
-Si $a \neq b$, entonces $a^2 + b^2 > 0$.
+Si $a \not=b$, entonces $a^2 + b^2 > 0$.
 
 **Demostración:**
 
 Si $a > b$:
 
 ```math
-\begin{align*}
+\begin{aligned}
   a^2 &> b^2 \\
   a^2 + b^2 &> b^2 
-\end{align*}
+\end{aligned}
 ```
 
 Si $a < b$:
 
 ```math
-\begin{align*}
+\begin{aligned}
   a^2 &< b^2 \\
   a^2 + b^2 &> a^2
-\end{align*}
+\end{aligned}
 ```
 
 Al ser cuadrados, ambos son positivos. Contemplando si $a^2 = 0\;$ o $\;b^2 = 0$ ya que ambos serán distintos. Por lo que $a^2 + b^2 > 0$.
@@ -237,10 +237,10 @@ Una sucesión $u_n$ por fórmula cerrada sería: $u_n = 2n + 1$
 Si quisieramos saber el valor de $u_3$, tendríamos que calcular: 
 
 ```math
-\begin{align*}
+\begin{aligned}
     u_3 &= u_2 + u_1 \\
     7 &= 4 + 3
-\end{align*}
+\end{aligned}
 ```
 
 ### Sumatoria 
@@ -323,10 +323,10 @@ Reemplazamos $i = 1$:
 Resolvemos:
 
 ```math
-\begin{align*}
+\begin{aligned}
     1 &= 2 - 1 \\
     1 &= 1
-\end{align*}
+\end{aligned}
 ```
 
 Como podemos ver, la igualdad se cumple para el caso base $n=1$.
@@ -340,10 +340,10 @@ Como podemos ver, la igualdad se cumple para el caso base $n=1$.
 **3)** Suponemos que se cumple para $n=k+1$, el siguiente de $k$ y cualquier $\mathbb{N}$ (**paso inductivo**). Reemplazamos $n=k+1$ en la proposición a demostrar:
 
 ```math
-\begin{align*}
+\begin{aligned}
   \displaystyle{\sum_{k=1}^{k+1}} i \cdot i! &= ((k + 1) + 1)! - 1 \\
   \displaystyle{\sum_{k=1}^{k+1}} i \cdot i! &\stackrel{?}{=} (k + 2)! - 1
-\end{align*}
+\end{aligned}
 ```
 
 Procedemos a demostrar:
@@ -522,10 +522,10 @@ Reemplazamos $i = 0$:
 Resolvemos:
 
 ```math
-\begin{align*}
+\begin{aligned}
     1 &= 2 - 1 \\
     1 &= 1
-\end{align*}
+\end{aligned}
 
 ```
 
@@ -540,10 +540,10 @@ Como podemos ver, la igualdad se cumple para el caso base $n=0$.
 **3)** Ahora, demostramos para $n=k+1$ (**paso inductivo**):
 
 ```math
-\begin{align*}
+\begin{aligned}
   \displaystyle{\sum_{i=0}^{k+1}}\;2^i &= 2^{k+1+1}-1 \\
   \displaystyle{\sum_{i=0}^{k+1}}\;2^i &\stackrel{?}{=} 2^{k+2}-1
-\end{align*}
+\end{aligned}
 ```
 
 Procedemos a demostrar:
@@ -605,10 +605,10 @@ Reemplazamos $i = 1$:
 Resolvemos:
 
 ```math
-\begin{align*}
+\begin{aligned}
     1 &= \frac{1 \cdot 2 \cdot 3}{6} \\
     1 &= 1
-\end{align*}
+\end{aligned}
 
 ```
 
@@ -623,10 +623,10 @@ Como podemos ver, la igualdad se cumple para el caso base $n=1$.
 **3)** Ahora, demostramos para $n=k+1$ (**paso inductivo**):
 
 ```math
-\begin{align*}
+\begin{aligned}
   \displaystyle{\sum_{i=1}^{k+1}}\;i^2 &= \frac{(k+1)(k+1+1)(2(k+1)+1)}{6} \\
   \displaystyle{\sum_{i=1}^{k+1}}\;i^2 &\stackrel{?}{=} \frac{(k+1)(k+2)(2k+3)}{6}
-\end{align*}
+\end{aligned}
 ```
 
 Procedemos a demostrar:
@@ -712,10 +712,10 @@ a_h = 3^h + 1
 **3)** Ahora, demostramos para $n=k+1$ (**paso inductivo**):
 
 ```math
-\begin{align*}
+\begin{aligned}
   a_{k+1} &= 3^{k+1} + 1 \\
   a_{k+1} &\stackrel{?}{=} 3^{k+1} + 1
-\end{align*}
+\end{aligned}
 
 ```
 
@@ -734,10 +734,10 @@ a_{k+1} = 4a_k - 3a_{k-1}
 Aplicamos la hipótesis inductiva:
 
 ```math
-\begin{align*}
+\begin{aligned}
 a_{k+1} &= 4(3^k + 1) - 3(3^{k-1} + 1) \\
-a_{k+1} &= 4 \cdot 3^k + 4 - 3 \cdot 3^{k-1} - 3 \\
-\end{align*}
+a_{k+1} &= 4 \cdot 3^k + 4 - 3 \cdot 3^{k-1} - 3 
+\end{aligned}
 ```
 
 Multiplicamos $3$ por $3^{k-1}$:
@@ -796,11 +796,11 @@ a_h = 2^{h+1} + 5^h
 **3)** Ahora, demostramos para $n=k+1$ (**paso inductivo**):
 
 ```math
-\begin{align*}
+\begin{aligned}
   a_{k+1} &= 2^{k+1+1} + 5^{k+1} \\
   a_{k+1} &\stackrel{?}{=} 2^{k+2+1} + 5^{k+1}
 
-\end{align*}
+\end{aligned}
 
 ```
 
@@ -819,29 +819,29 @@ a_{k+1} = 7a_k - 10a_{k-1}
 Aplicamos la hipótesis inductiva:
 
 ```math
-\begin{align*}
+\begin{aligned}
 a_{k+1} &= 7(2^{k+1} + 5^k) - 10(2^k + 5^{k-1}) \\
 a_{k+1} &= 7 \cdot 2^{k+1} + 7 \cdot 5^k - 10 \cdot 2^k - 10 \cdot 5^{k-1} 
-\end{align*}
+\end{aligned}
 ```
 
 Reexpresamos $10$ como $2 \cdot 5$:
 
 ```math
-\begin{align*}
+\begin{aligned}
 a_{k+1} &= 7 \cdot 2^{k+1} + 7 \cdot 5^k - 2 \cdot 5 \cdot 2^k - 2 \cdot 5 \cdot 5^{k-1} \\
 a_{k+1} &= 7 \cdot 2^{k+1} + 7 \cdot 5^k - 5 \cdot 2^{k+1} - 2 \cdot 5^{k} 
-\end{align*}
+\end{aligned}
 ```
 
 Aplicamos factor común de $2^{k+1}$ y $5^k$:
 
 ```math
-\begin{align*}
+\begin{aligned}
 a_{k+1} &= 2^{k+1} \cdot (7 - 5) + 5^k \cdot (7 - 2) \\
 a_{k+1} &= 2^{k+1} \cdot 2 + 5^k \cdot 5 \\
 a_{k+1} &= 2^{k+2} + 5^{k+1}
-\end{align*}
+\end{aligned}
 ```
 
 La proposición es verdadera para $n=k+1$, por lo que la proposición es verdadera para cualquier $n \in \mathbb{N}$.

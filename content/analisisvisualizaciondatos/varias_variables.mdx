@@ -10,10 +10,10 @@ Sean $X, Y \; \mathbf{v.a.}$ su función de densidad conjunta es $f(x,y)$. Su de
 > La **densidad marginal** de una variable $X$ es la función $f_X(x)$ es la sumatoria/integral de la función de densidad conjunta $f(x,y)$ respecto a la otra variable $Y$ (o viceversa).
 
 ```math
-\begin{align}
+\begin{aligned}
 &f_X(x) = \displaystyle{\sum_x} \; f(x,y), \quad\quad\quad f_Y(y) = \displaystyle{\sum_y} \; f(x,y) \quad \textnormal{(variables discretas)} \\
 &f_X(x) = \int f(x,y)\; dy, \quad\quad f_Y(y) = \int f(x,y) \;dx \quad \textnormal{(variables continuas)}
-\end{align}
+\end{aligned}
 ```
 
 ## Independencia de variables
@@ -22,11 +22,11 @@ Sean $X, Y \; \mathbf{v.a.}$ su función de densidad conjunta es $f(x,y)$. Su de
 si la probabilidad conjunta de que ocurran es el producto de sus probabilidades marginales:
 
 ```math
-\begin{align}
+\begin{aligned}
 &f(x,y) = f_X(x)f_Y(y) \\
 &\\
 &f_{X|Y}(x|y) = \frac{f(x,y)}{f_Y(y)} = f_X(x) \\
-\end{align}
+\end{aligned}
 ```
 
 ## Covarianza y correlación

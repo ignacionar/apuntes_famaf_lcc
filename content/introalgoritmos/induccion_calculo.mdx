@@ -7,7 +7,7 @@ La idea que rige este principio consiste en demostrar dos cosas:
 - Por un lado verificar que la propiedad se satisface para los elementos "más chicos" del dominio (por ejemplo,
 la lista $[]$). 
 
-- Por otro lado demostrar para un elemento arbitrario del dominio (por ejemplo, la lista $(x\;▹\;xs)$) que si suponemos que la propiedad es cierta para todos los elementos más chicos que él (por ejemplo $xs$), entonces
+- Por otro lado demostrar para un elemento arbitrario del dominio (por ejemplo, la lista $(x\;\triangleright\;xs)$) que si suponemos que la propiedad es cierta para todos los elementos más chicos que él (por ejemplo $xs$), entonces
 la propiedad también es satisfecha por ese elemento. 
 
 Dado que todo elemento de un dominio inductivo puede ser "construido" a partir de elementos más simples, este procedimiento demuestra que la propiedad es **satisfecha
@@ -22,7 +22,7 @@ Considerando las siguientes funciones, probar las siguientes propiedades por ind
 \begin{aligned}
 &sumatoria : [Int] \rightarrow Int \\
 &sumatoria.[ ] \; \dot{=} \; 0 \\
-&sumatoria.(x \;▹ \;xs) \; \dot{=} \; x + sumatoria.xs
+&sumatoria.(x \;\triangleright \;xs) \; \dot{=} \; x + sumatoria.xs
 \end{aligned}
 \end{equation*}
 ```
@@ -32,7 +32,7 @@ Considerando las siguientes funciones, probar las siguientes propiedades por ind
 \begin{aligned}
 &sumar1 : [Int] \rightarrow [Int] \\
 &sumar1.[ ] \; \dot{=} \; [ ] \\
-&sumar1.(x \;▹ \;xs) \; \dot{=} \; (x + 1) \;▹ \;sumar1.xs
+&sumar1.(x \;\triangleright \;xs) \; \dot{=} \; (x + 1) \;\triangleright \;sumar1.xs
 \end{aligned}
 \end{equation*}
 ```
@@ -42,7 +42,7 @@ Considerando las siguientes funciones, probar las siguientes propiedades por ind
 \begin{aligned}
 &length : [a] \rightarrow Int \\
 &length.[ ] \; \dot{=} \; 0 \\
-&length.(x \;▹ \;xs) \; \dot{=} \; 1 + length.xs
+&length.(x \;\triangleright \;xs) \; \dot{=} \; 1 + length.xs
 \end{aligned}
 \end{equation*}
 ```
@@ -71,10 +71,10 @@ Definimos el caso base ($xs = [ ]$):
 True
 ```
 
-Definimos el paso inductivo ($xs = (x \;▹ \;xs)$):
+Definimos el paso inductivo ($xs = (x \;\triangleright \;xs)$):
 
 ```math
-\underline{length.(x \;▹ \;xs)} \geq 0
+\underline{length.(x \;\triangleright \;xs)} \geq 0
 ```
 
 ≡```{``` Definición de $length$ ```}``` 
@@ -121,17 +121,17 @@ Definimos el caso base ($xs = [ ]$):
 True
 ```
 
-Definimos el paso inductivo ($xs = (x \;▹ \;xs)$):
+Definimos el paso inductivo ($xs = (x \;\triangleright \;xs)$):
 
 ```math
-sumatoria.(\underline{sumar1.(x \;▹ \;xs)}) = \underline{sumatoria.(x \;▹ \;xs)} + \underline{length.(x \;▹ \;xs)}
+sumatoria.(\underline{sumar1.(x \;\triangleright \;xs)}) = \underline{sumatoria.(x \;\triangleright \;xs)} + \underline{length.(x \;\triangleright \;xs)}
 ```
 
 ≡```{``` Definición de $sumar1, length, sumatoria$ ```}``` 
  
 
 ```math
-\underline{sumatoria.((x + 1) \;▹ \;sumar1.xs)} = x + sumatoria.xs + 1 + length.xs
+\underline{sumatoria.((x + 1) \;\triangleright \;sumar1.xs)} = x + sumatoria.xs + 1 + length.xs
 ```
 
 ≡```{``` Definición de $sumatoria$ ```}``` 
@@ -161,9 +161,9 @@ Considerando las siguientes funciones, probar las siguientes propiedades por ind
 \begin{aligned}
 &sacaUnos : [Int] \rightarrow [Int] \\
 &sacaUnos.[ ] \; \dot{=} \; [ ] \\
-&sacaUnos.(x \;▹ \;xs) \; \dot{=} \; ( \\
+&sacaUnos.(x \;\triangleright \;xs) \; \dot{=} \; ( \\
     &x = 1 → sacaUnos.xs \\
-    &□ \; x \neq 1 →  x \;▹ \;sacaUnos.xs \\
+    &\Box \; x \not=1 →  x \;\triangleright \;sacaUnos.xs \\
     &)
 \end{aligned}
 \end{equation*}
@@ -174,7 +174,7 @@ Considerando las siguientes funciones, probar las siguientes propiedades por ind
 \begin{aligned}
 &productoria : [Int] \rightarrow Int \\
 &productoria.[ ] \; \dot{=} \; 1 \\
-&productoria.(x \;▹ \;xs) \; \dot{=} \; x * productoria.xs
+&productoria.(x \;\triangleright \;xs) \; \dot{=} \; x * productoria.xs
 \end{aligned}
 \end{equation*}
 ```
@@ -209,16 +209,16 @@ productoria.(\underline{sacaUnos.[ ]}) = \underline{productoria.[ ]}
 True
 ```
 
-Definimos el paso inductivo ($xs = (x \;▹ \;xs)$):
+Definimos el paso inductivo ($xs = (x \;\triangleright \;xs)$):
 
 ```math
-productoria.(sacaUnos.(x \;▹ \;xs)) = productoria.(x \;▹ \;xs)
+productoria.(sacaUnos.(x \;\triangleright \;xs)) = productoria.(x \;\triangleright \;xs)
 ```
 
 Caso 1: $x = 1$
 
 ```math
-productoria.(\underline{sacaUnos.(x \;▹ \;xs)}) = \underline{productoria.(x \;▹ \;xs)}
+productoria.(\underline{sacaUnos.(x \;\triangleright \;xs)}) = \underline{productoria.(x \;\triangleright \;xs)}
 ```
 
 ≡```{``` Definición de $sacaUnos, productoria$ ```}``` 
@@ -239,16 +239,16 @@ productoria.(\underline{sacaUnos.(x \;▹ \;xs)}) = \underline{productoria.(x \;
 True
 ```
 
-Caso 2: $x \neq 1$
+Caso 2: $x \not=1$
 
 ```math
-productoria.(\underline{sacaUnos.(x \;▹ \;xs)}) = \underline{productoria.(x \;▹ \;xs)}
+productoria.(\underline{sacaUnos.(x \;\triangleright \;xs)}) = \underline{productoria.(x \;\triangleright \;xs)}
 ```
 
 ≡```{``` Definición de $sacaUnos, productoria$ ```}``` 
 
 ```math
-\underline{productoria.(x \;▹ \;sacaUnos.xs)} = \underline{x * productoria.xs}
+\underline{productoria.(x \;\triangleright \;sacaUnos.xs)} = \underline{x * productoria.xs}
 ```
 
 ≡```{``` Definición de $productoria$ ```}``` 
@@ -720,7 +720,7 @@ Por ejemplo, en base a la siguiente función:
 \begin{aligned}
 &soloCeros : [Num] \rightarrow Bool \\
 &soloCeros.[ ] \; \dot{=} \; True \\
-&soloCeros.(x \;▹ \;xs) \; \dot{=} \; x = 0 \land soloCeros.xs
+&soloCeros.(x \;\triangleright \;xs) \; \dot{=} \; x = 0 \land soloCeros.xs
 \end{aligned}
 \end{equation*}
 ```
@@ -767,16 +767,16 @@ True ≡ True
 True
 ```
 
-Definimos el paso inductivo ($xs = (x \;▹ \;xs)$):
+Definimos el paso inductivo ($xs = (x \;\triangleright \;xs)$):
 
 ```math
-\underline{soloCeros.(x \;▹ \;xs)} ≡ \bigl \langle \; ∀x : x ∈_ℓ (x \;▹ \;xs) : x = 0 \; \bigr \rangle
+\underline{soloCeros.(x \;\triangleright \;xs)} ≡ \bigl \langle \; ∀x : x ∈_ℓ (x \;\triangleright \;xs) : x = 0 \; \bigr \rangle
 ```
 
 ≡```{``` Definición de $soloCeros$ ```}```
 
 ```math
-x = 0 \land soloCeros.xs ≡ \bigl \langle \; \underline{∀x : x ∈_ℓ (x \;▹ \;xs) : x = 0} \; \bigr \rangle
+x = 0 \land soloCeros.xs ≡ \bigl \langle \; \underline{∀x : x ∈_ℓ (x \;\triangleright \;xs) : x = 0} \; \bigr \rangle
 ```	
 
 ≡```{``` Cambio de variable en el $$∀$$ ```}```

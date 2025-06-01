@@ -54,7 +54,7 @@ Ejemplo: _"quisiera saber si un número es impar..."_
   <ul style={{ width: "fit-content", textAlign: "left" }}>
     <li style={{ marginBottom: "6px"}}>**1)** $esImpar$</li>
     <li style={{ marginBottom: "6px"}}>**2)** $Int \to Bool$</li>
-    <li style={{ marginBottom: "6px"}}>**3)** $mod.x.2 \neq 0$</li>
+    <li style={{ marginBottom: "6px"}}>**3)** $mod.x.2 \not=0$</li>
   </ul>
 </div>
 
@@ -63,7 +63,7 @@ Nuestro programa sería:
 ```math
 \begin{array}{l}
   \Big\vert\ esImpar : Int \to Bool \\ 
-  \overline{\Big\vert \; esImpar.x \doteq } \; mod.x.2 \neq 0
+  \overline{\Big\vert \; esImpar.x \doteq } \; mod.x.2 \not=0
 \end{array}
 ```
 
@@ -112,7 +112,7 @@ Nuestro programa sería:
 &\mathbf{do} \; numero\_actual \leq N \ \rightarrow \\
 &\quad \mathbf{if} \; numero\_actual \; mod \; 6 = 0 \rightarrow  \\
 &\quad \quad resultado := resultado + 1 \; ; \\
-&\quad □ \; numero\_actual \; mod \; 6 \neq 0 \rightarrow \\
+&\quad \Box \; numero\_actual \; mod \; 6 \not=0 \rightarrow \\
 &\quad \quad \mathbf{skip} \; ; \\
 &\quad \mathbf{fi} \; ; \\
 &\quad numero\_actual := numero\_actual + 1 \; ; \\

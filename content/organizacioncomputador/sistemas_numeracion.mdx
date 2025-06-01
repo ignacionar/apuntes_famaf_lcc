@@ -11,10 +11,10 @@ Cada coeficiente $a_j$ se multiplica por $2^j$.
 Un número con punto decimal se representa con una serie de coeficientes: 
 
 ```math 
-\begin{align}
+\begin{aligned}
 &a_{n} \; a_{4} \; a_{3} \; a_{2} \; a_{1} \; a_{0} \; .a_{-1} \; a_{-2} \; a_{-3} \; \ldots a_{-n} \;  \\
 &10^{n}a_{n} + 10^{4}a_{4} + 10^{3}a_{3} + 10^{2}a_{2} + 10^{1}a_{1} + 10^{0}a_{0} + 10^{-1}a_{-1} + 10^{-2}a_{-2} + 10^{-3}a_{-3} + \ldots + 10^{-n}a_{-n} \\
-\end{align}
+\end{aligned}
 ```
 
 Donde $a_{n}$ es el coeficiente más grande y $a_{-n}$ es el coeficiente más pequeño.\
@@ -23,9 +23,9 @@ El punto decimal se usa para separar la parte entera de la parte fraccionaria.
 El sistema binario sería:
 
 ```math
-\begin{align}
+\begin{aligned}
 &2^{n}a_{n} + 2^{4}a_{4} + 2^{3}a_{3} + 2^{2}a_{2} + 2^{1}a_{1} + 2^{0}a_{0} + 2^{-1}a_{-1} + 2^{-2}a_{-2} + 2^{-3}a_{-3} + \ldots + 2^{-n}a_{-n} \\
-\end{align}
+\end{aligned}
 ```
 
 Un ejemplo de número decimal a binario es $13.62 = (1101)_{2}$. En lugar de denominar a los binarios como _binary digits_ se les llama _bits_.
@@ -33,7 +33,7 @@ Un ejemplo de número decimal a binario es $13.62 = (1101)_{2}$. En lugar de den
 Podemos realizar operaciones aritméticas con números binarios de la siguiente forma:
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\quad \; 1101 \\ 
 &+1011 \\
 &\quad \overline{11000} \\
@@ -48,7 +48,7 @@ Podemos realizar operaciones aritméticas con números binarios de la siguiente 
 &\quad 0000 \\
 &\;\; 1101 \\
 &\overline{\; 1000001} \\
-\end{align}
+\end{aligned}
 ```
 
 Como no es posible $1+1=2$ en binario, se deja un $0$ y se lleva un $1$ al siguiente coeficiente.
@@ -62,21 +62,21 @@ Existen distintos registros (tamaños de bits) para representar números binario
 **Ejemplo:** Convertir $0.6875$ a binario y a base $8$.
 
 ```math
-\begin{align}
+\begin{aligned}
 0.6875 \times 2 &= 1 + 0.375 &\implies a_{-1} = 1 \\
 0.375 \times 2 &= 0 + 0.75 &\implies a_{-2} = 0 \\
 0.75 \times 2 &= 1 + 0.5 &\implies a_{-3} = 1 \\
 0.5 \times 2 &= 1 + 0 &\implies a_{-4} = 1 \\
-\end{align}
+\end{aligned}
 ```
 
 Tenemos que $0.6875 = (0.1011)_2$.
 
 ```math
-\begin{align}
+\begin{aligned}
 0.6875 \times 8 &= 5 + 0.5 &\implies a_{-1} = 5 \\
 0.5 \times 8 &= 4 + 0 &\implies a_{-2} = 4 \\
-\end{align}
+\end{aligned}
 ```
 
 Tenemos que $0.6875 = (0.54)_8$.
@@ -115,11 +115,11 @@ Podemos hacer conversiones de base numérica acomodando los dígitos de forma co
 **Ejemplo:** Convertir $(1101.1011)_2$ a octal y hexadecimal.
 
 ```math
-\begin{align}
+\begin{aligned}
 (1101.1011)_2 &= (001 \; 101 \; .001 \; 011)_2 = (15.13)_8 = (D.5)_8 \\
 &\\
 (1101.1011)_2 &= (D.B)_{16}
-\end{align}
+\end{aligned}
 ```
 
 Puede darse el caso que el número no sea exactamente divisible por $3$ o $4$, por lo que se agregan ceros a la izquierda (en la parte entera) o a la derecha (en la parte fraccionaria) para completar el número.
@@ -127,11 +127,11 @@ Puede darse el caso que el número no sea exactamente divisible por $3$ o $4$, p
 **Ejemplo:** Expresar $(11010011011011)_2$ y $(0.101101)_2$ en hexadecimal.
 
 ```math
-\begin{align}
+\begin{aligned}
 (11010011011011)_2 &= 1011 \; 0011 \; 0110 \; 11 = 1011 \; 0011 \; 0110 \; 0011 = (B36B)_{16} \\
 &\\
 (0.101101)_2 &= 1011 \; 01 = 1011 \; 0100 = (0.B4)_{16}
-\end{align}
+\end{aligned}
 ```
 
 ## Complementos 
@@ -169,10 +169,10 @@ Primero calculamos el valor absoluto de $63$ en binario y agregamos ceros a la i
 Ahora obtenemos el complemento a $2$ de $(00111111)_2$.
 
 ```math
-\begin{align}
+\begin{aligned}
 (00111111)_2 &\implies (11000000)_2 \\
 +1 &\implies (11000001)_2
-\end{align}
+\end{aligned}
 ```
 
 Por lo que $-63 = (11000001)_2$.
@@ -207,10 +207,10 @@ Por ejemplo, el número $-13.625$ en precisión simple sería:
 Para seguir el formato, necesitamos desplazar el $.$ cuantas veces sea necesario para solo tener una unidad entera. En este caso, tres veces $\implies e=3$
 
 ```math
-\begin{align}
+\begin{aligned}
 &= 1.1011011 \times 2^3 \\
 &= 1.1011011 \times 2^{(130 - 127)} 
-\end{align}
+\end{aligned}
 ```
 
 Tenemos que: 
@@ -228,5 +228,5 @@ Sumando todos los bits, tenemos $32$ bits. Agrupando $s, E, F$ (en ese orden) de
 El $\pm \infty$ se representa con exponente $= 111 \ldots 1$, y mantisa $= 000 \ldots 0$.\
 Este se utiliza cuando un número excede el rango de representación. 
 
-El NaN se representa con exponente $= 111 \ldots 1$, y mantisa $\neq 000 \ldots 0$.\
+El NaN se representa con exponente $= 111 \ldots 1$, y mantisa $\not=000 \ldots 0$.\
 Este se utiliza cuando se realiza una operación inválida, como dividir por $0$.

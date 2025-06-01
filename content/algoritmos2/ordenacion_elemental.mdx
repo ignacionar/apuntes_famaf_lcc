@@ -70,7 +70,7 @@ El arreglo $a$ es una permutación del original. A partir del segmento $a[1, i)$
 Si quisieramos escribir este algoritmo en pseudocódigo, primero podemos escribir un procedimiento que recorra el arreglo, llamando una función que nos devuelva la posición del menor elemento a partir de una posición dada. Luego, intercambiamos el elemento de la posición actual con el menor elemento encontrado con un procedimiento.   
 
 ```math
-\begin{align}
+\begin{aligned}
 &\{ \; n \geq 0 \land a = A \; \} \\
 &\proc \; selection\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
 &\quad \var \; i, \; minp: \; \nat \\
@@ -82,13 +82,13 @@ Si quisieramos escribir este algoritmo en pseudocódigo, primero podemos escribi
 &\quad \od \\
 &\bfend \; \proc \\
 &\{ \; a \; \textnormal{está ordenado y es permutación de} \; A \; \} \\
-\end{align}
+\end{aligned}
 ```
 
 El $swap$ sería:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\{ \; a = A \land 1 \leq i, j \leq n \; \} \\
 &\proc \; swap(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; i, j : \nat) \\
 &\quad \var \; tmp : T \\
@@ -97,7 +97,7 @@ El $swap$ sería:
 &\quad a[j] := tmp \\
 &\bfend \; \proc \\
 &\{\; a[i] = A[j] \land a[j] = A[i] \land \forall k \not\in \{ i, j \} \implies a[k]=A[k] \; \} \\
-\end{align}
+\end{aligned}
 ```
 
 Para hacer $min\_pos\_from$, podemos seguir la siguiente lógica:
@@ -109,7 +109,7 @@ Para hacer $min\_pos\_from$, podemos seguir la siguiente lógica:
 El invariante es igual al anterior, pero ahora incluimos el mínimo del segmento $a[i, j)$ en la posición $minp$.
 
 ```math
-\begin{align}
+\begin{aligned}
 &\{ \; 0 < i \leq n \; \} \\
 &\fun \; min\_pos\_from(a : \array [1..n] \; \of \; T, \; i : \nat) \; \ret \; minp: \; \nat \\
 &\quad \var \; j : \nat \\
@@ -123,13 +123,13 @@ El invariante es igual al anterior, pero ahora incluimos el mínimo del segmento
 &\quad \od \\
 &\bfend \; \fun \\
 &\{ \; a[minp] \; \textnormal{es el mínimo de} \; a[i,n] \; \} \\
-\end{align}
+\end{aligned}
 ```
 
 Una manera de hacer lo mismo y con menos código es usando $\for$: 
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\proc \; selection\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
 &\quad \for \; i := 1 \; \too \; n \; \do \\
 &\quad \quad minp := min\_pos\_from(a,i) \\
@@ -145,7 +145,7 @@ Una manera de hacer lo mismo y con menos código es usando $\for$:
 &\quad \quad \fi \\
 &\quad \od \\
 &\bfend \; \fun \\
-\end{align}
+\end{aligned}
 ```
 
 De esta forma, las variables que sirven de índices estan declaradas en el contexto/scope de $\for$ 
@@ -165,7 +165,7 @@ El arreglo $a$ es una permutación del original. Un segmento inicial $a[1,i)]$ d
 Si quisieramos escribir este algoritmo en pseudocódigo, podemos escribir un procedimiento que recorra el arreglo, utilizando un procedimiento que se encargue de insertar un elemento en la posición correcta. 
 
 ```math
-\begin{align}
+\begin{aligned}
 &\{ \; n \geq 0 \land a = A \; \} \\
 &\proc \; insertion\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
 &\quad \for \; i := 2 \; \too \; n \; \do \\
@@ -173,7 +173,7 @@ Si quisieramos escribir este algoritmo en pseudocódigo, podemos escribir un pro
 &\quad \od \\
 &\bfend \; \proc \\
 &\{ \; a \; \textnormal{está ordenado y es permutación de} \; A \; \} \\
-\end{align}
+\end{aligned}
 ```
 
 Para hacer $insert$, podemos seguir la siguiente lógica:
@@ -185,7 +185,7 @@ Para hacer $insert$, podemos seguir la siguiente lógica:
 Como invariante, tenemos que $a$ es una permutación de $A$, el segmento $a[1,i]$ **sin celda** $j$ está ordenado y, $a[j,i]$ también está ordenado.
 
 ```math
-\begin{align}
+\begin{aligned}
 &\{ \; 0 < i \leq n \land a = A \; \} \\
 &\proc \; insert(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; i : \nat) \\
 &\quad \var \; j : \nat \\
@@ -196,7 +196,7 @@ Como invariante, tenemos que $a$ es una permutación de $A$, el segmento $a[1,i]
 &\quad \od \\
 &\bfend \; \proc \\
 &\{ \; a[1,i] \; \textnormal{está ordenado y es permutación de} \; A \; \} \\
-\end{align}
+\end{aligned}
 ```
 
 (Se utiliza el mismo $swap$ que en el algoritmo de selección). Tanto este algoritmo como el de selección tienen complejidad cuadrática $\bigO(n^2)$ (en el peor caso), ya que sería necesario recorrer el arreglo completo en cada iteración.

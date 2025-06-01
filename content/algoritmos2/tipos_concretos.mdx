@@ -15,14 +15,14 @@ En el lenguaje de la materia existen distintos tipos de datos concretos.
 > Un tipo enumerado consiste en una serie finita de constantes, únicos en su tipo.
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\type \; E = \enumerate \\
 &\quad elem1 \\
 &\quad elem2 \\
 &\quad \ldots \\
 &\quad elemk \\
 &\bfend \; \enumerate 
-\end{align}
+\end{aligned}
 ```
 
 De esta forma se definen únicamente los $k$ elementos que pertenecen al tipo $E$.
@@ -30,10 +30,10 @@ De esta forma se definen únicamente los $k$ elementos que pertenecen al tipo $E
 Si quisieramos usar el elemento $elem1$ de un tipo enumerado $E$, sería: 
 
 ```math
-\begin{align}
+\begin{aligned}
 &\var \; v : E \\
 &v := elem1 
-\end{align}
+\end{aligned}
 ```
 
 Puede ser útil para ciclos $\for$ dodne el índice tome el valor de un tipo enumerado.
@@ -47,13 +47,13 @@ Puede ser útil para ciclos $\for$ dodne el índice tome el valor de un tipo enu
 > Las tuplas representan productos cartesianos de distintos tipos. También se conocen como registros/estructuras.
 
 ```math
-\begin{align}
+\begin{aligned}
 &\type \; personType = \tuple \\
 &\quad name : \string \\
 &\quad age : \nat \\
 &\quad height : \real \\
 &\bfend \; \tuple
-\end{align}
+\end{aligned}
 ```
 
 $personType$ corresponde al producto de los tipos $\string$, $\nat$ y $\real$. Donde $name$, $age$ y $height$ son los **campos** de la tupla.
@@ -61,7 +61,7 @@ $personType$ corresponde al producto de los tipos $\string$, $\nat$ y $\real$. D
 Para acceder a los campos de una tupla se hace mediante el operador $.$ 
 
 ```math
-\begin{align}
+\begin{aligned}
 &\{- \;\; \textnormal{Declaración y asignación a campos de tupla} \;\; -\} \\
 &\var \; p : personType \\
 &p.name := \textnormal{"Juan"} \\
@@ -70,7 +70,7 @@ Para acceder a los campos de una tupla se hace mediante el operador $.$
 &\\
 &\{- \;\; \textnormal{Acceder a campo de tupla} \;\; -\} \\
 &p.name \\
-\end{align}
+\end{aligned}
 ```
 
 En la mayoría de lenguajes, cuando se ejecuta un programa a los elementos de un tipo tupla estos son alojados en espacios de memoria contiguos, su espacio es igual a la suma de los espacios que ocupan sus campos.
@@ -82,13 +82,13 @@ En la mayoría de lenguajes, cuando se ejecuta un programa a los elementos de un
 Su declaración es:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\{- \;\; \textnormal{Arreglo unidimensional} \;\; -\} \\
 &\var \; a : \array [N_1 \ldots M_1] \; \of \; T \\
 &\\
 &\{- \;\; \textnormal{Arreglo multidimensional} \;\; -\} \\
 &\var \; a : \array [N_1 \ldots M_1, \; \ldots, \; N_k \ldots M_k] \; \of \; T \\
-\end{align}
+\end{aligned}
 ```
 
 Donde:
@@ -99,13 +99,13 @@ Donde:
 - $T$ es el tipo de los elementos del arreglo.
 
 ```math
-\begin{align}
+\begin{aligned}
 &\{- \;\; \textnormal{Asignación a elemento de arreglo} \;\; -\} \\
 &a[i_1, \; \ldots , \; i_k] := E \\
 & \\
 &\{- \;\; \textnormal{Acceder a elemento de arreglo} \;\; -\} \\
 &a[i_1, \; \ldots , \; i_k]
-\end{align}
+\end{aligned}
 ```
 
 Donde $E$ es una expresión de tipo $T$.
@@ -113,7 +113,7 @@ Donde $E$ es una expresión de tipo $T$.
 Algunos ejemplos:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\var \; precios : \array [1..10] \; \of \; \intt \\
 &\{- \;\; \textnormal{arreglo de 10 elementos} \; precios[1], precios[2], \ldots , precios[10] \;\; -\} \\
 \\
@@ -131,7 +131,7 @@ Algunos ejemplos:
 &\quad \quad matriz[i,j] := \textnormal{"A"} \\
 &\quad \od \\
 &\od
-\end{align}
+\end{aligned}
 ```
 
 ## Punteros 
@@ -201,11 +201,11 @@ Por lo que podemos acceder a sus campos $\star p.name$, $\star p.age, \star p.he
 Otra notación que reemplaza los operadores $(\star), (.)$ para acceder a los campos de una tupla es $\rightarrow$
 
 ```math
-\begin{align}
+\begin{aligned}
 &p \rightarrow name := \textnormal{"Juan"} \\
 &p \rightarrow age := 20 \\
 &p \rightarrow height := 1.80
-\end{align}
+\end{aligned}
 ```
 
 Si por ejemplo, tuvieramos una variable $q$ tal que $q := p$ entonces $q$ y $p$ apuntan al mismo lugar de memoria, esto es llamado **aliasing**. Si uno de los punteros modifica el valor de la memoria, el otro puntero también verá el cambio.

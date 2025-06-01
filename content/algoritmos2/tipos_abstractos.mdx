@@ -37,7 +37,7 @@ Su implementación:
 ### Especificación de listas
 
 ```math 
-\begin{align}
+\begin{aligned}
 & \\
 &\spec \; List \; \of \; \where \\
 &\\ 
@@ -86,7 +86,7 @@ Su implementación:
 &\quad \fun \; copy\_list(l1 : List \; \of \; T) \; \ret \; l2 : List \; \of \; T \\ 
 &\quad\{- \;\; \textnormal{Copia los elementos de} \; l1 \; \textnormal{en la nueva lista} \; l2 \;\; -\} \\
 &\\
-\end{align}
+\end{aligned}
 ```
 
 Para usar el tipo de las listas basta con especificarlas. **No** es necessario conocer la implementación para usar el TAD.
@@ -97,7 +97,7 @@ Las operaciones permiten manipular listas de acuerdo a la funcionalidad del TAD.
 **Ejemplo de uso:**
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\fun \; promedio(l : List \; \of \; real) \; \ret \; r : \real \\
 &\quad \var \; largo : \nat \\
 &\quad \var \; elem : \real \\
@@ -114,7 +114,7 @@ Las operaciones permiten manipular listas de acuerdo a la funcionalidad del TAD.
 &\quad destroy(laux) \\
 &\quad r:= r \; / \; largo  \\
 &\bfend \; \proc
-\end{align}
+\end{aligned}
 ```
 
 ### Implementación de listas 
@@ -124,7 +124,7 @@ Cada elemento de la lista estará alojado en un _nodo_ conteniendo además un pu
 Una lista será un puntero a un nodo (se sigue un patrón recursivo)
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\impt \; List \; \of \; T \; \where \\
 &\\ 
 &\type \; Node \; \of \; T = \tuple \\
@@ -133,17 +133,17 @@ Una lista será un puntero a un nodo (se sigue un patrón recursivo)
 &\quad\quad\quad\quad\quad\quad\quad\quad \; \bfend \; \tuple \\
 &\\
 &\type \; List \; \of \; T = \pointer \; \too \; (Node \; \of \; T) \\
-\end{align}
+\end{aligned}
 ```
 
 El constructor $empty$ (lista vacía) se implementa fácilmente con el puntero $\null$ 
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\fun \; empty() \; \ret \; l : List \; \of \; T \\ 
 &\quad l := \null \\
 &\bfend \; \fun 
-\end{align}
+\end{aligned}
 ```
 
 Lo que falta es la implementación del constructor $addl$ (para agregar un elemento nuevo):
@@ -171,7 +171,7 @@ Entonces $l$ no debe apuntar a $e_1$ sino a $e$ (nuevo primer elemento)
 En el código tenemos: 
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\proc \; addl (\bfin \; e : T, \; \inout \; l : List \; \of \; T) \\
 &\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
 &\quad alloc(p) \\
@@ -204,7 +204,7 @@ En el código tenemos:
 &\quad q \to next := \null \\
 &\quad \if \; \neg is\_empty(l) \; \then \\
 &\quad\quad p := l \\
-&\quad\quad \while \; (p \to next \neq \null) \; \do \\
+&\quad\quad \while \; (p \to next \not=\null) \; \do \\
 &\quad\quad\quad p := p \to next \\
 &\quad\quad \od \\
 &\quad\quad p \to next := q \\
@@ -217,12 +217,12 @@ En el código tenemos:
 &\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
 &\quad n := 0 \\
 &\quad p := l \\
-&\quad \while \; (p \neq \null) \; \do \\
+&\quad \while \; (p \not=\null) \; \do \\
 &\quad \quad n := n + 1 \\
 &\quad \quad p := p \to next \\
 &\quad \od \\
 &\bfend \; \fun \\
-\end{align}
+\end{aligned}
 ```
 
 {/* TODO: Resto de implementaciones */}
@@ -238,7 +238,7 @@ En el código tenemos:
 ### Especificación de Contador
 
 ```math
-\begin{align}
+\begin{aligned}
 &\spec \; Counter \; \where \\
 &\\
 &\cons \\
@@ -259,7 +259,7 @@ En el código tenemos:
 &\quad \proc \; dec(\inout \; c : Counter) \\
 &\quad\{- \;\; \textnormal{Decrementa el contador} \; c \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_init(c) \;\; -\} \\
-\end{align}
+\end{aligned}
 ```
 
 ### Implementación de Contador
@@ -267,7 +267,7 @@ En el código tenemos:
 La implementación de un contador es sencilla, se puede hacer con un natural. 
 
 ```math
-\begin{align}
+\begin{aligned}
 &\impt \; Counter \; \where \\
 &\\
 &\type \; Counter = \nat \\
@@ -292,7 +292,7 @@ La implementación de un contador es sencilla, se puede hacer con un natural.
 &\proc \; destroy(\inout \; c : Counter) \\
 &\quad \skip \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 Todas las operaciones son $\bigO(1)$ (constantes).
@@ -305,7 +305,7 @@ La pila sigue el principio **LIFO** (Last In, First Out)
 ### Especificación de pila
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\spec \; Stack \; \of \; T \; \where \\
 &\\
 &\cons \\
@@ -333,7 +333,7 @@ La pila sigue el principio **LIFO** (Last In, First Out)
 &\\
 &\quad \fun \; is\_full(s : Stack) \; \ret \; b : \bool \\ 
 &\quad\{- \;\; \textnormal{Devuelve} \; True \; \textnormal{si} \; s \; \textnormal{está llena} \;\; -\} \\
-\end{align}
+\end{aligned}
 ```
 
 ### Implementación de pila 
@@ -341,7 +341,7 @@ La pila sigue el principio **LIFO** (Last In, First Out)
 Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en este caso se usará un arreglo: 
 
 ```math
-\begin{align}
+\begin{aligned}
 &\impt \; Stack \; \of \; T \; \where \\
 &\\
 &\type \; Stack \; \of \; T = \tuple \\
@@ -379,7 +379,7 @@ Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en 
 &\quad\quad pop(s) \\
 &\quad \od \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 ## Cola 
@@ -390,7 +390,7 @@ La cola sigue el principio **FIFO** (First In, First Out)
 ### Especificación de cola
 
 ```math
-\begin{align}
+\begin{aligned}
 &\spec \; Queue \; \of \; T \; \where \\
 &\\
 &\cons \\
@@ -415,7 +415,7 @@ La cola sigue el principio **FIFO** (First In, First Out)
 &\quad \proc \; deq  ueue(\inout \; q : Queue \; \of \; T) \\
 &\quad\{- \;\; \textnormal{Elimina el elemento al comienzo de} \; q \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_queue(q) \;\; -\} \\
-\end{align}
+\end{aligned}
 ```
 
 ### Implementación de cola 
@@ -423,7 +423,7 @@ La cola sigue el principio **FIFO** (First In, First Out)
 Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en este caso se usará un arreglo: 
 
 ```math
-\begin{align}
+\begin{aligned}
 &\impt \; Queue \; \of \; T \; \where \\
 &\\
 &\type \; Queue \; \of \; T = \tuple \\
@@ -464,13 +464,13 @@ Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en 
 &\quad\quad dequeue(q) \\
 &\quad \od \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 **Ejemplo de buffer de datos:**
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\proc \; buffer() \\ 
 &\quad \var \; d: data \\ 
 &\quad \var \; q: Queue \; \of \; data \\ 
@@ -485,7 +485,7 @@ Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en 
 &\quad\quad \fi \\
 &\quad \od \\
 &\bfend \; \proc 
-\end{align}
+\end{aligned}
 ```
 
 Sus funciones auxiliares:
@@ -514,7 +514,7 @@ Como **operaciones** tenemos:
 ### Especificación de conjunto finito de elementos
 
 ```math
-\begin{align}
+\begin{aligned}
 &\spec \; Set \; \of \; T \; \where \\
 &\\
 &\cons \\
@@ -543,7 +543,7 @@ Como **operaciones** tenemos:
 &\\
 &\quad \proc \; diff(\inout \; s1 : Set \; \of \; T, \; \bfin \; s2 : Set \; \of \; T) \\
 &\quad\{- \;\; \textnormal{Elimina de} \; s1 \; \textnormal{los elementos que pertenezcan a} \; s2 \;\; -\} \\
-\end{align}
+\end{aligned}
 ```
 
 {/* TODO: ### Implementacion de conjunto finito de elementos */}
@@ -564,7 +564,7 @@ Podemos recorrer un árbol indicando caminos desde la raíz y representarlos com
 Su especificación es: 
 
 ```math 
-\begin{align} 
+\begin{aligned} 
 &\type \; Direction = \enumerate \\ 
 &\quad\quad\quad\quad\quad\quad\quad\quad\quad Left \\
 &\quad\quad\quad\quad\quad\quad\quad\quad\quad Right \\
@@ -612,7 +612,7 @@ Su especificación es:
 &\quad \fun \; elem\_at(t : Tree \; \of \; T, \; p : Path) \; \ret \; e : T \\
 &\quad\{- \;\; \textnormal{Devuelve el elemento al seguir el camino} \; p \; \textnormal{en} \; t \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; is\_path(t,p) \;\; -\} \\
-\end{align}
+\end{aligned}
 ```
 
 ### Implementación de árboles binarios 
@@ -620,7 +620,7 @@ Su especificación es:
 Su implementación es similar a la de listas enlazadas. Se define un tipo $Node$ como tupla con un elemento y dos punteros a sí mismo: 
 
 ```math
-\begin{align}
+\begin{aligned}
 &\impt \; Tree \; \of \; T \; \where \\
 &\\
 &\type \; Node \; \of \; T = \tuple \\
@@ -641,7 +641,7 @@ Su implementación es similar a la de listas enlazadas. Se define un tipo $Node$
 &\quad t \to value := e \\
 &\quad t \to right := tr \\
 &\bfend \; \fun 
-\end{align}
+\end{aligned}
 ```
 
 ### Árboles binarios de búsqueda 

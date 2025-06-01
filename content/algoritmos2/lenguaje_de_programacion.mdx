@@ -7,12 +7,12 @@ Se utiliza un lenguaje inventado específicamente para la materia, que nos permi
 > Un procedimiento encapsula un bloque de código con su respectiva declaración de variables (que define el estado).
 
 ```math
-\begin{align}
+\begin{aligned}
 &\proc \; nombre(< \bfin | \out | \inout > p_1 : T_1, \; \ldots, \; < \bfin | \out | \inout > p_n : T_n) \\
 &\quad < \textnormal{declaraciones de variables} > \\
 &\quad < \textnormal{sentencias} > \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 Donde $p_1, \; \ldots, \; p_n$ son nombres de variables (parámetros) y $T_1, \; \ldots, \; T_n$ sus respectivos tipos.
@@ -26,7 +26,7 @@ Donde $p_1, \; \ldots, \; p_n$ son nombres de variables (parámetros) y $T_1, \;
 Un ejemplo de declaración de procedimiento es el siguiente:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\proc \; abs(\bfin \; x : \intt, \; \out \; y : \intt) \\
 &\quad \if \; x >= 0 \; \then \\
 &\quad \quad y := x \\
@@ -34,13 +34,13 @@ Un ejemplo de declaración de procedimiento es el siguiente:
 &\quad \quad y := -x \\
 &\quad \fi \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 Un ejemplo de llamada de este procedmiento puede ser:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\proc \; llamadordeabs() \\
 &\quad \var \; a, b : \intt \\
 &\quad a := -10 \\
@@ -48,7 +48,7 @@ Un ejemplo de llamada de este procedmiento puede ser:
 &\quad abs(a,b) \\
 &\quad \{- \;\; b = 10 \;\; -\} \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 **Observaciones:**
@@ -61,12 +61,12 @@ Un ejemplo de llamada de este procedmiento puede ser:
 > Las funciones son como procedimientos salvo que todos los parámetros son $\bfin$ y devuelven algo.
 
 ```math
-\begin{align}
+\begin{aligned}
 &\fun \; nombre(p_1 : T_1, \; \ldots, \; p_n : T_n) \; \ret \; r : T \\
 &\quad < \textnormal{declaraciones de variables} > \\
 &\quad < \textnormal{sentencias} > \\
 &\bfend \; \fun \\
-\end{align}
+\end{aligned}
 ```
 
 Donde $p_1, \; \ldots, \; p_n$ y $r$ son nombres de variables (parámetros) y $T_1, \; \ldots, \; T_n$ sus respectivos tipos.
@@ -74,7 +74,7 @@ Donde $p_1, \; \ldots, \; p_n$ y $r$ son nombres de variables (parámetros) y $T
 Un ejemplo de declaración de función es el siguiente:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\fun \; abs(\bfin \; x : \intt) \; \ret \; y : \intt  \\
 &\quad \if \; x >= 0 \; \then \\
 &\quad \quad y := x \\
@@ -82,13 +82,13 @@ Un ejemplo de declaración de función es el siguiente:
 &\quad \quad y := -x \\
 &\quad \fi \\
 &\bfend \; \fun \\
-\end{align}
+\end{aligned}
 ```
 
 Y un ejemplo de llamada es:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\proc \; llamadordeabs() \\
 &\quad \var \; a, b : \intt \\
 &\quad a := -10 \\
@@ -97,7 +97,7 @@ Y un ejemplo de llamada es:
 &\quad a := abs(a) + 10 \\
 &\quad \{- \;\; b = 10, \; a = 20 \;\; -\} \\
 &\bfend \; \proc \\
-\end{align}
+\end{aligned}
 ```
 
 **Observaciones sobre funciones:**
@@ -139,7 +139,7 @@ Expresiones válidas en programación imperativa:
 
 - valores constantes
 - variables y constantes declaradas
-- operaciones básicas $(+, -, *, /, \textnormal{div}, \textnormal{mod}, \textnormal{max}, \textnormal{min}, ∧, ∨, ¬, =, ≠, ≤, <, >)$
+- operaciones básicas $(+, -, *, /, \textnormal{div}, \textnormal{mod}, \textnormal{max}, \textnormal{min}, \land, \lor, \neg, =, \not=, \leq, <, >)$
 - accesos a elementos de arreglos
 - llamadas a funciones
 
@@ -162,23 +162,23 @@ Llamamos los procedimientos como $nombreproc(e_1, \ldots, e_n)$
 Utilizamos $\if, \; \then, \; \else$ de las siguientes maneras:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\if \; B \; \then \\
 &\quad S_1 \\
 &\else \\
 &\quad S_2 \\
 &\fi
-\end{align}
+\end{aligned}
 ```
 
 O también, sin el $\else$
 
 ```math
-\begin{align}
+\begin{aligned}
 &\if \; B \; \then \\
 &\quad S \\
 &\fi
-\end{align}
+\end{aligned}
 ```
 
 Donde $B$ es una guarda y expresión booleana, y $S, S_1, S_2$ sentencias.
@@ -188,11 +188,11 @@ Donde $B$ es una guarda y expresión booleana, y $S, S_1, S_2$ sentencias.
 Utilizamos $\while, \; \do$:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\while \; B \; \do \\
 &\quad S \\
 &\od
-\end{align}
+\end{aligned}
 ```
 
 Donde $B$ es una guarda y expresión booleana, y $S$ una sentencia.
@@ -202,11 +202,11 @@ Donde $B$ es una guarda y expresión booleana, y $S$ una sentencia.
 Sintaxis de $\for \; \too$:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\for \; i:=N \; \too \; M \; \do \\
 &\quad S \\
 &\od
-\end{align}
+\end{aligned}
 ```
 
 Donde $N$ y $M$ son expresiones de tipo $\intt$ y $S$ es sentencia.
@@ -223,11 +223,11 @@ Su semántica es la siguiente:
 Sintaxis de $\for \; \downto$:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\for \; i:=N \; \downto \; M \; \do \\
 &\quad S \\
 &\od
-\end{align}
+\end{aligned}
 ```
 
 Donde $N$ y $M$ son expresiones de tipo $int$ y $S$ es sentencia.
@@ -245,24 +245,24 @@ Su semántica es igual a $\for \; \too$ pero restando $1$.
 Un ejemplo de $\for \; \too$ podría ser:
 
 ```math
-\begin{align}
+\begin{aligned}
 &\var \; precios : \array [1..100] \; \of \; \intt \\
 &\for \; i:=1 \; \too \; 100 \; \do \\
 &\quad precios[i] := 0 \\
 &\od
-\end{align}
+\end{aligned}
 ```
 
 Y para $\for \; \downto$,
 
 ```math
-\begin{align}
+\begin{aligned}
 &\var \; precios : \array [1..100] \; \of \; \intt \\
 &precios[100] := 35 \\
 &\for \; i:=99 \; \downto \; 1 \; \do \\
 &\quad precios[i] := precios[i+1] * 2 \\
 &\od
-\end{align}
+\end{aligned}
 ```
 
 ### Secuenciación

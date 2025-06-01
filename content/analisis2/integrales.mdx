@@ -45,7 +45,7 @@ Todo polinomio mónico se puede escribir como producto de polinomios de primer g
 **1)** $Q$ es producto de polinomios de grado $1$ y todos distintos:
 
 ```math
-Q(x) = (x-r_1)(x-r_2)...(x-r_k),\;r_j \neq r_i,\; i \neq j
+Q(x) = (x-r_1)(x-r_2)...(x-r_k),\;r_j \not=r_i,\; i \not=j
 ```
 
 Como en el caso de:  
@@ -91,12 +91,12 @@ Igualando los coeficientes de los numeradores:
 Ahora reemplazamos $A_1$ en la segunda ecuación:
 
 ```math
-\begin{align*}
+\begin{aligned}
   - 1&= 2(7-A_2)-3A_2 \\
   -1 &= 14-2A_2-3A_2 \\
   -15 &= -5A_2 \\
   3 &= A_2 \\
-\end{align*}
+\end{aligned}
 ```
 
 Determinamos el valor de $A_1$: 
@@ -247,21 +247,21 @@ Para integrar términos de la forma $\frac{Bx+C}{x^2+\alpha x+\beta}$, debemos b
 Igualando los coeficientes de los numeradores obtenemos: 
 
 ```math
-\begin{align*}
+\begin{aligned}
   K_1 &= \frac{B}{2} \\
   K_2 &= C - K_1 \cdot \alpha
-\end{align*}
+\end{aligned}
 ```
 
 En base a lo explicado, nuestro primer paso será identificar $B, C, \alpha, \beta$:
 
 ```math
-\begin{align*}
+\begin{aligned}
   B &= 1 \\
   C &= -1 \\
   \alpha &= -4 \\
   \beta &= 5
-\end{align*}
+\end{aligned}
 ```
 
 Entonces tenemos que:
@@ -273,10 +273,10 @@ Entonces tenemos que:
 Ahora buscamos $K_1, K_2$:
 
 ```math
-\begin{align*}
+\begin{aligned}
   K_1 &= \frac{1}{2} \\
   K_2 &= -1 - \frac{1}{2} \cdot (-4) = 1
-\end{align*}
+\end{aligned}
 ```
 
 Sabiendo los valores de $K_1$ y $K_2$, podeemos reemplazar: 
@@ -456,11 +456,11 @@ Para ver la segunda integral, utilicemos el teorema:
 En este caso estamos integrando para $1 \leq x$ por lo que podemos establecer que:
 
 ```math
-\begin{align*}
+\begin{aligned}
   1 &\leq x \\
   1 \cdot x &\leq x \cdot x \\  
   x &\leq x^2 
-\end{align*}
+\end{aligned}
 ```
 
 Independientemente del valor de $x$, si evaluamos $e^x \leq e^{x^2} \implies e^{-x} \geq e^{-x^2}$.

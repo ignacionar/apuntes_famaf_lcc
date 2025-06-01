@@ -103,7 +103,7 @@ P(\hat{\theta_1} \leq \theta \leq \hat{\theta_2}) = 0.95
 Sea $X_1, \ldots, X_n$ una $\mathbf{m.a.}$ de una $\mathbf{v.a.} \; X \sim N(\mu, \sigma^2)$, con $\sigma^2$ conocido, si queremos construir el de nivel $1 - \alpha$ para $\mu$, se puede usar el estadístico pivote:
 
 ```math 
-\begin{align}
+\begin{aligned}
 &\overline{X} - \mu \sim N(0, \sigma^2 /n) \\
 & \\
 &\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \sim N(0,1) \\
@@ -111,7 +111,7 @@ Sea $X_1, \ldots, X_n$ una $\mathbf{m.a.}$ de una $\mathbf{v.a.} \; X \sim N(\mu
 & P(-z_{\alpha/2} \leq \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \leq z_{\alpha/2}) \approx 1 - \alpha \\
 & \\
 & P(\overline{X} - \frac{\sigma z_{\alpha/2}}{\sqrt{n}} \; \leq \mu \leq \; \overline{X} + \frac{\sigma z_{\alpha/2}}{\sqrt{n}}) \approx 1 - \alpha \\
-\end{align}
+\end{aligned}
 ```
 
 Donde $\overline{X} - \frac{\sigma z_{\alpha/2}}{\sqrt{n}}$ y $\overline{X} + \frac{\sigma z_{\alpha/2}}{\sqrt{n}}$ son los límites inferior y superior del intervalo de confianza, respectivamente.
