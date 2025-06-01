@@ -1,8 +1,8 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "node next dev",
-    "build": "node next build && npm run postbuild",
+    "dev": "next dev",
+    "build": "next build && npm run postbuild",
     "start": "next start",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
   },
