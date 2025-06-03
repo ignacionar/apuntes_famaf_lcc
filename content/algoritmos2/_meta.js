@@ -6,5 +6,6 @@ export default {
   recurrencias_jerarquia_de_funciones: "Recurrencias y Jerarquía de Funciones",
   tipos_concretos: "Tipos Concretos",
   tipos_abstractos: "Tipos Abstractos",
-  tecnicas_de_programacion: "Técnicas de Programación"
+  tecnicas_de_programacion: "Técnicas de Programación",
+  punteros_c: "Punteros en C"
 }

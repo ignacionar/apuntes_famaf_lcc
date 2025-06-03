@@ -1,0 +1,77 @@
+# Punteros en C
+
+> En esta sección se incluyen algunas notas sobre el uso de punteros en el lenguaje C 
+
+## Declaración de punteros
+
+> Los punteros son un tipo de variable especial que guardan una dirección de memoria
+
+En C se denotan con el símbolo `*` al momento de declarar una variable. 
+
+Siempre es recomendable darle un valor inicial a las variables al declaralas.\
+Para los punteros se puede usar `NULL`, representando una dirección de memoria nula que no puede ser leída/escrita:
+
+```c
+// p es un puntero a un entero, inicializado a NULL
+int *p = NULL;
+```
+
+## Operaciones con punteros
+
+### Operación de referenciación 
+
+Se puede obtener la dirección de memoria de una variable usando el operador `&`.
+
+```c
+int x = 10;
+
+int *p = &x; // p ahora apunta a la dirección de memoria de a
+```
+
+Como `p, &x` tienen el mismo tipo de dato, la operación es válida.
+
+### Operación de desreferenciación
+
+Para acceder al valor al que apunta un puntero, se usa el operador `*`
+
+```c
+printf("%d, %d\n", *p, x); 
+// 10, 10
+
+*p = 20; // Cambia el valor de x a 20
+
+printf("%d, %d\n", *p, x);
+// 20, 20
+```
+
+### Operación de indexación y acceso indirecto
+
+Los punteros también pueden ser usados para acceder a elementos de un arreglo. 
+
+```c
+int arr[] = {1, 2, 3, 4, 5};
+
+int *p = arr; // p apunta al primer elemento del arreglo
+
+printf("%d\n", *(p + 2)); 
+// 3 
+
+printf("%d\n", p[2]); 
+// 3 
+```
+
+Si `p` es puntero a una estructura, se puede acceder a sus campos usando el operador `->`:
+
+```c
+struct Punto {
+  int x;
+  int y;
+};
+
+struct Punto ejemplo_punto = {10, 20};
+
+struct Punto *p = &ejemplo_punto;
+
+printf("%d, %d\n", p -> x, p -> y);
+// 10, 20
+```
