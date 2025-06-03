@@ -75,3 +75,31 @@ struct Punto *p = &ejemplo_punto;
 printf("%d, %d\n", p -> x, p -> y);
 // 10, 20
 ```
+
+## Visualización de punteros 
+
+Podemos ver la dirección de memoria a la que apunta un puntero usando el especificador `%p` en `printf`:
+
+```c
+printf("Dirección de memoria de p en hexadecimal: %p\n", (void *) p);
+// Dirección de memoria de p en hexadecimal: 0x....
+
+printf("Dirección de memoria de p en decimal: %lu\n", (uintptr_t) p);
+// Dirección de memoria de p en decimal: 123...
+```
+
+El paréntesis que se agrega conteine un tipo, lo que hace que la expresión se convierta al tipo indicado para imprimir. 
+
+## Reservación y liberación de memoria 
+
+Para reservar y liberar memoria dinámica en C, se utilizan las funciones `malloc` y `free` respectivamente.
+
+```c
+int *p = malloc(sizeof(int)); // Reserva memoria para un entero
+
+array = malloc(sizeof(int) * n); // Reserva memoria para un arreglo de enteros de tamaño n
+
+// Liberar la memoria reservada
+free(p); 
+free(array); 
+``` 
