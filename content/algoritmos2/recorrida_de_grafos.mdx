@@ -1,0 +1,26 @@
+# Recorrida de Grafos 
+
+> Recorrer un grafo significa **visitar/procesar** todos los vértices del mismo, de forma organizada tal que todos sean visitados y ninguno de se repita. 
+
+## Tipos de recorrida
+
+### Pre-order 
+
+> Se visita **primero el vértice raíz**, luego se recorre el subárbol izquierdo y finalmente el subárbol derecho. 
+
+### In-order
+
+> Se **recorre el subárbol izquierdo, luego el vértice raíz** y finalmente el subárbol derecho. Esta **no** puede aplicarse a árboles finitarios, no se puede determinar cuando recorrer el vértice raíz.
+
+### Post-order
+
+> Se recorre **primero el subárbol izquierdo, luego el subárbol derecho** y finalmente se visita el vértice raíz. 
+
+## DFS (_Depth First Search_)
+
+> El algoritmo de **búsqueda en profundidad** es un algoritmo de recorrido de grafos que **explora lo más profundo posible a lo largo de cada rama antes de retroceder**. Este puede aplicar los recorridos pre-order, in-order y post-order.
+
+## BFS (_Breadth First Search_)
+
+> El algoritmo de **búsqueda en amplitud** es un algoritmo de recorrido de grafos que **explora todos los nodos vecinos inmediatos de un nodo**, para luego pasar a los **nodos vecinos de cada uno de esos nodos** (siguiente nivel).\
+Este no aplica los recorridos pre-order, in-order y post-order.

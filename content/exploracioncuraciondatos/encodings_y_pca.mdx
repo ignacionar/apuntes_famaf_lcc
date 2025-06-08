@@ -1,0 +1,34 @@
+# Encodings y PCA 
+
+## Codificación de variables categóricas (Encodings)
+
+Los algoritmos de aprendizaje automático requieren **exclusivamente** datos numéricos.\
+Por lo tanto, es necesario transformar los datos categóricos en datos numéricos.
+
+Existen varias técnicas para codificar variables categóricas, entre las más comunes se encuentran:
+
+### One-Hot Encoding 
+
+> Crea una columna binaria para cada categoría de la variable. Se asigna 1 si la observación pertenece a esa categoría y 0 en caso contrario. Ocupa mucha memoria.
+
+### Encoding Ordinal
+
+> Transforma variables categóricas ordenadas en valores numéricos que preservan orden/jerarquía. 
+
+## PCA 
+
+La reducción de dimensionalidad es una técnica que permite reducir el número de variables en un conjunto de datos, manteniendo la mayor cantidad de información posible.
+
+Podemos expresar el conjunto de datos como una matriz $X$ de $n$ filas y $m$ columnas, donde cada fila es un vector $x_i$ que habita con un espacio matemático de $m$ dimensiones. Cada dimensión corresponde a una columna. 
+
+```math 
+X \in \mathbb{R}^{n \times m}, \; x_i \in \mathbb{R}^m
+```
+
+El objetivo es obtener una nueva matriz $Z$ que tenga la misma cantidad de filas pero un número de columnas $d$ mucho menor que $m$ 
+
+```math 
+Z \in \mathbb{R}^{n \times d}, \; d \ll m
+```
+
+> El PCA (_Principal Component Analysis_) es una técnica de reducción de dimensionalidad que busca encontrar las direcciones de mayor varianza en los datos y proyectar los datos originales sobre estas direcciones.

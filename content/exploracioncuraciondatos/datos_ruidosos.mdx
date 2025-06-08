@@ -1,0 +1,37 @@
+# Datos Ruidosos 
+
+> Consideramos **dato ruidoso** a aquel que no cumple con las expectativas de calidad, y que puede afectar la validez de los resultados obtenidos en un análisis. 
+
+## Datos Atípicos 
+
+> Los **datos atípicos** son aquellos que se encuentran alejados de la mayoría de los datos en un conjunto. Son datos reales, pero pueden afectar los estadísticos de tendencia central y desviación. 
+
+Se puede optar por eliminarlos o incluirlos en el modelo (con el riesgo de propagar errores).
+
+## Datos Mal Codificados 
+
+> Los **datos mal codificados** son aquellos que no cumplen con las reglas de codificación esperadas. Por ejemplo, un campo de fecha que contiene texto o un campo numérico que contiene caracteres alfabéticos. 
+
+Se puede optar por corregir los errores de codificación o eliminarlos.  
+
+## Datos Faltantes 
+
+> Los **datos faltantes** son aquellos que no están presentes en el conjunto de datos. Pueden ser causados por errores en la recolección de datos, problemas de almacenamiento o simplemente porque no se registraron.
+
+### Clasificación de los datos faltantes
+
+Los datos faltantes son más complejos. Antes de decidir cómo tratarlos, es importante clasificarlos:
+
+- **MCAR (Missing Completely At Random):** Los datos faltantes no dependen de ninguna variable, incluyendo observadas y no observadas.
+
+- **MAR (Missing At Random):** Los datos faltantes dependen de variables observadas, pero no de las no observadas.
+
+- **NMAR (Not Missing At Random):** Los datos faltantes dependen de variables no observadas y quizás, de las observadas.
+
+### Tratamiento del dato faltante
+
+Se puede decidir por eliminar o imputar los datos faltantes. Optando por eliminar puntualmente solo los valores faltantes, o eliminando toda la fila/columna que contenga valores faltantes.
+
+La imputación general puede ser por la media, mediana o moda de la variable, o por el valor más frecuente. También se puede optar por técnicas más avanzadas como la imputación múltiple o el uso de modelos predictivos para estimar los valores faltantes.
+
+Entre estas técnicas de imputación se encuentran KNN (K-Nearest Neighbors) o MICE (Multiple Imputation by Chained Equations), que permiten imputar valores faltantes basándose en la similitud entre las observaciones. 

@@ -7,5 +7,6 @@ export default {
   tipos_concretos: "Tipos Concretos",
   tipos_abstractos: "Tipos Abstractos",
   tecnicas_de_programacion: "Técnicas de Programación",
-  punteros_c: "Punteros en C"
+  punteros_c: "Punteros en C",
+  recorrida_de_grafos: "Recorridas de Grafos",
 }

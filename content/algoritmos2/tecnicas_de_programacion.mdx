@@ -30,18 +30,45 @@ Su esquema general es el siguiente:
 $T \subseteq A$ es un árbol generador si el grafo $(V, T)$ es conexo y no contiene ciclos.\
 Su costo total es la suma de costos de sus aristas. El algoritmo busca $T$ cuyo costo sea mínimo. 
 
-Para resolver este problema, el algoritmo de Prim parte desde un vértice origen y se va extendiendo el tendido a partir de ese vértice. Se selecciona la arista de menor costo capaz de incorporar un nuevo vértice.
+Para resolver este problema, el algoritmo de Prim **recibe un grafo y un vértice origen**, parte desde el vértice origen y se va extendiendo el tendido a partir de ese vértice. Se selecciona la arista de menor costo capaz de incorporar un nuevo vértice, se **devuelve un conjunto de aristas seleccionadas**.
 
 ### Camino de costo mínimo (Algoritmo de Dijkstra)
 
 > Sea $G = (V, A)$ un grafo dirigido con costos no negativos en sus aristas, y sea $v \in V$ uno de sus vértices:\
 Se busca obtener los caminos de menor costo desde $v$ hacia cada uno de los demás vértices. 
 
-Para resolver este problema, el algoritmo de Dijkstra realiza una secuencia de $n$ pasos, donde $n$ es el número de vértices.\
-En cada paso "aprende" el camino de menor costo desde $v$ a un nuevo vértice, pintandolo de color (finalizado). Tras esos $n$ pasos, conoce los costos de los caminos de menor costo a cada uno de los vértices. 
+Para resolver este problema, el algoritmo de Dijkstra realiza una secuencia de $n$ pasos, donde $n$ es el número de vértices. Este **recibe un vértice $v$ y un grafo**. En cada paso "aprende" el camino de menor costo desde $v$ a un nuevo vértice, pintandolo de color (finalizado). Tras esos $n$ pasos, conoce los costos de los caminos de menor costo a cada uno de los vértices. **Devuelve un arreglo donde $D[j]$ es el camino de menor costo desde $v$ al vértice $j$**.
 
 ## Backtracking 
 
 > El _backtracking_ es una técnica de programación que se utiliza al no poder resolver un problema de forma voraz (no hay criterio de selección óptimo).\
 Se basa en la idea de **explorar todas las soluciones posibles** y quedarnos con la mejor de ellas. Si se elige un fragmento de solución que no es óptimo, se descarta y se vuelve atrás (_backtrack_) para probar otra opción.
 
+## Programación dinámica
+
+> La programación dinámica es un método para **transformar** una **definción recursiva en iterativa mediante una tabla de valores**. 
+
+**Ejemplo:** Secuencia de Fibonacci
+
+```math
+f_n = \begin{cases}
+n  &, \; n \leq 1 \\
+f_{n-1} + f_{n-2} &, \; n > 1
+\end{cases}
+```
+
+```math 
+\begin{aligned}
+&\\
+&\{ \; \mathbf{PRE:} \; n > 1 \; \} \\
+&\fun \; fib(n: \nat) \; \ret \; r: \nat \\
+&\quad \var \; f: \; \array [0..n] \; \of \; \nat \\
+&\quad f[0] := 0 \\
+&\quad f[1] := 1 \\
+&\quad \for \; i := 2 \; \too \; n \; \do \\
+&\quad \quad f[i] := f[i-1] + f[i-2] \\
+&\quad \od \\
+&\quad r := f[n] \\
+&\bfend \; \fun
+\end{aligned}
+```
