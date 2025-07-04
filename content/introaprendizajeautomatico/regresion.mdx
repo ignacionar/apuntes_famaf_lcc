@@ -1,0 +1,42 @@
+# Regresión Lineal y Polinómica 
+
+> Al disponer de $n$ pares de entrenamiento $\{(x_i, t_i)\}^n_{i=1} = \{ (x_1, t_1), \ldots, (x_n, t_n) \}$ el problema de regresión consiste en estimar $f(x)$ en base a esos datos.
+
+La **regresión lineal** es utilizada cuando existe una relación lineal entre la variable dependiente y las variables independientes. Busca predecir valores numéricos a partir de características de entrada. 
+
+*** 
+
+La **regresión polinomial** es una extensión de la regresión lineal que permite modelar relaciones no lineales entre variables mediante la inclusión de términos polinómicos. 
+
+En la regresión polinomial la función $f(x)$ es un polinomio denotado $y(x, \mathbf{w})$ (donde $\mathbf{w}$ es $\theta$)
+
+```math 
+y(x, \mathbf{w}) = w_0 + w_1x + w_2x^2 + \ldots + w_mx^m = \displaystyle{\sum_{j=0}^m \; w_jx^j}
+```
+
+Donde el ajuste del polinomio implica encontrar los **coeficientes** $\{ w_i \}^m_{i=1}$\
+que minimizan una **función de costo** (error cuadrático):
+
+```math 
+E(\mathbf{w}) = \frac{1}{2} \displaystyle{\sum^n_{n=1}} \; (y(x_n, \mathbf{w} - t_n))^2
+```
+
+## Sobreajuste (overfitting)
+
+> El **sobreajuste** o overfitting ocurre cuando el modelo ajusta demasiado bien datos de entrenamiento y no generaliza bien nuevos datos. 
+
+Algunas formas de prevenir el _overfitting_ son:
+
+- Limitar la complejidad del modelo (cambiando el polinomio $m$)
+- Aumentar el conjunto de $n$ datos.
+- Aplicar penalización a la función de pérdida (penalizar valores grandes de los coeficientes)
+
+Siendo la tercera forma:
+
+```math 
+\tilde{E}(\mathbf{w}) = \frac{1}{2} \displaystyle{\sum^n_{i=1} \; (y_n - y(x_n, \mathbf{w}))^2 + \frac{\lambda}{2}||w|| }
+```
+
+Lo ideal es alcanzar un error de entrenamiento y un error de validación mínimos y lo más cercanos posible entre sí. Esto indica que el modelo ha aprendido bien los patrones generales de los datos sin sobreajustarse.
+
+El **RMS** (_Root Mean Square_ Error) permite ver que tan lejos están las predicciones del modelo respecto a los valores reales. A mayor diferencia entre RMS de training/test, más probabilidad de overfitting.

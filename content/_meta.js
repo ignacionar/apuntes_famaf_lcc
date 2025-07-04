@@ -31,5 +31,6 @@ export default {
     )
   },
   analisisvisualizaciondatos: "Análisis y Visualización de Datos",
-  exploracioncuraciondatos: "Exploración y Curación de Datos"
+  exploracioncuraciondatos: "Exploración y Curación de Datos",
+  introaprendizajeautomatico: "Introducción al Aprendizaje Automático"
 }

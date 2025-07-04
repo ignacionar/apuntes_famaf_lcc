@@ -1,0 +1,72 @@
+# Introducción (IAAA)
+
+En **Introducción al Aprendizaje Automático**, se abordan los fundamentos teóricos y prácticos de los algoritmos que permiten a las computadoras aprender a partir de los datos. Se estudian distintos enfoques y técnicas para construir modelos capaces de identificar patrones, hacer predicciones o tomar decisiones sin ser programados explícitamente para cada tarea.
+
+## Programación Tradicional vs Aprendizaje Automático 
+
+> En la programación tradicional nuestro input a una computadora son los datos y el programa/algoritmo, para recibir una salida determinada. El aprendizaje automático nos permite pasar datos y una salida esperada, para recibir un programa (modelo) que generaliza esa relación. 
+
+- El algoritmo encuentra **patrones** en los datos para realizar una tarea determinada.
+
+- Los patrones se reflejan en una **función aproximada** que describe el comportamiento del modelo en base a la experiencia.
+
+- La aproximación de dicha función corresponde a una **búsqueda en un espacio de hipótesis** (espacio de funciones) por aquella que prediga mejor el comportamiento de los datos. 
+
+- Distintos enfoques/métodos de aprendizaje auto. **asumen distintos espacios de hipótesis** o utilizan distintas **estrategias de búsqueda**. 
+
+## Tipos de problema 
+
+### Aprendizaje supervisado
+
+Este recibe datos de entrenamiento y genera una salida esperada. Se divide en **regresión** y **clasificación**.
+
+En el primero se parte de un conjunto de datos $(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)$
+
+Pretendemos aprender una $f(x)$ que permita predecir $y$ a partir de $x$. 
+
+- Si la variable es **numérica** entonces hablamos de **regresión**.
+- Si la variable es **categórica** entonces hablamos de **clasificación**. 
+
+### Aprendizaje no supervisado 
+
+Recibe solo datos de entrenamiento. 
+
+Dados $x_1, x_2, \ldots, x_n$, el algoritmo aprende de la estructura interna de esos datos.\
+Mediante clustering se agrupan los datos en diferentes clusters o grupos según sus similitudes. 
+
+### Aprendizaje auto-supervisado
+
+Partimos de un conjunto de datos sin etiquetas. En lugar de buscar patrones en los datos, utilizamos la estructura interna de los datos para generar **tareas de pretexto** (supervisión)
+
+### Aprendizaje por refuerzo
+
+Un agente aprende a tomar decisiones mediante la interacción con un ambiente. El objetivo del agente es maximizar una recompensa otorgada por tomar ciertas acciones en un ambiente específico. 
+
+## Esquema de un modelo de aprendizaje automático 
+
+Primero partimos de un conjunto de datos $\{ (x_i, y_i) \}^n_{i=1}$
+
+Luego separamos los datos con una composición similar a (porcentajes sujetos a cambio): 
+  - $60%$ en datos de entrenamiento
+  - $20%$ para validación 
+  - $20%$ para testeo 
+
+En la etapa de entrenamiento, el modelo aprende una función de predicción $f(x, \theta, \mu)$ donde: 
+
+  - $x$ es el **conjunto de datos**
+  - $\theta$ son los **parámetros** (los que tenemos que aprender/encontrar)
+  - $\mu$ son los **hiperparámetros** (variables externas establecidas antes de entrenar el modelo) 
+
+Los parámetros se van ajustando en base a una **función de pérdida** $L(y, f(x, \theta, \mu)) \implies$ cuantifica la diferencia entre la predicción y el valor real.
+
+**Ejemplo de función de pérdida para el problema de regresión:** 
+
+```math 
+L = \frac{1}{2} \displaystyle{\sum_{i = 1}^n} \; (y_i - f(x, \theta, \mu))^2 
+```
+
+(este cuantifica la diferencia entre la predicción y el valor real)
+
+Los hiperparámetros $\mu$ son ajustados con el subconjunto de validación.
+
+El modelo es testeado con un modelo de datos que nunca vió, es decir el subconjunto de testeo. 
