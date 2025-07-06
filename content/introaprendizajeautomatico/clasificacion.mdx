@@ -20,3 +20,21 @@ Una clasificación correcta es el producto de la etiqueta verdadera y la funció
 ## Algoritmo del perceptrón 
 
 > Es un algoritmo que encuentra un hiperplano de separación si los datos son linealmente separables. 
+
+## Regresión logística 
+
+> Es una aproximación probabilística al problema de clasificación. Se modela la probabilidad de que una observación pertenezca a una clase específica dadas las variables predictoras. 
+
+Se toma una combinación lineal de las variables de entrada y luego se aplica una función sigmoide para obtener una probabilidad entre 0 y 1:
+
+```math
+p(y=1|x) = h(x) = \frac{1}{1 + e^{- \theta^T x}}
+```
+
+## Clasificador Naive Bayes
+
+> Es un clasificador probabilístico basado en el teorema de Bayes, asumiendo independencia entre las características. Calcula la probabilidad de que una observación pertenezca a una clase dada sus características.
+
+```math 
+p(A|B) = \frac{p(B|A)p(A)}{p(B)}
+```

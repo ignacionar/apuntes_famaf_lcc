@@ -1,0 +1,23 @@
+# Árboles de decisión 
+
+> Un árbol de decisión es una forma gráfica y analítica de analizar/describir un conjunto de datos. Se utiliza para predecir una respuesta de interés en función de las variables de entrada.
+
+## Medida de incertidumbre
+
+La forma de seleccionar la variable de ramificación en cada partición es mediante una medida de incertidumbre. 
+
+- Se debe definir un **criterio de bondad** que mida la calidad de la partición (menor cantidad nodos impuros generados).
+
+- Se calcula la **impureza** de los nodos y se evalúa la reducción de impureza respecto al nodo padre. 
+
+- Se elige al predictor que genere mayor reducción de impureza.
+
+### Entropía (medida de impureza)
+
+Para variables respuesta categórica (con $k$ niveles) la entropía $H(Y)$ de una variable aleatoria discreta $Y$ es: 
+
+```math
+H(Y) = - \displaystyle{\sum_{i=1}^k} \; P(y = y_1) \log_2 P(Y = y_i)
+```
+
+La entropía mide cuan impredecible es una variable. Si todos los valores son iguales (sin incertidubmre) la entropía es $0$. Si todos los valores son igualmente probables (máxima incertidumbre) la entropía es máxima, un ejemplo para esto es tirar una moneda. 
