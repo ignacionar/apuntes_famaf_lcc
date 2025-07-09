@@ -60,4 +60,8 @@ const withNextra = nextra({
   },
 })
 
-export default withNextra
+export default withNextra({
+  images: {
+    unoptimized: true
+  },
+})
