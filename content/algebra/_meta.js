@@ -1,4 +1,4 @@
 export default {
   intro: "Introducción (ALG)",
-  sistemas_lineales: "Sistemas Lineales"
+  espacios_vectoriales: "Espacios Vectoriales",
 }

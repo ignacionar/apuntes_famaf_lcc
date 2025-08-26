@@ -11,9 +11,73 @@ Los principales problemas en los que esta materia se enfoca son:
 
 _Los vectores y sus propiedades serán temas centrales en esta materia, para seguir, es útil repasar la siguiente sección: [Cálculo Vectorial (AM2)](/analisis2/calculo_vectorial)_
 
-## Anillos y cuerpos 
+## Relación de equivalencia
 
-Un **anillo** es un conjunto $R$ con dos operaciones $(+) \Rightarrow R + R, \; (\cdot) \Rightarrow R \times R$ que simplifican las siguientes propiedades (donde $a, b, c \in R$): 
+> Una **relación de equivalencia** en un conjunto no vacío $A$ es una relación binaria $\sim$ que satisface: 
+
+- **P1)** Reflexividad: $\forall a \in A$ se cumple $a \sim a$ 
+- **P2)** Simetría: $\forall a, b \in A$ se cumple $a \sim b \implies b \sim a$  
+- **P3)** Transitividad: $\forall a, b, c \in A$, si $\;a \sim b \land b \sim c \implies a \sim c$
+
+La congruencia módulo $n$ es **una relación de equivalencia.**
+
+**Ejemplo:** Determinar si la relación $R$ definida en el conjunto de los $\ZZ$ como $aRb \iff a+b$ es par, es una relación de equivalencia.
+
+- Reflexividad: $aRa \implies a + a$ es par: $a + a = 2a$ 
+- Simetría: $aRb \implies bRa$: Si $a + b$ es par, entonces $b + a$ es par: $a + b = b + a$ por conmutatividad.
+- Transitividad: Si $aRb$ y $bRc$, entonces $a + b$ y $b + c$ son pares:
+
+```math 
+\begin{aligned}
+2m = (a + b), \; 2k = (b + c) \\
+2m + 2k = (a + b) + (b + c) \\
+2(m + k) = a + 2b + c \\
+2(m + k - b) = a + c \\
+\end{aligned}
+```
+
+Las propiedades se cumplen, por lo que $R$ es una relación de equivalencia.
+
+### Clases de equivalencia
+
+> Sea $\sim$ una relación de equivalencia en un conjunto $A$. $\forall a \in A$, la clase de
+equivalencia de $a$, denotada por $[a]$, es el **subconjunto de $A$ que contiene a todos los elementos
+que están relacionados con $a$**:
+
+```math 
+[a] = \{ b \in A \mid b \sim a \}
+```
+
+El conjunto de todas las clases de equivalencia de $A$ con respecto a la relación $\sim$ es el **conjunto cociente**, denotado como $A / \sim$
+
+## El conjunto $\ZZ_n$ 
+
+> Dados $n > 1$ y $\equiv$ la relación de congruencia módulo $n$, se define $\ZZ_n = \ZZ / \equiv$.\
+Es decir, el conjunto de clases de equivalencia de $\ZZ$ módulo $n$. Dado $a \in \ZZ$ su clase de equivalencia es: 
+
+```math 
+[a] = \{ b \in \ZZ \mid b \equiv a \;(\textnormal{mod}\;n) \}
+```
+
+El conjunto $\ZZ_n$ tiene $n$ elementos y se puede escribir como: $\ZZ_n = \{[0], [1], [2], \ldots, [n - 1] \}$
+
+**Ejemplo:** En $\ZZ_5$, la clase $[2]$ es el conjunto de todos los enteros que al dividirse por $5$ dan resto $2$:\
+$[2] = \{\ldots, -8, -3, 2, 7, 12, \ldots \}$
+
+## Operación y grupo 
+
+> Sea $A$ un conjunto no vacío: una **operación** de $A$ es una función $*: A \times A \rightarrow A$
+
+1. $*$ se dice _asociativa_ si $(a * b) * c = a * (b * c), \; \forall a, b, c \in A$.
+2. Si $*$ tiene elemento neutro $e$, todo elemento tiene inverso si: $\forall a \in A, \; \exists a' \in A: a * a' = a' * a = e$.
+3. $*$ tiene _elemento neutro_ si $\exists e \in A$ tal que $e * a = a * e = a, \; \forall a \in A$.
+4. $*$ es _conmutativa_ si $a * b = b * a, \; \forall a, b \in A$.
+
+> Sea $A$ un conjunto y $*$ una operación de $A$ que satisface (1), (2) y (3) de la definción anterior, entonces $(A, *)$ es un **grupo**. Si además $*$ satisface (4), entonces $(A, *)$ es un **grupo abeliano**.
+
+## Anillo y cuerpo
+ 
+> Un **anillo (conmutativo con identidad)** es un conjunto $R$ con dos operaciones $(+) \Rightarrow R + R, \; (\cdot) \Rightarrow R \times R$ que simplifican las siguientes propiedades (donde $a, b, c \in R$): 
 
 - **P1)** $a+b, \; a \cdot b \in R$ 
 - **P2)** Conmutatividad: $a+b=b+a,\;ab=ba$
@@ -24,8 +88,126 @@ Un **anillo** es un conjunto $R$ con dos operaciones $(+) \Rightarrow R + R, \; 
 
 Un anillo $R$ es **conmutativo** cuando la multiplicación cumple la propiedad conmutativa: $a \cdot b = b \cdot a$ 
 
-> Un **cuerpo** $\KK$ es un anillo conmutativo donde todo elemento $a \in \KK, \; a \not= 0$ **tiene inverso multiplicativo**,\
+Un anillo conmutativo es **un dominio de integridad** si cumple la propiedad: $a \cdot b = 0 \implies a = 0 \; \lor \; b = 0$
+
+> Un **cuerpo** $\KK$ es un anillo conmutativo donde $\forall a \in \KK, \; a \not= 0$ **tiene inverso multiplicativo**,\
  es decir $a^{-1}$ tal que $a \cdot a^{-1} = 1$
+
+### Operaciones en $\ZZ_n$
+
+- Suma: $[a] + [b] = [a + b]$
+- Multiplicación: $[a] \cdot [b] = [a \cdot b]$
+
+### Ejercicios resueltos - Clases de equivalencia
+
+**1.** 
+
+Dar el resultado de $[4]_7 + [6]_7$:
+
+```math
+[4]_7 + [6]_7 = [4+6]_7 = [10]_7 = [3]_7
+```
+
+***
+
+**2.**
+
+Dar el resultado de $[3]_9 \cdot [5]_9$:
+
+```math
+[3]_9 \cdot [5]_9 = [3 \cdot 5]_9 = [15]_9 = [6]_9 
+```
+
+***
+
+**3.**
+
+Encontrar un entero positivo a tal que $[a]_{15}$ sea el opuesto aditivo de $[2]_{15}$: 
+
+Necesitamos encontrar un entero positivo tal que: $[2]_{15} + [a]_{15} = [0]_{15}. 
+
+Ese entero es $13$, ya que: $[2]_{15} + [13]_{15} = [15]_{15} = [0]_{15}$
+
+### Ejercicios resueltos - Cuerpos 
+
+**1.** 
+
+Probar que $\forall a \in \KK$ se cumple $a \cdot 0 = 0$ 
+
+```math 
+\begin{aligned}
+0 + 0 &= 0 \\ 
+a \cdot (0 + 0) &= a \cdot 0 \\
+a \cdot 0 + a \cdot 0 &= a \cdot 0 \\
+a \cdot 0 + a \cdot 0 - a \cdot 0 &= a \cdot 0 - a \cdot 0 \\
+a \cdot 0 &= 0
+\end{aligned}
+```
+
+***
+
+**2.** 
+
+Probar que si $a, b \in \KK$ donde $a \cdot b = 0 \implies a = 0 \; \lor \; b = 0$ 
+
+```math 
+\begin{aligned}
+a \cdot b = 0 \; &\lor \; a \cdot b = 0 \\
+a^{-1} \cdot a \cdot b = 0 \; &\lor \; a \cdot b \cdot b^{-1} = 0 \\
+1 \cdot b = 0 \; &\lor \; 1 \cdot a = 0 \\
+b = 0 \; &\lor \; a = 0 
+\end{aligned}
+```
+
+*** 
+
+**3.**
+
+Probar que $Z_n$ es cuerpo $\iff n$ es primo:
+
+Supongamos $n$ no es primo. Entonces dados $a, b$ donde $1 < a, b < n$ 
+
+```math 
+\begin{aligned}
+n &= a \cdot b \\
+Z_n &= \{ \ldots, [a], [b], \ldots \} 
+\end{aligned}
+```
+
+Entonces tenemos: $[a] \cdot [b] = [a \cdot b] = [n] = [0]$\
+Como $[a \cdot b] = 0$, $[a] \; \lor \; [b]$ deben ser cero, lo cual, contradice nuestra definición inicial. 
+
+***
+
+**4.**
+
+Probar que si $a \not= 0 \; \land \; a \cdot b = a \cdot c \implies b = c$ 
+
+```math 
+\begin{aligned}
+a \cdot b &= a \cdot c \\
+a^{-1} \cdot a \cdot b &= a^{-1} \cdot a \cdot c \\ 
+1 \cdot b &= 1 \cdot c \\
+b &= c
+\end{aligned}
+```
+
+***
+
+**5.**
+
+Probar que si $\exists n \in \NN$ tal que $a^n = 0 \implies a = 0$ 
+
+```math
+\begin{aligned} 
+a^n &= 0 \\
+a^{n - 1} \cdot a &= 0 \cdot a \\
+a^{n - 2} \cdot a &= 0 \cdot a \\
+&\ldots \\
+a^1 &= 0 \\
+a &= 0
+\end{aligned}
+```
 
 ## Números complejos 
 
@@ -34,51 +216,111 @@ Un anillo $R$ es **conmutativo** cuando la multiplicación cumple la propiedad c
 ```math 
 \begin{aligned}
 (a + ib) + (c + id) &= (a + c) + i(b + d) \\
-(a + ib) \cdot (c + id) &= (ac - bd) + i(b + d) \\
+(a + ib) \cdot (c + id) &= (ac - bd) + i(ad + bc) \\
 \end{aligned}
 ```
 
 Se define el conjugado de $a + bi$ como $\overline{a + bi} = a - bi$
 
-La norma $||a + bi|| = \sqrt{a^2 + b^2} \in \RR \geq 0$ 
+La norma $|a + bi| = \sqrt{a^2 + b^2} \in \RR \geq 0$ 
 
-## Combinación lineal 
+Las potencias de $i$ siguen el siguiente patrón:
 
-> Sean $\mathbf{v}_1, \ldots, \mathbf{v}_k$ vectores en $\mathbb{R}^n$ y sean $r_1, \ldots, r_k \in \mathbb{R}$ la combinación lineal de los vectores es:\
-$r_1\mathbf{v}_1 + \ldots + r_k\mathbf{v}_k$
-
-Un ejemplo de combinación lineal es la siguiente suma de vectores en $\mathbb{R}^3$:
-
-```math
-5(1, 2, 3) + 3(4, 5, 6) = (5, 10, 15) + (12, 15, 18) = (17, 25, 33)
+```math 
+\begin{aligned}
+i^1 &= i \\
+i^2 &= -1  \\
+i^3 &= -i \\
+i^4 &= 1 \\
+i^5 &= i \\
+&\ldots
+\end{aligned}
 ```
 
-Donde $(17, 25, 33)$ es combinación lineal de los vectores $(1, 2, 3)$ y $(4, 5, 6)$.
+### Ejercicios resueltos - Números complejos
 
-### Vectores canónicos y base canónica
+**1.**
 
-> Se denota por $\; \mathbf{e}_i, \; 1 \leq i \leq n$ a los vectores canónicos de $\mathbb{R}^n$ donde solo hay una coordenada $i = 1$ y el resto son nulos.
+Dar el resultado de $\overline{\overline{z}} = z$: 
 
-Por ejemplo, en $\mathbb{R}^3$ los vectores canónicos son:
-
-```math
-\mathbf{e}_1 = (1, 0, 0) \quad \mathbf{e}_2 = (0, 1, 0) \quad \mathbf{e}_3 = (0, 0, 1)
+```math 
+\begin{aligned}
+\overline{\overline{z}} &= z \\
+\overline{a - ib} &= a + ib \\
+a + ib &= a + ib
+\end{aligned}
 ```
 
-El conjunto dado por $\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ es llamado **base canónica** de $\mathbb{R}^n$.
+***
 
-Todo vector de $\mathbb{R}^n$ se puede expresar como combinación lineal de la base canónica tal que: 
+**2.**
 
-```math
-(x_1, \ldots, x_n) = x_1\mathbf{e}_1 + \ldots + x_n\mathbf{e}_n
+Demostrar que $\overline{z_1+z+2} = \overline{z_1} + \overline{z_2}$:
+
+```math 
+\begin{aligned}
+\overline{z_1+z_2} &= \overline{z_1} + \overline{z_2} \\
+\overline{(a + ib) + (c + id)} &= (a - ib) + (c - id) \\
+a - ib + c - id &= a - ib + c - id \\
+a + c - i(b + d) &= a + c - i(b +d) 
+\end{aligned}
 ```
 
-Por ejemplo, el vector $(2, 3, 4)$ se puede expresar como:
+***
+
+**3.** 
+
+Demostrar que $\overline{z_1 \cdot z_2} = \overline{z_1} \cdot \overline{z_1}$:
+
+```math 
+\begin{aligned}
+\overline{z_1 \cdot z_2} &= \overline{z_1} \cdot \overline{z_2} \\
+\overline{(a + ib) \cdot (c + id)} &= (a - ib) \cdot (c - id) \\
+\overline{(ac - bd) + i(ad + bc)} &= ac - iad - ibc + i^2bd \\
+(ac - bd) - i(ad + bc) &= (ac - bd) - i(ad + bc)
+\end{aligned}
+```
+
+***
+
+**4.**
+
+Demostrar que $z^{-1} = \frac{\overline{z}}{|z|^2}$ si $z \not= 0$
 
 ```math
 \begin{aligned}
-  (2, 3, 4) &= 2(1, 0, 0) + 3(0, 1, 0) + 4(0, 0, 1) \\ 
-  &= 2(1, 0, 0) + 3(0, 1, 0) + 4(0, 0, 1) \\
-  &= \mathbf{e}_1 + 3\mathbf{e}_2 + 4\mathbf{e}_3
+z \cdot \frac{\overline{z}}{|z|^2} &= 1 \\
+\frac{\overline{z}z}{a^2 + b^2} &= 1 \\
+\frac{(a - bi)(a + bi)}{a^2 + b^2} &=1 \\
+\frac{a^2 - b^2i^2}{a^2 + b^2} &= 1 \\
+\frac{a^2 - b^2 \cdot (-1)}{a^2 + b^2} &= 1 \\
+\cancel{\frac{a^2 + b^2}{a^2 + b^2}} &= 1 \\
+1 &= 1
+\end{aligned}
+```
+
+***
+
+**5.**
+
+Expresar el siguiente número en la forma $a + ib$: $(i^{131} - i^9 + 1)$
+
+```math
+i^{131} - i^9 + 1 = i^{32 \cdot 4 + 3} - i^9 + 1 = (i^4)^{32} \cdot i^3 - i^9 + 1 = 1 \cdot (-i) - i + 1 = 1 - 2i
+```
+
+***
+
+**6.**
+
+```math
+\begin{aligned}
+1 - \frac{1}{1 + \frac{1}{i}} &= 1 - \frac{1}{1 - i} \\
+&= 1 - \frac{1}{1 - i} \cdot \frac{1 + i}{1 + i} \\
+&= 1 - \frac{1 + i}{1 - i^2} \\
+&= 1 - \frac{1 + i}{1 - (-1)} \\
+&= 1 - \frac{1 + i}{2} \\
+&= \frac{2}{2} - \frac{1 + i}{2} \\
+&= \frac{1 - i}{2}
 \end{aligned}
 ```
