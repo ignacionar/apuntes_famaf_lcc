@@ -295,6 +295,94 @@ $S$ es un subespacio de $V$ solo si valen las siguientes condiciones:
 > Sea $V$ un $\KK$-espacio vectorial, y $S, T$ subespacios de $V$, entonces $S \cap T$ es subespacio de $V$.\
 Además, $S \cup T$ no es necesariamente un subespacio de $V$. 
 
+La primer proposición podría demostrarse como: 
+
+1. $0 \in S \cap T$ ya que $0 \in S, 0 \in T$.
+2. Dados $\bfv, \bfw \in S \cap T \implies \bfv, \bfw \in S \; \land \; \bfv, \bfw \in T$.\
+Como $S, T$ son subespacios, $\bfv + \bfw \in S \; \land \; \bfv + \bfw \in T \implies \bfv + \bfw \in S \cap T$.
+3. Dados $\lambda \in \KK, \; \bfv \in S \cap T \implies \bfv \in S \; \land \; \bfv \in T$\
+Como $S, T$ son subespacios y $\lambda \in \KK$: $\quad \lambda \cdot \bfv \in S \; \land \; \lambda \cdot \bfv \in T \implies \lambda \cdot \bfv \in S \cap T$.
+
+La intersección de cualquier familia de subespacios de un $\KK$-espacio vectorial $V$ es un subespacio de $V$.
+
+***
+
+La segunda proposición se demuestra como: 
+
+Dado $V = \RR^2$ si tenemos $S = \; < (1, 0) >, \; T = \; < (0, 1) >$, ambos $(1, 0), (0, 1) \in S \cup T$\
+pero $(1, 0) + (0, 1) = (1, 1) \not\in S \cup T$ ya que $(1, 1) \not \in S \; \land \; (1, 1) \not \in T$.
+
+### Ejercicios resueltos - Subespacios vectoriales 
+
+Dado $n \geq 3$ determinar cuales subconjuntos de $\RR^n$ son subespacios vectoriales.
+
+**1.** 
+
+```math
+S = \{ (x_1, \ldots, x_n) \in \RR^n \mid  x_1 \geq 0 \}
+```
+
+1. $0 \in S$, ya que $0 \geq 0$.
+2. Dados $(x_1, \ldots, x_n), (y_1, \ldots, y_n) \in S$ tenemos $x_1 \geq 0 \; \land \; y_1 \geq 0 \implies x_1 + y_1 \geq 0$.
+3. Dados $\lambda \in \RR, \; (x_1, \ldots, x_n) \in S, \;$ si $\; \lambda \geq 0 \implies \lambda \cdot x_1 \geq 0$.\
+Pero si $\lambda < 0 \implies -\lambda \cdot x_1 < 0$. Por lo tanto, $S$ **no** es un subespacio vectorial.
+
+***
+
+**2.** 
+
+```math
+P = \{ (x_1, \ldots, x_n) \in \RR^n \mid  x_1 + x_2 = 0 \}
+```
+
+1. $0 \in P$ ya que $0 + 0 = 0$.
+2. Dados $(x_1, \ldots, x_n), (y_1, \ldots, y_n) \in P$ tenemos\
+$x_1 + y_1 = 0 \; \land \; x_2 + y_2 = 0 \implies (x_1 + y_1) + (x_2 + y_2) = 0$.
+3. Dados $\lambda \in \RR, \; (x_1, \ldots, x_n) \in P$ tenemos $x_1 + x_2 = 0 \implies \lambda \cdot 0 = 0$.
+
+$P$ si es un subespacio vectorial.
+
+***
+
+**3.** 
+
+```math
+H = \{ (x_1, \ldots, x_n) \in \RR^n \mid x_1x_2 = 0 \}
+```
+
+1. $0 \in H$ ya que $0 \cdot 0 = 0$.
+2. Dados $(x_1, \ldots, x_n), (y_1, \ldots, y_n) \in H$ tenemos $(x_1 + y_1)(x_2 + y_2) = 0$. Pero esto no se cumple necesariamente. Ejemplo: $(1, 0) + (0, 1) = (1, 1) \implies 1 \cdot 1 \not= 0$. $H$ **no** es un subespacio vectorial.
+
+***
+
+**4.** 
+
+```math 
+I = \{ (x_1, \ldots, x_n) \in \RR^n \mid x_1 + x_2 = 1 \}
+```
+
+1. No se cumple que $0 \in I$. Ya que $0 + 0 \not= 1$. Por ende, $I$ **no** es un subespacio vectorial.
+
+***
+
+**5.** 
+
+Sean $W_1, W_2$ subespacios de un $\KK$-espacio vectorial $V$.\
+Probar que si $W_1 \cup W_2$ es un subespacio de $V \implies W_1 \subset W_2 \lor W_2 \subset W_1$:
+
+Podemos demostrarlo por contradicción, es decir, $W_1 \not\subset W_2 \land W_2 \not\subset W_1$. 
+
+Sean $\bfw_1 \in W_1, \; \bfw_1 \not\in W_2, \; \bfw_2 \in W_2, \; \bfw_2 \not\in W_1$.\
+Tenemos que $\bfw_1 + \bfw_2 \in W_1 \cup W_2$. La unión nos dice que: $\bfw_1 + \bfw_2 \in W_1 \; \lor \; \bfw_1 + \bfw_2 \in W_2$.
+
+Si restamos $\bfw_1$ del lado izquierdo y $\bfw_2$ del lado derecho, obtenemos:
+
+```math 
+\bfw_2 \in W_1 \lor \bfw_1 \in W_2.
+```
+
+Por lo tanto, hemos llegado a una contradicción. 
+
 ## Combinación lineal 
 
 > Sea $V$ un $\KK$-espacio vectorial y $G = \{ \bfv_1, \ldots, \bfv_r \} \subseteq V$. Una **combinación lineal** de $G$ es un elemento $\bfv \in V$ tal que $v = \displaystyle{\sum_{i=1}^r} a_i \bfv_i$ con $a_i \in \KK$ para cada $1 \leq i \leq r$.
