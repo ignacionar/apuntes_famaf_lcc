@@ -32,5 +32,13 @@ export default {
   },
   analisisvisualizaciondatos: "Análisis y Visualización de Datos",
   exploracioncuraciondatos: "Exploración y Curación de Datos",
-  introaprendizajeautomatico: "Introducción al Aprendizaje Automático"
+  introaprendizajeautomatico: "Introducción al Aprendizaje Automático",
+  '---': {
+    type: 'separator',
+    title: (
+      <div style={{ backgroundColor: "#ffc7c7ff", textAlign: "center", color: "oklch(.21 .034 264.665)", padding: '5px' }}>
+        🔐 Dipl. en Ciberseguridad
+      </div>
+    )
+  },
 }

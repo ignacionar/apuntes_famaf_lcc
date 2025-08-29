@@ -1,0 +1,191 @@
+# Gestión de Identidades y Accesos 
+
+## Autenticación y Autorización 
+
+> La **Autenticación** es el proceso de verificar la identidad de un usuario/dispositivo.\
+Es un paso previo a la autorización y suele implicar el uso de varios factores como tokens, contraseñas y biometría.
+
+> La **Autorización** es el proceso de determinar si un usuario/dispositivo tiene permiso para acceder a un recurso específico.\
+Suele implicar el uso de políticas de acceso que determinan quién puede acceder a qué recursos y bajo qué condiciones.
+
+## Inicio de Sesión Único (SSO) e Identidad Federada
+
+> El **Inicio de Sesión Único (SSO)** y la Identidad Federada son técnicas que facilitan la gestión de autenticación en entornos distribuidos.\
+El SSO permite a los usuarios acceder a múltiples aplicaciones con una sola autenticación, mientras que la Identidad Federada permite compartir la identidad del usuario entre diferentes dominios o sistemas.
+
+En la nube, la **Gestión de Identidades Federadas (FIM)** se utiliza para que los usuarios accedan a recursos utilizando sus credenciales de inicio de sesión existentes. 
+
+Algunos protocolos utilizados en la nube son: 
+
+- SAML (_Security Assertion Markup Language_)
+- OAuth 2.0 (_Open Authorization_)
+- OpenID Connect
+
+***
+
+### SAML 
+
+> Es un protocolo de **autenticación y autorización** que permite el intercambio de datos de autenticación y autorización entre diferentes dominios de seguridad.\
+Consiste en dos pasos que involucran un proveedor de identidad (IdP) y un proveedor de servicios (SP).
+
+1. **Autenticación:** el usuario inicia sesión en el IdP (AD) utilizando sus credenciales de inicio de sesión existentes. El IdP autentica el usuario y emite un token. 
+2. **Autorización:** el SP (AWS) solicita una confirmación de identidad al IdP, este envía la aserción de identidad al SP que luego utiliza para verificar la identidad del usuario.
+
+Los componentes de SAML incluyen: 
+
+- **Proveedor de Identidad (IdP):** Sistema que autentica a los usuarios y emite tokens de seguridad.
+- **Proveedor de Servicios (SP):** Sistema que solicita una aserción de identidad al IdP para verificar la identidad del usuario.
+- **Aserción de Identidad:** Documento XML que contiene información sobre la identidad del usuario y sus atributos.
+- **Token de Identidad:** Identificador único que el SP utiliza para verificar la identidad del usuario.
+
+***
+
+### Oauth 2.0 
+
+> Es un protocolo de **autorización** que permite a los usuarios **autorizar a las aplicaciones** para acceder a sus cuentas. Es un protocolo de tres pasos que involucra un usuario, un cliente y un proveedor de recursos. 
+
+1. **Autorización:** el usuario inicia sesión en el proveedor de identidad (IdP), este autentica al usuario y emite un token de acceso.
+2. **Aprobación:** el cliente envía el token de autorización al proveedor de recursos, este verifica el token y, si es válido, le concede acceso al recurso solicitado.
+3. **Acceso:** el cliente utiliza el token de acceso para realizar solicitudes al proveedor de recursos.
+
+Los componentes de OAuth 2.0 incluyen:
+
+- **Proveedor de Identidad (IdP) (AS):** Sistema que autentica a los usuarios y emite tokens de acceso.
+- **Proveedor de Recursos (RS):** Sistema que almacena los recursos protegidos y verifica los tokens de acceso.
+- **Cliente:** Aplicación que solicita acceso a los recursos del usuario.
+- **Usuario:** Persona o entidad que posee una cuenta en el sistema y solicita acceso a sus recursos.
+- **Token de Autorización y Token de Acceso:** Identificadores únicos que permiten al cliente acceder a los recursos del proveedor de recursos. 
+
+***
+
+### OpenID Connect 
+
+> Es un protocolo de **autenticación** que es una capa de identidades por encima de OAuth 2.0 y permite a los usuarios acceder a aplicaciones web/mobile con sus credenciales de inicio de sesión existentes. Es un protocolo de tres pasos que implica un usuario, cliente y proveedor de identidad (IdP).
+
+1. **Autenticación:** el usuario inicia sesión en el IdP utilizando sus credenciales de inicio de sesión existentes. El IdP autentica al usuario y emite un token de identidad.
+2. **Autorización:** el cliente envía el token de identidad al proveedor de recursos, este verifica el token y, si es válido, le concede acceso al recurso solicitado.
+3. **Acceso:** el cliente utiliza el token de acceso para realizar solicitudes al proveedor de recursos.
+
+Los componentes de OpenID Connect incluyen: 
+
+- **Proveedor de Identidad (IdP):** Sistema que autentica a los usuarios y emite tokens de identidad.
+- **Proveedor de Recursos:** Sistema que almacena los datos del usuario. 
+- **Cliente:** Aplicación que solicita acceso a los recursos del usuario.
+- **Usuario:** Persona o entidad que posee una cuenta en el sistema y solicita acceso a sus recursos.
+- **Token de Identidad:** Identificador único que el cliente utiliza para verificar la identidad del usuario.
+- **Claims:** Atributos de identidad del usuario (nombre, email...)
+
+## Políticas y Permisos 
+
+> Las políticas son reglas generales que definen **quién puede acceder a qué recursos**. Pueden ser de varios tipos como: 
+
+- **Políticas de Acceso:** definen quién puede iniciar sesión y qué recursos puede acceder. 
+- **Políticas de Autorización:** definen qué acciones puede realizar un usuario en un recurso específico.
+- **Políticas de Auditoría:** registran las acciones que realizan los usuarios en los recursos. 
+
+> Los permisos son reglas específicas que definen **qué acciones puede realizar un usuario en un recurso específico**. Pueden ser de lectura, escritura, eliminación, etc.
+
+## _Identity and Access Management_ (IAM)
+
+> Es un servicio de AWS que permite administrar los usuarios y su nivel de acceso a los recursos de AWS. Brinda control centralizado, permite definir permisos granulares, accesos temporales a usuarios/dispositivos, federación de identidades y configurar política de contraseñas. 
+
+Los permisos son administrados por las Políticas adjuntas a usuarios, grupos o roles. 
+
+- **Usuario:** Representa generalmente a personas o entidades que utilizan los recursos de AWS.
+- **Grupo:** Un grupo es el lugar para almacenar usuarios. Estos heredarán todos los permisos del grupo..
+- **Rol:** Se crean roles y luego pueden asignarse a recursos de AWS. Centralizan políticas. 
+- **Política:** Documento JSON que define uno o más permisos.
+
+### Políticas de IAM 
+
+> Las políticas de IAM especifican lo que se permite hacer con cualquier recurso de AWS. Son globales y se aplican a todas las áreas de AWS. Se adjuntan a usuarios, grupos o roles de IAM. 
+
+Los componentes de una política son: 
+
+- **Effect:** Especifica la declaración da como resultado un permiso o un rechazo explícito (requerido)
+- **Action:** Especifica la acción que se permite o se deniega (requerido)
+- **Resource:** Especifica el recurso al que se aplica la acción (requerido)
+- **Condition:** Especifica las condiciones para cuando una política está en vigor. 
+- **Principal:** Especifica la entidad a la que se le permite o deniega el acceso a un recurso. 
+
+Su estructura es la siguiente: 
+
+```json 
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "identificador",
+      "Action": "Allow",
+      "Resource": "prefijo-servicio:nombre-acción",
+      "Condition": {
+        "DateGreaterThan": {
+          "aws:CurrentTime": "2022-01-01T00:00:00Z"
+        }
+      }
+    }
+  ]
+}
+```
+
+Idealmente no se opta utilizar _wildcards_ (`*`) en las políticas de IAM, ya que pueden llevar a una sobreexposición de permisos. Lo recomendado es seguir el principio de mínimo privilegio. 
+
+### Informe de Credenciales 
+
+El informe de credenciales permite enumerar todos los usuarios de la cuenta AWS y dar información de:
+
+- Contraseñas (estado, última fecha de cambio, requisitos de complejidad, etc.)
+- Claves de acceso (última fecha de rotación, estado, etc.)
+- MFA (si está habilitado)
+
+***
+
+### Mejores prácticas 
+
+1. **No utilizar diariamente la cuenta raíz** (la cuenta con acceso total a todos los recursos de AWS)
+2. **Seguir el principio de mínimo privilegio.** (otorgar solo permisos necesarios)
+3. **Habilitar MFA** 
+4. **Crear usuarios solo para seres humanos** (no crear usuarios para servicios) 
+5. **Colocar siempre a los usuarios en grupos y luego aplicar políticas a grupos** 
+6. **Utilizar claves de acceso para el acceso programático**
+7. **Tener una política fuerte de rotación de contraseñas** 
+8. **Utilizar reportes de credenciales de IAM para auditar permisos**
+
+## _Security Token Service_ (STS)
+
+> Es un servicio que otorga credenciales de tiempo limitado a los usuarios y permite la federación de identidades.
+
+Los usuarios pueden provenir de estas fuentes: 
+
+- Federación (normalmente, Active Directory)
+  - Utiliza SAML. 
+  - Se otorga acceso temporal según credenciales de Active Directory
+  - Permite iniciar sesión sin asignar credenciales de IAM 
+- Federación con Aplicaciones Móviles 
+  - Utilizado para Facebook/Amazon/Google u otros proveedores de OpenID. 
+- Acceso a cuentas cruzadas.
+
+## IAM Identity Center
+
+> Servicio que proporciona un único lugar ap ra crear, conectar o sincronizar usuarios de la fuerza laboral y gestionar acceso a las cuentas y aplicaciones de AWS. 
+
+Ofrece las siguientes funciones: 
+
+- Creación y gestión de usuarios. 
+- Conexión de usuarios a identidades existentes (Active Directory, Okta)
+- Sincronización de usuarios con identidades existentes
+- Gestión de acceso a cuentas y aplicaciones de AWS. 
+
+## Directory Service
+
+> Es un servicio de directorio administrado que proporciona a las organizaciones una forma de administrar la identidad y el acceso a los recursos de AWS. 
+
+## Amazon Cognito 
+
+> Servicio que proporciona Federación de identidad web con distintas características.
+
+- Permite registrarse e iniciar sesión en aplicaciones. 
+- Acceso para usuarios invitados (_guest_)
+- Actúa como intermediario de identidad entre apps y los proveedores de identidades web. 
+- Sincroniza datos del usuario entre dispositivos.
+- Se puede utilizar la UI hosteada por Cognito para la autenticación.

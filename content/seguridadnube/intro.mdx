@@ -1,0 +1,84 @@
+# Introducción (SN)
+
+En **Seguridad en la Nube**, se abordan los desafíos y soluciones relacionados con la protección de datos y aplicaciones en entornos de computación en la nube. Se utiliza la plataforma de AWS Academy para proporcionar un entorno práctico y recursos de aprendizaje.
+
+Algunos de los temas estudiados son la gestión de identidades y accesos, la protección de datos, la seguridad de redes, respuesta a incidentes, entre otros. 
+
+## Modelos de Servicio de la Nube 
+
+### IaaS 
+
+> Modelo de servicio de computación en la nube que proporciona acceso a la infraestructura informática subyacente, como servidores, almacenamiento y redes, permitiendo a los usuarios gestionar y controlar sus recursos para crear/ejecutar aplicaciones. No se tiene acceso al hardware. 
+
+Ejemplos: Amazon EC2, VM, Compute Engine. 
+
+***
+
+### PaaS 
+
+> Modelo de servicio de computación en la nube que proporciona una plataforma para desarrollar, ejecutar y gestionar aplicaciones sin preocuparse por la infraestructura subyacente. Es un superconjunto de IaaS con características adicionales como herramientas de desarrollo, bases de datos y middleware.
+
+Algunos ejemplos son ElasticBeanStalk, Google App Services, Google App Engine.
+
+***
+
+### SaaS 
+
+> Modelo de servicio de computación en la nube que proporciona acceso a software a través de internet. Los clientes utilizan el software sin instalarlo/mantenerlo. 
+
+Algunos ejemplos de SaaS incluyen aplicaciones de productividad como Google Workspace, Microsoft 365 y Salesforce.
+
+## Ataques comunes 
+
+### Enfocados en IAM 
+
+El atacante encuentra la contraseña a través de fuerza bruta. Se puede prevenir mediante MFA o añadiendo más requisitos a la contraseña.
+
+### Ataques en superficie 
+
+- DDOS (_Denial of Service_)
+- Ataques a la capa de aplicación 
+- Ingeniería social
+
+### Configuraciones erróneas 
+  
+- Falta de cifrado 
+- falta de restricciones de acceso
+- Permisos débiles 
+- Falta de un programa de cumplimiento 
+- Manejo y conservación inadecuados de los datos 
+- Configuración insegura de las políticas 
+- Controles de IAM deficientes
+
+## Máquinas Virtuales 
+
+> La máquina virtual es un entorno de ejecución aislado que emula un sistema operativo completo en un servidor físico. Permite ejecutar múltiples sistemas operativos en un solo hardware, proporcionando flexibilidad y eficiencia en la utilización de recursos. Se pueden asignar recursos dinámicamente. 
+
+## Contenedores 
+
+> Los contenedores son unidades estandarizadas de software que empaquetan el código y todas sus dependencias para que la aplicación se ejecute rápidamente y de manera confiable en diferentes entornos de computación. A diferencia de las máquinas virtuales, **los contenedores comparten el kernel del sistema operativo subyacente**, lo que los hace más ligeros y eficientes en el uso de recursos. Los contenedores se gestionan a través de herramientas como Docker y Kubernetes.
+
+## Métodos de Acceso/Administración
+
+- **AWS Management Console:** Interfaz web que permite a los usuarios administrar su recursos de AWS.
+- **Interfaz de línea de comandos (CLI):** Herramienta que permite a los usuarios interactuar con los servicios de AWS a través de comandos en una terminal.
+- **SDKs de AWS:** Conjuntos de herramientas y bibliotecas que permiten a los desarrolladores interactuar con los servicios de AWS desde sus aplicaciones.
+- **Herramientas de terceros:** Aplicaciones y servicios desarrollados por terceros que se integran con AWS para proporcionar funcionalidades adicionales.
+
+## Amazon EC2 
+
+> Elastic Compute Cloud (EC2) son servidores virtuales en la nube.
+
+- Hay diferentes tipos de servidores según propósito (intensidad gráfica,
+optimizadas en Memoria, Cómputo, velocidad de Disco Duro) y
+modelos de precio (On-demand, Reserved, Spot, Dedicated Host).
+
+- Se definen Key Pairs para conectarse vía SSH, aunque existen otros
+métodos más seguros.
+
+- Sistema Operativo basado en AMI (_Amazon Machine Image_), que
+es una imagen de disco virtual que contiene una configuración de
+software, como sistema operativo, servidor de aplicaciones y
+aplicaciones preinstaladas. Desde una AMI, se lanza una instancia
+que es una copia de la AMI que se ejecuta como un servidor virtual
+en la nube.
