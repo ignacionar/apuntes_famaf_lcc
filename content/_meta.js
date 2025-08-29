@@ -41,4 +41,6 @@ export default {
       </div>
     )
   },
+  seguridadnube: "Seguridad en la Nube"
 }
+
