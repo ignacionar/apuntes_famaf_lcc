@@ -1,0 +1,39 @@
+# Sistemas Lineales
+
+> Se denomina un sistema de $m$ ecuaciones lineales con $n$ incógnitas a:
+
+```math 
+\begin{array}{cccc}
+  a_{11}x_1 + \ldots + a_{1n}x_n = y_1 \\
+  \vdots \hphantom{a_{11}x_1 + a_{1n}x_n} \vdots \\
+  a_{m1}x_1 + \ldots + a_{mn}x_n = y_m
+\end{array}
+```
+
+> Tal que $y_1, \ldots, y_m, \; a_{ij} \; (1 \leq i \leq m, 1 \leq j \leq n) \in \mathbb{K}$.\
+La $n$-tupla $(x_1, \ldots, x_n) \in \KK^n$ que satisface cada ecuación es la **solución del sistema**
+
+> El sistema es **homogéneo** si $y_i = 0 \; \forall i$ , y **no homogéneo** si $\exists i$ tal que $y_i \not=0$ 
+
+Dos sistemas de ecuaciones son **equivalentes** si sus conjuntos de soluciones son iguales
+
+La matriz $A \in \KK^{m \times n}$ definida por $A_{ij} = a_{ij}$ se llama **matriz asociada al sistema**. 
+
+Un **sistema homogéneo asociado** a un sistema no homogéneo se obtiene al igualar a cero todos los términos independientes.
+
+## Operaciones elementales de fila
+
+Dado a un sistema lineal homogéneo, estos cambios en las ecuaciones dan sistemas equivalentes:
+
+1. Intercambiar dos ecuaciones de lugar.
+2. Multiplicar una ecuación por una constante no nula.
+3. Reemplazar una ecuación por ella misma más un múltiplo de otra.
+
+En un sistema lineal no homogéneo se aplican incluyendo a los términos independientes.
+
+Si tenemos una matriz $A$ asociada al sistema $H$ aplicar estas operaciones en $H$ equivale a hacerlo en la matriz $A$.
+
+> Sea $H$ un sistema lineal homogéneo de $m$ ecuaciones con $n$ incógnitas. Aplicando los cambios puede obtenerse un sistema lineal homogéneo $H_0$ cuya matriz $B$ es triangular superior, es decir, tal que $B_{ij} = 0$ si $i > j$.
+
+> Sea $H$ un sistema lineal no homogéneo con soluciones y $S$ el conjunto de soluciones del sistema homogéneo asociado a $H$, sea $p$ solución particular de $H$.\
+El conjunto de soluciones $M$ de $H$ es: $M = S + p = \{ s + p \; | \; s \in S \}$.
