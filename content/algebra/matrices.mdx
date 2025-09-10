@@ -1,0 +1,125 @@
+# Matrices 
+
+> Sean $m, n \in \NN$. El conjunto de las matrices de $m$ filas y $n$ columnas con coeficientes en un cuerpo $\KK$ es 
+
+```math
+\KK^{m \times n} = \left\{ 
+\begin{bmatrix}
+a_{11} & \ldots & a_{1n} \\
+\vdots & \; & \vdots \\
+a_{m1} & \ldots & a_{mn}
+\end{bmatrix} \mid a_{ij} \in \KK, \; 1 \leq i \leq m, \; 1 \leq j \leq n
+\right\}
+```
+
+## Operaciones y Propiedades de Matrices
+
+### Igualdad de Matrices
+
+> Sean $A, B \in \KK^{m \times n}$. Decimos que $A = B \iff A_{ij} = B_{ij}\;$ donde $1 \leq i \leq m, \; 1 \leq j \leq n$.
+
+### Operaciones con Matrices
+
+> Pueden definirse la suma de matrices $\KK^{m \times n}$ y la acción de producto por escalares de $\KK$ en $\KK^{m \times n}$ de la siguiente manera:
+
+```math 
+\begin{aligned}
++ &: \KK^{m \times n} \times \KK^{m \times n} \to \KK^{m \times n}, \; (A + B)_{ij} = A_{ij} + B_{ij} \quad  (1 \leq i \leq m, \; 1 \leq j \leq n) \\
+\cdot &: \KK \times \KK^{m \times n} \to \KK^{m \times n}, \; (\lambda \cdot A)_{ij} = \lambda \cdot A_{ij} \quad (1 \leq i \leq m, \; 1 \leq j \leq n)
+\end{aligned}
+```
+
+Tenemos que $(\KK^{m \times n}, +, \cdot)$ es un $\KK$-espacio vectorial.
+
+> Dados $A \in \KK^{m \times n}, \; B \in \KK^{n \times r}$, El producto de $A$ por $B$ es la matriz $C \in \KK^{m \times r}$ definida por:
+
+```math
+C_{ij} = \displaystyle{\sum_{k=1}^{n}} A_{ik} \cdot B_{kj} \quad (1 \leq i \leq m, \; 1 \leq j \leq r)
+```
+
+### Propiedades del Producto de Matrices
+
+- **P1)** Asociatividad: Para $A \in \KK^{m \times n}, \; B \in \KK^{n \times r}, \; C \in \KK^{r \times s}$, se cumple que $(AB)C = A(BC)$.
+- **P2)** Matriz Identidad: Sean $n \in \NN, \; I_n \in \KK^{n \times n}$ la matriz identidad, definida por:
+
+```math
+I_n = \begin{cases}
+1 & \text{si} \quad i = j \\
+0 & \quad i \not= j
+\end{cases}
+```
+
+Para $A \in \KK^{m \times n}$, se verifica: $I_m \cdot A = A$ y $A \cdot I_n = A$.
+
+**P3)** Distributividad: 
+  - **1)** Para $A \in \KK^{m \times n}, \; B, C \in \KK^{n \times r}$, se cumple que $A(B + C) = AB + AC$.
+  - **2)** Para $A, B \in \KK^{m \times n}, \; C \in \KK^{n \times r}$, se cumple que $(A + B)C = AC + BC$.
+
+
+## Matriz canónica
+
+> Sean $m, n \in \NN$ y $1 \leq k \leq m, \; 1 \leq l \leq n$. Las matrices canónicas $E^{kl} \in \KK^{m \times n}$ son definidas por:
+
+```math
+(E^{kl})_{ij} = \begin{cases}
+1 & \text{si} \quad i = k \; \land \; j = l \\
+0 & \text{en caso contrario}
+\end{cases}
+```
+
+## K-álgebra
+
+> Sea $K$ un cuerpo y $A$ un conjunto con operaciones $+, \cdot$ y una acción $\cdot_\KK$ de $\KK$ en $A$.\
+Se dice que $A$ es una $\KK$-álgebra si se cumplen las siguientes condiciones:
+
+- $(A, +, \cdot)$ es un anillo.
+- $(A, +, \cdot_\KK)$ es un $\KK$-espacio vectorial.
+- $(\lambda \cdot_\KK X) \cdot Y = \lambda \cdot_\KK (X \cdot Y) = X \cdot (\lambda \cdot_\KK Y), \; \forall X, Y \in A, \; \forall \lambda \in \KK$.
+
+## Matriz Transpuesta 
+
+> Sea $A \in \KK^{m \times n}$. La matriz transpuesta de $A$, denotada por $A^t$, es la matriz en $\KK^{n \times m}$ definida por\
+$(A^t)_{ij} = A_{ji}, \; 1 \leq i \leq n, \; 1 \leq j \leq m$.
+
+**Ejemplo:**
+
+```math 
+A = 
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 
+\end{bmatrix}
+\implies 
+A^t =
+\begin{bmatrix}
+1 & 4 \\
+2 & 5 \\
+3 & 6 
+\end{bmatrix}
+```
+
+## Traza de una Matriz
+
+> Sea $A \in \KK^{n \times n}$. La traza de $A$ se nota por $tr(A)$ y se define como: $tr(A) = \displaystyle{\sum_{i=1}^{n}} A_{ii}$.
+
+**Ejemplo:**
+
+```math
+A =
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 \\ 
+\end{bmatrix}
+\implies 
+tr(A) = 1 + 5 + 9 = 15
+```
+
+## Matriz Invertible 
+
+> Sea $A \in \KK^{n \times n}$. Se dice que $A$ es invertible $\exists B \in \KK^{n \times n}$ tal que $AB = BA = I_n$.\
+En este caso, $B$ es la matriz inversa de $A$ y se denota como $B = A^{-1}$
+
+## Matriz Elemental 
+
+> Una matriz $n \times n$ es elemental si se obtiene por **una única operación elemental a partir de la matriz identidad $Id_n$**. Todas las matrices elementales son invertibles.

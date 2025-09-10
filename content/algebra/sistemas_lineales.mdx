@@ -31,6 +31,63 @@ Dado a un sistema lineal homogéneo, estos cambios en las ecuaciones dan sistema
 
 En un sistema lineal no homogéneo se aplican incluyendo a los términos independientes.
 
+1. Si el conjunto de soluciones del sistema es la intersección de los conjuntos de soluciones de cada ecuación, entonces intercambiar dos ecuaciones corresponde a intercambiar dos conjuntos en la intersección, lo cual no afecta el resultado (al ser conmutativa la intersección).
+
+2. Si $x = (x_1, \ldots, x_n) \in \KK^n$ es solución de: 
+
+```math 
+(*) = \begin{cases}
+  a_{11}x_1 + \ldots + a_{1n}x_n = 0 \\
+  \quad\quad\quad\quad \vdots \\
+  a_{i1}x_1 + \ldots + a_{in}x_n = 0 \\
+  \quad\quad\quad\quad \vdots \\
+  a_{m1}x_1 + \ldots + a_{mn}x_n = 0
+\end{cases}
+```
+
+Multiplicando la $i$-ésima ecuación por $\lambda \in \KK, \; \lambda \not= 0$ se obtiene:
+
+```math
+(**) = \begin{cases}
+  a_{11}x_1 + \ldots + a_{1n}x_n = 0 \\
+  \quad\quad\quad\quad \vdots \\
+  \lambda a_{i1}x_1 + \ldots + \lambda a_{in}x_n = 0 \\
+  \quad\quad\quad\quad \vdots \\
+  a_{m1}x_1 + \ldots + a_{mn}x_n = 0
+\end{cases}
+```
+
+$x$ es solución de todas las ecuaciones que no fueron modificadas, además que: 
+
+```math
+\lambda a_{i1}x_1 + \ldots + \lambda a_{in}x_n = \lambda (a_{i1}x_1 + \ldots + a_{in}x_n) = \lambda \cdot 0 = 0
+```
+
+Luego $x$ es solución de $(**)$. Multiplicando la $i$-ésima ecuación por $\frac{1}{\lambda}$ se obtiene el sistema $(*)$ y un razonamiento análogo muestra que $x$ es solución de $(*)$. Por lo tanto, los sistemas son equivalentes.
+
+La tercer operación se justifica de manera similar, sean la $i$-ésima y $j$-ésima ecuaciones de $(*)$:
+
+```math
+\begin{aligned}
+  a_{i1}x_1 + \ldots + a_{in}x_n &= 0 \\
+  a_{j1}x_1 + \ldots + a_{jn}x_n &= 0
+\end{aligned}
+```
+
+Sustituyendo la $i$-ésima ecuación por la suma de ambas multiplicando la $j$-ésima por $\lambda \in \KK$ se obtiene:
+
+```math
+(a_{i1} + \lambda a_{j1})x_1 + \ldots + (a_{in} + \lambda a_{jn})x_n = 0
+```
+
+Por lo tanto, 
+
+```math
+(a_{i1} + \lambda a_{j1})x_1 + \ldots + (a_{in} + \lambda a_{jn})x_n = (a_{i1}x_1 + \ldots + a_{in}x_n) + \lambda (a_{j1}x_1 + \ldots + a_{jn}x_n) = 0 + \lambda \cdot 0 = 0
+```
+
+***
+
 Si tenemos una matriz $A$ asociada al sistema $H$ aplicar estas operaciones en $H$ equivale a hacerlo en la matriz $A$.
 
 > Sea $H$ un sistema lineal homogéneo de $m$ ecuaciones con $n$ incógnitas. Aplicando los cambios puede obtenerse un sistema lineal homogéneo $H_0$ cuya matriz $B$ es triangular superior, es decir, tal que $B_{ij} = 0$ si $i > j$.
