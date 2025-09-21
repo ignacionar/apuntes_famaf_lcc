@@ -44,6 +44,23 @@ Para resolver este problema, el algoritmo de Dijkstra realiza una secuencia de $
 > El _backtracking_ es una técnica de programación que se utiliza al no poder resolver un problema de forma voraz (no hay criterio de selección óptimo).\
 Se basa en la idea de **explorar todas las soluciones posibles** y quedarnos con la mejor de ellas. Si se elige un fragmento de solución que no es óptimo, se descarta y se vuelve atrás (_backtrack_) para probar otra opción.
 
+Las soluciones con backtracking se aplican mediante una función recursiva (la cual se define matemáticamente).
+
+**Ejemplo:** Problema de la Moneda
+
+```math 
+cambio(i,j) = \textnormal{"menor número de monedas necesarias para pagar exactamente} \\ \textnormal{el monto $j$ con denominaciones $d_1, d_2, \ldots, d_i$"}
+```
+
+```math 
+cambio(i, j) = \begin{cases}
+0 &, \; j = 0 \\
+\infty &, \; j > 0 \land i = 0 \\
+cambio(i - 1, j) &, \; d_i > j > 0 \land i > 0 \\
+\textnormal{min}(cambio(i-1,j),1 + cambio(i, j - d_i)) &, \; j \geq d_i > 0 \land i > 0
+\end{cases}
+```
+
 ## Programación dinámica
 
 > La programación dinámica es un método para **transformar** una **definción recursiva en iterativa mediante una tabla de valores**. 
