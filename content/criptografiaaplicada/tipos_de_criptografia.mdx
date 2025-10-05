@@ -1,0 +1,157 @@
+# Tipos de criptografía 
+
+## Algoritmo de cifrado simétrico
+
+Ante la necesidad de preservar la confidencialidad de la información, se utilizan los algoritmos de cifrado simétrico.
+
+> Un algoritmo de cifrado transforma un mensaje denominado **texto claro** o **plaintext** en una versión alternativa denominada **texto cifrado** o **ciphertext**. 
+
+Su transformación debe ser reversible. Para ello, este algoritmo se parametriza por una **clave secreta**, conocida por el emisor y receptor, sus tamaños suelen ser de 128, 192 o 256 bits.
+
+La notación utilizada es: 
+
+```math 
+\begin{aligned}
+E_K(M) &= C \\
+D_K(C) &= M
+D_K(E_K(M)) = M
+\end{aligned}
+```
+
+Donde $E_K$ es el algoritmo de cifrado, $D_K$ el de descifrado, $M$ el mensaje o texto claro, $C$ el texto cifrado y $K$ la clave secreta.
+
+### Mensaje 
+
+> Se denomina **mensaje** a cualquier secuencia de bits que se desea transmitir de forma segura.
+
+## Sustitución monoalfabética 
+
+> Consiste en sustituir cada símbolo del mensaje por otro símbolo, de acuerdo a una regla fija.
+
+```math
+\begin{aligned}
+\prod &: \{ A, \ldots, Z \} \to \{ A, \ldots, Z \} \\
+M &= m_1, m_2, \ldots, m_n \\
+C &= \prod(m_1), \prod(m_2) \ldots \prod(m_n)
+\end{aligned}
+```
+
+La cantidad de claves posibles es $26! \approx 2^{88}$. Es posible criptoanalizar este cifrado mediante análisis de frecuencia.
+
+## Cifrado de Vernam (_One-Time Pad_)
+
+> Es un algoritmo **incondicionalmente seguro**, que utiliza una clave aleatoria de la misma longitud que el mensaje. 
+
+Es una larga secuencia aleatoria de letras. Para cifrar se suman las letras del mensaje y las correspondientes de la secuencia, módulo $26$. Análogamente para descifrar se resta con la misma clave. 
+
+Cada letra de la clave se usa una sola vez para un solo mensaje.
+
+Los problemas que presenta este cifrado son:
+
+1. La generación de claves verdaderamente aleatorias.
+2. La distribución segura de las claves.
+3. La longitud de la clave debe ser igual a la del mensaje.
+
+Puede generalizarse como: 
+
+- El alfabeto del mensaje son los enteros módulo $m$.
+- El _keystream_ es una secuencia de símbolos del mismo alfabeto, generada de forma aleatoria.
+- Emisor y receptor comparten el _keystream_.
+- Para cifrar se usa la suma módulo $m$ o XOR bit a bit. 
+
+## Cifradores de Flujo
+
+> En un **cifrador de flujo**, cada símbolo del texto claro se combina con un símbolo de una **secuencia cifrante** (keystream) mediante una operación invertible. 
+
+Para descifrar se combinan los símbolos del texto cifrado con los de la secuencia cifrante mediante la operación inversa.\
+Generalmente, los símbolos son bits y la operación es un XOR.
+
+La secuencia cifrante es la salida de un generador de números pseudoaleatorios con clave y criptográficamente seguro. Esta no debe reutilizarse.
+
+Algunos algoritmos de cifrado de flujo son: CSS, A5/1, RC4 (estos tres obsoletos), y ChaCha20.
+
+## Cifradores de Bloque
+
+> Un **cifrador de bloque** opera sobre bloques de bits de longitud fija, generalmente de 128 bits. Convirtiendo el bloque de texto claro en un bloque de texto cifrado. 
+
+Podría considerarse un algoritmo de sustitución monoalfabética con una gran cantidad de símbolos ($2^{128}$).
+
+Para cifrar mensajes mayores que el tamaño del bloque se utilizan **modos de operación**. 
+
+Algunos algoritmos de cifrado de bloque son: 
+
+- AES (_Advanced Encryption Standard_). Un estándar de NIST:
+  - Bloques de 128 bits.
+  - Claves de 128, 192 o 256 bits.
+- DES-EDE (Triple DES), una variante del DES:
+  - Bloques de 64 bits.
+  - Claves de 112 o 168 bits.
+- Camellia:
+  - Bloques de 128 bits.
+  - Claves de 128, 192 o 256 bits.
+
+Algunos modos de operación son:
+
+- ECB (_Electronic Codebook_)
+- CBC (_Cipher Block Chaining_)
+- CFB (_Cipher Feedback_)
+- CTR (_Counter_)
+
+## Funciones de hash criptográficas
+
+Ante la necesidad de asegurar que un mensaje no ha sido alterado, se utilizan las funciones de hash criptográficas.
+
+> Una **función de hash criptográfica** es una función que mapea un mensaje de longitud arbitraria a una cadena de bits de longitud fija, llamada **resumen** (digest). 
+
+Esta tiene las siguientes propiedades:
+
+1. Resistencia a preimagen: debe ser difícil, dado un hash, encontrar un mensaje que produzca ese hash.
+2. Resistencia a segunda preimagen: debe ser difícil, dado un mensaje y su hash, encontrar otro mensaje que produzca el mismo hash.
+3. Resistencia a colisiones: debe ser difícil encontrar dos mensajes diferentes que produzcan el mismo hash.
+
+Algunos ejemplos son: 
+
+- SHA-1 (obsoleto)
+- SHA-2 (SHA-224, SHA-256, SHA-384, SHA-512)
+
+## Código de autenticación de mensajes (MAC)
+
+Ante la necesidad de asegurar la integridad y autenticidad de un mensaje, se utilizan los códigos de autenticación de mensajes (MAC).
+
+> Un **código de autenticación de mensajes** (MAC) es un fragmento de información que se utiliza para verificar la integridad y autenticidad de un mensaje.
+
+Este requiere una clave secreta compartida entre el emisor y el receptor. Se construyen a partir de: 
+
+- Funciones hash combinadas con una clave secreta (ej: HMAC).
+- Cifradores de bloque en modos específicos (ej: CMAC).
+- Funciones ad-hoc (ej: Poly1305).
+
+## Algoritmo de cifrado autenticado 
+
+Ante la necesidad de asegurar la confidencialidad, integridad y autenticidad de un mensaje, se utilizan los algoritmos de cifrado autenticado.
+
+Una solución obsoleta es usar un algoritmo de cifrado simétrico para la confidencialidad combinado con un MAC para la integridad y autenticidad.
+
+> Se utilizan algoritmos que combinan ambas funciones en un solo paso, llamados **algoritmos de cifrado autenticado** (AE). Si además puede autenticar (sin cifrar) datos adicionales, se denominan **algoritmos de cifrado autenticado con datos asociados** (AEAD).
+
+Algunos ejemplos son:
+
+- GCM (_Galois/Counter Mode_): basado en AES en modo CTR con CBC-MAC.
+- ChaCha20-Poly1305: basado en el cifrador de flujo ChaCha20 y el MAC Poly1305.
+
+*** 
+
+El cifrado simétrico requiere que el emisor y receptor compartan una clave secreta, además, puede llegar a necesitarse una gran cantidad de claves (al menos una con cada corresponsal). Ante este problema se utiliz la criptografía de clave pública o criptografía asimétrica.
+
+Donde existen dos claves, una pública y otra privada. El emisor cifra con la clave pública del receptor y el receptor descifra con su clave privada.
+
+No se utiliza para cifrar grandes cantidades de datos, sino para compartir claves de cifrado simétrico o para firmar digitalmente.
+
+## Firma digital 
+
+> Una **firma digital** es un mecanismo para asegurar la autenticidad de un documento. Un algoritmo de firma digital combina funciones hash criptográficas y criptografía asimétrica. El resumen del documento se cifra con la clave privada del firmante, generando la firma digital.
+
+Algunos ejemplos son: 
+
+- RSA
+- DSA 

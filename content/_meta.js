@@ -41,6 +41,7 @@ export default {
       </div>
     )
   },
-  seguridadnube: "Seguridad en la Nube"
+  seguridadnube: "Seguridad en la Nube",
+  criptografiaaplicada: "Criptografía Aplicada"
 }
 

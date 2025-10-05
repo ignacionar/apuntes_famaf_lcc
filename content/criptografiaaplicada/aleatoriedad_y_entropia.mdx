@@ -1,0 +1,74 @@
+# Aleatoriedad y Entropía
+
+> La secuencia de números es estadísticamente aleatoria cuando no tiene regularidades o patrones predecibles. Podría ser producto de un proceso pseudoaleatorio. 
+
+> La entropía es una medida de la aleatoriedad en una secuencia de datos. Habitualmente expresamos la entropía en bits como 
+
+```math
+H(X) = - \sum_{i=1}^{n} P(x_i) \log_2 P(x_i)
+```
+
+La maxima entropía obtenible de una cadena de $n$ bits corresponde a una distribución uniforme y es precisamente $n$ bits.
+
+## Generadores de Números Pseudoaleatorios (PRNG)
+
+> Un **Generador de Números Pseudoaleatorios** es un algoritmo determinista que, a partir de una semilla inicial (valor inicial), produce una secuencia de números estadísticamente aleatorios. Tienen un estado interno finito, por lo que eventualmente la secuencia se repite (periodicidad). Los PRNGs no son criptográficamente seguros.
+
+En Java se utiliza un generador congruencial lineal, este tipo de generador es de la forma:
+
+```math
+X_{i+1} = (AX_i + C) \mod m
+```
+
+En este caso se utiliza 
+
+```java
+seed = (seed * 0x5DEECE66DL + 0xBL) & ((1L << 48) - 1);
+```
+
+El estado interno es de 48 bits, por lo que la secuencia se repite cada $2^{48}$ números generados.
+
+Produce enteros con la cantidad de bits solicitada, entre 1 y 32. 
+
+```java
+(int)(seed >>> (48 - bits))
+```
+
+Para devolver un `double` hace 
+
+```java
+public double nextDouble() {
+  return (((long)next(26) << 27) + next(27)) / (double)(1L << 53);
+}
+``` 
+
+Esto no es criptográficamente seguro. 
+
+***
+
+Existen PRNGs criptográficamente seguros tales como la API de criptografía de Windows, que provee la función `BCryptGenRandom()`
+
+La fuente de entropía es el driver `cng.sys`, un recolector de entropía basado en fortuna:
+
+```h 
+NTSTATUS BCryptGenRandom(
+  [in, out] BCRYPT_ALG_HANDLE hAlgorithm,
+  [in, out] PUCHAR pbBuffer,
+  [in] ULONG cbBuffer,
+  [in] ULONG dwFlags
+);  
+```
+
+En Unix y derivados, se utiliza el dispositivo `/dev/urandom`. Como es archivo de dispotiivo, solicitar bytes a `/dev/urandom` es igual a leer de un archivo. 
+
+La diferencia entre `/dev/random` y `/dev/urandom` es que el primero se bloquea si no hay suficiente entropía, mientras que el segundo no.
+
+Además `getrandom()` bloquea si no tiene suficiente entropía, pero no vuelve a bloquearse en llamadas posteriores.
+
+```c
+#include <linux/random.h>
+
+ssize_t getrandom(void *buf, size_t buflen, unsigned int flags);
+```
+
+En Python se provee `urandom()` que utiliza `BCryptGenRandom()` en Windows y `/dev/urandom` en Unix.
