@@ -292,6 +292,9 @@ $S$ es un subespacio de $V$ solo si valen las siguientes condiciones:
 - **P2)** $\bfv, \bfw \in S \implies \bfv + \bfw \in S$ 
 - **P3)** $\lambda \in \KK, \; \bfv \in S \implies \lambda \cdot \bfv \in S$
 
+> Dados $\bfv_1, \ldots, \bfv_n \in V, S = \{ \alpha_1 \bfv_1 + \ldots + \alpha_n \bfv_n \mid \alpha_i \in \KK, \; 1 \leq i \leq n \}$ subespacio de $V$.\
+$S$ es el **subespacio generado** por $\bfv_1, \ldots, \bfv_n$ y se denota $S = \; < \bfv_1, \ldots, \bfv_n >$.
+
 ***
 
 > Sea $V$ un $\KK$-espacio vectorial, y $S, T$ subespacios de $V$, entonces $S \cap T$ es subespacio de $V$.
@@ -420,7 +423,11 @@ Como ejemplo en $\RR^2$, $(1, 0); (0, 1)$ son linealmente independientes. Ningun
 
 > Sea $V$ un $\KK$-espacio vectorial. Una base de $V$ es el conjunto $B \subseteq V$ tal que $B$ genera a $V$ y $B$ es l.i.
 
-> El espacio $V$ tiene dimensión finita si tiene una base finita. 
+> La dimensión de $V$ es la cantidad de elementos de su base $B$, se denota $\dim V$ 
+
+> Si tenemos dos bases $B_1, B_2$ de $V$, donde $B_1 = \{ \bfv_1, \ldots, \bfv_n \}, \; B_2 = \{ \bfw_1, \ldots, \bfw_m \}$, entonces $n = m$
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión finita y sea $S$ un conjunto l.i. de $V$. Entonces $S$ es finito y existen $\bfv_1, \ldots, \bfv_n$ vectores de $V$ tal que $S \cup \{\bfv_1, \ldots, \bfv_n\}$ es base de $V$
 
 ### Vectores canónicos y base canónica
 
@@ -431,3 +438,24 @@ Como ejemplo en $\RR^2$, $(1, 0); (0, 1)$ son linealmente independientes. Ningun
 ```
 
 > El conjunto dado por $\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ es llamado **base canónica** de $\KK^n$.
+
+## Suma de subespacios
+
+> Sea $V$ un $\KK$-espacio vectorial y $S, T$ subespacios de $V$. Se denomina **suma de $S$ y $T$** al conjunto\
+$S + T = \{ \; \bfv \in V \; \mid \; \exists x \in S, y \in T, \bfv = x + y  \; \} = \{ \; x + y \; \mid \; x \in S, y \in T \; \}$
+
+Podemos decir que: 
+
+1. $S + T$ es subespacio de $V$
+2. $S + T$ es el menor subespacio que contiene a $S \cup T$
+3. Si $\{ \bfv_i \}_{i \in I}$ es sistema de generadores de $S$ y $\{ \bfw_j \}_{j \in J}$ es un sistema de generadores de $T$,\
+$\{ \bfv_i \}_{i \in I} \cup \{\bfw_j\}_{j \in J}$ es un sistema de generadores de $S + T$
+
+> Sea $V$ un $\KK$-espacio vectorial y $S, T$ subespacios de $V$ de dimensión finita, entonces\
+$\dim (S+T) = \dim S + \dim T - \dim (S \cap T)$
+
+### Suma directa y complemento
+
+> Se dice que $V$ es **suma directa** de $S, T$ y se nota $V = S \oplus T$ tal que: $\; V = S + T \; \land \; S \cap T = \{ 0 \}$
+
+> Sea $S \subseteq V$ un subespacio de $V$. $T$ es un **complemento** de $S$ en $V$ si $V = S \oplus T$.

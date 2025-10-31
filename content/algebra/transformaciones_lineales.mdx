@@ -1,0 +1,89 @@
+# Transformaciones lineales
+
+Las transformaciones lineales son funciones entre $\KK$-espacios vectoriales compatibles con la operación y acción de estos espacios.
+
+> Sean $(V, +_V, \cdot_V)$ y $(W, +_W, \cdot_W)$ dos $\KK$-espacios vectoriales. Una función $f: V \to W$ es una **transformación lineal de $V$ en $W$** si cumple: 
+
+1. $f(\bfv +_V \bfv') = f(\bfv) +_W f(\bfv'), \quad \forall \bfv, \bfv' \in V$.
+2. $f(\lambda \cdot_V \bfv) = \lambda \cdot_W f(\bfv), \quad \forall \lambda \in \KK, \forall \bfv \in V$.
+
+Si $f : V \to W$ es una transformación lineal, entonces $f(0_{\bf{v}}) = 0_{\bf{w}}$.
+
+Además, tenemos que: 
+
+1. Si $S$ es subespacio de $V$, entonces $f(S)$ es subespacio de $W$.
+2. Si $T$ es subespacio de $W$, entonces $f^{-1}(T)$ es subespacio de $V$.
+
+***
+
+> Sean $V, W$ dos $\KK$-espacios vectoriales, $V$ de dimensión finita. Sea $B = \{\bfv_1, \ldots, \bfv_n\}$ una base de $V$ y sean $\bfw_1, \ldots, \bfw_n \in W$. Existe una única transformación lineal $f: V \to W$ tal que $f(\bfv_i) = \bfw_i , \; 1 \leq i \leq n$.
+
+## Tipos de transformaciones lineales
+
+1. $f$ es un _monomorfismo_ si es inyectiva.
+2. $f$ es un _epimorfismo_ si es sobreyectiva.
+3. $f$ es un _isomorfismo_ si es biyectiva.
+4. $f$ es un _endomorfismo_ si $V = W$.
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión $n$. Existe un isomorfismo $f : V \to \KK^n$.
+
+## Núcleo e imagen 
+
+A una transformación lineal $f: V \to W$ se le puede asociar un subespacio de $V$ (núcleo) que permite medir el tamaño de la pre-imagen por $f$ de un elemento de su imagen. Ese subespacio permite determinar si $f$ es inyectiva.
+
+El núcleo de una transformación lineal es un subespacio de $V$.
+
+> Sean $V, W$ dos $\KK$-espacios vectoriales y $f: V \to W$ una transformación lineal.\
+El **núcleo** de $f$ es el conjunto $\textnormal{Nu}(f) = \{\bfv \in V | f(\bfv) = 0 \} = f^{-1}({0})$.
+
+Además, $f$ es _monomorfismo_ $\iff \textnormal{Nu}(f) = \{ 0\}$
+
+**Ejemplo:** Sea $f: \RR^3 \to \RR^2$, $f(x_1, x_2, x_3) = (x_1, x_2)$. Entonces:
+
+```math 
+\begin{aligned}
+Nu(f) &= \{(x_1, x_2, x_3) \in \RR^3 \; | \; f(x_1, x_2, x_3) = 0 \} \\
+       &= \{(x_1, x_2, x_3) \; | \; x_1 = x_2 = 0 \in \RR \} \\
+       &= \; <(0, 0, 1)>
+\end{aligned}
+```
+
+***
+
+El otro conjunto importante asociado a una transformación lineal es su imagen. 
+
+> Sean $V, W$ dos $\KK$-espacios vectoriales y $f: V \to W$ una transformación lineal. La imagen se define como $\textnormal{Im}(f) = \{ \bfw \in W | \exists \bfv \in V, f(\bfv) = \bfw \} \subseteq W$.
+
+La imagen de una transformación lineal es un subespacio de $W$.
+
+**Ejemplo:** Ejemplo. Hallar la imagen de la transformación lineal $f : \RR^3 \to \RR^3$ definida como\
+$f(x_1, x_2, x_3) = (x_1 - x_2, -x_1 + x_2, 2x_1 - 2x_2 + x_3)$.
+
+Siguiendo la definición, 
+
+```math
+\begin{aligned}
+\textnormal{Im}(f) &= \{y \in \RR^3 \; | \; \exists x \in \RR^3, f(x) = y \} \\
+&= \{(y_1, y_2, y_3) \in \RR^3 \; | \; \exists (x_1, x_2, x_3) \in \RR^3, (x_1 - x_2, -x_1 + x_2, 2x_1 - 2x_2 + x_3) = (y_1, y_2, y_3) \} \\
+\end{aligned}
+```
+
+Un elemento de $y$ pertenece a $\textnormal{Im}(f)$ solo si: 
+
+```math
+\begin{aligned}
+y &= (x_1 - x_2, -x_1 + x_2, 2x_1 - 2x_2 + x_3) \\
+&= (x_1, -x_1, 2x_1) + (-x_2, x_2, -2x_2) + (0, 0, x_3) \\
+&= x_1(1, -1, 2) + x_2(-1, 1, -2) + x_3(0, 0, 1)
+\end{aligned}
+```
+
+Luego, $\textnormal{Im}(f) = \; < (1, -1, 2), (-1, 1, -2), (0, 0, 1) > \; = \; < (1, -1, 2), (0, 0, 1) >$.
+
+### Teorema de la dimensión
+
+> Sean $V, W$ dos $\KK$-espacios vectoriales, con $V$ de dimensión finita, y sea $f: V \to W$ una transformación lineal. Entonces,
+
+```math
+\dim(V) = \dim(\textnormal{Nu}(f)) + \dim(\textnormal{Im}(f))
+```
