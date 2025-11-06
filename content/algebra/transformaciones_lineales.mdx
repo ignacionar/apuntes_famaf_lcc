@@ -2,7 +2,8 @@
 
 Las transformaciones lineales son funciones entre $\KK$-espacios vectoriales compatibles con la operación y acción de estos espacios.
 
-> Sean $(V, +_V, \cdot_V)$ y $(W, +_W, \cdot_W)$ dos $\KK$-espacios vectoriales. Una función $f: V \to W$ es una **transformación lineal de $V$ en $W$** si cumple: 
+> Sean $(V, +_V, \cdot_V)$ y $(W, +_W, \cdot_W)$ dos $\KK$-espacios vectoriales.\
+Una función $f: V \to W$ es una **transformación lineal de $V$ en $W$** si cumple: 
 
 1. $f(\bfv +_V \bfv') = f(\bfv) +_W f(\bfv'), \quad \forall \bfv, \bfv' \in V$.
 2. $f(\lambda \cdot_V \bfv) = \lambda \cdot_W f(\bfv), \quad \forall \lambda \in \KK, \forall \bfv \in V$.
@@ -20,8 +21,8 @@ Además, tenemos que:
 
 ## Tipos de transformaciones lineales
 
-1. $f$ es un _monomorfismo_ si es inyectiva.
-2. $f$ es un _epimorfismo_ si es sobreyectiva.
+1. $f$ es un _monomorfismo_ si es inyectiva. $\quad \dim({\textnormal{Nu}}(f)) = 0$
+2. $f$ es un _epimorfismo_ si es sobreyectiva. $\quad \dim({\textnormal{Im}}(f)) = \dim(W)$
 3. $f$ es un _isomorfismo_ si es biyectiva.
 4. $f$ es un _endomorfismo_ si $V = W$.
 
@@ -34,7 +35,7 @@ A una transformación lineal $f: V \to W$ se le puede asociar un subespacio de $
 El núcleo de una transformación lineal es un subespacio de $V$.
 
 > Sean $V, W$ dos $\KK$-espacios vectoriales y $f: V \to W$ una transformación lineal.\
-El **núcleo** de $f$ es el conjunto $\textnormal{Nu}(f) = \{\bfv \in V | f(\bfv) = 0 \} = f^{-1}({0})$.
+El **núcleo** de $f$ es el conjunto $\textnormal{Nu}(f) = \{\bfv \in V \; | \; f(\bfv) = 0 \} = f^{-1}({0})$.
 
 Además, $f$ es _monomorfismo_ $\iff \textnormal{Nu}(f) = \{ 0\}$
 
@@ -80,6 +81,8 @@ y &= (x_1 - x_2, -x_1 + x_2, 2x_1 - 2x_2 + x_3) \\
 
 Luego, $\textnormal{Im}(f) = \; < (1, -1, 2), (-1, 1, -2), (0, 0, 1) > \; = \; < (1, -1, 2), (0, 0, 1) >$.
 
+Podemos obtener la imagen mediante $f(e_i)$ donde $e_i$ son los vectores de la base canónica. 
+
 ### Teorema de la dimensión
 
 > Sean $V, W$ dos $\KK$-espacios vectoriales, con $V$ de dimensión finita, y sea $f: V \to W$ una transformación lineal. Entonces,
@@ -87,3 +90,60 @@ Luego, $\textnormal{Im}(f) = \; < (1, -1, 2), (-1, 1, -2), (0, 0, 1) > \; = \; <
 ```math
 \dim(V) = \dim(\textnormal{Nu}(f)) + \dim(\textnormal{Im}(f))
 ```
+
+### Aplicación de transformaciones lineales 
+
+> Sean $V, W, Z$ $\KK$-espacios vectoriales, $T : V \to W, \; U : W \to Z$ transformaciones lineales.\
+Entonces $\textnormal{Im}(T) \cap \textnormal{Nu}(U) = T(\textnormal{Nu}(U \circ T))$.
+
+## Cambios de base
+
+> Sean $V$ un $\KK$-espacio vectorial de dimensión $n$ y  $\Beta_1 = \{\bfv_1, \ldots, \bfv_n\}, \Beta_2 = \{\bfw_1, \ldots, \bfw_n\}$ bases de $V$.\
+Sean $a_{ij} \in \KK, \; 1 \leq i, j \leq n$ los escalares tales que $\bfv_j = \displaystyle{\sum_{i=1}^{n}} a_{ij} \bfw_i$.\
+La matriz de cambio de base de $\Beta_1$ a $\Beta_2$ es la matriz $M(\Beta_1, \Beta_2)_{ij} = a_{ij} , \; 1 \leq i, j \leq n$.
+
+Es decir, la matriz $M(\Beta_1, \Beta_2) \in \KK^{n \times n}$ tiene por $j$-ésima columna las coordenadas del $j$-ésimo vector de $\Beta_1$ en la base $\Beta_2$.
+
+**Ejemplo:** $V = \RR^3, \; \Beta_1 = \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\}, \; \Beta_2 = \{(1, 1, 1), (1, 1, 0), (1, 0, 0)\}$.
+
+Para construir $M(\Beta_1, \Beta_2)$ tenemos que escribir los elementos de $\Beta_1$ en la base $\Beta_2$:
+
+```math
+\left\{\begin{array}{lr}
+(1, 0, 0) = 0 \cdot (1, 1, 1) + 0 \cdot (1, 1, 0) + 1 \cdot (1, 0, 0) \\
+(0, 1, 0) = 0 \cdot (1, 1, 1) + 1 \cdot (1, 1, 0) + (-1) \cdot (1, 0, 0) \\
+(0, 0, 1) = 1 \cdot (1, 1, 1) + (-1) \cdot (1, 1, 0) + 0 \cdot (1, 0, 0) \\
+\end{array}\right\} = C(\Beta_1, \Beta_2) =
+\begin{bmatrix}
+0 & 0 & 1 \\
+0 & 1 & -1 \\
+1 & -1 & 0
+\end{bmatrix}
+```
+
+También, dado $(x, y, z) \in \RR^3$, se tiene que $(x, y, z) = ((x, y, z))_{\Beta_1}$ y\
+$(x, y, z) = z(1, 1, 1) + (y - z)(1, 1, 0) + (x - y)(1, 0, 0) = ((z, y - z, x - y))_{\Beta_2}$. 
+
+## Representación matricial de una transformación lineal
+
+> Sean $V, W$ $\KK$-espacios vectoriales de dimensión finita, $\Beta_1 = \{\bfv_1, \ldots, \bfv_n\}, \; \Beta_2 = \{\bfw_1, \ldots, \bfw_m\}$\
+bases de $V, W$ respectivamente. Sea $f: V \to W$ una transformación lineal.\
+Suponiendo $f(\bfv_j) = \displaystyle{\sum_{i=1}^{m}} a_{ij} \bfw_i, \; 1 \leq j \leq n$. La matriz de $f$ en las bases $\Beta_1, \Beta_2$ es la matriz $[f]_{\Beta_1, \Beta_2} \in \KK^{m \times n}$ dada por $[f]_{\Beta_1, \Beta_2} = a_{ij}, \; 1 \leq i \leq m, \; 1 \leq j \leq n$.
+
+Si $f : V \to V, \; \Beta_1 = \Beta_2$, la matriz de $f$ se denota como $[f]_{\Beta}$.
+
+Tenemos que: 
+
+```math
+\begin{aligned}
+[f]_{\Beta_1, \Beta_2} &= M(C, \Beta_2) \cdot [f]_{\Beta_1, \Beta_2} \cdot M(\Beta_1, C)  \\
+&= (M(\Beta_2, C))^{-1} \cdot [f]_{\Beta_1, \Beta_2} \cdot M(\Beta_1, C)
+\end{aligned}
+```
+
+Donde $M$ es la matriz de cambio de base y $C$ es la base canónica correspondiente.
+
+### Matriz de la composición y la inversa 
+
+> Sean $V, W, Z$ $\KK$-espacios vectoriales de dimensión finita, con bases $\Beta_1, \Beta_2, \Beta_3$ respectivamente.\
+Sean $T: V \to W, \; U: W \to Z$ transformaciones lineales. Entonces $[U \circ T]_{\Beta_1, \Beta_3} = [U]_{\Beta_2, \Beta_3} \cdot [T]_{\Beta_1, \Beta_2}$.
