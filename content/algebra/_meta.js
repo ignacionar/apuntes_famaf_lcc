@@ -3,5 +3,7 @@ export default {
   espacios_vectoriales: "Espacios Vectoriales",
   sistemas_lineales: "Sistemas Lineales",
   matrices: "Matrices",
-  transformaciones_lineales: "Transformaciones Lineales"
+  transformaciones_lineales: "Transformaciones Lineales",
+  determinante: "Determinante",
+  diagonalizacion: "Diagonalización"
 }

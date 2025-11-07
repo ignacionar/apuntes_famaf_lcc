@@ -1,0 +1,23 @@
+# Diagonalización
+
+> Una matriz $A \in \KK^{n \times n}$ es diagonalizable si $\exists C \in GL(n, \KK)$ tal que $C \cdot A \cdot C^{-1}$ es matriz diagonal.
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión $n$. Sea $f : V \to V$ transformación lineal.\
+Se dice que $f$ es **diagonalizable** si  existe una base $B$ de $V$ tal que $[f]_B$ es diagonal  
+
+## Autovalores y autovectores
+
+> Sea $V$ un $\KK$-espacio vectorial, sea $f : V \to V$ transformación lineal.\
+Se dice que $\bfv \in V, \bfv \not= 0$ es **autovector** de $f$ si $\exists \lambda \in \KK$ tal que $f(\bfv) = \lambda \cdot \bfv$.\
+El elemento $\lambda \in \KK$ es **autovalor** de $f$
+
+Estas mismas nociones a su vez, se pueden definir para matrices. 
+
+> Sea $A \in \KK^{n \times n}$. Se dice que $\bfv \in \KK^n, \bfv \not= 0$ es **autovector** de $A$ si $\exists \lambda \in \KK$ tal que $A \cdot \bfv = \lambda \cdot \bfv$.\
+El elemento $\lambda \in \KK$ es **autovalor** de $A$
+
+> Sea $A \in \KK^{n \times n}$. $A$ es diagonalizable $\iff$ existe una base $B$ de $\KK^n$ formada por **autovectores** de $A$
+
+## Polinomio característico
+
+> Sea $A \in \KK^{n \times n}$. El **polinomio característico** de $A$ es el polinomio $\chi_A = \det(X \cdot I_n - A) \in \KK[x]$
