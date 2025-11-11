@@ -439,6 +439,230 @@ Como ejemplo en $\RR^2$, $(1, 0); (0, 1)$ son linealmente independientes. Ningun
 
 > El conjunto dado por $\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ es llamado **base canónica** de $\KK^n$.
 
+***
+
+### Ejercicios resueltos - Independencia lineal 
+
+Decidir si los siguientes subconjuntos de $\RR^3$ son linealmente independientes:
+
+**1.** 
+
+```math 
+\{( 1, 0, -1), (1, 2, 1), (0, -3, 2)\}
+```
+
+Necesitamos ver si los vectores del subconjunto no son expresarse como combinación lineal de sí mismos.\
+Para ello, defino escalares $\alpha, \beta, \gamma$ para ver si todos ellos son cero.
+
+```math 
+\alpha(1, 0, -1) + \beta(1, 2, 1) + \gamma(0, -3, 2) \implies \alpha, \beta, \gamma \stackrel{?}{=} 0
+```
+
+Defino un sistema de ecuaciones. 
+
+```math 
+\begin{cases}
+\alpha + \beta = 0 \\
+2 \beta - 3 \gamma = 0 \\
+-\alpha + \beta + 2 \gamma = 0
+\end{cases}
+```
+
+Resolviendo el sistema y reemplazando valores ecuación por ecuación, tenemos:
+
+```math 
+\begin{aligned}
+\alpha &= - \beta \\ 
+&\;  \\ 
+-2 \alpha = 3 \gamma \\
+&\;  \\ 
+-\alpha - \alpha + 2 \gamma &= 0 \\
+-2 \alpha + 2 \gamma &= 0 \\ 
+3 \gamma + 2 \gamma &= 0 \\
+5 \gamma &= 0 \\ 
+\gamma &= 0 \implies \alpha = 0 \implies \beta = 0 
+\end{aligned}
+```
+
+El subconjunto es linealmente independiente.
+
+**2.**
+
+```math 
+\{(1, 0, -1), (1, -2, 1), (2, -2, 0)\}
+```
+
+Podemos observar que $1 \cdot (1, 0, -1) + 1 \cdot (1, -2, 1) = (2, -2, 0)$, por lo que el subconjunto es linealmente dependiente.\
+
+Si quisieramos resolverlo mediante ecuaciones hacemos lo siguiente:
+
+```math 
+\begin{cases} 
+\alpha + \beta + 2 \gamma = 0 \\
+- 2 \beta - 2 \gamma = 0 \\
+- \alpha + \beta = 0 
+\end{cases}
+``` 
+
+Resolviendo: 
+
+```math 
+\begin{aligned}
+\alpha &= \beta \\ 
+&\; \\ 
+- 2 \beta &= 2 \gamma \\
+- \beta &= \gamma \\ 
+&\; \\
+\beta + \beta + 2 \gamma &= 0 \\ 
+2 \beta + 2 \gamma &= 0 \\
+- 2 \gamma + 2 \gamma &= 0 \\
+0 &= 0
+\end{aligned}
+```
+
+Los escalares no son iguales a cero. 
+
+***
+
+### Ejercicios resueltos - Bases y dimensión 
+
+**1.** 
+
+Hallar la dimensión del subespacio $W_1$ generado por $S_1 = \{( 1, 0, -1), (1, 2, 1), (0, -3, 2)\}$, caracterizar $W_1$ mediante ecuaciones y decidir si el vector $(4, -5, 1)$ está en $W_1$.
+
+Los tres vectores de $S_1$ son linealmente independientes. Por lo tanto, la base del subespacio puede definirse como: $\{( 1, 0, -1), (1, 2, 1), (0, -3, 2)\}$ tal que $W_1 = \langle ( 1, 0, -1), (1, 2, 1), (0, -3, 2) \rangle$. 
+Por lo tanto, $\dim W_1 = 3$. 
+
+Siendo $\dim W_1 = 3 = \dim \RR^3$, podemos establecer que $W_1 = \RR^3$. Por lo tanto, todos los vectores de $\RR^3$ están en $W_1$ tal que $W_1 = (x, y, z) \in \RR^3 \implies (4, -5, 1) \in W_1$.    
+
+***
+
+**2.** 
+
+Hallar la dimensión del subespacio $W_2$ generado por $S_2 = \{( 1, 0, -1), (1, -2, 1), (2, -2, 0)\}$, caracterizar $W_2$ mediante ecuaciones y decidir si el vector $(4, -5, 1)$ está en $W_2$
+
+Observemos que uno de los vectores de $S_2$ es combinación lineal de los otros dos: $1 \cdot ( 1, 0, -1) + 1 \cdot (1, -2, 1) = (2, -2, 0)$. La base de $W_2$ solo está compuesta por vectores l.i., su base se define como $\{(1, 0, -1), (1, -2, 1)\}$. Tal que $W_2 = \langle (1, 0, -1), (1, -2, 1) \rangle$ 
+
+Tenemos que $\dim W_2 = 2$, su representación mediante ecuaciones puede obtenerse mediante la combinación lineal de los vectores de la base. Es decir,
+
+```math 
+\begin{aligned}
+(x, y, z) &= \alpha (1, 0, -1) + \beta (1, -2, 1)
+&\; \\
+x &= \alpha + \beta \\ 
+y &= -2 \beta \\ 
+z &= - \alpha + \beta 
+&\; \\ 
+\alpha &= x - \beta \\ 
+\beta &= - \frac{y}{2} \\ 
+&\; \\
+z &= - \alpha + \beta \\
+z &= - x - y \implies x + y + z = 0
+\end{aligned}
+```
+
+Tenemos la ecuación de $W_1$ como $(x, y, z) = x + y + z = 0$.\
+Por lo que, $(4, -5, 1) \in W_2$ ya que: $4 - 5 + 1 = 0$ 
+
+***
+
+Dar una base y dimensión de los siguientes subespacios vectoriales.
+
+**3.**
+
+```math 
+W_1 = \{ (x, y, z) \in \RR^3 \; | \; z = x + y \}
+```
+
+La forma de determinar su base es determinar la combinación lineal de los vectores que permite cumplir la igualdad $z = x + y$. Para ello, podemos definir un vector del subespacio $(x, y, z)$ en términos de $x, y$, ya que $z$ depende de ellos:
+
+```math 
+\begin{aligned}
+(x, y, z) &= (x, y, x + y) \\
+(x, y, z) &= x(1, 0, 1) + y(0, 1, 1) \\
+&\; \\
+\textnormal{Base de} \; W_1 &= \{ (1, 0, 1), (0, 1, 1) \} \\ 
+W_1 &= \langle (1, 0, 1), (0, 1, 1) \rangle \\
+\dim W_1 &= 2 
+\end{aligned}
+```
+
+**4.** 
+
+```math 
+W_2 = \{(x, y, z, w, u) \in \RR^5 : w = x + z, y = x - z, u = 2x - 3z \}
+```
+
+Determino la combinación lineal que satisface $w = x + z, y = x - z, u = 2x - 3z$:
+
+```math 
+\begin{aligned}
+(x, y, z, w, u) &= (x, x - z, z, x + z, 2x - 3z) \\
+(x, y, z, w, u) &= x(1, 1, 0, 1, 2) + z(0, -1, 1, 1, -3) \\
+&\; \\
+\textnormal{Base de} \; W_2 &= \{ (1, 1, 0, 1, 2) + z(0, -1, 1, 1, -3) \} \\ 
+W_2 &= \langle (1, 1, 0, 1, 2) + (0, -1, 1, 1, -3) \rangle \\
+\dim W_2 &= 2 
+\end{aligned}
+```
+
+*** 
+
+**5.**
+
+Sea $V$ un $\ZZ_{17}$-espacio vectorial de dimensión $17$. Determinar la cantidad de elementos que tiene.
+
+Teniendo en cuenta que son $17$ elementos por cada dimensión, multiplicamos los elementos $17$ veces, es decir, $17^{17}$.
+
+***
+
+**6.**
+
+Sea $V$ un espacio vectorial, $\bfv \in V, S \subset V$ linealmente independiente. Si $\bfv \not\in \langle S \rangle$, probar que $S \cup \{ \bfv \}$ es l.i.
+
+Dados $\{ \mathbf{s}_1, \ldots, \mathbf{s}_n \} \in S, \alpha, \beta \in \KK$: 
+
+```math 
+\alpha \bfv + \displaystyle{\sum_{i = 1}^n} \; \beta_i \mathbf{s}_i = 0 \stackrel{?}{\implies} \textnormal{es l.i.} \\
+```
+
+Si $\alpha = 0$, la igualdad a cero se mantiene. Por lo que es l.i.
+
+Si $\alpha \not= 0$, tenemos:
+
+```math  
+\begin{aligned}
+\displaystyle{\sum_{i = 1}^n} \; \beta_i \mathbf{s}_i &= -\alpha \bfv \\
+\displaystyle{\sum_{i = 1}^n} \; \beta_i \mathbf{s}_i \cdot \frac{1}{-\alpha} = \bfv 
+\end{aligned}
+```
+
+Nos contradecimos con nuestra definición inicial. Ya que $\bfv \in \langle S \rangle$ 
+
+*** 
+
+**7.**
+
+Sean $V$ un espacio vectorial de dimensión finita y $W \subset V$ un subespacio. Probar que si $\dim W = dim V \implies W = V$.
+
+Los dos espacios $W, V$ tienen misma dimensión finita $n$. Supongamos que $V \not= W$.\
+Es decir, $\exists \bfv \in V$ con $\bfv \not \in W$\
+La base de $V$ es $\{ \bfw_1, \ldots, \bfw_n, \bfv \}$ y la de $W$ es $\{ \bfw_1, \ldots, \bfw_n \}$
+
+La base de $V$ debe ser formada por vectores l.i. y por $v \not \in W$. Dados $\alpha, \beta \in \KK$, tenemos que:
+
+Si $\alpha \not= 0$, tenemos que:
+
+```math 
+\begin{aligned}
+\alpha \bfv + \displaystyle{\sum_{i = 1}^n} \; \beta_i \mathbf{\bfw}_i &= 0 \\
+\displaystyle{\sum_{i = 1}^n} \; \beta_i \mathbf{\bfw}_i &= - \alpha \bfv \\
+\displaystyle{\sum_{i = 1}^n} \; \beta_i \mathbf{\bfw}_i \cdot \frac{1}{- \alpha} &= \bfv 
+\end{aligned}
+```
+
+Observemos que, dada esta última igualdad, si se cumple que $\bfv \in \langle W \rangle$. Por contradicción probamos que la igualdad $V = W$ se cumple.  
+
 ## Suma de subespacios
 
 > Sea $V$ un $\KK$-espacio vectorial y $S, T$ subespacios de $V$. Se denomina **suma de $S$ y $T$** al conjunto\
@@ -459,3 +683,158 @@ $\dim (S+T) = \dim S + \dim T - \dim (S \cap T)$
 > Se dice que $V$ es **suma directa** de $S, T$ y se nota $V = S \oplus T$ tal que: $\; V = S + T \; \land \; S \cap T = \{ 0 \}$
 
 > Sea $S \subseteq V$ un subespacio de $V$. $T$ es un **complemento** de $S$ en $V$ si $V = S \oplus T$.
+
+***
+
+### Ejercicios resueltos - Suma de subespacios 
+
+**1.** 
+
+Sean $W_1$ y $W_2$ los siguientes subespacios de $\RR^6$:   
+
+```math 
+\begin{aligned}
+W_1 &= \{(x_1, x_2, x_3, x_4, x_5, x_6): x_1 + x_2 + x_3 = 0, x_4 + x_5 + x_6 = 0 \} \\
+W_2 &= \langle (1, -1, 1, -1, 1, -1),(1, 0, 2, 1, 0, 0),(1, 0, -1, -1, 0, 1),(2, 1, 0, 0, 0, 0) \rangle 
+\end{aligned}
+```
+
+1. Dar una base y $\dim W_1 \cap W_2$. Describirlo con ecuaciones.
+2. Dar una presentación por ecuaciones de $W_1 + W_2$. Obtener una base y su dimensión.
+3. Decidir si $(1, 1, -2, -2, 1, 1)$ está en $W_1 \cap W_2$ y en $W_1 + W_2$ 
+
+Primero, podemos establecer un sistema de ecuaciones en base a los escalares y las coordenadas respectivas de $W_2$. 
+
+```math 
+W_2 = \alpha (1, -1, 1, -1, 1, -1) + \beta (1, 0, 2, 1, 0, 0) + \gamma (1, 0, -1, -1, 0, 1) + \delta (2, 1, 0, 0, 0, 0) \\
+\; \\
+\begin{cases}
+\alpha + \beta + \gamma + 2 \delta = x_1 \\
+- \alpha + \delta = x_2 \\
+\alpha + 2 \beta - \gamma = x_3 \\
+-\alpha + \beta - \gamma = x_4 \\
+\alpha = x_5 \\ 
+-\alpha + \gamma = x_6  
+\end{cases}
+```
+
+Ahora podemos reemplazar los valores en nuestra definición de $W_1$. 
+
+```math 
+\begin{aligned}
+(\alpha + \beta + \gamma + 2 \delta) + (- \alpha + \delta) + (\alpha + 2 \beta - \gamma ) &= 0 \\
+(-\alpha + \beta - \gamma) + \alpha + (-\alpha + \gamma) &= 0 
+\end{aligned}
+```
+
+Esto nos da: 
+
+```math
+\begin{aligned}
+\alpha + 3 \beta + 3 \delta &= 0
+-\alpha + \beta &= 0 \implies \alpha = \beta \\ 
+&\; \\
+\alpha + 3 \alpha + 3 \delta &= 0 \\
+\delta &= - \frac{4 \alpha}{3}
+\end{aligned}
+``` 
+
+Volviendo a definir coordenada a coordeanada, ahora solo dependemos de $\alpha, \gamma$. Tal que: $\alpha (-\frac{2}{3}, - \frac{7}{3}, 3, 0, 1, -1) + \gamma (1, 0, -1, -1, 0, 1)$
+
+```math 
+\begin{cases}
+\alpha + \alpha + \gamma + 2 (-\frac{4 \alpha}{3}) = x_1 \implies - \frac{2 \alpha}{3} + \gamma = x_1 \\ 
+- \alpha - \frac{4 \alpha}{3} = x_2 \implies - \frac{7 \alpha}{3} = x_2 \\
+3 \alpha - \gamma = x_3 \\ 
+- \gamma = x_4 \\
+\alpha = x_5 \\ 
+-\alpha + \gamma = x_6  
+\end{cases}
+```
+
+Ahora, para obtener la ecuación correspondiente reemplazamos los valores de $\alpha, \gamma$ por los componentes.
+
+```math 
+\begin{cases}
+x_1 = - \frac{2 x_5}{3} - x_4 \\
+x_2 = - \frac{7 x_5}{3} \\
+x_3 = 3x_5 + x_4 \\ 
+x_6 = -x_5 - x_4 
+\end{cases} \\
+\; \\ 
+(x_1, x_2, x_3, x_4, x_5, x_6) = (-\frac{2 x_5}{3} - x_4, - \frac{7 x_5}{3}, 3x_5 + x_4, x_4, x_5, -x_5 + x_4)
+```
+
+Por lo tanto, la base de $W_1 \cap W_2$ es: $\{ (-\frac{2}{3}, - \frac{7}{3}, 3, 0, 1, -1), (1, 0, -1, -1, 0, 1) \}$
+
+```math 
+\begin{aligned}
+W_1 \cap W_2 &= \langle (-\frac{2}{3}, - \frac{7}{3}, 3, 0, 1, -1), (1, 0, -1, -1, 0, 1) \rangle \\
+\dim (W_1 \cap W_2) &= 2 
+\end{aligned}
+```
+
+Para determinar si $(1, 1, -2, -2, 1, 1) \in W_1 \cap W_2$, igualamos a cero el sistema de ecuaciones y reemplazamos los valores.
+
+```math 
+\begin{cases}
+-\frac{2(1)}{3} - (-2) - 1 \not= 0 \\
+-\frac{7(1)}{3} - 1 \not= 0 \\
+3(1) + (-2) - (-2) \not= 0 \\ 
+-1 - (-2) - 1 = 0  
+\end{cases}
+```
+
+Por lo tanto, $(1, 1, -2, -2, 1, 1) \not \in W_1 \cap W_2$
+
+Seguimos con $W_1 + W_2$. Sabemos que $W_1 + W_2 \leq \RR^6$. La dimensión de $W_1 + W_2$ puede ser calculada sabiendo la dimensión de $W_1 \cap W_2$ 
+
+```math 
+\begin{aligned}
+\dim (W_1 + W_2) &= \dim W_1 + \dim W_2 - dim (W_1 \cap W_2) \\
+\dim (W_1 + W_2) &= 4 + 4 - 2 \\
+\dim (W_1 + W_2) &= 6  
+\end{aligned}
+```
+
+Vemos que $\dim (W_1 + W_2) = 6 = \dim \RR^6$. Por lo tanto, $W_1 + W_2 = \RR^6$.\
+La base canónica de $\RR^6$ es la base de $S + T$. Todos los vectores de $\RR^6$ están en $S + T$, tal que:
+
+```math 
+(x_1, x_2, x_3, x_4, x_5, x_6) \in \RR^6
+```
+
+*** 
+
+**2.**
+
+Hallar un complemento para el subespacio generado por $\{(1, 1, 0),(0, 0, 1)\}$. 
+
+Un complemento podría ser $\{(0, 1, 0)\}$, puesto que no tienen vectores en común.
+
+***
+
+Decidir si las siguientes afirmaciones son verdaderas o falsas.
+
+**3.** 
+
+Sea $V$ un espacio vectorial de dimensión $42$. Si $V_1$ y $V_2$ son subespacios con $\dim V_1 = 33$, 
+$\dim V_2 = 9$ tales que $V = V_1 + V_2 \implies V = V1 \oplus V2$.
+
+Calculamos la dimensión de $V_1 + V_2$:
+
+```math 
+\begin{aligned}
+\dim V &= \dim V_1 + \dim V_2 - \dim (V_1 \cap V_2) \\ 
+42 &= 33 + 9 - \dim (V_1 \cap V_2) \\
+42 &= 42 - \dim (V_1 \cap V_2) \\
+\end{aligned}
+```
+
+Como $\dim (V_1 + V_2) = 42$, necesariamente $\dim (V_1 \cap V_2) = 0$.\
+Verdadero.
+
+Sea $V$ un espacio vectorial de dimensión $42$. Si $V_1$ y $V_2$ son subespacios con $\dim V_1 = 33$ y
+$\dim V_2 = 9$ tales que $V_1 \cap V_2 \not= 0 \implies V = V_1 \oplus V_2$.
+
+Falso. Para definir $V$ como suma directa de $V_1, V_2$ es necesario que $V_1 \cap V_2 = \{ 0 \}$

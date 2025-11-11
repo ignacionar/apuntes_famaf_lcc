@@ -96,6 +96,510 @@ Podemos obtener la imagen mediante $f(e_i)$ donde $e_i$ son los vectores de la b
 > Sean $V, W, Z$ $\KK$-espacios vectoriales, $T : V \to W, \; U : W \to Z$ transformaciones lineales.\
 Entonces $\textnormal{Im}(T) \cap \textnormal{Nu}(U) = T(\textnormal{Nu}(U \circ T))$.
 
+***
+
+### Ejercicios resueltos - Transformaciones lineales 
+
+Decidir si las siguientes funciones de $\RR^n$ en $\RR^m$ son transformaciones lineales     
+
+**1.** 
+
+```math 
+\begin{aligned}
+T_1(x, y) &= (1 + x, y) \\
+T_2(x, y) &= (y, x, x - 2y) 
+\end{aligned}
+```
+
+Para $T_1$, observemos que: 
+
+```math 
+T_1(0, 0) = (1 + 0, 0) \not= 0
+```
+
+$T(0) \not= 0$, por lo tanto no es transformación lineal.
+
+Para $T_2$, probamos tambien la suma y multiplicación por escalar $\lambda \in \KK$: 
+
+```math 
+\begin{aligned}
+T_2(0, 0) &= (0, 0, 0 - 2(0)) = 0 \\
+&\; \\
+T_2(\bfv_1 + \bfv_2) &= T(\bfv_1) + T(\bfv_2) \\ 
+T_2((x_1, y_1) + (x_2, y_2)) &= T(x_1, y_1) + T(x_2, y_2) \\ 
+T_2(x_1 + x_2, y_1 + y_2) &= (y_1, x_1, x_1 - 2y_1) + (y_2, x_2, x_2 - 2y_2) \\
+(y_1 + y_2, x_1 + x_2, x_1 + x_2 - 2y_1 - 2y_2) &= (y_1 + y_2, x_1 + x_2, x_1 + x_2 - 2y_1 - 2y_2) \\
+&\; \\
+T_2(\lambda \cdot \bfv) &= \lambda \cdot T_2(\bfv) \\
+T_2(\lambda \cdot x, \lambda \cdot y) &= \lambda \cdot T(x, y) \\
+(\lambda \cdot y, \lambda \cdot x, \lambda \cdot (x - 2y)) &= \lambda \cdot (y, x, x - 2y) \\
+(\lambda \cdot y, \lambda \cdot x, \lambda \cdot (x - 2y)) &= (\lambda \cdot y, \lambda \cdot x, \lambda \cdot (x - 2y))
+\end{aligned}
+``` 
+
+Las operaciones están bien definidas. $T_2$ es transformación lineal. 
+
+***  
+
+**2.**
+
+Decidir si $f : \CC \to \CC$ es $\CC$-lineal o $\RR$-lineal: $f(z) = iz$
+
+Para esto podemos probar un escalar $c \in \CC$ en $f$. 
+
+```math 
+\begin{aligned}
+f(c \cdot z) &= c \cdot f(z) \\
+i(cz) &= c(iz) \\
+icz &= icz 
+\end{aligned}
+```
+
+El producto por un escalar complejo es válido. Es $\CC$-lineal. 
+
+***
+
+**3.**
+
+Caracterizar el núcleo y la imagen de $T$, dar una base a cada uno de ellos.
+
+```math 
+\begin{aligned}
+T &: \RR^3 \to \RR^2 \\
+T(x, y, z) &= (x - y + z, -2x + 2y - 2z)
+\end{aligned}
+```
+
+Si queremos buscar el núcleo definimos $T(x, y, z) = 0$ y definimos un sistema de ecuaciones: 
+
+```math 
+\begin{aligned}
+&\begin{cases}
+x - y + z = 0 \\ 
+-2x + 2y - 2z = 0 
+\end{cases} \\
+&= \begin{bmatrix}
+1 & -1 & 1 \\
+-2 & 2 & -2  
+\end{bmatrix} \\
+&F_2 \to F_2 + 2F_1 \begin{bmatrix}
+1 & -1 & 1 \\
+0 & 0 & 0  
+\end{bmatrix} \\
+&x - y + z = 0 \\
+&x = y - z \\
+\end{aligned}
+```
+
+La ecuación del núcleo $x - y + z = 0$ nos deja $(x, y, z) = (y - z, y, z) \implies y(1, 1, 0) + z(-1, 0, 1)$
+
+Por lo tanto, la base de $\textnormal{Nu}(T)$ es $\{ (1, 1, 0), (-1, 0, 1) \}$,\
+tal que $\textnormal{Nu}(T) = \langle (1, 1, 0), (-1, 0, 1) \rangle, \; \dim(\textnormal{Nu}(T)) = 2$ 
+
+Podemos obtener la base de la imagen con una combinación lineal en términos de $x, y, z$ y aplicar Gauss a la matriz obtenida.
+
+```math 
+\begin{aligned}
+T(x, y, z) &= (x - y + z, -2x + 2y - 2z) = x(1, -2) + y(-1, 2) + z(1, -2) \\
+&\implies \begin{bmatrix}
+1 & -2 \\
+-1 & 2 \\
+1 & -2  
+\end{bmatrix} \\
+&F_1 \leftrightarrow F_2 \begin{bmatrix}
+-1 & 2 \\
+1 & -2 \\
+1 & -2  
+\end{bmatrix} \\
+&\begin{aligned} 
+F_3 \to F_3 + F_1 \\ 
+F_2 \to F_2 + F_1 
+\end{aligned} \begin{bmatrix}
+-1 & 2 \\
+0 & 0 \\
+0 & 0 \end{bmatrix}
+\end{aligned}
+```
+
+La base de $\textnormal{Im}(T)$ es $\{ (-1, 2) \}$. Tal que $\textnormal{Im}(T) = \langle (-1, 2) \rangle \implies \dim(\textnormal{Im}(T)) = 1$
+
+```math 
+\begin{aligned}
+\dim T &= \dim \textnormal{Nu}(T) + \dim (\textnormal{Im}(T)) \\
+\dim T &= 1 + 2 = 3
+\end{aligned}
+```
+
+***
+
+**4.** 
+
+Caracterizar el núcleo y la imagen de $T$, dar una base a cada uno de ellos.
+
+```math 
+\begin{aligned}
+T &: P_2 \to C[0, 1] \\
+T(ax^2 + bx + c) &= (b - a)e^x + (c - a)e^{2x} + (b - c)e^{3x}
+\end{aligned}
+```
+
+Calculo la base del núcleo de $T$ igualando a cero, es decir:
+
+```math 
+\begin{aligned}
+\textnormal{Nu}(T) &= \{ p(x) \in P_2 | T(p(x)) = 0 \} \\
+&\; \\  
+T(ax^2 + bx + c) &= 0
+(b - a)e^x + (c - a)e^{2x} + (b - c)e^{3x} &= 0
+\end{aligned}
+```
+
+Sabiendo que $\{ e^x, e^{2x}, e^{3x} \}$ es linealmente independiente:
+
+```math 
+\begin{aligned}
+&b - a = 0, \; c - a = 0, \; b - c = 0  \\
+&b = a, \; c = a, \; b = c \implies a = b = c 
+\end{aligned}
+```
+
+Reemplazando los valores, tenemos:
+
+```math 
+\begin{aligned}
+T(p(x)) &= ax^2 + ax + a \\
+T(p(x)) &= a(x^2 + x + 1) \\
+\end{aligned}
+```
+
+Por lo tanto la base de $\textnormal{Nu}(T)$ es $\{ x^2, x, 1 \}$ tal que\
+$\textnormal{Nu}(T) = \langle x^2, x, 1 \rangle \implies \dim \textnormal{Nu}(T) = 3$
+
+Con respecto a su imagen, podemos definirla a través de la base canónica:
+
+```math 
+\begin{aligned}
+T(x^2) &= (0 - 1)e^x + (0 - 1)e^{2x} + (0 - 0)e^{3x} = - e^x - e^{2x} \\
+T(x) &= (1 - 0)e^x + (0 - 0)e^{2x} + (1 - 0)e^{3x} = e^x + e^{3x} \\
+T(1) &= (0 - 0)e^x + (1 - 0)e^{2x} + (0 - 1)e^{3x} = e^{2x} - e^{3x} 
+\end{aligned}
+```
+
+Uno de los vectores puede expresarse como combinacion de los otros dos. Por lo que la base de la imagen está compuesta por dos vectores.
+Su base puede ser $\{ (- e^x - e^{2x}), (e^x + e^{3x}) \}$ tal que $\textnormal{Im}(T) = \langle (- e^x - e^{2x}), (e^x + e^{3x}) \rangle$ 
+
+La ecuación que define a la imagen es: $(b - a) - (c - a) = b - c \implies (b - a) - (c - a) - (b - c) = 0$ 
+
+***
+
+**5.**
+
+Caracterizar el núcleo y la imagen de $T$, dar una base a cada uno de ellos.
+
+```math 
+\begin{aligned}
+T &: R^{2 \times 2} \to P_5 \\
+T \begin{pmatrix}
+a & b \\
+c & d 
+\end{pmatrix} &= (a - b)x^5 + (c + d)x^4 + (a + b)x^3 + (c + d)x^2 + (2b + 3c)x + 7a - 8b.
+\end{aligned}
+```
+
+Buscamos el $\textnormal{Nu}(T)$ tal que: 
+
+```math 
+\begin{aligned} 
+\textnormal{Nu}(f) = \{ \begin{pmatrix}
+a & b \\
+c & d 
+\end{pmatrix} \in \RR^{2 \times 2} \; | \; T \begin{pmatrix}
+a & b \\
+c & d 
+\end{pmatrix} = 0 \}
+\end{aligned}
+```
+
+Igualamos los valores $a, b, c, d$ de la matriz a cero.
+
+```math 
+\begin{aligned}
+a - b &= 0 \\
+c + d &= 0 \\ 
+a + b &= 0 \\
+c + d &= 0 \\
+2b + 3c &= 0 \\
+7a - 8b &= 0 \\
+a = b = c = d &= 0
+\end{aligned}
+```
+
+Todos los valores son cero. Por lo que la base de $\textnormal{Nu}(T)$ es $\emptyset$, tal que $\dim \textnormal{Nu}(T) = 0$
+
+Con respecto a su imagen, podemos usar los vectores de la base canónica para dar con la base:
+
+```math 
+\begin{aligned}
+T \begin{pmatrix}
+1 & 0 \\
+0 & 0 
+\end{pmatrix} &= (1 - 0)x^5 + (0 + 0)x^4 + (1 + 0)x^3 + (0 + 0)x^2 + (0 + 0)x + 7 - 8(0 - 0) \\
+&= x^5 + x^3 + 7 \\
+&\; \\
+T \begin{pmatrix}
+0 & 1 \\
+0 & 0 
+\end{pmatrix} &= (0 - 1)x^5 + (0 + 0)x^4 + (1 + 0)x^3 + (0 + 0)x^2 + (2(1) + 3(0))x + 7 - 8(1) \\ 
+&= x^5 + x^3 + 2x - 8 \\
+&\; \\ 
+T \begin{pmatrix}
+0 & 0 \\
+1 & 0 
+\end{pmatrix} &= (0 - 0)x^5 + (1 + 0)x^4 + (0 + 0)x^3 + (1 + 0)x^2 + (2(0) + 3(1))x + 7 - 8(0) \\ 
+&= x^4 + x^2 + 3x \\
+&\; \\ 
+T \begin{pmatrix}
+0 & 0 \\
+0 & 1 
+\end{pmatrix} &= (0 - 0)x^5 + (0 + 1)x^4 + (0 + 0)x^3 + (0 + 1)x^2 + (2(0) + 3(0))x + 7 - 8(0) \\ 
+&= x^4 + x^2 \\
+\end{aligned}
+```
+
+Tal que: 
+
+```math 
+\begin{aligned}
+\bfv_1 &= x^5 + x^3 + 7 \\ 
+\bfv_2 &= x^5 + x^3 + 2x - 8 \\
+\bfv_3 &= x^4 + x^2 + 3x \\ 
+\bfv_4 &= x^4 + x^2 \\ 
+\end{aligned}
+```
+
+Por lo que tenemos la base de la imagen: $\{ x^5 + x^3 , x^5 + x^3 + 2x - 8, x^4 + x^2 + 3x, x^4 + x^2 \}$
+
+```math 
+\textnormal{Im}(T) = \langle (x^5 + x^3 + 7) , (x^5 + x^3 + 2x - 8), (x^4 + x^2 + 3x), (x^4 + x^2) \rangle \implies \dim{\textnormal{Im}}(T) = 4  
+```
+
+Defino la combinación lineal:
+
+```math 
+\alpha(x^5 + x^3 + 7) + \beta(x^5 + x^3 + 2x - 8) + \gamma(x^4 + x^2 + 3x) + \delta(x^4 + x^2)
+```
+
+Agrupando por coeficientes $(a_5, a_4, a_3, a_2, a_1, a_0)$
+
+```math 
+\begin{aligned}
+a_5 &= \alpha + \beta \\
+a_4 &= \gamma + \delta \\
+a_3 &= \alpha + \beta \\
+a_2 &= \gamma + \delta \\
+a_1 &= 2 \beta + 3 \gamma \\
+a_0 &= 7 \alpha - 8 \beta
+\end{aligned}
+```
+
+Tenemos que: 
+
+```math 
+\begin{aligned}
+a_2 &= a_4 \\
+a_3 &= a_5 \\
+&\; \\
+a_2 - a_4 &= 0 \\
+a_3 - a_5 &= 0 
+\end{aligned}
+```
+
+Esas dos ecuaciones caracterizan a la imagen, donde un polinomio\
+$p(x)=a_5x^5 + a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0$ que satisfaga la ecuación pertenece a la imagen.
+
+***
+
+**6.**
+
+Caracterizar el núcleo y la imagen de $T$, dar una base a cada uno de ellos.
+
+```math 
+\begin{aligned}
+T &: \RR^{2 \times 2} \to \RR^{2 \times 2} \\
+T \begin{pmatrix}
+x & y \\
+z & w  
+\end{pmatrix} &= \begin{pmatrix}
+-x +3y -2z + w  & 7x -6y + 2z -w \\
+-2x + 6y - 4z + 2w & -11x + 13y - 6z + 3w  
+\end{pmatrix}
+\end{aligned}
+```
+
+El núcleo puede definirse como: 
+
+```math 
+\begin{aligned}
+\textnormal{Nu}(T) = \{ \begin{pmatrix}
+x & y \\
+z & w  
+\end{pmatrix} \in \RR^{2 \times 2} \; | \; T\begin{pmatrix}
+x & y \\
+z & w  
+\end{pmatrix} = 0 \} 
+\end{aligned}
+```
+
+Por lo que tenemos: 
+
+```math 
+\begin{aligned}
+T \begin{pmatrix}
+x & y \\
+z & w  
+\end{pmatrix} &= 0 \\ 
+&\; \\ 
+\begin{cases}
+-x +3y -2z + w = 0 \\ 
+7x -6y + 2z -w = 0 \\ 
+-2x + 6y - 4z + 2w = 0 \\
+-11x + 13y - 6z + 3w = 0
+\end{cases}&
+\end{aligned}
+```
+
+Aplicando Gauss en la matriz de ese sistema, obtenemos:
+
+```math 
+\begin{bmatrix}
+1 & 0 & -\frac{2}{5} & \frac{1}{5} \\
+0 & 1 & -\frac{4}{5} & \frac{2}{5} \\ 
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0   
+\end{bmatrix} 
+```
+
+Despejando $x, y$: 
+
+```math 
+\begin{aligned}
+y &= \frac{4z}{5} - \frac{2w}{5} \\
+x &= \frac{2z}{5} - \frac{1w}{5}
+\end{aligned}
+```
+
+Por lo que podemos obtener los demás valores como: 
+
+```math
+\begin{pmatrix}
+\frac{2z}{5} - \frac{1w}{5} & \frac{4z}{5} - \frac{2w}{5} \\
+z & w  
+\end{pmatrix} = z \cdot \begin{pmatrix}
+\frac{2}{5} & \frac{4}{5}  \\
+1 & 0  
+\end{pmatrix} + 
+w \cdot
+\begin{pmatrix}
+- \frac{1}{5} & - \frac{2}{5} \\
+0 & 1  
+\end{pmatrix}
+```
+
+Por lo que podemos definir la base del núcleo como: 
+
+```math 
+\begin{aligned}
+&\{ \begin{pmatrix}
+\frac{2}{5} & \frac{4}{5}  \\
+1 & 0  
+\end{pmatrix}, 
+\begin{pmatrix}
+- \frac{1}{5} & - \frac{2}{5} \\
+0 & 1  
+\end{pmatrix}
+\} \\
+&\; \\
+\textnormal{Nu}(T) &= \langle \begin{pmatrix}
+\frac{2}{5} & \frac{4}{5}  \\
+1 & 0  
+\end{pmatrix}, 
+\begin{pmatrix}
+- \frac{1}{5} & - \frac{2}{5} \\
+0 & 1  
+\end{pmatrix} \rangle \\
+\dim \textnormal{Nu}(T) &= 2 
+\end{aligned}
+```
+
+Para calcular su imagen, utilizamos las matrices de la base canónica de $\RR^{2 \times 2}$.
+
+```math 
+\begin{aligned}
+T \begin{pmatrix}
+1 & 0 \\
+0 & 0 
+\end{pmatrix} &= \begin{pmatrix}
+-1 & 7 \\
+-2 & -11 
+\end{pmatrix} \\
+&\; \\
+T \begin{pmatrix}
+0 & 1 \\
+0 & 0 
+\end{pmatrix} &= \begin{pmatrix}
+3 & -6 \\
+6 & 13
+\end{pmatrix} \\
+&\; \\
+T \begin{pmatrix}
+0 & 0 \\
+1 & 0 
+\end{pmatrix} &= \begin{pmatrix}
+-2 & 2 \\
+-4 & -6
+\end{pmatrix} \\
+&\; \\ 
+T \begin{pmatrix}
+0 & 0 \\
+0 & 1 
+\end{pmatrix} &= \begin{pmatrix}
+1 & -1 \\
+2 & 3
+\end{pmatrix}
+\end{aligned}
+```
+
+La tercer y cuarta matriz pueden expresarse entre sí. 
+
+Por lo que sin ellas, la base de la imagen es: 
+
+```math 
+\begin{aligned}
+&\{ 
+\begin{pmatrix}
+-1 & 7 \\
+-2 & -11 
+\end{pmatrix}, 
+\begin{pmatrix}
+3 & -6 \\
+6 & 13
+\end{pmatrix}
+\} \\
+&\; \\ 
+\textnormal{Im}(T) &= \langle
+\begin{pmatrix}
+-1 & 7 \\
+-2 & -11 
+\end{pmatrix}, 
+\begin{pmatrix}
+3 & -6 \\
+6 & 13
+\end{pmatrix} 
+\rangle \\
+\dim \textnormal{Im}(T) &= 2
+\end{aligned} 
+```
+
 ## Cambios de base
 
 > Sean $V$ un $\KK$-espacio vectorial de dimensión $n$ y  $\Beta_1 = \{\bfv_1, \ldots, \bfv_n\}, \Beta_2 = \{\bfw_1, \ldots, \bfw_n\}$ bases de $V$.\
@@ -146,4 +650,267 @@ Donde $M$ es la matriz de cambio de base y $C$ es la base canónica correspondie
 ### Matriz de la composición y la inversa 
 
 > Sean $V, W, Z$ $\KK$-espacios vectoriales de dimensión finita, con bases $\Beta_1, \Beta_2, \Beta_3$ respectivamente.\
-Sean $T: V \to W, \; U: W \to Z$ transformaciones lineales. Entonces $[U \circ T]_{\Beta_1, \Beta_3} = [U]_{\Beta_2, \Beta_3} \cdot [T]_{\Beta_1, \Beta_2}$.
+Sean $T: V \to W, \; U: W \to Z$ transformaciones lineales. Entonces $[U \circ T]_{\Beta_1, \Beta_3} = [U]_{\Beta_2, \Beta_3} \cdot [T]_{\Beta_1, \Beta_2}$
+
+***
+
+### Ejercicios resueltos - Cambios de base 
+
+**1.**
+
+Sea $B = \{ (1, -2, 1),(2, -3, 3),(-2, 2, -3) \}$ 
+
+1. Hallar la matriz de cambio de base de la base canónica de $B$ a $C$ y de $C$ a $B$. 
+2. Hallar las coordenadas respecto de $B$ del vector $(1, 0, 1)$
+
+Sea $M$ la matriz cambio de base:
+
+```math 
+\begin{aligned}
+M(B, C) &= \begin{bmatrix}
+1 & 2 & -2 \\
+-2 & -3 & 2 \\
+1 & 3 & -3
+\end{bmatrix} \\
+&\; \\
+M(B,C)^{-1}&= \left[
+\begin{array}{ccc|ccc}
+1 & 2 & -2 & 1 & 0 & 0 \\
+-2 & -3 & 2 & 0 & 1 & 0 \\
+1 & 3 & -3 & 0 & 0 & 1
+\end{array}
+\right]
+\end{aligned}
+```
+
+Resolvemos $M(B, C)^{-1}$ lo cual es igual a $M(C, B)$. Tras resolver, obtenemos:
+
+```math
+M(C, B) =
+\begin{bmatrix}
+3 & 0 & -2\\
+-4 & -1 & 2\\
+-3 & -1 & 1
+\end{bmatrix}
+```
+
+Las coordenadas de $(1, 0, 1)$ pueden hallarse como:
+
+```math 
+\begin{aligned}
+[(1, 0, 1)]_B &= \begin{bmatrix}
+3 & 0 & -2\\
+-4 & -1 & 2\\
+-3 & -1 & 1
+\end{bmatrix} \cdot \begin{bmatrix}
+1 \\
+0 \\
+1 
+\end{bmatrix} \\
+&\; \\
+[(1, 0, 1)]_B &= (1, -2, -2)
+\end{aligned}
+```
+
+*** 
+
+**2.**
+
+Sea $B = \{ \begin{pmatrix}
+0 & 2  \\
+-3 & 3  
+\end{pmatrix}, 
+\begin{pmatrix}
+0 & -1 \\
+2 & 0  
+\end{pmatrix},
+\begin{pmatrix}
+2 & 1 \\
+-2 & 1  
+\end{pmatrix},
+\begin{pmatrix}
+4 & -2 \\
+2 & -3  
+\end{pmatrix}
+\}$
+
+Hallar el cambio de base de $B$ a $C$ (matriz canónica) y el cambio de base de $C$ a $B$
+
+Defino cada matriz de $B$ en términos de $C$: 
+
+```math 
+\begin{aligned}
+\begin{pmatrix}
+0 & 2  \\
+-3 & 3  
+\end{pmatrix} &= 0 \cdot \begin{pmatrix}
+1 & 0 \\
+0 & 0 
+\end{pmatrix} +
+2 \cdot \begin{pmatrix}
+0 & 1 \\
+0 & 0 
+\end{pmatrix} - 3 \cdot
+\begin{pmatrix}
+0 & 0 \\
+1 & 0 
+\end{pmatrix} + 3 \cdot 
+\begin{pmatrix}
+0 & 0 \\
+0 & 1 
+\end{pmatrix} \\ 
+&\; \\
+\begin{pmatrix}
+0 & -1  \\
+2 & 0  
+\end{pmatrix} &= 0 \cdot \begin{pmatrix}
+1 & 0 \\
+0 & 0 
+\end{pmatrix} -1 \cdot \begin{pmatrix}
+0 & 1 \\
+0 & 0 
+\end{pmatrix} + 2 \cdot \begin{pmatrix}
+0 & 0 \\
+1 & 0 
+\end{pmatrix} + 0 \cdot \begin{pmatrix}
+0 & 0 \\
+0 & 1 
+\end{pmatrix} \\ 
+&\; \\
+\begin{pmatrix}
+2 & 1  \\
+-2 & 1  
+\end{pmatrix} &= 2 \cdot \begin{pmatrix}
+1 & 0 \\
+0 & 0 
+\end{pmatrix} + 1 \cdot \begin{pmatrix}
+0 & 1 \\
+0 & 0 
+\end{pmatrix} - 2 \cdot \begin{pmatrix}
+0 & 0 \\
+1 & 0 
+\end{pmatrix} + 1 \cdot \begin{pmatrix}
+0 & 0 \\
+0 & 1 
+\end{pmatrix} \\
+&\; \\
+\begin{pmatrix}
+4 & -2  \\
+2 & -3  
+\end{pmatrix} &= 4 \cdot \begin{pmatrix}
+1 & 0 \\
+0 & 0 
+\end{pmatrix} - 2 \begin{pmatrix}
+0 & 1 \\
+0 & 0 
+\end{pmatrix} + 2 \begin{pmatrix}
+0 & 0 \\
+1 & 0 
+\end{pmatrix} - 3 \begin{pmatrix}
+0 & 0 \\
+0 & 1 
+\end{pmatrix}
+\end{aligned}
+```
+
+Ahora defino la matriz $M(C, B)$ donde $M$ es la matriz cambio de base. Luego, obtengo $M(B, C)$ con su inversa.
+
+```math 
+\begin{aligned}
+M(C, B) &= \begin{bmatrix}
+0 & 0 & 2 & 4 \\
+0 & -1 & 2 & 0 \\
+2 & 1 & -2 & 1 \\
+4 & -2 & 2 & -3  
+\end{bmatrix} \\
+&\; \\
+M(C, B)^{-1} &= \left[ \begin{array}{cccc|cccc}
+0 & 0 & 2 & 4 & 1 & 0 & 0 & 0 \\
+0 & -1 & 2 & 0 & 0 & 1 & 0 & 0 \\
+2 & 1 & -2 & 1 & 0 & 0 & 1 & 0 \\
+4 & -2 & 2 & -3 & 0 & 0 & 0 & 1
+\end{array} \right]
+\end{aligned}
+```
+
+Finalmente, obtenemos:
+
+```math 
+M(B, C) = \begin{bmatrix}
+-1 & -10 & -5 & 2 \\
+\frac{1}{2} & 3 & 2 & 0 \\
+\frac{3}{2} & 12 & 6 & -2 \\
+-\frac{1}{2} & -6 & -3 & 1  
+\end{bmatrix} 
+```
+
+***
+
+**3.**
+
+Sea $T : \RR_2[t] \to \RR_1[t]$ la transformación lineal:
+
+```math 
+T(ax^2 + bx + c) = (a+b)x+2c-a 
+```
+
+Donde $C - \{ x^2, x, 1 \}, \; C' = \{\ x, 1 \}$. 
+
+1. Dar la base del núcleo e imagen de $T$.
+2. Calcular $T_{C,C'}$
+
+Tenemos que $\dim \RR_2[t] = 3 = \dim \RR^3$. $\RR_2[t]$ es isomorfo a $\RR^3$. 
+
+Por lo tanto: 
+
+```math 
+\begin{aligned}
+T(ax^2 + bx + c) &\simeq (a + b)x + 2c -a \\
+T(a, b, c) &\simeq (a + b, 2c -a)
+\end{aligned}
+```
+
+Usando los elementos de la base canónica en $T$, tenemos:
+
+```math 
+\begin{aligned}
+T(x^2) &= (1, -1) \\
+T(x) &= (1, 0) \\
+T(1) &= (0, 2)  \\
+&\; \\
+T_{C,C'} &= \begin{bmatrix}
+1 & 1 & 0 \\
+-1 & 0 & 2 \\
+\end{bmatrix} 
+\end{aligned}
+```
+
+Buscamos el núcleo tal que:
+
+```math
+\begin{aligned}
+\textnormal{Nu}(T) &= \{ (a, b, c) \in \RR^3 \; | \; T(a, b, c) = 0 \} \\
+&\; \\
+&\begin{cases}
+a + b = 0 \\
+2c - a = 0 
+\end{cases} \\
+&\; \\
+a &= - b  \\
+&\; \\
+2c - (- b) &= 0 \\
+b &= -2c \\
+a &= -(-2c) \implies a = 2c \\
+&\; \\
+(a, b, c) &= c(2, -2, 1)
+\end{aligned}
+```
+
+La base del núcleo es  $\{ (2, -2, 1) \}$ tal que:
+
+```math 
+\textnormal{Nu}(T) = \langle (2, -2, 1) \rangle \implies \dim(\textnormal{Nu}(T)) = 1
+```
+
+Los vectores correspondientes a la base de la imagen son $(1, -1), (1, 0), (0, 2)$.\
+La máxima dimensión en $\RR^2$ es dos, por lo que usamos dos vectores l.i. Su base es: $\{ (1, -1) , (1, 0) \}$

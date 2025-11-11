@@ -18,6 +18,127 @@ El elemento $\lambda \in \KK$ es **autovalor** de $A$
 
 > Sea $A \in \KK^{n \times n}$. $A$ es diagonalizable $\iff$ existe una base $B$ de $\KK^n$ formada por **autovectores** de $A$
 
+### Ejercicios resueltos - Autovalores y autovectores 
+
+**1.** 
+
+Decidir si la transformación lineal es diagonalizable, calcular sus autovalores y sus correspondientes autoespacios:
+
+```math 
+T(x, y, z) = (x - y, -x + 2y - z, -y + z), \; x, y, z \in \CC 
+```
+
+Defino la matriz $[T]_C$ donde $C$ es base canónica de $\CC^3$, es decir $\{ (1, 0, 0), (0, 1, 0), (0, 0, 1) \}$
+
+```math 
+\begin{aligned}
+T(1, 0, 0) &= (1, -1, 0) \\
+T(0, 1, 0) &= (-1, 2, -1) \\
+T(0, 0, 1) &= (0, -1, 1) \\
+&\; \\
+[T]_C &= \begin{bmatrix}
+1 & -1 & 0 \\
+-1 & 2 & -1 \\
+0 & -1 & 1
+\end{bmatrix}
+\end{aligned}
+```
+
+Defino $\lambda \cdot Id - [T]_C$
+
+```math 
+\lambda \cdot Id - [T]_C = \begin{bmatrix}
+\lambda - 1 & 1 & 0 \\
+1 & \lambda - 2 & 1 \\
+0 & 1 & \lambda - 1
+\end{bmatrix}
+``` 
+
+Ahora calculo su determinante: 
+
+```math 
+\begin{aligned}
+\det([T]_C) &= \lambda \cdot \lambda \cdot (\lambda - 1) + 1 \cdot 1 \cdot (\lambda - 2) + 0 \cdot 0 \cdot 1 - 0 \cdot (\lambda - 2) \cdot 0 - 1 \cdot 1 \cdot (\lambda - 1) - (\lambda - 1) \cdot 0 \cdot 1 \\
+&=  \lambda^3 -4 \lambda^2 + 3 \lambda \\
+\end{aligned}
+```
+
+Ahora calculo los valores de $\lambda$
+
+```math 
+\begin{aligned}
+&\lambda (\lambda^2 - 4 \lambda + 3) = 0 \\
+&\implies \lambda = 0, \\
+&\implies \lambda = \frac{-(-4) \pm \sqrt{(-4)^2 - 4 \cdot 1 \cdot 3}}{2 \cdot 1} = \frac{4 \pm 2}{2}, \; \lambda = 3 \; \lor \; \lambda = 1
+\end{aligned}
+```
+
+Defino tres sistemas de ecuaciones para en base a la matriz obtenida, sustituyendo el valor de $\lambda$ en ellos.\
+Resuelvo los sistemas y defino los autoespacios. 
+
+```math 
+\begin{aligned}
+&\begin{bmatrix}
+\lambda - 1 & 1 & 0 \\
+1 & \lambda - 2 & 1 \\
+0 & 1 & \lambda - 1
+\end{bmatrix} \begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix} \\
+&\; \\
+&\lambda = 0 \implies \begin{cases}
+-x + y = 0 \\
+x - 2y + z = 0 \\
+y - z = 0
+\end{cases} \\
+&\; \\
+&y = z \\
+&x = 2z - z = z \\
+&\; \\
+&z(1, 1, 1) \implies \langle (1, 1, 1) \rangle \\
+&\; \\ 
+&\lambda = 3 \implies \begin{cases}
+2x + y = 0 \\
+x + y + z = 0 \\
+y + 2z = 0
+\end{cases} \\
+&\; \\ 
+&y = -2z \\ 
+&2x -2z = 0 \implies 2x = 2z \implies x = z \\
+&\; \\
+&z(1, -2, 1) \implies \langle (1, -2, 1) \rangle \\
+&\; \\
+&\lambda = 1 \implies \begin{cases}
+y = 0 \\
+x - y + z = 0 \\
+\end{cases} \\
+&\; \\
+&x = -z \\
+&\; \\ 
+&z(-1, 0, 1) \implies \langle (-1, 0, 1) \rangle 
+\end{aligned}
+```
+
+Tenemos los autovalores $\lambda = 0, \; \lambda = 3, \; \lambda = 1$ y los autoespacios generados $\langle (1,1,1) \rangle, \; \langle (1, -2, 1) \rangle, \; \langle (-1, 0, 1) \rangle$, respectivamente.
+
+Es diagonalizable, ya que: 
+
+```math 
+\dim \langle (1,1,1) \rangle + \dim \langle (1, -2, 1) \rangle + \dim \langle (-1, 0, 1) \rangle = 3 = \dim \CC^3
+```
+
+La base $B = \{(1,1,1), (1,-2,1), (-1,0,1)\}$ es la base tal que $[T]_B$ posee cada autovalor en su diagonal.
+
+```math 
+[T]_B = \begin{bmatrix}
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 3
+\end{bmatrix}
+```
+
 ## Polinomio característico
 
 > Sea $A \in \KK^{n \times n}$. El **polinomio característico** de $A$ es el polinomio $\chi_A = \det(X \cdot I_n - A) \in \KK[x]$
