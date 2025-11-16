@@ -193,8 +193,21 @@ x - y + z = 0 \\
 
 La ecuación del núcleo $x - y + z = 0$ nos deja $(x, y, z) = (y - z, y, z) \implies y(1, 1, 0) + z(-1, 0, 1)$
 
-Por lo tanto, la base de $\textnormal{Nu}(T)$ es $\{ (1, 1, 0), (-1, 0, 1) \}$,\
-tal que $\textnormal{Nu}(T) = \langle (1, 1, 0), (-1, 0, 1) \rangle, \; \dim(\textnormal{Nu}(T)) = 2$ 
+Por lo tanto: 
+
+```math 
+\begin{aligned}
+B_{\textnormal{Nu}(T)} &= \{ (1, 1, 0), (-1, 0, 1) \} \\ 
+\textnormal{Nu}(T) &= \langle (1, 1, 0), (-1, 0, 1) \rangle \\ 
+\dim (Nu(T)) &= 2
+\end{aligned}
+```
+
+La caracterización del núcleo con ecuaciones es:
+
+```math 
+\textnormal{Nu(T)} = \{ (x, y, z) \in \RR^3 \; | \; x = y - z \} 
+```
 
 Podemos obtener la base de la imagen con una combinación lineal en términos de $x, y, z$ y aplicar Gauss a la matriz obtenida.
 
@@ -221,13 +234,40 @@ F_2 \to F_2 + F_1
 \end{aligned}
 ```
 
-La base de $\textnormal{Im}(T)$ es $\{ (-1, 2) \}$. Tal que $\textnormal{Im}(T) = \langle (-1, 2) \rangle \implies \dim(\textnormal{Im}(T)) = 1$
+Por lo que esto nos da: 
 
 ```math 
 \begin{aligned}
-\dim T &= \dim \textnormal{Nu}(T) + \dim (\textnormal{Im}(T)) \\
-\dim T &= 1 + 2 = 3
+B_{\textnormal{Im}(T)} &= \{ (-1, 2) \} \\
+\textnormal{Im}(T) &= \langle (-1, 2) \rangle \\
+\dim(\textnormal{Im}(T)) &= 1
 \end{aligned}
+```
+
+Para caracterizar la imagen con ecuaciones defino la siguiente combinación lineal:
+
+```math 
+(x, y) = \lambda \cdot (-1, 2)
+```
+
+Lo cual nos da el siguiente sistema 
+
+```math 
+\begin{aligned}
+&\begin{cases}
+x = - \lambda \\ 
+y = 2 \lambda
+\end{cases} \\
+&\; \\
+\lambda &= -x \\
+y &= -2x 
+\end{aligned}
+```
+
+La imagen caracterizada con ecuaciones es:
+
+```math 
+\textnormal{Im}(T) = \{ (x, y) \in \RR^2 \; | \; y = -2x \}
 ```
 
 ***
@@ -247,9 +287,9 @@ Calculo la base del núcleo de $T$ igualando a cero, es decir:
 
 ```math 
 \begin{aligned}
-\textnormal{Nu}(T) &= \{ p(x) \in P_2 | T(p(x)) = 0 \} \\
+\textnormal{Nu}(T) = \{ p(x) \in P_2 \; | \; T(p(x)) = 0 \}& \\
 &\; \\  
-T(ax^2 + bx + c) &= 0
+T(ax^2 + bx + c) &= 0 \\
 (b - a)e^x + (c - a)e^{2x} + (b - c)e^{3x} &= 0
 \end{aligned}
 ```
@@ -272,10 +312,23 @@ T(p(x)) &= a(x^2 + x + 1) \\
 \end{aligned}
 ```
 
-Por lo tanto la base de $\textnormal{Nu}(T)$ es $\{ x^2, x, 1 \}$ tal que\
-$\textnormal{Nu}(T) = \langle x^2, x, 1 \rangle \implies \dim \textnormal{Nu}(T) = 3$
+Con respecto al núcleo tenemos:
 
-Con respecto a su imagen, podemos definirla a través de la base canónica:
+```math 
+\begin{aligned}
+B_{\textnormal{Nu}(T)} &= \{ x^2 + x + 1 \} \\
+\textnormal{Nu}(T) &= \langle x^2 + x + 1 \rangle \\
+\dim \textnormal{Nu}(T) &= 1
+\end{aligned}
+```
+
+Su núcleo caracterizado por ecuaciones es:
+
+```math 
+\textnormal{Nu}(T) = \{ (a, b, c) \in \RR^3 \; | \; a = b = c \}
+```
+
+Con respecto a su imagen, podemos definir su base a través de la base canónica de $P_2$ 
 
 ```math 
 \begin{aligned}
@@ -285,10 +338,36 @@ T(1) &= (0 - 0)e^x + (1 - 0)e^{2x} + (0 - 1)e^{3x} = e^{2x} - e^{3x}
 \end{aligned}
 ```
 
-Uno de los vectores puede expresarse como combinacion de los otros dos. Por lo que la base de la imagen está compuesta por dos vectores.
-Su base puede ser $\{ (- e^x - e^{2x}), (e^x + e^{3x}) \}$ tal que $\textnormal{Im}(T) = \langle (- e^x - e^{2x}), (e^x + e^{3x}) \rangle$ 
+Observemos que $T(x^2)$ es combinación lineal de los otros resultados: 
 
-La ecuación que define a la imagen es: $(b - a) - (c - a) = b - c \implies (b - a) - (c - a) - (b - c) = 0$ 
+```math 
+(-1) \cdot (e^x + e^{3x}) + (-1) \cdot (e^{2x} - e^{3x}) = - e^x - e^{2x}
+```
+
+Por lo que la base de la imagen está compuesta por $T(x), T(1)$:
+
+```math 
+\begin{aligned}
+B_{\textnormal{Im}(T)} &= \{ e^x + e^{3x}, e^{2x} - e^{3x} \} \\
+\textnormal{Im}(T) &= \langle e^x + e^{3x}, e^{2x} - e^{3x} \rangle \\
+\dim(\textnormal(T)) &= 2 
+\end{aligned}
+```
+
+Definiendo la siguiente combinación lineal:
+
+```math 
+\begin{aligned}
+\alpha \cdot (e^x + e^{3x}) + \beta (e^{2x} - e^{3x}) \quad (\alpha, \beta \in \RR) \\
+\alpha \cdot e^x + \beta \cdot e^{2x} + (\alpha - \beta) \cdot e^{3x}
+\end{aligned}
+```
+
+Podríamos definir $\gamma = \alpha - \beta \implies \alpha - \beta - \gamma = 0$. La caracterización por ecuaciones de la imagen es:
+
+```math 
+\textnormal{Im}(T) = \{ \alpha e^{x} + \beta e^{2x} + \gamma e^{3x} \in C[0, 1] \; | \; \alpha - \beta - \gamma = 0 \}
+```
 
 ***
 
@@ -306,20 +385,6 @@ c & d
 \end{aligned}
 ```
 
-Buscamos el $\textnormal{Nu}(T)$ tal que: 
-
-```math 
-\begin{aligned} 
-\textnormal{Nu}(f) = \{ \begin{pmatrix}
-a & b \\
-c & d 
-\end{pmatrix} \in \RR^{2 \times 2} \; | \; T \begin{pmatrix}
-a & b \\
-c & d 
-\end{pmatrix} = 0 \}
-\end{aligned}
-```
-
 Igualamos los valores $a, b, c, d$ de la matriz a cero.
 
 ```math 
@@ -334,7 +399,21 @@ a = b = c = d &= 0
 \end{aligned}
 ```
 
-Todos los valores son cero. Por lo que la base de $\textnormal{Nu}(T)$ es $\emptyset$, tal que $\dim \textnormal{Nu}(T) = 0$
+Todos los valores son cero. Por lo que tenemos:
+
+```math 
+\begin{aligned}
+B_{\textnormal{Nu}(T)} &= \emptyset \\
+\textnormal{Nu}(T) &= 0 \\
+\dim \textnormal{Nu}(T) &= 0
+\end{aligned}
+```
+
+La ecuación que caracteriza el núcleo es:
+
+```math 
+\textnormal{Nu}(T) = \{ \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \RR^{2 \times 2} \; | \; a = b = c = d = 0 \}
+```
 
 Con respecto a su imagen, podemos usar los vectores de la base canónica para dar con la base:
 
@@ -350,7 +429,7 @@ T \begin{pmatrix}
 0 & 1 \\
 0 & 0 
 \end{pmatrix} &= (0 - 1)x^5 + (0 + 0)x^4 + (1 + 0)x^3 + (0 + 0)x^2 + (2(1) + 3(0))x + 7 - 8(1) \\ 
-&= x^5 + x^3 + 2x - 8 \\
+&= -x^5 + x^3 + 2x - 8 \\
 &\; \\ 
 T \begin{pmatrix}
 0 & 0 \\
@@ -366,27 +445,20 @@ T \begin{pmatrix}
 \end{aligned}
 ```
 
-Tal que: 
+Por lo que tenemos: 
 
 ```math 
 \begin{aligned}
-\bfv_1 &= x^5 + x^3 + 7 \\ 
-\bfv_2 &= x^5 + x^3 + 2x - 8 \\
-\bfv_3 &= x^4 + x^2 + 3x \\ 
-\bfv_4 &= x^4 + x^2 \\ 
+B_{\textnormal{Im}(T)} &= \{ x^5 + x^3 , -x^5 + x^3 + 2x - 8, x^4 + x^2 + 3x, x^4 + x^2 \} \\
+\textnormal{Im}(T) &= \langle (x^5 + x^3 + 7) , (-x^5 + x^3 + 2x - 8), (x^4 + x^2 + 3x), (x^4 + x^2) \rangle \\ 
+\dim \textnormal{Im}(T) &= 4 
 \end{aligned}
 ```
 
-Por lo que tenemos la base de la imagen: $\{ x^5 + x^3 , x^5 + x^3 + 2x - 8, x^4 + x^2 + 3x, x^4 + x^2 \}$
+Para caracterizar por ecuaciones la imagen, defino la siguiente combinación lineal con:
 
 ```math 
-\textnormal{Im}(T) = \langle (x^5 + x^3 + 7) , (x^5 + x^3 + 2x - 8), (x^4 + x^2 + 3x), (x^4 + x^2) \rangle \implies \dim{\textnormal{Im}}(T) = 4  
-```
-
-Defino la combinación lineal:
-
-```math 
-\alpha(x^5 + x^3 + 7) + \beta(x^5 + x^3 + 2x - 8) + \gamma(x^4 + x^2 + 3x) + \delta(x^4 + x^2)
+\alpha(x^5 + x^3 + 7) + \beta(x^5 + x^3 + 2x - 8) + \gamma(x^4 + x^2 + 3x) + \delta(x^4 + x^2) \quad (\lambda, \beta, \gamma, \delta \in \RR)
 ```
 
 Agrupando por coeficientes $(a_5, a_4, a_3, a_2, a_1, a_0)$
@@ -404,18 +476,30 @@ a_0 &= 7 \alpha - 8 \beta
 
 Tenemos que: 
 
-```math 
+```math
+
 \begin{aligned}
 a_2 &= a_4 \\
-a_3 &= a_5 \\
 &\; \\
-a_2 - a_4 &= 0 \\
-a_3 - a_5 &= 0 
+a_3 + a_5 &= \alpha + \beta + \alpha - \beta \\
+a_3 + a_5 &= 2 \alpha \\
+\frac{a_3 + a_5}{2} &= \alpha \\
+&\; \\
+a_3 - a_5 &= \alpha + \beta - (\alpha - \beta) \\
+a_3 - a_5 &= 2 \beta \\
+\frac{a_3 - a_5}{2} &= \beta \\
+&\; \\
+a_0 &= 7 \cdot \frac{a_3 + a_5}{2} + 8 \cdot \frac{a_3 - a_5}{2} \\
+2a_0 &= 7a_3 + 7a_5 + 8a_3 - 8a_5 \\
+2a_0 - a_3 - 15a_5 &= 0
 \end{aligned}
 ```
 
-Esas dos ecuaciones caracterizan a la imagen, donde un polinomio\
-$p(x)=a_5x^5 + a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0$ que satisfaga la ecuación pertenece a la imagen.
+Esas dos ecuaciones caracterizan a la imagen, tal que:
+
+```math 
+\textnormal{Im}(T) = \{ a_5x^5 + a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0 \in P_5 \; | \; a_2 = a_4 , \; 2a_0 - a_3 - 15a_5 = 0 \} 
+```
 
 ***
 
@@ -436,7 +520,7 @@ z & w
 \end{aligned}
 ```
 
-El núcleo puede definirse como: 
+Buscamos el $\textnormal{Nu}(T)$ tal que: 
 
 ```math 
 \begin{aligned}
@@ -454,12 +538,12 @@ Por lo que tenemos:
 
 ```math 
 \begin{aligned}
-T \begin{pmatrix}
+&T \begin{pmatrix}
 x & y \\
 z & w  
-\end{pmatrix} &= 0 \\ 
+\end{pmatrix} = 0 \\ 
 &\; \\ 
-\begin{cases}
+&\begin{cases}
 -x +3y -2z + w = 0 \\ 
 7x -6y + 2z -w = 0 \\ 
 -2x + 6y - 4z + 2w = 0 \\
@@ -505,11 +589,11 @@ w \cdot
 \end{pmatrix}
 ```
 
-Por lo que podemos definir la base del núcleo como: 
+Por lo que tenemos: 
 
 ```math 
 \begin{aligned}
-&\{ \begin{pmatrix}
+B_{\textnormal{Nu}(T)} &= \{ \begin{pmatrix}
 \frac{2}{5} & \frac{4}{5}  \\
 1 & 0  
 \end{pmatrix}, 
@@ -527,8 +611,15 @@ Por lo que podemos definir la base del núcleo como:
 - \frac{1}{5} & - \frac{2}{5} \\
 0 & 1  
 \end{pmatrix} \rangle \\
+&\; \\
 \dim \textnormal{Nu}(T) &= 2 
 \end{aligned}
+```
+
+La ecuación que caracteriza el núcleo es:
+
+```math 
+\textnormal{Nu}(T) = \{ \begin{pmatrix} x & y \\ z & w \end{pmatrix} \in \RR^{2 \times 2} \; | \; x = \frac{2z}{5} - \frac{w}{5}, \; y = \frac{4z}{5} - \frac{2w}{5}\}
 ```
 
 Para calcular su imagen, utilizamos las matrices de la base canónica de $\RR^{2 \times 2}$.
@@ -575,7 +666,7 @@ Por lo que sin ellas, la base de la imagen es:
 
 ```math 
 \begin{aligned}
-&\{ 
+B_{\textnormal{Im}(T)} &= \{ 
 \begin{pmatrix}
 -1 & 7 \\
 -2 & -11 
@@ -596,8 +687,74 @@ Por lo que sin ellas, la base de la imagen es:
 6 & 13
 \end{pmatrix} 
 \rangle \\
+&\; \\
 \dim \textnormal{Im}(T) &= 2
 \end{aligned} 
+```
+
+Defino la siguiente combinación lineal: 
+
+```math 
+\begin{pmatrix} 
+x & y \\
+z & w 
+\end{pmatrix} =
+\lambda \cdot \begin{pmatrix}
+-1 & 7 \\
+-2 & -11 
+\end{pmatrix} + \beta \cdot \begin{pmatrix}
+3 & -6 \\
+6 & 13
+\end{pmatrix} \quad (\alpha, \beta \in \KK)
+```
+
+Por lo que tendríamos el siguiente sistema: 
+
+```math 
+\begin{cases}
+x = -\lambda + 3 \beta \\ 
+y = 7 \lambda - 6 \beta \\
+z = -2 \lambda + 6 \beta \\ 
+w = -11 \lambda + 13 \beta 
+\end{cases}
+```
+
+Resolviéndolo y sustituyendo valores: 
+
+```math 
+\begin{aligned}
+\lambda &= -x + 3 \beta \\
+&\; \\
+y &= 7 (-x + 3 \beta) - 6 \beta \\ 
+y &= -7x + 21 \beta - 6 \beta \\
+y &= -7x + 15 \beta \\
+y + 7x &= 15 \beta \\
+\frac{y}{15} + \frac{7x}{15} &= \beta \\
+&\; \\
+\lambda &= -x + 3(\frac{y}{15} + \frac{7x}{15}) \\
+\lambda &= -x + \frac{3y}{15} + \frac{21x}{15}  \\
+\lambda &= - \frac{5x}{5} + \frac{y}{5} + \frac{7x}{5} \\ 
+\lambda &= \frac{2x}{5} + \frac{y}{5} \\
+&\; \\
+z &= -2 (\frac{2x}{5} + \frac{y}{5}) + 6 (\frac{y}{15} + \frac{7x}{15}) \\
+z &= - \frac{4x}{5} - \frac{2y}{5} + \frac{6y}{15} + \frac{42x}{15} \\
+z &= - \frac{4x}{5} - \frac{2y}{5} + \frac{2y}{5} + \frac{14x}{5} \\ 
+z &= \frac{10x}{5} = 2x \\
+&\; \\ 
+w &= -11 (\frac{2x}{5} + \frac{y}{5}) + 13 (\frac{y}{15} + \frac{7x}{15}) \\
+w &= - \frac{22x}{5} - \frac{11y}{5} + \frac{13y}{15} + \frac{91x}{15} \\
+w &= - \frac{66x}{15} - \frac{33y}{15} + \frac{13y}{15} + \frac{91x}{15} \\
+w &= \frac{25x}{15} - \frac{20y}{15} = \frac{5x}{3} - \frac{4y}{3}
+\end{aligned}
+```
+
+Por lo tanto, la ecuación que caracteriza la imagen es: 
+
+```math 
+\textnormal{Im}(T) = \{ \begin{pmatrix}
+x & y \\
+z & w 
+\end{pmatrix} \in \RR^{2 \times 2} \; | \; z = 2x, \; w = \frac{5x}{3} - \frac{4y}{3} \}
 ```
 
 ## Cambios de base
@@ -906,11 +1063,37 @@ a &= -(-2c) \implies a = 2c \\
 \end{aligned}
 ```
 
-La base del núcleo es  $\{ (2, -2, 1) \}$ tal que:
+Por lo tanto tenemos:
 
 ```math 
-\textnormal{Nu}(T) = \langle (2, -2, 1) \rangle \implies \dim(\textnormal{Nu}(T)) = 1
+\begin{aligned}
+B_{\textnormal{Nu}(T)} &= \{ (2, -2, 1) \} \\
+\textnormal{Nu}(T) &= \langle (2, -2, 1) \rangle \\ 
+\dim (\textnormal{Nu}(T)) &= 1  
+\end{aligned}
 ```
 
-Los vectores correspondientes a la base de la imagen son $(1, -1), (1, 0), (0, 2)$.\
-La máxima dimensión en $\RR^2$ es dos, por lo que usamos dos vectores l.i. Su base es: $\{ (1, -1) , (1, 0) \}$
+La ecuación que caracteriza el núcleo es: 
+
+```math 
+\textnormal{Nu}(T) = \{ (a, b, c) \in \RR^3 \; | \; a = 2c, \; b = -a \}
+```
+
+Si evaluamos la transformación lineal con los vectores canónicos de $\RR^3$ obtenemos: $(1, -1), (1, 0), (0, 2)$\
+El tercer vector es combinación lineal de los otros: $2 \cdot (1, -1) + 2 \cdot (1, 0) = (0, 2)$
+
+Definimos la base de la imagen:
+
+```math 
+\begin{aligned}
+B_{\textnormal{Im}(T)} &= \{ (1, -1), (1, 0) \} \\ 
+\textnormal{Im}(T) &= \langle (1, -1), (1, 0) \rangle \\ 
+\dim(\textnormal{Im}(T)) &= 2
+\end{aligned}
+```
+
+Como tenemos $\dim (\textnormal{Im}(T)) = 2 = \dim \RR^2$, entonces se cumple: 
+
+```math
+\textnormal{Im}(T) = \{ (a, b) \in \RR^2 \}
+```

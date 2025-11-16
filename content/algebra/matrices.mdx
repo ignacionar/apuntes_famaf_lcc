@@ -120,6 +120,29 @@ tr(A) = 1 + 5 + 9 = 15
 > Sea $A \in \KK^{n \times n}$. Se dice que $A$ es inversible si $\exists B \in \KK^{n \times n}$ tal que $AB = BA = I_n$.\
 En este caso, $B$ es la matriz inversa de $A$ y se denota como $B = A^{-1}$
 
+Una matriz $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ es inversible $\iff ad - bc \not= 0$ 
+
+***
+
+Si $A, B \in \KK^{n \times n}$ son inversibles **no necesariamente** $A + B$ es inversible.
+
+Observemos que, si $n = 2$ y $A, B$ fueran respectivamente: 
+
+```math 
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 
+\end{bmatrix} + \begin{bmatrix}
+-1 & 0 \\
+0 & -1 
+\end{bmatrix} = \begin{bmatrix}
+0 & 0 \\
+0 & 0 
+\end{bmatrix}  
+```
+
+Su suma no es invertible. 
+
 ## Matriz Elemental 
 
 > Una matriz $n \times n$ es elemental si se obtiene por **una única operación elemental a partir de la matriz identidad $Id_n$**. Todas las matrices elementales son invertibles.

@@ -94,3 +94,247 @@ Si tenemos una matriz $A$ asociada al sistema $H$ aplicar estas operaciones en $
 
 > Sea $H$ un sistema lineal no homogéneo con soluciones y $S$ el conjunto de soluciones del sistema homogéneo asociado a $H$, sea $p$ solución particular de $H$.\
 El conjunto de soluciones $M$ de $H$ es: $M = S + p = \{ s + p \; | \; s \in S \}$.
+
+### Ejercicios resueltos - Sistemas lineales 
+
+**1.** 
+
+Hallar un sistema de ecuaciones lineales con coeficientes en $\RR$ tal que su conjunto de soluciones sea\
+$\{(1 - t, 2 + t, 3 + 2t \; | \; t \in \RR )\}$ 
+
+Despejo $t$ y sustituyo su valor: 
+
+```math 
+\begin{aligned}
+x &= 1 - t \implies t = - x + 1 \\
+y &= 2 + t \implies y = 2 + (-x + 1) = -x + 3 \\
+z &= 3 + 2(-x + 1) \implies z = 5 - 2x  
+\end{aligned}
+```
+
+Ahora defino el sistema como: 
+
+```math 
+\begin{cases}
+y + x = 3 \\
+z + 2x = 5
+\end{cases}
+```
+
+***
+
+**2.** 
+
+Encontrar los coeficientes de la parábola $y = ax^2 + bx + c$ que pasa por los puntos $(1, 2), (2, 7), (3, 14)$
+
+Sustituyendo los valores de $x, y$ tenemos:
+
+```math 
+\begin{aligned}
+2 &= a(1)^2 + b(1) + c \implies a + b + c = 2 \\
+7 &= a(2)^2 + b(2) + c \implies 4a + 2b + c = 7 \\
+14 &= a(3)^2 + b(3) + c \implies 9a + 3b + c = 14   
+\end{aligned}
+```
+
+Tenemos el sistema: 
+
+```math 
+\begin{cases}
+a + b + c = 2 \\ 
+4a + 2b + c = 7 \\
+9a + 3b + c = 14   
+\end{cases}
+```
+
+Ahora buscamos los valores de $a, b, c$ definiendo el mismo sistema como matriz. 
+
+```math 
+\begin{aligned}
+&\implies \begin{bmatrix}
+\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+4 & 2 & 1 & 7 \\
+9 & 3 & 1 & 14 
+\end{array}
+\end{bmatrix}
+\end{aligned}
+```
+
+Los coeficientes de la parabola son: $a = 1, \; b = 2, \; c = -1$ 
+
+***
+
+**3.**
+
+Hallar todas las soluciones de los siguientes sistemas de ecuaciones sobre $\ZZ_{11}$ 
+
+```math 
+\begin{cases}
+2x - y = 9 \\
+3x + 2y = 6
+\end{cases}
+```
+
+La matriz $A$ equivalente al sistema es: 
+
+```math 
+\begin{aligned}
+A &= \begin{bmatrix}
+\begin{array}{cc|c}
+2 & -1 & 9 \\
+3 & 2 & 6 \\
+\end{array}
+\end{bmatrix}
+\end{aligned}
+```
+
+Buscamos que el elemento $a_{11} \in \KK$ sea $1$. Lo cual en $\ZZ_{11}$ es:
+
+```math 
+\begin{aligned}
+2 \cdot x &\equiv 1 \; \pmod{11} \\
+&\; \\
+12 &\equiv 1 \; \pmod{11} \\
+2 \cdot 6 &\equiv 1 \; \pmod{11} 
+\end{aligned}
+```
+
+Por lo tanto, multiplico la primer fila por $6$. Tal que:
+
+```math
+\begin{aligned}
+12 &\equiv 1 \; \pmod{11} \\
+-6 &\equiv 5 \; \pmod{11} \\
+54 &\equiv 10 \; \pmod{11} \\
+&\; \\
+F_1 \rightarrow 6F_1 &\begin{bmatrix}
+\begin{array}{cc|c}
+12 & -6 & 54 \\
+3 & 2 & 6 \\
+\end{array}
+\end{bmatrix} \\
+= &\begin{bmatrix}
+\begin{array}{cc|c}
+1 & 5 & 10 \\
+3 & 2 & 6 \\
+\end{array}
+\end{bmatrix}
+\end{aligned}
+```
+
+Ahora aplico Gauss. 
+
+```math
+\begin{aligned}
+F_2 \rightarrow F_2 -3F_1 &\begin{bmatrix}
+\begin{array}{cc|c}
+1 & 5 & 10 \\
+0 & 9 & 9 \\
+\end{array}
+\end{bmatrix} \\
+= &\begin{bmatrix}
+\begin{array}{cc|c}
+1 & 5 & 10 \\
+0 & 1 & 1 \\
+\end{array}
+\end{bmatrix} \\
+F_1 \rightarrow F_1 - 5F_2 &\begin{bmatrix}
+\begin{array}{cc|c}
+1 & 0 & 5 \\
+0 & 1 & 1 \\
+\end{array}
+\end{bmatrix} 
+\end{aligned}
+```
+
+Por lo tanto, tenemos que: $x \equiv 5, y \equiv 1 \pmod{11}$ 
+
+***
+
+**4.** 
+
+Encontrar todos los valores de $a \in \RR$ tales que el siguiente sistema tiene al menos una solución:
+
+```math 
+\begin{cases}
+x - y + 2z = 2 \\ 
+3y -z = a + 1 \\
+8x + 4y + 12z = a
+\end{cases}
+```
+
+Para cada valor de $a$ hallado, encontrar todas las soluciones. 
+
+Defino la matriz equivalente $A$ al sistema: 
+
+```math 
+\begin{aligned}
+A &= \begin{bmatrix}
+\begin{array}{ccc|c}
+1 & -1 & 2 & 2 \\
+0 & 3 & -1 & a + 1 \\
+8 & 4 & 12 & a 
+\end{array}
+\end{bmatrix}
+\end{aligned}
+```
+
+Aplico Gauss:
+
+```math 
+\begin{aligned}
+F_3 \rightarrow F_3 - 8F_1 & \begin{bmatrix}
+\begin{array}{ccc|c}
+1 & -1 & 2 & 2 \\
+0 & 3 & -1 & a + 1 \\
+0 & 12 & -4 & a - 16  
+\end{array}
+\end{bmatrix} \\
+F_3 \rightarrow \frac{1}{4}F_3 & \begin{bmatrix}
+\begin{array}{ccc|c}
+1 & -1 & 2 & 2 \\
+0 & 3 & -1 & a + 1 \\
+0 & 3 & -1 & \frac{a}{4} - 4  
+\end{array}
+\end{bmatrix} \\
+F_3 \rightarrow F_3 - F_2 & \begin{bmatrix}
+\begin{array}{ccc|c}
+1 & -1 & 2 & 2 \\
+0 & 3 & -1 & a + 1 \\
+0 & 0 & 0 & - \frac{3a}{4} - 5 
+\end{array}
+\end{bmatrix}
+\end{aligned}
+```
+
+Para que el sistema tenga solución debe cumplirse que $- \frac{3a}{4} - 5 = 0$, es decir: 
+
+```math 
+\begin{aligned}
+-5 &= \frac{3a}{4} \\ 
+-20 &= 3a \\ 
+- \frac{20}{3} &= a  
+\end{aligned}
+```
+
+Ahora sustituimos el valor tal que:
+
+```math 
+\begin{aligned}
+3y -z &= a + 1 \\
+3y - z &= - \frac{20}{3} + 1 \\
+3y &= - \frac{17}{3} + z \\ 
+y &= - \frac{17}{9} + \frac{z}{3} \\ 
+&\; \\
+x &= y - 2z + 2 \\ 
+x &= - \frac{17}{9} + \frac{z}{3} - 2z + 2 \\
+x &= \frac{1}{9} - \frac{5z}{3}
+\end{aligned}
+```
+
+La variable $z$ puede tener cualquier valor real. Por lo tanto, sea $t \in \RR$ el conjunto solución es:
+
+```math  
+(x, y, z) = (\frac{1}{9} - \frac{5t}{3}, -\frac{17}{9} + \frac{t}{3}, t)
+```

@@ -391,6 +391,71 @@ Si restamos $\bfw_1$ del lado izquierdo y $\bfw_2$ del lado derecho, obtenemos:
 
 Por lo tanto, hemos llegado a una contradicción. 
 
+*** 
+
+**6.** 
+
+Comprobar si $\big\{ \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \QQ^{2 \times 2} \; | \; b = c^2 \big\}$ es subespacio de $\QQ^{2 \times 2}$. 
+
+1. $0$ si está en el conjunto: $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} \in \QQ^{2 \times 2}$
+
+2. Comprobamos la suma:
+
+```math 
+\begin{pmatrix} a_1 & c_1^2 \\ c_1 & d_1 \end{pmatrix} + \begin{pmatrix} a_2 & c_2^2 \\ c_2 & d_2 \end{pmatrix} = \begin{pmatrix} a_1 + a_2 & c_1^2 + c_2^2 \\ c_1 + c_2 & d_1 + d_2 \end{pmatrix}
+```
+
+Acorde a la definición, debería cumplirse que:
+
+```math 
+\begin{aligned}
+b_1 + b_2 &= (c_1 + c_2)^2  \\
+c_1^2 + c_2^2 &= c_1^2 + 2c_1c_2 + c_2^2 
+\end{aligned}
+```
+
+Lo cual, no se cumple si $2c_1c_2 \not= 0$. Al no ser cerrado bajo la suma, no es subespacio vectorial.
+
+*** 
+
+**7.** 
+
+Comprobar si $\big\{ \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \RR^{2 \times 2} \; | \; a + d = 0 \big\}$ es subespacio de $\RR^{2 \times 2}$. 
+
+1. $0$ si está en el conjunto: $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} \in \RR^{2 \times 2}$
+
+2. Teniendo en cuenta que $a + d = 0 \implies a = -d$, comprobamos la suma: 
+
+```math 
+\begin{pmatrix} -d_1 & b_1 \\ c_1 & d_1 \end{pmatrix} + \begin{pmatrix} -d_2 & b_2 \\ c_2 & d_2 \end{pmatrix}
+```
+
+Por lo tanto, tendríamos: 
+
+```math 
+(-d_1 + -d_2) + (d_1 + d_2) = 0 
+```
+
+Esto se cumple, por lo tanto la suma está definida. 
+
+3. Ahora comprobamos el producto por un escalar $\lambda \in \KK$: 
+
+```math 
+\lambda \cdot \begin{pmatrix} -d & b \\ c & d \end{pmatrix} = \begin{pmatrix} \lambda \cdot (-d) & \lambda \cdot b \\ \lambda \cdot c & \lambda \cdot d \end{pmatrix}
+```
+
+Entonces tenemos: 
+
+```math 
+\begin{aligned}
+\lambda (-d) \cdot \lambda d &= 0 \\
+\lambda (-d + d) &= 0 \\
+0 &= 0 
+\end{aligned}
+```
+
+Lo cual es valido, la operación está bien definida. Es subespacio vectorial.
+
 ## Combinación lineal 
 
 > Sea $V$ un $\KK$-espacio vectorial y $G = \{ \bfv_1, \ldots, \bfv_r \} \subseteq V$. Una **combinación lineal** de $G$ es un elemento $\bfv \in V$ tal que $\bfv = \displaystyle{\sum_{i=1}^r} a_i \bfv_i$ con $a_i \in \KK$ para cada $1 \leq i \leq r$.
