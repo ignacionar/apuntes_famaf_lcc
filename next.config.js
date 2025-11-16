@@ -66,4 +66,7 @@ export default withNextra({
   images: {
     unoptimized: true
   },
+  experimental: {
+    webpackMemoryOptimizations: true,
+  },
 })
