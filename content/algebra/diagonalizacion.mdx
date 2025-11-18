@@ -18,6 +18,36 @@ El elemento $\lambda \in \KK$ es **autovalor** de $A$
 
 > Sea $A \in \KK^{n \times n}$. $A$ es diagonalizable $\iff$ existe una base $B$ de $\KK^n$ formada por **autovectores** de $A$
 
+***
+
+Dada una matriz $A$ asociada a una transformación lineal $T$. Si $\det A = 0$ entonces el $\textnormal{Nu}(T)$ contiene uno o más vectores aparte del nulo. 
+
+Esto implica que hay un vector $\bfv \not= 0$ tal que $T(v) = 0 \implies T(v) = \bfv \cdot 0 = 0$.\
+Es decir, hay un autovalor $\lambda = 0$ tal que $\bfv \cdot \lambda = 0$. 
+
+De igual manera, si $0$ es autovalor de $A$. Su matriz no es invertible. Hay un vector no nulo en el núcleo tal que $v \not= 0, \; T(\bfv) = \bfv \cdot 0 = 0$ 
+
+***
+
+Podemos probar que una matriz $A$ asociada a una transformación lineal no es invertible si $B_{\textnormal{Nu}(T)} \not= \{ 0 \}$ (si es un monomorfismo).
+
+Supongamos que existe un vector $\bfv \not= 0$ y que la matriz $A$ si es invertible.
+
+Entonces, tenemos $A \bfv = 0$  
+
+```math 
+\begin{aligned}
+A \bfv &= 0 \\
+A^{-1}A \bfv &= A^{-1} \cdot 0 \\
+Id_n \bfv &= 0 \\
+\bfv &= 0 
+\end{aligned}
+```
+
+Llegamos a $\bfv = 0$, por lo que no es posible. 
+
+***
+
 ### Ejercicios resueltos - Autovalores y autovectores 
 
 **1.** 
@@ -138,6 +168,40 @@ La base $B = \{(1,1,1), (1,-2,1), (-1,0,1)\}$ es la base tal que $[T]_B$ posee c
 0 & 0 & 3
 \end{bmatrix}
 ```
+
+***
+
+**2.**
+
+Probar que toda matriz $A \in \RR^{2 \times 2}$ no es diagonalizable y que existe matriz sin autovalor definido. 
+
+Esto puede probarse si, por ejemplo, vemos el caso de la siguiente transformación lineal: 
+
+```math 
+T(x, y) = (-y, x)
+```
+
+Su representación matricial $[T]_C$ es: 
+
+```math 
+[T]_C = \begin{bmatrix}
+0 & -1 \\
+1 & 0 
+\end{bmatrix}
+```
+
+Si ahora hacemos $Id_2 \cdot \lambda - [T]_C$ 
+
+```math 
+Id_2 \cdot \lambda - [T]_C = \begin{bmatrix}
+\lambda & -1 \\
+1 & \lambda
+\end{bmatrix}
+```
+
+Su determinante queda: $\lambda^2 + 1 = 0 \implies \lambda^2 = -1$ 
+
+No existe número en $\RR$ que cumpla la igualdad. Por lo que no hay autovalor definido para $T$. Lo cual implica que tampoco hay autovectores definidos para formar una base. $T$ no es diagonalizable. 
 
 ## Polinomio característico
 

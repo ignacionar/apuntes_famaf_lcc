@@ -141,7 +141,22 @@ Observemos que, si $n = 2$ y $A, B$ fueran respectivamente:
 \end{bmatrix}  
 ```
 
-Su suma no es invertible. 
+Su suma no es inversible.
+
+Si $A, B \in \KK^{n \times n}$ son inversibles su producto $A \cdot B$ es inversible:
+
+```math 
+\begin{aligned}
+AA^{-1} &= Id_n \\
+&\; \\ 
+BB^{-1} &= Id_n \\
+AB(B^{-1}A^{-1}) &= A(BB^{-1})A^{-1} = A(Id_n)A^{-1} = AA^{-1} = Id_n \\ 
+&\; \\
+(B^{-1}A^{-1})AB &= B(AA^{-1})B^{-1} = B(Id_n)B^{-1} = BB^{-1} = Id_n \\
+&\; \\
+(AB)^{-1} &= B^{-1}A^{-1}
+\end{aligned} 
+```
 
 ## Matriz Elemental 
 
