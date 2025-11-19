@@ -755,6 +755,146 @@ $\dim (S+T) = \dim S + \dim T - \dim (S \cap T)$
 
 **1.** 
 
+Sea $W_1$ el subespacio de $\RR^4$ generado por los vectores: 
+
+```math 
+(-1, -1, 1, 0), (1, -1, 0, 1), (2, 0, -1, 1)
+```
+
+Y sea $W_2$ el subespacio de $\RR^4$ definido por:
+
+```math 
+W_2 = \{ (x, y, z, t) \in \RR^4 \; | \; x + y + z = 0, \; x - t = 0 \}
+```
+
+1. Caracterizar con ecuaciones $W_1$ y calcular su dimensión.
+2. Dar una base de $W_2$ y calcular su dimensión. 
+3. Dar una base de $W_1 + W_2$ y calcular su dimensión.
+
+Comprobamos si los vectores de $W_1$ son linealmente independientes. Defino una matriz con los vectores y aplico Gauss:
+```math 
+\begin{aligned}
+&\begin{bmatrix}
+-1 & -1 & 1 & 0 \\
+1 & -1 & 0 & 1 \\
+2 & 0 & -1 & 1 
+\end{bmatrix} \\
+F_3 \rightarrow F_3 + 2F_1 &\begin{bmatrix}
+-1 & -1 & 1 & 0 \\
+1 & -1 & 0 & 1 \\
+0 & -2 & 1 & 1 
+\end{bmatrix} \\
+\\
+F_2 \rightarrow F_2 + F_1 &\begin{bmatrix}
+-1 & -1 & 1 & 0 \\
+0 & -2 & 1 & 1 \\
+0 & -2 & 1 & 1 
+\end{bmatrix} \\
+F_3 \rightarrow F_3 + F_2 &\begin{bmatrix}
+-1 & -1 & 1 & 0 \\
+0 & -2 & 1 & 1 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\end{aligned}
+```
+
+Podemos definir la base con dos vectores como: $\{ (-1 , -1 , 1 , 0), (0 , -2 , 1 , 1) \}$.\
+Tal que $\dim W_1 = 2$.
+
+Para caracterizarlo con ecuaciones hacemos la combinación lineal:
+
+```math 
+\alpha(-1 , -1 , 1 , 0) + \beta(0 , -2 , 1 , 1) = (x, y, z, t) \quad (\alpha, \beta \in \RR)
+```
+
+Tal que: 
+
+```math 
+\begin{cases}
+- \alpha = x \\
+- \alpha - 2 \beta = y \\ 
+\alpha + \beta = z \\
+\beta = t 
+\end{cases}
+```
+
+Sustituyendo valores:
+
+```math 
+\begin{aligned}
+-x + t &= z \\ 
+-x -2t &= y 
+\end{aligned}
+```
+
+Obtuvimos la ecuación que caracteriza el subespacio $W_1$. 
+
+La base del subespacio $W_2$ puede obtenerse mediante las siguientes ecuaciones:
+
+```math 
+\begin{cases}
+x + y + z = 0, \\ 
+x - t = 0
+\end{cases}
+```
+
+Donde podemos definirlo en términos de $z, t$ ya que $y = -z - x \; \land \; x = t$. Tenemos:
+
+```math 
+(x, y, z, t) = (t, -z - t, z, t) = z(0, -1, 1, 0) + t(1, -1, 0, 1)
+```
+
+Por lo tanto, nuestra base para $W_2$ es $\{ (0, -1, 1, 0), (1, -1, 0, 1) \}$.\
+Tal que $\dim W_2 = 2$. 
+
+Ahora calculamos $W_1 \cap W_2$. Para ello volvemos a usar la ecuación que define nuestros componentes en $W_1$:
+
+```math 
+\begin{cases}
+- \alpha = x \\
+- \alpha - 2 \beta = y \\ 
+\alpha + \beta = z \\
+\beta = t 
+\end{cases}
+```
+x + y + z = 0, \; x - t = 0
+Ahora los sustituimos en la definición de $W_2$:
+
+```math 
+- \alpha - \alpha - 2 \beta + \alpha + \beta = 0 \implies - \alpha = \beta, \quad - \alpha = \beta 
+```
+
+Ahora remplazo el valor en el sistema:
+
+```math 
+\begin{cases}
+\beta = x \\
+- \beta = y \\ 
+0 = z \\
+\beta = t 
+\end{cases}
+```
+
+Ahora tenemos $\beta (1, -1, 0, 1)$. Por lo que la base de $W_1 \cap W_2$ es $\{ (1, -1, 0, 1) \}$.\
+Tal que $\dim W_1 \cap W_2 = 1$.
+
+Por lo tanto:
+
+```math 
+\begin{aligned}
+\dim W_1 + W_2 &= \dim W_1 + \dim W_2 - \dim W_1 \cap W_2 \\
+\dim W_1 + W_2 &= 2 + 2 - 1 \\
+\dim W_1 + W_2 &= 3 
+\end{aligned}
+```
+
+En este caso $W_1 + W_2$ es subespacio de $\RR^4$. Sus dimensiones difieren por lo que no pueden ser iguales.\
+En su lugar usamos los vectores l.i. entre las bases de $W_1, W_2$ para definir la base de $W_1 + W_2$: $\{(-1 , -1 , 1 , 0), (0, -1, 1, 0), (1, -1, 0, 1) \}$
+
+***
+
+**2.** 
+
 Sean $W_1$ y $W_2$ los siguientes subespacios de $\RR^6$:   
 
 ```math 
@@ -796,7 +936,7 @@ Esto nos da:
 
 ```math
 \begin{aligned}
-\alpha + 3 \beta + 3 \delta &= 0
+\alpha + 3 \beta + 3 \delta &= 0 \\
 -\alpha + \beta &= 0 \implies \alpha = \beta \\ 
 &\; \\
 \alpha + 3 \alpha + 3 \delta &= 0 \\
@@ -871,7 +1011,7 @@ La base canónica de $\RR^6$ es la base de $S + T$. Todos los vectores de $\RR^6
 
 *** 
 
-**2.**
+**3.**
 
 Hallar un complemento para el subespacio generado por $\{(1, 1, 0),(0, 0, 1)\}$. 
 
@@ -881,7 +1021,7 @@ Un complemento podría ser $\{(0, 1, 0)\}$, puesto que no tienen vectores en com
 
 Decidir si las siguientes afirmaciones son verdaderas o falsas.
 
-**3.** 
+**4.** 
 
 Sea $V$ un espacio vectorial de dimensión $42$. Si $V_1$ y $V_2$ son subespacios con $\dim V_1 = 33$, 
 $\dim V_2 = 9$ tales que $V = V_1 + V_2 \implies V = V1 \oplus V2$.
