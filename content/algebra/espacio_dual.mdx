@@ -1,0 +1,76 @@
+# Espacio Dual 
+
+> Sea $V$ un $\KK$-espacio vectorial. El **espacio dual** de $V$, denotado por $V^*$, es el conjunto de todas las transformaciones lineales de $V$ en $\KK$. Es decir, $V^* = \text{Hom}_\KK(V, \KK) = \{ T : V \rightarrow \KK \; | \; T \; \textnormal{es transformación lineal} \}$.\
+Cada $T \in V^*$ se llama **funcional lineal**.
+
+Si $\dim V = n$ entonces existe un isomorfismo entre $V*$ y $\KK^n$. Luego $\dim V^* = n$.
+
+**Ejemplo:** $V = \KK^n, a_1, \ldots, a_n \in \KK \implies T(x_1, \ldots, x_n) = \displaystyle{\sum_{i=1}^n a_i x_i}$ es un funcional lineal. 
+
+En particular, sea $\delta_i$ el funcional lineal consitituido con $a_i = 0 = a_j, \;\; j \not= i$\
+i.e. $\quad \delta_i(x_1, \ldots, x_n) = x_i \implies T = a_1 \delta_1 + \ldots + a_n \delta_n$. 
+
+Luego, $\{\delta_1, \ldots, \delta_n\}$ es una base de $V^*$ tal que: 
+
+```math 
+\delta_i(0, \ldots, 1, \ldots, 0) = \begin{cases}
+1 ,& j = i = \delta_{ij} \\
+0 ,& j \not= i
+\end{cases}
+```
+
+Donde $\delta_{ij}$ es el delta de Kronecker.
+
+## Base Dual
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión $n$, $B = \{ \bfv_1, \ldots, \bfv_n \}$ una base de $V$.\
+Existe una única base $B^* = \{ \varphi_1 , \ldots, \varphi_n \}$ de $V^*$ tal que:
+
+```math 
+\varphi_i(\bfv_j) = \begin{cases}
+1, & i= j \\
+0, & i \not= j 
+\end{cases}
+```
+
+$B^*$ se llama **base dual de $B$**.
+
+**Demostración:** 
+
+Para cada $i = 1, \ldots, n, \; \exists\varphi_i \;\;V \rightarrow \KK$ una transfromación lineal tal que\
+$\varphi_i (\bfv_i) = 0 \; \land \; \varphi_j (\bfv_j) = 0, \; i \not= j$ 
+
+Dado que $\dim V^* = n$ para probar que $B^* = \{ \varphi_1, \ldots, \varphi_n \}$ es base veremos que es l.i:
+
+Sean $a_1, \ldots, a_n \in \KK$ tal que $0 = a_1 \cdot \varphi_1, \ldots, a_n \cdot \varphi_n$ (el funcional lineal nulo). Entonces:
+
+```math 
+\begin{aligned}
+0 &= (a_1 \cdot \varphi_1 + \ldots + a_n \cdot \varphi_n)(\bfv_i) \\
+0 &= a_1 \cdot \varphi_1(\bfv_i) + \ldots + a_n \cdot \varphi_n(\bfv_i) \\
+0 &= a_i \cdot \varphi_i(\bfv_i) \\
+0 &= a_i \cdot 1 \\
+0 &= a_i
+\end{aligned}
+```
+
+$a_i = 0, \therefore \{ \varphi_1, \ldots, \varphi_n \}$ es l.i. y $B^*$ es base.
+
+**Ejemplo:**
+
+Si $V = \KK^n, \; E = \{ \mathbf{e}_1, \ldots, \mathbf{e}_n \}$ es la base canónica de $\KK^n$ entonces su base dual es $E^* = \{ \delta_1, \ldots, \delta_n \}$ donde $\delta_i(\mathbf{e}) = \delta_{ij}$.
+
+En $\RR^2$ si tenemos la base $B = \{ (2, 1), (-1, 0) \}$, su base dual es $B^* = \{ \varphi_1, \varphi_2 \}$ donde:
+
+```math
+\begin{aligned}
+(x, y) &= y \cdot (2, 1) + (2y - x) \cdot (-1, 0) \\
+\varphi_1(x, y) &= \varphi_1(y \cdot (2, 1) + (2y - x) \cdot (-1, 0)) \\
+\varphi_1(x, y) &= y \cdot \varphi_1 (2, 1) + (2y - x) \cdot \varphi_1 (-1, 0)
+&= y \\
+&\; \\
+\implies \varphi_1 (x, y) &= y 
+\end{aligned}
+```
+
+Análogamente, $\varphi_2 (x, y) = (2y - x)$ 

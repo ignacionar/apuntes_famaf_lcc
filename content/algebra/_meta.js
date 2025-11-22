@@ -5,5 +5,7 @@ export default {
   matrices: "Matrices",
   transformaciones_lineales: "Transformaciones Lineales",
   determinante: "Determinante",
-  diagonalizacion: "Diagonalización"
+  diagonalizacion: "Diagonalización",
+  espacio_dual: "Espacio Dual",
+  espacios_vectoriales_producto_interno: "Espacios Vectoriales con Producto Interno"
 }

@@ -1,0 +1,101 @@
+# Espacios vectoriales con producto interno
+
+> Sea $V$ un $\KK$-espacio vectorial. Un **producto interno** en $V$ es una función $\langle \cdot , \cdot \rangle : V \times V \rightarrow \KK$ que cumple las siguientes propiedades: 
+
+1. $\langle \bfv_1 + \bfv_2 , \bfw \rangle = \langle \bfv_1 , \bfw \rangle + \langle \bfv_2 , \bfw \rangle$\
+$\langle \bfv , \bfw_1 + \bfw_2 \rangle = \langle \bfv , \bfw_1 \rangle + \langle \bfv , \bfw_2 \rangle, \quad \forall \bfv, \bfw_1, \bfw_2 \in V$
+
+2. $\langle \lambda \bfv , \bfw \rangle = \lambda \langle \bfv , \bfw \rangle$\
+$\langle \bfv , \lambda \bfw \rangle = \overline{\lambda} \cdot \langle \bfv , \bfw \rangle, \quad \forall \bfv, \bfw \in V, \; \lambda \in \KK$
+
+3. $\langle \bfv , \bfw \rangle = \overline {\langle \bfw , \bfv \rangle}, \quad \forall \bfv, \bfw \in V$
+4. $\langle \bfv , \bfv \rangle \geq 0, \quad \langle \bfv, \bfv \rangle > 0 \iff \bfv \not= 0, \quad \forall \bfv \in V$
+
+Tener la primer y segunda propiedad se define ser **sesquilineal en la segunda entrada**. 
+
+**Demostraciones:** 
+
+```math 
+\begin{aligned}
+\langle \bfv, \bfw_1 + \bfw_2 \rangle &= \overline{\langle \bfw_1 + \bfw_2, \bfv \rangle} = \overline{\langle \bfw_1, \bfv \rangle + \langle \bfw_2, \bfv \rangle} = \overline{\langle \bfw_1, \bfv \rangle} + \overline{\langle \bfw_2, \bfv \rangle} = \langle \bfv, \bfw_1 \rangle + \langle \bfv, \bfw_2 \rangle \\
+&\; \\
+\langle \bfv, \lambda \bfw \rangle &= \overline{\langle \lambda \bfw, \bfv \rangle} = \overline{\lambda \langle \bfw, \bfv \rangle} = \overline{\lambda} \cdot \overline{\langle \bfw, \bfv \rangle} = \overline{\lambda} \cdot \langle \bfv, \bfw \rangle \\
+&\; \\
+\langle 0, \bfv \rangle &= \langle 0 + 0, \bfv \rangle = \langle 0, \bfv \rangle + \langle 0, \bfv \rangle \implies \langle 0, \bfv \rangle = 0 \\
+\end{aligned} 
+```
+
+**Ejemplo:**
+
+Sea $V = \RR^n$, definimos el producto interno canónico como: 
+
+```math
+\langle (x_1, \ldots, x_n), (y_1, \ldots, y_n) \rangle = x_1 y_1 + \ldots + x_n y_n
+```
+
+***
+
+> Sea $(V, \langle \cdot , \cdot \rangle)$ un espacio vectorial con producto interno. La norma en $V$ está definida como la función\
+$\| \cdot \| : V \rightarrow \RR_{\geq 0}$ tal que: $\| \bfv \| = \sqrt{\langle \bfv , \bfv \rangle}$ 
+
+1. $\forall \bfv \in V, \; \| \bfv \| \geq 0 \; $ y $\; \| \bfv \| = 0 \iff \bfv = 0$
+2. $\forall \lambda \in \KK, \; \bfv \in V, \; \| \lambda \bfv \| = |\lambda| \cdot \| \bfv \|$
+3. Desigualdad de Cauchy-Schwarz: $\forall \bfv, \bfw \in V, \; |\langle \bfv , \bfw \rangle| \leq \| \bfv \| \cdot \| \bfw \|$
+4. Desigualdad triangular: $\forall \bfv, \bfw \in V, \; \| \bfv + \bfw \| \leq \| \bfv \| + \| \bfw \|$
+
+## Ortogonalidad
+
+> Sea $(V, \langle \cdot , \cdot \rangle)$ un espacio euclídeo (en $\RR$):\
+Dos vectores $\bfv, \bfw \in V$ son **ortogonales** si $\langle \bfv , \bfw \rangle = 0$.\
+Un subconjunto $S \subseteq V$ es ortogonal si cada par de elementos en $S$ es ortogonal, es decir si\
+$\forall \bfv, \bfw \in S, \; \langle \bfv , \bfw \rangle = 0$.\
+Un subconjunto $S \subseteq V$ es **ortonormal** si es ortogonal y $\| \bfv \| = 1, \; \forall \bfv \in S$.
+
+### Teorema de Pitágoras
+
+> Si $\bfv, \bfw \in V$ son ortogonales, entonces $\| \bfv + \bfw \|^2 = \| \bfv \|^2 + \| \bfw \|^2$.
+
+Esto queda demostrado ya que:
+
+```math
+\begin{aligned}
+\| \bfv + \bfw \|^2 &= \langle \bfv + \bfw , \bfv + \bfw \rangle \\
+&= \langle \bfv , \bfv \rangle + \langle \bfv , \bfw \rangle + \langle \bfw , \bfv \rangle + \langle \bfw , \bfw \rangle \\
+&= \langle \bfv , \bfv \rangle + 0 + 0 + \langle \bfw , \bfw \rangle \\
+&= \| \bfv \|^2 + \| \bfw \|^2
+\end{aligned}
+```
+
+***
+
+### Método de ortogonalización de Gram-Schmidt
+
+> Sea $(V, \langle \cdot , \cdot \rangle)$ un espacio euclídeo y sea $B = \{ \bfv_1, \ldots, \bfv_n \}$ una base de $V$.\
+Existe una base ortogonal $\stackrel{\sim}{B} \; = \{ \bfw_1, \ldots, \bfw_n \}$ de $V$ tal que: 
+
+```math
+\langle \bfv_1, \ldots, \bfv_k \rangle = \langle \bfw_1, \ldots, \bfw_k \rangle, \quad k = 1, \ldots, n \\
+```
+
+Recursivamente, $\bfw_k = \frac{\bfw_k'}{\|\bfw_k'\|}$ donde:
+
+```math
+\bfw_k' = \bfv_k - \sum_{j=1}^{k-1} \frac{\langle \bfv_k, \bfw_j' \rangle}{\|\bfw_j'\|^2} \bfw_j'
+```
+
+***
+
+### Complemento ortogonal
+
+> Sea $(V, \langle \cdot , \cdot \rangle)$ un espacio euclídeo y sea $S \subseteq V$ un conjunto.\
+El complemento ortogonal de $S$ es el conjunto: 
+
+```math
+S^{\perp} = \{ \bfv \in V \; | \; \langle \bfv , \bfw \rangle = 0, \; \forall \bfw \in S \}
+```
+
+Algunas propiedades de $S^{\perp}$ son:
+
+1. $S^{\perp}$ es un subespacio de $V$.
+2. $V = S \oplus S^{\perp}$ si $S$ es un subespacio de $V$.
+3. $(S^{\perp})^{\perp} = S$ si $S$ es un subespacio de $V$.
