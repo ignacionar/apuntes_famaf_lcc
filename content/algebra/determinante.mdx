@@ -1,11 +1,35 @@
 # Determinante 
 
+Antes de definir el determinante, repasemos algunas definiciones importantes.
+
+> Sea $V$ un $\KK$-espacio vectorial. Una función $f : V \times V \times \ldots \times V \; (n \; veces) \to \KK$ es $n$-**multilineal** si es lineal en cada coordenada: 
+
+```math 
+\begin{aligned}
+f(\bfv_1, \ldots, \bfv_i + \bfv_i', \ldots, \bfv_n) &= f(\bfv_1, \ldots, \bfv_i, \ldots, \bfv_n) + f(\bfv_1, \ldots, \bfv_i', \ldots, \bfv_n) \\
+f(\bfv_1, \ldots, \lambda \bfv_i, \ldots, \bfv_n) &= \lambda \cdot f(\bfv_1, \ldots, \bfv_i, \ldots, \bfv_n) \quad \forall \lambda \in \KK, \forall i = 1, \ldots, n \\
+\end{aligned}
+```
+
+***
+
+> Una función $n$-multilineal $f$ se dice alternante si al evaluarla en una $n$-upla con dos vectores iguales se anula. Es decir: 
+
+```math
+f(\bfv_1, \ldots, \bfv_i, \ldots, \bfv_j, \ldots, \bfv_n) = 0 \quad \text{si} \quad \bfv_i = \bfv_j, \; i \not= j
+```
+
+***
+
 La fórmula recursiva del determinante utiliza partes de una matriz $A \in \KK^{n \times n}$ para calcular su valor. 
 
 > Sea $A \in \KK^{n \times n}$, sean $1 \leq i, j \leq n$. Entonces $A(i|j) \in \KK^{(n-1) \times (n-1)}$ es la matriz que se obtiene de $A$ suprimiendo la fila $i$ y la columna $j$.
 
-
 > La única función multilineal alternada es $f : \KK^{n \times n} \to \KK$ tal que $f(I_n) = 1$ se llama **determinante de orden** $n$. Su valor se denota como $\det(A)$ o $|A|$, y determina si una matriz cuadrada es invertible.
+
+```math 
+f(\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}) = 1 \implies \det\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = ad - bc 
+```
 
 ```math 
 \det(A^{n \times n}) = \begin{cases}
@@ -16,12 +40,59 @@ a_{11} ,& n = 1 \\
 
 ## Propiedades del Determinante
 
-1. Si $\det(A) \not= 0$, entonces $A$ es invertible.
-2. Si $A$ es matriz triangular superior $\implies \det(A) = \displaystyle{\prod_{i=1}^n} \; a_{ii}$
-3. $\det(A) = \det(A^t)$ (igual al de su transpuesta)
-4. $\det(A^n) = (\det(A))^n$. Por ejemplo, si $n = 2$: $\det(A^2) = \det(A \cdot A) = \det A \cdot \det A$
-5. Por consecuencia del punto anterior, $\det(A^{-1}) = \frac{1}{\det(A)}$
-6. Si $\det(A) = 0 \implies$ una fila o columna está compuesta por ceros.
+> Si $A \in \KK^{n \times n}$ y $\det(A) \not= 0 \implies A$ es invertible.
+
+**Demostración:**
+
+```math 
+\det A \cdot \det A^{-1} = \det(A \cdot A^{-1}) = \det(I_n) = 1 
+```
+
+***
+
+> Si $A \in \KK^{n \times n}$ es matriz triangular superior $\implies \det(A) = \displaystyle{\prod_{i=1}^n} \; a_{ii}$
+
+**Demostración:**
+
+Puede probarse por inducción en $n$. Para $n = 1$ es trivial, ya que $\det(A) = a_{11}$.\
+Supongamos esto vale para cualquier matriz triangular superior de tamaño $(n - 1) \times (n - 1)$.\
+Consideremos el desarollo del determinante por la primera columna:
+
+```math 
+\begin{aligned}
+\det A &= \displaystyle{\sum_{i=1}^{n}} \; (-1)^{i+1} \cdot a_{i1} \cdot \det(A(i|1)) \\
+&= (-1)^{1+1} \cdot a_{11} \cdot \det \begin{pmatrix} a_{22} & \ldots & * \\ \vdots & \ddots & \vdots \\ 0 & \ldots & a_{nn} \end{pmatrix} = a_{11} \cdot a_{22} \cdot \ldots \cdot a_{nn} \\
+&= \displaystyle{\prod_{i=1}^n} \; a_{ii} \\
+\end{aligned}
+```
+
+***
+
+> Sea $A \in \KK^{n \times n} \implies \det(A) = \det(A^t)$ (igual al de su transpuesta)
+
+**Demostración:**
+
+Puede probarse por inducción en $n$. Para $n = 1$ es trivial, ya que $\det(A) = a_{11} = \det(A^t)$.\
+Asumimos que vale para cualquier matriz $(n - 1) \times (n - 1)$. Entonces:
+
+```math 
+\begin{aligned}
+\det(A^t) &= \displaystyle{\sum_{i=1}^{n}} \; (-1)^{i+1} \cdot a_{1i} \cdot \det((A^t)(1|i)) \\
+&= \displaystyle{\sum_{i=1}^{n}} \; (-1)^{i+1} \cdot a_{1i} \cdot \det((A(i|1))^t) \\
+&= \displaystyle{\sum_{i=1}^{n}} \; (-1)^{i+1} \cdot a_{1i} \cdot \det(A(i|1)) \\
+&= \det(A)
+\end{aligned} 
+```
+
+***
+
+> Sea $A \in \KK^{n \times n} \implies \det(A^n) = (\det(A))^n$. 
+
+Por consecuencia del punto anterior, $\det(A^{-1}) = \frac{1}{\det(A)}$
+
+***
+
+> Sea $A \in \KK^{n \times n} \implies$ si una fila o columna de $A$ es nula, entonces $\det(A) = 0$. 
 
 Esta última afirmación no es recíproca. Por ejemplo, la siguiente matriz $A^{3 \times 3}$ tiene $\det A = 0$
 
@@ -31,6 +102,14 @@ A = \begin{bmatrix}
 4 & 5 & 6 \\ 
 7 & 8 & 9  
 \end{bmatrix}
+```
+
+**Demostración:**
+
+Supongamos la $i$-ésima fila es nula. Entonces, al desarrollar el determinante por la $i$-ésima fila:
+
+```math
+\det A = \ldots + (-1)^{i+1} \cdot 0 \cdot \det(A(i|1)) + \ldots + (-1)^{i+n} \cdot 0 \cdot \det(A(i|n)) = 0
 ```
 
 ***
@@ -144,6 +223,35 @@ Si reemplazamos $a_{i1}$ por el elemento correspondiente:
 &= 2 \cdot 57 - 8 \\
 &= 106
 \end{aligned} 
+```
+
+## Adjunta clásica
+
+> Dada $A \in \KK^{n \times n}$, y $C \in \KK^{n \times n}$ tal que $C_{ij} = (1)^{i+j} \cdot a_{ij} \cdot \det(A(i|j))$.\
+Su transpuesta se llama **matriz adjunta clásica** de $A$ tal que $\text{adj}(A)_{ij} = C_{ji} = (1)^{i+j} \cdot a_{ji} \cdot \det(A(j|i))$. 
+
+## Regla de Cramer 
+
+> Sea $A \in \KK^{n \times n}$ una matriz invertible y sea $b \in \KK^{n \times 1}$. Escribimos a $A = [A_1, \; A_2, \; \ldots, \; A_n]$, como columnas. Entonces la única solución del sistema lineal $Ax = b$ está dada por: 
+
+```math
+x = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}, \quad \text{donde} \quad x_i = \frac{\det(1, \ldots, \stackrel{\text{pos.}\; i}{b}, \ldots, n)}{\det A}, \quad \forall i = 1, \ldots, n
+```
+
+**Demostración:**
+
+Multiplicamos por $\text{adj}(A)$ el sistema:
+
+```math 
+\begin{aligned}
+Ax = b \implies \text{adj}(A) \cdot Ax &= b \cdot \text{adj}(A) \\
+\det(A) x &= \text{adj}(A) \cdot b \\
+(\det(A) x)_i &= (\text{adj}(A) \cdot b)_i \\
+\det(A) \cdot x_i &= \sum_{j=1}^{n} \text{adj}(A)_{ij} \cdot b_j \\
+&= \sum_{j=1}^{n} (1)^{i+j} \cdot a_{ji} \cdot \det(A(j|i)) \cdot b_j \\
+&= \det(1, \ldots, \stackrel{\text{pos.}\; i}{b}, \ldots, n) \\
+\implies x_i &= \frac{\det(1, \ldots, \stackrel{\text{pos.}\; i}{b}, \ldots, n)}{\det A} \\
+\end{aligned}
 ```
 
 ***

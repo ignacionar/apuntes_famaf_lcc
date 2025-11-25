@@ -76,6 +76,30 @@ Se dice que $A$ es una $\KK$-álgebra si se cumplen las siguientes condiciones:
 - $(A, +, \cdot_\KK)$ es un $\KK$-espacio vectorial.
 - $(\lambda \cdot_\KK X) \cdot Y = \lambda \cdot_\KK (X \cdot Y) = X \cdot (\lambda \cdot_\KK Y), \; \forall X, Y \in A, \; \forall \lambda \in \KK$.
 
+## Matriz Equivalente por Filas
+
+> Sean $A, B \in \KK^{m \times n}$. Decimos que $A$ es equivalente por filas a $B$ si puede obtenerse $B$ a partir de $A$ mediante una sucesión finita de operaciones elementales por filas. Su notación es: $A \sim B$.
+
+Las operaciones por filas se corresponden a operaciones entre ecuaciones del sistema homogéneo $Ax = 0$ 
+
+> Sean $A, B \in \KK^{m \times n}$ equivalentes por filas, los sistemas homogéneos $Ax = 0, \; Bx = 0$ tienen las mismas soluciones. 
+
+**Demostración:** 
+
+Como $A, B$ son equivalentes, existe una sucesión finita ($n$) de operaciones elementales por fila que lleva la matriz $A$ a la matriz $B$. 
+
+```math 
+\begin{aligned}
+A &= A_0 \rightarrow A_1 \rightarrow \ldots \rightarrow A_n = B \\
+&\; \\
+A_i &= E_i A_{i-1}, \; 1 \leq i \leq n \\
+\end{aligned}
+```
+
+(Con $E_i$ una operación elemental por filas)
+
+Como las operaciones elementales permutan filas o realizan combinaciones lineales de filas, es claro que las ecuaciones de $A_ix = 0$ son combinaciones lineales de las ecuaciones de $A_{i-1}x = 0$. Concluimos que $A_i$ y $A_{i-1}$ determinan sistemas de ecuaciones equivalentes para $1 \leq i \leq n$. Luego, $A_0x = 0$ y $A_1x = 0$ son sistemas equivalentes, y así sucesivamente, hasta llegar a que $A_nx = 0$ es equivalente. Luego, $Ax = 0$ y $Bx = 0$ son sistemas equivalentes. 
+
 ## Matriz Transpuesta 
 
 > Sea $A \in \KK^{m \times n}$. La matriz transpuesta de $A$, denotada por $A^t$, es la matriz en $\KK^{n \times m}$ definida por\
@@ -147,9 +171,9 @@ Si $A, B \in \KK^{n \times n}$ son inversibles su producto $A \cdot B$ es invers
 
 ```math 
 \begin{aligned}
-AA^{-1} &= Id_n \\
-&\; \\ 
+AA^{-1} &= Id_n \\ 
 BB^{-1} &= Id_n \\
+&\; \\
 AB(B^{-1}A^{-1}) &= A(BB^{-1})A^{-1} = A(Id_n)A^{-1} = AA^{-1} = Id_n \\ 
 &\; \\
 (B^{-1}A^{-1})AB &= B(AA^{-1})B^{-1} = B(Id_n)B^{-1} = BB^{-1} = Id_n \\
@@ -158,6 +182,270 @@ AB(B^{-1}A^{-1}) &= A(BB^{-1})A^{-1} = A(Id_n)A^{-1} = AA^{-1} = Id_n \\
 \end{aligned} 
 ```
 
+***
+
+> Si $A, B \in \KK^{n \times n}$ son inversibles, entonces $A \sim B \iff \exists P \in \KK^{n \times n}$ inversible tal que $B = P \cdot A$.
+
+**Demostración:**
+
+($\Rightarrow$) Si $A \sim B$, vimos que $\exists P$ producto de matrices elementales tal que $B = P \cdot A$.\
+$P$ resulta invertible pues las matrices elementales lo son. 
+
+($\Leftarrow$) Si $B = P \cdot A$, con $P$ invertible. El teorema anterior nos dice que $P$ es producto de matrices elementales.\
+$\therefore A \sim B$
+
 ## Matriz Elemental 
 
 > Una matriz $n \times n$ es elemental si se obtiene por **una única operación elemental a partir de la matriz identidad $Id_n$**. Todas las matrices elementales son invertibles.
+
+> Toda matriz elemental es inversible.
+
+** Demostración:**
+
+Sea $E$ la matriz elemental con operación $e$. Luego, $E = e(Id_n)$. Sea $e'$ la operación elemental tal que:
+
+```math 
+e'(e(A)) = A, \; \forall A \in \KK^{n \times n}
+```
+
+Sea $E' = e'(Id_n)$. Entonces:
+
+```math 
+\begin{aligned}
+E \cdot E' &= E \cdot e'(Id_n) = e(e'(Id_n)) = Id_n \\
+E' \cdot E &= E' \cdot e(Id_n) = e'(e(Id_n)) = Id_n \\
+\end{aligned}
+```
+
+Tenemos que $E' = E^{-1}$. 
+
+## Matriz MRF 
+
+> Una matriz $A \in \KK^{m \times n}$ está en forma reducida por filas (MRF) si cumple las siguientes condiciones:\
+1 ) La primera entrada no nula de una fila es $1$, llamado **1 principal** 
+2 ) Cada columna que contiene un 1 principal tiene **todos los otros elementos iguales a $0$**
+
+**Ejemplos:**
+
+```math
+\begin{bmatrix}
+1 & 0 & 0 & -4 \\ 
+0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 1 
+\end{bmatrix}
+\quad  \begin{bmatrix}
+0 & 1 \\
+0 & 0 \\
+1 & 0
+\end{bmatrix}
+```
+
+## Matriz MERF 
+
+> Una matriz $A \in \KK^{m \times n}$ está en forma escalonada reducida por filas (MERF) si cumple las siguientes condiciones:\
+1 ) Es reducida por filas (MRF)\
+2 ) Las filas nulas (si las hay) están debajo de las filas no nulas\
+3 ) En cada fila no nula, el primer elemento no nulo está a la derecha del pivote de la fila anterior.
+
+**Ejemplos:**
+
+```math
+\begin{bmatrix}
+1 & 0 & 2 & 0 \\
+0 & 1 & -1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\quad  \begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{bmatrix}
+```
+
+> Toda matriz $A \in \KK^{m \times n}$ es equivalente por filas a una MERF. 
+
+**Demostración:**
+
+Probamos que $A$ es equivalente por filas a $B \in \KK^{m \times n}$ con $B$ MRF.
+
+Consideremos la primera fila de $A$. Si es nula, no hacemos nada. Si no lo es, entonces tiene la forma
+
+```math 
+[0, \ldots, 0, a_{1j}, a_{1(j+1)}, \ldots, a_{1n}] \quad a_{1j} \not= 0
+```
+
+Mutliplicamos la primera fila por $(a_{1j})^{-1}$ y obtenemos: 
+
+```math 
+[0, \ldots, 0, 1, a_{1(j+1)}', \ldots, a_{1n}']
+```
+
+Ahora para cada $k \geq 2$ hacemos: $[F_k - (a_{kj} \cdot F_1)]$
+
+Pasamos a la fila dos de $A_1$: si es nula, no hacemos nada. Si no lo es, multiplicamos la segunda fila por $(a_{2l})^{-1}$, donde $l$ es el índice del primer elemento no nulo de la fila dos. Luego, para cada $k \geq 3$ hacemos: $[F_k - (a_{kl}' \cdot F_2)]$ y obtenemos $A_2$. Observemos que $a_{2l}'' = 1$ y que $a_{kl}'' = 0$. si $k \not= 2$. 
+
+Notar que la columna $j$ queda inalterada. Luego las operaciones por fila dejan $a_{2j}' = 0$ y por ende $l \not = j$. Luego las operaciones por fila dejan $a_{1j}'' = 1, a_{kj}'' = 0, \; \forall k \not = j, \; k \geq 2$.
+
+
+```math 
+A_1 = \begin{bmatrix}
+0 & \ldots & 0 & 1 & a_{1(j+1)}' & \ldots & a_{1n}' \\
+0 & \ldots & 0 & 0 & \ldots  & \ldots & *  \\
+* & * & * & \vdots & * & * & * \\
+* & * & * & 0 & * & * & * \\
+\; & \; & \; & (\textnormal{col.} \; j) & \; & \; & \; \\
+\end{bmatrix}
+```
+
+```math 
+A_2 = \begin{bmatrix}
+0 &  \ldots & 0 & 1 & a_{1(j+1)}'' & \ldots & a_{1n}'' \\
+0 & 1 & a_{2(l+1)}'' & \ldots & \ldots &\ldots & a_{2n}'' \\
+* & 0 & \ldots & 0 & * & *  \\
+* & \vdots & * & \vdots & * & * \\
+\; & (\textnormal{col.} \; l)  & \; & (\textnormal{col.} \; j) & \; & \; & \; \\
+\end{bmatrix}
+```
+
+Asi, luego de $m$ pasos obtenemos $B = Am$, donde cada fila $k$ o bien es nula o su primer elemento es $1$ y los demás restantes de la columna son $0$. 
+
+Paso 2: Toda MRF es equivalente por filas a una MERF (y así $A$ es equivalente por filas a una MERF).\
+Basta con permutar las filas nulas por las últimas filas y reordenar lass filas $1, \ldots, r$ de modo que si el $1$ principal de la fila $i$ está en la columna $k_i$, para $i = 1, \ldots, r \implies k_1 < \ldots < k_r$. 
+
+***
+
+> Sea $A \in \KK^{m \times n}$. Entonces $A \sim Id_n \iff$ el sistema homogéneo $Ax = 0$ tiene solo solución trivial. 
+
+**Demostración:**
+
+Supongamos que $Ax = 0$ tiene solo la solucion trivial. Sea $B$ una MERF $A \sim B$. 
+
+Como $Bx = 0$ tiene solo la solución trivial no hay variables libres. Es decir, si $B$ tiene $r$ filas no nulas $\implies n - r = 0 \implies r = n$. Cada fila $i$ de esas tiene un $1$ en la posición $k_i$ con $k_1 < \ldots < k_n$. Luego $k_1 = 1, \ldots, k_n = n$. Por lo tanto, $B = Id_n$.
+
+Si $A \sim Id_n$, entonces las soluciones de $Ax = 0$ coinciden con las de $Id_n x = 0$, esto es:
+
+```math 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & \ddots & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix} \begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix} = \begin{bmatrix}
+0 \\
+0 \\
+\vdots \\
+0
+\end{bmatrix} \implies x_1 = x_2 = \ldots = x_n = 0
+```
+
+## Matriz Cuadrada
+
+> Una matriz $A \in \KK^{n \times n}$ es cuadrada si tiene el mismo número de filas y columnas.
+
+Las siguientes afirmaciones son equivalentes para una matriz cuadrada $A \in \KK^{n \times n}$:
+
+**1)** $A$ es inversible.\
+**2)** $A$ es equivalente por filas a $Id_n$.\
+**3)** $A$ es producto de matrices elementales.
+
+**Demostración:**
+
+Sea $R$ una MERF tal que $A \sim R$. Del teorema anterior, $\exists E_1, \ldots, E_k$ matrices elementales tal que:
+
+```math 
+R = E_k \cdot E_{k-1} \cdot \ldots \cdot E_1 \quad (*)
+```
+
+Como $R \in \KK^{n \times n}$, tenemos dos casos respecto a la cantidad de filas no nulas $r$ de $R$:
+
+- $r = n \implies$ hay $n$ principales/pivotes en $R, \therefore R = Id_n$. 
+- $r < n \implies$ con lo cual $R$ tiene al menos una fila nula. 
+
+**1)** $\implies$ **2)** Si $A$ es inversible, entonces $R$ también lo es, por $(*)$, $R$ es producto de matrices invertibles.\
+Si $R$ tuviera una fila nula, entonces:
+
+```math
+Id_n = R \cdot R^{-1} = \begin{bmatrix}
+\stackrel{\sim}{r}_{11} & \ldots & \stackrel{\sim}{r}_{1n} \\
+\vdots & \; & \vdots \\
+0 & \ldots & 0 \\
+\end{bmatrix} \cdot \begin{bmatrix}
+r_{11} & \ldots & r_{1n} \\
+\vdots & \; & \vdots \\
+r_{n1} & \ldots & r_{nn} \\
+\end{bmatrix} = \begin{bmatrix}
+\ast & \ldots & \ast \\
+\vdots & \; & \vdots \\
+0 & \ldots & 0 \\
+\end{bmatrix}
+```
+
+Lo cual es una contradicción. Por lo tanto vale $R = Id_n$.
+
+**2)** $\implies$ **3)** Si $A \sim Id_n$, entonces $Id_n = E_k \ldots E_1 \cdot A$. Multiplicando por $E_1^{-1} \ldots E_k^{-1}$ se obtiene:\
+$A = E_1^{-1} \ldots E_k^{-1}$, cada $E_i^{-1}$ es matriz elemental.
+
+**3)** $\implies$ **1)** Si $A$ es producto de matrices elementales, entonces $A$ es invertible por ser producto de matrices invertibles.
+
+*** 
+
+Las siguientes afirmaciones son equivalentes para una matriz cuadrada $A \in \KK^{n \times n}$:
+
+**1)** $A$ es inversible.\
+**2)** El sistema homogéneo $Ax = 0$ tiene solo la solución trivial.\
+**3)** Para todo $b \in \KK^{n \times 1}$, el sistema $Ax = b$ tiene solución.
+
+**Demostración:**
+
+**1)** $\implies$ **2)** Si $A$ es inveritble y $x_0$ es solución del sistema $Ax = 0$ entonces:
+
+```math
+x_0 = Id_n \cdot x_0 = A^{-1} \cdot A \cdot x_0 = A^{-1} \cdot 0 = 0
+```
+
+**2)** $\implies$ **1)** Puede probarse con la contrarrecíproca: Si $A$ no es inversible, entonces $A$ no es equivalente por filas a la identidad. Luego si $A \sim R$, con $R$ MERF, $R$ tiene al menos una fila nula. Entonces el sistema $Rx = 0$ tiene  soluciones no triviales, con lo cual $Ax = 0$ tiene soluciones no triviales.
+
+**3)** $\implies$ **1)** Si $A$ no es inversible, entonces $A$ no es equivalente por filas a la identidad, luego si $A \sim R$ con $R$ MERF, $R$ tiene al menos una fila nula y $A = P \cdot R$ con $P$ inversible. Luego tenemos: 
+
+```math
+\begin{aligned}
+Ax = b &\iff P^{-1} \cdot R x = P^{-1} \cdot b \\
+&\iff R x = P^{-1} \cdot b
+\end{aligned}
+```
+
+El sistema $Rx = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{pmatrix}$ no tiene solución pues la última fila de $R$ es nula. Luego si consideramos $b = P \cdot \begin{pmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{pmatrix}$, el sistema $Ax = b$ no tiene solución.
+
+***
+
+Las siguientes afirmaciones son equivalentes para una matriz cuadrada $A \in \KK^{n \times n}$:
+
+**1)** $A$ es inversible.\
+**2)** $\exists B \in \KK^{n \times n}$ tal que $A \cdot B = I_n$.\
+**3)** $\exists C \in \KK^{n \times n}$ tal que $C \cdot A = I_n$.
+
+**Demostración:**
+
+**1)** $\implies$ **2)** y **1)** $\implies$ **3)** Por definición de matriz inversa.
+
+**3)** $\implies$ **1)** Si $x_0$ es solución de $Ax = 0$, entonces:
+
+```math
+x_0 = Id_n \cdot x_0 = (C \cdot A) \cdot x_0 = C \cdot (A \cdot x_0) = C \cdot 0 = 0
+```
+
+Luego, por el teorema anterior, $A$ es inversible.
+
+**2)** $\implies$ **1)** Sea $b \in \KK^{n \times 1}$. Entonces, si $x_0 = B \cdot b$:
+
+```math
+A \cdot x_0 = A \cdot (B \cdot b) = (A \cdot B) \cdot b = I_n \cdot b = b
+```
+
+Luego, $x_0$ es solución del sistema $Ax = b$. 

@@ -77,17 +77,89 @@ Existe una base ortogonal $\stackrel{\sim}{B} \; = \{ \bfw_1, \ldots, \bfw_n \}$
 \langle \bfv_1, \ldots, \bfv_k \rangle = \langle \bfw_1, \ldots, \bfw_k \rangle, \quad k = 1, \ldots, n \\
 ```
 
-Recursivamente, $\bfw_k = \frac{\bfw_k'}{\|\bfw_k'\|}$ donde:
+Recursivamente, $\bfw_k = \frac{{\bfw_k}'}{\|{\bfw_k}'\|}$ donde:
 
 ```math
-\bfw_k' = \bfv_k - \sum_{j=1}^{k-1} \frac{\langle \bfv_k, \bfw_j' \rangle}{\|\bfw_j'\|^2} \bfw_j'
+{\bfw_k}' = \bfv_k - \sum_{j=1}^{k-1} \frac{\langle \bfv_k, {\bfw_j}' \rangle}{\|{\bfw_j}'\|^2} \cdot {\bfw_j}'
 ```
+
+**Demostración:**
+
+Construiremos los vectores ${\bfw_k}'$ como en el enunciado de modo recursivo y probaremos que\
+$\langle \bfv_1, \dots, \bfv_k \rangle = \langle\bfw_1, \dots,\bfw_k \rangle$.
+Como el conjunto será ortogonal (y luego ortonormal),\
+en particular será l.i. y $\therefore \tilde{\Beta} = \{\bfw_1, \dots,\bfw_n\}$ será una base de $V$.
+
+Si $k = 1$:
+
+```math 
+{\bfw_1}' = \bfv_1, \quad\bfw_1 = \frac{{\bfw_1}'}{\|{\bfw_1}'\|} \implies \langle \bfv_1 \rangle = \langle\bfw_1 \rangle
+```
+
+Continuando con el paso recursivo:
+
+Asumimos que $\langle \bfv_1, \dots, \bfv_k \rangle = \langle\bfw_1, \dots,\bfw_k \rangle$ con $\{\bfw_1, \dots,\bfw_k\}$ ortonormal 
+
+Definimos:
+
+```math
+\begin{aligned}
+{\bfw_{k+1}}' &= \bfv_{k+1} - \sum_{j=1}^k \frac{\langle \bfv_{k+1}, {\bfw_j}' \rangle}{\|{\bfw_j}'\|^2} \cdot {\bfw_j}' \\
+&= \bfv_{k+1} - \sum_{j=1}^k \left\langle \bfv_{k+1}, \frac{{\bfw_j}'}{\|{\bfw_j}'\|} \right\rangle \cdot \frac{{\bfw_j}'}{\|{\bfw_j} '\|} \\
+&= \bfv_{k+1} - \sum_{j=1}^k \langle \bfv_{k+1}, \bfw_j \rangle \cdot \bfw_j
+\end{aligned}
+```
+
+Luego, para cualquier $l \in \{1, \dots, k\}$:
+
+```math 
+\begin{aligned}
+\langle {\bfw_{k+1}}', \bfw_l \rangle &= \left\langle \bfv_{k+1} - \sum_{j=1}^k \langle \bfv_{k+1}, \bfw_j \rangle \bfw_j, \; \bfw_l \right\rangle \\
+&= \langle \bfv_{k+1}, \bfw_l \rangle - \sum_{j=1}^k \langle \bfv_{k+1}, \bfw_j \rangle \cdot  \underbrace{\langle \bfw_j, \; \bfw_l \rangle}_{\delta_{jl}} \\
+&= \langle \bfv_{k+1}, \bfw_l \rangle - \langle \bfv_{k+1}, \bfw_l \rangle \\
+&= 0
+\end{aligned}
+```
+
+$\therefore \{\bfw_1, \dots, \bfw_k, {\bfw_{k+1}}'\}$ es ortogonal $\implies \{\bfw_1, \dots, \bfw_k, \bfw_{k+1}\}$ también lo es y más aún, es ortonormal.
+
+Queremos ver que $\langle \bfv_1, \dots, \bfv_{k+1} \rangle = \langle \bfw_1, \dots, \bfw_{k+1} \rangle$.\
+Sabemos que: $\langle \bfv_1, \dots, \bfv_k \rangle = \langle \bfw_1, \dots, \bfw_k \rangle$ y que $\langle \bfw_1, \dots, \bfw_{k+1} \rangle = \langle \bfw_1, \dots, \bfw_k, {\bfw_{k+1}}' \rangle$.
+
+- Como $\bfv_{k+1} = {\bfw_{k+1}}' + \displaystyle{\sum_{j=1}^k} \langle \bfv_{k+1}, \bfw_j \rangle \cdot  \bfw_j \in \langle \bfw_1, \ldots, \bfw_k, {\bfw_{k+1}}' \rangle$\
+y $\bfv_1 \in \langle \bfv_1, \ldots, \bfv_k \rangle = \langle \bfw_1, \ldots, \bfw_k \rangle \subseteq \langle \bfw_1, \ldots, \bfw_k, {\bfw_{k+1}}' \rangle, \;$ $\forall i = 1, \ldots, k$\
+$\implies \langle \bfv_1, \ldots, \bfv_{k+1} \rangle \subseteq \langle \bfw_1, \ldots, \bfw_k, {\bfw_{k+1}}' \rangle = \langle \bfw_1, \ldots, \bfw_{k+1} \rangle$.
+
+$\;$
+
+- Despejando $\bfw_{k+1}'$
+
+```math 
+\begin{aligned}
+{\bfw_{k+1}}' = \bfv_{k+1} - \displaystyle{\sum_{j=1}^k} \langle \bfv_{k+1}, \bfw_j \rangle \cdot  \bfw_j \in \; & \langle \bfv_{k+1} \rangle + \langle \bfw_1, \ldots, \bfw_k \rangle \\
+&\; \\
+&\langle \bfv_{k+1} \rangle + \langle \bfv_1, \ldots, \bfv_k \rangle \\
+= \; & \langle \bfv_1, \ldots, \bfv_{k+1} \rangle
+\end{aligned}
+```
+
+Además, $\forall i = 1, \ldots, k$ 
+
+```math 
+\begin{aligned}
+&\bfw_i \in \langle \bfw_1, \ldots, \bfw_k \rangle = \langle \bfv_1, \ldots, \bfv_k \rangle \subseteq \langle \bfv_1, \ldots, \bfv_{k+1} \rangle \\
+&\implies \langle \bfw_1, \ldots, {\bfw_{k+1}}' \rangle \subseteq \langle \bfv_1, \ldots, \bfv_{k+1} \rangle \\
+&\implies \langle \bfw_1, \ldots, \bfw_{k+1} \rangle \subseteq \langle \bfv_1, \ldots, \bfv_{k+1} \rangle
+\end{aligned}
+```
+
+Por lo tanto, $\langle \bfv_1, \ldots, \bfv_{k+1} \rangle = \langle \bfw_1, \ldots, \bfw_{k+1} \rangle$.
 
 ***
 
 ### Complemento ortogonal
 
-> Sea $(V, \langle \cdot , \cdot \rangle)$ un espacio euclídeo y sea $S \subseteq V$ un conjunto.\
+> Sea $(V, \langle \cdot , \cdot \rangle)$ un espacio euclídeo de dimensión finita $n$ y sea $S \subseteq V$ un conjunto.\
 El complemento ortogonal de $S$ es el conjunto: 
 
 ```math
@@ -99,3 +171,49 @@ Algunas propiedades de $S^{\perp}$ son:
 1. $S^{\perp}$ es un subespacio de $V$.
 2. $V = S \oplus S^{\perp}$ si $S$ es un subespacio de $V$.
 3. $(S^{\perp})^{\perp} = S$ si $S$ es un subespacio de $V$.
+
+***
+
+### Ejercicios resueltos - Ortogonalidad
+
+**1.**
+
+Aplicar el proceso de Gram-Schmidt a la base ordenada $\{(1, 1, 0),(0, 1, 1),(1, 0, 1)\}$ para obtener una base ortonormal de $\RR^3$ 
+
+El primer paso es obtener la base ortogonal. Para ello aplicamos el proceso de Gram-Schmidt:
+
+```math
+\begin{aligned}
+\bfw_1' &= (1, 1, 0) \\
+&\; \\
+\bfw_2' &= (0, 1, 1) - \frac{\langle (0, 1, 1), (1, 1, 0) \rangle}{\|(1, 1, 0)\|^2} (1, 1, 0) = (0, 1, 1) - \frac{1}{2} (1, 1, 0) = \left(-\frac{1}{2}, \frac{1}{2}, 1\right) \\
+&\; \\
+\bfw_3' &= (1, 0, 1) - \frac{\langle (1, 0, 1), (1, 1, 0) \rangle}{\|(1, 1, 0)\|^2} (1, 1, 0) - \frac{\langle (1, 0, 1), \left(-\frac{1}{2}, \frac{1}{2}, 1\right) \rangle}{\left\|\left(-\frac{1}{2}, \frac{1}{2}, 1\right)\right\|^2} \left(-\frac{1}{2}, \frac{1}{2}, 1\right) \\
+&\; \\
+&= (1, 0, 1) - (\frac{1}{2}, \frac{1}{2}, 0) - (- \frac{1}{6}, \frac{1}{6}, \frac{1}{3}) \\
+&\; \\
+&= (\frac{2}{3}, -\frac{2}{3}, \frac{2}{3})
+\end{aligned}
+```
+
+Su base ortogonal es: 
+
+```math
+\left\{(1, 1, 0), \left(-\frac{1}{2}, \frac{1}{2}, 1\right), \left(\frac{2}{3}, -\frac{2}{3}, \frac{2}{3}\right) \right\}
+```
+
+Luego, normalizamos los vectores para obtener la base ortonormal:
+
+```math
+\begin{aligned}
+\bfw_1 &= \frac{1}{\sqrt{2}} (1, 1, 0) = \left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0\right) \\
+\bfw_2 &= \frac{1}{\sqrt{6}} (-1, 1, 2) = \left(-\frac{1}{\sqrt{6}}, \frac{1}{\sqrt{6}}, \frac{2}{\sqrt{6}}\right) \\
+\bfw_3 &= \frac{1}{\sqrt{6}} \left(\frac{2}{3}, -\frac{2}{3}, \frac{2}{3}\right) = \left(\frac{1}{\sqrt{3}}, -\frac{1}{\sqrt{3}}, \frac{1}{\sqrt{3}}\right)
+\end{aligned}
+```
+
+La base ortonormal resultante es: 
+
+```math
+\left\{\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0\right), \left(-\frac{1}{\sqrt{6}}, \frac{1}{\sqrt{6}}, \frac{2}{\sqrt{6}}\right), \left(\frac{1}{\sqrt{3}}, -\frac{1}{\sqrt{3}}, \frac{1}{\sqrt{3}}\right) \right\}
+```

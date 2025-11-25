@@ -470,7 +470,51 @@ Donde $(17, 25, 33)$ es combinación lineal de los vectores $(1, 2, 3)$ y $(4, 5
 
 ### Sistema de generadores 
 
-> Sea $V$ un $\KK$-espacio vectorial y $G \subseteq V$, entonces $G$ es un **sistema de generadores** de $V$ si todo elemento de $V$ es combinación lineal de $G \;\; ( <G> \; = V)$
+> Sea $V$ un $\KK$-espacio vectorial y $G \subseteq V$, entonces $G$ es un **sistema de generadores** de $V$ si todo elemento de $V$ es combinación lineal de $G$. Es decir, $\langle G \rangle = V$
+
+> Sea $V$ un $\KK$-espacio vectorial y $S \subseteq V$ un subespacio y $G \subseteq V$ un subconjunto.\
+Entonces $\langle G \rangle \subseteq S \iff G \subseteq S$.
+
+**Demostración**:
+
+($\Rightarrow$) Si $\langle G \rangle \subseteq S$, entonces expresamos cada $\bfv \in G$ como: 
+
+```math
+\bfv = 1 \cdot \bfv \in \langle G \rangle \subseteq S \implies v \in S
+```
+
+($\Leftarrow$) Supongamos que $G \subseteq S$. Cada combinación lineal es $v = \displaystyle{\sum_{i=1}^n} \alpha_i \bfv_i$ con $\alpha \in \KK, \; \bfv_i \in G$. Entonces, $\bfv_i \in S$.\
+Luego $v \in S$ ya que $S$ es subespacio
+
+***
+
+> Sean $\{ \bfv_1, \ldots, \bfv_n \} \subseteq V$ un conjunto de vectores de un $\KK$-espacio vectorial $V$.\
+Entonces $\langle \bfv_1, \ldots, \hat{\bfv_i}, \bfv_{i+1}, \ldots , \bfv_n \rangle = \langle \bfv_1, \ldots, \bfv_n \rangle \iff \bfv_i \in \langle \bfv_1, \ldots, \hat{\bfv_i}, \bfv_{i+1}, \ldots , \bfv_n \rangle$
+
+($\Rightarrow$) Supongamos $\langle \bfv_1 , \ldots , \hat{\bfv_i} , \ldots , \bfv_n \rangle = \langle \bfv_1 , \ldots , \bfv_n \rangle$.\
+Dado que $\bfv_i \in \langle \bfv_1 , \ldots , \bfv_n \rangle$ (porque el conjunto de la derecha lo genera), por la igualdad de espacios tenemos $\bfv_i \in \langle \bfv_1 , \ldots , \hat{\bfv} , \ldots , \bfv_n \rangle$. Esto muestra la implicación directa.
+
+($\Leftarrow$) Supongamos que $\bfv_i \in \langle \bfv_1 , \ldots , \hat{\bfv_i} , \ldots , \bfv_n \rangle$. Queremos probar que los dos espacios generados son iguales.
+
+- $\langle \bfv_1, \ldots, \hat{\bfv_i}, \ldots, \bfv_n \rangle \subseteq \langle \bfv_1, \ldots, \bfv_n \rangle$ es claro. 
+- Para la otra inclusión, sea $\bfv \in \langle \bfv_1, \ldots, \bfv_n \rangle, \; \bfv = \alpha_1 \bfv_1 + \ldots + \alpha_i \bfv_i + \ldots + \alpha_n \bfv_n$.\
+Por hipótesis, sabemos que $\bfv_i$ si pertenece al espacio generado puede expresarse como combinación lineal de los otros vectores.
+
+```math
+\bfv_i = \beta_1 \bfv_1 + \ldots + \beta_{i-1} \bfv_{i-1} + \beta_{i+1} \bfv_{i+1} + \ldots + \beta_n \bfv_n
+```
+
+Reemplazando en la expresión de $\bfv$:
+
+```math
+\bfv = \alpha_1 \bfv_1 + \ldots + \alpha_i (\beta_1 \bfv_1 + \ldots + \beta_{i-1} \bfv_{i-1} + \beta_{i+1} \bfv_{i+1} + \ldots + \beta_n \bfv_n) + \ldots + \alpha_n \bfv_n
+```
+
+Por lo tanto, $\bfv$ es combinación lineal de los vectores $\{ \bfv_1, \ldots, \hat{\bfv_i}, \ldots, \bfv_n \}$, es decir, $\bfv \in \langle \bfv_1, \ldots, \hat{\bfv_i}, \ldots, \bfv_n \rangle$.
+
+Esto prueba la inclusión $\langle \bfv_1, \ldots, \bfv_n \rangle \subseteq \langle \bfv_1, \ldots, \hat{\bfv_i}, \ldots, \bfv_n \rangle$ y por lo tanto la igualdad de los espacios generados.
+
+***
 
 ### Independencia lineal 
 
@@ -484,15 +528,150 @@ De lo contrario, es **linealmente dependiente**.
 
 Como ejemplo en $\RR^2$, $(1, 0); (0, 1)$ son linealmente independientes. Ninguno puede escribirse como múltiplo del otro.
 
+***
+
 ### Base y dimensión 
 
-> Sea $V$ un $\KK$-espacio vectorial. Una base de $V$ es el conjunto $B \subseteq V$ tal que $B$ genera a $V$ y $B$ es l.i.
+> Sea $V$ un $\KK$-espacio vectorial. Una base de $V$ es el conjunto $B \subseteq V$ tal que:\
+1 ) $B$ es l.i. \
+2 ) $\langle B \rangle = V$
+
+> Sea $V$ un $\KK$-espacio vectorial. Sean $\{ \bfv_1, \ldots, \bfv_r \} \subseteq V, \langle \bfv_1, \ldots, \bfv_r \rangle = V$.\
+Si $\{ \bfw_1, \ldots, \bfw_s \} \subseteq V$ es l.i., entonces $s \leq r$.
+
+**Demostración:**
+
+Como $\bfw_i \in V = \langle \bfv_1, \dots, \bfv_r \rangle, \exists a_{ij} \in F$ (escalares) tales que:
+
+```math 
+\bfw_i = \displaystyle{\sum_{j=1}^r} a_{ij} v_j
+```
+
+```math
+\begin{cases}
+a_{11} \cdot x_1 + \dots + a_{1s} x_s = 0 \\
+\vdots \\
+a_{r1} \cdot x_1 + \dots + a_{rs} x_s = 0
+\end{cases}
+```
+
+Si $(y_1, \dots, y_s) \in F^s$ es solución del sistema, luego
+
+```math
+\begin{aligned}
+\Rightarrow \sum_{k=1}^s y_k \cdot w_k &= \sum_{k=1}^s y_k \cdot \left( \displaystyle{\sum_{j=1}^r} a_{jk} \cdot v_j \right) \\
+&= \displaystyle{\sum_{j=1}^r} \left( \underbrace{\displaystyle{\sum_{k=1}^s} a_{jk} \cdot y_k}_{= 0 j\text{ (-ésima ecuación)}} \right) \cdot v_j \\
+&= \displaystyle{\sum_{j=1}^r} 0 \cdot v_j \\
+&= 0 \\
+\Rightarrow \sum_{k=1}^s y_k \cdot w_k = 0
+\end{aligned}
+```
+
+Luego como $\{w_1, \dots, w_s\}$ es un conjunto l.i., se tiene que $y_k = 0, \; \forall k = 1, \dots, s$. Es decir, la única solución posible es la trivial (todas las soluciones son nulas) $\therefore s \le r$.\
+($\rightarrow$ la cantidad de ecuaciones $r$ es mayor o igual que el número de variables $s$)
+
+***
 
 > La dimensión de $V$ es la cantidad de elementos de su base $B$, se denota $\dim V$ 
 
 > Si tenemos dos bases $B_1, B_2$ de $V$, donde $B_1 = \{ \bfv_1, \ldots, \bfv_n \}, \; B_2 = \{ \bfw_1, \ldots, \bfw_m \}$, entonces $n = m$
 
-> Sea $V$ un $\KK$-espacio vectorial de dimensión finita y sea $S$ un conjunto l.i. de $V$. Entonces $S$ es finito y existen $\bfv_1, \ldots, \bfv_n$ vectores de $V$ tal que $S \cup \{\bfv_1, \ldots, \bfv_n\}$ es base de $V$
+**Demostración:** se prueba considerando $B_1$ como sistema de generadores y $B_2$ como conjunto l.i. y viceversa.\
+Si $|B_1| \leq |B_2| \; \land \; |B_2| \leq |B_1| \implies |B_1| = |B_2|$.
+
+***
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión finita y sea $B = \{ \bfv_1, \ldots, \bfv_n \}$ una base finita de $V$.\
+Entonces para cada $\bfv \in V, \exists! \; \alpha_1, \ldots, \alpha_n \in \KK$ tales que: $\bfv = \displaystyle{\sum_{i=1}^n} \alpha_i \bfv_i$.
+
+**Demostración:**
+
+Sea $\bfv \in V$. Como $v \in \langle B \rangle$, existen escalares $\alpha_1, \ldots, \alpha_n \in \KK$ tales que $\bfv = \displaystyle{\sum_{i=1}^n} \alpha_i \bfv_i$.
+
+Por otro lado, si $\beta_1, \ldots, \beta_n \in \KK$ son otros escalares tales que $\bfv = \displaystyle{\sum_{i=1}^n} \beta_i \bfv_i$, entonces:
+
+```math
+\begin{aligned}
+0 &= \bfv - \bfv \\
+&= \displaystyle{\sum_{i=1}^n} \alpha_i \bfv_i - \displaystyle{\sum_{i=1}^n} \beta_i \bfv_i \\
+&= \displaystyle{\sum_{i=1}^n} (\alpha_i - \beta_i) \bfv_i
+\end{aligned}
+```
+
+Como $\{ \bfv_1, \ldots, \bfv_n \}$ es l.i., se tiene que $\alpha_i - \beta_i = 0$ para todo $1 \leq i \leq n$, es decir, $\alpha_i = \beta_i$ para todo $1 \leq i \leq n$.
+
+***
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión finita. Si $S \subseteq V$ es l.i.  y $\bfw \in V - \langle S \rangle$, entonces $S \cup \{ \bfw \}$ es l.i.
+
+**Demostración:**
+
+Supongamos que $\bfv_1, \ldots, \bfv_n$ son elementos distintos de $S$ y sean $\lambda_1, \ldots, \lambda_n, \mu \in \KK$ tales que:
+
+```math
+\lambda_1 \bfv_1 + \ldots + \lambda_n \bfv_n + \mu \bfw = 0
+```
+
+Si $\mu \not= 0$, entonces:
+
+```math
+\bfw = - \frac{1}{\mu} (\lambda_1 \bfv_1 + \ldots + \lambda_n \bfv_n)
+```
+
+Lo cual implica que $\bfw \in \langle S \rangle$, lo cual es una contradicción. 
+
+Si $\mu = 0$, entonces:
+
+```math
+\lambda_1 \bfv_1 + \ldots + \lambda_n \bfv_n = 0
+```
+
+Como $S$ es l.i., se tiene que $\lambda_1 = \ldots = \lambda_n = 0$. Por lo tanto, $S \cup \{ \bfw \}$ es l.i.
+
+***
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión finita $n$. Si $S \subseteq V$ es l.i. donde $|S| = n$, entonces $S$ es una base de $V$.
+
+**Demostración:**
+
+Supongamos que $\langle S \rangle \subsetneq V$, luego, $\exists \; \bfw \in V - \langle S \rangle$.\
+Tenemos que $S \cup \{ \bfw \}$ es l.i., y $|S \cup \{ \bfw \}| = n + 1$, lo cual es una contradicción ya que la dimensión de $V$ es $n$.
+
+***
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión finita $n$. Sea $S_0$ conjunto l.i. de $V$. Entonces $S_0$ es finito y $\exists \; \bfw_1, \ldots, \bfw_n \in V$ tales que $S_0 \cup \{ \bfw_1, \ldots, \bfw_k \}$ es una base de $V$.
+
+**Demostración:**
+
+$S_0$ es finito pues observamos que $|S_0| \le \dim V = n$. Si $S_0$ genera a $V$, entonces $S_0$ es una base.\
+Si $S_0$ no genera a $V \Rightarrow \exists w_1 \in V - \langle S \rangle$, luego por el lema anterior, $S_1 = S_0 \cup \{w_1\}$ es l.i.
+
+Si $S_1$ genera a $V$, ya está. Si $S_1$ no genera a $V$. $\Rightarrow \exists w_2 \in V - \langle S \rangle$ tal que $S_2 = S_0 \cup \{w_1, w_2\}$ es l.i.\
+Continuando (y en no más de $\dim V$ pasos) se llega a $S_m = S_0 \cup \{w_1, \dots, w_m\}$ que es l.i. y genera a $V$, luego $S_m$ es base 
+
+***
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión finita $n$, $V \not= 0$. Sea $\langle S \rangle = V$. Entonces un subconjunto $B$ de $S$ es una base. 
+
+**Demostración:**
+
+Sea $C = \{ | R | \; | \; R \subseteq S, \; R \text{ l.i.} \}$. Como $v \not=0$ y $\langle S \rangle = V \implies C \not= \emptyset$. Como $C$ no es vacío, este tiene máximo. 
+
+Sea $n$ el máximo de $C$ y sea $B \subseteq S$ un subconjunto l.i. de $S$ tal que $|B| = n$, podemos ver que $B$ es base: 
+
+Supongamos que $\bfv \in S$ tal que $\bfv \not in \langle B \rangle$. Como $B$ es l.i., entonces $B \cup \{ \bfv \}$ es l.i. y $|B \cup \{ \bfv \}| = n + 1$, lo cual es una contradicción. Entonces, $\bfv \in S \implies \bfv \in \langle B \rangle$.\
+Por lo tanto, $\langle S \rangle \subseteq \langle B \rangle \implies V \subseteq \langle B \rangle \implies V = \langle B \rangle$. Entonces, $B$ es base de $V$.
+
+***
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión finita $n$. $S \subseteq V, |S| = n$. Si $\langle S \rangle = V \implies S$ es una base de $V$.
+
+**Demostración:**
+
+Si $S$ es base, ya está. Si no lo es, $\exists B \subsetneq S$ base de $V$. Luego, $|B| < |S| = n$.\
+Pero como $B$ es base, $|B| = n$. Contradicción.
+
+***
 
 ### Vectores canónicos y base canónica
 
@@ -843,16 +1022,164 @@ Podemos decir que:
 3. Si $\{ \bfv_i \}_{i \in I}$ es sistema de generadores de $S$ y $\{ \bfw_j \}_{j \in J}$ es un sistema de generadores de $T$,\
 $\{ \bfv_i \}_{i \in I} \cup \{\bfw_j\}_{j \in J}$ es un sistema de generadores de $S + T$
 
+**Demostración:**
+
+1. $0 \in S + T $ ya que $0 = 0 + 0, \; 0 \in S, \; 0 \in T$.\
+Si $\bfv_1, \bfv_2 \in S + T$, tal que $\bfv_1 = (x_1, y_1), \; \bfv_2 = (x_2, y_2), \lambda \in \KK$. Entonces,
+
+```math
+\begin{aligned}
+\bfv_1 + \lambda \bfv_2 &= (x_1, y_1) + \lambda (x_2, y_2) \\
+&= (x_1 + \lambda x_2, y_1 + \lambda y_2) \\
+\end{aligned}
+```
+
+2. $S \subseteq S + T$ pues $\forall \bfv \in S$ se tiene que $\bfv_1 + \bfv_1 + 0 \in S + T$. Análogamente, $T \subseteq S + T$. Luego, $S \cup T \subseteq S + T$.
+
+Sea $U$ un subespacio tal que $S \cup T \subseteq U$. Sea $\bfv \in S + T \implies \bfv = \mathbf{s} + \mathbf{t}, \; \mathbf{s} \in S, \; \mathbf{t} \in T$.
+
+```math 
+\begin{aligned}
+\mathbf{s} \in S \cup T &\subseteq U \implies \mathbf{s} \in U \\
+\mathbf{t} \in S \cup T &\subseteq U \implies \mathbf{t} \in U 
+\end{aligned}
+```
+
+Como $U$ es subespacio vectorial se tiene que $\bfv = \mathbf{s} + \mathbf{t} \in U \implies S + T \subseteq U$.
+
+3. Cada $\bfv \in S + T$ es de la forma $\bfv = \mathbf{s} + \mathbf{t}, \; \mathbf{s} \in S, \; \mathbf{t} \in T$.\
+Como $\mathbf{s} \in S \implies \exists \; \{ \alpha_i \}_{i \in I} \subseteq \KK$ tal que $\mathbf{s} = \displaystyle{\sum_{i \in I}} \alpha_i \bfv_i$ con $\alpha_i = 0$ salvo un número finito. Análogamente, para $\mathbf{t} \in T \implies \exists \; \{ \beta_j \}_{j \in J} \subseteq \KK$ tal que $\mathbf{t} = \displaystyle{\sum_{j \in J}} \beta_j \bfw_j$ con $\beta_j = 0$ salvo un número finito.
+
+```math 
+\bfv = \mathbf{s} + \mathbf{t} = \displaystyle{\sum_{i \in I}} \alpha_i \bfv_i + \displaystyle{\sum_{j \in J}} \beta_j \bfw_j
+```
+
+***
+
 > Sea $V$ un $\KK$-espacio vectorial y $S, T$ subespacios de $V$ de dimensión finita, entonces\
 $\dim (S+T) = \dim S + \dim T - \dim (S \cap T)$
+
+**Demostración:**
+
+Sean $s = \dim S, t = \dim T, r = \dim (S \cap T)$. Si $s = 0 \implies S = \{ 0 \}$, luego $S + T = T$ y $S \cap T = \{ 0 \}$. Análogamente, si $t = 0$.
+
+Sea $\{ \bfv_1, \ldots, \bfv_r \}$ una base de $S \cap T$. (si $r=0$, el conjunto es vacío). Luego, 
+
+- $\exists \; \bfw_{r+1}, \ldots, \bfw_s \in S$ tal que $\{ \bfv_1, \ldots, \bfv_r, \bfw_{r+1}, \ldots, \bfw_s \}$ es base de $S$.
+
+- $\exists \; \mathbf{u}_{r+1}, \ldots, \mathbf{u}_t \in T$ tal que $\{ \bfv_1, \ldots, \bfv_r, \mathbf{u}_{r+1}, \ldots, \mathbf{u}_t \}$ es base de $T$.
+
+Veamos que $\{ \bfv_1, \ldots, \bfv_r, \bfw_{r+1}, \ldots, \bfw_s, \mathbf{u}_{r+1}, \ldots, \mathbf{u}_t \}$ es base de $S + T$.
+
+Si $\bfv \in S + T$, entonces $\bfv = \mathbf{s} + \mathbf{t}, \; \mathbf{s} \in S, \; \mathbf{t} \in T$.
+
+```math 
+\begin{aligned}
+\mathbf{s} &= \displaystyle{\sum_{i = 1}^r} \alpha_i \bfv_i + \displaystyle{\sum_{i = r + 1}^s} \alpha_i \bfw_i \quad \alpha \in \KK \\
+\mathbf{t} &= \displaystyle{\sum_{j = 1}^r} \beta_i \bfv_i + \displaystyle{\sum_{j = r + 1}^t} \beta_i \mathbf{u}_i \quad \beta \in \KK \\
+\bfv &= \mathbf{s} + \mathbf{t} \\
+&= \displaystyle{\sum_{i = 1}^r} (\alpha_i + \beta_i) \bfv_i + \displaystyle{\sum_{i =  r + 1}^s} \alpha_i \bfw_i + \displaystyle{\sum_{i = r + 1}^t} \beta_i \mathbf{u}_i \\
+\bfv &\in \langle \bfv_1, \ldots, \bfv_r, \bfw_{r+1}, \ldots, \bfw_s, \mathbf{u}_{r+1}, \ldots, \mathbf{u}_t \rangle \quad (\text{l.i.})
+\end{aligned} 
+```
+
+Sean $\alpha_i, \beta_j, \gamma_k \in \KK$ tales que:
+
+```math
+\begin{aligned}
+\displaystyle{\sum_{i = 1}^r} \alpha_i \bfv_i + \displaystyle{\sum_{j = r + 1}^s} \beta_j \bfw_j + \displaystyle{\sum_{k = r + 1}^t} \gamma_k \mathbf{u}_k &= 0 \\
+\underbrace{\displaystyle{\sum_{i = 1}^r} \alpha_i \bfv_i + \displaystyle{\sum_{j = r + 1}^s} \beta_j \bfw_j}_{\in \; S} &=  \underbrace{- \displaystyle{\sum_{k = r + 1}^t} \gamma_k \mathbf{u}_k}_{\in \; T} \quad \in S \cap T
+\end{aligned}
+```
+
+$\therefore \displaystyle{\sum_{k = r + 1}^t} \gamma_k \mathbf{u}_k = \displaystyle{\sum_{i = 1}^r} \delta_i \bfv_i$ con $\delta_i \in \KK$. Pues $\{ \bfv_1, \ldots, \bfv_r \}$ es base de $S \cap T$. Luego,
+
+```math
+\begin{aligned}
+0 &= \displaystyle{\sum_{i = 1}^r} \alpha_i \bfv_i + \displaystyle{\sum_{j = r + 1}^s} \beta_j \bfw_j + \displaystyle{\sum_{i = 1}^r} \delta_i \bfv_i \\
+&= \displaystyle{\sum_{i = 1}^r} (\alpha_i + \delta_i) \bfv_i + \displaystyle{\sum_{j = r + 1}^s} \beta_j \bfw_j
+\end{aligned}
+```
+
+Por lo tanto $\alpha_i + \delta_i = 0, \; \forall i = 1, \ldots, r$ y $\beta_j = 0, \; \forall j = r + 1, \ldots, s$. Pues $\{ \bfv_1, \ldots, \bfv_r, \bfw_{r+1}, \ldots, \bfw_s \}$ es l.i. Luego, 
+
+```math 
+\displaystyle{\sum_{i = 1}^r} \alpha_i \bfv_i + \displaystyle{\sum_{k = r + 1}^t} \gamma_k \mathbf{u}_k = 0
+```
+
+Por lo tanto, $\alpha_i = 0, \; \forall i = 1, \ldots, r$ y $\gamma_k = 0, \; \forall k = r + 1, \ldots, t$. Pues $\{ \bfv_1, \ldots, \bfv_r, \mathbf{u}_{r+1}, \ldots, \mathbf{u}_t \}$ es l.i. Por lo tanto, el segundo conjunto deseado es l.i.
+
+Por lo tanto, 
+
+```math 
+\dim (S + T) = r + (s - r) + (t - r) = s + t - r = \dim S + \dim T - \dim (S \cap T)
+```
+
+***
 
 ### Suma directa y complemento
 
 > Se dice que $V$ es **suma directa** de $S, T$ y se nota $V = S \oplus T$ tal que: $\; V = S + T \; \land \; S \cap T = \{ 0 \}$
 
+> Si $V = S \oplus T \implies$ para cada $\bfv \in V \; \exists ! \; \mathbf{s} \in S, \; \mathbf{t} \in T$ tal que $\bfv = \mathbf{s} + \mathbf{t}$
+
+**Demostración:**
+
+Supongamos que existen $\mathbf{s}_1, \mathbf{s}_2 \in S$ y $\mathbf{t}_1, \mathbf{t}_2 \in T$ tal que:
+
+```math
+\mathbf{s}_1 + \mathbf{t}_1 = \bfv = \mathbf{s}_2 + \mathbf{t}_2
+```
+Luego, 
+
+```math
+\begin{aligned}
+\mathbf{s}_1 - \mathbf{s}_2 &= \mathbf{t}_2 - \mathbf{t}_1 \in S \cap T = \{ 0 \} \\
+\mathbf{s}_1 - \mathbf{s}_2 &= 0 \implies \mathbf{s}_1 = \mathbf{s}_2 \\
+\mathbf{t}_2 - \mathbf{t}_1 &= 0 \implies \mathbf{t}_1 = \mathbf{t}_2
+\end{aligned}
+```
+
 > Sea $S \subseteq V$ un subespacio de $V$. $T$ es un **complemento** de $S$ en $V$ si $V = S \oplus T$.
 
 ***
+
+> Sean $S, T$ subespacios vectoriales de $V$, con bases $B_{S}$ y $B_{T}$ respectivamente. Ambas son equivalentes:\
+1 ) $V = S \oplus T$\
+2 ) $B_{S} \cup B_{T}$ es base de $V$ 
+
+**Demostración:**
+
+**(1)** $\implies$ **(2)** Supongamos que $V = S \oplus T$. Como $V = S + T$, entonces $B_{S} \cup B_{T} = B$ es un conjunto de generadores de $S + T$.\
+Por otro lado, sean $\alpha_i \in \KK (i \in I)$ con $\alpha_i = 0$, salvo para finitos $i \in I$ y \
+$\beta_j \in \KK (j \in J)$ con $\beta_j = 0$, salvo para finitos $j \in J$ tenemos que: 
+
+```math
+\begin{aligned}
+&\implies \sum_{i \in I} \alpha_i \bfv_i + \sum_{j \in J} \beta_j \bfw_j = 0 \\ 
+&\implies \underbrace{\sum_{i \in I} \alpha_i \bfv_i}_{\in \; S} = - \underbrace{\sum_{j \in J} \beta_j \bfw_j}_{\in \; T} \in S \cap T = \{0\} \\ 
+&\implies \sum \alpha_i \bfv_i = 0 \; \land \; \sum \beta_j \bfw_j = 0 \\
+\end{aligned}
+```
+
+Como $B_{S}, B_{T}$ son l.i. se tiene que $\alpha_i = 0, \; \forall i$ y $\beta_j = 0, \; \forall j$. Por lo tanto, $B$ es l.i. 
+
+**(2)** $\implies$ **(1)** Como $B$ es base de $V \implies V = S + T$.\
+Si $\bfv \in S \cap T$, entonces: 
+
+- $\bfv \in S \implies \exists \; \alpha_i \in \KK (i \in I)$ con $\alpha_i = 0$, salvo para finitos $i \in I$ tal que $\bfv = \sum_{i \in I} \alpha_i \bfv_i$
+- $\bfv \in T \implies \exists \; \beta_j \in \KK (j \in J)$ con $\beta_j = 0$, salvo para finitos $j \in J$ tal que $\bfv = \sum_{j \in J} \beta_j \bfw_j$
+
+Tal que: 
+
+```math 
+\begin{aligned}
+\bfv &= \sum_{i \in I} \alpha_i \bfv_i = \sum_{j \in J} \beta_j \bfw_j \\
+0 &= \sum_{i \in I} \alpha_i \bfv_i - \sum_{j \in J} \beta_j \bfw_j 
+\end{aligned}
+```
+
+Por la independencia lineal de $B$ se tiene que $\alpha_i = 0, \; \forall i$, y $\beta_j = 0, \; \forall j$. Por lo tanto, $\bfv = 0 \therefore S \cap T = \{ 0 \}$.
 
 ### Ejercicios resueltos - Suma de subespacios 
 

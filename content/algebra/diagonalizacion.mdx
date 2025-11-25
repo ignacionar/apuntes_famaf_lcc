@@ -2,6 +2,8 @@
 
 > Una matriz $A \in \KK^{n \times n}$ es diagonalizable si $\exists C \in GL(n, \KK)$ tal que $C \cdot A \cdot C^{-1}$ es matriz diagonal.
 
+> Sean $A, B \in \KK^{n \times n}$. Se dice que $A, B$ son semejantes si $\exists C \in \KK^{n \times n}$ invertible tal que $A = C \cdot B \cdot C^{-1}$
+
 > Sea $V$ un $\KK$-espacio vectorial de dimensión $n$. Sea $f : V \to V$ transformación lineal.\
 Se dice que $f$ es **diagonalizable** si  existe una base $B$ de $V$ tal que $[f]_B$ es diagonal  
 
@@ -45,6 +47,56 @@ Id_n \bfv &= 0 \\
 ```
 
 Llegamos a $\bfv = 0$, por lo que no es posible. 
+
+## Teorema de Caracterización de Transformaciones Diagonalizables
+
+> Sea $T : V \to V$ una transformación lineal de un espacio vectorial de dimensión finita $n$.\
+Sean $\lambda_1, \ldots, \lambda_n$ los autovalores distintos de $T$ y sean $V_i = V_{\lambda_i}$ los correspondientes autoespacios asociados a cada $\lambda_i, \; i = 1, \ldots, n$. Se cumple que:\
+1 ) $T$ es diagonalizable\
+2 ) El polinomio característico de $T$ es: $P_T(x) = (x - \lambda_1)^{d_1} \cdot (x - \lambda_n)^{d_n}$ con $d_i = \dim V_i$\
+3 ) $\dim V = \dim V_1 + \ldots + \dim V_n$\
+4 ) $V = V_1 \oplus \ldots \oplus V_n$
+
+**1)** $\implies$ **2)** Si $T$ es diagonalizable, entonces existe una base $\Beta = \{v_1, \dots, v_n\}$ de autovectores de $V$.\
+Sea $d_i$ la cantidad de veces que aparece el autovalor $\lambda_i$. Podemos ordenar la base fijando $v_1, \dots, v_{d_1}$ como los autovectores asociados a $\lambda_1$; luego $v_{d_1+1}, \dots, v_{d_1+d_2}$ los autovectores de $\lambda_2$, etc.
+
+La matriz asociada en esta base será diagonal por bloques:
+
+```math
+[T]_\Beta = \begin{pmatrix}
+\lambda_1 I_{d_1} & 0 & \dots & 0 \\
+0 & \lambda_2 I_{d_2} & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & \lambda_r I_{d_r}
+\end{pmatrix}
+```
+
+Donde cada bloque es una matriz diagonal escalar de tamaño $d_i$.
+Luego, el polinomio característico es:
+```math
+P_T(x) = \det([T]_\Beta - x \cdot I) = (\lambda_1 - x)^{d_1} \cdot \ldots \cdot (\lambda_r - x)^{d_r}
+```
+
+Ahora, el subespacio $V_1$ (autoespacio de $\lambda_1$) está generado por $v_1, \dots, v_{d_1}$. Por otro lado, $V_2$ está generado por el siguiente grupo de vectores, etc.
+Luego, $\dim(V_i) = d_i$
+
+**2)** $\implies$ **3)** Supongamos que $P_T(x) = (\lambda_1 - x)^{d_1} \cdots (\lambda_r - x)^{d_r}$ con $d_i = \dim(V_i)$.
+Calculamos el grado del polinomio: $\text{gr}(P_T(x)) = d_1 + \dots + d_r$
+
+Por otro lado, sabemos por propiedad que el grado del polinomio característico es igual a la dimensión del espacio: $\text{gr}(P_T(x)) = n = \dim(V)$.
+Con lo cual: $\dim(V) = d_1 + \dots + d_r = \dim(V_1) + \dots + \dim(V_r)$
+
+**3)** $\implies $ **4)** Supongamos $\dim(V) = \dim(V_1) + \dots + \dim(V_r)$.
+Sabemos que $W$, el subespacio vectorial generado por los autovectores, es la **suma directa** de los autoespacios.\
+Es decir: $W = V_1 \oplus \dots \oplus V_r \subseteq V$ y $\dim W = \dim V_1 + \dots + \dim V_r = \dim V \implies \dim W = \dim V$.
+
+Calculando dimensiones: $\dim(W) = \sum_{i=1}^r \dim(V_i)$\
+Por hipótesis, esta suma es igual a $\dim(V)$.\
+Como $W$ es un subespacio de $V$ y tiene la misma dimensión que $V$, entonces $W = V$.\
+$\therefore V = V_1 \oplus \dots \oplus V_r$
+
+**4)** $\implies$ **1)** Supongamos $V = V_1 \oplus \dots \oplus V_r$. Sea $\Beta_1 = \{ \bfv_1, \ldots, d_1 \}$ base de $V_1$, $\Beta_2 = \{ \bfv_{d_1 + 1}, \ldots, \bfv_{d_1 + d_2} \}$ base de $V_2$, y así sucesivamente.\
+Cada $\bfv_j \in \Beta_i$ es un autovector de autovalor $\lambda_i$, y $\Beta = \Beta_1 \cup \Beta_2 \cup \ldots \cup \Beta_r$ es una base de $V$, que consta de autovectores, por lo que $T$ es diagonalizable.
 
 ***
 
@@ -206,3 +258,20 @@ No existe número en $\RR$ que cumpla la igualdad. Por lo que no hay autovalor d
 ## Polinomio característico
 
 > Sea $A \in \KK^{n \times n}$. El **polinomio característico** de $A$ es el polinomio $\chi_A = \det(X \cdot I_n - A) \in \KK[x]$
+
+> Si $A$ es semejante a $A' \implies P_A = P_{A'}$
+
+**Demostración:**
+
+Sea $C$ invertible tal que $A = C \cdot A' \cdot C^{-1}$
+
+```math
+\begin{aligned}
+P_A = \det(X \cdot I_n - A) &= \det(X \cdot I_n - C \cdot A' \cdot C^{-1}) \\
+&= \det(C \cdot (X \cdot I_n - A') \cdot C^{-1}) \\
+&= \det(C) \cdot \det(X \cdot I_n - A') \cdot \det(C^{-1}) \\
+&= \det(X \cdot I_n - A') \\ 
+&= P_{A'}
+\end{aligned}
+```
+

@@ -92,8 +92,42 @@ Si tenemos una matriz $A$ asociada al sistema $H$ aplicar estas operaciones en $
 
 > Sea $H$ un sistema lineal homogéneo de $m$ ecuaciones con $n$ incógnitas. Aplicando los cambios puede obtenerse un sistema lineal homogéneo $H_0$ cuya matriz $B$ es triangular superior, es decir, tal que $B_{ij} = 0$ si $i > j$.
 
-> Sea $H$ un sistema lineal no homogéneo con soluciones y $S$ el conjunto de soluciones del sistema homogéneo asociado a $H$, sea $p$ solución particular de $H$.\
+> Sea $H$ un sistema lineal no homogéneo con soluciones y $S$ el subespacio de $K^n$ soluciones del sistema homogéneo asociado, y sea $p$ solución particular de $H$.\
 El conjunto de soluciones $M$ de $H$ es: $M = S + p = \{ s + p \; | \; s \in S \}$.
+
+**Demostración:**
+
+
+$(\subseteq)$ $z \in M$. Escribimos:
+$z = (z - p) + p$, veamos que $s = (z - p) \in S$\
+Si $z = (z_1, \dots, z_n)$ y $p = (p_1, \dots, p_n)$, se tiene que $s = (z_1 - p_1, \dots, z_n - p_n)$
+Luego, $\forall i = 1, \dots, m$
+
+```math 
+\begin{aligned}
+&a_{i1}(z_1 - p_1) + \dots + a_{in}(z_n - p_n) \\
+&= a_{i1}z_1 + \dots + a_{in}z_n - a_{i1}p_1 - \dots - a_{in}p_n \\
+&= y_i - y_i = 0 \\
+&\; \\
+&\implies s \in S \\
+\end{aligned}
+```
+
+$(\supseteq)$ Sea $z = s + p$, con $s \in S$.\
+Si $s = (s_1, \dots, s_n)$ y $p = (p_1, \dots, p_n) \Rightarrow z = (s_1 + p_1, \dots, s_n + p_n)$
+Para $i = 1, \dots, m$
+
+```math 
+\begin{aligned}
+&a_{i1}(s_1 + p_1) + \dots + a_{in}(s_n + p_n) \\
+&= a_{i1}s_1 + \dots + a_{in}s_n + a_{i1}p_1 + \dots + a_{in}p_n \\
+&= 0 + y_i = y_i \\
+&\; \\
+&\implies z \in M \\
+\end{aligned}
+```
+
+***
 
 ### Ejercicios resueltos - Sistemas lineales 
 

@@ -19,6 +19,23 @@ Además, tenemos que:
 
 > Sean $V, W$ dos $\KK$-espacios vectoriales, $V$ de dimensión finita. Sea $B = \{\bfv_1, \ldots, \bfv_n\}$ una base de $V$ y sean $\bfw_1, \ldots, \bfw_n \in W$. Existe una única transformación lineal $f: V \to W$ tal que $f(\bfv_i) = \bfw_i , \; 1 \leq i \leq n$.
 
+> Sean $V, W, Z$ tres $\KK$-espacios vectoriales y sean $T: V \to W$ y $U: W \to Z$ dos transformaciones lineales.\
+Entonces $U \circ T : V \to Z$ definida como $(U \circ T)(\bfv) = U(T(\bfv))$ es una transformación lineal. 
+
+**Demostración:**
+
+Sean $\bfv_1, \bfv_2 \in V$ y $\lambda \in \KK$. Entonces: 
+
+```math
+\begin{aligned}
+(U \circ T)(\bfv_1 + \bfv_2) &= U(T(\bfv_1 + \bfv_2)) = U(T(\bfv_1) + T(\bfv_2)) = U(T(\bfv_1)) + U(T(\bfv_2)) \\
+&= (U \circ T)(\bfv_1) + (U \circ T)(\bfv_2) \\
+&\; \\
+(U \circ T)(\lambda \bfv_1) &= U(T(\lambda \bfv_1)) = U(\lambda T(\bfv_1)) \\ 
+&= \lambda U(T(\bfv_1)) = \lambda (U \circ T)(\bfv_1)
+\end{aligned}
+```
+
 ## Tipos de transformaciones lineales
 
 1. $f$ es un _monomorfismo_ si es inyectiva. $\quad \dim({\textnormal{Nu}}(f)) = 0$
@@ -37,8 +54,6 @@ El núcleo de una transformación lineal es un subespacio de $V$.
 > Sean $V, W$ dos $\KK$-espacios vectoriales y $f: V \to W$ una transformación lineal.\
 El **núcleo** de $f$ es el conjunto $\textnormal{Nu}(f) = \{\bfv \in V \; | \; f(\bfv) = 0 \} = f^{-1}({0})$.
 
-Además, $f$ es _monomorfismo_ $\iff \textnormal{Nu}(f) = \{ 0\}$
-
 **Ejemplo:** Sea $f: \RR^3 \to \RR^2$, $f(x_1, x_2, x_3) = (x_1, x_2)$. Entonces:
 
 ```math 
@@ -48,6 +63,24 @@ Además, $f$ es _monomorfismo_ $\iff \textnormal{Nu}(f) = \{ 0\}$
        &= \; <(0, 0, 1)>
 \end{aligned}
 ```
+
+> Sea $T : V \to W$, $T$ es monomorfismo $\iff \textnormal{Nu}(T) = \{0\}$.
+
+**Demostración:**
+
+($\Rightarrow$) Supongamos que $T(\bfv) = 0$ y veamos que $\bfv = 0$. Como $T(\bfv) = 0 = T(0) \implies T(\bfv) = T(0)$.\
+Tenemos que $\bfv = 0$ pues $T$ es monomorfismo (inyectiva). Entonces $\textnormal{Nu}(T) = \{0\}$.
+
+($\Leftarrow$) Sean $\bfv_1, \bfv_2 \in V$ tal que $T(\bfv_1) = T(\bfv_2)$. Entonces: 
+
+```math
+\begin{aligned}
+0 = T(\bfv_1) - T(\bfv_2) &= T(\bfv_1 - \bfv_2) \\
+\bfv_1 - \bfv_2 \in \textnormal{Nu}(T) &= \{0\} \implies \bfv_1 - \bfv_2 = 0 \implies \bfv_1 = \bfv_2 
+\end{aligned}
+```
+
+$T$ es monomorfismo.
 
 ***
 
@@ -91,10 +124,78 @@ Podemos obtener la imagen mediante $f(e_i)$ donde $e_i$ son los vectores de la b
 \dim(V) = \dim(\textnormal{Nu}(f)) + \dim(\textnormal{Im}(f))
 ```
 
+**Demostración:**
+
+Sean $\dim V = n, \dim(\textnormal{Nu}(T)) = k$ con $0 \leq k \leq n$ pues $\textnormal{Nu}(T)$ es subespacio de $V$.\
+Sea $\{\bfv_1, \ldots, \bfv_k\}$ base de $\textnormal{Nu}(T)$.\
+Entonces existen $\bfv_{k+1}, \ldots, \bfv_n \in V$ tales que $\{\bfv_1, \ldots, \bfv_n\}$ es base de $V$.
+
+Podemos afirmar que $\{T(\bfv_{k+1}), \ldots, T(\bfv_n)\}$ es base de $\textnormal{Im}(T)$. Esta afirmación se demuestra como: $\{ \bfv_1, \ldots, \bfv_n \}$ genera a $V$ y $T(\bfv_i) = 0 \; \forall i = 1 , \ldots, k$. Entonces: 
+
+```math 
+\textnormal{Im}(T) = \langle T(\bfv_i) \; | \; i = 1 \leq i \leq n \rangle = \langle T(\bfv_i \; | \; k + 1 \leq i \leq n) \rangle 
+```
+
+Sean $\alpha_{k+1}, \ldots, \alpha_n \in \KK$ tales que $\displaystyle{\sum_{i = k + 1}^{n} \alpha_i T(\bfv_i) = 0}$. Luego:\
+$T(\displaystyle{\sum_{i = k + 1}^{n} \alpha_i \bfv_i}) = 0 \implies \displaystyle{\sum_{i = k + 1}^{n} \alpha_i \bfv_i \in \textnormal{Nu}(T)}$.\
+Como $\{\bfv_1, \ldots, \bfv_k\}$ es base de $\textnormal{Nu}(T)$, $\exists \beta_1, \ldots, \beta_k \in \KK$ tales que: 
+
+```math
+\begin{aligned}
+\sum_{i = k + 1}^{n} \alpha_i \bfv_i &= \sum_{j = 1}^{k} \beta_j \bfv_j \\
+0 &= \sum_{j = 1}^{k} \beta_j \bfv_j - \sum_{i = k + 1}^{n} \alpha_i \bfv_i
+\end{aligned}
+```
+
+Como $\{ \bfv_1, \ldots, \bfv_n \}$ es l.i. se tiene que $\beta_1 = \ldots = \beta_k = 0 = -\alpha_{k+1} = \ldots = -\alpha_n$\
+En particular,  $\alpha_{k+1} = \alpha_{k+2} = \ldots = \alpha_n = 0$. Luego,\
+$\{ T(\bfv_{k+1}), \ldots, T(\bfv_n) \}$ es l.i. y por lo tanto una base de $\textnormal{Im}(T)$. (Afirmación demostrada)
+
+Luego, 
+
+```math 
+\begin{aligned}
+\dim(\textnormal{Im}(T)) &= n - k \\
+&= \dim(V) - \dim(\textnormal{Nu}(T)) \\
+&\; \\ 
+\therefore \; \dim(V) &= \dim(\textnormal{Nu}(T)) + \dim(\textnormal{Im}(T))
+\end{aligned}
+```
+
 ### Aplicación de transformaciones lineales 
 
 > Sean $V, W, Z$ $\KK$-espacios vectoriales, $T : V \to W, \; U : W \to Z$ transformaciones lineales.\
 Entonces $\textnormal{Im}(T) \cap \textnormal{Nu}(U) = T(\textnormal{Nu}(U \circ T))$.
+
+**Demostración:**
+
+($\subseteq$) $\bfw \in \textnormal{Im}(T) \cap \textnormal{Nu}(U) \implies \exists \bfv \in V$ tal que $T(\bfv) = \bfw$\
+
+Entonces tenemos que:
+
+```math
+\begin{aligned}
+&\implies \bfw \in \textnormal{Nu}(U) \\
+&\implies U(\bfw) = 0 \\
+&\implies (U \circ T)(\bfv) = 0 \\ 
+&\implies \bfv \in \textnormal{Nu}(U \circ T) \\
+&\implies \bfw = T(\bfv) ,\; \bfv \in \textnormal{Nu}(U \circ T)
+\end{aligned}
+```
+
+($\supseteq$) Sea $\bfw \in T(\textnormal{Nu}(U \circ T))$:
+
+```math
+\begin{aligned}
+&\implies \bfw = T(\bfv), \; \bfv \in \textnormal{Nu}(U \circ T) \\
+&\implies (U \circ T)(\bfv) = 0 \\
+&\implies U(T(\bfv)) = 0 \\
+&\implies U(\bfv) = 0 \\
+&\implies \bfw \in \textnormal{Nu}(U) \\
+&\implies \bfw \in \textnormal{Im}(T) \cap \textnormal{Nu}(U)
+\end{aligned}
+```
+
 
 ***
 
@@ -785,6 +886,42 @@ Para construir $M(\Beta_1, \Beta_2)$ tenemos que escribir los elementos de $\Bet
 También, dado $(x, y, z) \in \RR^3$, se tiene que $(x, y, z) = ((x, y, z))_{\Beta_1}$ y\
 $(x, y, z) = z(1, 1, 1) + (y - z)(1, 1, 0) + (x - y)(1, 0, 0) = ((z, y - z, x - y))_{\Beta_2}$. 
 
+***
+
+> Sea $V$ un $\KK$-espacio vectorial de dimensión $n$ y $\Beta_1, \Beta_2$ bases de $V$.\
+Entonces, para cada $\bfv \in V, [\bfv]_{\Beta_2} = M(\Beta_1, \Beta_2) \cdot [\bfv]_{\Beta_1}$
+
+***
+
+> Sean $V$ un $\KK$-espacio vectorial de dimensión $n$ y $\Beta_1, \Beta_2, \Beta_3$ bases de $V$.\
+1 ) $M(\Beta_1, \Beta_3) = M(\Beta_2, \Beta_3) \cdot M(\Beta_1, \Beta_2)$ \\
+2 ) $M(\Beta_2, \Beta_1) = (M(\Beta_1, \Beta_2))^{-1}$
+
+**Demostración:**
+
+Sea $Id_\bfv$ tal que $Id_\bfv(\bfv) = \bfv, \; \forall \bfv \in V$.  
+
+1. 
+
+```math 
+\begin{aligned}
+[Id_\bfv]_{\Beta_1, \Beta_3} &= [Id_\bfv \cdot Id_\bfv]_{\Beta_1, \Beta_3} = [Id_\bfv]_{\Beta_2, \Beta_3} \cdot [Id_\bfv]_{\Beta_1, \Beta_2} \\
+&\; \\
+M(\Beta_1, \Beta_3) &= M(\Beta_2, \Beta_3) \cdot M(\Beta_1, \Beta_2)
+\end{aligned}
+```
+
+2.
+
+```math
+\begin{aligned}
+Id_\bfv &= (Id_\bfv)^{-1} \\
+[Id_\bfv]_{\Beta_2, \Beta_1} &= [ (Id_\bfv)^{-1} ]_{\Beta_2, \Beta_1} = ([Id_\bfv]_{\Beta_1, \Beta_2})^{-1} \\
+&\; \\
+M(\Beta_2, \Beta_1) &= (M(\Beta_1, \Beta_2))^{-1}
+\end{aligned}
+```
+
 ## Representación matricial de una transformación lineal
 
 > Sean $V, W$ $\KK$-espacios vectoriales de dimensión finita, $\Beta_1 = \{\bfv_1, \ldots, \bfv_n\}, \; \Beta_2 = \{\bfw_1, \ldots, \bfw_m\}$\
@@ -804,10 +941,84 @@ Tenemos que:
 
 Donde $M$ es la matriz de cambio de base y $C$ es la base canónica correspondiente.
 
+***
+
+> Sean $V, W$ $\KK$-espacios vectoriales de dimensión finita $n$ y $m$, respectivamente, $T: V \to W$ una transformación lineal y $\Beta_1, \Beta_2$ bases de $V$ y $W$ respectivamente. Entonces, para cada $x \in V$, $[T(x)]_{\Beta_2} = [T]_{\Beta_1 \Beta_2} [x]_{\Beta_1}$
+
+**Demostración:**
+
+Si $\Beta_1 = \{ \bfv_1, \ldots, \bfv_n \}, \; \Beta_2 = \{ \bfw_1, \ldots, \bfw_m \}$, entonces se tiene que:
+
+```math
+\begin{aligned}
+x &= \displaystyle{\sum_{i=1}^{n}} x_i \bfv_i \\
+&\; \\
+\implies T(x) &= T (\displaystyle{\sum_{i=1}^{n}} x_i \bfv_i ) \\
+&= \displaystyle{\sum_{i=1}^{n}} x_i \; T(\bfv_i) \\
+&= \displaystyle{\sum_{i=1}^{n}} x_i \left( \displaystyle{\sum_{j=1}^{m}} a_{ji} \bfw_j \right) \\
+&= \displaystyle{\sum_{j=1}^{m}} \left( \displaystyle{\sum_{i=1}^{n}} a_{ji} x_i \right) \bfw_j \\
+&\; \\
+\implies [T(x)]_{\Beta_2} &= \begin{bmatrix}
+\displaystyle{\sum_{i=1}^{n}} a_{1i} x_i \\
+\vdots \\
+\displaystyle{\sum_{i=1}^{n}} a_{mi} x_i
+\end{bmatrix} = \begin{bmatrix}
+a_{11} & \ldots & a_{1n} \\
+\vdots & \; & \vdots \\
+a_{m1} & \ldots & a_{mn}
+\end{bmatrix} \cdot \begin{bmatrix}
+x_1 \\
+\vdots \\
+x_n
+\end{bmatrix} = [T]_{\Beta_1, \Beta_2} \cdot [x]_{\Beta_1}
+\end{aligned}
+```
+
+***
+
+> Sean $V, W$ dos $\KK$-espacios vectoriales de dimensión finita, $\Beta_1, \Beta_2$ bases de $V, W$ respectivamente. Sea $T: V \to W$ un isomorfismo. Entonces: $[T^{-1}]_{\Beta_2, \Beta_1} = ([T]_{\Beta_1, \Beta_2})^{-1}$
+
+**Demostración:** 
+
+Sea $Id_\bfv$ tal que $Id_\bfv(\bfv) = \bfv, \; \forall \bfv \in V$ (Análogamente para $\bfw \in W$). 
+
+```math
+\begin{aligned}
+&T^{-1} \circ T = Id_\bfv , \quad T \circ T^{-1} = Id_\bfw \\ 
+&\; \\
+&[Id_\bfv]_{\Beta_1, \Beta_1} = [T^{-1} \circ T]_{\Beta_1, \Beta_1} = [T^{-1}]_{\Beta_2, \Beta_1} \cdot [T]_{\Beta_1, \Beta_2} \\
+&\; \\
+&\begin{rcases}
+Id = [Id_\bfv]_{\Beta_1, \Beta_1} = [T^{-1} \circ T ]_{\Beta_1} = [T^{-1}]_{\Beta_2, \Beta_1} \cdot [T]_{\Beta_1, \Beta_2} \\
+Id = [Id_\bfw]_{\Beta_2, \Beta_2} = [T \circ T^{-1} ]_{\Beta_2} = [T]_{\Beta_1, \Beta_2} \cdot [T^{-1}]_{\Beta_2, \Beta_1}
+\end{rcases} \implies [T^{-1}]_{\Beta_2, \Beta_1} = ([T]_{\Beta_1, \Beta_2})^{-1}
+\end{aligned}
+```
+
+***
+
 ### Matriz de la composición y la inversa 
 
 > Sean $V, W, Z$ $\KK$-espacios vectoriales de dimensión finita, con bases $\Beta_1, \Beta_2, \Beta_3$ respectivamente.\
 Sean $T: V \to W, \; U: W \to Z$ transformaciones lineales. Entonces $[U \circ T]_{\Beta_1, \Beta_3} = [U]_{\Beta_2, \Beta_3} \cdot [T]_{\Beta_1, \Beta_2}$
+
+**Demostración:**
+
+Sean $\Beta_1 = \{ \bfv_1, \ldots, \bfv_n \}, \; \Beta_2 = \{ \bfw_1, \ldots, \bfw_m \}, \; \Beta_3 = \{ \mathbf{u}_1, \ldots, \mathbf{u}_r \}$.\
+De modo que $A = [T]_{\Beta_1, \Beta_2} \in \KK^{m \times n}, \; B = [U]_{\Beta_2, \Beta_3} \in \KK^{r \times m}, \; C = [U \circ T]_{\Beta_1, \Beta_3} \in \KK^{r \times n}$.\
+Si $A = (a_ij), \; B = (b_{ki}), \; C = (c_{kj})$, entonces:
+
+```math
+\begin{aligned}
+T(\bfv_j) &= \displaystyle{\sum_{i=1}^{m}} a_{ij} \bfw_i, \quad U(\bfw_i) = \displaystyle{\sum_{k=1}^{r}} b_{ki} \mathbf{u}_k, \quad (U \circ T)(\bfv_j) = \displaystyle{\sum_{k=1}^{r}} c_{kj} \mathbf{u}_k \\
+&\; \\
+(U \circ T)(\bfv_j) &= U(T(\bfv_j)) = U \left( \displaystyle{\sum_{i=1}^{m}} a_{ij} \bfw_i \right) = \displaystyle{\sum_{i=1}^{m}} a_{ij} U(\bfw_i) = \displaystyle{\sum_{i=1}^{m}} a_{ij} \left( \displaystyle{\sum_{k=1}^{r}} b_{ki} \mathbf{u}_k \right) \\
+&= \displaystyle{\sum_{k=1}^{r}} \left( \displaystyle{\sum_{i=1}^{m}} b_{ki} a_{ij} \right) \mathbf{u}_k \\
+&\; \\
+\implies c_{kj} &= \displaystyle{\sum_{i=1}^{m}} b_{ki} a_{ij} = (B \cdot A)_{kj} \\
+\implies C &= B \cdot A \\
+\end{aligned}
+```
 
 ***
 
