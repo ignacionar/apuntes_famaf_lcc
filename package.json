@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run postbuild",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' next build && npm run postbuild",
     "start": "next start",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
   },
