@@ -477,13 +477,13 @@ Entonces $\langle G \rangle \subseteq S \iff G \subseteq S$.
 
 **Demostración**:
 
-($\Rightarrow$) Si $\langle G \rangle \subseteq S$, entonces expresamos cada $\bfv \in G$ como: 
+($\Leftarrow$) Si $\langle G \rangle \subseteq S$, entonces expresamos cada $\bfv \in G$ como: 
 
 ```math
 \bfv = 1 \cdot \bfv \in \langle G \rangle \subseteq S \implies v \in S
 ```
 
-($\Leftarrow$) Supongamos que $G \subseteq S$. Cada combinación lineal es $v = \displaystyle{\sum_{i=1}^n} \alpha_i \bfv_i$ con $\alpha \in \KK, \; \bfv_i \in G$. Entonces, $\bfv_i \in S$.\
+($\Rightarrow$) Supongamos que $G \subseteq S$. Cada combinación lineal es $v = \displaystyle{\sum_{i=1}^n} \alpha_i \bfv_i$ con $\alpha \in \KK, \; \bfv_i \in G$. Entonces, $\bfv_i \in S$.\
 Luego $v \in S$ ya que $S$ es subespacio
 
 ***
@@ -541,10 +541,10 @@ Si $\{ \bfw_1, \ldots, \bfw_s \} \subseteq V$ es l.i., entonces $s \leq r$.
 
 **Demostración:**
 
-Como $\bfw_i \in V = \langle \bfv_1, \dots, \bfv_r \rangle, \exists a_{ij} \in F$ (escalares) tales que:
+Como $\bfw_i \in V = \langle \bfv_1, \dots, \bfv_r \rangle, \exists a_{ji} \in \KK$ tales que:
 
 ```math 
-\bfw_i = \displaystyle{\sum_{j=1}^r} a_{ij} v_j
+\bfw_i = \displaystyle{\sum_{j=1}^r} a_{ji} v_j
 ```
 
 ```math
@@ -555,12 +555,12 @@ a_{r1} \cdot x_1 + \dots + a_{rs} x_s = 0
 \end{cases}
 ```
 
-Si $(y_1, \dots, y_s) \in F^s$ es solución del sistema, luego
+Si $(y_1, \dots, y_s) \in \KK^s$ es solución del sistema, luego
 
 ```math
 \begin{aligned}
 \Rightarrow \sum_{k=1}^s y_k \cdot w_k &= \sum_{k=1}^s y_k \cdot \left( \displaystyle{\sum_{j=1}^r} a_{jk} \cdot v_j \right) \\
-&= \displaystyle{\sum_{j=1}^r} \left( \underbrace{\displaystyle{\sum_{k=1}^s} a_{jk} \cdot y_k}_{= 0 j\text{ (-ésima ecuación)}} \right) \cdot v_j \\
+&= \displaystyle{\sum_{j=1}^r} \left( \underbrace{\displaystyle{\sum_{k=1}^s} a_{jk} \cdot y_k}_{= 0 (j \text{-ésima ecuación})} \right) \cdot v_j \\
 &= \displaystyle{\sum_{j=1}^r} 0 \cdot v_j \\
 &= 0 \\
 \Rightarrow \sum_{k=1}^s y_k \cdot w_k = 0
@@ -651,7 +651,8 @@ Continuando (y en no más de $\dim V$ pasos) se llega a $S_m = S_0 \cup \{w_1, \
 
 ***
 
-> Sea $V$ un $\KK$-espacio vectorial de dimensión finita $n$, $V \not= 0$. Sea $\langle S \rangle = V$. Entonces un subconjunto $B$ de $S$ es una base. 
+> Sea $V$ un $\KK$-espacio vectorial de dimensión finita $n$, $V \not= 0$. Sea $\langle S \rangle = V$.\
+Entonces un subconjunto $B$ de $S$ es una base. 
 
 **Demostración:**
 
@@ -659,7 +660,7 @@ Sea $C = \{ | R | \; | \; R \subseteq S, \; R \text{ l.i.} \}$. Como $v \not=0$ 
 
 Sea $n$ el máximo de $C$ y sea $B \subseteq S$ un subconjunto l.i. de $S$ tal que $|B| = n$, podemos ver que $B$ es base: 
 
-Supongamos que $\bfv \in S$ tal que $\bfv \not in \langle B \rangle$. Como $B$ es l.i., entonces $B \cup \{ \bfv \}$ es l.i. y $|B \cup \{ \bfv \}| = n + 1$, lo cual es una contradicción. Entonces, $\bfv \in S \implies \bfv \in \langle B \rangle$.\
+Supongamos que $\bfv \in S$ tal que $\bfv \not \in \langle B \rangle$. Como $B$ es l.i., entonces $B \cup \{ \bfv \}$ es l.i. y $|B \cup \{ \bfv \}| = n + 1$, lo cual es una contradicción. Entonces, $\bfv \in S \implies \bfv \in \langle B \rangle$.\
 Por lo tanto, $\langle S \rangle \subseteq \langle B \rangle \implies V \subseteq \langle B \rangle \implies V = \langle B \rangle$. Entonces, $B$ es base de $V$.
 
 ***
@@ -1034,7 +1035,8 @@ Si $\bfv_1, \bfv_2 \in S + T$, tal que $\bfv_1 = (x_1, y_1), \; \bfv_2 = (x_2, y
 \end{aligned}
 ```
 
-2. $S \subseteq S + T$ pues $\forall \bfv \in S$ se tiene que $\bfv_1 + \bfv_1 + 0 \in S + T$. Análogamente, $T \subseteq S + T$. Luego, $S \cup T \subseteq S + T$.
+2. $S \subseteq S + T$ pues $\forall \bfv \in S$ se tiene que $\mathbf{s} = \mathbf{s} + 0 \in S + T$.\
+Análogamente, $T \subseteq S + T$. Luego, $S \cup T \subseteq S + T$.
 
 Sea $U$ un subespacio tal que $S \cup T \subseteq U$. Sea $\bfv \in S + T \implies \bfv = \mathbf{s} + \mathbf{t}, \; \mathbf{s} \in S, \; \mathbf{t} \in T$.
 
@@ -1144,13 +1146,13 @@ Luego,
 
 ***
 
-> Sean $S, T$ subespacios vectoriales de $V$, con bases $B_{S}$ y $B_{T}$ respectivamente. Ambas son equivalentes:\
+> Sean $S, T$ subespacios vectoriales de $V$, con bases $\Beta_{S}$ y $\Beta_{T}$ respectivamente. Ambas son equivalentes:\
 1 ) $V = S \oplus T$\
-2 ) $B_{S} \cup B_{T}$ es base de $V$ 
+2 ) $\Beta_{S} \cup \Beta_{T}$ es base de $V$ 
 
 **Demostración:**
 
-**(1)** $\implies$ **(2)** Supongamos que $V = S \oplus T$. Como $V = S + T$, entonces $B_{S} \cup B_{T} = B$ es un conjunto de generadores de $S + T$.\
+**(1)** $\implies$ **(2)** Supongamos que $V = S \oplus T$. Como $V = S + T$, entonces $\Beta_{S} \cup \Beta_{T} = B$ es un conjunto de generadores de $S + T$.\
 Por otro lado, sean $\alpha_i \in \KK (i \in I)$ con $\alpha_i = 0$, salvo para finitos $i \in I$ y \
 $\beta_j \in \KK (j \in J)$ con $\beta_j = 0$, salvo para finitos $j \in J$ tenemos que: 
 
@@ -1162,7 +1164,7 @@ $\beta_j \in \KK (j \in J)$ con $\beta_j = 0$, salvo para finitos $j \in J$ tene
 \end{aligned}
 ```
 
-Como $B_{S}, B_{T}$ son l.i. se tiene que $\alpha_i = 0, \; \forall i$ y $\beta_j = 0, \; \forall j$. Por lo tanto, $B$ es l.i. 
+Como $\Beta_{S}, \Beta_{T}$ son l.i. se tiene que $\alpha_i = 0, \; \forall i$ y $\beta_j = 0, \; \forall j$. Por lo tanto, $B$ es l.i. 
 
 **(2)** $\implies$ **(1)** Como $B$ es base de $V \implies V = S + T$.\
 Si $\bfv \in S \cap T$, entonces: 
@@ -1180,6 +1182,8 @@ Tal que:
 ```
 
 Por la independencia lineal de $B$ se tiene que $\alpha_i = 0, \; \forall i$, y $\beta_j = 0, \; \forall j$. Por lo tanto, $\bfv = 0 \therefore S \cap T = \{ 0 \}$.
+
+***
 
 ### Ejercicios resueltos - Suma de subespacios 
 
@@ -1287,8 +1291,7 @@ Ahora calculamos $W_1 \cap W_2$. Para ello volvemos a usar la ecuación que defi
 \beta = t 
 \end{cases}
 ```
-x + y + z = 0, \; x - t = 0
-Ahora los sustituimos en la definición de $W_2$:
+$x + y + z = 0, \; x - t = 0$. Ahora los sustituimos en la definición de $W_2$:
 
 ```math 
 - \alpha - \alpha - 2 \beta + \alpha + \beta = 0 \implies - \alpha = \beta, \quad - \alpha = \beta 

@@ -126,14 +126,14 @@ Podemos obtener la imagen mediante $f(e_i)$ donde $e_i$ son los vectores de la b
 
 **Demostración:**
 
-Sean $\dim V = n, \dim(\textnormal{Nu}(T)) = k$ con $0 \leq k \leq n$ pues $\textnormal{Nu}(T)$ es subespacio de $V$.\
+Sean $\dim V = n, \; \dim(\textnormal{Nu}(T)) = k$ con $0 \leq k \leq n$ pues $\textnormal{Nu}(T)$ es subespacio de $V$.\
 Sea $\{\bfv_1, \ldots, \bfv_k\}$ base de $\textnormal{Nu}(T)$.\
 Entonces existen $\bfv_{k+1}, \ldots, \bfv_n \in V$ tales que $\{\bfv_1, \ldots, \bfv_n\}$ es base de $V$.
 
 Podemos afirmar que $\{T(\bfv_{k+1}), \ldots, T(\bfv_n)\}$ es base de $\textnormal{Im}(T)$. Esta afirmación se demuestra como: $\{ \bfv_1, \ldots, \bfv_n \}$ genera a $V$ y $T(\bfv_i) = 0 \; \forall i = 1 , \ldots, k$. Entonces: 
 
 ```math 
-\textnormal{Im}(T) = \langle T(\bfv_i) \; | \; i = 1 \leq i \leq n \rangle = \langle T(\bfv_i \; | \; k + 1 \leq i \leq n) \rangle 
+\textnormal{Im}(T) = \langle \{ T(\bfv_i) \; | \; i = 1 \leq i \leq n \} \rangle = \langle \{ T(\bfv_i) \; | \; k + 1 \leq i \leq n \} \rangle 
 ```
 
 Sean $\alpha_{k+1}, \ldots, \alpha_n \in \KK$ tales que $\displaystyle{\sum_{i = k + 1}^{n} \alpha_i T(\bfv_i) = 0}$. Luego:\
@@ -156,7 +156,7 @@ Luego,
 ```math 
 \begin{aligned}
 \dim(\textnormal{Im}(T)) &= n - k \\
-&= \dim(V) - \dim(\textnormal{Nu}(T)) \\
+\dim(\textnormal{Im}(T)) &= \dim(V) - \dim(\textnormal{Nu}(T)) \\
 &\; \\ 
 \therefore \; \dim(V) &= \dim(\textnormal{Nu}(T)) + \dim(\textnormal{Im}(T))
 \end{aligned}
@@ -894,7 +894,7 @@ Entonces, para cada $\bfv \in V, [\bfv]_{\Beta_2} = M(\Beta_1, \Beta_2) \cdot [\
 ***
 
 > Sean $V$ un $\KK$-espacio vectorial de dimensión $n$ y $\Beta_1, \Beta_2, \Beta_3$ bases de $V$.\
-1 ) $M(\Beta_1, \Beta_3) = M(\Beta_2, \Beta_3) \cdot M(\Beta_1, \Beta_2)$ \\
+1 ) $M(\Beta_1, \Beta_3) = M(\Beta_2, \Beta_3) \cdot M(\Beta_1, \Beta_2)$\
 2 ) $M(\Beta_2, \Beta_1) = (M(\Beta_1, \Beta_2))^{-1}$
 
 **Demostración:**
