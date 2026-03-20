@@ -54,6 +54,102 @@ También se encuentran los siguientes teoremas:
 |  $1$  |  $1$  |  $1$  |   $1$  |
 </div>
 
+***
+
+### Ejercicios resueltos - Álgebra de Boole 
+
+**1.**
+
+Simplificar la siguiente función booleana a un número mínimo de términos: $x \cdot y + x \cdot y'$ 
+
+```math 
+\begin{aligned}
+&= x \cdot y + x \cdot y' \\
+&= x \cdot (y + y') \\
+\end{aligned}
+```
+
+***
+
+**2.**
+
+Simplificar la siguiente función booleana a un número mínimo de términos: $(x + y) \cdot (x + y')$
+
+```math
+\begin{aligned}
+&= (x + y) \cdot (x + y') \\
+&= x + xy' + xy + yy' \\
+&= x + xy' + xy + 0 \\
+&= x + xy' + xy \\
+&= x(1 + y' + y) \\
+&= x(1) \\
+&= x
+\end{aligned}
+```
+
+***
+
+**3.**
+
+Simplificar la siguiente función booleana a un número mínimo de términos: $x \cdot y \cdot z + x' \cdot y + x \cdot y \cdot z'$
+
+```math
+\begin{aligned}
+&= x \cdot y \cdot z + x' \cdot y + x \cdot y \cdot z' \\
+&= y \cdot (x \cdot z + x' + x \cdot z') \\
+&= y \cdot (x \cdot (z + z') + x') \\
+&= y \cdot (x \cdot 1 + x') \\
+&= y \cdot (x + x') \\
+&= y \cdot 1 \\
+&= y
+\end{aligned}
+```
+
+***
+
+Simplificar la siguiente función booleana a un número mínimo de términos: $z \cdot x + z\cdot x' \cdot y$ 
+
+```math
+\begin{aligned}
+&= z \cdot x + z\cdot x' \cdot y \\
+&= z \cdot (x + x' \cdot y) \\
+&= z \cdot (x \cdot y) \\
+\end{aligned}
+```
+
+***
+
+**5.*
+
+Simplificar la siguiente función booleana a un número mínimo de términos: $(A + B)' \cdot (A' + B')$
+
+```math
+\begin{aligned}
+&= (A + B)' \cdot (A' + B') \\
+&= (A' \cdot B') \cdot (A' + B') \\
+&= A' \cdot A' \cdot B' + A' \cdot B' \cdot B' \\
+&= B(A' \cdot A') + A'(B' \cdot B') \\
+&= A'B' + A'B' \\
+&= A'B'
+\end{aligned}
+```
+
+***
+
+**6.**
+
+Simplificar la siguiente función booleana a un número mínimo de términos: $(A + B)' \cdot (A' + B')$
+
+```math 
+\begin{aligned}
+&= y \cdot (w \cdot z' + w \cdot z) + x \cdot y \\
+&= y \cdot w \cdot (z' + z) + x \cdot y \\
+&= y \cdot w \cdot 1 + x \cdot y \
+&= y \cdot w + x \cdot y \\
+&= y \cdot (w + x)
+\end{aligned}
+```
+
 ## Compuertas Lógicas
 
 > Las compuertas lógicas son circuitos electrónicos que realizan operaciones booleana según los valores de entrada. 
@@ -64,7 +160,20 @@ Estas son las compuertas con su respectiva ecuación:
 
 <Image src="/organizacioncomputador/compuertaslogicas.png" alt="Compuertas Lógicas" width={550} height={0} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "0 auto"}} />
 
-**Las compuertas NOR y NAND son universales**, estas compuertas pueden representar las funciones NOT, AND, OR. 
+- El OR exclusivo (XOR) tiene dos entradas y una salida. Solo si exactamente una entrada es $1$, la salida es $1$. En caso contrario, la salida es $0$.
+
+- **Las compuertas NOR y NAND son universales**, estas compuertas pueden **representar cualquier otra compuerta lógica**. 
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| $x$ | $y$ | $x \oplus y$ | $(x + y)'$ | $(x \cdot y)'$ |
+|:---:|:---:|:---:|:----------:|:---------------:|
+|  $0$  |  $0$  |  $0$  |   $1$   |    $1$     |
+|  $0$  |  $1$  |  $1$  |   $0$   |    $1$     |
+|  $1$  |  $0$  |  $1$  |   $0$   |    $1$     |
+|  $1$  |  $1$  |  $0$  |   $0$   |    $0$     |
+</div>
 
 Las funciones booleanas se pueden representar mediante compuertas lógicas. Es posible simplificar las funciones booleanas como suma de minitérminos $m_i$ o producto de maxitérminos $M_i$
 

@@ -42,48 +42,47 @@ Su implementación:
 &\spec \; List \; \of \; \where \\
 &\\ 
 &\cons \\ 
-&\quad \fun \; empty() \; \ret \; l : List \; \of \; T \\  
+&\quad \fun \; empty() \; \ret \; l : List \; \of \; \bft \\  
 &\quad\{- \;\; \textnormal{Crea una lista vacía} \;\; -\} \\
 &\\
-&\quad \proc \; addl (\bfin \; e : T, \; \inout \; l : List \; \of \; T) \\
+&\quad \proc \; addl (\bfin \; e : T, \; \inout \; l : List \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al comienzo de una lista} \; l \;\; -\} \\
 &\\ 
 &\destroy \\
-&\quad \proc \; destroy(\inout \; l : List \; \of \; T) \\
+&\quad \proc \; destroy(\inout \; l : List \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso que sea necesario} \;\; -\} \\
 &\\ 
-&\ops \\
-&\quad \fun \; is\_empty(l : List \; \of \; T) \; \ret \; b : \bool \\ 
+&\quad \fun \; is\_empty(l : List \; \of \; \bft) \; \ret \; b : \bool \\ 
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; l \;\textnormal{es vacía.} \;\; -\} \\
 &\\ 
-&\quad \fun \; head(l : List \; \of \; T) \; \ret \; e : T \\ 
+&\quad \fun \; head(l : List \; \of \; \bft) \; \ret \; e : T \\ 
 &\quad\{- \;\; \textnormal{Devuelve el primer elemento de} \; l \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
 &\\
-&\quad \proc \; tail(\inout \; l : List \; \of \; T) \; \ret \; e : T \\ 
+&\quad \proc \; tail(\inout \; l : List \; \of \; \bft) \; \ret \; e : T \\ 
 &\quad\{- \;\; \textnormal{Elimina el primer elemento de} \; l \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
 &\\
-&\quad \proc \; addr(\inout \; l : List \; \of \; T, \; \bfin \; e : T) \; \ret \; e : T \\ 
+&\quad \proc \; addr(\inout \; l : List \; \of \; \bft, \; \bfin \; e : \bft) \; \ret \; e : \bft \\ 
 &\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al final de la lista} \; l \;\; -\} \\
 &\\
-&\quad \fun \; length(l : List \; \of \; T) \; \ret \; n : \nat \\ 
+&\quad \fun \; length(l : List \; \of \; \bft) \; \ret \; n : \nat \\ 
 &\quad\{- \;\; \textnormal{Devuelve la cantidad de elementos de} \; l \;\; -\} \\
 &\\ 
-&\quad \proc \; concat(\inout \; l : List \; \of \; T, \; \bfin \; l0 : List \; \of \; T) \; \ret \; e : T \\ 
+&\quad \proc \; concat(\inout \; l : List \; \of \; \bft, \; \bfin \; l0 : List \; \of \; \bft) \; \ret \; e : \bft \\ 
 &\quad\{- \;\; \textnormal{Agrega al final de} \; l \; \textnormal{todos los elementos de} \; l- \; \textnormal{en el mismo orden} \;\; -\} \\
 &\\
-&\quad \fun \; index(l : List \; \of \; T, \; n : \nat) \; \ret \; e : T \\ 
+&\quad \fun \; index(l : List \; \of \; \bft, \; n : \nat) \; \ret \; e : \bft \\ 
 &\quad\{- \;\; \textnormal{Devuelve el} \; n\textnormal{ésimo elemento de la lista} \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; length(l) > n \;\; -\} \\
 &\\
-&\quad \proc \; take(\inout \; l : List \; \of \; T, \; n : \nat) \\ 
+&\quad \proc \; take(\inout \; l : List \; \of \; \bft, \; n : \nat) \\ 
 &\quad\{- \;\; \textnormal{Deja en} \; l \; \textnormal{los primeros} n \; \textnormal{elementos, elimina el resto} \;\; -\} \\
 &\\ 
-&\quad \proc \; drop(\inout \; l : List \; \of \; T, \; n : \nat) \\ 
+&\quad \proc \; drop(\inout \; l : List \; \of \; \bft, \; n : \nat) \\ 
 &\quad\{- \;\; \textnormal{Elimina los primeros} \; n \; \textnormal{de} \; l \;\; -\} \\
 &\\
-&\quad \fun \; copy\_list(l1 : List \; \of \; T) \; \ret \; l2 : List \; \of \; T \\ 
+&\quad \fun \; copy\_list(l1 : List \; \of \; \bft) \; \ret \; l2 : List \; \of \; \bft \\ 
 &\quad\{- \;\; \textnormal{Copia los elementos de} \; l1 \; \textnormal{en la nueva lista} \; l2 \;\; -\} \\
 &\\
 \end{aligned}
@@ -125,14 +124,14 @@ Una lista será un puntero a un nodo (se sigue un patrón recursivo)
 
 ```math 
 \begin{aligned}
-&\impt \; List \; \of \; T \; \where \\
+&\impt \; List \; \of \; \bft \; \where \\
 &\\ 
-&\type \; Node \; \of \; T = \tuple \\
-&\quad\quad\quad\quad\quad\quad\quad\quad\quad elem : T \\
-&\quad\quad\quad\quad\quad\quad\quad\quad\quad next : \pointer \; \too \; (Node \; \of \; T) \\
+&\type \; Node \; \of \; \bft = \tuple \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad elem : \bft \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad next : \pointer \; \too \; (Node \; \of \; \bft) \\
 &\quad\quad\quad\quad\quad\quad\quad\quad \; \bfend \; \tuple \\
 &\\
-&\type \; List \; \of \; T = \pointer \; \too \; (Node \; \of \; T) \\
+&\type \; List \; \of \; \bft = \pointer \; \too \; (Node \; \of \; \bft) \\
 \end{aligned}
 ```
 
@@ -140,7 +139,7 @@ El constructor $empty$ (lista vacía) se implementa fácilmente con el puntero $
 
 ```math 
 \begin{aligned}
-&\fun \; empty() \; \ret \; l : List \; \of \; T \\ 
+&\fun \; empty() \; \ret \; l : List \; \of \; \bft \\ 
 &\quad l := \null \\
 &\bfend \; \fun 
 \end{aligned}
@@ -172,33 +171,33 @@ En el código tenemos:
 
 ```math 
 \begin{aligned}
-&\proc \; addl (\bfin \; e : T, \; \inout \; l : List \; \of \; T) \\
-&\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
+&\proc \; addl (\bfin \; e : \bft, \; \inout \; l : List \; \of \; \bft) \\
+&\quad \var \; p : \pointer \; \too \; (Node \; \of \; \bft) \\
 &\quad alloc(p) \\
 &\quad p \to elem := e \\ 
 &\quad p \to next := l \\
 &\quad l := p \\
 &\bfend \; \proc \\ 
 &\\
-&\fun \; is\_empty(l : List \; \of \; T) \; \ret \; b : \bool \\
+&\fun \; is\_empty(l : List \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad b := (l = \null) \\
 &\bfend \; \fun \\
 &\\
 &\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
-&\fun \; head(l : List \; \of \; T) \; \ret \; e : T \\
+&\fun \; head(l : List \; \of \; \bft) \; \ret \; e : \bft \\
 &\quad e := (l \to elem) \\
 &\bfend \; \fun \\
 &\\
 &\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty(l) \;\; -\} \\
-&\proc \; tail(\inout \; l : List \; \of \; T) \\
-&\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
+&\proc \; tail(\inout \; l : List \; \of \; \bft) \\
+&\quad \var \; p : \pointer \; \too \; (Node \; \of \; \bft) \\
 &\quad p := l \\
 &\quad l := l \to next \\
 &\quad free(p) \\
 &\bfend \; \proc \\
 &\\
-&\proc \; addr(\inout \; l : List \; \of \; T, \; \bfin \; e : T) \\
-&\quad var \; p,q : \pointer \; \too \; (Node \; \of \; T) \\
+&\proc \; addr(\inout \; l : List \; \of \; \bft, \; \bfin \; e : \bft) \\
+&\quad var \; p,q : \pointer \; \too \; (Node \; \of \; \bft) \\
 &\quad alloc(p) \\
 &\quad q \to elem := e \\
 &\quad q \to next := \null \\
@@ -213,8 +212,8 @@ En el código tenemos:
 &\quad \fi \\
 &\bfend \; \proc \\
 &\\
-&\fun \; length(l : List \; \of \; T) \; \ret \; n : \nat \\
-&\quad \var \; p : \pointer \; \too \; (Node \; \of \; T) \\
+&\fun \; length(l : List \; \of \; \bft) \; \ret \; n : \nat \\
+&\quad \var \; p : \pointer \; \too \; (Node \; \of \; \bft) \\
 &\quad n := 0 \\
 &\quad p := l \\
 &\quad \while \; (p \not=\null) \; \do \\
@@ -252,7 +251,6 @@ En el código tenemos:
 &\quad \proc \; destroy(\inout \; c : Counter) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
 &\\
-&\ops \\
 &\quad \fun \; is\_init(c : Counter) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; c \;\textnormal{es el valor inicial} \;\; -\} \\
 &\\
@@ -306,28 +304,27 @@ La pila sigue el principio **LIFO** (Last In, First Out)
 
 ```math 
 \begin{aligned}
-&\spec \; Stack \; \of \; T \; \where \\
+&\spec \; Stack \; \of \; \bft \; \where \\
 &\\
 &\cons \\
-&\quad \fun \; empty\_stack() \; \ret \; s: Stack \; \of \; T \\
+&\quad \fun \; empty\_stack() \; \ret \; s: Stack \; \of \; \bft \\
 &\quad\{- \;\; \textnormal{Crea una pila vacía} \;\; -\} \\
 &\\
-&\quad \proc \; push(\bfin \; e : T, \; \inout \; s : Stack \; \of \; T) \\
+&\quad \proc \; push(\bfin \; e : \bft, \; \inout \; s : Stack \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al tope de la pila} \; s \;\; -\} \\
 &\\
 &\destroy \\
-&\quad \proc \; destroy(\inout \; s : Stack \; \of \; T) \\
+&\quad \proc \; destroy(\inout \; s : Stack \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
 &\\
-&\ops \\
-&\quad \fun \; is\_empty\_stack(s : Stack \; \of \; T) \; \ret \; b : \bool \\
+&\quad \fun \; is\_empty\_stack(s : Stack \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; s \;\textnormal{está vacía} \;\; -\} \\
 &\\
-&\quad \fun \; top(s : Stack \; \of \; T) \; \ret \; e : T \\
+&\quad \fun \; top(s : Stack \; \of \; \bft) \; \ret \; e : \bft \\
 &\quad\{- \;\; \textnormal{Devuelve el elemento en el tope de} \; s \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_stack(s) \;\; -\} \\
 &\\
-&\quad \proc \; pop(\inout \; s : Stack \; \of \; T) \\
+&\quad \proc \; pop(\inout \; s : Stack \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Elimina el elemento en el tope de} \; s \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_stack(s) \;\; -\} \\
 &\\
@@ -342,10 +339,10 @@ Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en 
 
 ```math
 \begin{aligned}
-&\impt \; Stack \; \of \; T \; \where \\
+&\impt \; Stack \; \of \; \bft \; \where \\
 &\\
-&\type \; Stack \; \of \; T = \tuple \\
-&\quad\quad\quad\quad\quad\quad\quad\quad\quad elems: \array[1..N] \; \of \; T \\
+&\type \; Stack \; \of \; \bft = \tuple \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad elems: \array[1..N] \; \of \; \bft \\
 &\quad\quad\quad\quad\quad\quad\quad\quad\quad size: \nat \\
 &\quad\quad\quad\quad\quad\quad\quad\quad \;\; \bfend \; \tuple \\
 &\\
@@ -391,28 +388,27 @@ La cola sigue el principio **FIFO** (First In, First Out)
 
 ```math
 \begin{aligned}
-&\spec \; Queue \; \of \; T \; \where \\
+&\spec \; Queue \; \of \; \bft \; \where \\
 &\\
 &\cons \\
-&\quad \fun \; empty\_queue() \; \ret \; q: Queue \; \of \; T \\
+&\quad \fun \; empty\_queue() \; \ret \; q: Queue \; \of \; \bft \\
 &\quad\{- \;\; \textnormal{Crea una cola vacía} \;\; -\} \\
 &\\
-&\quad \proc \; enqueue(\bfin \; q : Queue \; \of \; T, \; \inout \; e : T) \\
+&\quad \proc \; enqueue(\bfin \; q : Queue \; \of \; \bft, \; \inout \; e : \bft) \\
 &\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al final de la cola} \; q \;\; -\} \\
 &\\
 &\destroy \\
-&\quad \proc \; destroy(\inout \; q : Queue \; \of \; T) \\
+&\quad \proc \; destroy(\inout \; q : Queue \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
 &\\
-&\ops \\
-&\quad \fun \; is\_empty\_queue(q : Queue \; \of \; T) \; \ret \; b : \bool \\
+&\quad \fun \; is\_empty\_queue(q : Queue \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; q \;\textnormal{está vacía} \;\; -\} \\
 &\\
-&\quad \fun \; first(q : Queue \; \of \; T) \; \ret \; e : T \\
+&\quad \fun \; first(q : Queue \; \of \; \bft) \; \ret \; e : \bft \\
 &\quad\{- \;\; \textnormal{Devuelve el elemento al comienzo de} \; q \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_queue(q) \;\; -\} \\
 &\\
-&\quad \proc \; deq  ueue(\inout \; q : Queue \; \of \; T) \\
+&\quad \proc \; deq  ueue(\inout \; q : Queue \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Elimina el elemento al comienzo de} \; q \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_queue(q) \;\; -\} \\
 \end{aligned}
@@ -424,10 +420,10 @@ Se puede utilizar un arreglo o una lista enlazada para implementar una pila, en 
 
 ```math
 \begin{aligned}
-&\impt \; Queue \; \of \; T \; \where \\
+&\impt \; Queue \; \of \; \bft \; \where \\
 &\\
-&\type \; Queue \; \of \; T = \tuple \\
-&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad elems: \array[0..N-1] \; \of \; T \\
+&\type \; Queue \; \of \; \bft = \tuple \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad elems: \array[0..N-1] \; \of \; \bft \\
 &\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad fst: \nat \\
 &\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad size: \nat \\
 &\quad\quad\quad\quad\quad\quad\quad\quad \;\;\; \bfend \; \tuple \\
@@ -515,33 +511,32 @@ Como **operaciones** tenemos:
 
 ```math
 \begin{aligned}
-&\spec \; Set \; \of \; T \; \where \\
+&\spec \; Set \; \of \; \bft \; \where \\
 &\\
 &\cons \\
-&\quad \fun \; empty\_set() \; \ret \; s : Set \; \of \; T \\
+&\quad \fun \; empty\_set() \; \ret \; s : Set \; \of \; \bft \\
 &\quad\{- \;\; \textnormal{Crea un conjunto vacío} \;\; -\} \\
 &\\
-&\quad \proc \; add(\inout \; s : Set \; \of \; T, \; \bfin \; e : T) \\
+&\quad \proc \; add(\inout \; s : Set \; \of \; \bft, \; \bfin \; e : \bft) \\
 &\quad\{- \;\; \textnormal{Agrega el elemento} \; e \; \textnormal{al conjunto} \; s \;\; -\} \\
 &\\
 &\destroy \\
-&\quad \proc \; destroy(\inout \; s : Set \; \of \; T) \\ 
+&\quad \proc \; destroy(\inout \; s : Set \; \of \; \bft) \\ 
 &\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
 &\\
-&\ops \\
-&\quad \fun \; is\_empty(s : Set \; \of \; T) \; \ret \; b : \bool \\
+&\quad \fun \; is\_empty(s : Set \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; s \;\textnormal{es vacío} \;\; -\} \\
 &\\
-&\quad \fun \; member(s : Set \; \of \; T, \; e : T) \; \ret \; b : \bool \\
+&\quad \fun \; member(s : Set \; \of \; \bft, \; e : \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; e \;\textnormal{pertenece al conjunto} \; s \;\; -\} \\
 &\\
-&\quad \proc \; union(\inout \; s1 : Set \; \of \; T, \; \bfin \; s2 : Set \; \of \; T) \\
+&\quad \proc \; union(\inout \; s1 : Set \; \of \; \bft, \; \bfin \; s2 : Set \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Agrega a} \; s1 \; \textnormal{los elementos de} \; s2 \;\; -\} \\
 &\\
-&\quad \proc \; intersection(\inout \; s1 : Set \; \of \; T, \; \bfin \; s2 : Set \; \of \; T) \\
+&\quad \proc \; intersection(\inout \; s1 : Set \; \of \; \bft, \; \bfin \; s2 : Set \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Elimina de} \; s1 \; \textnormal{los elementos que NO pertenezcan a} \; s2 \;\; -\} \\
 &\\
-&\quad \proc \; diff(\inout \; s1 : Set \; \of \; T, \; \bfin \; s2 : Set \; \of \; T) \\
+&\quad \proc \; diff(\inout \; s1 : Set \; \of \; \bft, \; \bfin \; s2 : Set \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Elimina de} \; s1 \; \textnormal{los elementos que pertenezcan a} \; s2 \;\; -\} \\
 \end{aligned}
 ```
@@ -575,41 +570,40 @@ Su especificación es:
 &\spec \; Tree \; \of \; \where \\
 &\\
 &\cons \\
-&\quad \fun \; empty\_tree() \; \ret \; t : Tree \; \of \; T \\
+&\quad \fun \; empty\_tree() \; \ret \; t : Tree \; \of \; \bft \\
 &\quad\{- \;\; \textnormal{Crea un árbol vacío} \;\; -\} \\
 &\\
-&\quad \fun \; node(tl: Tree \; \of \; T, \; e : T, \; tr: Tree \; \of \; T) \; \ret \; t : Tree \; \of \; T \\
+&\quad \fun \; node(tl: Tree \; \of \; \bft, \; e : \bft, \; tr: Tree \; \of \; \bft) \; \ret \; t : Tree \; \of \; \bft \\
 &\quad\{- \;\; \textnormal{Crea el nodo con elemento} \; e \; \textnormal{y subárboles} \; tl, \; tr \;\; -\} \\
 &\destroy \\
-&\quad \proc \; destroy(\inout \; tr : Tree \; \of \; T) \\
+&\quad \proc \; destroy(\inout \; tr : Tree \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso que sea necesario} \;\; -\} \\
 &\\ 
-&\ops \\ 
-&\quad \fun \; is\_empty\_tree(t : Tree \; \of \; T) \; \ret \; b : \bool \\
+&\quad \fun \; is\_empty\_tree(t : Tree \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; t \;\textnormal{es vacío} \;\; -\} \\
 &\\
-&\quad \fun \; root(t : Tree \; \of \; T) \; \ret \; e : T \\
+&\quad \fun \; root(t : Tree \; \of \; \bft) \; \ret \; e : \bft \\
 &\quad\{- \;\; \textnormal{Devuelve el elemento de la raíz de} \; t \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_tree(t) \;\; -\} \\
 &\\
-&\quad \fun \; left(t : Tree \; \of \; T) \; \ret \; tl : Tree \; \of \; T \\         
+&\quad \fun \; left(t : Tree \; \of \; \bft) \; \ret \; tl : Tree \; \of \; \bft \\         
 &\quad\{- \;\; \textnormal{Devuelve el subárbol izquierdo de} \; t \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_tree(t) \;\; -\} \\
 &\\
-&\quad \fun \; right(t : Tree \; \of \; T) \; \ret \; tr : Tree \; \of \; T \\
+&\quad \fun \; right(t : Tree \; \of \; \bft) \; \ret \; tr : Tree \; \of \; \bft \\
 &\quad\{- \;\; \textnormal{Devuelve el subárbol derecho de} \; t \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; \textnormal{not} \; is\_empty\_tree(t) \;\; -\} \\
 &\\
-&\quad \fun \; height(t : Tree \; \of \; T) \; \ret \; n : \nat \\
+&\quad \fun \; height(t : Tree \; \of \; \bft) \; \ret \; n : \nat \\
 &\quad\{- \;\; \textnormal{Devuelve la distancia entre la raíz de} \; t \; \textnormal{y la hoja más profunda} \;\; -\} \\
 &\\ 
-&\quad \fun \; is\_path(t : Tree \; \of \; T, \; p : Path) \; \ret \; b : \bool \\
+&\quad \fun \; is\_path(t : Tree \; \of \; \bft, \; p : Path) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; p \;\textnormal{es un camino válido en} \; t \;\; -\} \\
 &\\
-&\quad \fun \; subtree\_at(t : Tree \; \of \; T, \; p : Path) \; \ret \; t0 : Tree \; \of \; T \\
+&\quad \fun \; subtree\_at(t : Tree \; \of \; \bft, \; p : Path) \; \ret \; t0 : Tree \; \of \; \bft \\
 &\quad\{- \;\; \textnormal{Devuelve el subárbol de} \; t \; \textnormal{al seguir el camino} \; p \; \textnormal{en} \; t \;\; -\} \\
 &\\
-&\quad \fun \; elem\_at(t : Tree \; \of \; T, \; p : Path) \; \ret \; e : T \\
+&\quad \fun \; elem\_at(t : Tree \; \of \; \bft, \; p : Path) \; \ret \; e : \bft \\
 &\quad\{- \;\; \textnormal{Devuelve el elemento al seguir el camino} \; p \; \textnormal{en} \; t \;\; -\} \\
 &\quad\{- \;\; \mathbf{PRE:} \; is\_path(t,p) \;\; -\} \\
 \end{aligned}
@@ -621,21 +615,21 @@ Su implementación es similar a la de listas enlazadas. Se define un tipo $Node$
 
 ```math
 \begin{aligned}
-&\impt \; Tree \; \of \; T \; \where \\
+&\impt \; Tree \; \of \; \bft \; \where \\
 &\\
-&\type \; Node \; \of \; T = \tuple \\
-&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad left: \pointer \; \too \; (Node \; \of \; T) \\
-&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad value: T \\
-&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad right: \pointer \; \too \; (Node \; \of \; T) \\
+&\type \; Node \; \of \; \bft = \tuple \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad left: \pointer \; \too \; (Node \; \of \; \bft) \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad value: \bft \\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad right: \pointer \; \too \; (Node \; \of \; \bft) \\
 &\quad\quad\quad\quad\quad\quad\quad\quad \; \; \bfend \; \tuple \\ 
 &\\
-&\type \; Tree \; \of \; T = \pointer \; \too \; (Node \; \of \; T) \\
+&\type \; Tree \; \of \; \bft = \pointer \; \too \; (Node \; \of \; \bft) \\
 &\\
-&\fun \; empty\_tree() \; \ret \; t : Tree \; \of \; T \\
+&\fun \; empty\_tree() \; \ret \; t : Tree \; \of \; \bft \\
 &\quad t := \null \\
 &\bfend \; \fun \\
 &\\
-&\fun \; node(tl: Tree \; \of \; T, \; e : T, \; tr: Tree \; \of \; T) \; \ret \; t : Tree \; \of \; T \\
+&\fun \; node(tl: Tree \; \of \; \bft, \; e : \bft, \; tr: Tree \; \of \; \bft) \; \ret \; t : Tree \; \of \; \bft \\
 &\quad alloc(t) \\
 &\quad t \to left := tl \\
 &\quad t \to value := e \\

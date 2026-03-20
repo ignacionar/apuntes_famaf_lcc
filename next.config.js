@@ -19,6 +19,8 @@ const withNextra = nextra({
         '\\out': '\\mathbf{out}',
         '\\bfin': '\\mathbf{in}',
         '\\inout': '\\mathbf{in/out}',
+        '\\ops(': '\\textnormal{ops}',
+        '\\bft': '\\mathbf{T}',
         '\\if': '\\mathbf{if}',
         '\\fi': '\\mathbf{fi}',
         '\\var': '\\mathbf{var}',
@@ -54,7 +56,7 @@ const withNextra = nextra({
         '\\spec': '\\mathbf{spec}',
         '\\cons': '\\mathbf{constructors}',
         '\\destroy': '\\mathbf{destroy}',
-        '\\ops': '\\mathbf{operations}',
+        '\\ops(': '\\mathbf{operations}',
         '\\impt': '\\mathbf{implement}',
         '\\mcalx': '\\mathcal{X}'
       }

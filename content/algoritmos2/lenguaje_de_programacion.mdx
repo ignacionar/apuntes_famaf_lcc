@@ -8,14 +8,14 @@ Se utiliza un lenguaje inventado específicamente para la materia, que nos permi
 
 ```math
 \begin{aligned}
-&\proc \; nombre(< \bfin | \out | \inout > p_1 : T_1, \; \ldots, \; < \bfin | \out | \inout > p_n : T_n) \\
+&\proc \; nombre(< \bfin | \out | \inout > p_1 : \bft_1, \; \ldots, \; < \bfin | \out | \inout > p_n : \bft_n) \\
 &\quad < \textnormal{declaraciones de variables} > \\
 &\quad < \textnormal{sentencias} > \\
 &\bfend \; \proc \\
 \end{aligned}
 ```
 
-Donde $p_1, \; \ldots, \; p_n$ son nombres de variables (parámetros) y $T_1, \; \ldots, \; T_n$ sus respectivos tipos.
+Donde $p_1, \; \ldots, \; p_n$ son nombres de variables (parámetros) y $\bft_1, \; \ldots, \; \bft_n$ sus respectivos tipos.
 
 **Entrada/salida de parámetros:**
 
@@ -28,7 +28,7 @@ Un ejemplo de declaración de procedimiento es el siguiente:
 ```math
 \begin{aligned}
 &\proc \; abs(\bfin \; x : \intt, \; \out \; y : \intt) \\
-&\quad \if \; x >= 0 \; \then \\
+&\quad \if \; x \geq 0 \; \then \\
 &\quad \quad y := x \\
 &\quad \else \\
 &\quad \quad y := -x \\
@@ -62,14 +62,14 @@ Un ejemplo de llamada de este procedmiento puede ser:
 
 ```math
 \begin{aligned}
-&\fun \; nombre(p_1 : T_1, \; \ldots, \; p_n : T_n) \; \ret \; r : T \\
+&\fun \; nombre(p_1 : \bft_1, \; \ldots, \; p_n : \bft_n) \; \ret \; r : T \\
 &\quad < \textnormal{declaraciones de variables} > \\
 &\quad < \textnormal{sentencias} > \\
 &\bfend \; \fun \\
 \end{aligned}
 ```
 
-Donde $p_1, \; \ldots, \; p_n$ y $r$ son nombres de variables (parámetros) y $T_1, \; \ldots, \; T_n$ sus respectivos tipos.
+Donde $p_1, \; \ldots, \; p_n$ y $r$ son nombres de variables (parámetros) y $\bft_1, \; \ldots, \; \bft_n$ sus respectivos tipos.
 
 Un ejemplo de declaración de función es el siguiente:
 
@@ -268,3 +268,125 @@ Y para $\for \; \downto$,
 ### Secuenciación
 
 No hay secuenciación explícita como en Algoritmos 1, basta con poner una sentencia después de otra.
+
+***
+
+### Ejercicios resueltos - Definiciones de procedimientos y funciones
+
+Dar la definición recursiva de la función factorial
+
+**1.**
+
+```math
+\begin{aligned}
+&\fun \; factorial(\bfin \; n : \nat) \; \ret \; f : \nat \\
+&\quad \if \; n = 0 \; \then \\
+&\quad \quad f := 1 \\
+&\quad \else \\
+&\quad \quad f := n * factorial(n-1) \\
+&\quad \fi \\
+&\bfend \; \fun \\
+\end{aligned}
+```
+
+***
+
+**2.**
+
+Dar la definición iterativa de la función factorial
+
+```math
+\begin{aligned}
+&\fun \; factorial(\bfin \; n : \nat) \; \ret \; f : \nat \\
+&\quad f := 1 \\
+&\quad \for \; i := 1 \; \too \; n \; \do \\
+&\quad \quad f := f * i \\
+&\quad \od \\
+&\bfend \; \fun \\
+\end{aligned}
+```
+
+***
+
+**3.**
+
+Dar un procedimiento para incrementar en $1$ los valores de un arreglo de enteros.
+
+```math
+\begin{aligned}
+&\proc \; init\_array(\inout \; a: \array [n..m] \; \of \; \intt) \\
+&\quad \for \; i := n \; \too \; m \; \do \\
+&\quad \quad a[i] := a[i] + 1 \\
+&\quad \od \\
+&\bfend \; \proc \\
+\end{aligned}
+```
+
+***
+
+**4.**
+
+Dar una función para encontrar el mínimo de un arreglo de enteros.
+
+```math
+\begin{aligned}
+&\fun \; min\_array(\bfin \; a: \array [1..n] \; \of \; \intt) \; \ret \; min : \intt \\
+&\quad min := \infty \\
+&\quad \for \; i := 1 \; \too \; n \; \do \\
+&\quad \quad \if \; a[i] < min \; \then \\
+&\quad \quad \quad min := a[i] \\
+&\quad \quad \fi \\
+&\quad \od \\
+&\bfend \; \fun \\
+\end{aligned}
+```
+
+***
+
+**5.**
+
+Dar una procedimiento para inicializar un arreglo con los primeros $n$ números naturales.
+
+```math
+\begin{aligned}
+&\proc \; init\_array(\out \; a: \array [1..n] \; \of \; \intt) \\
+&\quad \for \; i := 1 \; \too \; n \; \do \\
+&\quad \quad a[i] := i \\
+&\quad \od \\
+&\bfend \; \proc \\
+\end{aligned}
+```
+
+***
+
+**6.**
+
+Dar una procedimiento para inicializar un arreglo con los primeros $n$ números naturales impares.
+
+```math
+\begin{aligned}
+&\proc \; init\_array(\out \; a: \array [1..n] \; \of \; \intt) \\
+&\quad \for \; i := 1 \; \too \; n \; \do \\
+&\quad \quad a[i] := 2*i - 1 \\ 
+&\quad \od \\
+&\bfend \; \proc \\
+\end{aligned}
+```
+
+***
+
+**7.**
+
+Dar un procedimiento para incrementar en $1$ las posiciones impares de un arreglo de enteros.
+
+```math
+\begin{aligned}
+&\proc \; increment\_odd\_positions(\inout \; a: \array [1..n] \; \of \; \intt) \\
+&\quad \for \; i := 1 \; \too \; n \; \do \\
+&\quad \quad \if \; i \; \text{mod} \; 2 \not= 1 \; \then \\
+&\quad \quad \quad a[i] := a[i] + 1 \\
+&\quad \quad \fi \\
+&\quad \od \\
+&\bfend \; \proc \\
+\end{aligned}
+```

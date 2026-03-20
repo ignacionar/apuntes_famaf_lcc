@@ -11,10 +11,7 @@ Cada coeficiente $a_j$ se multiplica por $2^j$.
 Un número con punto decimal se representa con una serie de coeficientes: 
 
 ```math 
-\begin{aligned}
-&a_{n} \; a_{4} \; a_{3} \; a_{2} \; a_{1} \; a_{0} \; .a_{-1} \; a_{-2} \; a_{-3} \; \ldots a_{-n} \;  \\
-&10^{n}a_{n} + 10^{4}a_{4} + 10^{3}a_{3} + 10^{2}a_{2} + 10^{1}a_{1} + 10^{0}a_{0} + 10^{-1}a_{-1} + 10^{-2}a_{-2} + 10^{-3}a_{-3} + \ldots + 10^{-n}a_{-n} \\
-\end{aligned}
+10^{n}a_{n} + 10^{4}a_{4} + 10^{3}a_{3} + 10^{2}a_{2} + 10^{1}a_{1} + 10^{0}a_{0} + 10^{-1}a_{-1} + 10^{-2}a_{-2} + 10^{-3}a_{-3} + \ldots + 10^{-n}a_{-n} 
 ```
 
 Donde $a_{n}$ es el coeficiente más grande y $a_{-n}$ es el coeficiente más pequeño.\
@@ -134,6 +131,72 @@ Puede darse el caso que el número no sea exactamente divisible por $3$ o $4$, p
 \end{aligned}
 ```
 
+***
+
+### Ejercicios resueltos - Conversión de base numérica
+
+**1.**
+
+Convertir el siguiente número hexadecimal a binario de $32$ bits: $0x10A6F2B$
+
+```math
+0x10A6F2B = (0001 \; 0000 \; 1010 \; 0110 \; 1111 \; 0010 \; 1011)_2 = 
+```
+
+***
+
+**2.**
+
+Convertir el siguiente número decimal a binario: $123$
+
+```math
+\begin{aligned}
+123 = 2 \cdot 61 + 1 \\
+61 = 2 \cdot 30 + 1 \\
+30 = 2 \cdot 15 + 0 \\
+15 = 2 \cdot 7 + 1 \\
+7 = 2 \cdot 3 + 1 \\
+3 = 2 \cdot 1 + 1 \\
+1 = 2 \cdot 0 + 1 \\
+\end{aligned}
+```
+
+Tenemos que $123 = (1111011)_2$.
+
+***
+
+**3.**
+
+Suponiendo que se tienen registros de $16$ bits, convertir el siguiente número decimal: $255,46$ a binario sin signo.
+
+```math
+\begin{aligned}
+255 = 2 \cdot 127 + 1 \\
+127 = 2 \cdot 63 + 1 \\
+63 = 2 \cdot 31 + 1 \\
+31 = 2 \cdot 15 + 1 \\
+15 = 2 \cdot 7 + 1 \\
+7 = 2 \cdot 3 + 1 \\
+3 = 2 \cdot 1 + 1 \\
+1 = 2 \cdot 0 + 1 \\
+\end{aligned}
+```
+
+```math
+\begin{aligned}
+0.46 \cdot 2 &= 0 + 0.92 \\
+0.92 \cdot 2 &= 1 + 0.84 \\
+0.84 \cdot 2 &= 1 + 0.68 \\
+0.68 \cdot 2 &= 1 + 0.36 \\
+0.36 \cdot 2 &= 0 + 0.72 \\
+0.72 \cdot 2 &= 1 + 0.44 \\ 
+0.44 \cdot 2 &= 0 + 0.88 \\
+0.88 \cdot 2 &= 1 + 0.76 \\
+\end{aligned}
+```
+
+Tenemos que $255.46 = (11111111.01110101)_2$.
+
 ## Complementos 
 
 > Los complementos son una forma de representar números negativos.\
@@ -183,6 +246,122 @@ Si quisiéramos aumentar el tamaño del registro, al ser **negativo, se agregan 
 
 Para hacer una resta entre dos números binarios, **es más sencillo hacer el complemento a $2$ del sustraendo y sumar ambos números**. 
 
+***
+
+### Ejercicios resueltos - Complementos
+
+**1.**
+
+Suponiendo que un microprocesador utiliza registros de $8$ bits y representación de números negativos en complemento a $2$, convertir el número decimal $-76$ a binario.
+
+Primero calculamos el valor de $76$ en binario.
+
+```math
+\begin{aligned}
+76 = 2 \cdot 38 + 0 \\
+38 = 2 \cdot 19 + 0 \\
+19 = 2 \cdot 9 + 1 \\
+9 = 2 \cdot 4 + 1 \\
+4 = 2 \cdot 2 + 0 \\
+2 = 2 \cdot 1 + 0 \\
+1 = 2 \cdot 0 + 1 \\
+\end{aligned}
+```
+
+Tenemos que $76 = (01001100)_2$, se agrega un cero a la izquierda para completar los $8$ bits. Ahora obtenemos el complemento a $1$ de $(01001100)_2$.
+
+```math
+(01001100)_2 \implies (10110011)_2
+```
+
+Ahora sumamos $1$ al complemento a $1$ para obtener el complemento a $2$.
+
+```math
+\begin{aligned}
+(10110011)_2 &\implies (10110011)_2 \\
++1 &\implies (10110100)_2
+\end{aligned}
+```
+
+Por lo que $-76 = (10110100)_2$.
+
+***
+
+**2.**
+
+Convertir el siguiente valor signado de $8$ bits a decimal: $(10010110)_2$.
+
+Revertimos la suma y obtenemos el complemento a $1$ de $(10010110)_2$.
+
+```math
+(10010110)_2 - 1 \implies (10010101)_2
+```
+
+Ahora cambiamos $1$ por $0$
+
+```math 
+(10010101)_2 \implies (01101010)_2
+```
+
+Ahora convertimos el número binario a decimal.
+
+```math
+\begin{aligned}
+&= 0 \cdot 2^7 + 1 \cdot 2^6 + 1 \cdot 2^5 + 0 \cdot 2^4 + 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 0 \cdot 2^0 \\
+&= 0 + 64 + 32 + 0 + 8 + 0 + 2 + 0 \\
+&= 106
+\end{aligned}
+```
+
+Con el signo negativo, tenemos que $(10010110)_2 = -106$.
+
+***
+
+**3.**
+
+Dar el resultado de la operación $0x80$ - $0xD0$ en decimal, donde se usan registros de $8$ bits y representación de números negativos en complemento a $2$.
+
+Primero convertimos ambos números hexadecimales a binario
+
+```math
+0x80 = (10000000)_2 \\
+0xD0 = (11010000)_2
+```
+
+Ahora obtenemos el complemento a $2$ de $(11010000)_2$
+
+```math
+\begin{aligned}
+(11010000)_2 &\implies (00101111)_2 \\
++1 &\implies (00110000)_2
+\end{aligned}
+```
+
+Ambos números en decimal son:
+
+```math
+\begin{aligned}
+(10000000)_2 &= 2^7 = 128 \\
+(00110000)_2 &= 2^5 + 2^4 = -48
+\end{aligned}
+```
+
+La resta $0x80$ - $0xD0$ se puede expresar como $128 + (-48) = 80$. En binario, $80$ es 
+
+```math
+\begin{aligned}
+80 = 2 \cdot 40 + 0 \\
+40 = 2 \cdot 20 + 0 \\
+20 = 2 \cdot 10 + 0 \\
+10 = 2 \cdot 5 + 0 \\
+5 = 2 \cdot 2 + 1 \\
+2 = 2 \cdot 1 + 0 \\
+1 = 2 \cdot 0 + 1 \\
+\end{aligned}
+```
+
+Tenemos que $80 = (01010000)_2$.
+
 ## Números Flotantes 
 
 > Los números flotantes son una representación de números reales extremadamente grandes o pequeños en notación científica. Este formato puede ser de precisión simple o doble, dependiendo de la cantidad de bits que se usen. En lenguajes como C se usan los tipos `float` y `double` para representarlos.
@@ -190,7 +369,7 @@ Para hacer una resta entre dos números binarios, **es más sencillo hacer el co
 Su formato sería el siguiente: 
 
 ```math
-x = (-1)^{s} \times (1 + F) \times 2^{E - B}
+x = (-1)^{s} \cdot (1 + F) \cdot 2^{E - B}
 ```
 
 - $s$ corresponde a un bit de signo. 
@@ -230,3 +409,114 @@ Este se utiliza cuando un número excede el rango de representación.
 
 El NaN se representa con exponente $= 111 \ldots 1$, y mantisa $\not=000 \ldots 0$.\
 Este se utiliza cuando se realiza una operación inválida, como dividir por $0$.
+
+***
+
+### Ejercicios resueltos - Números flotantes
+
+**1.**
+
+Convertir el siguiente número decimal a formato IEEE 754 de precisión simple: $5678$ (normalizado).
+
+Primero convertimos el número decimal a binario.
+
+```math
+\begin{aligned}
+5678 = 2 \cdot 2839 + 0 \\
+2839 = 2 \cdot 1419 + 1 \\
+1419 = 2 \cdot 709 + 1 \\
+709 = 2 \cdot 354 + 1 \\
+354 = 2 \cdot 177 + 0 \\
+177 = 2 \cdot 88 + 1 \\
+88 = 2 \cdot 44 + 0 \\
+44 = 2 \cdot 22 + 0 \\
+22 = 2 \cdot 11 + 0 \\
+11 = 2 \cdot 5 + 1 \\
+5 = 2 \cdot 2 + 1 \\
+2 = 2 \cdot 1 + 0 \\
+1 = 2 \cdot 0 + 1 \\
+\end{aligned}
+```
+
+Tenemos que $5678 = (1011000101110)_2$. Ahora identificamos los valores de $s, F, E$.
+
+- $s = 0$ (es positivo)
+
+Este número no tiene parte fraccionaria, por lo que el desplazamiento del punto es de $e = 12 \implies 1.011000101110$ 
+
+- $F = 01100010111000000000000$ (agregamos ceros para llegar a $23$ bits)
+
+Finalmente, calculamos el valor de $E$.
+
+```math
+\begin{aligned}
+E &= e + B \\
+&= 12 + 127 \\
+&= 139 = 2^7 + 2^3 + 2^2 + 2^1 + 2^0 = (10001011)_2
+\end{aligned}
+```
+
+El número $5678$ en formato IEEE 754 de precisión simple es $(0 \; 10001011 \; 01100010111000000000000)_2$.
+
+***
+
+**2.**
+
+Convertir el siguiente número decimal a formato IEEE 754 de precisión simple: $-3020.993$ (normalizado).
+
+Primero convertimos el número decimal a binario. Este número tiene parte entera y parte fraccionaria, por lo que se convierten por separado.\
+La mantisa debe tener $23$ bits, por lo que nos interesan los primeros $24$ bits para hacer el desplazamiento del punto.
+
+```math
+\begin{aligned}
+3020 = 2 \cdot 1510 + 0 \\
+1510 = 2 \cdot 755 + 0 \\
+755 = 2 \cdot 377 + 1 \\
+377 = 2 \cdot 188 + 1 \\
+188 = 2 \cdot 94 + 0 \\
+94 = 2 \cdot 47 + 0 \\
+47 = 2 \cdot 23 + 1 \\
+23 = 2 \cdot 11 + 1 \\
+11 = 2 \cdot 5 + 1 \\
+5 = 2 \cdot 2 + 1 \\
+2 = 2 \cdot 1 + 0 \\
+1 = 2 \cdot 0 + 1 \\
+\end{aligned}
+```
+
+Tenemos que $3020 = (101111001100)_2$. Ahora convertimos la parte fraccionaria.
+
+```math
+\begin{aligned}
+0.993 \cdot 2 &= 1 + 0.986 \\
+0.986 \cdot 2 &= 1 + 0.972 \\
+0.972 \cdot 2 &= 1 + 0.944 \\
+0.944 \cdot 2 &= 1 + 0.888 \\
+0.888 \cdot 2 &= 1 + 0.776 \\
+0.776 \cdot 2 &= 1 + 0.552 \\
+0.552 \cdot 2 &= 1 + 0.104 \\
+0.104 \cdot 2 &= 0 + 0.208 \\
+0.208 \cdot 2 &= 0 + 0.416 \\
+0.416 \cdot 2 &= 0 + 0.832 \\
+0.832 \cdot 2 &= 1 + 0.664 \\
+0.664 \cdot 2 &= 1 + 0.328 \\
+\end{aligned}
+```
+
+- $s = 0$ (es positivo)
+
+El número $3020,993 = (101111001100.111111100011)_2$. El desplazamiento del punto es de $e = 11 \implies 1.011110011001111111100011$
+
+- $F = 01111001100111111110001$ 
+
+Finalmente, calculamos el valor de $E$.
+
+```math
+\begin{aligned}
+E &= e + B \\
+&= 11 + 127 \\
+&= 138 = 2^7 + 2^3 + 2^2 + 2^1 = (10001010)_2
+\end{aligned}
+```
+
+El número $-3020.993$ en formato IEEE 754 de precisión simple es $(1 \; 10001010 \; 01111001100111111110011)_2$.

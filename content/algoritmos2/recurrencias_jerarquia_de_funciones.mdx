@@ -109,7 +109,7 @@ Planteada la recurrencia tenemos que:
 \begin{aligned}
 &\\
 &\{  1 \leq lft \leq n+1 \; \land 0 \leq rgt \leq n \; \land \; a \; \textnormal{está ordenado} \} \\
-&\fun \; binary\_search\_rec(a: \array[1..n] \; \of \; T , \; x: T, \; lft, rgt: \nat) \; \ret \; i : \nat \\
+&\fun \; binary\_search\_rec(a: \array[1..n] \; \of \; \bft , \; x: \bft, \; lft, rgt: \nat) \; \ret \; i : \nat \\
 &\quad \var \; mid: \nat \\
 &\quad \if \; lft > rgt \; \to \; i := 0 \\
 &\quad \quad lft \leq rgt \to mid := (lft + rgt) \; \textnormal{div} \; 2 \\
@@ -123,7 +123,7 @@ Planteada la recurrencia tenemos que:
 &\\ 
 &\\
 &\{ n \geq 0 \} \\
-&\fun \; binary\_search(a: \array[1..n] \; \of \; T , \; x: T) \; \ret \; i : \nat \\
+&\fun \; binary\_search(a: \array[1..n] \; \of \; \bft , \; x: \bft) \; \ret \; i : \nat \\
 &\quad i := binary\_search\_rec(a, x, 1, n) \\
 &\bfend \; \fun \\
 &\{ i = 0 \implies x \; \textnormal{no está en} \; a \; \land \; (i \not=0 \implies x = a[i]) \}

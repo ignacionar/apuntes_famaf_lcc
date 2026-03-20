@@ -11,49 +11,189 @@ Para contar cuántas veces se ejecuta una operación, debemos tener en cuenta to
 En el comando $\skip$ no se ejecuta ninguna operación, por lo que el número de operaciones es 0. 
 
 ```math 
-ops(\skip) = 0
+\textnormal{ops}(\skip) = 0
 ```
 
 En el caso de $\for$, debemos tener en cuenta que la siguiente ecuación vale si **no hay interés en contar las operaciones que involucran el índice $k$**. 
 
 ```math 
-ops(\for \; k:= n \; \too \; m \; \do \; C(k) \; \od) = \displaystyle{\sum_{n}^{m} ops(C(k))}
+\textnormal{ops}(\for \; k:= n \; \too \; m \; \do \; C(k) \; \od) = \displaystyle{\sum_{n}^{m} \textnormal{ops}(C(k))}
 ```
 
 Para $\if$ contamos cuantas veces se ejecuta durante la evaluiación de $b$ y luego cuantas en la ejecución de $C$ y $D$ (caso verdadero y falso)
 
 ```math
-ops(\if \; b \; \then \; C \; \else \; D \; \fi) = \begin{cases}
-    ops(b) + ops(C) & \text{si } b \text{ es verdadero} \\
-    ops(b) + ops(D) & \text{si } b \text{ es falso}
+\textnormal{ops}(\if \; b \; \then \; C \; \else \; D \; \fi) = \begin{cases}
+    \textnormal{ops}(b) + \textnormal{ops}(C) & \text{si } b \text{ es verdadero} \\
+    \textnormal{ops}(b) + \textnormal{ops}(D) & \text{si } b \text{ es falso}
 \end{cases}
 ```
 
 Para la asignación, debemos considerar el caso de modificación de la variable. Debemos considerar que tal vez, el nuevo valor es la llamada a una función que también tiene un costo.  
 
 ```math
-ops(x := e) = \begin{cases}
-    ops(e) + 1 & \text{si } x \text{ es modificada} \\
-    ops(e) & \text{si } x \text{ no es modificada}
+\textnormal{ops}(x := e) = \begin{cases}
+    \textnormal{ops}(e) + 1 & \text{si } x \text{ es modificada} \\
+    \textnormal{ops}(e) & \text{si } x \text{ no es modificada}
 \end{cases}
 ```
 
 Para las expresiones, consideramos el caso de contar comparaciones: 
 
 ```math
-ops(e<f) = \begin{cases}
-    ops(e) + ops(f) + 1 & \text{si se cuentan comparaciones} \\
-    ops(e) + ops(f) & \text{caso contrario } 
+\textnormal{ops}(e<f) = \begin{cases}
+    \textnormal{ops}(e) + \textnormal{ops}(f) + 1 & \text{si se cuentan comparaciones} \\
+    \textnormal{ops}(e) + \textnormal{ops}(f) & \text{caso contrario } 
 \end{cases}
 ```
 
 En el caso de los ciclos ($\do$) tenemos que: 
 
 ```math
-ops(\do \; b \rightarrow C \; \od) = ops(b) + \displaystyle{\sum_{k=1}^n \; d_k}
+\textnormal{ops}(\do \; b \rightarrow C \; \od) = \textnormal{ops}(b) + \displaystyle{\sum_{k=1}^n \; d_k}
 ```
 
 Donde $n$ es el número de veces que el cuerpo del ciclo se ejecuta, y $d_k$ s el número de operaciones que se ejecutan en la $k$-ésima iteración.
+
+### Ejercicios resueltos - Número de ejecuciones de un programa
+
+**1.**
+
+Calcular el número de asignaciones de la variable $t$ en el siguiente algoritmo: 
+
+```math
+\begin{aligned}
+&t := 0 \\ 
+&\for \; i := 1 \; \too \; n \; \do \\
+&\quad \for \; j := 1 \; \too \; n^2 \; \do  \\
+&\quad\quad \for \; k := 1 \; \too \; n^3 \; \do \\
+&\quad\quad\quad t := t + 1 \\
+&\quad\quad \od \\
+&\quad \od \\
+&\od \\
+&\; \\
+&\textnormal{ops}(t := 0) + \textnormal{ops}( \\
+&\for \; i := 1 \; \too \; n \; \do \\
+&\quad \for \; j := 1 \; \too \; n^2 \; \do  \\
+&\quad\quad \for \; k := 1 \; \too \; n^3 \; \do \\
+&\quad\quad\quad t := t + 1 \\
+&\quad\quad \od \\
+&\quad \od \\
+&\od \\
+&) \\
+&= 1 + (\sum_{1=1}^{n} ( \sum_{1=1}^{n^2} ( \sum_{1=1}^{n^3} 1))) \\
+&= 1 + (\sum_{1=1}^{n} ( \sum_{1=1}^{n^2} n^3 )) \\
+&= 1 + (\sum_{1=1}^{n} n^2 \cdot n^3) \\
+&= 1 + (n \cdot n^2 \cdot n^3) \\
+&= 1 + \underline{n^6}
+\end{aligned}
+```
+
+***
+
+**2.**
+
+Calcular el número de asignaciones de la variable $t$ en el siguiente algoritmo: 
+
+```math
+\begin{aligned}
+&t := 0 \\ 
+&\for \; i := 1 \; \too \; n \; \do \\
+&\quad \for \; j := 1 \; \too \; i \; \do  \\
+&\quad\quad \for \; k := 1 \; \too \; n^3 \; \do \\
+&\quad\quad\quad t := t + 1 \\
+&\quad\quad \od \\
+&\quad \od \\
+&\od \\
+&\; \\
+&\textnormal{ops}(t := 0) + \textnormal{ops}( \\
+&\for \; i := 1 \; \too \; n \; \do \\
+&\quad \for \; j := 1 \; \too \; i \; \do  \\
+&\quad\quad \for \; k := j \; \too \; j+3 \; \do \\
+&\quad\quad\quad t := t + 1 \\
+&\quad\quad \od \\
+&\quad \od \\
+&\od \\
+&) \\
+&= 1 + (\sum_{i=1}^{n} ( \sum_{j=1}^{i} ( \sum_{k=j}^{j+3} 1))) \\
+&= 1 + (\sum_{i=1}^{n} ( \sum_{j=1}^{i} 4 )) \\
+&= 1 + (\sum_{i=1}^{n} i \cdot 4) \\
+&= 1 + (4 \cdot \sum_{i=1}^{n} i ) \\
+&= 1 + (4 \cdot \frac{n \cdot (n + 1)}{2}) \\
+&= 1 + 2(n^2 + n) \\
+&= 1 + \underline{2n^2 + 2n}
+\end{aligned}
+```
+
+***
+
+**3.**
+
+Calcular el orden del número de asignaciones a la variable $t$ del siguiente algoritmo:
+
+```math 
+\begin{aligned}
+&t := 0 \\ 
+&\while \; t < n \; \do \\ 
+&\quad \quad t := t * 2 \\ 
+&\od
+\end{aligned}
+```
+
+Podemos probar distintos valores de $n$ y observar la relación en la que las asignaciones crecen conforme $n$ (dato de entrada) aumenta.
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| $n$ | $\textnormal{ops}$ | 
+|:---:|:------------------:|
+| $1$ |       $1$          |
+| $2$ |       $2$          |
+| $3$ |       $3$          |
+| $4$ |       $4$          |
+| $5$ |       $4$          |
+| $6$ |       $4$          |
+| $7$ |       $4$          |
+| $8$ |       $4$          |
+| $9$ |       $5$          |
+| $10$|      $10$          |
+</div>
+
+El orden es $\approx 2 \log (n)$
+
+***
+
+**4.**
+
+Calcular el orden del número de asignaciones a la variable $t$ del siguiente algoritmo:
+
+```math 
+\begin{aligned}
+&\for \; i := 1 \; \too \; n \; \do \\ 
+&\quad t := i \\ 
+&\quad \while \; t > 0 \; \do \\ 
+&\quad \quad t := t \; \textnormal{div} \; 2 \\
+&\quad \od \\
+&\od
+\end{aligned}
+```
+
+Siguiendo la lógica del ejercicio anterior, probamos valores de $n$ y observamos el crecimiento:
+
+<br />
+
+<div style={{ margin: "0 auto", width: "fit-content" }}>
+| $n$ | $\textnormal{ops}$ | 
+|:---:|:------------------:|
+| $1$ |       $2$          |
+| $2$ |       $5$          |
+| $3$ |       $8$          |
+| $4$ |       $12$         |
+| $5$ |       $16$         |
+| $6$ |       $20$         |
+</div>
+
+El orden es $\approx n^2$
 
 ## Ordenación por selección (_Selection Sort_)
 
@@ -72,7 +212,7 @@ Si quisieramos escribir este algoritmo en pseudocódigo, primero podemos escribi
 ```math
 \begin{aligned}
 &\{ \; n \geq 0 \land a = A \; \} \\
-&\proc \; selection\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
+&\proc \; selection\_sort(\inout \; a : \array [1..n] \; \of \; \bft) \\
 &\quad \var \; i, \; minp: \; \nat \\
 &\quad i := 1 \quad\quad\quad\quad\quad\quad \{- \;\; \textnormal{Invariante} \;\; -\} \\ 
 &\quad \while \; i < n \; \do \\
@@ -90,8 +230,8 @@ El $swap$ sería:
 ```math
 \begin{aligned}
 &\{ \; a = A \land 1 \leq i, j \leq n \; \} \\
-&\proc \; swap(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; i, j : \nat) \\
-&\quad \var \; tmp : T \\
+&\proc \; swap(\inout \; a : \array [1..n] \; \of \; \bft, \; \bfin \; i, j : \nat) \\
+&\quad \var \; tmp : \bft \\
 &\quad tmp := a[i] \\
 &\quad a[i] := a[j] \\
 &\quad a[j] := tmp \\
@@ -111,7 +251,7 @@ El invariante es igual al anterior, pero ahora incluimos el mínimo del segmento
 ```math
 \begin{aligned}
 &\{ \; 0 < i \leq n \; \} \\
-&\fun \; min\_pos\_from(a : \array [1..n] \; \of \; T, \; i : \nat) \; \ret \; minp: \; \nat \\
+&\fun \; min\_pos\_from(a : \array [1..n] \; \of \; \bft, \; i : \nat) \; \ret \; minp: \; \nat \\
 &\quad \var \; j : \nat \\
 &\quad minp := i \\
 &\quad j := i+1 \quad\quad\quad\quad\quad\quad \{- \;\; \textnormal{Invariante: } \; a[minp] \; \textnormal{es el mínimo de} \; a[i,j] \;\; -\} \\  
@@ -130,14 +270,14 @@ Una manera de hacer lo mismo y con menos código es usando $\for$:
 
 ```math 
 \begin{aligned}
-&\proc \; selection\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
-&\quad \for \; i := 1 \; \too \; n \; \do \\
+&\proc \; selection\_sort(\inout \; a : \array [1..n] \; \of \; \bft) \\
+&\quad \for \; i := 1 \; \too \; n - 1 \; \do \\
 &\quad \quad minp := min\_pos\_from(a,i) \\
 &\quad \quad swap(a, i, minp) \\
 &\quad \od \\
 &\bfend \; \proc \\
 &&\\
-&\fun \; min\_pos\_from(a : \array [1..n] \; \of \; T, \; i : \nat) \; \ret \; minp: \; \nat \\
+&\fun \; min\_pos\_from(a : \array [1..n] \; \of \; \bft, \; i : \nat) \; \ret \; minp: \; \nat \\
 &\quad minp := i \\
 &\quad \for \; j := i+1 \; \too \; n \; \do \\
 &\quad \quad \if \; a[j] < a[minp] \; \then \\
@@ -149,6 +289,63 @@ Una manera de hacer lo mismo y con menos código es usando $\for$:
 ```
 
 De esta forma, las variables que sirven de índices estan declaradas en el contexto/scope de $\for$ 
+
+***
+
+### Ejercicios resueltos - Ordenación por selección
+
+**1.**
+
+Ordenar el siguiente arreglo $[7, 1, 10, 3, 4, 9, 5]$ usando el algoritmo de ordenación por selección, mostrar en cada paso de iteración el elemento seleccionado y como queda el arreglo luego de cada intercambio.
+
+```math
+\begin{array}{ll}
+[\underline{7}, \underline{1}, 10, 3, 4, 9, 5] \\
+\{- \quad \textnormal{ pos. actual } = 1, \quad minp = 2 \quad -\} \\
+\\
+[1, \underline{7}, 10, \underline{3}, 4, 9, 5] \\
+\{- \quad \textnormal{ pos. actual } = 2, \quad minp = 4 \quad -\} \\
+\\
+[1, 3, \underline{10}, 7, \underline{4}, 9, 5] \\
+\{- \quad \textnormal{ pos. actual } = 3, \quad minp = 5 \quad -\} \\
+\\
+[1, 3, 4, \underline{7}, 10, 9, \underline{5}] \\
+\{- \quad \textnormal{ pos. actual } = 4, \quad minp = 7 \quad -\} \\
+\\
+[1, 3, 4, 5, \underline{10}, 9, \underline{7}] \\
+\{- \quad \textnormal{ pos. actual } = 5, \quad minp = 7 \quad -\} \\
+\\
+[1, 3, 4, 5, 7, \underline{9}, 10] \\
+\{- \quad \textnormal{ pos. actual } = 6, \quad minp = 6 \quad -\} \\
+\{- \quad \textnormal{ arreglo ordenado } \quad -\} \\
+\end{array}
+```
+
+***
+
+**2.**
+
+Ordenar el siguiente arreglo $[1, 2, 3, 4, 5]$ usando el algoritmo de ordenación por selección, mostrar en cada paso de iteración el elemento seleccionado y como queda el arreglo luego de cada intercambio.
+
+```math
+\begin{array}{ll}
+[\underline{1}, 2, 3, 4, 5] \\
+\{- \quad \textnormal{ pos. actual } = 1, \quad minp = 1 \quad -\} \\
+\\
+[1, \underline{2}, 3, 4, 5] \\
+\{- \quad \textnormal{ pos. actual } = 2, \quad minp = 2 \quad -\} \\
+\\
+[1, 2, \underline{3}, 4, 5] \\
+\{- \quad \textnormal{ pos. actual } = 3, \quad minp = 3 \quad -\} \\
+\\
+[1, 2, 3, \underline{4}, 5] \\
+\{- \quad \textnormal{ pos. actual } = 4, \quad minp = 4 \quad -\} \\
+\\
+[1, 2, 3, 4, \underline{5}] \\
+\{- \quad \textnormal{ pos. actual } = 5, \quad minp = 5 \quad -\} \\
+\{- \quad \textnormal{ arreglo ordenado } \quad -\} \\
+\end{array}
+```
 
 ## Ordenación por inserción (_Insertion Sort_)
 
@@ -167,7 +364,7 @@ Si quisieramos escribir este algoritmo en pseudocódigo, podemos escribir un pro
 ```math
 \begin{aligned}
 &\{ \; n \geq 0 \land a = A \; \} \\
-&\proc \; insertion\_sort(\inout \; a : \array [1..n] \; \of \; T) \\
+&\proc \; insertion\_sort(\inout \; a : \array [1..n] \; \of \; \bft) \\
 &\quad \for \; i := 2 \; \too \; n \; \do \\
 &\quad \quad insert(a, i) \\
 &\quad \od \\
@@ -187,7 +384,7 @@ Como invariante, tenemos que $a$ es una permutación de $A$, el segmento $a[1,i]
 ```math
 \begin{aligned}
 &\{ \; 0 < i \leq n \land a = A \; \} \\
-&\proc \; insert(\inout \; a : \array [1..n] \; \of \; T, \; \bfin \; i : \nat) \\
+&\proc \; insert(\inout \; a : \array [1..n] \; \of \; \bft, \; \bfin \; i : \nat) \\
 &\quad \var \; j : \nat \\
 &\quad j := i \quad\quad\quad\quad\quad\quad \{- \;\; \textnormal{Invariante mencionado} \;\; -\} \\
 &\quad \while \; j > 1 \; \land \; a[j] < a[j-1] \; \do \\
@@ -200,3 +397,76 @@ Como invariante, tenemos que $a$ es una permutación de $A$, el segmento $a[1,i]
 ```
 
 (Se utiliza el mismo $swap$ que en el algoritmo de selección). Tanto este algoritmo como el de selección tienen complejidad cuadrática $\bigO(n^2)$ (en el peor caso), ya que sería necesario recorrer el arreglo completo en cada iteración.
+
+***
+
+### Ejercicios resueltos - Ordenación por inserción
+
+Ordenar el siguiente arreglo $[7, 1, 10, 3, 4, 9, 5]$ usando el algoritmo de ordenación por inserción, mostrar en cada paso de iteración el elemento seleccionado y como queda el arreglo luego de cada intercambio.
+
+```math
+\begin{array}{ll}
+[\underline{7}, \underline{1}, 10, 3, 4, 9, 5] \\
+\{- \quad 1 < 7, \quad \textnormal{ se intercambian } \quad -\} \\
+\\
+[1, \underline{7}, \underline{10}, 3, 4, 9, 5] \\
+\{- \quad 10 \not< 7, \quad \textnormal{ siguiente iteración } \quad -\} \\
+\\
+[1, 7, \underline{10}, \underline{3}, 4, 9, 5] \\
+\{- \quad 3 < 10, \quad \textnormal{ se intercambian } \quad -\} \\
+\\ 
+[1, \underline{7}, \underline{3}, 10, 4, 9, 5] \\
+\{- \quad 3 < 7, \quad \textnormal{ se intercambian } \quad -\} \\
+\\
+[\underline{1}, \underline{3}, 7, 10, 4, 9, 5] \\
+\{- \quad 3 \not< 1, \quad \textnormal{ siguiente iteración } \quad -\} \\
+\\
+[1, 3, \underline{7}, \underline{4}, 10, 9, 5] \\
+\{- \quad 4 < 7, \quad \textnormal{ se intercambian } \quad -\} \\
+\\
+[1, \underline{3}, \underline{4}, 7, 10, 9, 5] \\
+\{- \quad 4 \not< 3, \quad \textnormal{ siguiente iteración } \quad -\} \\
+\\
+[1, 3, 4, \underline{7}, \underline{9}, 10, 5] \\
+\{- \quad 9 \not< 7, \quad \textnormal{ siguiente iteración } \quad -\} \\
+\\
+[1, 3, 4, 7, \underline{9}, \underline{10}, 5] \\
+\{- \quad 10 \not< 9, \quad \textnormal{ siguiente iteración } \quad -\} \\
+\\
+[1, 3, 4, 7, 9, \underline{10}, \underline{5}] \\
+\{- \quad 5 < 10, \quad \textnormal{ se intercambian } \quad -\} \\
+\\
+[1, 3, 4, 7, \underline{9}, \underline{5}, 10] \\
+\{- \quad 5 < 9, \quad \textnormal{ se intercambian } \quad -\} \\
+\\
+[1, 3, 4, \underline{7}, \underline{5}, 9, 10] \\
+\{- \quad 5 < 7, \quad \textnormal{ se intercambian } \quad -\} \\
+\\
+[1, 3, \underline{4}, \underline{5}, 7, 9, 10] \\
+\{- \quad 5 \not< 4, \quad \textnormal{ se recorrió todo el arreglo } \quad -\} \\
+\{- \quad \textnormal{ arreglo ordenado } \quad -\} \\
+\end{array}
+```
+
+***
+
+**2.**
+
+Ordenar el siguiente arreglo $[1, 2, 3, 4, 5]$ usando el algoritmo de ordenación por selección, mostrar en cada paso de iteración el elemento seleccionado y como queda el arreglo luego de cada intercambio.
+
+```math
+\begin{array}{ll}
+[\underline{1}, \underline{2}, 3, 4, 5] \\
+\{- \quad 2 \not< 1, \quad \textnormal{ siguiente iteración } \quad -\} \\
+\\
+[1, \underline{2}, \underline{3}, 4, 5] \\
+\{- \quad 3 \not< 2, \quad \textnormal{ siguiente iteración } \quad -\} \\
+\\
+[1, 2, \underline{3}, \underline{4}, 5] \\
+\{- \quad 4 \not< 3, \quad \textnormal{ siguiente iteración } \quad -\} \\
+\\
+[1, 2, 3, \underline{4}, \underline{5}] \\  
+\{- \quad 5 \not< 4, \quad \textnormal{ se recorrió todo el arreglo } \quad -\} \\
+\{- \quad \textnormal{ arreglo ordenado } \quad -\} \\
+\end{array}
+```
