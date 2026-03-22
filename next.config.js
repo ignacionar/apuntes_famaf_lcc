@@ -56,7 +56,6 @@ const withNextra = nextra({
         '\\spec': '\\mathbf{spec}',
         '\\cons': '\\mathbf{constructors}',
         '\\destroy': '\\mathbf{destroy}',
-        '\\ops(': '\\mathbf{operations}',
         '\\impt': '\\mathbf{implement}',
         '\\mcalx': '\\mathcal{X}'
       }
