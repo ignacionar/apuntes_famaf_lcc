@@ -1,0 +1,285 @@
+# Semántica Operacional 
+
+> La **semántica operacional** es una representación abstracta de la ejecución de un programa, como secuencia de transiciones entre estados.
+
+Los estados de un programa son una descripción abstracta de la memoria y estructura de datos, y las transiciones siguen la estructura de la sintaxis. 
+
+Para describir la semántica operacional, podemos usar el siguiente modelo (simplificado) de una computadora:
+
+La maquina se compone por:
+
+- **Registros**: la memoria más rápida y pequeña del sistema. No guardan grandes cantidades de datos, sino punteros de control y estados inmediatos esenciales para la ejecución en curso.
+
+- **Contador de programa**: es un registro especial que almacena la dirección de memoria de la instrucción que se va a ejecutar (por eso en el diagrama tiene una flecha que apunta directamente al bloque de "Código").
+
+- **Puntero de entorno**: un registro que apunta a la ubicación actual en el stack donde residen las variables locales de la función que se está ejecutando en ese preciso momento (esto permite saber el contexto de ejecución, es decir, qué variables están disponibles y dónde encontrarlas).
+
+- **Código**: sección de la memoria donde están almacenadas las instrucciones del programa.
+
+- **Stack**: es la parte superior de los datos en la memoria, donde se almacenan las variables locales de las funciones, los parámetros de las funciones y las direcciones de retorno.
+
+- **Heap**: es la parte de la memoria donde se almacenan los objetos dinámicos, como las instancias de clases o estructuras de datos que se crean durante la ejecución del programa. Se guardan los datos cuyo tamaño o tiempo de vida no se puede predecir en tiempo de compilación.
+
+## Lenguajes con estructura de bloques
+
+> Los lenguajes modernos suelen ser estructurados por bloques, lo que significa que el código se organiza en bloques de código delimitados por llaves `{}` o palabras clave como `begin` y `end`.
+
+Las variables declaradas dentro de un bloque son locales a ese bloque y no son accesibles desde fuera de él. Esto se logra mediante el uso de un puntero de entorno que apunta al bloque actual en la pila, lo que permite gestionar el alcance de las variables y garantizar que solo sean accesibles dentro del bloque donde fueron declaradas.
+
+En los lenguajes estructurados por bloques, al entrar en un nuevo bloque durante la ejecución, se agrega a la pila un **activation record** con espacio para las variables locales de ese bloque, y el puntero de entorno apunta al nuevo **activation record**. Al salir del bloque, se elimina el **activation record** y el puntero de entorno vuelve a apuntar al bloque anterior.
+
+## Activation records
+
+> Los **activation records** son estructuras de datos que contienen las variables locales de la función, el control link que apunta al bloque anterior (lo que permite regresar al contexto de ejecución anterior), el access link que apunta a la función que contiene a la función actual, y cualquier variable temporal o resultado intermedio que se necesite durante la ejecución de la función.
+
+Cada vez que se llama a una función, se crea un nuevo **activation record** en la pila para esa función. Cuando la función termina su ejecución, el **activation record** se elimina de la pila, y el control regresa al bloque anterior utilizando el control link. Esto permite gestionar el alcance de las variables y garantizar que cada función tenga su propio espacio para almacenar sus variables locales y resultados intermedios sin interferir con otras funciones.
+
+## Pasaje de parámetros 
+
+Existen distintos métodos para el pasaje de parámetros en la semántica operacional, entre los cuales se encuentran:
+
+- **Pasaje por valor**: se pasa una copia del valor del argumento a la función (R-valor). Cualquier cambio realizado en el parámetro dentro de la función no afecta al argumento original fuera de la función.
+
+- **Pasaje por referencia**: se pasa una referencia al argumento original a la función (L-valor). Cualquier cambio realizado en el parámetro dentro de la función afecta al argumento original fuera de la función.
+
+- **Pasaje por valor-resultado**: se pasa una copia del valor del argumento a la función, pero al finalizar la función, el valor modificado se copia de vuelta al argumento original. Esto combina aspectos del pasaje por valor y por referencia.
+
+- **Pasaje por nombre**: en el cuerpo de la función se sustituye textualmente el argumento para cada instancia del parámetro. Esto permite que el argumento se evalúe cada vez que se accede al parámetro dentro de la función, lo que puede llevar a resultados diferentes dependiendo de cómo se utilice el parámetro.
+
+- **Pasaje por necesidad**: similar al pasaje por nombre, pero el argumento se evalúa solo la primera vez que se accede al parámetro dentro de la función, y luego se reutiliza ese valor para las siguientes referencias al parámetro. Esto puede mejorar la eficiencia en algunos casos, evitando evaluaciones repetidas del mismo argumento.
+
+***
+
+**Ejemplo:**
+
+```pas
+begin
+  integer n; integer m; integer r;
+  procedure p(i j k);
+    begin		
+      r := 5;		
+      i := k;		
+      r := 4;		
+      j := k+n		
+    end;
+  n := 3; m := 4; r :=1 
+  p(n m (n+r));
+  print(n);		
+end;
+```
+
+En este ejemplo, dependiendo del método de pasaje de parámetros utilizado, el valor de `n` al final del programa puede variar.
+
+Con el pasaje por valor, `n` se mantendría igual a 3, ya que se pasa una copia del valor de `n` a la función `p`, y cualquier cambio dentro de la función no afecta al valor original de `n`.
+
+Con el pasaje por referencia, `n` se modificaría a 4, ya que se pasa una referencia a `n`, y cualquier cambio dentro de la función afecta al valor original de `n`.
+
+Con el pasaje por valor-resultado, `n` también se modificaría a 4, ya que se pasa una copia del valor de `n` a la función, pero al finalizar la función, el valor modificado se copia de vuelta a `n`.
+
+Con el pasaje por nombre, se reescriben `i := k` y `j := k+n` dentro de la función `p` como `n := (n+r)` y `m := (n+r) + n` respectivamente, lo que resulta en `n` siendo modificado a 8.
+
+Con el pasaje por necesidad, `n` se modificaría a 8, ya que el argumento `(n+r)` se evalúa solo la primera vez que se accede al parámetro dentro de la función, y luego se reutiliza ese valor para las siguientes referencias al parámetro.
+
+
+## Paradigma declarativo e imperativo
+
+> El paradigma declarativo se centra en describir lo que se quiere lograr, mientras que el paradigma imperativo se centra en describir cómo lograrlo.
+
+Por ejemplo, las construcciones más primitivas son imperativas
+
+```go
+x := 5
+x := x + 3
+```
+
+Las construcciones imperativas **cambian** un valor y las declarativas **crean** un valor.
+
+***
+
+### Asignación destructiva
+
+> La asignación destructiva es una operación que modifica el valor de una variable existente, en lugar de crear una nueva variable con un nuevo valor.\
+Esto puede dar lugar a efectos secundarios, ya que destruye el valor anterior de la variable.
+
+***
+
+### Operaciones declarativas 
+
+> Una operación es declarativa si siempre que la llamamos con los mismos argumentos, se obtiene el mismo resultado, sin importar el estado del programa. 
+
+Una operación declarativa es:
+
+- **Independiente** (depende solo de los argumentos)
+- **Sin estado** (no recuerda ningún estado entre llamados)
+- **Determinística** (siempre devuelve el mismo resultado para los mismos argumentos)
+
+***
+
+### Componentes declarativos
+
+Los componentes declarativos ofrecen los siguientes beneficios:
+
+- **Programación a pequeña escala:** es más fácil razonar sobre programas declarativos porque pueden usarse técnicas algebraicas y lógicas.
+- **Programación a gran escala:** un componente se puede escribir, testear y verificar independientemente de otros componentes. 
+
+***
+
+### Ejercicios resueltos - Paradigma declarativo e imperativo
+
+**1.** 
+
+Determinar si el siguiente código es declarativo: 
+
+```c
+{
+  int x = 1;
+  x = x + 1;
+  {
+    int y = x + 1;
+    {
+      int x = y + z;
+    }
+  }
+}
+```
+
+El código no es declarativo, ya que la variable `x` se modifica a través de una asignación destructiva (`x = x + 1`), lo que introduce un efecto secundario. 
+
+***
+
+**2.**
+
+Identificar porciones de código que no sean declarativas:
+
+```c 
+int A; 
+int B;
+
+int Add () { 
+  return A + B ; 
+} 
+
+int main () { 
+  int answer; 
+  A = 5; 
+  B = 7; 
+  answer = Add(); 
+  printf("%d\n", answer); 
+  return 0; 
+}
+```
+
+La función `Add` no es declarativa, ya que depende de las variables globales `A` y `B`, lo que introduce un estado compartido y efectos secundarios. Además, la función `main` también tiene efectos secundarios al modificar las variables globales `A` y `B`. Por ende, `answer` y `printf` tampoco son declarativos, ya que dependen de las variables globales y producen efectos secundarios al imprimir el resultado.
+
+***
+
+**3.**
+
+Identificar porciones de código que no sean declarativas:
+
+```c
+int glob = 0; 
+
+int square (int x) { 
+  glob = 1; return x*x; 
+} 
+
+int main () {
+  int res; 
+  glob = 0; 
+  res = square(5); 
+  res += glob;
+  return res; 
+}
+```
+
+La función `square` no es declarativa, ya que modifica la variable global `glob`, lo que introduce un efecto secundario. Además, la función `main` también tiene efectos secundarios al modificar la variable global `glob` y al depender del valor de `glob` para calcular el resultado final. Por lo tanto, tanto `square` como `main` no son declarativas debido a su dependencia de variables globales y efectos secundarios asociados.
+
+## Alcance estático y dinámico
+
+> El alcance de una variable se refiere a la región del programa donde esa variable es accesible. El alcance puede ser estático o dinámico.\
+En el alcance estático, un identificador global se refiere al identificador con ese nombre que se encuentre en el bloque contenedor más cercano en el texto del programa. En el alcance dinámico, un identificador global se refiere al identificador con ese nombre que se encuentre en el bloque contenedor más cercano en la pila de ejecución.
+
+**Ejemplo:**
+
+```js
+int x = 1;
+
+function g(z) { 
+  return x + z
+};
+
+function f(y) = {
+  int x = y + 1;
+  return g(y * x)
+};
+
+f(3);
+```
+
+La llamada a `f(3)` lleva a una llamada a `g(12)` dentro de la función `f`.\
+Esto provoca que se evalúe la expresión `x + z` en el cuerpo de `g`. Después de la llamada a `g`, la pila de ejecución tendrá registros de activación para la declaración externa de `x`, la invocación de `f`, y la invocación de `g`.
+El resultado de la expresión `x + z` dependerá del tipo de alcance utilizado:
+- Con alcance estático, `x` tendrá el valor de 1, ya que es el valor de `x` en el bloque contenedor más cercano en el texto del programa, lo que da un resultado de 13.
+- Con alcance dinámico, `x` tendrá el valor de 4, ya que es el valor de `x` en el bloque contenedor más cercano en la pila de ejecución (el bloque de `f`), lo que da un resultado de 16.
+
+## Excepciones 
+
+> Las excepciones son una forma estructurada de salto que se puede utilizar para salir de un bloque o llamada de función, estas se usan en situaciones excepcionales, como erorres o condiciones inesperadas. 
+
+Todo mecanismo de excepción debe incluir: 
+
+- **_Rise/Throw_**: una operación  ejecuta una excepción, lo que provoca un salto a un bloque de código que maneja esa excepción.
+- **_Handle/Catch_**: un bloque de código que permite responder a la excepción lanzada durante la ejecución del programa. 
+
+## Tipado
+
+> Los tipos son una colección de valores computables que comparten alguna propiedad estructural. Se uutilizan para clasificar los datos y las operaciones que se pueden realizar sobre ellos, lo que ayuda a prevenir errores y a mejorar la seguridad y la eficiencia de los programas.
+
+Podemos destacar distintos sistemas de tipos, entre los cuales se encuentran:
+
+- **Tipos básicos**: como enteros, reales, booleanos, caracteres, etc.
+- **Tipos compuestos**: como arreglos, registros, tuplas, etc.
+- **tipos definidos por el usuario / tipos abstractos**: como listas, pilas, colas, árboles, etc.
+
+### Tipado estático/dinámico, fuerte/débil
+
+> El tipado estático es un sistema de tipos en el que los tipos de datos se verifican en **tiempo de compilación**, mientras que el tipado dinámico es un sistema de tipos en el que los tipos de datos se verifican en **tiempo de ejecución**.\
+El tipado fuerte es un sistema de tipos en el que los tipos de datos **no se pueden mezclar sin una conversión explícita**, mientras que el tipado débil es un sistema de tipos en el que los tipos de datos **se pueden mezclar sin una conversión explícita**.
+
+### Comprobación e inferencia de tipos
+
+> La comprobación de tipos es el proceso de verificar que los tipos de datos utilizados en un programa son correctos y compatibles entre sí. La inferencia de tipos es el proceso de deducir automáticamente los tipos de datos a partir del contexto en el que se utilizan.
+
+**Ejemplo:**
+
+```ml 
+fun f(x) = 2 + x;
+
+val it = fn : int -> int
+```
+
+El operador `+` tiene dos tipos: `int * int -> int` y `real * real -> real`.\
+El elemento `2 : int` tiene el tipo `int`, lo que hace que el operador `+` se resuelva al tipo `int * int -> int`.
+
+### Sobrecarga y polimorfismo
+
+> La sobrecarga es la capacidad de un operador o función para tener múltiples definiciones con diferentes tipos de argumentos. El polimorfismo es la capacidad de una función o tipo para operar con diferentes tipos de datos.
+
+**Ejemplo:**
+
+```ts 
+function add(x: number, y: number): number {
+  return x + y;
+}
+
+function add(x: string, y: string): string {
+  return x + y;
+}
+
+function show<T>(value: T): void {
+  console.log(value);
+}
+```
+
+En este ejemplo, la función `add` está sobrecargada para manejar tanto números como cadenas de texto. La función `show` es un ejemplo de polimorfismo, ya que puede aceptar cualquier tipo de dato gracias al uso de un tipo de dato genérico `T`.

@@ -22,6 +22,7 @@ export default {
   algoritmos2: "Algoritmos y Estructuras de Datos 2",
   analisisnumerico: "Análisis Numérico",
   organizacioncomputador: "Organización del Computador",
+  paradigmasprogramacion: "Paradigmas de Programación",
   '--': {
     type: 'separator',
     title: (

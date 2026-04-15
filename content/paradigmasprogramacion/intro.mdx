@@ -1,0 +1,57 @@
+# Introducción (PdP)
+
+En **Paradigmas de Programación** se estudian los fundamentos de los lenguajes de programación, identificar dichos conceptos en lenguajes concretos y evaluar situaciones en las que un lenguaje es más adecuado que otro.
+
+Es importante tener en cuenta esta definición:
+
+> Un **lenguaje de programación** es una notación formal para especificar computaciones. Los programas construidos en un lenguaje son la descripción de un proceso dinámico en un texto.
+
+- La **sintaxis** es el texto del programa.
+
+- La **semántica** las cosas que el programa hace. 
+
+La implementación de un lenguaje de programación debe transformar la sintaxis de un programa en instrucciones de máquina que puedan ser ejecutadas y suceda la secuencia de acciones que el programa describe. Dicha implementación es lograda a través de un **compilador**. 
+
+Definiendo lo que es un paradigma de programación: 
+
+> Un **paradigma de programación** es una configuración frecuente de características de un lenguaje de programación.
+
+## Minilenguaje Turing-completo
+
+> Un **minilenguaje Turing-completo** es un lenguaje de programación que tiene la capacidad de expresar cualquier computación que pueda ser realizada por una máquina de Turing.
+
+Un minilenguaje Turing-completo debe tener al menos:
+
+- **Asignación**: la capacidad de modificar el estado de una variable.
+
+- **Variables enteras, valores, operaciones**
+
+- **Condicionales**: `if`, `else`
+
+- **Go-to**: la capacidad de alterar el flujo de control del programa, permitiendo saltar a diferentes partes del código.
+
+## Declaraciones de variables
+
+- Las declaraciones de variables **tipadas** restringen los posibles valores de una variable en la ejecución del programa. Al declarar una variable esta se asocia a una ubicación en memoria (global, en la pila o en el heap). Podemos definir tres componentes de una variable: 
+
+- **L-valor**: la ubicación en memoria. 
+
+- **R-valor**: el valor almacenado en la ubicación de memoria.
+
+- **Identificador**: el nombre de la variable en el texto del programa.
+
+Observemos el siguiente ejemplo:
+
+```go
+x := 1
+// Guardamos 1 como R-valor de la ubicación señalada por el L-valor de x. 
+
+x := x + 1 
+// Obtenemos el R-valor de x que encontramos en el L-valor ligado al identificador de x, le sumamos 1 y guardamos el resultado como nuevo R-valor en la misma ubicación de memoria. 
+```
+
+Observemos que:
+
+- El R-valor de un puntero es el L-valor de otra variable.
+- Las constantes solo tienen R-valor.
+- Las funciones solo tienen L-valor. 
