@@ -520,3 +520,49 @@ E &= e + B \\
 ```
 
 El número $-3020.993$ en formato IEEE 754 de precisión simple es $(1 \; 10001010 \; 01111001100111111110011)_2$.
+
+***
+
+**3.**
+
+Convertir el siguiente número en formato IEEE 754 de precisión simple a decimal: $(1 \; 10001011 \; 01100010111000000000000)_2$.
+
+- $s = 1$ (es negativo)
+- $E = 10001011 = 139 \implies e = 139 - 127 = 12$
+- $F = 01100010111000000000000$
+
+Observemos que, con la mantisa $F$, el número es $1.011000101110$. Ahora, con el valor de $e$, el número se puede expresar como $1.011000101110 \times 2^{12}$. Por lo que desplazamos el punto $12$ veces a la derecha y obtenemos el número decimal.
+
+```math
+\begin{aligned}
+&= 1011000101110 \\
+&= 2^{12} + 2^{10} + 2^9 + 2^5 + 2^3 + 2^2 + 2^1 \\
+&= 4096 + 1024 + 512 + 32 + 8 + 4 + 2 \\
+&= 5678
+\end{aligned}
+```
+
+Como el signo es negativo, el número decimal es $-5678$.
+
+***
+
+**4.** 
+
+Convertir el siguiente número en formato IEEE 754 de precisión simple a decimal: $(1 \; 01110101 \; 01101100011000010101001)_2$.
+
+- $s = 1$ (es negativo)
+- $E = 01110101 = 117 \implies e = 117 - 127 = -10$
+- $F = 01101100011000010101001$
+
+Observemos que, con la mantisa $F$, el número es $1.01101100011000010101001$. Ahora, con el valor de $e$, el número se puede expresar como $1.01101100011000010101001 \times 2^{-10}$. Por lo que desplazamos el punto $10$ veces a la izquierda (agregando ceros a la izquierda) y obtenemos el número decimal.
+
+```math
+\begin{aligned}
+&= 0.0000000001011011000110000010101001 \\
+&= 2^{-10} + 2^{-13} + 2^{-14} + 2^{-17} + 2^{-19} + 2^{-20} + 2^{-23} \\
+&= 0.0009765625 + 0.00048828125 + 0.000244140625 + 0.0001220703125 + 0.00006103515625 + 0.000030517578125 + 0.0000152587890625 \\
+&= 0.001953125
+\end{aligned}
+```
+
+Como el signo es negativo, el número decimal es $-0.001953125$.

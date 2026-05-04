@@ -70,6 +70,133 @@ Se considera el caso en el que todos los elementos de la segunda mitad se compar
 
 Este algoritmo posee una complejidad de $O(n \log n)$ en el peor caso. 
 
+
+***
+
+### Ejercicios resueltos - Ordenación por intercalación
+
+**1.**
+
+Ordenar el siguiente arreglo $[7, 1, 10, 3, 4, 9, 5]$ usando el algoritmo de ordenación por intercalación, mostrar en cada paso de la recursión el arreglo resultante y dar la secuencia de llamadas de $merge\_sort\_rec$.
+
+```math
+\begin{array}{ll}
+
+\underline{[7, 1, 10, 3, 4, 9, 5]} \\
+\{- \quad merge\_sort\_rec(a, 1, 7) \quad -\} \\
+\\
+\underline{[7, 1, 10, 3]} \quad [4, 9, 5] \\
+\{- \quad merge\_sort\_rec(a, 1, 4) \quad -\} \\
+\\
+\underline{[7, 1] } \quad [10, 3] \quad [4,9,5] \\
+\{- \quad merge\_sort\_rec(a, 1, 2) \quad -\} \\
+\\
+\underline{[7]} \quad [1] \quad [10, 3] \quad [4,9,5] \\
+\{- \quad merge\_sort\_rec(a, 1, 1) \quad -\} \\
+\\
+[7] \quad \underline{[1]} \quad [10, 3] \quad [4,9,5] \\
+\{- \quad merge\_sort\_rec(a, 2, 2) \quad -\} \\
+\\
+\underline{[7]} \quad \underline{[1]} \quad [10, 3] \quad [4,9,5] \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+[1, 7] \quad \underline{[10, 3]} \quad [4,9,5] \\
+\{- \quad merge\_sort\_rec(a, 3, 4) \quad -\} \\
+\\
+[1, 7] \quad \underline{[10]} \quad [3] \quad [4,9,5] \\
+\{- \quad merge\_sort\_rec(a, 3, 3) \quad -\} \\
+\\
+[1, 7] \quad [10] \quad \underline{[3]} \quad [4,9,5] \\
+\{- \quad merge\_sort\_rec(a, 4, 4) \quad -\} \\
+\\
+[1, 7] \quad \underline{[10]} \quad \underline{[3]} \quad [4,9,5] \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+\underline{[1, 7]} \quad \underline{[3, 10]} \quad [4,9,5] \\
+\{- \quad \textnormal{ intercalo } \quad \quad -\} \\
+\\
+[1, 3, 7, 10] \quad \underline{[4,9,5]} \\
+\{- \quad merge\_sort\_rec(a, 5, 7) \quad -\} \\
+\\
+[1, 3, 7, 10] \quad \underline{[4, 9]} \quad [5] \\
+\{- \quad merge\_sort\_rec(a, 5, 6) \quad -\} \\
+\\
+[1, 3, 7, 10] \quad \underline{[4]} \quad [9] \quad [5] \\
+\{- \quad merge\_sort\_rec(a, 5, 5) \quad -\} \\
+\\
+[1, 3, 7, 10] \quad [4] \quad \underline{[9]} \quad [5] \\
+\{- \quad merge\_sort\_rec(a, 6, 6) \quad -\} \\
+\\
+[1, 3, 7, 10] \quad \underline{[4]} \quad \underline{[9]} \quad [5] \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+[1, 3, 7, 10] \quad [4, 9] \quad \underline{[5]} \\
+\{- \quad merge\_sort\_rec(a, 7, 7) \quad -\} \\
+\\
+[1, 3, 7, 10] \quad \underline{[4, 9]} \quad \underline{[5]} \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+\underline{[1, 3, 7, 10]} \quad \underline{[4, 5, 9]} \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+[1, 3, 4, 5, 7, 9, 10] \\
+\{- \quad \textnormal{ arreglo ordenado } \quad -\} \\
+\end{array}
+```
+
+***
+
+**2.**
+
+Ordenar el siguiente arreglo $[1, 2, 3, 4, 5]$ usando el algoritmo de ordenación por intercalación, mostrar en cada paso de la recursión el arreglo resultante.
+
+```math
+\begin{array}{ll}
+\underline{[1, 2, 3, 4, 5]} \\
+\{- \quad merge\_sort\_rec(a, 1, 5) \quad -\} \\
+\\
+\underline{[1, 2, 3]} \quad [4, 5] \\
+\{- \quad merge\_sort\_rec(a, 1, 3) \quad -\} \\
+\\
+\underline{[1, 2]} \quad [3] \quad [4, 5] \\
+\{- \quad merge\_sort\_rec(a, 1, 2) \quad -\} \\
+\\
+\underline{[1]} \quad [2] \quad [3] \quad [4, 5] \\
+\{- \quad merge\_sort\_rec(a, 1, 1) \quad -\} \\
+\\
+[1] \quad \underline{[2]} \quad [3] \quad [4, 5] \\
+\{- \quad merge\_sort\_rec(a, 2, 2) \quad -\} \\
+\\
+\underline{[1]} \quad \underline{[2]} \quad [3] \quad [4, 5] \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+[1, 2] \quad \underline{[3]} \quad [4, 5] \\
+\{- \quad merge\_sort\_rec(a, 3, 3) \quad -\} \\
+\\
+\underline{[1, 2]} \quad \underline{[3]} \quad [4, 5] \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+[1, 2, 3] \quad \underline{[4, 5]} \\
+\{- \quad merge\_sort\_rec(a, 4, 5) \quad -\} \\
+\\
+[1, 2, 3] \quad \underline{[4]} \quad [5] \\
+\{- \quad merge\_sort\_rec(a, 4, 4) \quad -\} \\
+\\
+[1, 2, 3] \quad [4] \quad \underline{[5]} \\
+\{- \quad merge\_sort\_rec(a, 5, 5) \quad -\} \\
+\\
+[1, 2, 3] \quad \underline{[4]} \quad \underline{[5]} \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+\underline{[1, 2, 3]} \quad \underline{[4, 5]} \\
+\{- \quad \textnormal{ intercalo } \quad -\} \\
+\\
+[1, 2, 3, 4, 5] \\
+\{- \quad \textnormal{ arreglo ordenado } \quad -\} \\
+\end{array}
+```
+
+
 ## Ordenación rápida (_Quick Sort_)
 
 > Se toma el primer elemento del arreglo como pivote, se colocan los elementos menores a la izquierda y los mayores a la derecha. Luego se repite el proceso con las dos mitades.
@@ -127,3 +254,153 @@ El pseudocódigo de $partition$ es:
 Comparamos si $a[i]$ es menor o igual al pivote y si $a[j]$ es mayor o igual. De ser el caso aumentamos los índices, de lo contrario intercambiamos los elementos. Por último, ubicamos correctamente a $a[pivot]$ y asignamos su nuevo índice.
 
 En el peor caso, la complejidad de este algoritmo en el peor caso es de $O(n^2)$, pero en promedio es de $O(n \log n)$. Por lo general es más rápido que _Merge Sort_, es una buena opción para conjuntos de datos que caben en memoria. De lo contrario, _Merge Sort_ es más eficiente. 
+
+***
+
+### Ejercicios resueltos - Ordenación rápida
+
+**1.**
+
+Ordenar el siguiente arreglo $[7, 1, 10, 3, 4, 9, 5]$ usando el algoritmo de ordenación rápida, mostrar en cada paso de la recursión el arreglo resultante y dar la secuencia de llamadas de $quick\_sort\_rec$.
+
+```math
+\begin{array}{ll}
+\underline{[7, 1, 10, 3, 4, 9, 5]} \\
+\{- \quad quick\_sort\_rec(a, 1, 7) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[\mathbf{7}, \underline{1}, 10, 3, 4, 9, \underline{5}] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[\mathbf{7}, 1, \underline{10}, 3, 4, 9, \underline{5}] \\
+\{- \quad \textnormal{ intercambio elementos } \quad -\} \\
+\\
+[\mathbf{7}, 1, 5, \underline{3}, 4, \underline{9}, 10] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[\underline{\mathbf{7}}, 1, 5, 3, \underline{4}, 9, 10] \\
+\{- \quad \textnormal{ muevo el } \; pivot \quad -\} \\
+\\
+[\underline{4, 1, 5, 3}, 7, 9, 10] \\
+\{- \quad quick\_sort\_rec(a, 1, 4) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[\mathbf{4}, \underline{1}, 5, \underline{3}, 7, 9, 10] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[\mathbf{4}, 1, \underline{5}, \underline{3}, 7, 9, 10] \\
+\{- \quad \textnormal{ intercambio elementos } \quad -\} \\
+\\
+[\underline{\mathbf{4}}, 1, \underline{3}, 5, 7, 9, 10] \\
+\{- \quad \textnormal{ muevo el } \; pivot \quad -\} \\
+\\
+[\underline{3, 1}, 4, 5, 7, 9, 10] \\
+\{- \quad quick\_sort\_rec(a, 1, 2) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[\underline{\mathbf{3}}, \underline{1}, 4, 5, 7, 9, 10] \\
+\{- \quad \textnormal{ muevo el } \; pivot \quad -\} \\
+\\
+[\underline{1}, 3, 4, 5, 7, 9, 10] \\
+\{- \quad quick\_sort\_rec(a, 1, 1) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[\mathbf{1}, 3, 4, 5, 7, 9, 10] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, 3, 4, \underline{5}, 7, 9, 10] \\
+\{- \quad quick\_sort\_rec(a, 4, 4) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[1, 3, 4, \mathbf{5}, 7, 9, 10] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, 3, 4, 5, 7, \underline{9, 10}] \\
+\{- \quad quick\_sort\_rec(a, 6, 7) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[1, 3, 4, 5, 7, \mathbf{9}, 10] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, 3, 4, 5, 7, 9, \underline{10}] \\
+\{- \quad quick\_sort\_rec(a, 7, 7) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[1, 3, 4, 5, 7, 9, \mathbf{10}] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, 3, 4, 5, 7, 9, 10] \\
+\{- \quad \textnormal{ arreglo ordenado } \quad -\} \\
+\end{array}
+```
+
+***
+
+**2.**
+
+Ordenar el siguiente arreglo $[1, 2, 3, 4, 5]$ usando el algoritmo de ordenación por intercalación, mostrar en cada paso de la recursión el arreglo resultante y dar la secuencia de llamadas de $quick\_sort\_rec$.
+
+```math
+\begin{array}{ll}
+\underline{[1, 2, 3, 4, 5]} \\
+\{- \quad quick\_sort\_rec(a, 1, 5) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[\mathbf{1}, \underline{2}, 3, 4, \underline{5}] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[\mathbf{1}, 2, \underline{3}, 4, \underline{5}] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[\mathbf{1}, 2, 3, \underline{4}, \underline{5}] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[\mathbf{1}, 2, 3, 4, 5] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, \underline{2}, 3, 4, 5] \\
+\{- \quad quick\_sort\_rec(a, 2, 5) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[1, \mathbf{2}, \underline{3}, 4, \underline{5}] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[1, \mathbf{2}, 3, \underline{4}, \underline{5}] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[1, \mathbf{2}, 3, 4, 5] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, 2, \underline{3}, 4, 5] \\
+\{- \quad quick\_sort\_rec(a, 3, 5) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[1, 2, \mathbf{3}, \underline{4}, \underline{5}] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[1, 2, \mathbf{3}, 4, 5] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, 2, 3, \underline{4}, 5] \\
+\{- \quad quick\_sort\_rec(a, 4, 5) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[1, 2, 3, \mathbf{4}, \underline{5}] \\
+\{- \quad \textnormal{ comparo } \quad -\} \\
+\\
+[1, 2, 3, \mathbf{4}, 5] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, 2, 3, 4, \underline{5}] \\
+\{- \quad quick\_sort\_rec(a, 5, 5) \quad -\} \\
+\{- \quad \textnormal{ elijo el } \; pivot \quad -\} \\
+\\
+[1, 2, 3, 4, \mathbf{5}] \\
+\{- \quad \textnormal{ dejo el } \; pivot \quad -\} \\
+\\
+[1, 2, 3, 4, 5] \\
+\{- \quad \textnormal{ arreglo ordenado } \quad -\} \\
+\end{array}
+```
+
+***

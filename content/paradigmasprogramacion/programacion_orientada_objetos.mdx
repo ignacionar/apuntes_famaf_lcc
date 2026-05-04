@@ -1,0 +1,77 @@
+# Programación Orientada a Objetos
+
+> La **Programación Orientada a Objetos** (POO) es un paradigma de programación que tiene el objetivo de modularizar mediante: abstracción procedural, tipos abstractos, paquetes y módulos y otras abstracciones genéricas.
+
+Podemos establecer los siguientes conceptos acerca de la modularidad: 
+
+- **Componente:** unidad de programa con sentido (función, estructura de datos, módulo...)
+
+- **Interfaz:** tipos y operaciones definidos dentro de un componente que **son visibles** fuera del componente.
+
+- **Especificación:** comportamiento esperado de un componente, expresado como una propiedad observable a través de su interfaz.
+
+- **Implementación:** estructura de datos y funciones dentro del componente. 
+
+**Ejemplo:**
+
+- Función que calcula la raíz cuadrada (componente)
+
+- `float sqrt(float x)` (interfaz)
+
+- `x > 1 => sqrt(x) * sqrt(x) == x` (especificación)
+
+- (implementación) 
+
+```c
+float sqrt(float x) {
+  float y = x / 2; 
+  float step = x / 4; 
+  int i;
+
+  for (i = 0; i < 20; i++) {
+    if ((y * y) < x) {
+      y = y + step;
+    } else {
+      y = y - step;
+      step = step / 2;
+    }
+  }
+
+  return y;
+}
+```
+
+## Propiedades de la POO 
+
+### Objetos
+
+Un **objeto** consiste de:
+
+- Datos ocultos (variables de la instancia, posiblemente funciones ocultas)
+- Operaciones públicas (métodos o  algunas variables públicas en algunos mensajes)
+
+Un programa orientado a objetos envía mensajes a los objetos.
+
+***
+
+### Subtipado y herencia
+
+> El **subtipado es una relación entre interfaces**. Si la interfaz $A$ conteine todos los elementos de la interfaz $B$, entonces los objetos de tipo $A$ pueden ser usados en cualquier contexto donde se espera un objeto de tipo $B$. La herencia es una relación entre implementaciones, donde una clase hija hereda la implementación de su clase padre.
+
+***
+
+### Encapsulación 
+
+> La encapsulación separa las dos vistas entre usuario y programador, donde el primero tiene una vista abstracta y el segundo tiene una vista detallada de la implementación.
+
+***
+
+### Lookup dinámico
+
+> En programación convencional, el significado de una operaación con los mismos operandos es siempre el mismo. En programación orientada a objetos, el código depende del objeto y el mensaje que se le envía. El lookup dinámico es la capacidad de determinar en tiempo de ejecución qué método se debe ejecutar en función del tipo del objeto al que se le envía el mensaje.
+
+***
+
+### Funciones virtuales 
+
+> Se llaman funciones virtuales a aquellas funciones que pueden ser redefinidas en clases hijas, permitiendo que el comportamiento de un objeto pueda ser modificado sin cambiar su interfaz. Se deben declarar explicitamente como virtuales y se acceden a través de un puntero del objeto.

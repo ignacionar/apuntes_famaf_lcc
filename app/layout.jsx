@@ -40,7 +40,9 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="es" dir="ltr" suppressHydrationWarning>
-      <Head faviconGlyph="✦" />
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <body>
         <Layout
           docsRepositoryBase={"https://github.com/ignacionar/apuntes_famaf_lcc"}
