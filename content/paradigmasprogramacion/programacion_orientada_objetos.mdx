@@ -58,20 +58,129 @@ Un programa orientado a objetos envía mensajes a los objetos.
 
 > El **subtipado es una relación entre interfaces**. Si la interfaz $A$ conteine todos los elementos de la interfaz $B$, entonces los objetos de tipo $A$ pueden ser usados en cualquier contexto donde se espera un objeto de tipo $B$. La herencia es una relación entre implementaciones, donde una clase hija hereda la implementación de su clase padre.
 
+**Ejemplo:**
+
+```cpp
+#include <iostream>
+
+class Animal {
+public:
+  void comer() { std::cout << "El animal está comiendo.\n"; }
+};
+
+// Perro reutiliza la implementación de comer() y agrega su propio método ladrar()
+class Perro : public Animal {
+public:
+  void ladrar() { std::cout << "¡Guau!\n"; }
+};
+
+// esta función espera un 'Animal', pero acepta un 'Perro' 
+void alimentar(Animal& a) {
+    a.comer(); 
+}
+
+int main() {
+    Perro miPerro;
+    miPerro.comer();  // uso de la herencia (Perro hereda de Animal)
+    miPerro.ladrar();    
+    alimentar(miPerro);  // uso del subtipado (pasamos un Perro como Animal)
+    return 0;
+}
+```
+
 ***
 
 ### Encapsulación 
 
 > La encapsulación separa las dos vistas entre usuario y programador, donde el primero tiene una vista abstracta y el segundo tiene una vista detallada de la implementación.
 
+```cpp
+#include <iostream>
+
+class CuentaBancaria {
+private:
+    // atributo no accesible directamente
+    double m_saldo;
+
+public:
+    CuentaBancaria(double saldoInicial) : m_saldo(saldoInicial) {}
+
+    // vista del usuario
+    void depositar(double monto) {
+        if (monto > 0) {
+            m_saldo += monto;
+        }
+    }
+
+    double getSaldo() const {
+        return m_saldo;
+    }
+};
+
+int main() {
+    CuentaBancaria cuenta(1000);
+    cuenta.depositar(500);
+  
+    std::cout << "Saldo: $" << cuenta.getSaldo() << "\n";
+    return 0;
+}
+```
+
 ***
 
-### Lookup dinámico
+### Lookup dinámico y funciones virtuales 
 
-> En programación convencional, el significado de una operaación con los mismos operandos es siempre el mismo. En programación orientada a objetos, el código depende del objeto y el mensaje que se le envía. El lookup dinámico es la capacidad de determinar en tiempo de ejecución qué método se debe ejecutar en función del tipo del objeto al que se le envía el mensaje.
-
-***
-
-### Funciones virtuales 
+> En programación convencional, el significado de una operación con los mismos operandos es siempre el mismo. En programación orientada a objetos, el código depende del objeto y el mensaje que se le envía. El lookup dinámico es la capacidad de determinar en tiempo de ejecución qué método se debe ejecutar en función del tipo del objeto al que se le envía el mensaje.
 
 > Se llaman funciones virtuales a aquellas funciones que pueden ser redefinidas en clases hijas, permitiendo que el comportamiento de un objeto pueda ser modificado sin cambiar su interfaz. Se deben declarar explicitamente como virtuales y se acceden a través de un puntero del objeto.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Figura {
+public:
+    // función virtual que puede ser redefinida por las clases hijas
+    virtual double area() {
+        return 0;
+    }
+};
+
+class Cuadrado : public Figura {
+private:
+    double lado;
+
+public:
+    Cuadrado(double l) {
+        lado = l;
+    }
+
+    double area() override {
+        return lado * lado;
+    }
+};
+
+class Circulo : public Figura {
+private:
+    double radio;
+
+public:
+    Circulo(double r) {
+        radio = r;
+    }
+
+    double area() override {
+        return 3.1416 * radio * radio;
+    }
+};
+
+int main() {
+    Figura* f1 = new Cuadrado(5);
+    Figura* f2 = new Circulo(3);
+
+    cout << "Área del cuadrado: " << f1->area() << endl;
+    cout << "Área del círculo: " << f2->area() << endl;
+
+    return 0;
+}
+```
