@@ -52,6 +52,7 @@ Su implementación:
 &\quad \proc \; destroy(\inout \; l : List \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso que sea necesario} \;\; -\} \\
 &\\ 
+&\oprts \\
 &\quad \fun \; is\_empty(l : List \; \of \; \bft) \; \ret \; b : \bool \\ 
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; l \;\textnormal{es vacía.} \;\; -\} \\
 &\\ 
@@ -251,6 +252,7 @@ En el código tenemos:
 &\quad \proc \; destroy(\inout \; c : Counter) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
 &\\
+&\oprts \\
 &\quad \fun \; is\_init(c : Counter) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; c \;\textnormal{es el valor inicial} \;\; -\} \\
 &\\
@@ -317,6 +319,7 @@ La pila sigue el principio **LIFO** (Last In, First Out)
 &\quad \proc \; destroy(\inout \; s : Stack \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
 &\\
+&\oprts \\
 &\quad \fun \; is\_empty\_stack(s : Stack \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; s \;\textnormal{está vacía} \;\; -\} \\
 &\\
@@ -401,6 +404,7 @@ La cola sigue el principio **FIFO** (First In, First Out)
 &\quad \proc \; destroy(\inout \; q : Queue \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
 &\\
+&\oprts \\
 &\quad \fun \; is\_empty\_queue(q : Queue \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; q \;\textnormal{está vacía} \;\; -\} \\
 &\\
@@ -524,6 +528,7 @@ Como **operaciones** tenemos:
 &\quad \proc \; destroy(\inout \; s : Set \; \of \; \bft) \\ 
 &\quad\{- \;\; \textnormal{Libera memoria en caso necesario} \;\; -\} \\
 &\\
+&\oprts \\
 &\quad \fun \; is\_empty(s : Set \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; s \;\textnormal{es vacío} \;\; -\} \\
 &\\
@@ -556,7 +561,7 @@ En un árbol "balanceado" la altura es del orden del $\log_2 k$ donde $k$ es el 
 
 Podemos recorrer un árbol indicando caminos desde la raíz y representarlos como secuencias donde los elementos indican si bajamos por **izquierda** o **derecha**.
 
-Su especificación es: 
+### Especificación de árboles binarios
 
 ```math 
 \begin{aligned} 
@@ -575,10 +580,12 @@ Su especificación es:
 &\\
 &\quad \fun \; node(tl: Tree \; \of \; \bft, \; e : \bft, \; tr: Tree \; \of \; \bft) \; \ret \; t : Tree \; \of \; \bft \\
 &\quad\{- \;\; \textnormal{Crea el nodo con elemento} \; e \; \textnormal{y subárboles} \; tl, \; tr \;\; -\} \\
+&\\
 &\destroy \\
 &\quad \proc \; destroy(\inout \; tr : Tree \; \of \; \bft) \\
 &\quad\{- \;\; \textnormal{Libera memoria en caso que sea necesario} \;\; -\} \\
 &\\ 
+&\oprts \\
 &\quad \fun \; is\_empty\_tree(t : Tree \; \of \; \bft) \; \ret \; b : \bool \\
 &\quad\{- \;\; \textnormal{Devuelve} \; True \;\textnormal{si} \; t \;\textnormal{es vacío} \;\; -\} \\
 &\\
