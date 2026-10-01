@@ -73,7 +73,7 @@ La línea violeta representa el conjunto solución: $(-5, 3]$
 x^2 \geq 6
 ```
 
-El primer paso en este ejercicio sería restar 4 en ambos lados de la inecuación para ser comparada con 0: 
+El primer paso en este ejercicio sería restar 6 en ambos lados de la inecuación para ser comparada con 0: 
 
 ```math
 x^2 - 6 \geq 0
@@ -105,7 +105,7 @@ Dentro de cada caso tenemos 2 condiciones para $x$, por lo que debemos buscar un
 
 <Image src="/analisis1/interseccion3.jpg" alt="recta" width={0} height={0} layout="responsive" style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}/>
 
-Las intersecciones son $(-\infty, -\sqrt{6}]$ y $(\sqrt{6}, \infty]$. El conjunto solución contempla los casos donde $ab$ son $(+)$ o $(-)$: $(-\infty, -\sqrt{6}] \cup (\sqrt{6}, \infty]$.
+Las intersecciones son $(-\infty, -\sqrt{6}]$ y $[\sqrt{6}, \infty)$. El conjunto solución contempla los casos donde $ab$ son $(+)$ o $(-)$: $(-\infty, -\sqrt{6}] \cup [\sqrt{6}, \infty)$.
 
 <br/>
 
@@ -148,11 +148,13 @@ No existen valores de $x$ para el segundo caso, por lo que el conjunto solución
 \frac{1}{x} \geq 0
 ```
 
-En este caso, multiplicamos ambos lados por $x$:
+En este caso, **no** podemos multiplicar ambos lados por $x$ sin conocer su signo (si $x < 0$ la desigualdad se invierte). Además, $x \not= 0$, ya que la división por $0$ no está definida.
+
+El numerador $1$ es siempre positivo, por lo que el signo de $\frac{1}{x}$ es el signo de $x$. Además, $\frac{1}{x}$ nunca vale $0$, por lo que la inecuación es equivalente a:
 
 ```math
-1 \geq 0
+\frac{1}{x} > 0 \iff x > 0
 ```
 
-Esto significa que $x$ puede ser cualquier número real. Por lo que el conjunto solución es $\mathbb{R}$.
+Por lo que el conjunto solución es $(0, \infty)$.
 

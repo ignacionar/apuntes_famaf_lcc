@@ -73,7 +73,7 @@ Si $F(x)$ es una antiderivada de $f$, entonces la integral indefinida es el conj
       </tr>    
       <tr>
         <td>$\frac{1}{\sqrt{1-x^2}}$</td>
-        <td>$\arcsin x + c, \\ \arccos x + c$</td>
+        <td>$\arcsin x + c, \\ -\arccos x + c$</td>
       </tr>
       <tr>
         <td>$\frac{1}{1+x^2}$</td>
@@ -137,13 +137,13 @@ Resolver por sustitución:
 Para resolver esta integral, hacemos el cambio de variable:
 
 ```math
-u = \sqrt{4x} \implies du = \frac{1}{2\sqrt{x}}\;dx
+u = \sqrt{4x} = 2\sqrt{x} \implies du = 2 \cdot \frac{1}{2\sqrt{x}}\;dx = \frac{1}{\sqrt{x}}\;dx
 ```
 
 Reemplazamos en la integral:
 
 ```math
-\int\frac{\sin(u)}{2}\;du = -\frac{\cos(u)}{2} + c = -\frac{\cos(\sqrt{4x})}{2} + c
+\int\frac{\sin(\sqrt{4x})}{\sqrt{x}}\;dx = \int \sin(u)\;du = -\cos(u) + c = -\cos(\sqrt{4x}) + c
 ```
 
 ***

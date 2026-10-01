@@ -387,28 +387,28 @@ h'(x) = 3x^2\ln(x^2-1) + \frac{2x^4}{x^2-1}
  
 Calcular la derivada de $f(x) = \frac{1}{\sqrt{x^2+1}} - 3x^2$:
 
-Aplicamos la regla de la resta:
+Reexpresamos el primer término como potencia: $\frac{1}{\sqrt{x^2+1}} = \left(x^2+1\right)^{-\frac{1}{2}}$. Aplicamos la regla de la resta y la regla de la cadena:
 
 ```math
-f'(x) = \frac{1}{2} \cdot \left(x^2+1\right)^{-\frac{1}{2}} \cdot 2x - 6x
+f'(x) = -\frac{1}{2} \cdot \left(x^2+1\right)^{-\frac{1}{2}-1} \cdot 2x - 6x
 ```
 
 Resolvemos la potencia:
 
 ```math
-f'(x) = \frac{1}{2} \cdot \frac{1}{\sqrt{x^2+1}} \cdot 2x - 6x
+f'(x) = -\frac{1}{2} \cdot \left(x^2+1\right)^{-\frac{3}{2}} \cdot 2x - 6x = -\frac{1}{2} \cdot \frac{1}{\left(x^2+1\right)^{\frac{3}{2}}} \cdot 2x - 6x
 ```
 
 Multiplicamos:
 
 ```math
-f'(x) = \frac{2x}{2\sqrt{x^2+1}} - 6x
+f'(x) = -\frac{2x}{2\left(x^2+1\right)^{\frac{3}{2}}} - 6x
 ```
 
 Simplificamos:
 
 ```math
-f'(x) = \frac{\cancel{2}x}{\cancel{2}x\sqrt{^2+1}} - 6x = \frac{x}{\sqrt{x^2+1}} - 6x
+f'(x) = -\frac{\cancel{2}x}{\cancel{2}\left(x^2+1\right)^{\frac{3}{2}}} - 6x = -\frac{x}{\left(x^2+1\right)^{\frac{3}{2}}} - 6x
 ```
 
 ***
@@ -523,10 +523,10 @@ Luego, calculamos $f(x_0)$:
 f(x_0) = \sqrt{25} = 5
 ```
 
-Ahora, calculamos $f'(x)$ (regla de la cadena):
+Ahora, calculamos $f'(x)$. Reexpresamos la función como potencia:
 
 ```math
-f'(x) = x^{\frac{1}{2}} \cdot 1 = x^{\frac{1}{2}}
+f(x) = \sqrt{x} = x^{\frac{1}{2}}
 ```
 
 Seguimos resolviendo (regla de la potencia):
@@ -569,10 +569,10 @@ Luego, calculamos $f(x_0)$:
 f(x_0) = \sqrt{4} = 2
 ```
 
-Ahora, calculamos $f'(x)$ (regla de la cadena):
+Ahora, calculamos $f'(x)$. Reexpresamos la función como potencia:
 
 ```math
-f'(x) = x^{\frac{1}{2}} \cdot 1 = x^{\frac{1}{2}}
+f(x) = \sqrt{x} = x^{\frac{1}{2}}
 ```
 
 Seguimos resolviendo (regla de la potencia):
@@ -656,8 +656,12 @@ f'(x) = \frac{1}{3} \cdot x^{-\frac{2}{3}}
 Ahora veamos si $f'$ tiene límite en $0$:
 
 ```math
-\displaystyle{\lim_{x \to ^+0}} \; f'(x) = \displaystyle{\lim_{x \to ^+0}} \; \frac{1}{3} \cdot x^{-\frac{2}{3}} = \displaystyle{\lim_{x \to ^+0}} \; \frac{1}{3\sqrt[3]{x^2}} = +\infty \\
-\displaystyle{\lim_{x \to ^-0}} \; f'(x) = \displaystyle{\lim_{x \to ^-0}} \; \frac{1}{3} \cdot x^{-\frac{2}{3}} = \displaystyle{\lim_{x \to ^-0}} \; \frac{1}{3\sqrt[3]{x^2}} = -\infty
+\begin{array}{ll}
+\displaystyle{\lim_{x \to 0^+}} \; f'(x) = \displaystyle{\lim_{x \to 0^+}} \; \frac{1}{3} \cdot x^{-\frac{2}{3}} = \displaystyle{\lim_{x \to 0^+}} \; \frac{1}{3\sqrt[3]{x^2}} = +\infty \\
+\displaystyle{\lim_{x \to 0^-}} \; f'(x) = \displaystyle{\lim_{x \to 0^-}} \; \frac{1}{3} \cdot x^{-\frac{2}{3}} = \displaystyle{\lim_{x \to 0^-}} \; \frac{1}{3\sqrt[3]{x^2}} = +\infty
+\end{array}
 ```
+
+En ambos casos el límite es $+\infty$, ya que $x^2 > 0$ tanto si $x$ se acerca a $0$ por izquierda como por derecha. Como el límite no es finito, $\nexists\; \displaystyle{\lim_{x \to 0}} \; f'(x)$ y, por el corolario, $f$ **no** es derivable en $0$ (su recta tangente en $0$ es vertical).
 
 Para cualquiera de los limites laterales, $f'$ diverge en $0$, por lo que $f$ no es derivable en $0$.

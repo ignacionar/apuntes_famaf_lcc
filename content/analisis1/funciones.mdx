@@ -221,7 +221,19 @@ Igualamos el denominador por 0 y resolvemos:
 
 El $Dom\;f(x) = \mathbb{R} - \{\frac{2}{5}\}$ y el $Dom\;g(x) = [0, \infty)$
 
-Por lo tanto, $Dom\;(g \circ f)(x) = \mathbb{R} - \{\frac{2}{5}\} \cap [0, \infty) = [0, \frac{2}{5}) \cup (\frac{2}{5}, \infty)$
+Para que $(g \circ f)(x)$ esté definida, $x$ debe estar en el dominio de $f$ **y** $f(x)$ debe estar en el dominio de $g$, es decir, $f(x) \geq 0$:
+
+```math
+\frac{1}{5x-2} \geq 0
+```
+
+El numerador es positivo, por lo que el signo de la fracción es el signo de $5x - 2$ (y la fracción nunca vale $0$):
+
+```math
+5x - 2 > 0 \Rightarrow x > \frac{2}{5}
+```
+
+Por lo tanto, $Dom\;(g \circ f)(x) = (\frac{2}{5}, \infty)$
 
 ***
 
@@ -728,7 +740,7 @@ La función **logarítmica** de base $a$ es $f(x) = \log_a(x)$. Su dominio es $\
 
 La función logarítmica es la inversa de la exponencial. Si tenemos $f : \mathbb{R} \rightarrow \mathbb{R^+}$ y $f(x) = a^x$, entonces $f$ es biyectiva, por lo que $f^{-1}(x) = \log_a(x)$. 
 
-El **logaritmo natural** es la función logarítmica de base $e$. Suponiendo que $f(x) = e^x$, entonces $f^{-1}(x) = \\ln(x)$. El siguiente gráfico muestra la función exponencial y logarítmica:
+El **logaritmo natural** es la función logarítmica de base $e$. Suponiendo que $f(x) = e^x$, entonces $f^{-1}(x) = \ln(x)$. El siguiente gráfico muestra la función exponencial y logarítmica:
 
 <br/>
 
@@ -853,10 +865,10 @@ x = \frac{3 + \sqrt{29}}{2}
 
 Resolver la ecuación: $\sqrt[3]{\ln(x)} = \ln(\sqrt[3]{x})$
 
-Para resolver esta ecuación, debemos pensar en los valores que $x$ puede tomar (debe ser mayor a $0$):
+Para resolver esta ecuación, debemos pensar en los valores que $x$ puede tomar. La raíz cúbica está definida para cualquier número real (incluso negativos), por lo que la única restricción es que los argumentos de los logaritmos sean mayores a $0$:
 
 ```math
-(\ln(x) > 0) \land (\sqrt[3]{x} > 0)
+(x > 0) \land (\sqrt[3]{x} > 0)
 ```
 
 Se cumplen los casos $\iff x > 0$
@@ -940,5 +952,7 @@ x = e^{\pm \sqrt{27}}
 ```math
 x = e^{\sqrt{27}}\;\lor\;x = e^{-\sqrt{27}}
 ```
+
+Los tres valores son mayores a $0$, por lo que las soluciones son $x = 1$, $x = e^{\sqrt{27}}$ y $x = e^{-\sqrt{27}}$.
 
 Las soluciones posibles son: $x = 1\;\lor\;x = e^{\sqrt{27}}\;\lor\;x = e^{-\sqrt{27}}$
