@@ -64,11 +64,24 @@ const withNextra = nextra({
   },
 })
 
+const mathjaxMacros = Object.fromEntries(
+  Object.entries(macros)
+    .map(([k, v]) => [k.slice(1), v])
+    .filter(([k]) => /^[a-zA-Z]+$/.test(k))
+)
+
+const useMathjax = process.env.LATEX_RENDERER === 'mathjax'
+
+const latex = useMathjax
+  ? { renderer: 'mathjax', options: { config: { tex: { macros: mathjaxMacros } } } }
+  : { renderer: 'katex', options: { macros } }
+
+const withNextra = nextra({
+  whiteListTagsStyling: ['table', 'thead', 'tbody', 'tr', 'th', 'td'],
+  latex,
+})
+
 export default withNextra({
-  images: {
-    unoptimized: true
-  },
-  experimental: {
-    webpackMemoryOptimizations: true,
-  },
+  images: { unoptimized: true },
+  experimental: { webpackMemoryOptimizations: true },
 })
