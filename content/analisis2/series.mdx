@@ -119,10 +119,10 @@ Determina si las siguientes series geométricas convergen o divergen y en caso d
 |\frac{1}{2}| < 1 
 ``` 
 
-Por el teorema, $\displaystyle{\sum_{n=1}^{\infty} \frac{1}{2^n}}$ converge y se cumple que:
+Por el teorema, $\displaystyle{\sum_{n=1}^{\infty} \frac{1}{2^n}}$ converge. Como el teorema da el valor de la serie que empieza en $n = 0$, le restamos el término $n = 0$, que es $(\frac{1}{2})^0 = 1$:
 
 ```math 
-\sum_{n=1}^{\infty} \frac{1}{2^n} = \frac{1}{1-\frac{1}{2}} = \frac{1}{\frac{1}{2}} = 2
+\sum_{n=1}^{\infty} \frac{1}{2^n} = \sum_{n=0}^{\infty} (\frac{1}{2})^n - 1 = \frac{1}{1-\frac{1}{2}} - 1 = \frac{1}{\frac{1}{2}} - 1 = 2 - 1 = 1
 ```
 
 **2.**
@@ -262,11 +262,11 @@ I = \{ \;x \in \mathbb{R} \; : \; \displaystyle{\sum_{n=0}^{\infty} c_n \; (x - 
 
 Dada la serie $\displaystyle{\sum_{n=1}^{\infty} \frac{1}{n} \; x^n}$, determina su radio e intervalo de convergencia.
 
-- Si $x = 1$ tenemos la serie armónica $\displaystyle{\sum_{n=1}^{\infty} \frac{1}{n}}$ la cual diverge. Luego, $R \leq 1$
+- Si $x = 1$ tenemos la serie armónica $\displaystyle{\sum_{n=1}^{\infty} \frac{1}{n}}$ la cual diverge. Luego, $R \leq 1$ y $1 \notin I$
 
-- Si $x = -1$ tenemos la serie alternante $\displaystyle{\sum_{n=1}^{\infty} \frac{(-1)^n}{n}}$ la cual converge. Luego, $R \geq 1$
+- Si $x = -1$ tenemos la serie alternante $\displaystyle{\sum_{n=1}^{\infty} \frac{(-1)^n}{n}}$ la cual converge (criterio de comparación para series alternantes, ya que $\frac{1}{n} \geq \frac{1}{n+1} > 0$ y $\displaystyle{\lim_{n \to \infty}} \frac{1}{n} = 0$). Luego, $R \geq 1$ y $-1 \in I$
 
-Por lo tanto, $R = 1$ y $I = (-1, 1]$
+Por lo tanto, $R = 1$ y $I = [-1, 1)$
 
 ### Criterio del cociente para series de potencias
 

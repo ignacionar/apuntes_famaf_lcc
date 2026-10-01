@@ -81,9 +81,9 @@ Calcular el número de asignaciones de la variable $t$ en el siguiente algoritmo
 &\quad \od \\
 &\od \\
 &) \\
-&= 1 + (\sum_{1=1}^{n} ( \sum_{1=1}^{n^2} ( \sum_{1=1}^{n^3} 1))) \\
-&= 1 + (\sum_{1=1}^{n} ( \sum_{1=1}^{n^2} n^3 )) \\
-&= 1 + (\sum_{1=1}^{n} n^2 \cdot n^3) \\
+&= 1 + (\sum_{i=1}^{n} ( \sum_{j=1}^{n^2} ( \sum_{k=1}^{n^3} 1))) \\
+&= 1 + (\sum_{i=1}^{n} ( \sum_{j=1}^{n^2} n^3 )) \\
+&= 1 + (\sum_{i=1}^{n} n^2 \cdot n^3) \\
 &= 1 + (n \cdot n^2 \cdot n^3) \\
 &= 1 + \underline{n^6}
 \end{aligned}
@@ -100,7 +100,7 @@ Calcular el número de asignaciones de la variable $t$ en el siguiente algoritmo
 &t := 0 \\ 
 &\for \; i := 1 \; \too \; n \; \do \\
 &\quad \for \; j := 1 \; \too \; i \; \do  \\
-&\quad\quad \for \; k := 1 \; \too \; n^3 \; \do \\
+&\quad\quad \for \; k := j \; \too \; j+3 \; \do \\
 &\quad\quad\quad t := t + 1 \\
 &\quad\quad \od \\
 &\quad \od \\
@@ -133,7 +133,7 @@ Calcular el orden del número de asignaciones a la variable $t$ del siguiente al
 
 ```math 
 \begin{aligned}
-&t := 0 \\ 
+&t := 1 \\ 
 &\while \; t < n \; \do \\ 
 &\quad \quad t := t * 2 \\ 
 &\od
@@ -150,16 +150,18 @@ Podemos probar distintos valores de $n$ y observar la relación en la que las as
 | $1$ |       $1$          |
 | $2$ |       $2$          |
 | $3$ |       $3$          |
-| $4$ |       $4$          |
+| $4$ |       $3$          |
 | $5$ |       $4$          |
 | $6$ |       $4$          |
 | $7$ |       $4$          |
 | $8$ |       $4$          |
 | $9$ |       $5$          |
-| $10$|      $10$          |
+| $10$|       $5$          |
 </div>
 
-El orden es $\approx 2 \log (n)$
+El ciclo se ejecuta hasta que $t = 2^k \geq n$, es decir, $\lceil \log_2 n \rceil$ veces. Sumando la asignación inicial, el número de asignaciones es $1 + \lceil \log_2 n \rceil$.
+
+El orden es $\approx \log_2 (n)$
 
 ***
 
@@ -191,6 +193,8 @@ Siguiendo la lógica del ejercicio anterior, probamos valores de $n$ y observamo
 | $4$ |       $12$         |
 | $5$ |       $16$         |
 | $6$ |       $20$         |
+| $7$ |       $24$         |
+| $8$ |       $29$         |
 </div>
 
 El orden es $\approx n^2$

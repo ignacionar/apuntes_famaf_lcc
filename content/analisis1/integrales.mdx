@@ -13,16 +13,16 @@ Encontrar la antiderivada de $f(x) = 4x^2$ que pasa por el punto $(1, 3)$.
 Primero buscamos la antiderivada:
 
 ```math
-F(x) = 2x^3 + c
+F(x) = \frac{4x^3}{3} + c
 ```
 
 Luego, reemplazamos el punto $(1, 3)$:
 
 ```math
-3 = 2(1)^3 + c \implies c = 1
+3 = \frac{4(1)^3}{3} + c \implies c = 3 - \frac{4}{3} = \frac{5}{3}
 ```
 
-Por lo tanto, la antiderivada que pasa por el punto $(1, 3)$ es: $F(x) = 2x^3 + 1$.
+Por lo tanto, la antiderivada que pasa por el punto $(1, 3)$ es: $F(x) = \frac{4x^3}{3} + \frac{5}{3}$.
 
 ## Integral Indefinida
 
@@ -288,11 +288,15 @@ Aplicamos el segundo teorema fundamental del cálculo:
 
 **Ejemplo:**
 
-$f(x) = x^2$ y $g(x) = x$ en $[0, 1]$
+$f(x) = x$ y $g(x) = x^2$ en $[0, 1]$
+
+En $[0, 1]$ se cumple que $x \geq x^2$, por lo que $f(x) \geq g(x)$:
 
 ```math
-\int_0^1 (x^2 - x)\;dx = \int_0^1 x^2\;dx - \int_0^1 x\;dx = \frac{x^3}{3}\Big|_0^1 - \frac{x^2}{2}\Big|_0^1 = \frac{1}{3} - \frac{1}{2} = -\frac{1}{6}
+\int_0^1 (x - x^2)\;dx = \int_0^1 x\;dx - \int_0^1 x^2\;dx = \frac{x^2}{2}\Big|_0^1 - \frac{x^3}{3}\Big|_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}
 ```
+
+Notar que si restamos en el orden inverso, $\int_0^1 (x^2 - x)\;dx = -\frac{1}{6}$: un área nunca puede ser negativa, por lo que siempre se resta la función de abajo a la de arriba.
 
 Se vería de la siguiente forma:
 

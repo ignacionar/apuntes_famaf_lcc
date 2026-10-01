@@ -25,7 +25,7 @@ El sistema binario sería:
 \end{aligned}
 ```
 
-Un ejemplo de número decimal a binario es $13.62 = (1101)_{2}$. En lugar de denominar a los binarios como _binary digits_ se les llama _bits_.
+Un ejemplo de número decimal a binario es $13.625 = (1101.101)_{2}$. En lugar de denominar a los binarios como _binary digits_ se les llama _bits_.
 
 Podemos realizar operaciones aritméticas con números binarios de la siguiente forma:
 
@@ -113,9 +113,9 @@ Podemos hacer conversiones de base numérica acomodando los dígitos de forma co
 
 ```math
 \begin{aligned}
-(1101.1011)_2 &= (001 \; 101 \; .001 \; 011)_2 = (15.13)_8 = (D.5)_8 \\
+(1101.1011)_2 &= (001 \; 101 \; . \; 101 \; 100)_2 = (15.54)_8 \\
 &\\
-(1101.1011)_2 &= (D.B)_{16}
+(1101.1011)_2 &= (1101 \; . \; 1011)_2 = (D.B)_{16}
 \end{aligned}
 ```
 
@@ -125,7 +125,7 @@ Puede darse el caso que el número no sea exactamente divisible por $3$ o $4$, p
 
 ```math
 \begin{aligned}
-(11010011011011)_2 &= 1011 \; 0011 \; 0110 \; 11 = 1011 \; 0011 \; 0110 \; 0011 = (B36B)_{16} \\
+(11010011011011)_2 &= 11 \; 0100 \; 1101 \; 1011 = 0011 \; 0100 \; 1101 \; 1011 = (34DB)_{16} \\
 &\\
 (0.101101)_2 &= 1011 \; 01 = 1011 \; 0100 = (0.B4)_{16}
 \end{aligned}
@@ -140,7 +140,13 @@ Puede darse el caso que el número no sea exactamente divisible por $3$ o $4$, p
 Convertir el siguiente número hexadecimal a binario de $32$ bits: $0x10A6F2B$
 
 ```math
-0x10A6F2B = (0001 \; 0000 \; 1010 \; 0110 \; 1111 \; 0010 \; 1011)_2 = 
+0x10A6F2B = (0001 \; 0000 \; 1010 \; 0110 \; 1111 \; 0010 \; 1011)_2
+```
+
+Son $7$ dígitos hexadecimales, es decir, $28$ bits. Para llegar a $32$ bits agregamos un dígito $0$ (cuatro ceros) a la izquierda:
+
+```math
+0x010A6F2B = (0000 \; 0001 \; 0000 \; 1010 \; 0110 \; 1111 \; 0010 \; 1011)_2
 ```
 
 ***
@@ -337,30 +343,28 @@ Ahora obtenemos el complemento a $2$ de $(11010000)_2$
 \end{aligned}
 ```
 
-Ambos números en decimal son:
+Ahora sumamos $0x80$ con el complemento a $2$ de $0xD0$:
 
 ```math
 \begin{aligned}
-(10000000)_2 &= 2^7 = 128 \\
-(00110000)_2 &= 2^5 + 2^4 = -48
+&\quad \; 10000000 \\
+&+00110000 \\
+&\quad \overline{\;10110000}
 \end{aligned}
 ```
 
-La resta $0x80$ - $0xD0$ se puede expresar como $128 + (-48) = 80$. En binario, $80$ es 
+El resultado $(10110000)_2 = 0xB0$ tiene el bit más significativo en $1$, por lo que es **negativo**. Para obtener su valor, calculamos su complemento a $2$:
 
 ```math
 \begin{aligned}
-80 = 2 \cdot 40 + 0 \\
-40 = 2 \cdot 20 + 0 \\
-20 = 2 \cdot 10 + 0 \\
-10 = 2 \cdot 5 + 0 \\
-5 = 2 \cdot 2 + 1 \\
-2 = 2 \cdot 1 + 0 \\
-1 = 2 \cdot 0 + 1 \\
+(10110000)_2 &\implies (01001111)_2 \\
++1 &\implies (01010000)_2 = 2^6 + 2^4 = 80
 \end{aligned}
 ```
 
-Tenemos que $80 = (01010000)_2$.
+Por lo tanto, $0x80 - 0xD0 = (10110000)_2 = -80$.
+
+Podemos comprobarlo interpretando ambos operandos en complemento a $2$: $0x80 = (10000000)_2 = -128$ y $0xD0 = (11010000)_2 = -48$, por lo que $-128 - (-48) = -80$.
 
 ## Números Flotantes 
 
@@ -380,23 +384,29 @@ x = (-1)^{s} \cdot (1 + F) \cdot 2^{E - B}
 Por ejemplo, el número $-13.625$ en precisión simple sería:
 
 ```math 
-13.625 = 1101.1011 
+13.625 = 1101.101 
 ```
+
+(La parte entera es $13 = (1101)_2$ y la fraccionaria es $0.625 = 0.5 + 0.125 = (0.101)_2$)
 
 Para seguir el formato, necesitamos desplazar el $.$ cuantas veces sea necesario para solo tener una unidad entera. En este caso, tres veces $\implies e=3$
 
 ```math
 \begin{aligned}
-&= 1.1011011 \times 2^3 \\
-&= 1.1011011 \times 2^{(130 - 127)} 
+&= 1.101101 \times 2^3 \\
+&= 1.101101 \times 2^{(130 - 127)} 
 \end{aligned}
 ```
 
 Tenemos que: 
 
 - $s = 1$ (es negativo)
-- $F = 10110110000000000000000$ (agregamos ceros para llegar a $23$ bits)
-- $E = 130 = (10000110)_2$
+- $F = 10110100000000000000000$ (agregamos ceros para llegar a $23$ bits)
+- $E = 130 = (10000010)_2$
+
+```math
+(1 \; 10000010 \; 10110100000000000000000)_2 = (1100 \; 0001 \; 0101 \; 1010 \; 0000 \; 0000 \; 0000 \; 0000)_2
+```
 
 Sumando todos los bits, tenemos $32$ bits. Agrupando $s, E, F$ (en ese orden) de a cuatro podemos dar con el número hexadecimal $0xC15A0000$
 
@@ -452,7 +462,7 @@ Finalmente, calculamos el valor de $E$.
 \begin{aligned}
 E &= e + B \\
 &= 12 + 127 \\
-&= 139 = 2^7 + 2^3 + 2^2 + 2^1 + 2^0 = (10001011)_2
+&= 139 = 2^7 + 2^3 + 2^1 + 2^0 = (10001011)_2
 \end{aligned}
 ```
 
@@ -503,11 +513,11 @@ Tenemos que $3020 = (101111001100)_2$. Ahora convertimos la parte fraccionaria.
 \end{aligned}
 ```
 
-- $s = 0$ (es positivo)
+- $s = 1$ (es negativo)
 
-El número $3020,993 = (101111001100.111111100011)_2$. El desplazamiento del punto es de $e = 11 \implies 1.011110011001111111100011$
+El número $3020.993 \approx (101111001100.111111100011)_2$. El desplazamiento del punto es de $e = 11 \implies 1.01111001100111111100011$
 
-- $F = 01111001100111111110001$ 
+- $F = 01111001100111111100011$ (los $11$ bits restantes de la parte entera seguidos de los $12$ bits de la parte fraccionaria)
 
 Finalmente, calculamos el valor de $E$.
 
@@ -515,11 +525,11 @@ Finalmente, calculamos el valor de $E$.
 \begin{aligned}
 E &= e + B \\
 &= 11 + 127 \\
-&= 138 = 2^7 + 2^3 + 2^2 + 2^1 = (10001010)_2
+&= 138 = 2^7 + 2^3 + 2^1 = (10001010)_2
 \end{aligned}
 ```
 
-El número $-3020.993$ en formato IEEE 754 de precisión simple es $(1 \; 10001010 \; 01111001100111111110011)_2$.
+El número $-3020.993$ en formato IEEE 754 de precisión simple es $(1 \; 10001010 \; 01111001100111111100011)_2 = 0xC53CCFE3$.
 
 ***
 
@@ -558,11 +568,13 @@ Observemos que, con la mantisa $F$, el número es $1.01101100011000010101001$. A
 
 ```math
 \begin{aligned}
-&= 0.0000000001011011000110000010101001 \\
-&= 2^{-10} + 2^{-13} + 2^{-14} + 2^{-17} + 2^{-19} + 2^{-20} + 2^{-23} \\
-&= 0.0009765625 + 0.00048828125 + 0.000244140625 + 0.0001220703125 + 0.00006103515625 + 0.000030517578125 + 0.0000152587890625 \\
-&= 0.001953125
+&= 0.000000000101101100011000010101001 \\
+&= 2^{-10} + 2^{-12} + 2^{-13} + 2^{-15} + 2^{-16} + 2^{-20} + 2^{-21} + 2^{-26} + 2^{-28} + 2^{-30} + 2^{-33} \\
+&= 0.0009765625 + 0.000244140625 + 0.0001220703125 + 0.000030517578125 + 0.0000152587890625 + 0.00000095367431640625 + \ldots \\
+&\approx 0.00139
 \end{aligned}
 ```
 
-Como el signo es negativo, el número decimal es $-0.001953125$.
+(Los últimos términos, de $2^{-21}$ en adelante, son muy pequeños: el valor exacto es $0.001389999990351\ldots$)
+
+Como el signo es negativo, el número decimal es $\approx -0.00139$.

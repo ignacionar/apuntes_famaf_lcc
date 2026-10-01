@@ -115,8 +115,8 @@ ADD X0, X0, X3
 ADD X0, X0, X4   
    
 // B)
-ADD X0, X0, X1    
-ADDI X0, X2, #5  
+ADDI X9, X2, #5   // X9 = h + 5
+ADD X0, X1, X9    // f = g + (h + 5)
   
 // C)
 ADD X9, X1, X2   
@@ -193,11 +193,11 @@ Usar `MOVZ, MOVK` para cargar los registros:
 ```assembly 
 MOVZ X0, 0x1234, LSL 48  // 0x1234000000000000
   
-MOVZ X1, 0xBBB, LSL 52   // 0xBBB0000000000000
+MOVZ X1, 0xBBB0, LSL 48  // 0xBBB0000000000000
 MOVK X1, 0xAAA, LSL 00   // 0xBBB0000000000AAA
   
 MOVZ X2, 0xA0A0, LSL 48  // 0xA0A0000000000000
-MOVK X2, 0xB1B1, LSL 32  // 0xA0A00000B1B10000
+MOVK X2, 0xB1B1, LSL 32  // 0xA0A0B1B100000000
 MOVK X2, 0xC2C2, LSL 00  // 0xA0A0B1B10000C2C2
   
 MOVZ X3, 0x0123, LSL 48  // 0x0123000000000000
@@ -230,7 +230,7 @@ Asignamos a las variables `f, g, h, i, j` los registros `X0, X1, X2, X3, X4`, re
       CBNZ X9, Else   // i != j  ⇒  salta a Else
       ADD X0, X1, X2  // f = g + h
       B Exit          // salta a Exit
-Else: SUB X9, X1, X2  // f = g - h
+Else: SUB X0, X1, X2  // f = g - h
 Exit: ...
 ```
 
@@ -248,14 +248,17 @@ Asignamos a las variables `i, k` los registros `X0, X1`, respectivamente.
 La dirección base del array `save` se almacena en el registro `X2`:
 
 ```assembly
-      LSL X9, X0, #3    // i * 8
-      ADD X9, X9, X2    // &save[i]
-Loop: LDUR X10, [X9]    // save[i]
-      CBNZ X10, End     // save[i] != k  ⇒  salta a End
-      ADDI X0, X0, #1   // i += 1
+Loop: LSL X9, X0, #3        // i * 8
+      ADD X9, X9, X2        // &save[i]
+      LDUR X10, [X9, #0]    // save[i]
+      SUB X11, X10, X1      // save[i] - k
+      CBNZ X11, End         // save[i] != k  ⇒  salta a End
+      ADDI X0, X0, #1       // i += 1
       B Loop
 End:  ...
 ```
+
+La dirección `&save[i]` se recalcula dentro del ciclo porque `i` cambia en cada iteración. Para comparar `save[i]` con `k` restamos ambos valores: el resultado es `0` si y solo si son iguales.
 
 ## Operaciones condicionales 
 
@@ -274,7 +277,7 @@ Asignamos a las variables `a, b` los registros `X0, X1`, respectivamente:
 
 ```assembly
       SUBS X9, X0, X1   // a - b
-      B.GE Else         // a <= b  ⇒  salta a Else
+      B.LE Else         // a <= b  ⇒  salta a Else
       ADDI X0, X0, #1   // a += 1
 Else: ...
 ```
@@ -283,7 +286,7 @@ También se puede usar `CMP, CMPI` para comparar sin almacenar el resultado en u
 
 ```assembly
       CMP X0, X1        // comparar a, b
-      B.GE Else         // a <= b  ⇒  salta a Else
+      B.LE Else         // a <= b  ⇒  salta a Else
       ADDI X0, X0, #1   // a += 1
 Else: ...
 ```

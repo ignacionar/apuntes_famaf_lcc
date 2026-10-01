@@ -163,22 +163,22 @@ Dar la derivada de $f(x) = 5x + 3$ por definición:
 f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{f(x+h) - f(x)}{h}
 ```
 
-Sustituimos $f(x)$ por $5x + 3$ y $f(x+h)$ por $(5x + 3) + h$:
+Sustituimos $f(x)$ por $5x + 3$ y $f(x+h)$ por $5(x + h) + 3$:
 
 ```math
-f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{(5x + 3) + h - (5x + 3)}{h}
+f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{5(x + h) + 3 - (5x + 3)}{h}
 ```
 
-Restamos:
+Distribuimos y restamos:
 
 ```math
-f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{h}{h}
+f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{5x + 5h + 3 - 5x - 3}{h} = \displaystyle{\lim_{h \to 0}} \; \frac{5h}{h}
 ```
 
 Simplificamos:
 
 ```math
-f'(x) = \displaystyle{\lim_{h \to 0}} \; 1 = 1
+f'(x) = \displaystyle{\lim_{h \to 0}} \; \frac{5\cancel{h}}{\cancel{h}} = \displaystyle{\lim_{h \to 0}} \; 5 = 5
 ```
 
 ***
@@ -290,7 +290,7 @@ Dada la función $f(x) = x^2 + 2x + 1$, calcular $f'(x)$ y simplificar lo más p
 Para esta función, sustituimos $x^2$ por $2x$ (potencia menos uno) y $2x$ por $2$ (potencia menos uno) y $1$ por $0$ (constante):
 
 ```math 
-f'(x) = 2x^{2-1} + 2 \cdot 2x^{1-1} + 0 = 2x + 2
+f'(x) = 2x^{2-1} + 2 \cdot 1x^{1-1} + 0 = 2x + 2
 ```
 
 ***
@@ -299,19 +299,21 @@ f'(x) = 2x^{2-1} + 2 \cdot 2x^{1-1} + 0 = 2x + 2
 
 Dada la función $f(x) = |3x+2|$, comprobar si $f$ es derivable en $2$.
 
-Para eso comparamos las derivadas laterales de la función en $2$. Primero, calculamos $f'^-(2)$:
+Para eso comparamos las derivadas laterales de la función en $2$. Como $3 \cdot 2 + 2 = 8 > 0$, cerca de $x = 2$ la expresión $3x + 2$ es positiva, por lo que $|3x+2| = 3x + 2$ a ambos lados de $2$. Primero, calculamos $f'^-(2)$:
 
 ```math
-f'^-(2) = 1\cdot-3x^{-1} - 0 = 1\cdot-3 = -3
+f'^-(2) = \displaystyle{\lim_{h \to 0^-}} \; \frac{|3(2+h)+2| - |8|}{h} = \displaystyle{\lim_{h \to 0^-}} \; \frac{8 + 3h - 8}{h} = 3
 ```
 
 Luego, calculamos $f'^+(2)$:
 
 ```math
-f'^+(2) = 1\cdot3x^{-1} - 0 = 1\cdot3 = 3
+f'^+(2) = \displaystyle{\lim_{h \to 0^+}} \; \frac{|3(2+h)+2| - |8|}{h} = \displaystyle{\lim_{h \to 0^+}} \; \frac{8 + 3h - 8}{h} = 3
 ```
 
-Como $f'^-(2) \not=f'^+(2)$, $f$ no es derivable en $-2$.
+Como $f'^-(2) = f'^+(2) = 3$, $f$ es derivable en $2$ y $f'(2) = 3$.
+
+El único punto donde $f$ no es derivable es $x = -\frac{2}{3}$, donde $3x + 2$ cambia de signo: allí $f'^-(-\frac{2}{3}) = -3$ y $f'^+(-\frac{2}{3}) = 3$.
 
 ***
 

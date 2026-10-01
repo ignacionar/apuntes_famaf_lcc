@@ -111,25 +111,32 @@ Por lo tanto, **no es par ni impar**
 
 Calculamos las raíces de $f$:
 
-Realizamos un cambio de variable, $x^2 = t$:
+$f$ es un polinomio de grado $3$ (no es bicuadrático), por lo que no podemos usar el cambio de variable $x^2 = t$.
+
+Podemos usar el Teorema del Valor Intermedio. Sabemos que $f$ es continua en $\mathbb{R}$ (es un polinomio), por lo que también lo es en $[-1, 0]$:
 
 ```math
-t^2 - 3t + 2 = 0
+\begin{array}{ll}
+  f(-1) = (-1)^3 - 3(-1)^2 + 2(-1) + 1 = -5 \; \\
+  f(0) = 0^3 - 3(0)^2 + 2(0) + 1 = 1 \; \\
+\end{array}
 ```
+
+Si $N = 0$, entonces $f(-1) < 0 < f(0)$.\
+Por el Teorema del Valor Intermedio, existe un $c$ en $(-1, 0)$ tal que $f(c) = 0$. Más adelante veremos que el máximo y el mínimo local de $f$ son positivos, por lo que esa es la **única** raíz real.
+
+Podemos aproximarla aplicando el mismo teorema en intervalos más chicos. Por ejemplo:
 
 ```math
-(t - 2)(t - 1) = 0
+\begin{array}{ll}
+  f(-0.33) \approx -0.023 \; \\
+  f(-0.32) \approx 0.020 \; \\
+\end{array}
 ```
 
-```math
-t_1 = 2 \implies x^2 = 2 \implies x_1, x_2 = \pm \sqrt{2}
-```
+Como $f(-0.33) < 0 < f(-0.32)$, la raíz está en $(-0.33, -0.32)$.
 
-```math
-t_2 = 1 \implies x^2 = 1 \implies x_3, x_4 = \pm \sqrt{1}
-```
-
-**Sus raíces son:** $x_1 = -\sqrt{2},\;x_2 = \sqrt{2},\;x_3 = -1,\;x_4 = 1$
+**Su raíz es:** $x_1 \approx -0.32$
 
 **No tiene A.V.** (El dominio es $\mathbb{R}$)
 
@@ -233,7 +240,7 @@ Ahora, nos interesa ver los signos de la derivada:
         <tr>
           <th>$3\\(x-(\frac{3 + \sqrt{3}}{3}))\\(x-(\frac{3 - \sqrt{3}}{3}))$</th>
           <th>$(+)\\(-)\\(-)$</th>
-          <th>$(+)\\(+)\\(-)$</th>
+          <th>$(+)\\(-)\\(+)$</th>
           <th>$(+)\\(+)\\(+)$</th>
         </tr>
         <tr>
@@ -262,15 +269,15 @@ x_c = \frac{3 - \sqrt{3}}{3}
 \begin{aligned}
 f\left(\frac{3 - \sqrt{3}}{3}\right) & = \left(\frac{3 - \sqrt{3}}{3}\right)^3 - 3\left(\frac{3 - \sqrt{3}}{3}\right)^2 + 2\left(\frac{3 - \sqrt{3}}{3}\right) + 1 \\
 & = \frac{(3 - \sqrt{3})^3}{27} - \frac{3(3 - \sqrt{3})^2}{9} + \frac{2(3 - \sqrt{3})}{3} + 1 \\
-& = \frac{27 - 27\sqrt{3} + 9\sqrt{3} - 9}{27} - \frac{3(9 - 6\sqrt{3} + 3)}{9} + \frac{2(3 - \sqrt{3})}{3} + 1 \\
-& = \frac{18 - 18\sqrt{3} + 6\sqrt{3} - 18}{27} - \frac{27 - 18\sqrt{3} + 9}{9} + \frac{6 - 2\sqrt{3}}{3} + 1 \\
-& = \frac{-27\sqrt{3}}{27} - \frac{9\sqrt{3}}{9} + \frac{6 - 2\sqrt{3}}{3} + 1 \\
-& = -\sqrt{3} - \sqrt{3} + 2 - \sqrt{3} + 1 \\
-& = 3 - 3\sqrt{3}.
+& = \frac{27 - 27\sqrt{3} + 27 - 3\sqrt{3}}{27} - \frac{3(9 - 6\sqrt{3} + 3)}{9} + \frac{2(3 - \sqrt{3})}{3} + 1 \\
+& = \frac{54 - 30\sqrt{3}}{27} - \frac{36 - 18\sqrt{3}}{9} + \frac{6 - 2\sqrt{3}}{3} + 1 \\
+& = \frac{54 - 30\sqrt{3}}{27} - \frac{108 - 54\sqrt{3}}{27} + \frac{54 - 18\sqrt{3}}{27} + \frac{27}{27} \\
+& = \frac{27 + 6\sqrt{3}}{27} \\
+& = 1 + \frac{2\sqrt{3}}{9}.
 \end{aligned}
 ```
 
-El máximo local es $A = (\frac{3 - \sqrt{3}}{3}, 3 - 3\sqrt{3})$
+El máximo local es $A = (\frac{3 - \sqrt{3}}{3}, 1 + \frac{2\sqrt{3}}{9})$
 
 **Mínimo Local:**
 
@@ -282,15 +289,15 @@ x_c = \frac{3 + \sqrt{3}}{3}
 \begin{aligned}
 f\left(\frac{3 + \sqrt{3}}{3}\right) & = \left(\frac{3 + \sqrt{3}}{3}\right)^3 - 3\left(\frac{3 + \sqrt{3}}{3}\right)^2 + 2\left(\frac{3 + \sqrt{3}}{3}\right) + 1 \\
 & = \frac{(3 + \sqrt{3})^3}{27} - \frac{3(3 + \sqrt{3})^2}{9} + \frac{2(3 + \sqrt{3})}{3} + 1 \\
-& = \frac{27 + 27\sqrt{3} + 9\sqrt{3} + 9}{27} - \frac{3(9 + 6\sqrt{3} + 3)}{9} + \frac{2(3 + \sqrt{3})}{3} + 1 \\
-& = \frac{18 + 18\sqrt{3} + 6\sqrt{3} + 18}{27} - \frac{27 + 18\sqrt{3} + 9}{9} + \frac{6 + 2\sqrt{3}}{3} + 1 \\
-& = \frac{27\sqrt{3}}{27} - \frac{9\sqrt{3}}{9} + \frac{6 + 2\sqrt{3}}{3} + 1 \\
-& = \sqrt{3} - \sqrt{3} + 2 + \sqrt{3} + 1 \\
-& = 3 + 3\sqrt{3}.
+& = \frac{27 + 27\sqrt{3} + 27 + 3\sqrt{3}}{27} - \frac{3(9 + 6\sqrt{3} + 3)}{9} + \frac{2(3 + \sqrt{3})}{3} + 1 \\
+& = \frac{54 + 30\sqrt{3}}{27} - \frac{36 + 18\sqrt{3}}{9} + \frac{6 + 2\sqrt{3}}{3} + 1 \\
+& = \frac{54 + 30\sqrt{3}}{27} - \frac{108 + 54\sqrt{3}}{27} + \frac{54 + 18\sqrt{3}}{27} + \frac{27}{27} \\
+& = \frac{27 - 6\sqrt{3}}{27} \\
+& = 1 - \frac{2\sqrt{3}}{9}
 \end{aligned}
 ```
 
-El mínimo local es $B = (\frac{3 + \sqrt{3}}{3}, 3 + 3\sqrt{3})$
+El mínimo local es $B = (\frac{3 + \sqrt{3}}{3}, 1 - \frac{2\sqrt{3}}{9})$
 
 <br/>
 
@@ -480,8 +487,8 @@ Ahora, nos interesa ver los signos de la derivada:
         <tr>
           <th>$x(x - 2)$</th>
           <th>$(-)\\(-)$</th>
-          <th>$(-)\\(+)$</th>
-          <th>$(+)\\(+)$</th>
+          <th>$(+)\\(-)$</th>
+          <th>$(+)\\(-)$</th>
           <th>$(+)\\(+)$</th>
         </tr>
         <tr>
@@ -493,23 +500,23 @@ Ahora, nos interesa ver los signos de la derivada:
         </tr>
         <tr>
           <th>$f'(x)$</th>
+          <th>$(+)$</th>
           <th>$(-)$</th>
-          <th>$(+)$</th>
-          <th>$(+)$</th>
+          <th>$(-)$</th>
           <th>$(+)$</th>
         </tr>
         <tr>
           <th>$f(x)$</th>
+          <th>$\nearrow$</th>
           <th>$\searrow$</th>
-          <th>$\nearrow$</th>
-          <th>$\nearrow$</th>
+          <th>$\searrow$</th>
           <th>$\nearrow$</th>
         </tr>
       </tbody>
   </table>
 </div>
 
-**Mínimo Local:**
+**Máximo Local:**
 
 ```math
 x_c = 0
@@ -519,7 +526,19 @@ x_c = 0
 f(0) = \frac{0^2}{0 - 1} = 0
 ```
 
-El mínimo local es $A = (0, 0)$
+El máximo local es $A = (0, 0)$
+
+**Mínimo Local:**
+
+```math
+x_c = 2
+```
+
+```math
+f(2) = \frac{2^2}{2 - 1} = 4
+```
+
+El mínimo local es $B = (2, 4)$
 
 <br/>
 
@@ -555,17 +574,17 @@ Ahora, nos interesa ver los signos de la derivada segunda:
       <tbody>
         <tr>
           <th>$\frac{2}{(x - 1)^3}$</th>
-          <th>$(+)$</th>
+          <th>$(-)$</th>
           <th>$(+)$</th>
         </tr>
         <tr>
           <th>$f''(x)$</th>
-          <th>$(+)$</th>
+          <th>$(-)$</th>
           <th>$(+)$</th>
         </tr>
         <tr>
           <th>$f(x)$</th>
-          <th>$\cup$</th>
+          <th>$\cap$</th>
           <th>$\cup$</th>
         </tr>
       </tbody>
