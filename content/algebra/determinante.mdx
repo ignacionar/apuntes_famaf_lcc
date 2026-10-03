@@ -227,8 +227,8 @@ Si reemplazamos $a_{i1}$ por el elemento correspondiente:
 
 ## Adjunta clásica
 
-> Dada $A \in \KK^{n \times n}$, y $C \in \KK^{n \times n}$ tal que $C_{ij} = (1)^{i+j} \cdot a_{ij} \cdot \det(A(i|j))$.\
-Su transpuesta se llama **matriz adjunta clásica** de $A$ tal que $\text{adj}(A)_{ij} = C_{ji} = (1)^{i+j} \cdot a_{ji} \cdot \det(A(j|i))$. 
+> Dada $A \in \KK^{n \times n}$, y $C \in \KK^{n \times n}$ tal que $C_{ij} = (-1)^{i+j} \cdot \det(A(i|j))$.\
+Su transpuesta se llama **matriz adjunta clásica** de $A$ tal que $\text{adj}(A)_{ij} = C_{ji} = (-1)^{i+j} \cdot \det(A(j|i))$.
 
 ## Regla de Cramer 
 
@@ -244,11 +244,11 @@ Multiplicamos por $\text{adj}(A)$ el sistema:
 
 ```math 
 \begin{aligned}
-Ax = b \implies \text{adj}(A) \cdot Ax &= b \cdot \text{adj}(A) \\
+Ax = b \implies \text{adj}(A) \cdot Ax &= \text{adj}(A) \cdot b \\
 \det(A) x &= \text{adj}(A) \cdot b \\
 (\det(A) x)_i &= (\text{adj}(A) \cdot b)_i \\
 \det(A) \cdot x_i &= \sum_{j=1}^{n} \text{adj}(A)_{ij} \cdot b_j \\
-&= \sum_{j=1}^{n} (1)^{i+j} \cdot a_{ji} \cdot \det(A(j|i)) \cdot b_j \\
+&= \sum_{j=1}^{n} (-1)^{i+j} \cdot b_j \cdot \det(A(j|i)) \\
 &= \det(1, \ldots, \stackrel{\text{pos.}\; i}{b}, \ldots, n) \\
 \implies x_i &= \frac{\det(1, \ldots, \stackrel{\text{pos.}\; i}{b}, \ldots, n)}{\det A} \\
 \end{aligned}

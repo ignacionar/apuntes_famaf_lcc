@@ -550,7 +550,7 @@ Por lo que tenemos:
 
 ```math 
 \begin{aligned}
-B_{\textnormal{Im}(T)} &= \{ x^5 + x^3 , -x^5 + x^3 + 2x - 8, x^4 + x^2 + 3x, x^4 + x^2 \} \\
+B_{\textnormal{Im}(T)} &= \{ x^5 + x^3 + 7, -x^5 + x^3 + 2x - 8, x^4 + x^2 + 3x, x^4 + x^2 \} \\
 \textnormal{Im}(T) &= \langle (x^5 + x^3 + 7) , (-x^5 + x^3 + 2x - 8), (x^4 + x^2 + 3x), (x^4 + x^2) \rangle \\ 
 \dim \textnormal{Im}(T) &= 4 
 \end{aligned}
@@ -559,14 +559,14 @@ B_{\textnormal{Im}(T)} &= \{ x^5 + x^3 , -x^5 + x^3 + 2x - 8, x^4 + x^2 + 3x, x^
 Para caracterizar por ecuaciones la imagen, defino la siguiente combinación lineal con:
 
 ```math 
-\alpha(x^5 + x^3 + 7) + \beta(x^5 + x^3 + 2x - 8) + \gamma(x^4 + x^2 + 3x) + \delta(x^4 + x^2) \quad (\lambda, \beta, \gamma, \delta \in \RR)
+\alpha(x^5 + x^3 + 7) + \beta(-x^5 + x^3 + 2x - 8) + \gamma(x^4 + x^2 + 3x) + \delta(x^4 + x^2) \quad (\alpha, \beta, \gamma, \delta \in \RR)
 ```
 
 Agrupando por coeficientes $(a_5, a_4, a_3, a_2, a_1, a_0)$
 
 ```math 
 \begin{aligned}
-a_5 &= \alpha + \beta \\
+a_5 &= \alpha - \beta \\
 a_4 &= \gamma + \delta \\
 a_3 &= \alpha + \beta \\
 a_2 &= \gamma + \delta \\
@@ -590,16 +590,16 @@ a_3 - a_5 &= \alpha + \beta - (\alpha - \beta) \\
 a_3 - a_5 &= 2 \beta \\
 \frac{a_3 - a_5}{2} &= \beta \\
 &\; \\
-a_0 &= 7 \cdot \frac{a_3 + a_5}{2} + 8 \cdot \frac{a_3 - a_5}{2} \\
-2a_0 &= 7a_3 + 7a_5 + 8a_3 - 8a_5 \\
-2a_0 - a_3 - 15a_5 &= 0
+a_0 &= 7 \cdot \frac{a_3 + a_5}{2} - 8 \cdot \frac{a_3 - a_5}{2} \\
+2a_0 &= 7a_3 + 7a_5 - 8a_3 + 8a_5 \\
+2a_0 + a_3 - 15a_5 &= 0
 \end{aligned}
 ```
 
 Esas dos ecuaciones caracterizan a la imagen, tal que:
 
 ```math 
-\textnormal{Im}(T) = \{ a_5x^5 + a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0 \in P_5 \; | \; a_2 = a_4 , \; 2a_0 - a_3 - 15a_5 = 0 \} 
+\textnormal{Im}(T) = \{ a_5x^5 + a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0 \in P_5 \; | \; a_2 = a_4 , \; 2a_0 + a_3 - 15a_5 = 0 \} 
 ```
 
 ***
